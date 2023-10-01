@@ -18,5 +18,5 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # -----------------------------------------------------------------------------
-time tilemaker --input ~/data/north-yorkshire_2023-09-15T20:21:26Z.osm.pbf     --output ~/data/output_sve01.mbtiles --config ~/src/SomeoneElse-vector-extract/resources/config-sve01.json --process ~/src/SomeoneElse-vector-extract/resources/process-sve01.lua
+time tilemaker --input ~/data/north-yorkshire_2023-09-25T20:21:15Z.osm.pbf     --output ~/data/tilemaker_sve01.mbtiles --config ~/src/SomeoneElse-vector-extract/resources/config-sve01.json --process ~/src/SomeoneElse-vector-extract/resources/process-sve01.lua
 #

@@ -18,8 +18,8 @@ function node_function(node)
 	local shop = node:Find("shop")
 	if amenity~="" or shop~="" then
 		node:Layer("poi", false)
-		if amenity~="" then node:Attribute("class",amenity)
-		else node:Attribute("class",shop) end
+		if amenity~="" then node:Attribute("class","amenity_" .. amenity)
+		else node:Attribute("class","shop_" .. shop) end
 		node:Attribute("name", node:Find("name"))
 	end
 end
