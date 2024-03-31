@@ -28,13 +28,24 @@ end
 
 function way_function(way)
 	local highway = way:Find("highway")
+	local verge = way:Find("verge")
 	local waterway = way:Find("waterway")
 	local building = way:Find("building")
+
 	if highway~="" then
-		way:Layer("transportation", false)
-		way:Attribute("class", highway)
---		way:Attribute("id",way:Id())
---		way:AttributeNumeric("area",37)
+	    way:Layer("transportation", false)
+	    way:Attribute("class", highway)
+
+	    if (( verge == "both"     ) or
+                ( verge == "left"     ) or
+                ( verge == "separate" ) or
+                ( verge == "right"    ) or
+                ( verge == "yes"      )) then
+                way:Attribute("edge", "verge")
+            end
+
+--	    way:Attribute("id",way:Id())
+--	    way:AttributeNumeric("area",37)
 	end
 	if waterway~="" then
 		way:Layer("waterway", false)
