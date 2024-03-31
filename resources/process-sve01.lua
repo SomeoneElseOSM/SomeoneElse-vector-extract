@@ -67,13 +67,13 @@ function way_function(way)
                 ( sidewalk == "right"           ) or 
                 ( sidewalk == "shared"          ) or 
                 ( sidewalk == "yes"             ) or
-                ( sidewalkCleft == "separate"   ) or 
-                ( sidewalkCleft == "yes"        ) or
-                ( sidewalkCleft == "segregated" ) or
-                ( sidewalkCright == "separate"  ) or 
-                ( sidewalkCright == "yes"       ) or
                 ( sidewalkCboth == "separate"   ) or 
                 ( sidewalkCboth == "yes"        ) or
+                ( sidewalkCleft == "separate"   ) or 
+                ( sidewalkCleft == "segregated" ) or
+                ( sidewalkCleft == "yes"        ) or
+                ( sidewalkCright == "separate"  ) or 
+                ( sidewalkCright == "yes"       ) or
                 ( footway  == "separate"        ) or 
                 ( footway  == "yes"             ) or
                 ( shoulder == "both"            ) or
