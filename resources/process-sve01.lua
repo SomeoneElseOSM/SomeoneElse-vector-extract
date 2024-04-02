@@ -11,29 +11,15 @@ end
 function exit_function()
 end
 
--- Assign nodes to a layer, and set attributes, based on OSM tags
 
+-- ------------------------------------------------------------------------------
+-- Main entry point for processing nodes
+-- ------------------------------------------------------------------------------
 function node_function( node )
-    local amenity = node:Find("amenity")
-    local shop = node:Find("shop")
+-- No node-specific code yet
 
-    if amenity~="" or shop~="" then
-        node:Layer("poi", false)
-
-        if amenity~="" then node:Attribute("class","amenity_" .. amenity)
-        else node:Attribute("class","shop_" .. shop) end
-
-        node:Attribute("name", node:Find("name"))
-	end
-
-    local tourism  = node:Find("tourism")
-
-    if ( tourism == "artwork" ) then
-        node:Layer( "poi", false )
-	node:Attribute( "class","tourism_" .. tourism )
-	node:Attribute( "name", node:Find( "name" ))
-    end
-end
+    generic_function( node )
+end -- node_function()
 
 -- ------------------------------------------------------------------------------
 -- Main entry point for processing ways
@@ -128,4 +114,33 @@ function way_function(way)
     if building~="" then
         way:Layer("building", true)
     end
-end
+
+    generic_function( way )
+end -- way_function()
+
+-- ------------------------------------------------------------------------------
+-- Generic code called for both nodes and ways.
+-- ------------------------------------------------------------------------------
+function generic_function( passed_obj )
+    local amenity  = passed_obj:Find("amenity")
+    local shop = passed_obj:Find("shop")
+    local tourism  = passed_obj:Find("tourism")
+
+    if ( amenity ~= "" ) then
+        passed_obj:LayerAsCentroid( "poi" )
+	passed_obj:Attribute( "class","amenity_" .. amenity )
+	passed_obj:Attribute( "name", passed_obj:Find( "name" ))
+    else
+        if ( shop ~= "" ) then
+            passed_obj:LayerAsCentroid( "poi" )
+    	    passed_obj:Attribute( "class","shop_" .. shop )
+    	    passed_obj:Attribute( "name", passed_obj:Find( "name" ))
+	else
+            if ( tourism ~= "" ) then
+                passed_obj:LayerAsCentroid( "poi" )
+        	passed_obj:Attribute( "class","tourism_" .. tourism )
+        	passed_obj:Attribute( "name", passed_obj:Find( "name" ))
+            end -- tourism
+        end -- shop
+    end -- amenity
+end -- generic_function()

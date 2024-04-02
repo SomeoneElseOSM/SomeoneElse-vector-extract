@@ -1,15 +1,16 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20240331T131800Z",
+  "data_updated": "20240402T231800Z",
   "project": {
     "name": "SomeoneElse: Rural pedestrian vector schema",
-    "description": "This map style is designed for England and Wales-based rural pedestrians",
+    "description": "This vector map style is designed for England and Wales-based rural pedestrians",
     "project_url": "https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract",
     "contact_name": "Andy Townsend",
     "contact_email": "sve01-taginfo@atownsend.org.uk"
   },
   "tags": [
+    { "key": "amenity", "description": "All amenity nodes and ways written into mbtiles" },
     { "key": "building", "description": "Detect building ways" },
     { "key": "cycleway", "description": "Decide if a road has a sidewalk" },
     { "key": "cycleway", "value": "opposite_track", "description": "Decide if a road has a sidewalk" },
@@ -30,6 +31,7 @@
     { "key": "segregated", "description": "Decide if a road has a sidewalk" },
     { "key": "segregated", "value": "right", "description": "Decide if a road has a sidewalk" },
     { "key": "segregated", "value": "yes", "description": "Decide if a road has a sidewalk" },
+    { "key": "shop", "description": "All shop nodes and ways written into mbtiles" },
     { "key": "shoulder", "description": "Decide if a road has a sidewalk" },
     { "key": "shoulder", "value": "both", "description": "Decide if a road has a sidewalk" },
     { "key": "shoulder", "value": "left", "description": "Decide if a road has a sidewalk" },
@@ -53,6 +55,7 @@
     { "key": "sidewalk:right", "description": "Decide if a road has a sidewalk" },
     { "key": "sidewalk:right", "value": "separate", "description": "Decide if a road has a sidewalk" },
     { "key": "sidewalk:right", "value": "yes", "description": "Decide if a road has a sidewalk" },
+    { "key": "tourism", "description": "All tourism nodes and ways written into mbtiles" },
     { "key": "verge", "description": "Decide if a road has a verge" },
     { "key": "verge", "value": "both", "description": "Decide if a road has a verge" },
     { "key": "verge", "value": "left", "description": "Decide if a road has a verge" },
