@@ -57,8 +57,8 @@ function way_function(way)
         way:Layer("transportation", false)
 
 -- ----------------------------------------------------------------------------
--- Some highway types are temporarily rewritten to a "catch all" of 
--- "pathnarrow", before designation processing is added.
+-- Some highway types are temporarily rewritten to "catch all"s of 
+-- "pathnarrow" and "pathwide", before designation processing is added.
 -- Others are written through as the OSM highway type.
 -- For roads, sidewalk / verge information is written to an "edge" value.
 -- ----------------------------------------------------------------------------
@@ -69,7 +69,11 @@ function way_function(way)
             ( highway == "steps"     )) then
             way:Attribute( "class", "pathnarrow" )
         else
-            way:Attribute( "class", highway )
+	    if ( highway == "track" ) then
+                way:Attribute( "class", "pathwide" )
+            else
+                way:Attribute( "class", highway )
+            end
         end
 
 -- ----------------------------------------------------------------------------
