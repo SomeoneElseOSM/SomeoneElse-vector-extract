@@ -50,9 +50,27 @@ function way_function(way)
     local waterway = way:Find("waterway")
     local building = way:Find("building")
 
+-- ----------------------------------------------------------------------------
+-- highway processing
+-- ----------------------------------------------------------------------------
     if ( highway ~= "" ) then
         way:Layer("transportation", false)
-        way:Attribute("class", highway)
+
+-- ----------------------------------------------------------------------------
+-- Some highway types are temporarily rewritten to a "catch all" of 
+-- "pathnarrow", before designation processing is added.
+-- Others are written through as the OSM highway type.
+-- For roads, sidewalk / verge information is written to an "edge" value.
+-- ----------------------------------------------------------------------------
+        if (( highway == "path"      ) or
+            ( highway == "footway"   ) or
+            ( highway == "bridleway" ) or
+            ( highway == "cycleway"  ) or
+            ( highway == "steps"     )) then
+            way:Attribute( "class", "pathnarrow" )
+        else
+            way:Attribute( "class", highway )
+        end
 
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
