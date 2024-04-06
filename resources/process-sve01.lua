@@ -284,6 +284,12 @@ function generic_before_function( passed_obj )
 -- ----------------------------------------------------------------------------
    passed_obj:Attribute( "official_ref", set_official_ref( passed_obj:Find("official_ref"), passed_obj:Find("highway_authority_ref"), passed_obj:Find("highway_ref"), passed_obj:Find("admin_ref"), passed_obj:Find("admin:ref"), passed_obj:Find("loc_ref"), passed_obj:Find("ref") ))
 
+-- ----------------------------------------------------------------------------
+-- "Sabristas" sometimes add dubious names to motorway junctions.  Don't show
+-- them if they're not signed.
+-- ----------------------------------------------------------------------------
+   passed_obj:Attribute( "name", suppress_unsigned_motorway_junctions( passed_obj:Find("name"), passed_obj:Find("name:signed"), passed_obj:Find("name:absent"), passed_obj:Find("unsigned") ))
+
 end -- generic_before_function()
 
 
