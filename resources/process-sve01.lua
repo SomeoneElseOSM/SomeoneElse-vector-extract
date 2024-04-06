@@ -16,6 +16,13 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -- ----------------------------------------------------------------------------
+-- Code common to several projects is in "shared_lua.lua".
+-- That file is in the "SomeoneElse-style" repository, but needs to be 
+-- available on the standard lua path when this script is invoked.  An easy way
+-- to do that is to copy it to a local shared area on that path:
+-- cp /home/${local_filesystem_user}/src/SomeoneElse-style/shared_lua.lua -
+--      /usr/local/share/lua/5.3/
+-- ----------------------------------------------------------------------------
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
