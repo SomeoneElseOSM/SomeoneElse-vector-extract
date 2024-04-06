@@ -274,6 +274,11 @@ function generic_before_function( passed_obj )
 -- ----------------------------------------------------------------------------
    passed_obj:Attribute( "name", set_name_left_right_en( passed_obj:Find("name"), passed_obj:Find("name:left"), passed_obj:Find("name:right"), passed_obj:Find("name:en") ))
 
+-- ----------------------------------------------------------------------------
+-- Move refs to consider as "official" to official_ref
+-- ----------------------------------------------------------------------------
+   passed_obj:Attribute( "official_ref", set_official_ref( passed_obj:Find("official_ref"), passed_obj:Find("highway_authority_ref"), passed_obj:Find("highway_ref"), passed_obj:Find("admin_ref"), passed_obj:Find("admin:ref"), passed_obj:Find("loc_ref"), passed_obj:Find("ref") ))
+
 end -- generic_before_function()
 
 
