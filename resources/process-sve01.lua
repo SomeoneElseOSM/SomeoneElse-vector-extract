@@ -204,7 +204,60 @@ function generic_before_function( passed_obj )
 -- ----------------------------------------------------------------------------
     passed_obj:Attribute( "layer", fix_invalid_layer_values( passed_obj:Find("layer"), passed_obj:Find("bridge"), passed_obj:Find("embankment") ))
 
+-- ----------------------------------------------------------------------------
+-- Treat "was:" as "disused:"
+-- ----------------------------------------------------------------------------
+   if (( passed_obj:Find("was:amenity")     ~= nil ) and
+       ( passed_obj:Find("disused:amenity") == nil )) then
+      passed_obj:Attribute( "disused:amenity", passed_obj:Find( "was:amenity" ))
+   end
+
+   if (( passed_obj:Find("was:waterway")     ~= nil ) and
+       ( passed_obj:Find("disused:waterway") == nil )) then
+      passed_obj:Attribute( "disused:waterway", passed_obj:Find( "was:waterway" ))
+   end
+
+   if (( passed_obj:Find("was:railway")     ~= nil ) and
+       ( passed_obj:Find("disused:railway") == nil )) then
+      passed_obj:Attribute( "disused:railway", passed_obj:Find( "was:railway" ))
+   end
+
+   if (( passed_obj:Find("was:aeroway")     ~= nil ) and
+       ( passed_obj:Find("disused:aeroway") == nil )) then
+      passed_obj:Attribute( "disused:aeroway", passed_obj:Find( "was:aeroway" ))
+   end
+
+   if (( passed_obj:Find("was:landuse")     ~= nil ) and
+       ( passed_obj:Find("disused:landuse") == nil )) then
+      passed_obj:Attribute( "disused:landuse", passed_obj:Find( "was:landuse" ))
+   end
+
+   if (( passed_obj:Find("was:shop")     ~= nil ) and
+       ( passed_obj:Find("disused:shop") == nil )) then
+      passed_obj:Attribute( "disused:shop", passed_obj:Find( "was:shop" ))
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat "closed:" as "disused:" in some cases too.
+-- ----------------------------------------------------------------------------
+   if (( passed_obj:Find("closed:amenity")  ~= nil ) and
+       ( passed_obj:Find("disused:amenity") == nil )) then
+      passed_obj:Attribute( "disused:amenity", passed_obj:Find( "closed:amenity" ))
+   end
+
+   if (( passed_obj:Find("closed:shop")  ~= nil ) and
+       ( passed_obj:Find("disused:shop") == nil )) then
+      passed_obj:Attribute( "disused:shop", passed_obj:Find( "closed:shop" ))
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat "status=abandoned" as "disused=yes"
+-- ----------------------------------------------------------------------------
+   if ( passed_obj:Find("status") == "abandoned" ) then
+      passed_obj:Attribute( "disused", "yes" )
+   end
 end -- generic_before_function()
+
 
 function generic_after_function( passed_obj )
     local amenity  = passed_obj:Find("amenity")
