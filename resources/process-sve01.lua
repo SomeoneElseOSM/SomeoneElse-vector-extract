@@ -76,7 +76,17 @@ end -- node_function()
 function way_function(way)
     generic_before_function( way )
 
-    local highway = way:Find("highway")
+-- ----------------------------------------------------------------------------
+-- Before processing footways, turn certain corridors into footways
+--
+-- Note that https://wiki.openstreetmap.org/wiki/Key:indoor defines
+-- indoor=corridor as a closed way.  highway=corridor is not documented there
+-- but is used for corridors.  We'll only process layer or level 0 (or nil)
+--
+-- The assignment of local variables is done by the example code, I'm guessing
+-- for reasons of speed.
+-- ----------------------------------------------------------------------------
+    local highway = fix_corridors( way:Find("highway"), way:Find("layer"), way:Find("level") )
 
 -- ------------------------------------------------------------------------------
 -- Which other tags do we need to look at to see if a highway way has a 
