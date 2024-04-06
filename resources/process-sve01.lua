@@ -88,6 +88,11 @@ function way_function(way)
 -- ----------------------------------------------------------------------------
     local highway = fix_corridors( way:Find("highway"), way:Find("layer"), way:Find("level") )
 
+-- ----------------------------------------------------------------------------
+-- Consolidate some rare highway types into ones we can display.
+-- ----------------------------------------------------------------------------
+    highway = process_golf_tracks( highway, way:Find("golf") )
+
 -- ------------------------------------------------------------------------------
 -- Which other tags do we need to look at to see if a highway way has a 
 -- sidewalk or a verge?
