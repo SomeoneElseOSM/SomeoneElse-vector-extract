@@ -40,21 +40,41 @@ end
 
 -- ------------------------------------------------------------------------------
 -- Main entry point for processing nodes
+--
+-- The parameter here is an object that describes one node.  See:
+-- https://github.com/systemed/tilemaker/blob/master/docs/CONFIGURATION.md#principal-lua-functions
+-- Note that "node" is an object with specific methods, unlike the array that is 
+-- passed to similar code in osm2pgsql's pgsql lua calls.
+--
+-- "generic_before_function" handles things like "unusual" tags that we want to 
+-- replace across the board.
+-- Then any processing that only applies to nodes is done.
+-- Finally "generic_after_function" handles everything else, including most of
+-- the "move OSM tags to vector layers"
 -- ------------------------------------------------------------------------------
 function node_function( node )
+    generic_before_function( node )
+
 -- No node-specific code yet
 
-    generic_function( node )
+    generic_after_function( node )
 end -- node_function()
 
 -- ------------------------------------------------------------------------------
 -- Main entry point for processing ways
+-- The parameter here is an object that describes one way.  See:
+-- https://github.com/systemed/tilemaker/blob/master/docs/CONFIGURATION.md#principal-lua-functions
+-- Note that "node" is an object with specific methods, unlike the array that is 
+-- passed to similar code in osm2pgsql's pgsql lua calls.
+--
+-- "generic_before_function" handles things like "unusual" tags that we want to 
+-- replace across the board.
+-- Then any processing that only applies to ways is done.
+-- Finally "generic_after_function" handles everything else, including most of
+-- the "move OSM tags to vector layers"
 -- ------------------------------------------------------------------------------
 function way_function(way)
--- ----------------------------------------------------------------------------
--- Invalid layer values - change them to something plausible.
--- ----------------------------------------------------------------------------
-    way:Attribute( "layer", fix_invalid_layer_values( way:Find("layer"), way:Find("bridge"), way:Find("embankment") ))
+    generic_before_function( way )
 
     local highway = way:Find("highway")
 
@@ -168,13 +188,25 @@ function way_function(way)
         way:Layer("building", true)
     end
 
-    generic_function( way )
+    generic_after_function( way )
 end -- way_function()
+
 
 -- ------------------------------------------------------------------------------
 -- Generic code called for both nodes and ways.
+-- "_before_" is called before any node or way specific code, "_after_" after.
+-- For methods available with passed_obj, see
+-- https://github.com/systemed/tilemaker/blob/master/docs/CONFIGURATION.md#principal-lua-functions
 -- ------------------------------------------------------------------------------
-function generic_function( passed_obj )
+function generic_before_function( passed_obj )
+-- ----------------------------------------------------------------------------
+-- Invalid layer values - change them to something plausible.
+-- ----------------------------------------------------------------------------
+    passed_obj:Attribute( "layer", fix_invalid_layer_values( passed_obj:Find("layer"), passed_obj:Find("bridge"), passed_obj:Find("embankment") ))
+
+end -- generic_before_function()
+
+function generic_after_function( passed_obj )
     local amenity  = passed_obj:Find("amenity")
     local shop = passed_obj:Find("shop")
     local tourism  = passed_obj:Find("tourism")
@@ -196,4 +228,4 @@ function generic_function( passed_obj )
             end -- tourism
         end -- shop
     end -- amenity
-end -- generic_function()
+end -- generic_after_function()
