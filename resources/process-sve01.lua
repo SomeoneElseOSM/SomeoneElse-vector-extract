@@ -1,5 +1,6 @@
--- Nodes will only be processed if one of these keys is present
+require "shared_lua"
 
+-- Nodes will only be processed if one of these keys is present
 node_keys = { "amenity", "shop", "tourism" }
 
 -- Initialize Lua logic
@@ -25,6 +26,11 @@ end -- node_function()
 -- Main entry point for processing ways
 -- ------------------------------------------------------------------------------
 function way_function(way)
+-- ----------------------------------------------------------------------------
+-- Invalid layer values - change them to something plausible.
+-- ----------------------------------------------------------------------------
+    way:Attribute( "layer", fix_invalid_layer_values( way:Find("layer"), way:Find("bridge"), way:Find("embankment") ))
+
     local highway = way:Find("highway")
 
 -- ------------------------------------------------------------------------------
