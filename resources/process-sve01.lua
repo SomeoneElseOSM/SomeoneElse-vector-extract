@@ -266,6 +266,14 @@ function generic_before_function( passed_obj )
    if ( passed_obj:Find("status") == "abandoned" ) then
       passed_obj:Attribute( "disused", "yes" )
    end
+
+-- ----------------------------------------------------------------------------
+-- If there are different names on each side of the street, we create one name
+-- containing both.
+-- If "name" does not exist but "name:en" does, use that.
+-- ----------------------------------------------------------------------------
+   passed_obj:Attribute( "name", set_name_left_right_en( passed_obj:Find("name"), passed_obj:Find("name:left"), passed_obj:Find("name:right"), passed_obj:Find("name:en") ))
+
 end -- generic_before_function()
 
 
