@@ -288,7 +288,7 @@ function generic_before_function( passed_obj )
 -- "Sabristas" sometimes add dubious names to motorway junctions.  Don't show
 -- them if they're not signed.
 -- ----------------------------------------------------------------------------
-   passed_obj:Attribute( "name", suppress_unsigned_motorway_junctions( passed_obj:Find("name"), passed_obj:Find("name:signed"), passed_obj:Find("name:absent"), passed_obj:Find("unsigned") ))
+   passed_obj:Attribute( "name", suppress_unsigned_motorway_junctions( passed_obj:Find("name"), passed_obj:Find("highway"), passed_obj:Find("name:signed"), passed_obj:Find("name:absent"), passed_obj:Find("unsigned") ))
 
 end -- generic_before_function()
 
