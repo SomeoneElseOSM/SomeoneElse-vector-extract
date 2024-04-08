@@ -290,6 +290,11 @@ function generic_before_function( passed_obj )
 -- ----------------------------------------------------------------------------
    passed_obj:Attribute( "name", suppress_unsigned_motorway_junctions( passed_obj:Find("name"), passed_obj:Find("highway"), passed_obj:Find("name:signed"), passed_obj:Find("name:absent"), passed_obj:Find("unsigned") ))
 
+-- ----------------------------------------------------------------------------
+-- Move unsigned road refs to the name, in brackets.
+-- ----------------------------------------------------------------------------
+   passed_obj:Attribute( "name", suppress_unsigned_road_refs( passed_obj:Find("name"), passed_obj:Find("highway"), passed_obj:Find("name:signed"), passed_obj:Find("name:absent"), passed_obj:Find("official_ref"), passed_obj:Find("ref"), passed_obj:Find("ref:signed"), passed_obj:Find("unsigned") ))
+
 end -- generic_before_function()
 
 
