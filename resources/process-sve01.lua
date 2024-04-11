@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "shop", "tourism" }
+node_keys = { "amenity", "place", "shop", "tourism" }
 
 -- Initialize Lua logic
 
@@ -300,6 +300,7 @@ end -- generic_before_function()
 
 function generic_after_function( passed_obj )
     local amenity  = passed_obj:Find("amenity")
+    local place = passed_obj:Find("place")
     local shop = passed_obj:Find("shop")
     local tourism  = passed_obj:Find("tourism")
 
@@ -308,16 +309,22 @@ function generic_after_function( passed_obj )
 	passed_obj:Attribute( "class","amenity_" .. amenity )
 	passed_obj:Attribute( "name", passed_obj:Find( "name" ))
     else
-        if ( shop ~= "" ) then
-            passed_obj:LayerAsCentroid( "poi" )
-    	    passed_obj:Attribute( "class","shop_" .. shop )
+        if ( place ~= "" ) then
+            passed_obj:LayerAsCentroid( "place" )
+            passed_obj:MinZoom( 6 )
     	    passed_obj:Attribute( "name", passed_obj:Find( "name" ))
 	else
-            if ( tourism ~= "" ) then
+            if ( shop ~= "" ) then
                 passed_obj:LayerAsCentroid( "poi" )
-        	passed_obj:Attribute( "class","tourism_" .. tourism )
-        	passed_obj:Attribute( "name", passed_obj:Find( "name" ))
-            end -- tourism
-        end -- shop
+    	        passed_obj:Attribute( "class","shop_" .. shop )
+    	        passed_obj:Attribute( "name", passed_obj:Find( "name" ))
+	    else
+                if ( tourism ~= "" ) then
+                    passed_obj:LayerAsCentroid( "poi" )
+            	passed_obj:Attribute( "class","tourism_" .. tourism )
+            	passed_obj:Attribute( "name", passed_obj:Find( "name" ))
+                end -- tourism
+            end -- shop
+        end -- place
     end -- amenity
 end -- generic_after_function()
