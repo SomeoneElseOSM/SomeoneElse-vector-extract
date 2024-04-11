@@ -311,9 +311,36 @@ function generic_after_function( passed_obj )
     else
         if ( place ~= "" ) then
             passed_obj:LayerAsCentroid( "place" )
-            passed_obj:MinZoom( 6 )
     	    passed_obj:Attribute( "name", passed_obj:Find( "name" ))
-	else
+
+            if (( place == "country" ) or
+                ( place == "state"   )) then
+                passed_obj:MinZoom( 5 )
+            else
+                if ( place == "city" ) then
+                    passed_obj:MinZoom( 5 )
+                else
+                    if ( place == "town" ) then
+                        passed_obj:MinZoom( 8 )
+                    else
+                        if (( place == "suburb"  ) or
+                            ( place == "village" )) then
+                            passed_obj:MinZoom( 11 )
+                        else
+                            if (( place == "hamlet"            ) or
+                                ( place == "locality"          ) or
+                                ( place == "neighbourhood"     ) or
+                                ( place == "isolated_dwelling" ) or
+                                ( place == "farm"              )) then
+                                passed_obj:MinZoom( 13 )
+                            else
+                                passed_obj:MinZoom( 14 )
+                            end -- hamlet
+                        end -- suburb
+                    end -- town
+                end -- city
+            end --country
+	else -- place
             if ( shop ~= "" ) then
                 passed_obj:LayerAsCentroid( "poi" )
     	        passed_obj:Attribute( "class","shop_" .. shop )
