@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "place", "shop", "tourism" }
+node_keys = { "amenity", "natural", "place", "shop", "tourism" }
 
 -- Initialize Lua logic
 
@@ -294,6 +294,13 @@ function generic_before_function( passed_obj )
 -- Move unsigned road refs to the name, in brackets.
 -- ----------------------------------------------------------------------------
    passed_obj:Attribute( "name", suppress_unsigned_road_refs( passed_obj:Find("name"), passed_obj:Find("highway"), passed_obj:Find("name:signed"), passed_obj:Find("name:absent"), passed_obj:Find("official_ref"), passed_obj:Find("ref"), passed_obj:Find("ref:signed"), passed_obj:Find("unsigned") ))
+
+-- ----------------------------------------------------------------------------
+-- Handle place=islet as place=island
+-- Handle place=quarter
+-- Handle natural=cape etc. as place=locality if no other place tag.
+-- ----------------------------------------------------------------------------
+   passed_obj:Attribute( "place", consolidate_place( passed_obj:Find("place"), passed_obj:Find("natural") ))
 
 end -- generic_before_function()
 
