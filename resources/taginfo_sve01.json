@@ -25,8 +25,6 @@
     { "key": "footway", "value": "yes", "description": "Decide if a road has a sidewalk" },
     { "key": "hard_shoulder", "description": "Decide if a road has a sidewalk" },
     { "key": "hard_shoulder", "value": "yes", "description": "Decide if a road has a sidewalk" },
-    { "key": "hardshoulder", "description": "Decide if a road has a sidewalk" },
-    { "key": "hardshoulder", "value": "yes", "description": "Decide if a road has a sidewalk" },
     { "key": "highway", "description": "Detect highway ways" },
     { "key": "place", "description": "Most place types shown" },
     { "key": "place", "value": "country", "description": "Shown as country" },

@@ -104,7 +104,6 @@ function way_function(way)
     local footway = way:Find("footway")
     local shoulder = way:Find("shoulder")
     local hard_shoulder = way:Find("hard_shoulder")
-    local hardshoulder = way:Find("hardshoulder")
     local cycleway = way:Find("cycleway")
     local segregated = way:Find("segregated")
 
@@ -166,7 +165,6 @@ function way_function(way)
             ( shoulder == "right"           ) or 
             ( shoulder == "yes"             ) or
             ( hard_shoulder == "yes"        ) or
-            ( hardshoulder  == "yes"        ) or
             ( cycleway == "track"           ) or
             ( cycleway == "opposite_track"  ) or
             ( cycleway == "yes"             ) or
