@@ -72,7 +72,7 @@
     { "key": "verge", "description": "Decide if a road has a verge" },
     { "key": "verge", "value": "both", "description": "Decide if a road has a verge" },
     { "key": "verge", "value": "left", "description": "Decide if a road has a verge" },
-    { "key": "verge", "value": "seperate", "description": "Decide if a road has a verge" },
+    { "key": "verge", "value": "separate", "description": "Decide if a road has a verge" },
     { "key": "verge", "value": "right", "description": "Decide if a road has a verge" },
     { "key": "verge", "value": "yes", "description": "Decide if a road has a verge" },
     { "key": "waterway", "description": "Detect waterway ways" }
