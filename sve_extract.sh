@@ -1,6 +1,6 @@
 #!/bin/bash
 # -----------------------------------------------------------------------------
-# sve01_extract.sh
+# sve_extract.sh
 #
 # Copyright (C) 2023-2024  Andy Townsend
 #
@@ -24,10 +24,11 @@
 # files user by update_render.sh (raster maps) or garmin_map_etrex_03.sh 
 # (Garmin) if either of those are also installed.
 #
-# Four parameters can be set, such as:
-# europe great-britain england north-yorkshire
+# Five parameters can be set, such as:
+# (bbox) europe great-britain england north-yorkshire
+# At least two are required.
 #
-# This script uses
+# One of the expected uses for this script is with
 # ~/src/SomeoneElse-vector-extract/resources/process-sve01.lua
 # which in turn relies on "shared_lua.lua", including from somewhere that the
 # local lua expects to include from.  This code can be found at
@@ -37,22 +38,22 @@
 # Running this script without the file will list the locations it is expected
 # to be found in one of.
 # ----------------------------------------------------------------------------
-if [ -z "$4" ]
+if [ -z "$8" ]
 then
-    if [ -z "$3" ]
+    if [ -z "$7" ]
     then
-	if [ -z "$2" ]
+	if [ -z "$6" ]
 	then
-	    if [ -z "$1" ]
+	    if [ -z "$5" ]
 	    then
-		echo "1-4 arguments needed (continent, country, state, region).  No arguments passed - exiting"
+		echo "5-8 arguments needed (bbox, continent, country, state, region).  No arguments passed - exiting"
 		exit 1
 	    else
 		# ----------------------------------------------------------------------
 		# Sensible options here might be "antarctica" or possibly "central-america".
 		# ----------------------------------------------------------------------
-		echo "1 argument passed - processing a continent"
-		file_prefix1=${1}
+		echo "2 arguments passed - processing a continent"
+		file_prefix1=${5}
 		file_page1=http://download.geofabrik.de/${file_prefix1}.html
 		file_url1=http://download.geofabrik.de/${file_prefix1}-latest.osm.pbf
 	    fi
@@ -60,28 +61,28 @@ then
 	    # ----------------------------------------------------------------------
 	    # Sensible options here might be e.g. "europe" and "albania".
 	    # ----------------------------------------------------------------------
-	    echo "2 arguments passed - processing a continent and a country"
-	    file_prefix1=${2}
-	    file_page1=http://download.geofabrik.de/${1}/${file_prefix1}.html
-	    file_url1=http://download.geofabrik.de/${1}/${file_prefix1}-latest.osm.pbf
+	    echo "3 arguments passed - processing a continent and a country"
+	    file_prefix1=${6}
+	    file_page1=http://download.geofabrik.de/${5}/${file_prefix1}.html
+	    file_url1=http://download.geofabrik.de/${5}/${file_prefix1}-latest.osm.pbf
 	fi
     else
 	# ----------------------------------------------------------------------
 	# Sensible options here might be e.g. "europe" "united-kingdom" and "england".
 	# ----------------------------------------------------------------------
-	echo "3 arguments passed - processing a continent, a country and a subregion"
-	file_prefix1=${3}
-	file_page1=http://download.geofabrik.de/${1}/${2}/${file_prefix1}.html
-	file_url1=http://download.geofabrik.de/${1}/${2}/${file_prefix1}-latest.osm.pbf
+	echo "4 arguments passed - processing a continent, a country and a subregion"
+	file_prefix1=${7}
+	file_page1=http://download.geofabrik.de/${5}/${6}/${file_prefix1}.html
+	file_url1=http://download.geofabrik.de/${5}/${6}/${file_prefix1}-latest.osm.pbf
     fi
 else
     # ----------------------------------------------------------------------
     # Sensible options here might be e.g. "europe" "united-kingdom", "england" and "bedfordshire"
     # ----------------------------------------------------------------------
-    echo "3 arguments passed - processing a continent, a country and a subregion"
-    file_prefix1=${4}
-    file_page1=http://download.geofabrik.de/${1}/${2}/${3}/${file_prefix1}.html
-    file_url1=http://download.geofabrik.de/${1}/${2}/${3}/${file_prefix1}-latest.osm.pbf
+    echo "5 arguments passed - processing a continent, a country, a subregion and a county"
+    file_prefix1=${8}
+    file_page1=http://download.geofabrik.de/${5}/${6}/${7}/${file_prefix1}.html
+    file_url1=http://download.geofabrik.de/${5}/${6}/${7}/${file_prefix1}-latest.osm.pbf
 fi
 
 #
@@ -92,15 +93,9 @@ cd ~/data
 #
 # When was the target file last modified?
 #
-if [ "$1" = "current" ]
-then
-    echo "Using current data"
-    ls -t | grep "${file_prefix1}_" | head -1 | sed "s/${file_prefix1}_//" | sed "s/.osm.pbf//" > last_modified1.$$
-else
-    wget $file_page1 -O file_page1.$$
-    grep " and contains all OSM data up to " file_page1.$$ | sed "s/.*and contains all OSM data up to //" | sed "s/. File size.*//" > last_modified1.$$
-    rm file_page1.$$
-fi
+wget $file_page1 -O file_page1.$$
+grep " and contains all OSM data up to " file_page1.$$ | sed "s/.*and contains all OSM data up to //" | sed "s/. File size.*//" > last_modified1.$$
+rm file_page1.$$
 #
 file_extension1=`cat last_modified1.$$`
 #
@@ -112,5 +107,11 @@ else
 fi
 #
 # -----------------------------------------------------------------------------
-time tilemaker --input ~/data/${file_prefix1}_${file_extension1}.osm.pbf     --output ~/data/tilemaker_sve01.mbtiles --config ~/src/SomeoneElse-vector-extract/resources/config-sve01.json --process ~/src/SomeoneElse-vector-extract/resources/process-sve01.lua
+# Expected parameters at the front are
+# --config  $1
+# --process $2
+# --output  $3
+# --bbox    $4
+# -----------------------------------------------------------------------------
+time tilemaker --bbox $4 --input ~/data/${file_prefix1}_${file_extension1}.osm.pbf     --output $3 --config $1 --process $2
 #
