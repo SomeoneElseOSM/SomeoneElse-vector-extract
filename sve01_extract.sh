@@ -26,6 +26,16 @@
 #
 # Four parameters can be set, such as:
 # europe great-britain england north-yorkshire
+#
+# This script uses
+# ~/src/SomeoneElse-vector-extract/resources/process-sve01.lua
+# which in turn relies on "shared_lua.lua", including from somewhere that the
+# local lua expects to include from.  This code can be found at
+# https://github.com/SomeoneElseOSM/SomeoneElse-style/blob/master/shared_lua.lua
+# and the "update_render.sh" of that project will install it to
+# "usr/local/share/lua/5.3/" if a raster tile data import is performed.
+# Running this script without the file will list the locations it is expected
+# to be found in one of.
 # ----------------------------------------------------------------------------
 if [ -z "$4" ]
 then
