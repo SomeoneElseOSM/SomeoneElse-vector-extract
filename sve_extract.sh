@@ -112,6 +112,8 @@ fi
 # --process $2
 # --output  $3
 # --bbox    $4
+# Some configs have relative references in them, so cd there first.
 # -----------------------------------------------------------------------------
+cd `dirname $1`
 time tilemaker --bbox $4 --input ~/data/${file_prefix1}_${file_extension1}.osm.pbf     --output $3 --config $1 --process $2
 #
