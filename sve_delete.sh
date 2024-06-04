@@ -46,11 +46,13 @@ APACHE_SUBDIR=/var/www/html/vector
 #
 # Parameter: For example:                                                   Meaning:
 # $1         omt_ny                                                         name of this tileset.  
-# $2         /etc/apache2/sites-available/000-default.conf                  location of Apache config file
+# $2         /etc/apache2/sites-available/000-default.conf                  location of one Apache config file
+# $3         /etc/apache2/sites-available/default-ssl.conf                  location of other Apache config file
 #
 # Set e.v.s for these parameters
 TILESET_NAME=$1
-APACHECONF_LOCATION=$2
+APACHECONF_LOCATION1=$2
+APACHECONF_LOCATION2=$3
 #
 # -----------------------------------------------------------------------------
 # Now we have all the information we need.
@@ -66,29 +68,49 @@ else
     # -----------------------------------------------------------------------------
     # Remove tileset location from apache config file
     # -----------------------------------------------------------------------------
-    if [ "${APACHECONF_LOCATION}" = "" ]
+    if [ "${APACHECONF_LOCATION1}" = "" ]
     then
-	echo "Apache config file untouched; name not provided"
+	echo "Apache config file 1 untouched; name not provided"
     else
-	if [ -f "${APACHECONF_LOCATION}" ]
+	if [ -f "${APACHECONF_LOCATION1}" ]
 	then
-	    if grep 'MbtilesEnabled true' ${APACHECONF_LOCATION} > /dev/null
+	    if grep 'MbtilesEnabled true' ${APACHECONF_LOCATION1} > /dev/null
 	    then
-		grep -v "MbtilesAdd ${TILESET_NAME}" ${APACHECONF_LOCATION} > apacheconf_temp.$$
-		mv apacheconf_temp.$$ ${APACHECONF_LOCATION}
+		grep -v "MbtilesAdd ${TILESET_NAME}" ${APACHECONF_LOCATION1} > apacheconf_temp.$$
+		mv apacheconf_temp.$$ ${APACHECONF_LOCATION1}
+		echo "Apache config file updated: ${APACHECONF_LOCATION1}"
+
+		if [ "${APACHECONF_LOCATION2}" = "" ]
+		then
+		    echo "Apache config file 2 untouched; name not provided"
+		else
+		    if [ -f "${APACHECONF_LOCATION2}" ]
+		    then
+			if grep 'MbtilesEnabled true' ${APACHECONF_LOCATION2} > /dev/null
+			then
+			    grep -v "MbtilesAdd ${TILESET_NAME}" ${APACHECONF_LOCATION2} > apacheconf_temp.$$
+			    mv apacheconf_temp.$$ ${APACHECONF_LOCATION2}
+			    echo "Apache config file updated: ${APACHECONF_LOCATION2}"
+			else
+			    echo "Apache config file untouched; MbtilesEnabled true missing from ${APACHECONF_LOCATION2}"
+			fi
+		    else
+			echo "Apache config file untouched; does not exist: ${APACHECONF_LOCATION2}"
+		    fi
+		fi
+
 		systemctl restart apache2
-		echo "Apache config file updated: ${APACHECONF_LOCATION}"
 	    else
-		echo "Apache config file untouched; MbtilesEnabled true missing from ${APACHECONF_LOCATION}"
+		echo "Apache config file untouched; MbtilesEnabled true missing from ${APACHECONF_LOCATION1}"
 	    fi
 	else
-	    echo "Apache config file untouched; does not exist: ${APACHECONF_LOCATION}"
+	    echo "Apache config file untouched; does not exist: ${APACHECONF_LOCATION1}"
 	fi
     fi
     #
     # -----------------------------------------------------------------------------
-    # We don't delete fonts files below main Apache directory.
-    # It is expected that most styles will share fonts
+    # We don't yet delete fonts files below main Apache directory.
+    # Some styles may share fonts; more investigattion needed.
     # -----------------------------------------------------------------------------
     #
 fi
