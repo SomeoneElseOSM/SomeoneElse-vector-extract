@@ -23,5 +23,11 @@ The logic used here is actually very similar to that used for [raster maps](http
 
 No fields
 
+## "poi"
+
+* class - stored as the OSM tag and value, such as "amenity_pub"
+* name - the value of the OSM name tag.
+
+
 This style is Not yet fully functional - it is still very much a work in progress.
 
