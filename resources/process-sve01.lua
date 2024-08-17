@@ -291,7 +291,40 @@ function generic_before_function( passed_obj )
 -- ----------------------------------------------------------------------------
 -- Move unsigned road refs to the name, in brackets.
 -- ----------------------------------------------------------------------------
-   Attribute( "name", suppress_unsigned_road_refs( Find("name"), Find("highway"), Find("name:signed"), Find("name:absent"), Find("official_ref"), Find("ref"), Find("ref:signed"), Find("unsigned") ))
+   t = { Find("name"), Find("highway"), Find("name:signed"), Find("name:absent"), Find("official_ref"), Find("ref"), Find("ref:signed"), Find("unsigned") }
+   suppress_unsigned_road_refs( t )
+
+   if ( t[1] ~= nil ) then
+      Attribute( "name", t[1] )
+   end
+
+   if ( t[2] ~= nil ) then
+      Attribute( "highway", t[2] )
+   end
+
+   if ( t[3] ~= nil ) then
+      Attribute( "name:signed", t[3] )
+   end
+
+   if ( t[4] ~= nil ) then
+      Attribute( "name:absent", t[4] )
+   end
+
+   if ( t[5] ~= nil ) then
+      Attribute( "official_ref", t[5] )
+   end
+
+   if ( t[6] ~= nil ) then
+      Attribute( "ref", t[6] )
+   end
+
+   if ( t[7] ~= nil ) then
+      Attribute( "ref:signed", t[7] )
+   end
+
+   if ( t[8] ~= nil ) then
+      Attribute( "unsigned", t[8] )
+   end
 
 -- ----------------------------------------------------------------------------
 -- Handle place=islet as place=island
