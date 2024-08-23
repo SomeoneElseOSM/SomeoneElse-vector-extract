@@ -52,12 +52,12 @@ end
 -- Finally "generic_after_function" handles everything else, including most of
 -- the "move OSM tags to vector layers"
 -- ------------------------------------------------------------------------------
-function node_function( node )
-    generic_before_function( node )
+function node_function()
+    generic_before_function()
 
 -- No node-specific code yet
 
-    generic_after_function( node )
+    generic_after_function()
 end -- node_function()
 
 -- ------------------------------------------------------------------------------
@@ -73,8 +73,8 @@ end -- node_function()
 -- Finally "generic_after_function" handles everything else, including most of
 -- the "move OSM tags to vector layers"
 -- ------------------------------------------------------------------------------
-function way_function(way)
-    generic_before_function( way )
+function way_function()
+    generic_before_function()
 
 -- ----------------------------------------------------------------------------
 -- Before processing footways, turn certain corridors into footways
@@ -201,17 +201,17 @@ function way_function(way)
         Layer("building", true)
     end
 
-    generic_after_function( way )
+    generic_after_function()
 end -- way_function()
 
 
 -- ------------------------------------------------------------------------------
 -- Generic code called for both nodes and ways.
 -- "_before_" is called before any node or way specific code, "_after_" after.
--- For methods available with passed_obj, see
+-- For methods available, see
 -- https://github.com/systemed/tilemaker/blob/master/docs/CONFIGURATION.md#principal-lua-functions
 -- ------------------------------------------------------------------------------
-function generic_before_function( passed_obj )
+function generic_before_function()
 -- ----------------------------------------------------------------------------
 -- Invalid layer values - change them to something plausible.
 -- ----------------------------------------------------------------------------
@@ -336,7 +336,7 @@ function generic_before_function( passed_obj )
 end -- generic_before_function()
 
 
-function generic_after_function( passed_obj )
+function generic_after_function()
     local amenity  = Find("amenity")
     local place = Find("place")
     local shop = Find("shop")
