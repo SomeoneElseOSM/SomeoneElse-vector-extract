@@ -12,8 +12,25 @@ The logic used here is actually very similar to that used for [raster maps](http
 
 ## "transportation"
 
-* class - the OSM value for "highway"
-* edge - "sidewalk", "verge" or unset.
+### class
+
+This is derived from the OSM value for "highway" and the designation.  Values are:
+
+* motorway, trunk, primary, secondary, tertiary, unclassified and residential are handled as normal.
+* service without designation are handled as normal
+* service with designation are handled as per the designation
+* unpaved - unpaved unclassified roads, shown with a solid brown line
+* ucrwide, ucrnarrow - unclassified country road; long brown dashes widely or narrowly spaced
+* boatwide, boatnarrow - Byway Open to All Traffic; brown dashes widely or narrowly spaced
+* rbywide, rbynarrow - Restricted Byway; blue dashes and dots widely or narrowly spaced
+* bridlewaywide, bridlewaynarrow - Public Bridleway; blue dots widely or narrowly spaced
+* bridlewaysteps - Public Bridleway; wide blue dashes
+* footwaywide, footwaynarrow - Public Footpath; salmon dots widely or narrowly spaced
+* footwaysteps - Public Footpath; wide salmon dashes
+* pathwide, pathnarrow - no designation; black dots widely or narrowly spaced
+* steps - no designation; wide black dashes
+
+* edge - "sidewalk", "verge" or unset.  Influences the rendering on major road types.
 
 ## "waterway"
 
@@ -29,5 +46,5 @@ No fields
 * name - the value of the OSM name tag.
 
 
-This style is Not yet fully functional - it is still very much a work in progress.
+This style is very much still a work in progress.
 
