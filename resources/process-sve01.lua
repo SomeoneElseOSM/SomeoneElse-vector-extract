@@ -924,6 +924,102 @@ function generic_before_function( passedt )
       end
    end
 
+   if (( passedt.designation == "public_bridleway"                    ) or
+       ( passedt.designation == "bridleway"                           ) or 
+       ( passedt.designation == "tertiary_highway;public_bridleway"   ) or 
+       ( passedt.designation == "public_bridleway;public_cycleway"    ) or 
+       ( passedt.designation == "public_cycleway;public_bridleway"    ) or 
+       ( passedt.designation == "public_bridleway;public_footpath"    )) then
+      if (( passedt.highway == "intpathnarrow" ) or
+	  ( passedt.highway == "pathnarrow"    )) then
+         if (( passedt.trail_visibility == "bad"          )  or
+             ( passedt.trail_visibility == "intermediate" )) then
+            passedt.highway = "intbridlewaynarrow"
+         else
+            passedt.highway = "bridlewaynarrow"
+         end
+      else
+         if (( passedt.highway == "steps"          ) or
+             ( passedt.highway == "bridlewaysteps" )) then
+            passedt.highway = "bridlewaysteps"
+         else
+            if (( passedt.highway == "service"     ) or 
+                ( passedt.highway == "road"        ) or
+                ( passedt.highway == "track"       ) or
+                ( passedt.highway == "intpathwide" ) or
+                ( passedt.highway == "pathwide"    )) then
+               if (( passedt.trail_visibility == "bad"          )  or
+                   ( passedt.trail_visibility == "intermediate" )) then
+                  passedt.highway = "intbridlewaywide"
+               else
+                  passedt.highway = "bridlewaywide"
+               end
+            end
+         end
+      end
+      if ( passedt.prow_ref ~= nil ) then
+         if ( passedt.name == nil ) then
+            passedt.name     = "(" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         else
+            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Rights of way for people on foot are designated as:
+-- England and Wales: public_footpath
+-- Scotland: core_path (ish - more general acess rights exist)
+-- Northern Ireland: public_footpath or PROW (actually "footpath" in law)
+-- ----------------------------------------------------------------------------
+   if (( passedt.designation == "public_footpath"                        ) or
+       ( passedt.designation == "core_path"                              ) or 
+       ( passedt.designation == "footpath"                               ) or 
+       ( passedt.designation == "public_footway"                         ) or 
+       ( passedt.designation == "public_footpath;permissive_bridleway"   ) or 
+       ( passedt.designation == "public_footpath;public_cycleway"        ) or
+       ( passedt.designation == "PROW"                                   ) or
+       ( passedt.designation == "access_land"                            )) then
+      if (( passedt.highway == "intpathnarrow" ) or
+          ( passedt.highway == "pathnarrow"    )) then
+         if (( passedt.trail_visibility == "bad"          )  or
+             ( passedt.trail_visibility == "intermediate" )) then
+            passedt.highway = "intfootwaynarrow"
+         else
+            passedt.highway = "footwaynarrow"
+         end
+      else
+         if (( passedt.highway == "steps"        ) or
+             ( passedt.highway == "footwaysteps" )) then
+            passedt.highway = "footwaysteps"
+         else
+            if (( passedt.highway == "service"     ) or 
+                ( passedt.highway == "road"        ) or
+                ( passedt.highway == "track"       ) or
+                ( passedt.highway == "intpathwide" ) or
+                ( passedt.highway == "pathwide"    )) then
+               if (( passedt.trail_visibility == "bad"          )  or
+                   ( passedt.trail_visibility == "intermediate" )) then
+                  passedt.highway = "intfootwaywide"
+               else
+                  passedt.highway = "footwaywide"
+               end
+            end
+         end
+      end
+      if ( passedt.prow_ref ~= nil ) then
+         if ( passedt.name == nil ) then
+            passedt.name     = "(" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         else
+            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         end
+      end
+   end
+
 end -- generic_before_function()
 
 
