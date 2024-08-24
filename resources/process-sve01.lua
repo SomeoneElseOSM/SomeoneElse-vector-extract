@@ -258,26 +258,7 @@ function way_function()
 -- ----------------------------------------------------------------------------
     if ( wayt.highway ~= "" ) then
         Layer("transportation", false)
-
--- ----------------------------------------------------------------------------
--- Some highway types are temporarily rewritten to "catch all"s of 
--- "pathnarrow" and "pathwide", before designation processing is added.
--- Others are written through as the OSM highway type.
--- For roads, sidewalk / verge information is written to an "edge" value.
--- ----------------------------------------------------------------------------
-        if (( wayt.highway == "path"      ) or
-            ( wayt.highway == "footway"   ) or
-            ( wayt.highway == "bridleway" ) or
-            ( wayt.highway == "cycleway"  ) or
-            ( wayt.highway == "steps"     )) then
-            Attribute( "class", "pathnarrow" )
-        else
-	    if ( wayt.highway == "track" ) then
-                Attribute( "class", "pathwide" )
-            else
-                Attribute( "class", wayt.highway )
-            end
-        end
+        Attribute( "class", wayt.highway )
 
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
