@@ -853,6 +853,36 @@ function generic_before_function( passedt )
       end
    end
 
+   if (( passedt.designation == "byway_open_to_all_traffic" ) or
+       ( passedt.designation == "public_byway"              ) or 
+       ( passedt.designation == "byway"                     ) or
+       ( passedt.designation == "carriageway"               )) then
+      if (( passedt.highway == "steps"         ) or 
+	  ( passedt.highway == "intpathnarrow" ) or
+	  ( passedt.highway == "pathnarrow"    )) then
+	  passedt.highway = "boatnarrow"
+	  passedt.designation = "byway_open_to_all_traffic"
+      else
+         if (( passedt.highway == "service"     ) or 
+             ( passedt.highway == "road"        ) or
+             ( passedt.highway == "track"       ) or
+             ( passedt.highway == "intpathwide" ) or
+             ( passedt.highway == "pathwide"    )) then
+	     passedt.highway = "boatwide"
+	     passedt.designation = "byway_open_to_all_traffic"
+         end
+      end
+      if ( passedt.prow_ref ~= nil ) then
+         if ( passedt.name == nil ) then
+            passedt.name     = "(" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         else
+            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         end
+      end
+   end
+
 end -- generic_before_function()
 
 
