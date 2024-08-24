@@ -883,6 +883,47 @@ function generic_before_function( passedt )
       end
    end
 
+-- ----------------------------------------------------------------------------
+-- Note that a designated restricted_byway up some steps would be rendered
+-- as a restricted_byway.  I've never seen one though.
+-- There is special processing for "public footpath" and "public_bridleway"
+-- steps (see below) and non-designated steps are rendered as is by the
+-- stylesheet.
+-- ----------------------------------------------------------------------------
+   if (( passedt.designation == "restricted_byway"                        ) or
+       ( passedt.designation == "public_right_of_way"                     ) or
+       ( passedt.designation == "unclassified_highway;restricted_byway"   ) or 
+       ( passedt.designation == "unknown_byway"                           ) or 
+       ( passedt.designation == "public_way"                              ) or 
+       ( passedt.designation == "tertiary_highway;restricted_byway"       ) or 
+       ( passedt.designation == "orpa"                                    ) or
+       ( passedt.designation == "restricted_byway;quiet_lane"             )) then
+      if (( passedt.highway == "steps"         ) or 
+	  ( passedt.highway == "intpathnarrow" ) or
+	  ( passedt.highway == "pathnarrow"    )) then
+         passedt.highway = "rbynarrow"
+         passedt.designation = "restricted_byway"
+      else
+         if (( passedt.highway == "service"     ) or 
+             ( passedt.highway == "road"        ) or
+             ( passedt.highway == "track"       ) or
+             ( passedt.highway == "intpathwide" ) or
+             ( passedt.highway == "pathwide"    )) then
+	    passedt.highway = "rbywide"
+            passedt.designation = "restricted_byway"
+         end
+      end
+      if ( passedt.prow_ref ~= nil ) then
+         if ( passedt.name == nil ) then
+            passedt.name     = "(" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         else
+            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         end
+      end
+   end
+
 end -- generic_before_function()
 
 
