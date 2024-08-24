@@ -118,6 +118,18 @@ function node_function()
     nodet.informal = Find("informal")
     nodet.width = Find("width")
     nodet.est_width = Find("est_width")
+    nodet.designation = Find("designation")
+    nodet.prow_ref = Find("prow_ref")
+    nodet.sac_scale = Find("sac_scale")
+    nodet.scramble = Find("scramble")
+    nodet.ladder = Find("ladder")
+    nodet.access = Find("access")
+    nodet.foot = Find("foot")
+    nodet.bicycle = Find("bicycle")
+    nodet.horse = Find("horse")
+    nodet.accessCfoot = Find("access:foot")
+    nodet.accessCbicycle = Find("access:bicycle")
+    nodet.accessChorse = Find("access:horse")
 
     generic_before_function( nodet )
 
@@ -205,6 +217,18 @@ function way_function()
     wayt.informal = Find("informal")
     wayt.width = Find("width")
     wayt.est_width = Find("est_width")
+    wayt.designation = Find("designation")
+    wayt.prow_ref = Find("prow_ref")
+    wayt.sac_scale = Find("sac_scale")
+    wayt.scramble = Find("scramble")
+    wayt.ladder = Find("ladder")
+    wayt.access = Find("access")
+    wayt.foot = Find("foot")
+    wayt.bicycle = Find("bicycle")
+    wayt.horse = Find("horse")
+    wayt.accessCfoot = Find("access:foot")
+    wayt.accessCbicycle = Find("access:bicycle")
+    wayt.accessChorse = Find("access:horse")
 
     generic_before_function( wayt )
 
@@ -530,6 +554,237 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- highway=scramble is used very occasionally
+--
+-- If sac_scale is unset, set it to "demanding_alpine_hiking" here so that
+-- e.g. "badpathnarrow" is set lower down.  
+-- If it is already set, use the already-set value.
+--
+-- Somewhat related, if "scramble=yes" is set and "trail_visibility" isn't,
+-- set "trail_visibility==intermediate" so that e.g. "badpathnarrow" is set.
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway == "scramble"  ) then
+      passedt.highway = "path"
+
+      if ( passedt.sac_scale == nil  ) then
+         passedt.sac_scale = "demanding_alpine_hiking"
+      end
+   end
+
+   if (( passedt.highway          ~= nil   ) and
+       ( passedt.scramble         == "yes" ) and
+       ( passedt.sac_scale        == nil   ) and
+       ( passedt.trail_visibility == nil   )) then
+      passedt.trail_visibility = "intermediate"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Suppress non-designated very low-visibility paths
+-- Various low-visibility trail_visibility values have been set to "bad" above
+-- to suppress from normal display.
+-- The "bridge" check (on trail_visibility, not sac_scale) is because if 
+-- there's really a bridge there, surely you can see it?
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway          ~= nil   ) and
+       ( passedt.designation      == nil   ) and
+       ( passedt.trail_visibility == "bad" )) then
+      if ((( tonumber(passedt.width) or 0 ) >=  2 ) or
+          ( passedt.width == "2 m"                ) or
+          ( passedt.width == "2.5 m"              ) or
+          ( passedt.width == "3 m"                ) or
+          ( passedt.width == "4 m"                )) then
+         if ( passedt.bridge == nil ) then
+            passedt.highway = "badpathwide"
+         else
+            passedt.highway = "intpathwide"
+         end
+      else
+         if ( passedt.bridge == nil ) then
+            passedt.highway = "badpathnarrow"
+         else
+            passedt.highway = "intpathnarrow"
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various low-visibility trail_visibility values have been set to "bad" above.
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway ~= nil   ) and
+       ( passedt.ladder  == "yes" )) then
+      passedt.highway = "steps"
+      passedt.ladder  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Where a wide width is specified on a normally narrow path, render as wider
+--
+-- Note that "steps" and "footwaysteps" are unchanged by the 
+-- pathwide / path choice below:
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway == "footway"   ) or 
+       ( passedt.highway == "bridleway" ) or 
+       ( passedt.highway == "cycleway"  ) or
+       ( passedt.highway == "path"      )) then
+      if ((( tonumber(passedt.width) or 0 ) >=  2 ) or
+          ( passedt.width == "2 m"                ) or
+          ( passedt.width == "2.5 m"              ) or
+          ( passedt.width == "3 m"                ) or
+          ( passedt.width == "4 m"                )) then
+         if (( passedt.trail_visibility == "bad"          )  or
+             ( passedt.trail_visibility == "intermediate" )) then
+            passedt.highway = "intpathwide"
+         else
+            passedt.highway = "pathwide"
+         end
+      else
+         if (( passedt.trail_visibility == "bad"          )  or
+             ( passedt.trail_visibility == "intermediate" )) then
+            passedt.highway = "intpathnarrow"
+         else
+            passedt.highway = "pathnarrow"
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Where a narrow width is specified on a normally wide track, render as
+-- narrower
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway == "track" ) then
+      if ( passedt.width == nil ) then
+         passedt.width = "2"
+      end
+      if ((( tonumber(passedt.width) or 0 ) >= 2 ) or
+          (  passedt.width == "2 m"              ) or
+          (  passedt.width == "2.5 m"            ) or
+          (  passedt.width == "2.5m"             ) or
+          (  passedt.width == "3 m"              ) or
+          (  passedt.width == "3 metres"         ) or
+          (  passedt.width == "3.5 m"            ) or
+          (  passedt.width == "4 m"              ) or
+          (  passedt.width == "5m"               )) then
+         if (( passedt.trail_visibility == "bad"          )  or
+             ( passedt.trail_visibility == "intermediate" )) then
+            passedt.highway = "intpathwide"
+         else
+            passedt.highway = "pathwide"
+         end
+      else
+         if (( passedt.trail_visibility == "bad"          )  or
+             ( passedt.trail_visibility == "intermediate" )) then
+            passedt.highway = "intpathnarrow"
+         else
+            passedt.highway = "pathnarrow"
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Suppress some "demanding" paths.  UK examples with sac_scale:
+-- alpine_hiking:
+-- http://www.openstreetmap.org/way/168426583   Crib Goch, Snowdon
+-- demanding_mountain_hiking:
+-- http://www.openstreetmap.org/way/114871124   Near Tryfan
+-- difficult_alpine_hiking:
+-- http://www.openstreetmap.org/way/334306672   Jack's Rake, Pavey Ark
+-- ----------------------------------------------------------------------------
+   if ((  passedt.designation == nil                        ) and
+       (( passedt.sac_scale   == "demanding_alpine_hiking" )  or
+        ( passedt.sac_scale   == "difficult_alpine_hiking" ))) then
+      if ((( tonumber(passedt.width) or 0 ) >=  2 ) or
+          ( passedt.width == "2 m"                ) or
+          ( passedt.width == "2.5 m"              ) or
+          ( passedt.width == "3 m"                ) or
+          ( passedt.width == "4 m"                )) then
+         passedt.highway = "badpathwide"
+      else
+         passedt.highway = "badpathnarrow"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Consolidate some access values to make later processing easier.
+--
+-- First - lose "access=designated", which is meaningless.
+-- ----------------------------------------------------------------------------
+   if ( passedt.access == "designated" ) then
+      passedt.access = nil
+   end
+
+   if ( passedt.foot == "designated" ) then
+      passedt.foot = "yes"
+   end
+
+   if ( passedt.bicycle == "designated" ) then
+      passedt.bicycle = "yes"
+   end
+
+   if ( passedt.horse == "designated" ) then
+      passedt.horse = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle dodgy access tags.  Note that this doesn't affect my "designation"
+-- processing, but may be used by the main style, as "foot", "bicycle" and 
+-- "horse" are all in as columns.
+-- ----------------------------------------------------------------------------
+   if (passedt.accessCfoot == "yes") then
+      passedt.accessCfoot = nil
+      passedt.foot = "yes"
+   end
+
+   if (passedt.accessCbicycle == "yes") then
+      passedt.accessCbicycle = nil
+      passedt.bicycle = "yes"
+   end
+
+   if (passedt.accessChorse == "yes") then
+      passedt.accessChorse = nil
+      passedt.horse = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- On footpaths, if foot=no set access=no
+--
+-- Tracks etc. that aren't narrow won't be "pathnarrow" at this stage, and we
+-- shouldn't set "access" based on "foot"
+--
+-- Things that are narrow but have a designation will either not be private to
+-- foot traffic or should be picked up by the TRO etc. handling below.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.highway == "pathnarrow" ) and
+       (( passedt.foot    == "private"   )  or
+        ( passedt.foot    == "no"        )) and
+       (( passedt.bicycle == nil         )  or
+        ( passedt.bicycle == "private"   )  or
+        ( passedt.bicycle == "no"        )) and
+       (( passedt.horse   == nil         )  or
+        ( passedt.horse   == "private"   )  or
+        ( passedt.horse   == "no"        ))) then
+      passedt.access = "no"
+   end
+
+-- ----------------------------------------------------------------------------
+-- When handling TROs etc. we test for "no", not private, hence this change:
+-- ----------------------------------------------------------------------------
+   if ( passedt.access == "private" ) then
+      passedt.access = "no"
+   end
+
+   if ( passedt.foot == "private" ) then
+      passedt.foot = "no"
+   end
+
+   if ( passedt.bicycle == "private" ) then
+      passedt.bicycle = "no"
+   end
+
+   if ( passedt.horse == "private" ) then
+      passedt.horse = "no"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Here we apply the track grade rendering to road designations:
 --   unpaved roads                      unpaved
 --   narrow unclassigned_county_road    ucrnarrow
@@ -552,6 +807,48 @@ function generic_before_function( passedt )
        (( passedt.surface == "unpaved"      )  or 
         ( passedt.surface == "gravel"       ))) then
       passedt.highway = "track"
+   end
+
+   if (( passedt.designation == "unclassified_county_road"                       ) or
+       ( passedt.designation == "unclassified_country_road"                      ) or
+       ( passedt.designation == "unclassified_highway"                           ) or
+       ( passedt.designation == "unclassified_road"                              ) or
+       ( passedt.designation == "unmade_road"                                    ) or
+       ( passedt.designation == "public_highway"                                 ) or 
+       ( passedt.designation == "unclassified_highway;public_footpath"           ) or 
+       ( passedt.designation == "unmade_road"                                    ) or 
+       ( passedt.designation == "adopted"                                        ) or 
+       ( passedt.designation == "unclassified_highway;public_bridleway"          ) or 
+       ( passedt.designation == "adopted highway"                                ) or 
+       ( passedt.designation == "adopted_highway"                                ) or 
+       ( passedt.designation == "unclassified_highway;byway_open_to_all_traffic" ) or 
+       ( passedt.designation == "adopted_highway;public_footpath"                ) or 
+       ( passedt.designation == "tertiary_highway"                               ) or 
+       ( passedt.designation == "public_road"                                    ) or
+       ( passedt.designation == "quiet_lane;unclassified_highway"                ) or
+       ( passedt.designation == "unclassified_highway;quiet_lane"                )) then
+      if (( passedt.highway == "steps"         ) or 
+	  ( passedt.highway == "intpathnarrow" ) or
+	  ( passedt.highway == "pathnarrow"    )) then
+	  passedt.highway = "ucrnarrow"
+      else
+         if (( passedt.highway == "service"     ) or 
+             ( passedt.highway == "road"        ) or
+             ( passedt.highway == "track"       ) or
+             ( passedt.highway == "intpathwide" ) or
+             ( passedt.highway == "pathwide"    )) then
+	     passedt.highway = "ucrwide"
+         end
+      end
+      if ( passedt.prow_ref ~= nil ) then
+         if ( passedt.name == nil ) then
+            passedt.name     = "(" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         else
+            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
+            passedt.prow_ref = nil
+         end
+      end
    end
 
 end -- generic_before_function()
