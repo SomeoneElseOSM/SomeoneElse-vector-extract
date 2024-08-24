@@ -652,9 +652,11 @@ function generic_before_function( passedt )
 -- narrower
 -- ----------------------------------------------------------------------------
    if ( passedt.highway == "track" ) then
-      if ( passedt.width == nil ) then
+      if (( passedt.width == nil ) or
+          ( passedt.width == ""  )) then
          passedt.width = "2"
       end
+
       if ((( tonumber(passedt.width) or 0 ) >= 2 ) or
           (  passedt.width == "2 m"              ) or
           (  passedt.width == "2.5 m"            ) or
