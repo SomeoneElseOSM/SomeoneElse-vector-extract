@@ -124,12 +124,14 @@ function node_function()
     nodet.scramble = Find("scramble")
     nodet.ladder = Find("ladder")
     nodet.access = Find("access")
-    nodet.foot = Find("foot")
-    nodet.bicycle = Find("bicycle")
-    nodet.horse = Find("horse")
     nodet.accessCfoot = Find("access:foot")
     nodet.accessCbicycle = Find("access:bicycle")
     nodet.accessChorse = Find("access:horse")
+    nodet.foot = Find("foot")
+    nodet.bicycle = Find("bicycle")
+    nodet.horse = Find("horse")
+    nodet.service = Find("service")
+    nodet.motor_vehicle = Find("motor_vehicle")
 
     generic_before_function( nodet )
 
@@ -223,12 +225,14 @@ function way_function()
     wayt.scramble = Find("scramble")
     wayt.ladder = Find("ladder")
     wayt.access = Find("access")
-    wayt.foot = Find("foot")
-    wayt.bicycle = Find("bicycle")
-    wayt.horse = Find("horse")
     wayt.accessCfoot = Find("access:foot")
     wayt.accessCbicycle = Find("access:bicycle")
     wayt.accessChorse = Find("access:horse")
+    wayt.foot = Find("foot")
+    wayt.bicycle = Find("bicycle")
+    wayt.horse = Find("horse")
+    wayt.service = Find("service")
+    wayt.motor_vehicle = Find("motor_vehicle")
 
     generic_before_function( wayt )
 
@@ -1018,6 +1022,108 @@ function generic_before_function( passedt )
             passedt.prow_ref = nil
          end
       end
+   end
+
+-- ----------------------------------------------------------------------------
+-- If something is still "track" by this point change it to pathwide.
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway == "track" ) then
+      if (( passedt.trail_visibility == "bad"          )  or
+          ( passedt.trail_visibility == "intermediate" )) then
+         passedt.highway = "intpathwide"
+      else
+         passedt.highway = "pathwide"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat access=permit as access=no (which is what we have set "private" to 
+-- above).
+-- ----------------------------------------------------------------------------
+   if (( passedt.access  == "permit"       ) or
+       ( passedt.access  == "agricultural" ) or
+       ( passedt.access  == "forestry"     ) or
+       ( passedt.access  == "delivery"     ) or
+       ( passedt.access  == "military"     )) then
+      passedt.access = "no"
+   end
+
+   if ( passedt.access  == "customers" ) then
+      passedt.access = "destination"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Don't make driveways with a designation disappear.
+-- ----------------------------------------------------------------------------
+   if ((    passedt.service     == "driveway"                     ) and
+       ((   passedt.designation == "public_footpath"             )  or
+        (   passedt.designation == "public_bridleway"            )  or
+        (   passedt.designation == "restricted_byway"            )  or
+        (   passedt.designation == "byway_open_to_all_traffic"   )  or
+        (   passedt.designation == "unclassified_county_road"    )  or
+        (   passedt.designation == "unclassified_country_road"   )  or
+        (   passedt.designation == "unclassified_highway"        ))) then
+      passedt.service = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If motor_vehicle=no is set on a BOAT, it's probably a TRO, so display as
+-- an RBY instead
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway       == "boatwide"    )  and
+       ( passedt.motor_vehicle == "no"          )) then
+      passedt.highway = "rbywide"
+   end
+
+   if (( passedt.highway       == "boatnarrow"  )  and
+       ( passedt.motor_vehicle == "no"          )) then
+      passedt.highway = "rbynarrow"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Try and detect genuinely closed public footpaths, bridleways (not just those
+-- closed to motor traffic etc.).  Examples with "access=no/private" are
+-- picked up below; we need to make sure that those that do not get an
+-- access=private tag first.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.access      == nil                          )  and
+       (( passedt.designation == "public_footpath"           )   or
+        ( passedt.designation == "public_bridleway"          )   or
+        ( passedt.designation == "restricted_byway"          )   or
+        ( passedt.designation == "byway_open_to_all_traffic" )   or
+        ( passedt.designation == "unclassified_county_road"  )   or
+        ( passedt.designation == "unclassified_country_road" )   or
+        ( passedt.designation == "unclassified_highway"      ))  and
+       (  passedt.foot        == "no"                         )) then
+      passedt.access  = "no"
+   end
+
+-- ----------------------------------------------------------------------------
+-- The extra information "and"ed with "public_footpath" below checks that
+-- "It's access=private and designation=public_footpath, and ordinarily we'd
+-- just remove the access=private tag as you ought to be able to walk there,
+-- unless there isn't foot=yes/designated to say you can, or there is an 
+-- explicit foot=no".
+-- ----------------------------------------------------------------------------
+   if (((   passedt.access      == "no"                          )  or
+        (   passedt.access      == "destination"                 )) and
+       (((( passedt.designation == "public_footpath"           )    or
+          ( passedt.designation == "public_bridleway"          )    or
+          ( passedt.designation == "restricted_byway"          )    or
+          ( passedt.designation == "byway_open_to_all_traffic" )    or
+          ( passedt.designation == "unclassified_county_road"  )    or
+          ( passedt.designation == "unclassified_country_road" )    or
+          ( passedt.designation == "unclassified_highway"      ))   and
+         (  passedt.foot        ~= nil                          )   and
+         (  passedt.foot        ~= "no"                         ))  or
+        ((( passedt.highway     == "pathnarrow"                )    or
+          ( passedt.highway     == "pathwide"                  )    or
+          ( passedt.highway     == "intpathnarrow"             )    or
+          ( passedt.highway     == "intpathwide"               )    or
+          ( passedt.highway     == "service"                   ))   and
+         (( passedt.foot        == "permissive"                )    or
+          ( passedt.foot        == "yes"                       ))))) then
+      passedt.access  = nil
    end
 
 end -- generic_before_function()
