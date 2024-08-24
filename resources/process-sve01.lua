@@ -518,15 +518,16 @@ function generic_before_function( passedt )
       passedt.trail_visibility = "bad"
    end
 
-   if ((  passedt.trail_visibility == "intermediate"  )  or
-       (  passedt.trail_visibility == "intermittent"  )  or
-       (  passedt.trail_visibility == "indistinct"    )  or
-       (  passedt.trail_visibility == "medium"        )  or
-       (  passedt.trail_visibility == "low"           )  or
-       (  passedt.overgrown        == "yes"           )  or
-       (  passedt.obstacle         == "vegetation"    )  or
-       (( passedt.trail_visibility == nil            )   and
-        ( passedt.informal         == "yes"          ))) then
+   if ((   passedt.trail_visibility == "intermediate"  )  or
+       (   passedt.trail_visibility == "intermittent"  )  or
+       (   passedt.trail_visibility == "indistinct"    )  or
+       (   passedt.trail_visibility == "medium"        )  or
+       (   passedt.trail_visibility == "low"           )  or
+       (   passedt.overgrown        == "yes"           )  or
+       (   passedt.obstacle         == "vegetation"    )  or
+       ((( passedt.trail_visibility == nil           )    or
+         ( passedt.trail_visibility == ""            ))   and
+        (  passedt.informal         == "yes"          ))) then
       passedt.trail_visibility = "intermediate"
    end
 
