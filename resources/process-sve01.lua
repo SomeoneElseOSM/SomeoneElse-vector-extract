@@ -829,15 +829,8 @@ function generic_before_function( passedt )
 	     passedt.highway = "ucrwide"
          end
       end
-      if ( passedt.prow_ref ~= nil ) then
-         if ( passedt.name == nil ) then
-            passedt.name     = "(" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         else
-            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         end
-      end
+
+      append_prow_ref( passedt )
    end
 
    if (( passedt.designation == "byway_open_to_all_traffic" ) or
@@ -859,15 +852,8 @@ function generic_before_function( passedt )
 	     passedt.designation = "byway_open_to_all_traffic"
          end
       end
-      if ( passedt.prow_ref ~= nil ) then
-         if ( passedt.name == nil ) then
-            passedt.name     = "(" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         else
-            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         end
-      end
+
+      append_prow_ref( passedt )
    end
 
 -- ----------------------------------------------------------------------------
@@ -900,15 +886,8 @@ function generic_before_function( passedt )
             passedt.designation = "restricted_byway"
          end
       end
-      if ( passedt.prow_ref ~= nil ) then
-         if ( passedt.name == nil ) then
-            passedt.name     = "(" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         else
-            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         end
-      end
+
+      append_prow_ref( passedt )
    end
 
    if (( passedt.designation == "public_bridleway"                    ) or
@@ -944,15 +923,8 @@ function generic_before_function( passedt )
             end
          end
       end
-      if ( passedt.prow_ref ~= nil ) then
-         if ( passedt.name == nil ) then
-            passedt.name     = "(" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         else
-            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         end
-      end
+
+      append_prow_ref( passedt )
    end
 
 -- ----------------------------------------------------------------------------
@@ -996,15 +968,8 @@ function generic_before_function( passedt )
             end
          end
       end
-      if ( passedt.prow_ref ~= nil ) then
-         if ( passedt.name == nil ) then
-            passedt.name     = "(" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         else
-            passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
-            passedt.prow_ref = nil
-         end
-      end
+
+      append_prow_ref( passedt )
    end
 
 -- ----------------------------------------------------------------------------
@@ -1111,6 +1076,19 @@ function generic_before_function( passedt )
 
 end -- generic_before_function()
 
+function append_prow_ref( passedt )
+    if (( passedt.prow_ref ~= nil ) and
+        ( passedt.prow_ref ~= ""  )) then
+       if (( passedt.name == nil )  or
+           ( passedt.name == "" )) then
+          passedt.name     = "(" .. passedt.prow_ref .. ")"
+          passedt.prow_ref = nil
+       else
+          passedt.name     = passedt.name .. " (" .. passedt.prow_ref .. ")"
+          passedt.prow_ref = nil
+       end
+    end
+end -- append_prow_ref
 
 function generic_after_function( passedt )
     if (( passedt.amenity ~= ""  ) and
