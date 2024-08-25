@@ -259,6 +259,7 @@ function way_function()
     if ( wayt.highway ~= "" ) then
         Layer("transportation", false)
         Attribute( "class", wayt.highway )
+	Attribute( "name", wayt.name )
 
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
