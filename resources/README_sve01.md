@@ -30,23 +30,33 @@ This is derived from the OSM value for "highway" and the designation.  Values ar
 * pathwide, pathnarrow - no designation; black dots widely or narrowly spaced
 * steps - no designation; wide black dashes
 
-### name - the value of the OSM name tag.
+### name
 
-### edge - "sidewalk", "verge" or unset.  Influences the rendering on major road types.
+The value of the OSM name tag, after postprocessing to e.g. put in brackets if not signed.
+
+### edge
+
+This will be "sidewalk", "verge" or unset.  Influences the rendering on major road types.
 
 ## "waterway"
 
-### class - the OSM value for "waterway"
+### class
+
+The OSM value for "waterway"
 
 ## "building"
 
-No fields
+No fields yet
 
 ## "poi"
 
-### class - stored as the OSM tag and value, such as "amenity_pub"
+### class
 
-### name - the value of the OSM name tag.
+Stored as the OSM tag and value, such as "amenity_pub"
+
+### name
+
+the value of the OSM name tag, after any postprocessing e.g. for "operator".
 
 
 This style is very much still a work in progress.
