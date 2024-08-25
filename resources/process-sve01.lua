@@ -89,6 +89,7 @@ function node_function()
     nodet.disusedCrailway = Find("disused:railway")
     nodet.wasCaeroway = Find("was:aeroway")
     nodet.disusedCaeroway = Find("disused:aeroway")
+    nodet.landuse = Find("landuse")
     nodet.wasClanduse = Find("was:landuse")
     nodet.disusedClanduse = Find("disused:landuse")
     nodet.status = Find("status")
@@ -190,6 +191,7 @@ function way_function()
     wayt.disusedCrailway = Find("disused:railway")
     wayt.wasCaeroway = Find("was:aeroway")
     wayt.disusedCaeroway = Find("disused:aeroway")
+    wayt.landuse = Find("landuse")
     wayt.wasClanduse = Find("was:landuse")
     wayt.disusedClanduse = Find("disused:landuse")
     wayt.status = Find("status")
@@ -1095,7 +1097,8 @@ function generic_after_function( passedt )
         ( passedt.amenity ~= nil )) then
         LayerAsCentroid( "poi" )
 	Attribute( "class","amenity_" .. passedt.amenity )
-	Attribute( "name", Find( "name" ))
+	Attribute( "name", Find( "name" ) )
+        MinZoom( 14 )
     else
         if (( passedt.place ~= ""  ) and
             ( passedt.place ~= nil )) then
@@ -1134,13 +1137,25 @@ function generic_after_function( passedt )
                 ( passedt.shop ~= nil )) then
                 LayerAsCentroid( "poi" )
     	        Attribute( "class","shop_" .. passedt.shop )
-    	        Attribute( "name", Find( "name" ))
+    	        Attribute( "name", Find( "name" ) )
+                MinZoom( 14 )
 	    else
                 if (( passedt.tourism ~= ""  ) and
                     ( passedt.tourism ~= nil )) then
                     LayerAsCentroid( "poi" )
-            	Attribute( "class","tourism_" .. passedt.tourism )
-            	Attribute( "name", Find( "name" ))
+                    Attribute( "class", "tourism_" .. passedt.tourism )
+                    Attribute( "name", Find( "name" ) )
+                    MinZoom( 14 )
+                else
+                    if (( passedt.landuse ~= ""  ) and
+                        ( passedt.landuse ~= nil )) then
+                        if ( passedt.landuse == "forest" ) then
+                            Layer( "land", true )
+                            Attribute( "class", "landuse_" .. passedt.landuse )
+                            Attribute( "name", Find( "name" ) )
+                            MinZoom( 7 )
+                        end -- landuse=forest
+                    end -- landuse
                 end -- tourism
             end -- shop
         end -- place

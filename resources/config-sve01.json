@@ -1,6 +1,7 @@
 {
 	"layers": {
 		"place": { "minzoom": 5, "maxzoom": 14 },
+		"land": { "minzoom": 5, "maxzoom": 14 },
 		"waterway": { "minzoom": 11, "maxzoom": 14 },
 		"transportation": { "minzoom": 5, "maxzoom": 14, "simplify_below": 13, "simplify_level": 0.0001, "simplify_ratio": 2.0 },
 		"building": { "minzoom": 14, "maxzoom": 14 },
