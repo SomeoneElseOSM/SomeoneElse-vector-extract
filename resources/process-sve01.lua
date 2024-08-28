@@ -139,6 +139,7 @@ function node_function()
     nodet.leisure = Find("leisure")
     nodet.landcover = Find("landcover")
     nodet.barrier = Find("barrier")
+    nodet.ford = Find("ford")
 
     generic_before_function( nodet )
 
@@ -247,6 +248,7 @@ function way_function()
     wayt.leisure = Find("leisure")
     wayt.landcover = Find("landcover")
     wayt.barrier = Find("barrier")
+    wayt.ford = Find("ford")
 
     generic_before_function( wayt )
 
@@ -320,9 +322,16 @@ function way_function()
                 ( wayt.verge == "right"    ) or
                 ( wayt.verge == "yes"      )) then
                 Attribute("edge", "verge")
-            end
-        end
-    end
+            else
+-- ----------------------------------------------------------------------------
+-- If there is not a sidewalk or verge but it is a long ford, set "edge" to "ford"
+-- ----------------------------------------------------------------------------
+                if ( wayt.ford == "yes" ) then
+                    Attribute("edge", "ford")
+                end  -- ford
+            end -- verge
+        end -- sidewalk
+    end -- highway
 
 -- ----------------------------------------------------------------------------
 -- Other processing - still to be added
