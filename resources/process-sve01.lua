@@ -287,9 +287,10 @@ function way_function()
             ( wayt.sidewalk == "yes"             ) or
             ( wayt.sidewalkCboth == "separate"   ) or 
             ( wayt.sidewalkCboth == "yes"        ) or
-            ( wayt.sidewalkCleft == "separate"   ) or 
             ( wayt.sidewalkCleft == "segregated" ) or
+            ( wayt.sidewalkCleft == "separate"   ) or 
             ( wayt.sidewalkCleft == "yes"        ) or
+            ( wayt.sidewalkCright == "segregated" ) or 
             ( wayt.sidewalkCright == "separate"  ) or 
             ( wayt.sidewalkCright == "yes"       ) or
             ( wayt.footway  == "separate"        ) or 
