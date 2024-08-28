@@ -133,6 +133,12 @@ function node_function()
     nodet.horse = Find("horse")
     nodet.service = Find("service")
     nodet.motor_vehicle = Find("motor_vehicle")
+    nodet.boundary = Find("boundary")
+    nodet.protect_class = Find("protect_class")
+    nodet.protection_title = Find("protection_title")
+    nodet.leisure = Find("leisure")
+    nodet.landcover = Find("landcover")
+    nodet.barrier = Find("barrier")
 
     generic_before_function( nodet )
 
@@ -235,6 +241,12 @@ function way_function()
     wayt.horse = Find("horse")
     wayt.service = Find("service")
     wayt.motor_vehicle = Find("motor_vehicle")
+    wayt.boundary = Find("boundary")
+    wayt.protect_class = Find("protect_class")
+    wayt.protection_title = Find("protection_title")
+    wayt.leisure = Find("leisure")
+    wayt.landcover = Find("landcover")
+    wayt.barrier = Find("barrier")
 
     generic_before_function( wayt )
 
@@ -1076,6 +1088,147 @@ function generic_before_function( passedt )
       passedt.access  = nil
    end
 
+-- ----------------------------------------------------------------------------
+-- Render national parks and AONBs as such no matter how they are tagged.
+--
+-- Any with "boundary=national_park" set already will be included and won't
+-- be affected by this.  Most national parks and AONBs in UK have 
+-- "protect_class=5", but also have one of the "designation" values below.
+-- Many smaller nature reserves have other values for designation and are
+-- ignored here.
+--
+-- Previously this section also had "protect_class=2" because IE ones had that 
+-- and not "boundary"="national_park", but that situation seems to have changed.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.boundary      == "protected_area"                      ) and
+       ((  passedt.designation   == "national_park"                      )  or 
+        (  passedt.designation   == "area_of_outstanding_natural_beauty" )  or
+        (  passedt.designation   == "national_scenic_area"               ))) then
+      passedt.boundary = "national_park"
+      passedt.protect_class = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Access land is shown with a high-zoom yellow border (to contrast with the 
+-- high-zoom green border of nature reserves) and with a low-opacity 
+-- yellow fill at all zoom levels (to contrast with the low-opacity green fill
+-- at low zoom levels of nature reserves.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.designation   == "access_land"     )  and
+       (( passedt.boundary      == nil              )   or
+        ( passedt.boundary      == "protected_area" ))  and
+       (  passedt.highway       == nil               )) then
+      passedt.boundary = "access_land"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render certain protect classes and designations of protected areas as 
+-- nature_reserve:
+-- protect_class==1   "... strictly set aside to protect ... " (all sorts)
+-- protect_class==4   "Habitat/Species Management Area"
+--
+-- There are a few instances of "leisure" being set to something else already
+-- ("common", "park", "golf_course", "dog_park").  We leave that if so.
+--
+-- This selection does not currently include:
+-- protect_class==98  "intercontinental treaties..." (e.g. world heritage)
+-- ----------------------------------------------------------------------------
+   if (((  passedt.boundary      == "protected_area"            )   and
+        (( passedt.protect_class == "1"                        )    or
+         ( passedt.protect_class == "2"                        )    or
+         ( passedt.protect_class == "4"                        )    or
+         ( passedt.designation   == "national_nature_reserve"  )    or
+         ( passedt.designation   == "local_nature_reserve"     )    or
+         ( passedt.designation   == "Nature Reserve"           )    or
+         ( passedt.designation   == "Marine Conservation Zone" ))) and
+       (   passedt.leisure       == nil                          )) then
+      passedt.leisure = "nature_reserve"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show grass schoolyards as green
+-- ----------------------------------------------------------------------------
+   if (( passedt.leisure == "schoolyard" ) and
+       ( passedt.surface == "grass"      )) then
+      passedt.landuse = "grass"
+      passedt.leisure = nil
+      passedt.surface = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- "Nature reserve" doesn't say anything about what's inside; but one UK OSMer 
+-- changed "landuse" to "surface" (changeset 98859964).  This undoes that.
+-- ----------------------------------------------------------------------------
+   if (( passedt.leisure == "nature_reserve" ) and
+       ( passedt.surface == "grass"          )) then
+      passedt.landuse = "grass"
+      passedt.surface = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat landcover=grass as landuse=grass
+-- Also landuse=college_court, flowerbed
+-- ----------------------------------------------------------------------------
+   if (( passedt.landcover == "grass"         ) or
+       ( passedt.landuse   == "college_court" ) or
+       ( passedt.landuse   == "flowerbed"     )) then
+      passedt.landcover = nil
+      passedt.landuse = "grass"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat natural=grass as landuse=grass 
+-- if there is no other more appropriate tag
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural  == "grass"  ) and
+       (( passedt.landuse == nil     )  and
+        ( passedt.leisure == nil     )  and
+        ( passedt.aeroway == nil     ))) then
+      passedt.landuse = "grass"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat natural=garden and natural=plants as leisure=garden
+-- if there is no other more appropriate tag.
+-- The "barrier" check is to avoid linear barriers with this tag as well 
+-- becoming area ones unexpectedly
+-- ----------------------------------------------------------------------------
+   if ((( passedt.natural == "garden"     )   or
+        ( passedt.natural == "plants"     )   or
+        ( passedt.natural == "flower_bed" ))  and
+       (( passedt.landuse == nil          )   and
+        ( passedt.leisure == nil          )   and
+        ( passedt.barrier == nil          ))) then
+      passedt.leisure = "garden"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render various synonyms for leisure=common.
+-- ----------------------------------------------------------------------------
+   if (( passedt.landuse          == "common"   ) or
+       ( passedt.leisure          == "common"   ) or
+       ( passedt.designation      == "common"   ) or
+       ( passedt.amenity          == "common"   ) or
+       ( passedt.protection_title == "common"   )) then
+      passedt.leisure = "common"
+      passedt.landuse = nil
+      passedt.amenity = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render quiet lanes as living streets.
+-- This is done because it's a difference I don't want to draw attention to -
+-- they aren't "different enough to make them render differently".
+-- ----------------------------------------------------------------------------
+   if ((( passedt.highway     == "tertiary"                          )  or
+        ( passedt.highway     == "unclassified"                      )  or
+        ( passedt.highway     == "residential"                       )) and
+       (( passedt.designation == "quiet_lane"                        )  or
+        ( passedt.designation == "quiet_lane;unclassified_highway"   )  or
+        ( passedt.designation == "unclassified_highway;quiet_lane"   ))) then
+      passedt.highway = "living_street"
+   end
+
 end -- generic_before_function()
 
 function append_prow_ref( passedt )
@@ -1147,15 +1300,22 @@ function generic_after_function( passedt )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 14 )
                 else
-                    if (( passedt.landuse ~= ""  ) and
-                        ( passedt.landuse ~= nil )) then
-                        if ( passedt.landuse == "forest" ) then
+                    if (( passedt.landuse == "forest" ) or
+                        ( passedt.landuse == "grass"  )) then
+                        Layer( "land", true )
+                        Attribute( "class", "landuse_" .. passedt.landuse )
+                        Attribute( "name", Find( "name" ) )
+                        MinZoom( 7 )
+                    else
+                        if (( passedt.leisure == "nature_reserve" ) or
+                            ( passedt.leisure == "garden"         ) or
+                            ( passedt.leisure == "common"         )) then
                             Layer( "land", true )
-                            Attribute( "class", "landuse_" .. passedt.landuse )
+                            Attribute( "class", "leisure_" .. passedt.leisure )
                             Attribute( "name", Find( "name" ) )
-                            MinZoom( 7 )
-                        end -- landuse=forest
-                    end -- landuse
+                            MinZoom( 10 )
+                        end -- leisure=nature_reserve etc.
+                    end -- landuse=forest etc.
                 end -- tourism
             end -- shop
         end -- place
