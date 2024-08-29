@@ -1099,6 +1099,14 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Send driveways through to the rendering code as a specific highway type
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway == "service"  ) and
+       ( passedt.service == "driveway" )) then
+      passedt.highway  = "driveway"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Render national parks and AONBs as such no matter how they are tagged.
 --
 -- Any with "boundary=national_park" set already will be included and won't
