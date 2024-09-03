@@ -119,6 +119,7 @@ function node_function()
     nodet.informal = Find("informal")
     nodet.width = Find("width")
     nodet.est_width = Find("est_width")
+    nodet.maxwidth = Find("maxwidth")
     nodet.designation = Find("designation")
     nodet.prow_ref = Find("prow_ref")
     nodet.sac_scale = Find("sac_scale")
@@ -140,6 +141,8 @@ function node_function()
     nodet.landcover = Find("landcover")
     nodet.barrier = Find("barrier")
     nodet.ford = Find("ford")
+    nodet.oneway = Find("oneway")
+    nodet.junction = Find("junction")
 
     generic_before_function( nodet )
 
@@ -228,6 +231,7 @@ function way_function()
     wayt.informal = Find("informal")
     wayt.width = Find("width")
     wayt.est_width = Find("est_width")
+    wayt.maxwidth = Find("maxwidth")
     wayt.designation = Find("designation")
     wayt.prow_ref = Find("prow_ref")
     wayt.sac_scale = Find("sac_scale")
@@ -249,6 +253,8 @@ function way_function()
     wayt.landcover = Find("landcover")
     wayt.barrier = Find("barrier")
     wayt.ford = Find("ford")
+    wayt.oneway = Find("oneway")
+    wayt.junction = Find("junction")
 
     generic_before_function( wayt )
 
@@ -1245,6 +1251,19 @@ function generic_before_function( passedt )
         ( passedt.designation == "quiet_lane;unclassified_highway"   )  or
         ( passedt.designation == "unclassified_highway;quiet_lane"   ))) then
       passedt.highway = "living_street"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render narrow tertiary roads as unclassified
+-- ----------------------------------------------------------------------------
+   if ((  passedt.highway    == "tertiary"  )  and
+       (( passedt.oneway     == nil        )   or
+        ( passedt.oneway     == ""         ))  and
+       (( passedt.junction   == nil        )   or
+        ( passedt.junction   == ""         ))  and
+       ((( tonumber(passedt.width)    or 4 ) <=  3 ) or
+        (( tonumber(passedt.maxwidth) or 4 ) <=  3 ))) then
+      passedt.highway = "unclassified"
    end
 
 end -- generic_before_function()
