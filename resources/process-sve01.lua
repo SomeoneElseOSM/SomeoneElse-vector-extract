@@ -337,6 +337,8 @@ function way_function()
                 end  -- ford
             end -- verge
         end -- sidewalk
+
+        AttributeBoolean( "bridge", ( wayt.bridge == "yes" ) )
     end -- highway
 
 -- ----------------------------------------------------------------------------
@@ -1264,6 +1266,40 @@ function generic_before_function( passedt )
        ((( tonumber(passedt.width)    or 4 ) <=  3 ) or
         (( tonumber(passedt.maxwidth) or 4 ) <=  3 ))) then
       passedt.highway = "unclassified"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render bus-only service roads tagged as "highway=busway" as service roads.
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway == "busway" ) then
+      passedt.highway = "service"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Bridge types - only some types (including "yes") are selected
+-- ----------------------------------------------------------------------------
+   if (( passedt.bridge == "aqueduct"           ) or
+       ( passedt.bridge == "bailey"             ) or
+       ( passedt.bridge == "boardwalk"          ) or
+       ( passedt.bridge == "building_passage"   ) or
+       ( passedt.bridge == "cantilever"         ) or
+       ( passedt.bridge == "chain"              ) or
+       ( passedt.bridge == "covered"            ) or
+       ( passedt.bridge == "foot"               ) or
+       ( passedt.bridge == "footbridge"         ) or
+       ( passedt.bridge == "gangway"            ) or
+       ( passedt.bridge == "low_water_crossing" ) or
+       ( passedt.bridge == "movable"            ) or
+       ( passedt.bridge == "pier"               ) or
+       ( passedt.bridge == "plank"              ) or
+       ( passedt.bridge == "plank_bridge"       ) or
+       ( passedt.bridge == "pontoon"            ) or
+       ( passedt.bridge == "rope"               ) or
+       ( passedt.bridge == "swing"              ) or
+       ( passedt.bridge == "trestle"            ) or
+       ( passedt.bridge == "undefined"          ) or
+       ( passedt.bridge == "viaduct"            )) then
+      passedt.bridge = "yes"
    end
 
 end -- generic_before_function()
