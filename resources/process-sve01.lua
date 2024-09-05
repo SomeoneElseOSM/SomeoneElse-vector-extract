@@ -63,6 +63,7 @@ function node_function()
     nodet.tourism = Find("tourism")
     nodet.layer = Find("layer")
     nodet.bridge = Find("bridge")
+    nodet.tunnel = Find("tunnel")
     nodet.embankment = Find("embankment")
     nodet.highway = Find("highway")
     nodet.level = Find("level")
@@ -175,6 +176,7 @@ function way_function()
     wayt.tourism = Find("tourism")
     wayt.layer = Find("layer")
     wayt.bridge = Find("bridge")
+    wayt.tunnel = Find("tunnel")
     wayt.embankment = Find("embankment")
     wayt.highway = Find("highway")
     wayt.level = Find("level")
@@ -339,6 +341,7 @@ function way_function()
         end -- sidewalk
 
         AttributeBoolean( "bridge", ( wayt.bridge == "yes" ) )
+        AttributeBoolean( "tunnel", ( wayt.tunnel == "yes" ) )
     end -- highway
 
 -- ----------------------------------------------------------------------------
@@ -1300,6 +1303,42 @@ function generic_before_function( passedt )
        ( passedt.bridge == "undefined"          ) or
        ( passedt.bridge == "viaduct"            )) then
       passedt.bridge = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Remove some combinations of bridge
+-- ----------------------------------------------------------------------------
+   if ((  passedt.bridge  == "yes"          ) and
+       (( passedt.barrier == "cattle_grid" )  or
+        ( passedt.barrier == "stile"       ))) then
+      passedt.barrier = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Tunnel values - render as "yes" if appropriate.
+-- ----------------------------------------------------------------------------
+   if (( passedt.tunnel == "culvert"             ) or
+       ( passedt.tunnel == "covered"             ) or
+       ( passedt.tunnel == "avalanche_protector" ) or
+       ( passedt.tunnel == "passage"             ) or
+       ( passedt.tunnel == "1"                   ) or
+       ( passedt.tunnel == "cave"                ) or
+       ( passedt.tunnel == "flooded"             ) or
+       ( passedt.tunnel == "building_passage"    )) then
+      passedt.tunnel = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Covered values - render as "yes" if appropriate.
+-- ----------------------------------------------------------------------------
+   if (( passedt.covered == "arcade"           ) or
+       ( passedt.covered == "covered"          ) or
+       ( passedt.covered == "colonnade"        ) or
+       ( passedt.covered == "building_passage" ) or
+       ( passedt.covered == "building_arcade"  ) or
+       ( passedt.covered == "roof"             ) or
+       ( passedt.covered == "portico"          )) then
+      passedt.covered = "yes"
    end
 
 end -- generic_before_function()
