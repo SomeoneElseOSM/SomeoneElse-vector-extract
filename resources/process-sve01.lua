@@ -1514,35 +1514,49 @@ function generic_after_function( passedt )
                             ( passedt.landuse == "farmyard"           ) or
                             ( passedt.landuse == "unnamedfarmyard"    ) or
                             ( passedt.landuse == "farmgrass"          ) or
-                            ( passedt.landuse == "unnamedfarmgrass"   )) then
+                            ( passedt.landuse == "unnamedfarmgrass"   ) or
+                            ( passedt.landuse == "recreation_ground"  ) or
+                            ( passedt.landuse == "retail"             ) or
+                            ( passedt.landuse == "industrial"         ) or
+                            ( passedt.landuse == "unnamedindustrial"  )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
-                            if (( passedt.landuse == "grass"       )  or
-                                ( passedt.landuse == "residential" )  or
-                                ( passedt.landuse == "meadow"      )  or
-                                ( passedt.landuse == "farmyard"    )  or
-                                ( passedt.landuse == "farmgrass"   )) then
+                            if (( passedt.landuse == "grass"             )  or
+                                ( passedt.landuse == "residential"       )  or
+                                ( passedt.landuse == "meadow"            )  or
+                                ( passedt.landuse == "farmyard"          )  or
+                                ( passedt.landuse == "farmgrass"         )  or
+                                ( passedt.landuse == "recreation_ground" )  or
+                                ( passedt.landuse == "retail"            )  or
+                                ( passedt.landuse == "industrial"        )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
                             MinZoom( 9 )
 	                else
-                            if ( passedt.leisure == "common" ) then
+                            if ( passedt.landuse == "village_green" ) then
                                 Layer( "land", true )
-                                Attribute( "class", "leisure_" .. passedt.leisure )
+                                Attribute( "class", "landuse_" .. passedt.landuse )
                                 Attribute( "name", Find( "name" ) )
-                                MinZoom( 9 )
-                            else
-                                if (( passedt.leisure == "nature_reserve" ) or
-                                    ( passedt.leisure == "garden"         )) then
+                                MinZoom( 10 )
+	                    else
+                                if ( passedt.leisure == "common" ) then
                                     Layer( "land", true )
                                     Attribute( "class", "leisure_" .. passedt.leisure )
                                     Attribute( "name", Find( "name" ) )
-                                    MinZoom( 10 )
-                                end -- leisure=nature_reserve etc.
-                            end -- leisure=common
-	                end -- landuse=grass 
+                                    MinZoom( 9 )
+                                else
+                                    if (( passedt.leisure == "nature_reserve" ) or
+                                        ( passedt.leisure == "garden"         )) then
+                                        Layer( "land", true )
+                                        Attribute( "class", "leisure_" .. passedt.leisure )
+                                        Attribute( "name", Find( "name" ) )
+                                        MinZoom( 10 )
+                                    end -- leisure=nature_reserve etc.
+                                end -- leisure=common
+	                    end -- landuse=village_green
+	                end -- landuse=grass etc.
                     end -- landuse=forest 
                 end -- tourism
             end -- shop
