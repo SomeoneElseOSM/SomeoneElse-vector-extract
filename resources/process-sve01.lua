@@ -1417,7 +1417,7 @@ function generic_after_function( passedt )
                         Layer( "land", true )
                         Attribute( "class", "landuse_" .. passedt.landuse )
                         Attribute( "name", Find( "name" ) )
-                        MinZoom( 7 )
+                        MinZoom( 8 )
                     else
                         if (( passedt.leisure == "nature_reserve" ) or
                             ( passedt.leisure == "garden"         ) or
