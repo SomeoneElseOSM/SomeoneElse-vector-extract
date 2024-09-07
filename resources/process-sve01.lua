@@ -1426,12 +1426,15 @@ function generic_after_function( passedt )
                         if (( passedt.landuse == "grass"              ) or
                             ( passedt.landuse == "unnamedgrass"       ) or
                             ( passedt.landuse == "residential"        ) or
-                            ( passedt.landuse == "unnamedresidential" )) then
+                            ( passedt.landuse == "unnamedresidential" ) or
+                            ( passedt.landuse == "meadow"             ) or
+                            ( passedt.landuse == "unnamedmeadow"      )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
                             if (( passedt.landuse == "grass"       )  or
-                                ( passedt.landuse == "residential" )) then
+                                ( passedt.landuse == "residential" )  or
+                                ( passedt.landuse == "meadow"      )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
