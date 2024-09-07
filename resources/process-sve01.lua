@@ -1505,20 +1505,27 @@ function generic_after_function( passedt )
 
                         MinZoom( 8 )
                     else
-                        if (( passedt.landuse == "grass"              ) or
-                            ( passedt.landuse == "unnamedgrass"       ) or
-                            ( passedt.landuse == "residential"        ) or
-                            ( passedt.landuse == "unnamedresidential" ) or
-                            ( passedt.landuse == "meadow"             ) or
-                            ( passedt.landuse == "unnamedmeadow"      ) or
-                            ( passedt.landuse == "farmyard"           ) or
-                            ( passedt.landuse == "unnamedfarmyard"    ) or
-                            ( passedt.landuse == "farmgrass"          ) or
-                            ( passedt.landuse == "unnamedfarmgrass"   ) or
-                            ( passedt.landuse == "recreation_ground"  ) or
-                            ( passedt.landuse == "retail"             ) or
-                            ( passedt.landuse == "industrial"         ) or
-                            ( passedt.landuse == "unnamedindustrial"  )) then
+                        if (( passedt.landuse == "grass"               ) or
+                            ( passedt.landuse == "unnamedgrass"        ) or
+                            ( passedt.landuse == "residential"         ) or
+                            ( passedt.landuse == "unnamedresidential"  ) or
+                            ( passedt.landuse == "meadow"              ) or
+                            ( passedt.landuse == "unnamedmeadow"       ) or
+                            ( passedt.landuse == "farmyard"            ) or
+                            ( passedt.landuse == "unnamedfarmyard"     ) or
+                            ( passedt.landuse == "farmgrass"           ) or
+                            ( passedt.landuse == "unnamedfarmgrass"    ) or
+                            ( passedt.landuse == "recreation_ground"   ) or
+                            ( passedt.landuse == "retail"              ) or
+                            ( passedt.landuse == "industrial"          ) or
+                            ( passedt.landuse == "unnamedindustrial"   ) or
+                            ( passedt.landuse == "railway"             ) or
+                            ( passedt.landuse == "commercial"          ) or
+                            ( passedt.landuse == "unnamedcommercial"   ) or
+                            ( passedt.landuse == "brownfield"          ) or
+                            ( passedt.landuse == "greenfield"          ) or
+                            ( passedt.landuse == "construction"        ) or
+                            ( passedt.landuse == "unnamedconstruction" )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
@@ -1529,7 +1536,12 @@ function generic_after_function( passedt )
                                 ( passedt.landuse == "farmgrass"         )  or
                                 ( passedt.landuse == "recreation_ground" )  or
                                 ( passedt.landuse == "retail"            )  or
-                                ( passedt.landuse == "industrial"        )) then
+                                ( passedt.landuse == "industrial"        )  or
+                                ( passedt.landuse == "railway"           )  or
+                                ( passedt.landuse == "commercial"        )  or
+                                ( passedt.landuse == "brownfield"        )  or
+                                ( passedt.landuse == "greenfield"        )  or
+                                ( passedt.landuse == "construction"      )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
@@ -1541,20 +1553,27 @@ function generic_after_function( passedt )
                                 Attribute( "name", Find( "name" ) )
                                 MinZoom( 10 )
 	                    else
-                                if ( passedt.leisure == "common" ) then
+                                if ( passedt.landuse == "garages" ) then
                                     Layer( "land", true )
-                                    Attribute( "class", "leisure_" .. passedt.leisure )
+                                    Attribute( "class", "landuse_" .. passedt.landuse )
                                     Attribute( "name", Find( "name" ) )
-                                    MinZoom( 9 )
-                                else
-                                    if (( passedt.leisure == "nature_reserve" ) or
-                                        ( passedt.leisure == "garden"         )) then
+                                    MinZoom( 11 )
+	                        else
+                                    if ( passedt.leisure == "common" ) then
                                         Layer( "land", true )
                                         Attribute( "class", "leisure_" .. passedt.leisure )
                                         Attribute( "name", Find( "name" ) )
-                                        MinZoom( 10 )
-                                    end -- leisure=nature_reserve etc.
-                                end -- leisure=common
+                                        MinZoom( 9 )
+                                    else
+                                        if (( passedt.leisure == "nature_reserve" ) or
+                                            ( passedt.leisure == "garden"         )) then
+                                            Layer( "land", true )
+                                            Attribute( "class", "leisure_" .. passedt.leisure )
+                                            Attribute( "name", Find( "name" ) )
+                                            MinZoom( 10 )
+                                        end -- leisure=nature_reserve etc.
+                                    end -- leisure=common
+	                        end -- landuse=garages
 	                    end -- landuse=village_green
 	                end -- landuse=grass etc.
                     end -- landuse=forest 
