@@ -144,6 +144,10 @@ function node_function()
     nodet.ford = Find("ford")
     nodet.oneway = Find("oneway")
     nodet.junction = Find("junction")
+    nodet.farmland = Find("farmland")
+    nodet.animal = Find("animal")
+    nodet.meadow = Find("meadow")
+    nodet.produce = Find("produce")
 
     generic_before_function( nodet )
 
@@ -257,6 +261,10 @@ function way_function()
     wayt.ford = Find("ford")
     wayt.oneway = Find("oneway")
     wayt.junction = Find("junction")
+    wayt.farmland = Find("farmland")
+    wayt.animal = Find("animal")
+    wayt.meadow = Find("meadow")
+    wayt.produce = Find("produce")
 
     generic_before_function( wayt )
 
@@ -1341,6 +1349,77 @@ function generic_before_function( passedt )
       passedt.covered = "yes"
    end
 
+-- ----------------------------------------------------------------------------
+-- Some kinds of farmland and meadow should be changed to "landuse=farmgrass", 
+-- which is rendered slightly greener than the normal farmland (and less green 
+-- than landuse=meadow)
+-- ----------------------------------------------------------------------------
+   if ((  passedt.landuse  == "farmland"                    ) and
+       (( passedt.farmland == "pasture"                    )  or
+        ( passedt.farmland == "heath"                      )  or
+        ( passedt.farmland == "paddock"                    )  or
+        ( passedt.farmland == "meadow"                     )  or
+        ( passedt.farmland == "pasture;heath"              )  or
+        ( passedt.farmland == "turf_production"            )  or
+        ( passedt.farmland == "grassland"                  )  or
+        ( passedt.farmland == "wetland"                    )  or
+        ( passedt.farmland == "marsh"                      )  or
+        ( passedt.farmland == "turf"                       )  or
+        ( passedt.farmland == "animal_keeping"             )  or
+        ( passedt.farmland == "grass"                      )  or
+        ( passedt.farmland == "crofts"                     )  or
+        ( passedt.farmland == "scrub"                      )  or
+        ( passedt.farmland == "pasture;wetland"            )  or
+        ( passedt.farmland == "equestrian"                 )  or
+        ( passedt.animal   == "cow"                        )  or
+        ( passedt.animal   == "cattle"                     )  or
+        ( passedt.animal   == "chicken"                    )  or
+        ( passedt.animal   == "horse"                      )  or
+        ( passedt.meadow   == "agricultural"               )  or
+        ( passedt.meadow   == "paddock"                    )  or
+        ( passedt.meadow   == "pasture"                    )  or
+        ( passedt.produce  == "turf"                       )  or
+        ( passedt.produce  == "grass"                      )  or
+        ( passedt.produce  == "Silage"                     )  or
+        ( passedt.produce  == "cow"                        )  or
+        ( passedt.produce  == "cattle"                     )  or
+        ( passedt.produce  == "milk"                       )  or
+        ( passedt.produce  == "dairy"                      )  or
+        ( passedt.produce  == "meat"                       )  or
+        ( passedt.produce  == "horses"                     )  or
+        ( passedt.produce  == "live_animal"                )  or
+        ( passedt.produce  == "live_animal;cows"           )  or
+        ( passedt.produce  == "live_animal;sheep"          )  or
+        ( passedt.produce  == "live_animal;Cattle_&_Sheep" )  or
+        ( passedt.produce  == "live_animals"               ))) then
+      passedt.landuse = "farmgrass"
+   end
+
+   if ((  passedt.landuse  == "meadow"        ) and
+       (( passedt.meadow   == "agricultural" )  or
+        ( passedt.meadow   == "paddock"      )  or
+        ( passedt.meadow   == "pasture"      )  or
+        ( passedt.meadow   == "agriculture"  )  or
+        ( passedt.meadow   == "hay"          )  or
+        ( passedt.meadow   == "managed"      )  or
+        ( passedt.meadow   == "cut"          )  or
+        ( passedt.animal   == "pig"          )  or
+        ( passedt.animal   == "sheep"        )  or
+        ( passedt.animal   == "cow"          )  or
+        ( passedt.animal   == "cattle"       )  or
+        ( passedt.animal   == "chicken"      )  or
+        ( passedt.animal   == "horse"        )  or
+        ( passedt.farmland == "field"        )  or
+        ( passedt.farmland == "pasture"      )  or
+        ( passedt.farmland == "crofts"       ))) then
+      passedt.landuse = "farmgrass"
+   end
+
+   if (( passedt.landuse == "paddock"        ) or
+       ( passedt.landuse == "animal_keeping" )) then
+      passedt.landuse = "farmgrass"
+   end
+
 end -- generic_before_function()
 
 function append_prow_ref( passedt )
@@ -1412,12 +1491,15 @@ function generic_after_function( passedt )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 14 )
                 else
-                    if (( passedt.landuse == "forest"         ) or
-                        ( passedt.landuse == "unnamedforest"  )) then
+                    if (( passedt.landuse == "forest"          ) or
+                        ( passedt.landuse == "unnamedforest"   ) or
+                        ( passedt.landuse == "farmland"        ) or
+                        ( passedt.landuse == "unnamedfarmland" )) then
                         Layer( "land", true )
                         Attribute( "class", "landuse_" .. passedt.landuse )
 
-                        if ( passedt.landuse == "forest" ) then
+                        if (( passedt.landuse == "forest"   )  or
+                            ( passedt.landuse == "farmland" )) then
                             Attribute( "name", Find( "name" ) )
                         end
 
@@ -1428,13 +1510,19 @@ function generic_after_function( passedt )
                             ( passedt.landuse == "residential"        ) or
                             ( passedt.landuse == "unnamedresidential" ) or
                             ( passedt.landuse == "meadow"             ) or
-                            ( passedt.landuse == "unnamedmeadow"      )) then
+                            ( passedt.landuse == "unnamedmeadow"      ) or
+                            ( passedt.landuse == "farmyard"           ) or
+                            ( passedt.landuse == "unnamedfarmyard"    ) or
+                            ( passedt.landuse == "farmgrass"          ) or
+                            ( passedt.landuse == "unnamedfarmgrass"   )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
                             if (( passedt.landuse == "grass"       )  or
                                 ( passedt.landuse == "residential" )  or
-                                ( passedt.landuse == "meadow"      )) then
+                                ( passedt.landuse == "meadow"      )  or
+                                ( passedt.landuse == "farmyard"    )  or
+                                ( passedt.landuse == "farmgrass"   )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
