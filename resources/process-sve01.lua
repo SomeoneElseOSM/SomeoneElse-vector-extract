@@ -1412,22 +1412,34 @@ function generic_after_function( passedt )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 14 )
                 else
-                    if (( passedt.landuse == "forest" ) or
-                        ( passedt.landuse == "grass"  )) then
+                    if ( passedt.landuse == "forest"  ) then
                         Layer( "land", true )
                         Attribute( "class", "landuse_" .. passedt.landuse )
                         Attribute( "name", Find( "name" ) )
                         MinZoom( 8 )
                     else
-                        if (( passedt.leisure == "nature_reserve" ) or
-                            ( passedt.leisure == "garden"         ) or
-                            ( passedt.leisure == "common"         )) then
+                        if ( passedt.landuse == "grass"  ) then
                             Layer( "land", true )
-                            Attribute( "class", "leisure_" .. passedt.leisure )
+                            Attribute( "class", "landuse_" .. passedt.landuse )
                             Attribute( "name", Find( "name" ) )
-                            MinZoom( 10 )
-                        end -- leisure=nature_reserve etc.
-                    end -- landuse=forest etc.
+                            MinZoom( 9 )
+	                else
+                            if ( passedt.leisure == "common" ) then
+                                Layer( "land", true )
+                                Attribute( "class", "leisure_" .. passedt.leisure )
+                                Attribute( "name", Find( "name" ) )
+                                MinZoom( 9 )
+                            else
+                                if (( passedt.leisure == "nature_reserve" ) or
+                                    ( passedt.leisure == "garden"         )) then
+                                    Layer( "land", true )
+                                    Attribute( "class", "leisure_" .. passedt.leisure )
+                                    Attribute( "name", Find( "name" ) )
+                                    MinZoom( 10 )
+                                end -- leisure=nature_reserve etc.
+                            end -- leisure=common
+	                end -- landuse=grass 
+                    end -- landuse=forest 
                 end -- tourism
             end -- shop
         end -- place
