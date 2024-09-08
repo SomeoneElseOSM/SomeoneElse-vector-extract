@@ -157,6 +157,10 @@ function node_function()
     nodet.tomb = Find("tomb")
     nodet.archaeological_site = Find("archaeological_site")
     nodet.geological = Find("geological")
+    nodet.attraction = Find("attraction")
+    nodet.reef = Find("reef")
+    nodet.wetland = Find("wetland")
+    nodet.tidal = Find("tidal")
 
     generic_before_function( nodet )
 
@@ -283,6 +287,10 @@ function way_function()
     wayt.tomb = Find("tomb")
     wayt.archaeological_site = Find("archaeological_site")
     wayt.geological = Find("geological")
+    wayt.attraction = Find("attraction")
+    wayt.reef = Find("reef")
+    wayt.wetland = Find("wetland")
+    wayt.tidal = Find("tidal")
 
     generic_before_function( wayt )
 
@@ -1368,6 +1376,159 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Handle shoals, either as mud or reef
+-- ----------------------------------------------------------------------------
+   if ( passedt.natural == "shoal" ) then
+      if ( passedt.surface == "mud" ) then
+         passedt.natural = "mud"
+         passedt.surface = nil
+      else
+         passedt.natural = "reef"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show sandy reefs as more sandy than rocky reefs
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural == "reef" ) and
+       ( passedt.reef    == "sand" )) then
+         passedt.natural = "reefsand"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Convert "natural=saltmarsh" into something we can handle below
+-- ----------------------------------------------------------------------------
+   if ( passedt.natural == "saltmarsh" ) then
+      if ( passedt.wetland == "tidalflat" ) then
+         passedt.tidal = "yes"
+      else
+         passedt.tidal = "no"
+      end
+
+      passedt.natural = "wetland"
+      passedt.wetland = "saltmarsh"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Detect wetland not tagged with "natural=wetland".
+-- Other combinations include
+-- natural=water, natural=scrub, landuse=meadow, leisure=nature_reserve,
+-- leisure=park, and no natural, landuse or leisure tags.
+-- In many cases we don't set natural=wetland, but in some we do.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.wetland == "wet_meadow"  ) and
+       (( passedt.natural == nil          )  or
+        ( passedt.natural == ""           )  or
+        ( passedt.natural == "grassland"  )) and
+       (( passedt.leisure == nil          )  or
+        ( passedt.leisure == ""           ))  and
+       (( passedt.landuse == nil          )  or
+        ( passedt.landuse == ""           )  or
+        ( passedt.landuse == "meadow"     ))) then
+      passedt.natural = "wetland"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Detect wetland also tagged with "surface" tags.
+-- The wetland types that we're interested in below are:
+-- (nil), tidalflat, mud, wet_meadow, saltmarsh, reedbed
+-- Of these, for (nil) and tidalflat, the surface should take precedence.
+-- For others, we fall through to 'if "natural" is still "wetland"' nelow, and
+-- if "wetland" doesn't match one of those, it'll go through as 
+-- "generic wetland", which is an overlay for whatever's underneath.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural == "wetland"    ) and
+       (( passedt.wetland == nil         ) or
+        ( passedt.wetland == ""          ) or
+        ( passedt.wetland == "tidalflat" ))) then
+      if (( passedt.surface == "mud"       ) or
+          ( passedt.surface == "mud, sand" )) then
+         passedt.natural = "mud"
+      end
+
+      if (( passedt.surface == "sand"      ) or
+          ( passedt.surface == "sand, mud" ) or
+          ( passedt.surface == "dirt/sand" )) then
+         passedt.natural = "sand"
+      end
+
+      if (( passedt.surface == "shingle"     ) or
+          ( passedt.surface == "gravel"      ) or
+          ( passedt.surface == "fine_gravel" ) or
+          ( passedt.surface == "pebblestone" )) then
+         passedt.natural = "shingle"
+      end
+
+      if (( passedt.surface == "rock"      ) or
+          ( passedt.surface == "bare_rock" ) or
+          ( passedt.surface == "concrete"  )) then
+         passedt.natural = "bare_rock"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Also, if "natural" is still "wetland", what "wetland" values should be 
+-- handled as some other tag?
+-- ----------------------------------------------------------------------------
+   if ( passedt.natural == "wetland" ) then
+      if (( passedt.wetland == "tidalflat" ) or
+          ( passedt.wetland == "mud"       )) then
+         passedt.natural = "mud"
+         passedt.tidal = "yes"
+      end
+
+      if ( passedt.wetland == "wet_meadow" ) then
+         passedt.landuse = "wetmeadow"
+         passedt.natural = nil
+      end
+
+      if ( passedt.wetland == "saltmarsh" ) then
+         passedt.landuse = "saltmarsh"
+         passedt.natural = nil
+      end
+
+      if ( passedt.wetland == "reedbed" ) then
+         passedt.landuse = "reedbed"
+         passedt.natural = nil
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render tidal mud with more blue
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural   == "mud"        ) and
+       (( passedt.tidal     == "yes"       ) or
+        ( passedt.wetland   == "tidalflat" ))) then
+      passedt.natural = "tidal_mud"
+   end
+
+-- ----------------------------------------------------------------------------
+-- landuse=field is rarely used.  I tried unsuccessfully to change the colour 
+-- in the stylesheet so am mapping it here.
+-- ----------------------------------------------------------------------------
+   if (passedt.landuse   == "field") then
+      passedt.landuse = "farmland"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various tags for showgrounds
+-- Other tags are suppressed to prevent them appearing ahead of "landuse"
+-- ----------------------------------------------------------------------------
+   if ((  passedt.amenity    == "showground"       )  or
+       (  passedt.leisure    == "showground"       )  or
+       (  passedt.amenity    == "show_ground"      )  or
+       (  passedt.amenity    == "show_grounds"     )  or
+       (( passedt.tourism    == "attraction"      )   and
+        ( passedt.attraction == "showground"      ))  or
+       (  passedt.amenity    == "festival_grounds" )  or
+       (  passedt.amenity    == "car_boot_sale"    )) then
+      passedt.amenity = nil
+      passedt.leisure = nil
+      passedt.tourism = nil
+      passedt.landuse = "meadow"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Some kinds of farmland and meadow should be changed to "landuse=farmgrass", 
 -- which is rendered slightly greener than the normal farmland (and less green 
 -- than landuse=meadow)
@@ -1941,6 +2102,7 @@ function generic_after_function( passedt )
                             ( passedt.landuse == "unnamedresidential"  ) or
                             ( passedt.landuse == "meadow"              ) or
                             ( passedt.landuse == "unnamedmeadow"       ) or
+                            ( passedt.landuse == "wetmeadow"           ) or
                             ( passedt.landuse == "farmyard"            ) or
                             ( passedt.landuse == "unnamedfarmyard"     ) or
                             ( passedt.landuse == "farmgrass"           ) or
@@ -1967,6 +2129,7 @@ function generic_after_function( passedt )
                             if (( passedt.landuse == "grass"             )  or
                                 ( passedt.landuse == "residential"       )  or
                                 ( passedt.landuse == "meadow"            )  or
+                                ( passedt.landuse == "wetmeadow"         )  or
                                 ( passedt.landuse == "farmyard"          )  or
                                 ( passedt.landuse == "farmgrass"         )  or
                                 ( passedt.landuse == "recreation_ground" )  or
