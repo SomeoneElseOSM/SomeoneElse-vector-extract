@@ -2155,7 +2155,8 @@ function generic_after_function( passedt )
                             ( passedt.landuse == "unnamedmeadowwildflower"   ) or
                             ( passedt.landuse == "meadowperpetual"           ) or
                             ( passedt.landuse == "unnamedmeadowperpetual"    ) or
-                            ( passedt.landuse == "saltmarsh"                 )) then
+                            ( passedt.landuse == "saltmarsh"                 ) or
+                            ( passedt.landuse == "reedbed"                   )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
@@ -2179,7 +2180,8 @@ function generic_after_function( passedt )
                                 ( passedt.landuse == "meadowtransitional" )  or
                                 ( passedt.landuse == "meadowwildflower"   )  or
                                 ( passedt.landuse == "meadowperpetual"    )  or
-                                ( passedt.landuse == "saltmarsh"          )) then
+                                ( passedt.landuse == "saltmarsh"          )  or
+                                ( passedt.landuse == "reedbed"            )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
