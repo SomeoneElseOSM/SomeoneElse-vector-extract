@@ -1827,6 +1827,29 @@ function generic_before_function( passedt )
       passedt.historic = nil
    end
 
+-- ----------------------------------------------------------------------------
+-- If a quarry is disused or historic, it's still likely a hole in the ground, 
+-- so render it as something.
+-- However, if there's a natural tag, that should take precendence, and 
+-- landuse is cleared.
+-- ----------------------------------------------------------------------------
+   if (((  passedt.disusedClanduse == "quarry"   )  and
+        (( passedt.landuse         == nil       )   or
+         ( passedt.landuse         == ""        ))) or
+       ((  passedt.historic        == "quarry"   )  and
+        (( passedt.landuse         == nil       )   or
+         ( passedt.landuse         == ""        ))) or
+       ((  passedt.landuse         == "quarry"   )  and
+        (( passedt.disused         == "yes"     )   or
+         ( passedt.historic        == "yes"     )))) then
+      if (( passedt.natural == nil )  or
+          ( passedt.natural == ""  )) then
+         passedt.landuse = "historicquarry"
+      else
+         passedt.landuse = nil
+      end
+   end
+
 end -- generic_before_function()
 
 function append_prow_ref( passedt )
@@ -1959,14 +1982,17 @@ function generic_after_function( passedt )
 
                             MinZoom( 9 )
 	                else
-                            if (( passedt.landuse == "village_green"  ) or
-                                ( passedt.landuse == "quarry"         ) or
-                                ( passedt.landuse == "unnamed_quarry" )) then
+                            if (( passedt.landuse == "village_green"          ) or
+                                ( passedt.landuse == "quarry"                 ) or
+                                ( passedt.landuse == "unnamed_quarry"         ) or
+                                ( passedt.landuse == "historicquarry"         ) or
+                                ( passedt.landuse == "unnamed_historicquarry" )) then
                                 Layer( "land", true )
                                 Attribute( "class", "landuse_" .. passedt.landuse )
 
                                 if (( passedt.landuse == "village_green"  )  or
-                                    ( passedt.landuse == "quarry"         )) then
+                                    ( passedt.landuse == "quarry"         )  or
+                                    ( passedt.landuse == "historicquarry" )) then
                                     Attribute( "name", Find( "name" ) )
                                 end
 
