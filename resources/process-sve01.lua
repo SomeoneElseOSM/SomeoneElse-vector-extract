@@ -1958,7 +1958,9 @@ function generic_after_function( passedt )
                             ( passedt.landuse == "unnamedconstruction" ) or
                             ( passedt.landuse == "landfill"            ) or
                             ( passedt.landuse == "unnamedlandfill"     ) or
-                            ( passedt.landuse == "historic"            )) then
+                            ( passedt.landuse == "historic"            ) or
+                            ( passedt.landuse == "orchard"             ) or
+                            ( passedt.landuse == "unnamedorchard"      )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
@@ -1976,7 +1978,8 @@ function generic_after_function( passedt )
                                 ( passedt.landuse == "greenfield"        )  or
                                 ( passedt.landuse == "construction"      )  or
                                 ( passedt.landuse == "landfill"          )  or
-                                ( passedt.landuse == "historic"          )) then
+                                ( passedt.landuse == "historic"          )  or
+                                ( passedt.landuse == "orchard"           )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
@@ -1984,9 +1987,9 @@ function generic_after_function( passedt )
 	                else
                             if (( passedt.landuse == "village_green"          ) or
                                 ( passedt.landuse == "quarry"                 ) or
-                                ( passedt.landuse == "unnamed_quarry"         ) or
+                                ( passedt.landuse == "unnamedquarry"          ) or
                                 ( passedt.landuse == "historicquarry"         ) or
-                                ( passedt.landuse == "unnamed_historicquarry" )) then
+                                ( passedt.landuse == "unnamedhistoricquarry"  )) then
                                 Layer( "land", true )
                                 Attribute( "class", "landuse_" .. passedt.landuse )
 
