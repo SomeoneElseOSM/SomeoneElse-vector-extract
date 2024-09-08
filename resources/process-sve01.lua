@@ -1600,6 +1600,32 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- As well as agricultural meadows, we show a couple of other subtags of meadow
+-- slightly differently.
+-- ----------------------------------------------------------------------------
+   if (( passedt.landuse  == "meadow"       ) and
+       ( passedt.meadow   == "transitional" )) then
+      passedt.landuse = "meadowtransitional"
+   end
+
+   if (( passedt.landuse  == "meadow"       ) and
+       ( passedt.meadow   == "wildflower" )) then
+      passedt.landuse = "meadowwildflower"
+   end
+
+   if (( passedt.landuse  == "meadow"       ) and
+       ( passedt.meadow   == "perpetual" )) then
+      passedt.landuse = "meadowperpetual"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Change landuse=greenhouse_horticulture to farmyard.
+-- ----------------------------------------------------------------------------
+   if (passedt.landuse   == "greenhouse_horticulture") then
+      passedt.landuse = "farmyard"
+   end
+
+-- ----------------------------------------------------------------------------
 -- City gates go through as "historic=city_gate"
 -- Note that historic=gate are generally much smaller and are not included here.
 --
@@ -2096,53 +2122,56 @@ function generic_after_function( passedt )
 
                         MinZoom( 8 )
                     else
-                        if (( passedt.landuse == "grass"               ) or
-                            ( passedt.landuse == "unnamedgrass"        ) or
-                            ( passedt.landuse == "residential"         ) or
-                            ( passedt.landuse == "unnamedresidential"  ) or
-                            ( passedt.landuse == "meadow"              ) or
-                            ( passedt.landuse == "unnamedmeadow"       ) or
-                            ( passedt.landuse == "wetmeadow"           ) or
-                            ( passedt.landuse == "farmyard"            ) or
-                            ( passedt.landuse == "unnamedfarmyard"     ) or
-                            ( passedt.landuse == "farmgrass"           ) or
-                            ( passedt.landuse == "unnamedfarmgrass"    ) or
-                            ( passedt.landuse == "recreation_ground"   ) or
-                            ( passedt.landuse == "retail"              ) or
-                            ( passedt.landuse == "industrial"          ) or
-                            ( passedt.landuse == "unnamedindustrial"   ) or
-                            ( passedt.landuse == "railway"             ) or
-                            ( passedt.landuse == "commercial"          ) or
-                            ( passedt.landuse == "unnamedcommercial"   ) or
-                            ( passedt.landuse == "brownfield"          ) or
-                            ( passedt.landuse == "greenfield"          ) or
-                            ( passedt.landuse == "construction"        ) or
-                            ( passedt.landuse == "unnamedconstruction" ) or
-                            ( passedt.landuse == "landfill"            ) or
-                            ( passedt.landuse == "unnamedlandfill"     ) or
-                            ( passedt.landuse == "historic"            ) or
-                            ( passedt.landuse == "orchard"             ) or
-                            ( passedt.landuse == "unnamedorchard"      )) then
+                        if (( passedt.landuse == "grass"                     ) or
+                            ( passedt.landuse == "unnamedgrass"              ) or
+                            ( passedt.landuse == "residential"               ) or
+                            ( passedt.landuse == "unnamedresidential"        ) or
+                            ( passedt.landuse == "meadow"                    ) or
+                            ( passedt.landuse == "unnamedmeadow"             ) or
+                            ( passedt.landuse == "wetmeadow"                 ) or
+                            ( passedt.landuse == "farmyard"                  ) or
+                            ( passedt.landuse == "unnamedfarmyard"           ) or
+                            ( passedt.landuse == "farmgrass"                 ) or
+                            ( passedt.landuse == "unnamedfarmgrass"          ) or
+                            ( passedt.landuse == "recreation_ground"         ) or
+                            ( passedt.landuse == "retail"                    ) or
+                            ( passedt.landuse == "industrial"                ) or
+                            ( passedt.landuse == "unnamedindustrial"         ) or
+                            ( passedt.landuse == "railway"                   ) or
+                            ( passedt.landuse == "commercial"                ) or
+                            ( passedt.landuse == "unnamedcommercial"         ) or
+                            ( passedt.landuse == "brownfield"                ) or
+                            ( passedt.landuse == "greenfield"                ) or
+                            ( passedt.landuse == "construction"              ) or
+                            ( passedt.landuse == "unnamedconstruction"       ) or
+                            ( passedt.landuse == "landfill"                  ) or
+                            ( passedt.landuse == "unnamedlandfill"           ) or
+                            ( passedt.landuse == "historic"                  ) or
+                            ( passedt.landuse == "orchard"                   ) or
+                            ( passedt.landuse == "unnamedorchard"            ) or
+                            ( passedt.landuse == "meadowtransitional"        ) or
+                            ( passedt.landuse == "unnamedmeadowtransitional" )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
-                            if (( passedt.landuse == "grass"             )  or
-                                ( passedt.landuse == "residential"       )  or
-                                ( passedt.landuse == "meadow"            )  or
-                                ( passedt.landuse == "wetmeadow"         )  or
-                                ( passedt.landuse == "farmyard"          )  or
-                                ( passedt.landuse == "farmgrass"         )  or
-                                ( passedt.landuse == "recreation_ground" )  or
-                                ( passedt.landuse == "retail"            )  or
-                                ( passedt.landuse == "industrial"        )  or
-                                ( passedt.landuse == "railway"           )  or
-                                ( passedt.landuse == "commercial"        )  or
-                                ( passedt.landuse == "brownfield"        )  or
-                                ( passedt.landuse == "greenfield"        )  or
-                                ( passedt.landuse == "construction"      )  or
-                                ( passedt.landuse == "landfill"          )  or
-                                ( passedt.landuse == "historic"          )  or
-                                ( passedt.landuse == "orchard"           )) then
+                            if (( passedt.landuse == "grass"              )  or
+                                ( passedt.landuse == "residential"        )  or
+                                ( passedt.landuse == "meadow"             )  or
+                                ( passedt.landuse == "wetmeadow"          )  or
+                                ( passedt.landuse == "farmyard"           )  or
+                                ( passedt.landuse == "farmgrass"          )  or
+                                ( passedt.landuse == "recreation_ground"  )  or
+                                ( passedt.landuse == "retail"             )  or
+                                ( passedt.landuse == "industrial"         )  or
+                                ( passedt.landuse == "railway"            )  or
+                                ( passedt.landuse == "commercial"         )  or
+                                ( passedt.landuse == "brownfield"         )  or
+                                ( passedt.landuse == "greenfield"         )  or
+                                ( passedt.landuse == "construction"       )  or
+                                ( passedt.landuse == "landfill"           )  or
+                                ( passedt.landuse == "historic"           )  or
+                                ( passedt.landuse == "orchard"            )  or
+                                ( passedt.landuse == "meadowtransitional" )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
