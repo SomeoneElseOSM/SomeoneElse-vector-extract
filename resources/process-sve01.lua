@@ -2218,20 +2218,7 @@ function generic_after_function( passedt )
                                         Attribute( "name", Find( "name" ) )
                                         MinZoom( 12 )
 	                            else
-                                        if ( passedt.leisure == "common" ) then
-                                            Layer( "land", true )
-                                            Attribute( "class", "leisure_" .. passedt.leisure )
-                                            Attribute( "name", Find( "name" ) )
-                                            MinZoom( 9 )
-                                        else
-                                            if (( passedt.leisure == "nature_reserve" ) or
-                                                ( passedt.leisure == "garden"         )) then
-                                                Layer( "land", true )
-                                                Attribute( "class", "leisure_" .. passedt.leisure )
-                                                Attribute( "name", Find( "name" ) )
-                                                MinZoom( 10 )
-                                            end -- leisure=nature_reserve etc.
-                                        end -- leisure=common
+                                        render_leisure_function( passedt )
 	                            end -- landuse=vineyard 12
 	                        end -- landuse=garages 11
 	                    end -- landuse=village_green 10
@@ -2242,3 +2229,27 @@ function generic_after_function( passedt )
         end -- place
     end -- amenity
 end -- generic_after_function()
+
+function render_leisure_function( passedt )
+    if ( passedt.leisure == "common" ) then
+        Layer( "land", true )
+        Attribute( "class", "leisure_" .. passedt.leisure )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 9 )
+    else
+        if (( passedt.leisure == "nature_reserve" ) or
+            ( passedt.leisure == "garden"         )) then
+            Layer( "land", true )
+            Attribute( "class", "leisure_" .. passedt.leisure )
+            Attribute( "name", Find( "name" ) )
+            MinZoom( 10 )
+        else
+            if ( passedt.leisure == "swimming_pool" ) then
+                Layer( "land", true )
+                Attribute( "class", "leisure_" .. passedt.leisure )
+                Attribute( "name", Find( "name" ) )
+                MinZoom( 13 )
+            end -- leisure=swimming_pool etc. 13
+        end -- leisure=nature_reserve etc. 10
+    end -- leisure=common 9
+end -- render_leisure_function()
