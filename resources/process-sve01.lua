@@ -148,6 +148,15 @@ function node_function()
     nodet.animal = Find("animal")
     nodet.meadow = Find("meadow")
     nodet.produce = Find("produce")
+    nodet.historic = Find("historic")
+    nodet.ruins = Find("ruins")
+    nodet.ruinsCman_made = Find("ruins:man_made")
+    nodet.towerCtype = Find("tower:type")
+    nodet.aircraftCmodel = Find("aircraft:model")
+    nodet.inscription = Find("inscription")
+    nodet.tomb = Find("tomb")
+    nodet.archaeological_site = Find("archaeological_site")
+    nodet.geological = Find("geological")
 
     generic_before_function( nodet )
 
@@ -265,6 +274,15 @@ function way_function()
     wayt.animal = Find("animal")
     wayt.meadow = Find("meadow")
     wayt.produce = Find("produce")
+    wayt.historic = Find("historic")
+    wayt.ruins = Find("ruins")
+    wayt.ruinsCman_made = Find("ruins:man_made")
+    wayt.towerCtype = Find("tower:type")
+    wayt.aircraftCmodel = Find("aircraft:model")
+    wayt.inscription = Find("inscription")
+    wayt.tomb = Find("tomb")
+    wayt.archaeological_site = Find("archaeological_site")
+    wayt.geological = Find("geological")
 
     generic_before_function( wayt )
 
@@ -1420,6 +1438,395 @@ function generic_before_function( passedt )
       passedt.landuse = "farmgrass"
    end
 
+-- ----------------------------------------------------------------------------
+-- City gates go through as "historic=city_gate"
+-- Note that historic=gate are generally much smaller and are not included here.
+--
+-- Also, there are individual icons for these:
+-- "historic=battlefield", "historic=stocks" (also used for "pillory"), 
+-- "historic=well", "historic=dovecote"
+-- ----------------------------------------------------------------------------
+   if ( passedt.historic == "pillory" ) then
+      passedt.historic = "stocks"
+   end
+
+   if (( passedt.historic == "city_gate"   ) or
+       ( passedt.historic == "battlefield" ) or
+       ( passedt.historic == "stocks"      ) or
+       ( passedt.historic == "well"        ) or
+       ( passedt.historic == "dovecote"    )) then
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- historic=grave_yard goes through as historic=nonspecific, with fill for 
+-- amenity=grave_yard if no landuse fill already.
+-- ----------------------------------------------------------------------------
+   if (((  passedt.historic        == "grave_yard"  )  or
+        (  passedt.historic        == "cemetery"    )  or
+        (  passedt.disusedCamenity == "grave_yard"  )  or
+        (( passedt.historic        == "ruins"      )   and
+         ( passedt.ruins           == "grave_yard" ))) and
+       (( passedt.amenity         == nil          )  or
+        ( passedt.amenity         == ""           )) and
+       (  passedt.landuse         ~= "cemetery"    )) then
+      passedt.historic = "nonspecific"
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  ))) then
+         passedt.landuse = "cemetery"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Towers go through as various historic towers
+-- We also send ruined towers through here.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic == "tower"        ) or
+       (  passedt.historic == "round_tower"  ) or
+       (( passedt.historic == "ruins"       )  and
+        ( passedt.ruins    == "tower"       ))) then
+      passedt.man_made = nil
+
+      if ((  passedt.historic  == "round_tower"  ) or
+          ( passedt.towerCtype == "round_tower"  ) or
+          ( passedt.towerCtype == "shot_tower"   )) then
+         passedt.historic = "historicroundtower"
+      else
+         if ( passedt.towerCtype == "defensive" ) then
+            passedt.historic = "historicdefensivetower"
+         else
+            if (( passedt.towerCtype == "observation" ) or
+                ( passedt.towerCtype == "watchtower"  )) then
+               passedt.historic = "historicobservationtower"
+            else
+               if ( passedt.towerCtype == "bell_tower" ) then
+                  passedt.historic = "historicchurchtower"
+               else
+                  passedt.historic = "historicsquaretower"
+               end  -- bell_tower
+            end  -- observation
+         end  -- defensive
+      end  -- round_tower
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Both kilns and lime kilns are shown with the same distinctive bottle kiln
+-- shape.
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic       == "lime_kiln" ) or
+       ( passedt.ruinsCman_made == "kiln"      )) then
+      passedt.historic       = "kiln"
+      passedt.ruinsCman_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show village_pump as water_pump
+-- ----------------------------------------------------------------------------
+   if ( passedt.historic  == "village_pump" ) then
+      passedt.historic = "water_pump"
+   end
+
+-- ----------------------------------------------------------------------------
+-- For aircraft without names, try and construct something
+-- First use aircraft:model and/or ref.  If still no name, inscription.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic == "aircraft" )  and
+       (( passedt.name     == nil        )  or
+        ( passedt.name     == ""         ))) then
+      if (( passedt.aircraftCmodel ~= nil ) and
+          ( passedt.aircraftCmodel ~= ""  )) then
+         passedt.name = passedt.aircraftCmodel
+      end
+
+      if (( passedt.ref ~= nil ) and
+          ( passedt.ref ~= ""  )) then
+         if (( passedt.name == nil ) or
+             ( passedt.name == ""  )) then
+            passedt.name = passedt.ref
+         else
+            passedt.name = passedt.name .. " " .. passedt.ref
+         end
+      end
+
+      if ((( passedt.name        == nil )   or
+           ( passedt.name        == ""  ))  and
+          (  passedt.inscription ~= nil  )  and
+          (  passedt.inscription ~= ""   )) then
+         passedt.name = passedt.inscription
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Add a building tag to specific historic items that are likely buildings 
+-- Note that "historic=mill" does not have a building tag added.
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "aircraft"           ) or
+       ( passedt.historic == "ice_house"          ) or
+       ( passedt.historic == "kiln"               ) or
+       ( passedt.historic == "ship"               ) or
+       ( passedt.historic == "tank"               ) or
+       ( passedt.historic == "watermill"          ) or
+       ( passedt.historic == "windmill"           )) then
+      if ( passedt.ruins == "yes" ) then
+         passedt.building = "roof"
+      else
+         passedt.building = "yes"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Add a building tag to nonspecific historic items that are likely buildings 
+-- so that buildings.mss can process it.  Some shouldn't assume buildings 
+-- (e.g. "fort" below).  Some use "roof" (which I use for "nearly a building" 
+-- elsewhere).  It's sent through as "nonspecific".
+-- "stone" has a building tag added because some are mapped as closed ways.
+-- "landuse" is cleared because it might have been set for some building types
+--  above.
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "baths"              ) or
+       ( passedt.historic == "building"           ) or
+       ( passedt.historic == "chlochan"           ) or
+       ( passedt.historic == "gate_house"         ) or
+       ( passedt.historic == "heritage_building"  ) or
+       ( passedt.historic == "house"              ) or
+       ( passedt.historic == "locomotive"         ) or
+       ( passedt.historic == "protected_building" ) or
+       ( passedt.historic == "residence"          ) or
+       ( passedt.historic == "roundhouse"         ) or
+       ( passedt.historic == "smithy"             ) or
+       ( passedt.historic == "sound_mirror"       ) or
+       ( passedt.historic == "standing_stone"     ) or
+       ( passedt.historic == "trough"             ) or
+       ( passedt.historic == "vehicle"            )) then
+      if ( passedt.ruins == "yes" ) then
+         passedt.building = "roof"
+      else
+         passedt.building = "yes"
+      end
+
+      passedt.historic = "nonspecific"
+      passedt.landuse  = nil
+      passedt.tourism  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- historic=wreck is usually on nodes and has its own icon
+-- ----------------------------------------------------------------------------
+   if ( passedt.historic == "wreck" ) then
+      passedt.building = "roof"
+   end
+
+   if ( passedt.historic == "aircraft_wreck" ) then
+      passedt.building = "roof"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Ruined buildings do not have their own icon
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic == "ruins"    )  and
+       (  passedt.ruins    == "building" )  and
+       (( passedt.barrier  == nil        )  or
+        ( passedt.barrier  == ""         ))) then
+      passedt.building = "roof"
+      passedt.historic = "nonspecific"
+   end
+   
+   if ((  passedt.historic == "ruins"             ) and
+       (( passedt.ruins    == "church"           )  or
+        ( passedt.ruins    == "place_of_worship" )  or
+        ( passedt.ruins    == "wayside_chapel"   )  or
+        ( passedt.ruins    == "chapel"           )) and
+       (( passedt.amenity  == nil                )  or
+        ( passedt.amenity  == ""                 ))) then
+      passedt.building = "roof"
+      passedt.historic = "church"
+   end
+
+   if ((  passedt.historic == "ruins"           ) and
+       (( passedt.ruins    == "castle"         )  or
+        ( passedt.ruins    == "fort"           )  or
+        ( passedt.ruins    == "donjon"         )) and
+       (( passedt.amenity  == nil              )  or
+        ( passedt.amenity  == ""               ))) then
+      passedt.historic = "historicarchcastle"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "historic=industrial" has been used as a modifier for all sorts.  
+-- We're not interested in most of these but do display a historic dot for 
+-- some.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic == "industrial"  ) and
+       (( passedt.building == nil          )  or
+        ( passedt.building == ""           )) and
+       (( passedt.man_made == nil          )  or
+        ( passedt.man_made == ""           )) and
+       (( passedt.waterway == nil          )  or
+        ( passedt.waterway == ""           )) and
+       ( passedt.name     ~= nil            ) and
+       ( passedt.name     ~= ""             )) then
+      passedt.historic = "nonspecific"
+      passedt.tourism = nil
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Some tumuli are tagged as tombs, so dig those out first.
+-- They are then picked up below.
+--
+-- Tombs that remain go straight through unless we need to set landuse.
+-- ----------------------------------------------------------------------------
+   if ( passedt.historic == "tomb" ) then
+      if ( passedt.tomb == "tumulus" ) then
+         passedt.historic            = "archaeological_site"
+         passedt.archaeological_site = "tumulus"
+      else
+         if ((( passedt.landuse == nil )  or
+              ( passedt.landuse == ""  )) and
+             (( passedt.leisure == nil )  or
+              ( passedt.leisure == ""  )) and
+             (( passedt.natural == nil )  or
+              ( passedt.natural == ""  ))) then
+            passedt.landuse = "historic"
+         end
+      end
+   end
+   
+-- ----------------------------------------------------------------------------
+-- The catch-all for most "sensible" historic values that are displayed with
+-- a historic dot regardless of whether they have a name.
+--
+-- disused:landuse=cemetery goes through here rather than as 
+-- historic=grave_yard above because the notes suggest that these are not 
+-- visible as graveyards any more, so no graveyard fill.
+-- ----------------------------------------------------------------------------   
+   if ((   passedt.historic == "almshouse"                 ) or
+       (   passedt.historic == "anchor"                    ) or
+       (   passedt.historic == "bakery"                    ) or
+       (   passedt.historic == "barrow"                    ) or
+       (   passedt.historic == "battery"                   ) or
+       (   passedt.historic == "bridge_site"               ) or
+       (   passedt.historic == "camp"                      ) or
+       (   passedt.historic == "deserted_medieval_village" ) or
+       (   passedt.historic == "drinking_fountain"         ) or
+       (   passedt.historic == "fortification"             ) or
+       (   passedt.historic == "gate"                      ) or
+       (   passedt.historic == "grinding_mill"             ) or
+       (   passedt.historic == "hall"                      ) or
+       (   passedt.historic == "jail"                      ) or
+       (   passedt.historic == "millstone"                 ) or
+       (   passedt.historic == "monastic_grange"           ) or
+       (   passedt.historic == "mound"                     ) or
+       (   passedt.historic == "naval_mine"                ) or
+       (   passedt.historic == "oratory"                   ) or
+       (   passedt.historic == "police_call_box"           ) or
+       (   passedt.historic == "prison"                    ) or
+       (   passedt.historic == "ruins"                     ) or
+       (   passedt.historic == "sawmill"                   ) or
+       (   passedt.historic == "shelter"                   ) or
+       (   passedt.historic == "statue"                    ) or
+       (   passedt.historic == "theatre"                   ) or
+       (   passedt.historic == "toll_house"                ) or
+       (   passedt.historic == "tower_house"               ) or
+       (   passedt.historic == "village"                   ) or
+       (   passedt.historic == "workhouse"                 ) or
+       ((  passedt.disusedClanduse == "cemetery"          )  and
+        (( passedt.landuse         == nil                )   or
+         ( passedt.landuse         == ""                 ))  and
+        (( passedt.leisure         == nil                )   or
+         ( passedt.leisure         == ""                 ))  and
+        (( passedt.amenity         == nil                )   or
+         ( passedt.amenity         == ""                 )))) then
+      passedt.historic = "nonspecific"
+      passedt.tourism = nil
+      passedt.disusedClanduse = nil
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- palaeolontological_site
+-- ----------------------------------------------------------------------------
+   if ( passedt.geological == "palaeontological_site" ) then
+      passedt.historic = "palaeontological_site"
+   end
+
+-- ----------------------------------------------------------------------------
+-- historic=icon shouldn't supersede amenity or tourism tags.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic == "icon"  ) and
+       (( passedt.amenity  == nil    )  or
+        ( passedt.amenity  == ""     )) and
+       (( passedt.tourism  == nil    )  or
+        ( passedt.tourism  == ""     ))) then
+      passedt.historic = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Historic markers
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "marker"          ) or
+       ( passedt.historic == "plaque"          ) or
+       ( passedt.historic == "memorial_plaque" ) or
+       ( passedt.historic == "blue_plaque"     )) then
+      passedt.tourism = "informationplaque"
+   end
+
+   if ( passedt.historic == "pillar" ) then
+      passedt.barrier = "bollard"
+      passedt.historic = nil
+   end
+
+   if ( passedt.historic == "cairn" ) then
+      passedt.man_made = "cairn"
+      passedt.historic = nil
+   end
+
+   if (( passedt.historic == "chimney" ) or
+       ( passedt.man_made == "chimney" ) or
+       ( passedt.building == "chimney" )) then
+      if (( tonumber(passedt.height) or 0 ) >  50 ) then
+         passedt.man_made = "bigchimney"
+      else
+         passedt.man_made = "chimney"
+      end
+      passedt.historic = nil
+   end
+
 end -- generic_before_function()
 
 function append_prow_ref( passedt )
@@ -1525,7 +1932,10 @@ function generic_after_function( passedt )
                             ( passedt.landuse == "brownfield"          ) or
                             ( passedt.landuse == "greenfield"          ) or
                             ( passedt.landuse == "construction"        ) or
-                            ( passedt.landuse == "unnamedconstruction" )) then
+                            ( passedt.landuse == "unnamedconstruction" ) or
+                            ( passedt.landuse == "landfill"            ) or
+                            ( passedt.landuse == "unnamedlandfill"     ) or
+                            ( passedt.landuse == "historic"            )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
@@ -1541,7 +1951,9 @@ function generic_after_function( passedt )
                                 ( passedt.landuse == "commercial"        )  or
                                 ( passedt.landuse == "brownfield"        )  or
                                 ( passedt.landuse == "greenfield"        )  or
-                                ( passedt.landuse == "construction"      )) then
+                                ( passedt.landuse == "construction"      )  or
+                                ( passedt.landuse == "landfill"          )  or
+                                ( passedt.landuse == "historic"          )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
