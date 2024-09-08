@@ -1959,10 +1959,17 @@ function generic_after_function( passedt )
 
                             MinZoom( 9 )
 	                else
-                            if ( passedt.landuse == "village_green" ) then
+                            if (( passedt.landuse == "village_green"  ) or
+                                ( passedt.landuse == "quarry"         ) or
+                                ( passedt.landuse == "unnamed_quarry" )) then
                                 Layer( "land", true )
                                 Attribute( "class", "landuse_" .. passedt.landuse )
-                                Attribute( "name", Find( "name" ) )
+
+                                if (( passedt.landuse == "village_green"  )  or
+                                    ( passedt.landuse == "quarry"         )) then
+                                    Attribute( "name", Find( "name" ) )
+                                end
+
                                 MinZoom( 10 )
 	                    else
                                 if ( passedt.landuse == "garages" ) then
