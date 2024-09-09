@@ -161,6 +161,8 @@ function node_function()
     nodet.reef = Find("reef")
     nodet.wetland = Find("wetland")
     nodet.tidal = Find("tidal")
+    nodet.playground = Find("playground")
+    nodet.sport = Find("sport")
 
     generic_before_function( nodet )
 
@@ -291,6 +293,8 @@ function way_function()
     wayt.reef = Find("reef")
     wayt.wetland = Find("wetland")
     wayt.tidal = Find("tidal")
+    wayt.playground = Find("playground")
+    wayt.sport = Find("sport")
 
     generic_before_function( wayt )
 
@@ -1175,7 +1179,7 @@ function generic_before_function( passedt )
 -- Access land is shown with a high-zoom yellow border (to contrast with the 
 -- high-zoom green border of nature reserves) and with a low-opacity 
 -- yellow fill at all zoom levels (to contrast with the low-opacity green fill
--- at low zoom levels of nature reserves.
+-- at low zoom levels of nature reserves).
 -- ----------------------------------------------------------------------------
    if ((  passedt.designation   == "access_land"     )  and
        (( passedt.boundary      == nil              )   or
@@ -1623,6 +1627,347 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if (passedt.landuse   == "greenhouse_horticulture") then
       passedt.landuse = "farmyard"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Golf (and sandpits)
+-- ----------------------------------------------------------------------------
+   if ((( passedt.golf       == "bunker"  )  or
+        ( passedt.playground == "sandpit" )) and
+       (( passedt.natural     == nil      )  or
+        ( passedt.natural     == ""       ))) then
+      passedt.natural = "sand"
+   end
+
+   if ( passedt.golf == "tee" ) then
+      passedt.leisure = "garden"
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = passedt.ref
+      end
+   end
+
+   if ( passedt.golf == "green" ) then
+      passedt.leisure = "golfgreen"
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = passedt.ref
+      end
+   end
+
+   if ( passedt.golf == "fairway" ) then
+      passedt.leisure = "garden"
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = passedt.ref
+      end
+   end
+
+   if ( passedt.golf == "pin" ) then
+      passedt.leisure = "leisurenonspecific"
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = passedt.ref
+      end
+   end
+
+   if ((  passedt.golf    == "rough" ) and
+       (( passedt.natural == nil    )  or
+        ( passedt.natural == ""     ))) then
+      passedt.natural = "scrub"
+   end
+
+   if ((  passedt.golf    == "driving_range"  ) and
+       (( passedt.leisure == nil             )  or
+        ( passedt.leisure == ""              ))) then
+      passedt.leisure = "pitch"
+   end
+
+   if ((  passedt.golf    == "path"  ) and
+       (( passedt.highway == nil    )  or
+        ( passedt.highway == ""     ))) then
+      passedt.highway = "pathnarrow"
+   end
+
+   if ((  passedt.golf    == "practice"  ) and
+       (( passedt.leisure == nil        )  or
+        ( passedt.leisure == ""         ))) then
+      passedt.leisure = "garden"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Playground stuff
+--
+-- The "leisure=nil" check here is because there are some unusual combinations
+-- of "playground" tags on otherwise-rendered "leisure" things.
+--
+-- "landuse=playground" is a rare synonym of "leisure=playground".
+-- "leisure=playground".is handled in the rendering code.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.landuse == "playground"  ) and
+       (( passedt.leisure == nil          )  or
+        ( passedt.leisure == ""           ))) then
+      passedt.leisure = "playground"
+   end
+
+   if (((  passedt.leisure    == nil           )   or
+        (  passedt.leisure    == ""            ))  and
+       ((  passedt.playground == "swing"       )   or
+        (  passedt.playground == "basketswing" ))) then
+      passedt.amenity = "playground_swing"
+   end
+
+   if ((( passedt.leisure    == nil         )   or
+        ( passedt.leisure    == ""          ))  and
+       (  passedt.playground == "structure"  )) then
+      passedt.amenity = "playground_structure"
+   end
+
+   if ((( passedt.leisure    == nil             )   or
+        ( passedt.leisure    == ""              ))  and
+       (  passedt.playground == "climbingframe"  )) then
+      passedt.amenity = "playground_climbingframe"
+   end
+
+   if ((( passedt.leisure    == nil     )   or
+        ( passedt.leisure    == ""      ))  and
+       (  passedt.playground == "slide"  )) then
+      passedt.amenity = "playground_slide"
+   end
+
+   if ((( passedt.leisure    == nil       )   or
+        ( passedt.leisure    == ""        ))  and
+       (  passedt.playground == "springy"  )) then
+      passedt.amenity = "playground_springy"
+   end
+
+   if ((( passedt.leisure    == nil       )   or
+        ( passedt.leisure    == ""        ))  and
+       (  passedt.playground == "zipwire"  )) then
+      passedt.amenity = "playground_zipwire"
+   end
+
+   if ((( passedt.leisure    == nil      )   or
+        ( passedt.leisure    == ""       ))  and
+       (  passedt.playground == "seesaw"  )) then
+      passedt.amenity = "playground_seesaw"
+   end
+
+   if ((( passedt.leisure    == nil          )   or
+        ( passedt.leisure    == ""           ))  and
+       (  passedt.playground == "roundabout"  )) then
+      passedt.amenity = "playground_roundabout"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various leisure=pitch icons
+-- Note that these are also listed at the end in 
+-- "Shops etc. with icons already".
+-- ----------------------------------------------------------------------------
+   if (( passedt.leisure == "pitch"        )  and
+       ( passedt.sport   == "table_tennis" )) then
+      passedt.amenity = "pitch_tabletennis"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"                      )  and
+       (( passedt.sport   == "association_football"      )   or
+        ( passedt.sport   == "football"                  )   or
+        ( passedt.sport   == "multi;soccer;basketball"   )   or
+        ( passedt.sport   == "football;basketball"       )   or
+        ( passedt.sport   == "football;rugby"            )   or
+        ( passedt.sport   == "football;soccer"           )   or
+        ( passedt.sport   == "soccer"                    )   or
+        ( passedt.sport   == "soccer;archery"            )   or
+        ( passedt.sport   == "soccer;athletics"          )   or
+        ( passedt.sport   == "soccer;basketball"         )   or
+        ( passedt.sport   == "soccer;cricket"            )   or
+        ( passedt.sport   == "soccer;field_hockey"       )   or
+        ( passedt.sport   == "soccer;football"           )   or
+        ( passedt.sport   == "soccer;gaelic_games"       )   or
+        ( passedt.sport   == "soccer;gaelic_games;rugby" )   or
+        ( passedt.sport   == "soccer;hockey"             )   or
+        ( passedt.sport   == "soccer;multi"              )   or
+        ( passedt.sport   == "soccer;rugby"              )   or
+        ( passedt.sport   == "soccer;rugby_union"        )   or
+        ( passedt.sport   == "soccer;tennis"             ))) then
+      passedt.amenity = "pitch_soccer"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch"                    )  and
+       (( passedt.sport  == "basketball"              )   or
+        ( passedt.sport  == "basketball;soccer"       )   or
+        ( passedt.sport  == "basketball;football"     )   or
+        ( passedt.sport  == "basketball;multi"        )   or
+        ( passedt.sport  == "basketball;netball"      )   or
+        ( passedt.sport  == "basketball;tennis"       )   or
+        ( passedt.sport  == "multi;basketball"        )   or
+        ( passedt.sport  == "multi;basketball;soccer" ))) then
+      passedt.amenity = "pitch_basketball"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"                )  and
+       (( passedt.sport   == "cricket"             )   or
+        ( passedt.sport   == "cricket_rugby_union" )   or
+        ( passedt.sport   == "cricket;soccer"      )   or
+        ( passedt.sport   == "cricket_nets"        )   or
+        ( passedt.sport   == "cricket_nets;multi"  ))) then
+      passedt.amenity = "pitch_cricket"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch"           )  and
+       (( passedt.sport  == "skateboard"     )   or
+        ( passedt.sport  == "skateboard;bmx" ))) then
+      passedt.amenity = "pitch_skateboard"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"                )  and
+       (( passedt.sport   == "climbing"            )   or
+        ( passedt.sport   == "climbing;bouldering" ))) then
+      passedt.amenity = "pitch_climbing"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"                )  and
+       (( passedt.sport   == "rugby"               )   or
+        ( passedt.sport   == "rugby;cricket"       )   or
+        ( passedt.sport   == "rugby;football"      )   or
+        ( passedt.sport   == "rugby;rubgy_union"   )   or
+        ( passedt.sport   == "rugby;soccer"        )   or
+        ( passedt.sport   == "rugby_league"        )   or
+        ( passedt.sport   == "rugby_union"         )   or
+        ( passedt.sport   == "rugby_union;cricket" )   or
+        ( passedt.sport   == "rugby_union;soccer"  ))) then
+      passedt.amenity = "pitch_rugby"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch" )  and
+       ( passedt.sport   == "chess" )) then
+      passedt.amenity = "pitch_chess"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"              )  and
+       (( passedt.sport   == "tennis"            )   or
+        ( passedt.sport   == "tennis;basketball" )   or
+        ( passedt.sport   == "tennis;bowls"      )   or
+        ( passedt.sport   == "tennis;hockey"     )   or
+        ( passedt.sport   == "tennis;multi"      )   or
+        ( passedt.sport   == "tennis;netball"    )   or
+        ( passedt.sport   == "tennis;soccer"     )   or
+        ( passedt.sport   == "tennis;squash"     ))) then
+      passedt.amenity = "pitch_tennis"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"             )  and
+       (( passedt.sport   == "athletics"        )   or
+        ( passedt.sport   == "athletics;soccer" )   or
+        ( passedt.sport   == "long_jump"        )   or
+        ( passedt.sport   == "running"          )   or
+        ( passedt.sport   == "shot-put"         ))) then
+      passedt.amenity = "pitch_athletics"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch" )  and
+       ( passedt.sport   == "boules" )) then
+      passedt.amenity = "pitch_boules"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"         )  and
+       (( passedt.sport   == "bowls"        )   or
+        ( passedt.sport   == "bowls;tennis" ))) then
+      passedt.amenity = "pitch_bowls"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch" )  and
+       ( passedt.sport   == "croquet" )) then
+      passedt.amenity = "pitch_croquet"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"         )  and
+       (( passedt.sport   == "cycling"      )   or
+        ( passedt.sport   == "bmx"          )   or
+        ( passedt.sport   == "cycling;bmx"  )   or
+        ( passedt.sport   == "bmx;mtb"      )   or
+        ( passedt.sport   == "bmx;cycling"  )   or
+        ( passedt.sport   == "mtb"          ))) then
+      passedt.amenity = "pitch_cycling"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch" )  and
+       ( passedt.sport   == "equestrian" )) then
+      passedt.amenity = "pitch_equestrian"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"                  )  and
+       (( passedt.sport   == "gaelic_games"          )   or
+        ( passedt.sport   == "gaelic_games;handball" )   or
+        ( passedt.sport   == "gaelic_games;soccer"   )   or
+        ( passedt.sport   == "shinty"                ))) then
+      passedt.amenity = "pitch_gaa"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"                  )  and
+       (( passedt.sport   == "field_hockey"          )   or
+        ( passedt.sport   == "field_hockey;soccer"   )   or
+        ( passedt.sport   == "hockey"                )   or
+        ( passedt.sport   == "hockey;soccer"         ))) then
+      passedt.amenity = "pitch_hockey"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch" )  and
+       ( passedt.sport   == "multi" )) then
+      passedt.amenity = "pitch_multi"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch" )  and
+       ( passedt.sport   == "netball" )) then
+      passedt.amenity = "pitch_netball"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if (( passedt.leisure == "pitch" )  and
+       ( passedt.sport   == "polo" )) then
+      passedt.amenity = "pitch_polo"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"           )  and
+       (( passedt.sport   == "shooting"       ) or
+        ( passedt.sport   == "shooting_range" ))) then
+      passedt.amenity = "pitch_shooting"
+      passedt.leisure = "unnamedpitch"
+   end
+
+   if ((  passedt.leisure == "pitch"                                             )  and
+       (( passedt.sport   == "baseball"                                         ) or
+        ( passedt.sport   == "baseball;soccer"                                  ) or
+        ( passedt.sport   == "baseball;softball"                                ) or
+        ( passedt.sport   == "baseball;cricket"                                 ) or
+        ( passedt.sport   == "multi;baseball"                                   ) or
+        ( passedt.sport   == "baseball;lacrosse;multi"                          ) or
+        ( passedt.sport   == "baseball;american_football;ice_hockey;basketball" ))) then
+      passedt.amenity = "pitch_baseball"
+      passedt.leisure = "unnamedpitch"
    end
 
 -- ----------------------------------------------------------------------------
@@ -2231,25 +2576,36 @@ function generic_after_function( passedt )
 end -- generic_after_function()
 
 function render_leisure_function( passedt )
-    if ( passedt.leisure == "common" ) then
+    if (( passedt.leisure == "common"            ) or
+        ( passedt.leisure == "park"              ) or
+        ( passedt.leisure == "recreation_ground" ) or
+        ( passedt.leisure == "garden"            ) or
+        ( passedt.leisure == "golfgreen"         )) then
         Layer( "land", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
         Attribute( "name", Find( "name" ) )
         MinZoom( 9 )
     else
-        if (( passedt.leisure == "nature_reserve" ) or
-            ( passedt.leisure == "garden"         )) then
+        if ( passedt.leisure == "nature_reserve" ) then
             Layer( "land", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
             Attribute( "name", Find( "name" ) )
             MinZoom( 10 )
         else
-            if ( passedt.leisure == "swimming_pool" ) then
+            if (( passedt.leisure == "playground" ) or
+                ( passedt.leisure == "schoolyard" )) then
                 Layer( "land", true )
                 Attribute( "class", "leisure_" .. passedt.leisure )
                 Attribute( "name", Find( "name" ) )
-                MinZoom( 13 )
-            end -- leisure=swimming_pool etc. 13
+                MinZoom( 12 )
+            else
+                if ( passedt.leisure == "swimming_pool" ) then
+                    Layer( "land", true )
+                    Attribute( "class", "leisure_" .. passedt.leisure )
+                    Attribute( "name", Find( "name" ) )
+                    MinZoom( 13 )
+                end -- leisure=swimming_pool etc. 13
+            end -- leisure=playground etc.  12
         end -- leisure=nature_reserve etc. 10
-    end -- leisure=common 9
+    end -- leisure=common etc. 9
 end -- render_leisure_function()
