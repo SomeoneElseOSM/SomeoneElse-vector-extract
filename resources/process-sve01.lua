@@ -163,6 +163,7 @@ function node_function()
     nodet.tidal = Find("tidal")
     nodet.playground = Find("playground")
     nodet.sport = Find("sport")
+    nodet.military = Find("military")
 
     generic_before_function( nodet )
 
@@ -295,6 +296,7 @@ function way_function()
     wayt.tidal = Find("tidal")
     wayt.playground = Find("playground")
     wayt.sport = Find("sport")
+    wayt.military = Find("military")
 
     generic_before_function( wayt )
 
@@ -2503,7 +2505,8 @@ function generic_after_function( passedt )
                             ( passedt.landuse == "saltmarsh"                 ) or
                             ( passedt.landuse == "reedbed"                   ) or
                             ( passedt.landuse == "allotments"                ) or
-                            ( passedt.landuse == "unnamedallotments"         )) then
+                            ( passedt.landuse == "unnamedallotments"         ) or
+                            ( passedt.landuse == "military"                  )) then
                             Layer( "land", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
 
@@ -2529,7 +2532,8 @@ function generic_after_function( passedt )
                                 ( passedt.landuse == "meadowperpetual"    )  or
                                 ( passedt.landuse == "saltmarsh"          )  or
                                 ( passedt.landuse == "reedbed"            )  or
-                                ( passedt.landuse == "allotments"         )) then
+                                ( passedt.landuse == "allotments"         )  or
+                                ( passedt.landuse == "military"           )) then
                                 Attribute( "name", Find( "name" ) )
                             end
 
@@ -2626,3 +2630,4 @@ function render_leisure_function( passedt )
         end -- leisure=nature_reserve etc. 10
     end -- leisure=common etc. 9
 end -- render_leisure_function()
+
