@@ -2581,10 +2581,26 @@ function render_leisure_function( passedt )
         ( passedt.leisure == "recreation_ground" ) or
         ( passedt.leisure == "garden"            ) or
         ( passedt.leisure == "golfgreen"         ) or
-        ( passedt.leisure == "golf_course"       )) then
+        ( passedt.leisure == "golf_course"       ) or
+        ( passedt.leisure == "sports_centre"     ) or
+        ( passedt.leisure == "stadium"           ) or
+        ( passedt.leisure == "pitch"             ) or
+        ( passedt.leisure == "unnamedpitch"      )) then
         Layer( "land", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
-        Attribute( "name", Find( "name" ) )
+
+	if (( passedt.leisure == "common"            ) or
+	    ( passedt.leisure == "park"              ) or
+	    ( passedt.leisure == "recreation_ground" ) or
+	    ( passedt.leisure == "garden"            ) or
+	    ( passedt.leisure == "golfgreen"         ) or
+	    ( passedt.leisure == "golf_course"       ) or
+	    ( passedt.leisure == "sports_centre"     ) or
+	    ( passedt.leisure == "stadium"           ) or
+            ( passedt.leisure == "pitch"             )) then
+            Attribute( "name", Find( "name" ) )
+        end
+
         MinZoom( 9 )
     else
         if ( passedt.leisure == "nature_reserve" ) then
