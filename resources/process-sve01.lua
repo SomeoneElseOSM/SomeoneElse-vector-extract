@@ -2580,7 +2580,8 @@ function render_leisure_function( passedt )
         ( passedt.leisure == "park"              ) or
         ( passedt.leisure == "recreation_ground" ) or
         ( passedt.leisure == "garden"            ) or
-        ( passedt.leisure == "golfgreen"         )) then
+        ( passedt.leisure == "golfgreen"         ) or
+        ( passedt.leisure == "golf_course"       )) then
         Layer( "land", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
         Attribute( "name", Find( "name" ) )
