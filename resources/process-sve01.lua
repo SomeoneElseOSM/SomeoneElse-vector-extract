@@ -88,6 +88,7 @@ function node_function()
     nodet.disusedCwaterway = Find("disused:waterway")
     nodet.wasCrailway = Find("was:railway")
     nodet.disusedCrailway = Find("disused:railway")
+    nodet.aeroway = Find("aeroway")
     nodet.wasCaeroway = Find("was:aeroway")
     nodet.disusedCaeroway = Find("disused:aeroway")
     nodet.landuse = Find("landuse")
@@ -221,6 +222,7 @@ function way_function()
     wayt.disusedCwaterway = Find("disused:waterway")
     wayt.wasCrailway = Find("was:railway")
     wayt.disusedCrailway = Find("disused:railway")
+    wayt.aeroway = Find("aeroway")
     wayt.wasCaeroway = Find("was:aeroway")
     wayt.disusedCaeroway = Find("disused:aeroway")
     wayt.landuse = Find("landuse")
@@ -2384,6 +2386,210 @@ function generic_before_function( passedt )
       end
    end
 
+-- ----------------------------------------------------------------------------
+-- Where both historic and natural might carry a name, we need to change some
+-- natural tags to unnamed versions
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "archaeological_site"   ) or
+       ( passedt.historic == "battlefield"           ) or
+       ( passedt.historic == "castle"                ) or
+       ( passedt.historic == "church"                ) or
+       ( passedt.historic == "historicfortification" ) or
+       ( passedt.historic == "historichillfort"      ) or
+       ( passedt.historic == "historicmegalithtomb"  ) or
+       ( passedt.historic == "historicringfort"      ) or
+       ( passedt.historic == "historicstandingstone" ) or
+       ( passedt.historic == "historicstonecircle"   ) or
+       ( passedt.historic == "historictumulus"       ) or
+       ( passedt.historic == "manor"                 ) or
+       ( passedt.historic == "memorial"              ) or
+       ( passedt.historic == "memorialobelisk"       ) or
+       ( passedt.historic == "monastery"             ) or
+       ( passedt.historic == "mineshaft"             ) or
+       ( passedt.historic == "nonspecific"           )) then
+      if ( passedt.natural == "wood" ) then
+         passedt.natural = "unnamedwood"
+      end
+
+      if ( passedt.natural == "broadleaved" ) then
+         passedt.natural = "unnamedbroadleaved"
+      end
+
+      if ( passedt.natural == "mixedleaved" ) then
+         passedt.natural = "unnamedmixedleaved"
+      end
+
+      if ( passedt.natural == "needleleaved" ) then
+         passedt.natural = "unnamedneedleleaved"
+      end
+
+      if ( passedt.natural == "heath" ) then
+         passedt.natural = "unnamedheath"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Change commercial landuse from aerodromes so that no name is displayed 
+-- from that.
+-- There's a similar issue with e.g. leisure=fishing / landuse=grass, which has
+-- already been rewritten to "park" by now.
+-- Some combinations are incompatible so we "just need to pick one".
+-- ----------------------------------------------------------------------------
+   if (( passedt.aeroway  == "aerodrome"             ) or
+       ( passedt.historic == "archaeological_site"   ) or
+       ( passedt.historic == "battlefield"           ) or
+       ( passedt.historic == "castle"                ) or
+       ( passedt.historic == "church"                ) or
+       ( passedt.historic == "historicfortification" ) or
+       ( passedt.historic == "historichillfort"      ) or
+       ( passedt.historic == "historicmegalithtomb"  ) or
+       ( passedt.historic == "historicringfort"      ) or
+       ( passedt.historic == "historicstandingstone" ) or
+       ( passedt.historic == "historicstonecircle"   ) or
+       ( passedt.historic == "historictumulus"       ) or
+       ( passedt.historic == "manor"                 ) or
+       ( passedt.historic == "memorial"              ) or
+       ( passedt.historic == "memorialobelisk"       ) or
+       ( passedt.historic == "monastery"             ) or
+       ( passedt.historic == "mineshaft"             ) or
+       ( passedt.historic == "nonspecific"           ) or
+       ( passedt.leisure  == "common"                ) or
+       ( passedt.leisure  == "garden"                ) or
+       ( passedt.leisure  == "nature_reserve"        ) or
+       ( passedt.leisure  == "park"                  ) or
+       ( passedt.leisure  == "pitch"                 ) or
+       ( passedt.leisure  == "sports_centre"         ) or
+       ( passedt.leisure  == "track"                 )) then
+      if ( passedt.landuse == "allotments" ) then
+         passedt.landuse = "unnamedallotments"
+      end
+
+      if ( passedt.landuse == "cemetery" ) then
+         passedt.landuse = "unnamedcemetery"
+      end
+
+      if ( passedt.landuse == "commercial" ) then
+         passedt.landuse = "unnamedcommercial"
+      end
+
+      if (( passedt.landuse == "construction" )  or
+          ( passedt.landuse == "brownfield"   )  or
+          ( passedt.landuse == "greenfield"   )) then
+         passedt.landuse = "unnamedconstruction"
+      end
+
+      if ( passedt.landuse == "farmland" ) then
+         passedt.landuse = "unnamedfarmland"
+      end
+
+      if ( passedt.landuse == "farmgrass" ) then
+         passedt.landuse = "unnamedfarmgrass"
+      end
+
+      if ( passedt.landuse == "farmyard" ) then
+         passedt.landuse = "unnamedfarmyard"
+      end
+
+      if ( passedt.landuse == "forest" ) then
+         passedt.landuse = "unnamedforest"
+      end
+
+      if ( passedt.landuse == "grass" ) then
+         passedt.landuse = "unnamedgrass"
+      end
+
+      if ( passedt.landuse == "industrial" ) then
+         passedt.landuse = "unnamedindustrial"
+      end
+
+      if ( passedt.landuse == "landfill" ) then
+         passedt.landuse = "unnamedlandfill"
+      end
+
+      if ( passedt.landuse == "meadow" ) then
+         passedt.landuse = "unnamedmeadow"
+      end
+
+      if ( passedt.landuse == "meadowwildflower" ) then
+         passedt.landuse = "unnamedmeadowwildflower"
+      end
+
+      if ( passedt.landuse == "meadowperpetual" ) then
+         passedt.landuse = "unnamedmeadowperpetual"
+      end
+
+      if ( passedt.landuse == "meadowtransitional" ) then
+         passedt.landuse = "unnamedmeadowtransitional"
+      end
+
+      if ( passedt.landuse == "orchard" ) then
+         passedt.landuse = "unnamedorchard"
+      end
+
+      if ( passedt.landuse  == "quarry" ) then
+         passedt.landuse = "unnamedquarry"
+      end
+
+      if ( passedt.landuse  == "historicquarry" ) then
+         passedt.landuse = "unnamedhistoricquarry"
+      end
+
+      if ( passedt.landuse == "residential" ) then
+         passedt.landuse = "unnamedresidential"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Shops etc. with icons already - just add "unnamedcommercial" landuse.
+-- The exception is where landuse is set to something we want to keep.
+-- ----------------------------------------------------------------------------
+   if (((( passedt.shop       ~= nil                 )   and
+         ( passedt.shop       ~= ""                  ))  or
+        (( passedt.amenity    ~= nil                 )   and
+         ( passedt.amenity    ~= ""                  )   and
+         ( passedt.amenity    ~= "holy_well"         )   and
+         ( passedt.amenity    ~= "holy_spring"       )   and
+         ( passedt.amenity    ~= "biergarten"        )   and
+         ( passedt.amenity    ~= "pitch_baseball"    )   and
+         ( passedt.amenity    ~= "pitch_basketball"  )   and
+         ( passedt.amenity    ~= "pitch_chess"       )   and
+         ( passedt.amenity    ~= "pitch_cricket"     )   and
+         ( passedt.amenity    ~= "pitch_climbing"    )   and
+         ( passedt.amenity    ~= "pitch_athletics"   )   and
+         ( passedt.amenity    ~= "pitch_boules"      )   and
+         ( passedt.amenity    ~= "pitch_bowls"       )   and
+         ( passedt.amenity    ~= "pitch_croquet"     )   and
+         ( passedt.amenity    ~= "pitch_cycling"     )   and
+         ( passedt.amenity    ~= "pitch_equestrian"  )   and
+         ( passedt.amenity    ~= "pitch_gaa"         )   and
+         ( passedt.amenity    ~= "pitch_hockey"      )   and
+         ( passedt.amenity    ~= "pitch_multi"       )   and
+         ( passedt.amenity    ~= "pitch_netball"     )   and
+         ( passedt.amenity    ~= "pitch_polo"        )   and
+         ( passedt.amenity    ~= "pitch_shooting"    )   and
+         ( passedt.amenity    ~= "pitch_rugby"       )   and
+         ( passedt.amenity    ~= "pitch_skateboard"  )   and
+         ( passedt.amenity    ~= "pitch_soccer"      )   and
+         ( passedt.amenity    ~= "pitch_tabletennis" )   and
+         ( passedt.amenity    ~= "pitch_tennis"      ))  or
+        (  passedt.tourism    == "hotel"              )  or
+        (  passedt.tourism    == "guest_house"        )  or
+        (  passedt.tourism    == "attraction"         )  or
+        (  passedt.tourism    == "viewpoint"          )  or
+        (  passedt.tourism    == "museum"             )  or
+        (  passedt.tourism    == "hostel"             )  or
+        (  passedt.tourism    == "gallery"            )  or
+        (  passedt.tourism    == "apartment"          )  or
+        (  passedt.tourism    == "bed_and_breakfast"  )  or
+        (  passedt.tourism    == "motel"              )  or
+        (  passedt.tourism    == "theme_park"         )) and
+       (   passedt.leisure    ~= "garden"              )) then
+      if (( passedt.landuse == nil ) or
+          ( passedt.landuse == ""  )) then
+         passedt.landuse = "unnamedcommercial"
+      end
+   end
+
 end -- generic_before_function()
 
 function append_prow_ref( passedt )
@@ -2401,6 +2607,20 @@ function append_prow_ref( passedt )
 end -- append_prow_ref
 
 function generic_after_function( passedt )
+-- ----------------------------------------------------------------------------
+-- When processing data for layers note that something might have be a feature
+-- that needs adding to more than one layer (perhaps based on the same 
+-- key/value combination, perhaps based on a different one.
+-- ----------------------------------------------------------------------------
+    generic_after_poi( passedt )
+    generic_after_land1( passedt )
+    generic_after_land2( passedt )
+end -- generic_after_function()
+
+-- ----------------------------------------------------------------------------
+-- poi layer
+-- ----------------------------------------------------------------------------
+function generic_after_poi( passedt )
     if (( passedt.amenity ~= ""  ) and
         ( passedt.amenity ~= nil )) then
         LayerAsCentroid( "poi" )
@@ -2454,132 +2674,88 @@ function generic_after_function( passedt )
                     Attribute( "class", "tourism_" .. passedt.tourism )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 14 )
-                else
-                    if (( passedt.landuse == "forest"          ) or
-                        ( passedt.landuse == "unnamedforest"   ) or
-                        ( passedt.landuse == "farmland"        ) or
-                        ( passedt.landuse == "unnamedfarmland" )) then
-                        Layer( "land", true )
-                        Attribute( "class", "landuse_" .. passedt.landuse )
-
-                        if (( passedt.landuse == "forest"   )  or
-                            ( passedt.landuse == "farmland" )) then
-                            Attribute( "name", Find( "name" ) )
-                        end
-
-                        MinZoom( 8 )
-                    else
-                        if (( passedt.landuse == "grass"                     ) or
-                            ( passedt.landuse == "unnamedgrass"              ) or
-                            ( passedt.landuse == "residential"               ) or
-                            ( passedt.landuse == "unnamedresidential"        ) or
-                            ( passedt.landuse == "meadow"                    ) or
-                            ( passedt.landuse == "unnamedmeadow"             ) or
-                            ( passedt.landuse == "wetmeadow"                 ) or
-                            ( passedt.landuse == "farmyard"                  ) or
-                            ( passedt.landuse == "unnamedfarmyard"           ) or
-                            ( passedt.landuse == "farmgrass"                 ) or
-                            ( passedt.landuse == "unnamedfarmgrass"          ) or
-                            ( passedt.landuse == "recreation_ground"         ) or
-                            ( passedt.landuse == "retail"                    ) or
-                            ( passedt.landuse == "industrial"                ) or
-                            ( passedt.landuse == "unnamedindustrial"         ) or
-                            ( passedt.landuse == "railway"                   ) or
-                            ( passedt.landuse == "commercial"                ) or
-                            ( passedt.landuse == "unnamedcommercial"         ) or
-                            ( passedt.landuse == "brownfield"                ) or
-                            ( passedt.landuse == "greenfield"                ) or
-                            ( passedt.landuse == "construction"              ) or
-                            ( passedt.landuse == "unnamedconstruction"       ) or
-                            ( passedt.landuse == "landfill"                  ) or
-                            ( passedt.landuse == "unnamedlandfill"           ) or
-                            ( passedt.landuse == "historic"                  ) or
-                            ( passedt.landuse == "orchard"                   ) or
-                            ( passedt.landuse == "unnamedorchard"            ) or
-                            ( passedt.landuse == "meadowtransitional"        ) or
-                            ( passedt.landuse == "unnamedmeadowtransitional" ) or
-                            ( passedt.landuse == "meadowwildflower"          ) or
-                            ( passedt.landuse == "unnamedmeadowwildflower"   ) or
-                            ( passedt.landuse == "meadowperpetual"           ) or
-                            ( passedt.landuse == "unnamedmeadowperpetual"    ) or
-                            ( passedt.landuse == "saltmarsh"                 ) or
-                            ( passedt.landuse == "reedbed"                   ) or
-                            ( passedt.landuse == "allotments"                ) or
-                            ( passedt.landuse == "unnamedallotments"         ) or
-                            ( passedt.landuse == "military"                  )) then
-                            Layer( "land", true )
-                            Attribute( "class", "landuse_" .. passedt.landuse )
-
-                            if (( passedt.landuse == "grass"              )  or
-                                ( passedt.landuse == "residential"        )  or
-                                ( passedt.landuse == "meadow"             )  or
-                                ( passedt.landuse == "wetmeadow"          )  or
-                                ( passedt.landuse == "farmyard"           )  or
-                                ( passedt.landuse == "farmgrass"          )  or
-                                ( passedt.landuse == "recreation_ground"  )  or
-                                ( passedt.landuse == "retail"             )  or
-                                ( passedt.landuse == "industrial"         )  or
-                                ( passedt.landuse == "railway"            )  or
-                                ( passedt.landuse == "commercial"         )  or
-                                ( passedt.landuse == "brownfield"         )  or
-                                ( passedt.landuse == "greenfield"         )  or
-                                ( passedt.landuse == "construction"       )  or
-                                ( passedt.landuse == "landfill"           )  or
-                                ( passedt.landuse == "historic"           )  or
-                                ( passedt.landuse == "orchard"            )  or
-                                ( passedt.landuse == "meadowtransitional" )  or
-                                ( passedt.landuse == "meadowwildflower"   )  or
-                                ( passedt.landuse == "meadowperpetual"    )  or
-                                ( passedt.landuse == "saltmarsh"          )  or
-                                ( passedt.landuse == "reedbed"            )  or
-                                ( passedt.landuse == "allotments"         )  or
-                                ( passedt.landuse == "military"           )) then
-                                Attribute( "name", Find( "name" ) )
-                            end
-
-                            MinZoom( 9 )
-	                else
-                            if (( passedt.landuse == "village_green"          ) or
-                                ( passedt.landuse == "quarry"                 ) or
-                                ( passedt.landuse == "unnamedquarry"          ) or
-                                ( passedt.landuse == "historicquarry"         ) or
-                                ( passedt.landuse == "unnamedhistoricquarry"  )) then
-                                Layer( "land", true )
-                                Attribute( "class", "landuse_" .. passedt.landuse )
-
-                                if (( passedt.landuse == "village_green"  )  or
-                                    ( passedt.landuse == "quarry"         )  or
-                                    ( passedt.landuse == "historicquarry" )) then
-                                    Attribute( "name", Find( "name" ) )
-                                end
-
-                                MinZoom( 10 )
-	                    else
-                                if ( passedt.landuse == "garages" ) then
-                                    Layer( "land", true )
-                                    Attribute( "class", "landuse_" .. passedt.landuse )
-                                    Attribute( "name", Find( "name" ) )
-                                    MinZoom( 11 )
-	                        else
-                                    if ( passedt.landuse == "vineyard" ) then
-                                        Layer( "land", true )
-                                        Attribute( "class", "landuse_" .. passedt.landuse )
-                                        Attribute( "name", Find( "name" ) )
-                                        MinZoom( 12 )
-	                            else
-                                        render_leisure_function( passedt )
-	                            end -- landuse=vineyard 12
-	                        end -- landuse=garages 11
-	                    end -- landuse=village_green 10
-	                end -- landuse=grass etc. 9
-                    end -- landuse=forest 8
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
                 end -- tourism
             end -- shop
         end -- place
     end -- amenity
-end -- generic_after_function()
+end -- generic_after_poi()
 
-function render_leisure_function( passedt )
+-- ----------------------------------------------------------------------------
+-- There are two "land" layers - "land1" and "land2".
+-- Where two features might get shown, the lua code above adds the one to
+-- show the label for to "land1" and adds the other "unnamed" one to "land2"
+--
+-- land1 layer
+-- ----------------------------------------------------------------------------
+function generic_after_land1( passedt )
+    if (( passedt.landuse == "forest"          ) or
+        ( passedt.landuse == "farmland"        )) then
+        Layer( "land1", true )
+        Attribute( "class", "landuse_" .. passedt.landuse )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 8 )
+    else
+        if (( passedt.landuse == "grass"                     ) or
+            ( passedt.landuse == "residential"               ) or
+            ( passedt.landuse == "meadow"                    ) or
+            ( passedt.landuse == "wetmeadow"                 ) or
+            ( passedt.landuse == "farmyard"                  ) or
+            ( passedt.landuse == "farmgrass"                 ) or
+            ( passedt.landuse == "recreation_ground"         ) or
+            ( passedt.landuse == "retail"                    ) or
+            ( passedt.landuse == "industrial"                ) or
+            ( passedt.landuse == "railway"                   ) or
+            ( passedt.landuse == "commercial"                ) or
+            ( passedt.landuse == "brownfield"                ) or
+            ( passedt.landuse == "greenfield"                ) or
+            ( passedt.landuse == "construction"              ) or
+            ( passedt.landuse == "landfill"                  ) or
+            ( passedt.landuse == "historic"                  ) or
+            ( passedt.landuse == "orchard"                   ) or
+            ( passedt.landuse == "meadowtransitional"        ) or
+            ( passedt.landuse == "meadowwildflower"          ) or
+            ( passedt.landuse == "meadowperpetual"           ) or
+            ( passedt.landuse == "saltmarsh"                 ) or
+            ( passedt.landuse == "reedbed"                   ) or
+            ( passedt.landuse == "allotments"                ) or
+            ( passedt.landuse == "military"                  )) then
+            Layer( "land1", true )
+            Attribute( "class", "landuse_" .. passedt.landuse )
+            Attribute( "name", Find( "name" ) )
+            MinZoom( 9 )
+        else
+            if (( passedt.landuse == "village_green"          ) or
+                ( passedt.landuse == "quarry"                 ) or
+                ( passedt.landuse == "historicquarry"         )) then
+                Layer( "land1", true )
+                Attribute( "class", "landuse_" .. passedt.landuse )
+                Attribute( "name", Find( "name" ) )
+                MinZoom( 10 )
+            else
+                if ( passedt.landuse == "garages" ) then
+                    Layer( "land1", true )
+                    Attribute( "class", "landuse_" .. passedt.landuse )
+                    Attribute( "name", Find( "name" ) )
+                    MinZoom( 11 )
+                else
+                    if ( passedt.landuse == "vineyard" ) then
+                        Layer( "land1", true )
+                        Attribute( "class", "landuse_" .. passedt.landuse )
+                        Attribute( "name", Find( "name" ) )
+                        MinZoom( 12 )
+                    else
+                        render_leisure_land1( passedt )
+                    end -- landuse=vineyard 12
+                end -- landuse=garages 11
+            end -- landuse=quarry 10
+        end -- landuse=grass etc. 9
+    end -- landuse=forest 8
+end -- generic_after_land1()
+
+function render_leisure_land1( passedt )
     if (( passedt.leisure == "common"            ) or
         ( passedt.leisure == "park"              ) or
         ( passedt.leisure == "recreation_ground" ) or
@@ -2588,46 +2764,86 @@ function render_leisure_function( passedt )
         ( passedt.leisure == "golf_course"       ) or
         ( passedt.leisure == "sports_centre"     ) or
         ( passedt.leisure == "stadium"           ) or
-        ( passedt.leisure == "pitch"             ) or
-        ( passedt.leisure == "unnamedpitch"      )) then
-        Layer( "land", true )
+        ( passedt.leisure == "pitch"             )) then
+        Layer( "land1", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
-
-	if (( passedt.leisure == "common"            ) or
-	    ( passedt.leisure == "park"              ) or
-	    ( passedt.leisure == "recreation_ground" ) or
-	    ( passedt.leisure == "garden"            ) or
-	    ( passedt.leisure == "golfgreen"         ) or
-	    ( passedt.leisure == "golf_course"       ) or
-	    ( passedt.leisure == "sports_centre"     ) or
-	    ( passedt.leisure == "stadium"           ) or
-            ( passedt.leisure == "pitch"             )) then
-            Attribute( "name", Find( "name" ) )
-        end
-
+        Attribute( "name", Find( "name" ) )
         MinZoom( 9 )
     else
         if ( passedt.leisure == "nature_reserve" ) then
-            Layer( "land", true )
+            Layer( "land1", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
             Attribute( "name", Find( "name" ) )
             MinZoom( 10 )
         else
             if (( passedt.leisure == "playground" ) or
                 ( passedt.leisure == "schoolyard" )) then
-                Layer( "land", true )
+                Layer( "land1", true )
                 Attribute( "class", "leisure_" .. passedt.leisure )
                 Attribute( "name", Find( "name" ) )
                 MinZoom( 12 )
             else
                 if ( passedt.leisure == "swimming_pool" ) then
-                    Layer( "land", true )
+                    Layer( "land1", true )
                     Attribute( "class", "leisure_" .. passedt.leisure )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 13 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
                 end -- leisure=swimming_pool etc. 13
             end -- leisure=playground etc.  12
         end -- leisure=nature_reserve etc. 10
     end -- leisure=common etc. 9
-end -- render_leisure_function()
+end -- render_leisure_land1()
 
+-- ----------------------------------------------------------------------------
+-- land1 layer
+-- ----------------------------------------------------------------------------
+function generic_after_land2( passedt )
+    if (( passedt.landuse == "unnamedforest"   ) or
+        ( passedt.landuse == "unnamedfarmland" )) then
+        Layer( "land2", true )
+        Attribute( "class", "landuse_" .. passedt.landuse )
+        MinZoom( 8 )
+    else
+        if (( passedt.landuse == "unnamedgrass"              ) or
+            ( passedt.landuse == "unnamedresidential"        ) or
+            ( passedt.landuse == "unnamedmeadow"             ) or
+            ( passedt.landuse == "unnamedfarmyard"           ) or
+            ( passedt.landuse == "unnamedfarmgrass"          ) or
+            ( passedt.landuse == "unnamedindustrial"         ) or
+            ( passedt.landuse == "unnamedcommercial"         ) or
+            ( passedt.landuse == "unnamedconstruction"       ) or
+            ( passedt.landuse == "unnamedlandfill"           ) or
+            ( passedt.landuse == "unnamedorchard"            ) or
+            ( passedt.landuse == "unnamedmeadowtransitional" ) or
+            ( passedt.landuse == "unnamedmeadowwildflower"   ) or
+            ( passedt.landuse == "unnamedmeadowperpetual"    ) or
+            ( passedt.landuse == "unnamedallotments"         )) then
+            Layer( "land2", true )
+            Attribute( "class", "landuse_" .. passedt.landuse )
+            MinZoom( 9 )
+        else
+            if (( passedt.landuse == "unnamedquarry"          ) or
+                ( passedt.landuse == "unnamedhistoricquarry"  )) then
+                Layer( "land1", true )
+                Attribute( "class", "landuse_" .. passedt.landuse )
+                MinZoom( 10 )
+            else
+                render_leisure_land2( passedt )
+            end -- landuse=unnamedquarry 10
+        end -- landuse=unnamedgrass etc. 9
+    end -- landuse=unnamedforest 8
+end -- generic_after_land2()
+
+function render_leisure_land2( passedt )
+    if ( passedt.leisure == "unnamedpitch" ) then
+        Layer( "land2", true )
+        Attribute( "class", "leisure_" .. passedt.leisure )
+        MinZoom( 9 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
+    end -- leisure=unnamedpitch 9
+end -- render_leisure_land2()
