@@ -1513,6 +1513,200 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Things that are both localities and peaks or hills 
+-- should render as the latter.
+-- Also, some other combinations (most amenities, some man_made, etc.)
+-- Note that "hill" is handled by the rendering code as similar to "peak" but
+-- only at higher zooms.  See 19/03/2023 in changelog.html .
+-- ----------------------------------------------------------------------------
+   if ((  passedt.place    == "locality"      ) and
+       (( passedt.natural  == "peak"         )  or
+        ( passedt.natural  == "hill"         )  or
+        ( passedt.amenity  ~= nil            )  or
+        ( passedt.man_made ~= nil            )  or
+        ( passedt.historic ~= nil            ))) then
+      passedt.place = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Things that are both viewpoints or attractions and monuments or memorials 
+-- should render as the latter.  Some are handled further down too.
+-- Also handle some other combinations.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.tourism   == "viewpoint"                 )  or
+        ( passedt.tourism   == "attraction"                )) and
+       (( passedt.historic  == "abbey"                     )  or
+        ( passedt.historic  == "aircraft"                  )  or
+        ( passedt.historic  == "almshouse"                 )  or
+        ( passedt.historic  == "anchor"                    )  or
+        ( passedt.historic  == "archaeological_site"       )  or
+        ( passedt.historic  == "bakery"                    )  or
+        ( passedt.historic  == "barrow"                    )  or
+        ( passedt.historic  == "baths"                     )  or
+        ( passedt.historic  == "battlefield"               )  or
+        ( passedt.historic  == "battery"                   )  or
+        ( passedt.historic  == "bullaun_stone"             )  or
+        ( passedt.historic  == "boundary_stone"            )  or
+        ( passedt.historic  == "building"                  )  or
+        ( passedt.historic  == "bridge_site"               )  or
+        ( passedt.historic  == "bunker"                    )  or
+        ( passedt.historic  == "camp"                      )  or
+        ( passedt.historic  == "cannon"                    )  or
+        ( passedt.historic  == "castle"                    )  or
+        ( passedt.historic  == "chapel"                    )  or
+        ( passedt.historic  == "church"                    )  or
+        ( passedt.historic  == "city_gate"                 )  or
+        ( passedt.historic  == "citywalls"                 )  or
+        ( passedt.historic  == "chlochan"                  )  or
+        ( passedt.historic  == "cross"                     )  or
+        ( passedt.historic  == "deserted_medieval_village" )  or
+        ( passedt.historic  == "drinking_fountain"         )  or
+        ( passedt.historic  == "folly"                     )  or
+        ( passedt.historic  == "fort"                      )  or
+        ( passedt.historic  == "fortification"             )  or
+        ( passedt.historic  == "gate"                      )  or
+        ( passedt.historic  == "grinding_mill"             )  or
+        ( passedt.historic  == "hall"                      )  or
+        ( passedt.historic  == "high_cross"                )  or
+        ( passedt.historic  == "house"                     )  or
+        ( passedt.historic  == "ice_house"                 )  or
+        ( passedt.historic  == "jail"                      )  or
+        ( passedt.historic  == "locomotive"                )  or
+        ( passedt.historic  == "locomotive"                )  or
+        ( passedt.historic  == "martello_tower"            )  or
+        ( passedt.historic  == "martello_tower;bunker"     )  or
+        ( passedt.historic  == "maypole"                   )  or
+        ( passedt.historic  == "memorial"                  )  or
+        ( passedt.historic  == "mill"                      )  or
+        ( passedt.historic  == "millstone"                 )  or
+        ( passedt.historic  == "mine"                      )  or
+        ( passedt.historic  == "monastery"                 )  or
+        ( passedt.historic  == "monastic_grange"           )  or
+        ( passedt.historic  == "monument"                  )  or
+        ( passedt.historic  == "mound"                     )  or
+	( passedt.historic  == "naval_mine"                )  or
+        ( passedt.historic  == "oratory"                   )  or
+        ( passedt.historic  == "pillory"                   )  or
+        ( passedt.historic  == "place_of_worship"          )  or
+        ( passedt.historic  == "police_call_box"           )  or
+        ( passedt.historic  == "prison"                    )  or
+        ( passedt.historic  == "residence"                 )  or
+        ( passedt.historic  == "roundhouse"                )  or
+        ( passedt.historic  == "ruins"                     )  or
+        ( passedt.historic  == "sawmill"                   )  or
+        ( passedt.historic  == "shelter"                   )  or
+        ( passedt.historic  == "ship"                      )  or
+        ( passedt.historic  == "smithy"                    )  or
+        ( passedt.historic  == "sound_mirror"              )  or
+        ( passedt.historic  == "standing_stone"            )  or
+        ( passedt.historic  == "statue"                    )  or
+        ( passedt.historic  == "stocks"                    )  or
+        ( passedt.historic  == "stone"                     )  or
+        ( passedt.historic  == "tank"                      )  or
+        ( passedt.historic  == "theatre"                   )  or
+        ( passedt.historic  == "tomb"                      )  or
+        ( passedt.historic  == "tower"                     )  or
+        ( passedt.historic  == "tower_house"               )  or
+        ( passedt.historic  == "tumulus"                   )  or
+        ( passedt.historic  == "village"                   )  or
+        ( passedt.historic  == "village_pump"              )  or
+        ( passedt.historic  == "water_pump"                )  or
+        ( passedt.historic  == "wayside_cross"             )  or
+        ( passedt.historic  == "wayside_shrine"            )  or
+        ( passedt.historic  == "well"                      )  or
+        ( passedt.historic  == "watermill"                 )  or
+        ( passedt.historic  == "windmill"                  )  or
+        ( passedt.historic  == "workhouse"                 )  or
+        ( passedt.historic  == "wreck"                     )  or
+        ( passedt.historic  == "yes"                       )  or
+        ( passedt.natural   == "beach"                     )  or
+        ( passedt.natural   == "cave_entrance"             )  or
+        ( passedt.natural   == "cliff"                     )  or
+        ( passedt.natural   == "grassland"                 )  or
+        ( passedt.natural   == "heath"                     )  or
+        ( passedt.natural   == "sand"                      )  or
+        ( passedt.natural   == "scrub"                     )  or
+        ( passedt.natural   == "spring"                    )  or
+        ( passedt.natural   == "tree"                      )  or
+        ( passedt.natural   == "water"                     )  or
+        ( passedt.natural   == "wood"                      )  or
+        ( passedt.leisure   == "garden"                    )  or
+        ( passedt.leisure   == "nature_reserve"            )  or
+        ( passedt.leisure   == "park"                      )  or
+        ( passedt.leisure   == "sports_centre"             ))) then
+      passedt.tourism = nil
+   end
+
+   if ((  passedt.tourism == "attraction"  ) and
+       (( passedt.shop    ~= nil          )  or
+        ( passedt.shop    ~= ""           )  or
+        ( passedt.amenity ~= nil          )  or
+        ( passedt.amenity ~= ""           )  or
+        ( passedt.leisure == "park"       ))) then
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- There's a bit of "tagging for the renderer" going on with some large museums
+-- ----------------------------------------------------------------------------
+   if ((  passedt.tourism == "museum"          ) and 
+       (( passedt.leisure == "garden"         )  or
+        ( passedt.leisure == "nature_reserve" )  or
+        ( passedt.leisure == "park"           ))) then
+      passedt.leisure = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Some people tag beach resorts as beaches - remove "beach_resort" there.
+-- ----------------------------------------------------------------------------
+   if (( passedt.leisure == "beach_resort" ) and
+       ( passedt.natural == "beach"        )) then
+      passedt.leisure = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render tidal beaches with more blue
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural   == "beach"      ) and
+       (( passedt.tidal     == "yes"       )  or
+        ( passedt.wetland   == "tidalflat" ))) then
+      passedt.natural = "tidal_beach"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render tidal scree with more blue
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural   == "scree" ) and
+       ( passedt.tidal     == "yes"   )) then
+      passedt.natural = "tidal_scree"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render tidal shingle with more blue
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural   == "shingle" ) and
+       ( passedt.tidal     == "yes"     )) then
+      passedt.natural = "tidal_shingle"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Change natural=rocks on non-nodes to natural=bare_rock
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural   == "rocks"  ) or
+       ( passedt.natural   == "stones" )) then
+      passedt.natural = "bare_rock"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render tidal rocks with more blue
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural   == "bare_rock"  ) and
+       (( passedt.tidal     == "yes"       )  or
+        ( passedt.wetland   == "tidalflat" ))) then
+      passedt.natural = "tidal_rock"
+   end
+
+-- ----------------------------------------------------------------------------
 -- landuse=field is rarely used.  I tried unsuccessfully to change the colour 
 -- in the stylesheet so am mapping it here.
 -- ----------------------------------------------------------------------------
@@ -2820,11 +3014,22 @@ function render_military_land1( passedt )
         Attribute( "class", "military_" .. passedt.military )
         Attribute( "name", Find( "name" ) )
         MinZoom( 9 )
+    else
+        render_natural_land1( passedt )
+    end
+end -- render_military_land1()
+
+function render_natural_land1( passedt )
+    if ( passedt.natural == "beach" ) then
+        Layer( "land1", true )
+        Attribute( "class", "natural_" .. passedt.natural )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 9 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
     end
-end -- render_military_land1()
+end -- render_natural_land1()
 
 -- ----------------------------------------------------------------------------
 -- land2 layer
