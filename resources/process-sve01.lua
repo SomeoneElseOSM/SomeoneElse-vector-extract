@@ -2613,8 +2613,8 @@ function generic_after_function( passedt )
 -- key/value combination, perhaps based on a different one.
 -- ----------------------------------------------------------------------------
     generic_after_poi( passedt )
-    generic_after_land1( passedt )
     generic_after_land2( passedt )
+    generic_after_land1( passedt )
 end -- generic_after_function()
 
 -- ----------------------------------------------------------------------------
@@ -2720,8 +2720,7 @@ function generic_after_land1( passedt )
             ( passedt.landuse == "meadowperpetual"           ) or
             ( passedt.landuse == "saltmarsh"                 ) or
             ( passedt.landuse == "reedbed"                   ) or
-            ( passedt.landuse == "allotments"                ) or
-            ( passedt.landuse == "military"                  )) then
+            ( passedt.landuse == "allotments"                )) then
             Layer( "land1", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
             Attribute( "name", Find( "name" ) )
@@ -2788,17 +2787,28 @@ function render_leisure_land1( passedt )
                     Attribute( "class", "leisure_" .. passedt.leisure )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 13 )
--- ------------------------------------------------------------------------------
--- No "else" here yet
--- ------------------------------------------------------------------------------
+                else
+                    render_military_land1( passedt )
                 end -- leisure=swimming_pool etc. 13
             end -- leisure=playground etc.  12
         end -- leisure=nature_reserve etc. 10
     end -- leisure=common etc. 9
 end -- render_leisure_land1()
 
+function render_military_land1( passedt )
+    if ( passedt.military == "barracks" ) then
+        Layer( "land1", true )
+        Attribute( "class", "military_" .. passedt.military )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 9 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
+    end
+end -- render_military_land1()
+
 -- ----------------------------------------------------------------------------
--- land1 layer
+-- land2 layer
 -- ----------------------------------------------------------------------------
 function generic_after_land2( passedt )
     if (( passedt.landuse == "unnamedforest"   ) or
@@ -2820,9 +2830,15 @@ function generic_after_land2( passedt )
             ( passedt.landuse == "unnamedmeadowtransitional" ) or
             ( passedt.landuse == "unnamedmeadowwildflower"   ) or
             ( passedt.landuse == "unnamedmeadowperpetual"    ) or
-            ( passedt.landuse == "unnamedallotments"         )) then
+            ( passedt.landuse == "unnamedallotments"         ) or
+            ( passedt.landuse == "military"                  )) then
             Layer( "land2", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
+
+            if ( passedt.landuse == "military" ) then
+                Attribute( "name", Find( "name" ) )
+            end
+
             MinZoom( 9 )
         else
             if (( passedt.landuse == "unnamedquarry"          ) or
