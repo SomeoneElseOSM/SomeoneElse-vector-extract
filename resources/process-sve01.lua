@@ -1830,6 +1830,24 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Sand dunes
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural == "dune"       ) or
+       ( passedt.natural == "dunes"      ) or
+       ( passedt.natural == "sand_dunes" )) then
+      passedt.natural = "sand"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render tidal sand with more blue
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural   == "sand"       ) and
+       (( passedt.tidal     == "yes"       )  or
+        ( passedt.wetland   == "tidalflat" ))) then
+      passedt.natural = "tidal_sand"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Golf (and sandpits)
 -- ----------------------------------------------------------------------------
    if ((( passedt.golf       == "bunker"  )  or
@@ -3020,7 +3038,13 @@ function render_military_land1( passedt )
 end -- render_military_land1()
 
 function render_natural_land1( passedt )
-    if ( passedt.natural == "beach" ) then
+    if (( passedt.natural == "beach"         ) or
+        ( passedt.natural == "tidal_beach"   ) or
+        ( passedt.natural == "tidal_mud"     ) or
+        ( passedt.natural == "tidal_rock"    ) or
+        ( passedt.natural == "tidal_sand"    ) or
+        ( passedt.natural == "tidal_scree"   ) or
+        ( passedt.natural == "tidal_shingle" )) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
         Attribute( "name", Find( "name" ) )
