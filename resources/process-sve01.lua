@@ -3046,10 +3046,15 @@ function render_natural_land1( passedt )
     else
         if (( passedt.natural == "beach"         ) or
             ( passedt.natural == "tidal_beach"   ) or
+            ( passedt.natural == "mud"           ) or
             ( passedt.natural == "tidal_mud"     ) or
+            ( passedt.natural == "bare_rock"     ) or
             ( passedt.natural == "tidal_rock"    ) or
+            ( passedt.natural == "sand"          ) or
             ( passedt.natural == "tidal_sand"    ) or
+            ( passedt.natural == "scree"         ) or
             ( passedt.natural == "tidal_scree"   ) or
+            ( passedt.natural == "shingle"       ) or
             ( passedt.natural == "tidal_shingle" ) or
             ( passedt.natural == "heath"         )) then
             Layer( "land1", true )
