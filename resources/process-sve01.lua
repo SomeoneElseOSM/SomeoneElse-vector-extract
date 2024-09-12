@@ -2637,7 +2637,8 @@ function generic_before_function( passedt )
        ( passedt.historic == "memorialobelisk"       ) or
        ( passedt.historic == "monastery"             ) or
        ( passedt.historic == "mineshaft"             ) or
-       ( passedt.historic == "nonspecific"           )) then
+       ( passedt.historic == "nonspecific"           ) or
+       ( passedt.leisure  == "nature_reserve"        )) then
       if ( passedt.natural == "wood" ) then
          passedt.natural = "unnamedwood"
       end
@@ -3044,27 +3045,35 @@ function render_natural_land1( passedt )
         Attribute( "name", Find( "name" ) )
         MinZoom( 7 )
     else
-        if (( passedt.natural == "beach"         ) or
-            ( passedt.natural == "tidal_beach"   ) or
-            ( passedt.natural == "mud"           ) or
-            ( passedt.natural == "tidal_mud"     ) or
-            ( passedt.natural == "bare_rock"     ) or
-            ( passedt.natural == "tidal_rock"    ) or
-            ( passedt.natural == "sand"          ) or
-            ( passedt.natural == "tidal_sand"    ) or
-            ( passedt.natural == "scree"         ) or
-            ( passedt.natural == "tidal_scree"   ) or
-            ( passedt.natural == "shingle"       ) or
-            ( passedt.natural == "tidal_shingle" ) or
-            ( passedt.natural == "heath"         )) then
+        if ( passedt.natural == "wood" ) then
             Layer( "land1", true )
             Attribute( "class", "natural_" .. passedt.natural )
             Attribute( "name", Find( "name" ) )
-            MinZoom( 9 )
+            MinZoom( 8 )
+        else
+            if (( passedt.natural == "beach"         ) or
+                ( passedt.natural == "tidal_beach"   ) or
+                ( passedt.natural == "mud"           ) or
+                ( passedt.natural == "tidal_mud"     ) or
+                ( passedt.natural == "bare_rock"     ) or
+                ( passedt.natural == "tidal_rock"    ) or
+                ( passedt.natural == "sand"          ) or
+                ( passedt.natural == "tidal_sand"    ) or
+                ( passedt.natural == "scree"         ) or
+                ( passedt.natural == "tidal_scree"   ) or
+                ( passedt.natural == "shingle"       ) or
+                ( passedt.natural == "tidal_shingle" ) or
+                ( passedt.natural == "heath"         ) or
+                ( passedt.natural == "grassland"     )) then
+                Layer( "land1", true )
+                Attribute( "class", "natural_" .. passedt.natural )
+                Attribute( "name", Find( "name" ) )
+                MinZoom( 9 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-        end -- beach etc. 9
+            end -- beach etc. 9
+        end -- wood 8
     end -- desert 7
 end -- render_natural_land1()
 
@@ -3125,12 +3134,18 @@ function render_leisure_land2( passedt )
 end -- render_leisure_land2()
 
 function render_natural_land2( passedt )
-    if ( passedt.natural == "unnamedheath" ) then
+    if ( passedt.natural == "unnamedwood" ) then
         Layer( "land2", true )
         Attribute( "class", "natural_" .. passedt.natural )
-        MinZoom( 9 )
+        MinZoom( 8 )
+    else
+        if ( passedt.natural == "unnamedheath" ) then
+            Layer( "land2", true )
+            Attribute( "class", "natural_" .. passedt.natural )
+            MinZoom( 9 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-    end -- natural=unnamedheath 9
+        end -- natural=unnamedheath 9
+    end -- natural=unnamedheath 8
 end -- render_natural_land2()
