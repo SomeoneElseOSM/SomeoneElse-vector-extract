@@ -165,6 +165,7 @@ function node_function()
     nodet.playground = Find("playground")
     nodet.sport = Find("sport")
     nodet.military = Find("military")
+    nodet.hazard = Find("hazard")
 
     generic_before_function( nodet )
 
@@ -299,6 +300,7 @@ function way_function()
     wayt.playground = Find("playground")
     wayt.sport = Find("sport")
     wayt.military = Find("military")
+    wayt.hazard = Find("hazard")
 
     generic_before_function( wayt )
 
@@ -2361,6 +2363,23 @@ function generic_before_function( passedt )
          passedt.man_made = "chimney"
       end
       passedt.historic = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Add landuse=military to some military things.
+-- ----------------------------------------------------------------------------
+   if (( passedt.military == "office"                             ) or
+       ( passedt.military == "offices"                            ) or
+       ( passedt.military == "barracks"                           ) or
+       ( passedt.military == "naval_base"                         ) or
+       ( passedt.military == "depot"                              ) or
+       ( passedt.military == "registration_and_enlistment_office" ) or
+       ( passedt.military == "checkpoint"                         ) or
+       ( passedt.military == "danger_area"                        ) or
+       ( passedt.hazard   == "shooting_range"                     ) or
+       ( passedt.sport    == "shooting"                           ) or
+       ( passedt.sport    == "shooting_range"                     )) then
+      passedt.landuse = "military"
    end
 
 -- ----------------------------------------------------------------------------
