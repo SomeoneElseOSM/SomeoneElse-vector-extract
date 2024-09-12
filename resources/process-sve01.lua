@@ -2841,11 +2841,11 @@ function generic_after_function( passedt )
 -- ----------------------------------------------------------------------------
 -- When processing data for layers note that something might have be a feature
 -- that needs adding to more than one layer (perhaps based on the same 
--- key/value combination, perhaps based on a different one.
+-- key/value combination, perhaps based on a different one).
 -- ----------------------------------------------------------------------------
     generic_after_poi( passedt )
-    generic_after_land2( passedt )
     generic_after_land1( passedt )
+    generic_after_land2( passedt )
 end -- generic_after_function()
 
 -- ----------------------------------------------------------------------------
@@ -3038,21 +3038,29 @@ function render_military_land1( passedt )
 end -- render_military_land1()
 
 function render_natural_land1( passedt )
-    if (( passedt.natural == "beach"         ) or
-        ( passedt.natural == "tidal_beach"   ) or
-        ( passedt.natural == "tidal_mud"     ) or
-        ( passedt.natural == "tidal_rock"    ) or
-        ( passedt.natural == "tidal_sand"    ) or
-        ( passedt.natural == "tidal_scree"   ) or
-        ( passedt.natural == "tidal_shingle" )) then
+    if ( passedt.natural == "desert" ) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
         Attribute( "name", Find( "name" ) )
-        MinZoom( 9 )
+        MinZoom( 7 )
+    else
+        if (( passedt.natural == "beach"         ) or
+            ( passedt.natural == "tidal_beach"   ) or
+            ( passedt.natural == "tidal_mud"     ) or
+            ( passedt.natural == "tidal_rock"    ) or
+            ( passedt.natural == "tidal_sand"    ) or
+            ( passedt.natural == "tidal_scree"   ) or
+            ( passedt.natural == "tidal_shingle" ) or
+            ( passedt.natural == "heath"         )) then
+            Layer( "land1", true )
+            Attribute( "class", "natural_" .. passedt.natural )
+            Attribute( "name", Find( "name" ) )
+            MinZoom( 9 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-    end
+        end -- beach etc. 9
+    end -- desert 7
 end -- render_natural_land1()
 
 -- ----------------------------------------------------------------------------
@@ -3106,8 +3114,18 @@ function render_leisure_land2( passedt )
         Layer( "land2", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
         MinZoom( 9 )
+    else
+        render_natural_land2( passedt )
+    end -- leisure=unnamedpitch 9
+end -- render_leisure_land2()
+
+function render_natural_land2( passedt )
+    if ( passedt.natural == "unnamedheath" ) then
+        Layer( "land2", true )
+        Attribute( "class", "natural_" .. passedt.natural )
+        MinZoom( 9 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-    end -- leisure=unnamedpitch 9
-end -- render_leisure_land2()
+    end -- natural=unnamedheath 9
+end -- render_natural_land2()
