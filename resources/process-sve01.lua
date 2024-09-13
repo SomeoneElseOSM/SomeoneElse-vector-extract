@@ -166,6 +166,8 @@ function node_function()
     nodet.sport = Find("sport")
     nodet.military = Find("military")
     nodet.hazard = Find("hazard")
+    nodet.operator = Find("operator")
+    nodet.leaf_type = Find("leaf_type")
 
     generic_before_function( nodet )
 
@@ -301,6 +303,8 @@ function way_function()
     wayt.sport = Find("sport")
     wayt.military = Find("military")
     wayt.hazard = Find("hazard")
+    wayt.operator = Find("operator")
+    wayt.leaf_type = Find("leaf_type")
 
     generic_before_function( wayt )
 
@@ -1830,6 +1834,103 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Attempt to do something sensible with trees
+--
+-- "boundary=forest" is the latest attempt to resolve the "landuse=forest is 
+-- used for different things" issue.  Unfortunately, it can also be used with 
+-- other landuse values.
+--
+-- There are a few 10s of natural=woodland and natural=forest; treat them the same
+-- as other woodland.  If we have landuse=forest on its own without
+-- leaf_type, then we don't change it - we'll handle that separately in the
+-- mss file.
+-- ----------------------------------------------------------------------------
+  if ((  passedt.boundary == "forest"  ) and
+      (( passedt.landuse  == nil      )  or
+       ( passedt.landuse  == ""       ))) then
+      passedt.landuse = "forest"
+      passedt.boundary = nil
+  end
+
+  if ( passedt.landuse == "forestry" ) then
+      passedt.landuse = "forest"
+  end
+
+  if ( passedt.natural == "woodland" ) then
+      passedt.natural = "wood"
+  end
+
+-- ----------------------------------------------------------------------------
+-- Use operator (but not brand) on various natural objects, always in brackets.
+-- (compare with the similar check including "brand" for e.g. "atm" below)
+-- This is done before we change tags based on leaf_type.
+-- ----------------------------------------------------------------------------
+   if (( passedt.landuse == "forest" )  or
+       ( passedt.natural == "wood"   )) then
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         if (( passedt.operator ~= nil ) and
+             ( passedt.operator ~= ""  )) then
+            passedt.name = "(" .. passedt.operator .. ")"
+            passedt.operator = nil
+         end
+      else
+         if (( passedt.operator ~= nil           )  and
+             ( passedt.operator ~= ""            )  and
+             ( passedt.operator ~= passedt.name  )) then
+            passedt.name = passedt.name .. " (" .. passedt.operator .. ")"
+            passedt.operator = nil
+         end
+      end
+   end
+
+  if (((  passedt.landuse   == "forest"     )  and
+       (  passedt.leaf_type ~= nil          )  and
+       (  passedt.leaf_type ~= ""           )) or
+      (   passedt.natural   == "forest"      ) or
+      (   passedt.landcover == "trees"       ) or
+      ((  passedt.natural   == "tree_group" )  and
+       (( passedt.landuse   == nil         )   or
+        ( passedt.landuse   == ""          ))  and
+       (( passedt.leisure   == nil         )   or
+        ( passedt.leisure   == ""          )))) then
+      passedt.landuse = nil
+      passedt.natural = "wood"
+   end
+
+-- ----------------------------------------------------------------------------
+-- The "landcover" layer considers a whole bunch of tags to incorporate into
+-- one layer.  The way that this is done (derived from OSM Carto from some
+-- years back) means that an unexpected and unrendered "landuse" tag might
+-- prevent a valid "natural" one from being displayed.
+-- Other combinations will also be affected, but have not been seen occurring
+-- together.
+-- ----------------------------------------------------------------------------
+   if (( passedt.landuse ~= nil    ) and
+       ( passedt.landuse ~= ""     ) and
+       ( passedt.natural == "wood" )) then
+      passedt.landuse = nil
+   end
+
+   if (( passedt.leaf_type   == "broadleaved"  )  and
+       ( passedt.natural     == "wood"         )) then
+      passedt.landuse = nil
+      passedt.natural = "broadleaved"
+   end
+
+   if (( passedt.leaf_type   == "needleleaved" )  and
+       ( passedt.natural     == "wood"         )) then
+      passedt.landuse = nil
+      passedt.natural = "needleleaved"
+   end
+
+   if (( passedt.leaf_type   == "mixed"        )  and
+       ( passedt.natural     == "wood"         )) then
+      passedt.landuse = nil
+      passedt.natural = "mixedleaved"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Sand dunes
 -- ----------------------------------------------------------------------------
    if (( passedt.natural == "dune"       ) or
@@ -3045,7 +3146,10 @@ function render_natural_land1( passedt )
         Attribute( "name", Find( "name" ) )
         MinZoom( 7 )
     else
-        if ( passedt.natural == "wood" ) then
+        if (( passedt.natural == "wood"         ) or
+            ( passedt.natural == "broadleaved"  ) or
+            ( passedt.natural == "needleleaved" ) or
+            ( passedt.natural == "mixedleaved"  )) then
             Layer( "land1", true )
             Attribute( "class", "natural_" .. passedt.natural )
             Attribute( "name", Find( "name" ) )
@@ -3134,7 +3238,10 @@ function render_leisure_land2( passedt )
 end -- render_leisure_land2()
 
 function render_natural_land2( passedt )
-    if ( passedt.natural == "unnamedwood" ) then
+    if (( passedt.natural == "unnamedwood"         ) or
+        ( passedt.natural == "unnamedbroadleaved"  ) or
+        ( passedt.natural == "unnamedneedleleaved" ) or
+        ( passedt.natural == "unnamedmixedleaved"  )) then
         Layer( "land2", true )
         Attribute( "class", "natural_" .. passedt.natural )
         MinZoom( 8 )
