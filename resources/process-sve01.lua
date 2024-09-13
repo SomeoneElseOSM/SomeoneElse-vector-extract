@@ -3170,7 +3170,8 @@ function render_natural_land1( passedt )
                 ( passedt.natural == "heath"         ) or
                 ( passedt.natural == "grassland"     ) or
                 ( passedt.natural == "reef"          ) or
-                ( passedt.natural == "reefsand"      )) then
+                ( passedt.natural == "reefsand"      ) or
+                ( passedt.natural == "scrub"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "natural_" .. passedt.natural )
                 Attribute( "name", Find( "name" ) )
