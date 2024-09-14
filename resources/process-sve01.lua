@@ -168,6 +168,7 @@ function node_function()
     nodet.hazard = Find("hazard")
     nodet.operator = Find("operator")
     nodet.leaf_type = Find("leaf_type")
+    nodet.power = Find("power")
 
     generic_before_function( nodet )
 
@@ -305,6 +306,7 @@ function way_function()
     wayt.hazard = Find("hazard")
     wayt.operator = Find("operator")
     wayt.leaf_type = Find("leaf_type")
+    wayt.power = Find("power")
 
     generic_before_function( wayt )
 
@@ -3182,14 +3184,26 @@ function render_natural_land1( passedt )
                     Attribute( "class", "natural_" .. passedt.natural )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 12 )
--- ------------------------------------------------------------------------------
--- No "else" here yet
--- ------------------------------------------------------------------------------
+                else
+                    render_power_land1( passedt )
                 end -- wetland 12
             end -- beach etc. 9
         end -- wood 8
     end -- desert 7
 end -- render_natural_land1()
+
+function render_power_land1( passedt )
+    if (( passedt.power == "station"   ) or
+        ( passedt.power == "generator" )) then
+        Layer( "land1", true )
+        Attribute( "class", "power_" .. passedt.power )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 9 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
+    end -- power=generator 9
+end -- render_power_land1()
 
 -- ----------------------------------------------------------------------------
 -- land2 layer
