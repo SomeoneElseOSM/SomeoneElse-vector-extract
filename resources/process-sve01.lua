@@ -169,7 +169,7 @@ function node_function()
     nodet.operator = Find("operator")
     nodet.leaf_type = Find("leaf_type")
     nodet.power = Find("power")
-    nodet.place = Find("place")
+    nodet.zoo = Find("zoo")
 
     generic_before_function( nodet )
 
@@ -308,7 +308,7 @@ function way_function()
     wayt.operator = Find("operator")
     wayt.leaf_type = Find("leaf_type")
     wayt.power = Find("power")
-    wayt.place = Find("place")
+    wayt.zoo = Find("zoo")
 
     generic_before_function( wayt )
 
@@ -1391,6 +1391,40 @@ function generic_before_function( passedt )
        ( passedt.covered == "roof"             ) or
        ( passedt.covered == "portico"          )) then
       passedt.covered = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Aviaries in UK / IE seem to be always within a zoo or larger attraction, 
+-- and not "zoos" in their own right.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.zoo     == "aviary"  )  and
+       (( passedt.amenity == nil      )   or
+        ( passedt.amenity == ""       ))) then
+      passedt.amenity = "zooaviary"
+      passedt.tourism = nil
+      passedt.zoo = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Some zoos are mistagged with extra "animal=attraction" or "zoo=enclosure" 
+-- tags, so remove those.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.attraction == "animal"    )  or
+        ( passedt.zoo        == "enclosure" )) and
+       (  passedt.tourism == "zoo"           )) then
+      passedt.attraction = nil
+      passedt.zoo = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Retag any remaining animal attractions or zoo enclosures for rendering.
+-- Unlike aviaries, these aren't assumed to have a roof
+-- ----------------------------------------------------------------------------
+   if (( passedt.attraction == "animal"    )  or
+       ( passedt.zoo        == "enclosure" )) then
+      passedt.amenity = "zooenclosure"
+      passedt.attraction = nil
+      passedt.zoo = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -3311,17 +3345,24 @@ function render_power_land1( passedt )
 end -- render_power_land1()
 
 function render_tourism_land1( passedt )
-    if (( passedt.tourism == "camp_site"    ) or
-        ( passedt.tourism == "caravan_site" ) or
-        ( passedt.tourism == "picnic_site"  )) then
+    if ( passedt.tourism == "zoo" ) then
         Layer( "land1", true )
         Attribute( "class", "tourism_" .. passedt.tourism )
         Attribute( "name", Find( "name" ) )
-        MinZoom( 12 )
+        MinZoom( 9 )
+    else
+        if (( passedt.tourism == "camp_site"    ) or
+            ( passedt.tourism == "caravan_site" ) or
+            ( passedt.tourism == "picnic_site"  )) then
+            Layer( "land1", true )
+            Attribute( "class", "tourism_" .. passedt.tourism )
+            Attribute( "name", Find( "name" ) )
+            MinZoom( 12 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-    end -- tourism=camp_site etc. 12
+        end -- tourism=camp_site etc. 12
+    end -- tourism=zoo 9
 end -- render_tourism_land1()
 
 -- ----------------------------------------------------------------------------
@@ -3360,7 +3401,7 @@ function generic_after_land2( passedt )
         else
             if (( passedt.landuse == "unnamedquarry"          ) or
                 ( passedt.landuse == "unnamedhistoricquarry"  )) then
-                Layer( "land1", true )
+                Layer( "land2", true )
                 Attribute( "class", "landuse_" .. passedt.landuse )
                 MinZoom( 10 )
             else
