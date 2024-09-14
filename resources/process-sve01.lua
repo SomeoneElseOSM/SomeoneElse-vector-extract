@@ -170,6 +170,8 @@ function node_function()
     nodet.leaf_type = Find("leaf_type")
     nodet.power = Find("power")
     nodet.zoo = Find("zoo")
+    nodet.industrial = Find("industrial")
+    nodet.seamarkCtype = Find("seamark:type")
 
     generic_before_function( nodet )
 
@@ -309,6 +311,8 @@ function way_function()
     wayt.leaf_type = Find("leaf_type")
     wayt.power = Find("power")
     wayt.zoo = Find("zoo")
+    wayt.industrial = Find("industrial")
+    wayt.seamarkCtype = Find("seamark:type")
 
     generic_before_function( wayt )
 
@@ -332,7 +336,8 @@ function way_function()
 -- ----------------------------------------------------------------------------
 -- highway processing
 -- ----------------------------------------------------------------------------
-    if ( wayt.highway ~= "" ) then
+    if (( wayt.highway ~= nil )   and
+        ( wayt.highway ~= ""  ))  then
         Layer("transportation", false)
         Attribute( "class", wayt.highway )
 	Attribute( "name", wayt.name )
@@ -1696,6 +1701,53 @@ function generic_before_function( passedt )
         ( passedt.leisure == "nature_reserve" )  or
         ( passedt.leisure == "park"           ))) then
       passedt.leisure = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- highway=services is translated to commercial landuse - any overlaid parking
+-- can then be seen.
+--
+-- highway=rest_area is translated lower down to amenity=parking.
+-- ----------------------------------------------------------------------------
+   if (  passedt.highway == "services" ) then
+      passedt.highway = nil
+      passedt.landuse = "commercial"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Things without icons - add "commercial" landuse to include a name 
+-- (if one exists) too.
+-- ----------------------------------------------------------------------------
+   if (( passedt.landuse      == "churchyard"               ) or
+       ( passedt.landuse      == "religious"                ) or
+       ( passedt.leisure      == "racetrack"                ) or
+       ( passedt.landuse      == "aquaculture"              ) or
+       ( passedt.landuse      == "fishfarm"                 ) or
+       ( passedt.industrial   == "fish_farm"                ) or
+       ( passedt.seamarkCtype == "marine_farm"              )) then
+      passedt.landuse = "commercial"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Shop groups - just treat as retail landuse.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "mall"            ) or
+       ( passedt.amenity == "marketplace"     ) or
+       ( passedt.shop    == "market"          ) or
+       ( passedt.amenity == "market"          ) or
+       ( passedt.amenity == "food_court"      ) or
+       ( passedt.shop    == "shopping_centre" )) then
+      passedt.landuse = "retail"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Scout camps etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity   == "scout_camp"     ) or
+       ( passedt.landuse   == "scout_camp"     ) or	
+       ( passedt.leisure   == "fishing"        ) or
+       ( passedt.leisure   == "outdoor_centre" )) then
+      passedt.leisure = "park"
    end
 
 -- ----------------------------------------------------------------------------
