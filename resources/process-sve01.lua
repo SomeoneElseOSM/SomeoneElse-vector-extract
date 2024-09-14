@@ -172,6 +172,11 @@ function node_function()
     nodet.zoo = Find("zoo")
     nodet.industrial = Find("industrial")
     nodet.seamarkCtype = Find("seamark:type")
+    nodet.religion = Find("religion")
+    nodet.denomination = Find("denomination")
+    nodet.iata = Find("iata")
+    nodet.icao = Find("icao")
+    nodet.aerodromeCtype = Find("aerodrome:type")
 
     generic_before_function( nodet )
 
@@ -313,6 +318,11 @@ function way_function()
     wayt.zoo = Find("zoo")
     wayt.industrial = Find("industrial")
     wayt.seamarkCtype = Find("seamark:type")
+    wayt.religion = Find("religion")
+    wayt.denomination = Find("denomination")
+    wayt.iata = Find("iata")
+    wayt.icao = Find("icao")
+    wayt.aerodromeCtype = Find("aerodrome:type")
 
     generic_before_function( wayt )
 
@@ -2883,6 +2893,56 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Special case for Jehovahs Witnesses - don't use the normal Christian
+-- symbol (a cross)
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity      == "place_of_worship" ) and
+       ( passedt.religion     == "christian"        ) and
+       ( passedt.denomination == "jehovahs_witness" )) then
+      passedt.religion = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat heliports as aerodromes.
+-- Done before the "disused" logic below and the "large/small" logic 
+-- further down.
+--
+-- Heliports are similar to airports, except an icao code (present on many
+-- more airports) can also determine that a heliport is "public".
+-- ----------------------------------------------------------------------------
+   if ( passedt.aeroway == "heliport" ) then
+      passedt.aeroway = "aerodrome"
+
+      if ((( passedt.iata  == nil )   or
+           ( passedt.iata  == ""  ))  and
+          ( passedt.icao  ~= nil   )  and
+          ( passedt.icao  ~= ""    )) then
+         passedt.iata = passedt.icao
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Disused aerodromes etc. - handle disused=yes.
+-- ----------------------------------------------------------------------------
+   if (( passedt.aeroway        == "aerodrome" ) and
+       ( passedt.disused        == "yes"       )) then
+      passedt.aeroway = nil
+      passedt.disusedCaeroway = "aerodrome"
+   end
+
+   if (( passedt.aeroway        == "runway" ) and
+       ( passedt.disused        == "yes"       )) then
+      passedt.aeroway = nil
+      passedt.disusedCaeroway = "runway"
+   end
+
+   if (( passedt.aeroway        == "taxiway" ) and
+       ( passedt.disused        == "yes"       )) then
+      passedt.aeroway = nil
+      passedt.disusedCaeroway = "taxiway"
+   end
+
+-- ----------------------------------------------------------------------------
 -- If a quarry is disused or historic, it's still likely a hole in the ground, 
 -- so render it as something.
 -- However, if there's a natural tag, that should take precendence, and 
@@ -3057,6 +3117,77 @@ function generic_before_function( passedt )
       if ( passedt.landuse == "residential" ) then
          passedt.landuse = "unnamedresidential"
       end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Aerodrome size.
+-- Large public airports should have an airport icon.  Others should not.
+-- ----------------------------------------------------------------------------
+   if ( passedt.aeroway == "aerodrome" ) then
+      if ((  passedt.iata           ~= nil          ) and
+          (  passedt.iata           ~= ""           ) and
+          (  passedt.aerodromeCtype ~= "military"   ) and
+          (( passedt.military       == nil         )  or
+           ( passedt.military       == ""          ))) then
+         passedt.aeroway = "large_aerodrome"
+
+         if (( passedt.name == nil ) or
+             ( passedt.name == ""  )) then
+            passedt.name = passedt.iata
+         else
+            passedt.name = passedt.name .. " (" .. passedt.iata .. ")"
+         end
+      else
+         if ((  passedt.aerodromeCtype == "military"   ) or
+             (( passedt.military       ~= nil         )  and
+              ( passedt.military       ~= ""          ))) then
+            passedt.aeroway = "military_aerodrome"
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Grass runways
+-- These are rendered less prominently.
+-- ----------------------------------------------------------------------------
+   if (( passedt.aeroway == "runway" ) and
+       ( passedt.surface == "grass"  )) then
+      passedt.aeroway = "grass_runway"
+   end
+
+   if (( passedt.aeroway == "apron"  ) and
+       ( passedt.surface == "grass"  )) then
+      passedt.landuse = "grass"
+      passedt.aeroway = nil
+   end
+
+   if (( passedt.aeroway == "taxiway"  ) and
+       ( passedt.surface == "grass"    )) then
+      passedt.highway = "track"
+      passedt.aeroway = nil
+   end
+
+
+-- ----------------------------------------------------------------------------
+-- Render airport parking positions as gates.
+-- ----------------------------------------------------------------------------
+   if ( passedt.aeroway == "parking_position" ) then
+      passedt.aeroway = "gate"
+
+      if (( passedt.ref ~= nil ) and
+          ( passedt.ref ~= ""  )) then
+         passedt.ref = "(" .. passedt.ref .. ")"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Let's send amenity=grave_yard and landuse=cemetery through as
+-- landuse=cemetery.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "grave_yard" ) or
+       ( passedt.landuse == "grave_yard" )) then
+      passedt.amenity = nil
+      passedt.landuse = "cemetery"
    end
 
 -- ----------------------------------------------------------------------------
@@ -3240,7 +3371,8 @@ function generic_after_land1( passedt )
             ( passedt.landuse == "meadowperpetual"           ) or
             ( passedt.landuse == "saltmarsh"                 ) or
             ( passedt.landuse == "reedbed"                   ) or
-            ( passedt.landuse == "allotments"                )) then
+            ( passedt.landuse == "allotments"                ) or
+            ( passedt.landuse == "cemetery"                  )) then
             Layer( "land1", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
             Attribute( "name", Find( "name" ) )
@@ -3441,6 +3573,7 @@ function generic_after_land2( passedt )
             ( passedt.landuse == "unnamedmeadowwildflower"   ) or
             ( passedt.landuse == "unnamedmeadowperpetual"    ) or
             ( passedt.landuse == "unnamedallotments"         ) or
+            ( passedt.landuse == "unnamedcemetery"           ) or
             ( passedt.landuse == "military"                  )) then
             Layer( "land2", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
