@@ -169,6 +169,7 @@ function node_function()
     nodet.operator = Find("operator")
     nodet.leaf_type = Find("leaf_type")
     nodet.power = Find("power")
+    nodet.place = Find("place")
 
     generic_before_function( nodet )
 
@@ -307,6 +308,7 @@ function way_function()
     wayt.operator = Find("operator")
     wayt.leaf_type = Find("leaf_type")
     wayt.power = Find("power")
+    wayt.place = Find("place")
 
     generic_before_function( wayt )
 
@@ -2681,6 +2683,103 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Render alternative taggings of camp_site etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.tourism == "camping"                ) or
+       ( passedt.tourism == "camp_site;caravan_site" )) then
+      passedt.tourism = "camp_site"
+   end
+
+   if ( passedt.tourism == "caravan_site;camp_site" ) then
+      passedt.tourism = "caravan_site"
+   end
+
+   if ( passedt.tourism == "adventure_holiday"  ) then
+      passedt.tourism = "hostel"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Chalets
+--
+-- Depending on other tags, these will be treated as singlechalet (z17)
+-- or as chalet (z16).  Processing here is simpler than for Garmin as we don't
+-- have to worry where on the search menu something will appear.
+--
+-- We assume that tourism=chalet with no building tag could be either a
+-- self-contained chalet park or just one chalet.  Leave tagging as is.
+--
+-- We assume that tourism=chalet with a building tag is a 
+-- self-contained chalet or chalet within a resort.  Change to "singlechalet".
+-- ----------------------------------------------------------------------------
+   if ( passedt.tourism == "chalet" ) then
+      passedt.leisure = nil
+
+      if ((  passedt.name     == nil  ) or
+          (  passedt.name     == ""   ) or
+          (( passedt.building ~= nil ) and
+           ( passedt.building ~= ""  ))) then
+         passedt.tourism = "singlechalet"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- "leisure=trailhead" is an occasional mistagging for "highway=trailhead"
+-- ----------------------------------------------------------------------------
+   if ((  passedt.leisure == "trailhead"  ) and
+       (( passedt.highway == nil         )  or
+        ( passedt.highway == ""          ))) then
+      passedt.highway = "trailhead"
+      passedt.leisure = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Trailheads appear in odd combinations, not all of which make sense.
+--
+-- If someone's tagged a trailhead as a locality; likely it's not really one
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway == "trailhead" ) and
+       ( passedt.place   == "locality"  )) then
+      passedt.place = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a trailhead also has a tourism tag, go with whatever tourism tag that is,
+-- rather than sending it through as "informationroutemarker" below.
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway == "trailhead" ) and
+       ( passedt.tourism ~= nil         ) and
+       ( passedt.tourism ~= ""          )) then
+      passedt.highway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a trailhead has no name but an operator, use that
+-- ----------------------------------------------------------------------------
+   if ((  passedt.highway  == "trailhead"  ) and
+       (( passedt.name     == nil         )  or
+        ( passedt.name     == ""          )) and
+       (  passedt.operator ~= nil          ) and
+       (  passedt.operator ~= ""           )) then
+      passedt.name = passedt.operator
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a trailhead still has no name, remove it
+-- ----------------------------------------------------------------------------
+   if ((  passedt.highway  == "trailhead"  ) and
+       (( passedt.name     == nil         )  or
+        ( passedt.name     == ""          ))) then
+      passedt.highway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render amenity=information as tourism
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "information"  ) then
+      passedt.tourism = "information"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Add landuse=military to some military things.
 -- ----------------------------------------------------------------------------
    if (( passedt.military == "office"                             ) or
@@ -3205,12 +3304,25 @@ function render_power_land1( passedt )
             Attribute( "class", "power_" .. passedt.power )
             Attribute( "name", Find( "name" ) )
             MinZoom( 12 )
--- ------------------------------------------------------------------------------
--- No "else" here yet
--- ------------------------------------------------------------------------------
+        else
+            render_tourism_land1( passedt )
         end -- power=substation 12
     end -- power=generator 9
 end -- render_power_land1()
+
+function render_tourism_land1( passedt )
+    if (( passedt.tourism == "camp_site"    ) or
+        ( passedt.tourism == "caravan_site" ) or
+        ( passedt.tourism == "picnic_site"  )) then
+        Layer( "land1", true )
+        Attribute( "class", "tourism_" .. passedt.tourism )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 12 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
+    end -- tourism=camp_site etc. 12
+end -- render_tourism_land1()
 
 -- ----------------------------------------------------------------------------
 -- land2 layer
