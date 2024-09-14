@@ -3176,9 +3176,16 @@ function render_natural_land1( passedt )
                 Attribute( "class", "natural_" .. passedt.natural )
                 Attribute( "name", Find( "name" ) )
                 MinZoom( 9 )
+            else
+                if ( passedt.natural == "wetland" ) then
+                    Layer( "land1", true )
+                    Attribute( "class", "natural_" .. passedt.natural )
+                    Attribute( "name", Find( "name" ) )
+                    MinZoom( 12 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
+                end -- wetland 12
             end -- beach etc. 9
         end -- wood 8
     end -- desert 7
