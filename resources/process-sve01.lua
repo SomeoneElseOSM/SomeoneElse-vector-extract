@@ -3199,9 +3199,16 @@ function render_power_land1( passedt )
         Attribute( "class", "power_" .. passedt.power )
         Attribute( "name", Find( "name" ) )
         MinZoom( 9 )
+    else
+        if ( passedt.power == "substation" ) then
+            Layer( "land1", true )
+            Attribute( "class", "power_" .. passedt.power )
+            Attribute( "name", Find( "name" ) )
+            MinZoom( 12 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
+        end -- power=substation 12
     end -- power=generator 9
 end -- render_power_land1()
 
