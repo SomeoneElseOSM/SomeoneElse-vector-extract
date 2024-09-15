@@ -2893,13 +2893,45 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
--- Special case for Jehovahs Witnesses - don't use the normal Christian
+-- Let's send amenity=grave_yard and landuse=cemetery through as
+-- landuse=cemetery.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "grave_yard" ) or
+       ( passedt.landuse == "grave_yard" )) then
+      passedt.amenity = nil
+      passedt.landuse = "cemetery"
+   end
+
+-- ----------------------------------------------------------------------------
+-- A special case to check before the "vacant shops" check at the end - 
+-- potentially remove disused:amenity=grave_yard
+-- ----------------------------------------------------------------------------
+   if (( passedt.disusedCamenity == "grave_yard" ) and
+       ( passedt.landuse         == "cemetery"   )) then
+      passedt.disusedCamenity = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Cemeteries are separated by religion here.
+-- "unnamed" is potentially set lower down.  All 6 are selected in project.mml.
+--
+-- There is a special case for Jehovahs Witnesses - don't use the normal Christian
 -- symbol (a cross)
 -- ----------------------------------------------------------------------------
-   if (( passedt.amenity      == "place_of_worship" ) and
-       ( passedt.religion     == "christian"        ) and
-       ( passedt.denomination == "jehovahs_witness" )) then
-      passedt.religion = nil
+   if ( passedt.landuse == "cemetery" ) then
+      if ( passedt.religion == "christian" ) then
+         if ( passedt.denomination == "jehovahs_witness" ) then
+            passedt.landuse = "othercemetery"
+         else
+            passedt.landuse = "christiancemetery"
+         end
+      else
+         if ( passedt.religion == "jewish" ) then
+            passedt.landuse = "jewishcemetery"
+         else
+            passedt.landuse = "othercemetery"
+         end
+      end
    end
 
 -- ----------------------------------------------------------------------------
@@ -3044,8 +3076,16 @@ function generic_before_function( passedt )
          passedt.landuse = "unnamedallotments"
       end
 
-      if ( passedt.landuse == "cemetery" ) then
-         passedt.landuse = "unnamedcemetery"
+      if ( passedt.landuse == "christiancemetery" ) then
+         passedt.landuse = "unnamedchristiancemetery"
+      end
+
+      if ( passedt.landuse == "jewishcemetery" ) then
+         passedt.landuse = "unnamedjewishcemetery"
+      end
+
+      if ( passedt.landuse == "othercemetery" ) then
+         passedt.landuse = "unnamedothercemetery"
       end
 
       if ( passedt.landuse == "commercial" ) then
@@ -3178,16 +3218,6 @@ function generic_before_function( passedt )
           ( passedt.ref ~= ""  )) then
          passedt.ref = "(" .. passedt.ref .. ")"
       end
-   end
-
--- ----------------------------------------------------------------------------
--- Let's send amenity=grave_yard and landuse=cemetery through as
--- landuse=cemetery.
--- ----------------------------------------------------------------------------
-   if (( passedt.amenity == "grave_yard" ) or
-       ( passedt.landuse == "grave_yard" )) then
-      passedt.amenity = nil
-      passedt.landuse = "cemetery"
    end
 
 -- ----------------------------------------------------------------------------
@@ -3372,7 +3402,9 @@ function generic_after_land1( passedt )
             ( passedt.landuse == "saltmarsh"                 ) or
             ( passedt.landuse == "reedbed"                   ) or
             ( passedt.landuse == "allotments"                ) or
-            ( passedt.landuse == "cemetery"                  )) then
+            ( passedt.landuse == "christiancemetery"         ) or
+            ( passedt.landuse == "jewishcemetery"            ) or
+            ( passedt.landuse == "othercemetery"             )) then
             Layer( "land1", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
             Attribute( "name", Find( "name" ) )
@@ -3573,7 +3605,9 @@ function generic_after_land2( passedt )
             ( passedt.landuse == "unnamedmeadowwildflower"   ) or
             ( passedt.landuse == "unnamedmeadowperpetual"    ) or
             ( passedt.landuse == "unnamedallotments"         ) or
-            ( passedt.landuse == "unnamedcemetery"           ) or
+            ( passedt.landuse == "unnamedchristiancemetery"  ) or
+            ( passedt.landuse == "unnamedjewishcemetery"     ) or
+            ( passedt.landuse == "unnamedothercemetery"      ) or
             ( passedt.landuse == "military"                  )) then
             Layer( "land2", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
