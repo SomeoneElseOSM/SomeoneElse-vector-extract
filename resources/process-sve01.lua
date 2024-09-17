@@ -3574,12 +3574,23 @@ function render_tourism_land1( passedt )
             Attribute( "class", "tourism_" .. passedt.tourism )
             Attribute( "name", Find( "name" ) )
             MinZoom( 12 )
--- ------------------------------------------------------------------------------
--- No "else" here yet
--- ------------------------------------------------------------------------------
+	else
+            render_aeroway_land1( passedt )
         end -- tourism=camp_site etc. 12
     end -- tourism=zoo 9
 end -- render_tourism_land1()
+
+function render_aeroway_land1( passedt )
+    if ( passedt.aeroway == "apron"     ) then
+        Layer( "land1", true )
+        Attribute( "class", "aeroway_" .. passedt.aeroway )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 12 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
+    end -- aeroway=apron 12
+end -- render_aeroway_land1()
 
 -- ----------------------------------------------------------------------------
 -- land2 layer
@@ -3653,9 +3664,22 @@ function render_natural_land2( passedt )
             Layer( "land2", true )
             Attribute( "class", "natural_" .. passedt.natural )
             MinZoom( 9 )
--- ------------------------------------------------------------------------------
--- No "else" here yet
--- ------------------------------------------------------------------------------
+	else
+            render_aeroway_land2( passedt )
         end -- natural=unnamedheath 9
     end -- natural=unnamedheath 8
 end -- render_natural_land2()
+
+function render_aeroway_land2( passedt )
+    if (( passedt.aeroway == "aerodrome"       ) or
+        ( passedt.aeroway == "large_aerodrome" )) then
+        Layer( "land2", true )
+        Attribute( "class", "aeroway_" .. passedt.aeroway )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 12 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
+    end -- aeroway=aerodrome 12
+end -- render_aeroway_land2()
+
