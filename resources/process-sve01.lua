@@ -429,10 +429,6 @@ function way_function()
         Attribute("class", wayt.waterway)
     end
 
-    if wayt.building~="" then
-        Layer("building", true)
-    end
-
     generic_after_function( wayt )
 end -- way_function()
 
@@ -3510,10 +3506,23 @@ function generic_after_function( passedt )
 -- that needs adding to more than one layer (perhaps based on the same 
 -- key/value combination, perhaps based on a different one).
 -- ----------------------------------------------------------------------------
+    generic_after_building( passedt )
     generic_after_poi( passedt )
     generic_after_land1( passedt )
     generic_after_land2( passedt )
 end -- generic_after_function()
+
+-- ----------------------------------------------------------------------------
+-- building layer
+-- ----------------------------------------------------------------------------
+function generic_after_building( passedt )
+    if (( passedt.building ~= nil ) and
+        ( passedt.building ~= ""  )) then
+        Layer("building", true)
+	Attribute( "class", "building_" .. passedt.building )
+	Attribute( "name", Find( "name" ) )
+    end
+end -- generic_after_building()
 
 -- ----------------------------------------------------------------------------
 -- poi layer
