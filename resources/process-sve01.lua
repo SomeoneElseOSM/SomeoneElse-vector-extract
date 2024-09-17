@@ -177,6 +177,11 @@ function node_function()
     nodet.iata = Find("iata")
     nodet.icao = Find("icao")
     nodet.aerodromeCtype = Find("aerodrome:type")
+    nodet.small_electric_vehicle = Find("small_electric_vehicle")
+    nodet.network = Find("network")
+    nodet.fee = Find("fee")
+    nodet.male = Find("male")
+    nodet.female = Find("female")
 
     generic_before_function( nodet )
 
@@ -323,6 +328,11 @@ function way_function()
     wayt.iata = Find("iata")
     wayt.icao = Find("icao")
     wayt.aerodromeCtype = Find("aerodrome:type")
+    wayt.small_electric_vehicle = Find("small_electric_vehicle")
+    wayt.network = Find("network")
+    wayt.fee = Find("fee")
+    wayt.male = Find("male")
+    wayt.female = Find("female")
 
     generic_before_function( wayt )
 
@@ -2031,6 +2041,213 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Render amenity=layby as parking.
+-- highway=rest_area is used a lot in the UK for laybies, so map that over too.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "layby"     ) or
+       ( passedt.highway == "rest_area" )) then
+      passedt.amenity = "parking"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Lose any "access=permissive" on parking; it should not be greyed out as it
+-- is "somewhere we can park".
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "parking"    ) and
+       ( passedt.access  == "permissive" )) then
+      passedt.access = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Scooter rental
+-- All legal scooter rental / scooter parking in UK are private; these are the
+-- the tags currently used.
+-- "network" is a bit of a special case because normally it means "lwn" etc.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.amenity                == "escooter_rental"         ) or
+       (   passedt.amenity                == "scooter_parking"         ) or
+       (   passedt.amenity                == "kick-scooter_rental"     ) or
+       (   passedt.amenity                == "small_electric_vehicle"  ) or
+       ((  passedt.amenity                == "parking"                )  and
+        (( passedt.parking                == "e-scooter"             )   or
+         ( passedt.small_electric_vehicle == "designated"            ))) or
+       ((  passedt.amenity                == "bicycle_parking"        )  and
+        (  passedt.small_electric_vehicle == "designated"             ))) then
+      passedt.amenity = "scooter_rental"
+      passedt.access = nil
+
+      if ((( passedt.name     == nil )  or
+           ( passedt.name     == ""  )) and
+          (( passedt.operator == nil )  or
+           ( passedt.operator == ""  )) and
+          (  passedt.network  ~= nil  ) and
+          (  passedt.network  ~= ""   )) then
+         passedt.name = passedt.network
+         passedt.network = nil
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render for-pay parking areas differently.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.amenity == "parking"  ) and
+       (( passedt.fee     ~= nil       )  and
+        ( passedt.fee     ~= ""        )  and
+        ( passedt.fee     ~= "no"      )  and
+        ( passedt.fee     ~= "none"    )  and
+        ( passedt.fee     ~= "None"    )  and
+        ( passedt.fee     ~= "Free"    )  and
+        ( passedt.fee     ~= "0"       ))) then
+      passedt.amenity = "parking_pay"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render for-pay bicycle_parking areas differently.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.amenity == "bicycle_parking"  ) and
+       (( passedt.fee     ~= nil               )  and
+        ( passedt.fee     ~= ""                )  and
+        ( passedt.fee     ~= "no"              )  and
+        ( passedt.fee     ~= "none"            )  and
+        ( passedt.fee     ~= "None"            )  and
+        ( passedt.fee     ~= "Free"            )  and
+        ( passedt.fee     ~= "0"               ))) then
+      passedt.amenity = "bicycle_parking_pay"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render for-pay motorcycle_parking areas differently.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.amenity == "motorcycle_parking"  ) and
+       (( passedt.fee     ~= nil               )  and
+        ( passedt.fee     ~= ""                )  and
+        ( passedt.fee     ~= "no"              )  and
+        ( passedt.fee     ~= "none"            )  and
+        ( passedt.fee     ~= "None"            )  and
+        ( passedt.fee     ~= "Free"            )  and
+        ( passedt.fee     ~= "0"               ))) then
+      passedt.amenity = "motorcycle_parking_pay"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render for-pay toilets differently.
+-- Also use different icons for male and female, if these are separate.
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "toilets" ) then
+      if (( passedt.fee     ~= nil       )  and
+          ( passedt.fee     ~= ""        )  and
+          ( passedt.fee     ~= "no"      )  and
+          ( passedt.fee     ~= "none"    )  and
+          ( passedt.fee     ~= "None"    )  and
+          ( passedt.fee     ~= "Free"    )  and
+          ( passedt.fee     ~= "0"       )) then
+         if (( passedt.male   == "yes" ) and
+             ( passedt.female ~= "yes" )) then
+            passedt.amenity = "toilets_pay_m"
+         else
+            if (( passedt.female == "yes"       ) and
+                ( passedt.male   ~= "yes"       )) then
+               passedt.amenity = "toilets_pay_w"
+            else
+               passedt.amenity = "toilets_pay"
+            end
+         end
+      else
+         if (( passedt.male   == "yes" ) and
+             ( passedt.female ~= "yes" )) then
+            passedt.amenity = "toilets_free_m"
+         else
+            if (( passedt.female == "yes"       ) and
+                ( passedt.male   ~= "yes"       )) then
+               passedt.amenity = "toilets_free_w"
+            end
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render for-pay shower differently.
+-- Also use different icons for male and female, if these are separate.
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "shower" ) then
+      if (( passedt.fee     ~= nil       )  and
+          ( passedt.fee     ~= ""        )  and
+          ( passedt.fee     ~= "no"      )  and
+          ( passedt.fee     ~= "none"    )  and
+          ( passedt.fee     ~= "None"    )  and
+          ( passedt.fee     ~= "Free"    )  and
+          ( passedt.fee     ~= "0"       )) then
+         if (( passedt.male   == "yes" ) and
+             ( passedt.female ~= "yes" )) then
+            passedt.amenity = "shower_pay_m"
+         else
+            if (( passedt.female == "yes"       ) and
+                ( passedt.male   ~= "yes"       )) then
+               passedt.amenity = "shower_pay_w"
+            else
+               passedt.amenity = "shower_pay"
+            end
+         end
+      else
+         if (( passedt.male   == "yes" ) and
+             ( passedt.female ~= "yes" )) then
+            passedt.amenity = "shower_free_m"
+         else
+            if (( passedt.female == "yes"       ) and
+                ( passedt.male   ~= "yes"       )) then
+               passedt.amenity = "shower_free_w"
+            end
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render parking spaces as parking.  Most in the UK are not part of larger
+-- parking areas, and most do not have an access tag, but many should have.
+--
+-- This does not work where e.g. Supermarket car parks have been mapped:
+-- https://github.com/SomeoneElseOSM/SomeoneElse-style/issues/14
+--
+-- Also map emergency bays (used in place of hard shoulders) in the same way.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "parking_space" ) or
+       ( passedt.highway == "emergency_bay" )) then
+       if (( passedt.fee     ~= nil       )  and
+           ( passedt.fee     ~= ""        )  and
+           ( passedt.fee     ~= "no"      )  and
+           ( passedt.fee     ~= "none"    )  and
+           ( passedt.fee     ~= "None"    )  and
+           ( passedt.fee     ~= "Free"    )  and
+           ( passedt.fee     ~= "0"       )) then
+         if ( passedt.parking_space == "disabled" ) then
+            passedt.amenity = "parking_paydisabled"
+         else
+            passedt.amenity = "parking_pay"
+         end
+      else
+         if ( passedt.parking_space == "disabled" ) then
+            passedt.amenity = "parking_freedisabled"
+         else
+            passedt.amenity = "parking"
+         end
+      end
+
+      if (( passedt.access == nil  ) or
+          ( passedt.access == ""   )) then
+         passedt.access = "no"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render amenity=leisure_centre and leisure=leisure_centre 
+-- as leisure=sports_centre
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "leisure_centre" ) or
+       ( passedt.leisure == "leisure_centre" )) then
+      passedt.leisure = "sports_centre"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Sand dunes
 -- ----------------------------------------------------------------------------
    if (( passedt.natural == "dune"       ) or
@@ -3586,11 +3803,30 @@ function render_aeroway_land1( passedt )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
         Attribute( "name", Find( "name" ) )
         MinZoom( 12 )
+    else
+        render_amenity_land1( passedt )
+    end -- aeroway=apron 12
+end -- render_aeroway_land1()
+
+function render_amenity_land1( passedt )
+    if (( passedt.amenity == "parking"              ) or
+        ( passedt.amenity == "parking_pay"          ) or
+        ( passedt.amenity == "parking_freedisabled" ) or
+        ( passedt.amenity == "parking_paydisabled"  ) or
+        ( passedt.amenity == "university"           ) or
+        ( passedt.amenity == "college"              ) or
+        ( passedt.amenity == "school"               ) or
+        ( passedt.amenity == "hospital"             ) or
+        ( passedt.amenity == "kindergarten"         )) then
+        Layer( "land1", true )
+        Attribute( "class", "amenity_" .. passedt.amenity )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 9 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-    end -- aeroway=apron 12
-end -- render_aeroway_land1()
+    end -- amenity=parking etc. 9
+end -- render_amenity_land1()
 
 -- ----------------------------------------------------------------------------
 -- land2 layer
