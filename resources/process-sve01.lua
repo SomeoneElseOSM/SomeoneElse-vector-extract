@@ -182,6 +182,7 @@ function node_function()
     nodet.fee = Find("fee")
     nodet.male = Find("male")
     nodet.female = Find("female")
+    nodet.area = Find("area")
 
     generic_before_function( nodet )
 
@@ -333,8 +334,72 @@ function way_function()
     wayt.fee = Find("fee")
     wayt.male = Find("male")
     wayt.female = Find("female")
+    wayt.area = Find("area")
 
     generic_before_function( wayt )
+
+-- ----------------------------------------------------------------------------
+-- A "leisure=track" can be either a linear or an area feature
+-- https://wiki.openstreetmap.org/wiki/Tag%3Aleisure%3Dtrack
+-- Assign a highway tag (gallop or leisuretrack) so that linear features can
+-- be explicitly rendered.
+-- "sport" is often (but not always) used to separate different types of
+-- leisure tracks.
+--
+-- If on an area, the way will go into planet_osm_polygon and the highway
+-- feature won't be rendered (because both leisuretrack and gallop are only 
+-- processed as linear features) but the leisure=track will be (as an area).
+--
+-- Additionally force anything that is "oneway" to not be an area feature
+-- ----------------------------------------------------------------------------
+   if ( wayt.leisure  == "track" ) then
+      if (( wayt.sport    == "equestrian"   )  or
+          ( wayt.sport    == "horse_racing" )) then
+         wayt.highway = "gallop"
+      else
+         if ((( wayt.sport    == "motor"         )  or
+              ( wayt.sport    == "karting"       )  or
+              ( wayt.sport    == "motor;karting" )) and
+             (( wayt.area     == nil              )  or
+              ( wayt.area     == ""               )  or
+              ( wayt.area     == "no"             ))) then
+            wayt.highway = "raceway"
+         else
+            wayt.highway = "leisuretrack"
+         end
+      end
+
+      if ( wayt.oneway == "yes" ) then
+         wayt.area = "no"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- highway=turning_loop on ways to service road
+-- "turning_loop" is mostly used on nodes, with one way in UK/IE data.
+-- ----------------------------------------------------------------------------
+   if ( wayt.highway == "turning_loop" ) then
+      wayt.highway = "service"
+      wayt.service = "driveway"
+   end
+
+-- ----------------------------------------------------------------------------
+-- natural=rock on ways to natural=bare_rock
+-- ----------------------------------------------------------------------------
+   if ( wayt.natural == "rock" ) then
+      wayt.natural = "bare_rock"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Where amenity=watering_place has been used on a way and there's no
+-- "natural" tag already, apply "natural=water".
+-- ----------------------------------------------------------------------------
+   if ((  wayt.amenity == "watering_place"  ) and
+       (( wayt.natural == nil              )  or
+        ( wayt.natural == ""               ))) then
+      wayt.amenity = nil
+      wayt.natural = "water"
+   end
 
 -- ----------------------------------------------------------------------------
 -- Before processing footways, turn certain corridors into footways
@@ -3673,7 +3738,8 @@ function render_leisure_land1( passedt )
         ( passedt.leisure == "golf_course"       ) or
         ( passedt.leisure == "sports_centre"     ) or
         ( passedt.leisure == "stadium"           ) or
-        ( passedt.leisure == "pitch"             )) then
+        ( passedt.leisure == "pitch"             ) or
+        ( passedt.leisure == "track"             )) then
         Layer( "land1", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
         Attribute( "name", Find( "name" ) )
