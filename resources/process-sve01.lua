@@ -3316,6 +3316,10 @@ function generic_before_function( passedt )
       if ( passedt.natural == "heath" ) then
          passedt.natural = "unnamedheath"
       end
+
+      if ( passedt.natural == "scrub" ) then
+         passedt.natural = "unnamedscrub"
+      end
    end
 
 -- ----------------------------------------------------------------------------
@@ -3971,7 +3975,8 @@ function render_natural_land2( passedt )
         Attribute( "class", "natural_" .. passedt.natural )
         MinZoom( 8 )
     else
-        if ( passedt.natural == "unnamedheath" ) then
+        if (( passedt.natural == "unnamedheath" ) or
+	    ( passedt.natural == "unnamedscrub" )) then
             Layer( "land2", true )
             Attribute( "class", "natural_" .. passedt.natural )
             MinZoom( 9 )
