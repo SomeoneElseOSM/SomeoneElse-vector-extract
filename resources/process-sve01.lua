@@ -489,7 +489,8 @@ function way_function()
 -- ----------------------------------------------------------------------------
 -- Other processing - still to be added
 -- ----------------------------------------------------------------------------
-    if wayt.waterway~="" then
+    if (( wayt.waterway ~= nil ) and
+        ( wayt.waterway ~= ""  )) then
         Layer("waterway", false)
         Attribute("class", wayt.waterway)
     end
@@ -1782,6 +1783,48 @@ function generic_before_function( passedt )
         ( passedt.leisure == "nature_reserve" )  or
         ( passedt.leisure == "park"           ))) then
       passedt.leisure = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Boatyards
+-- ----------------------------------------------------------------------------
+   if (( passedt.waterway   == "boatyard" ) or
+       ( passedt.industrial == "boatyard" )) then
+      passedt.amenity = "boatyard"
+      passedt.waterway = nil
+      passedt.industrial = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Beer gardens etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "beer_garden" ) or
+       ( passedt.leisure == "beer_garden" )) then
+      passedt.amenity = nil
+      passedt.leisure = "garden"
+      passedt.garden = "beer_garden"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render biergartens as gardens, which is all they likely are.
+-- Remove the symbol from unnamed ones - they're likely just pub beer gardens.
+-- ----------------------------------------------------------------------------
+   if (  passedt.amenity == "biergarten" ) then
+      if (( passedt.name == nil           )   or
+          ( passedt.name == "Beer Garden" )) then
+         passedt.amenity = nil
+      end
+
+      passedt.leisure = "garden"
+      passedt.garden  = "beer_garden"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat natural=meadow as a synonym for landuse=meadow, if no other landuse
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural == "meadow" ) and
+       ( passedt.landuse == nil      )) then
+      passedt.landuse = "meadow"
    end
 
 -- ----------------------------------------------------------------------------
@@ -3320,6 +3363,38 @@ function generic_before_function( passedt )
       if ( passedt.natural == "scrub" ) then
          passedt.natural = "unnamedscrub"
       end
+
+      if ( passedt.natural == "mud" ) then
+         passedt.natural = "unnamedmud"
+      end
+
+      if ( passedt.natural == "tidal_mud" ) then
+         passedt.natural = "unnamedtidal_mud"
+      end
+
+      if ( passedt.natural == "bare_rock" ) then
+         passedt.natural = "unnamedbare_rock"
+      end
+
+      if ( passedt.natural == "beach" ) then
+         passedt.natural = "unnamedbeach"
+      end
+
+      if ( passedt.natural == "sand" ) then
+         passedt.natural = "unnamedsand"
+      end
+
+      if ( passedt.natural == "tidal_sand" ) then
+         passedt.natural = "unnamedtidal_sand"
+      end
+
+      if ( passedt.natural == "wetland" ) then
+         passedt.natural = "unnamedwetland"
+      end
+
+      if ( passedt.natural == "grassland" ) then
+         passedt.natural = "unnamedgrassland"
+      end
    end
 
 -- ----------------------------------------------------------------------------
@@ -3412,6 +3487,10 @@ function generic_before_function( passedt )
          passedt.landuse = "unnamedmeadow"
       end
 
+      if ( passedt.landuse == "wetmeadow" ) then
+         passedt.landuse = "unnamedwetmeadow"
+      end
+
       if ( passedt.landuse == "meadowwildflower" ) then
          passedt.landuse = "unnamedmeadowwildflower"
       end
@@ -3422,6 +3501,10 @@ function generic_before_function( passedt )
 
       if ( passedt.landuse == "meadowtransitional" ) then
          passedt.landuse = "unnamedmeadowtransitional"
+      end
+
+      if ( passedt.landuse == "saltmarsh" ) then
+         passedt.landuse = "unnamedsaltmarsh"
       end
 
       if ( passedt.landuse == "orchard" ) then
@@ -3927,6 +4010,7 @@ function generic_after_land2( passedt )
         if (( passedt.landuse == "unnamedgrass"              ) or
             ( passedt.landuse == "unnamedresidential"        ) or
             ( passedt.landuse == "unnamedmeadow"             ) or
+            ( passedt.landuse == "unnamedwetmeadow"          ) or
             ( passedt.landuse == "unnamedfarmyard"           ) or
             ( passedt.landuse == "unnamedfarmgrass"          ) or
             ( passedt.landuse == "unnamedindustrial"         ) or
@@ -3937,6 +4021,7 @@ function generic_after_land2( passedt )
             ( passedt.landuse == "unnamedmeadowtransitional" ) or
             ( passedt.landuse == "unnamedmeadowwildflower"   ) or
             ( passedt.landuse == "unnamedmeadowperpetual"    ) or
+            ( passedt.landuse == "unnamedsaltmarsh"          ) or
             ( passedt.landuse == "unnamedallotments"         ) or
             ( passedt.landuse == "unnamedchristiancemetery"  ) or
             ( passedt.landuse == "unnamedjewishcemetery"     ) or
@@ -3982,13 +4067,26 @@ function render_natural_land2( passedt )
         Attribute( "class", "natural_" .. passedt.natural )
         MinZoom( 8 )
     else
-        if (( passedt.natural == "unnamedheath" ) or
-            ( passedt.natural == "unnamedscrub" )) then
+        if (( passedt.natural == "unnamedheath"      ) or
+            ( passedt.natural == "unnamedscrub"      ) or
+            ( passedt.natural == "unnamedmud"        ) or
+            ( passedt.natural == "unnamedtidal_mud"  ) or
+            ( passedt.natural == "unnamedbare_rock"  ) or
+            ( passedt.natural == "unnamedbeach"      ) or
+            ( passedt.natural == "unnamedsand"       ) or
+            ( passedt.natural == "unnamedtidal_sand" ) or
+            ( passedt.natural == "unnamedgrassland"  )) then
             Layer( "land2", true )
             Attribute( "class", "natural_" .. passedt.natural )
             MinZoom( 9 )
         else
-            render_aeroway_land2( passedt )
+            if ( passedt.natural == "unnamedwetland"     ) then
+                Layer( "land2", true )
+                Attribute( "class", "natural_" .. passedt.natural )
+                MinZoom( 12 )
+            else
+                render_aeroway_land2( passedt )
+            end -- natural=unnamedwetland
         end -- natural=unnamedheath 9
     end -- natural=unnamedheath 8
 end -- render_natural_land2()
