@@ -3643,7 +3643,7 @@ function generic_after_poi( passedt )
     	        Attribute( "class","shop_" .. passedt.shop )
     	        Attribute( "name", Find( "name" ) )
                 MinZoom( 14 )
-	    else
+            else
                 if (( passedt.tourism ~= ""  ) and
                     ( passedt.tourism ~= nil )) then
                     LayerAsCentroid( "poi" )
@@ -3734,45 +3734,52 @@ function generic_after_land1( passedt )
 end -- generic_after_land1()
 
 function render_leisure_land1( passedt )
-    if (( passedt.leisure == "common"            ) or
-        ( passedt.leisure == "park"              ) or
-        ( passedt.leisure == "recreation_ground" ) or
-        ( passedt.leisure == "garden"            ) or
-        ( passedt.leisure == "golfgreen"         ) or
-        ( passedt.leisure == "golf_course"       ) or
-        ( passedt.leisure == "sports_centre"     ) or
-        ( passedt.leisure == "stadium"           ) or
-        ( passedt.leisure == "pitch"             ) or
-        ( passedt.leisure == "track"             )) then
+    if ( passedt.leisure == "nature_reserve" ) then
         Layer( "land1", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
         Attribute( "name", Find( "name" ) )
-        MinZoom( 9 )
+        MinZoom( 6 )
     else
-        if ( passedt.leisure == "nature_reserve" ) then
+        if (( passedt.leisure == "common"            ) or
+            ( passedt.leisure == "park"              ) or
+            ( passedt.leisure == "recreation_ground" ) or
+            ( passedt.leisure == "garden"            ) or
+            ( passedt.leisure == "golfgreen"         ) or
+            ( passedt.leisure == "golf_course"       ) or
+            ( passedt.leisure == "sports_centre"     ) or
+            ( passedt.leisure == "stadium"           ) or
+            ( passedt.leisure == "pitch"             ) or
+            ( passedt.leisure == "track"             )) then
             Layer( "land1", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
             Attribute( "name", Find( "name" ) )
-            MinZoom( 10 )
+            MinZoom( 9 )
         else
-            if (( passedt.leisure == "playground" ) or
-                ( passedt.leisure == "schoolyard" )) then
+            if ( passedt.leisure == "nature_reserve" ) then
                 Layer( "land1", true )
                 Attribute( "class", "leisure_" .. passedt.leisure )
                 Attribute( "name", Find( "name" ) )
-                MinZoom( 12 )
+                MinZoom( 10 )
             else
-                if ( passedt.leisure == "swimming_pool" ) then
+                if (( passedt.leisure == "playground" ) or
+                    ( passedt.leisure == "schoolyard" )) then
                     Layer( "land1", true )
                     Attribute( "class", "leisure_" .. passedt.leisure )
                     Attribute( "name", Find( "name" ) )
-                    MinZoom( 13 )
+                    MinZoom( 12 )
                 else
-                    render_military_land1( passedt )
-                end -- leisure=swimming_pool etc. 13
-            end -- leisure=playground etc.  12
-        end -- leisure=nature_reserve etc. 10
-    end -- leisure=common etc. 9
+                    if ( passedt.leisure == "swimming_pool" ) then
+                        Layer( "land1", true )
+                        Attribute( "class", "leisure_" .. passedt.leisure )
+                        Attribute( "name", Find( "name" ) )
+                        MinZoom( 13 )
+                    else
+                        render_military_land1( passedt )
+                    end -- leisure=swimming_pool etc. 13
+                end -- leisure=playground etc.  12
+            end -- leisure=nature_reserve etc. 10
+        end -- leisure=common etc. 9
+    end -- leisure=nature_reserve 6
 end -- render_leisure_land1()
 
 function render_military_land1( passedt )
@@ -3870,7 +3877,7 @@ function render_tourism_land1( passedt )
             Attribute( "class", "tourism_" .. passedt.tourism )
             Attribute( "name", Find( "name" ) )
             MinZoom( 12 )
-	else
+        else
             render_aeroway_land1( passedt )
         end -- tourism=camp_site etc. 12
     end -- tourism=zoo 9
@@ -3976,11 +3983,11 @@ function render_natural_land2( passedt )
         MinZoom( 8 )
     else
         if (( passedt.natural == "unnamedheath" ) or
-	    ( passedt.natural == "unnamedscrub" )) then
+            ( passedt.natural == "unnamedscrub" )) then
             Layer( "land2", true )
             Attribute( "class", "natural_" .. passedt.natural )
             MinZoom( 9 )
-	else
+        else
             render_aeroway_land2( passedt )
         end -- natural=unnamedheath 9
     end -- natural=unnamedheath 8
