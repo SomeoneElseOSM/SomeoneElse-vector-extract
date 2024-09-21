@@ -3826,7 +3826,8 @@ function generic_before_function( passedt )
        ( passedt.leisure  == "park"                  ) or
        ( passedt.leisure  == "pitch"                 ) or
        ( passedt.leisure  == "sports_centre"         ) or
-       ( passedt.leisure  == "track"                 )) then
+       ( passedt.leisure  == "track"                 ) or
+       ( passedt.tourism  == "theme_park"            )) then
       if ( passedt.landuse == "allotments" ) then
          passedt.landuse = "unnamedallotments"
       end
@@ -4412,7 +4413,8 @@ function render_tourism_land1( passedt )
     else
         if (( passedt.tourism == "camp_site"    ) or
             ( passedt.tourism == "caravan_site" ) or
-            ( passedt.tourism == "picnic_site"  )) then
+            ( passedt.tourism == "picnic_site"  ) or
+            ( passedt.tourism == "theme_park"   )) then
             Layer( "land1", true )
             Attribute( "class", "tourism_" .. passedt.tourism )
             Attribute( "name", Find( "name" ) )
