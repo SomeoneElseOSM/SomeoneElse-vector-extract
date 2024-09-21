@@ -183,6 +183,20 @@ function node_function()
     nodet.male = Find("male")
     nodet.female = Find("female")
     nodet.area = Find("area")
+    nodet.man_made = Find("man_made")
+    nodet.landmark = Find("landmark")
+    nodet.airmark = Find("airmark")
+    nodet.abandonedCrailway = Find("abandoned:railway")
+    nodet.historicCrailway = Find("historic:railway")
+    nodet.wall = Find("wall")
+    nodet.memorial = Find("memorial")
+    nodet.memorialCtype = Find("memorial:type")
+    nodet.marker = Find("marker")
+    nodet.historicCcivilisation = Find("historic:civilisation")
+    nodet.site_type = Find("site_type")
+    nodet.fortification_type = Find("fortification_type")
+    nodet.megalith_type = Find("megalith_type")
+    nodet.place_of_worship = Find("place_of_worship")
 
     generic_before_function( nodet )
 
@@ -335,6 +349,20 @@ function way_function()
     wayt.male = Find("male")
     wayt.female = Find("female")
     wayt.area = Find("area")
+    wayt.man_made = Find("man_made")
+    wayt.landmark = Find("landmark")
+    wayt.airmark = Find("airmark")
+    wayt.abandonedCrailway = Find("abandoned:railway")
+    wayt.historicCrailway = Find("historic:railway")
+    wayt.wall = Find("wall")
+    wayt.memorial = Find("memorial")
+    wayt.memorialCtype = Find("memorial:type")
+    wayt.marker = Find("marker")
+    wayt.historicCcivilisation = Find("historic:civilisation")
+    wayt.site_type = Find("site_type")
+    wayt.fortification_type = Find("fortification_type")
+    wayt.megalith_type = Find("megalith_type")
+    wayt.place_of_worship = Find("place_of_worship")
 
     generic_before_function( wayt )
 
@@ -3100,6 +3128,393 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Beacons - render historic ones, not radio ones.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.man_made == "beacon"        )  or
+        ( passedt.man_made == "signal_beacon" )  or
+        ( passedt.landmark == "beacon"        )  or
+        ( passedt.historic == "beacon"        )) and
+       (  passedt.airmark  == nil              ) and
+       (  passedt.aeroway  == nil              ) and
+       (  passedt.natural  ~= "hill"           ) and
+       (  passedt.natural  ~= "peak"           )) then
+      passedt.historic = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render historic railway stations.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.abandonedCrailway == "station"         )  or
+        ( passedt.disusedCrailway   == "station"         )  or
+        ( passedt.historicCrailway  == "station"         )  or
+        ( passedt.historic          == "railway_station" )) and
+       (  passedt.tourism           ~= "information"      )) then
+      passedt.historic = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Add landuse=military to some military things.
+-- ----------------------------------------------------------------------------
+   if (( passedt.military == "office"                             ) or
+       ( passedt.military == "offices"                            ) or
+       ( passedt.military == "barracks"                           ) or
+       ( passedt.military == "naval_base"                         ) or
+       ( passedt.military == "depot"                              ) or
+       ( passedt.military == "registration_and_enlistment_office" ) or
+       ( passedt.military == "checkpoint"                         ) or
+       ( passedt.military == "danger_area"                        ) or
+       ( passedt.hazard   == "shooting_range"                     ) or
+       ( passedt.sport    == "shooting"                           ) or
+       ( passedt.sport    == "shooting_range"                     )) then
+      passedt.landuse = "military"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render castle_wall as city_wall
+-- ----------------------------------------------------------------------------
+   if (( passedt.barrier   == "wall"        )  and
+       ( passedt.wall      == "castle_wall" )) then
+      passedt.historic = "citywalls"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Get rid of landuse=conservation if we can.  It's a bit of a special case;
+-- in raster maps it has a label like grass but no green fill.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.landuse  == "conservation"  ) and
+       (( passedt.historic ~= nil            )  or
+        ( passedt.leisure  ~= nil            )  or
+        ( passedt.natural  ~= nil            ))) then
+      passedt.landuse = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- "wayside_shrine" and various memorial crosses.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.historic   == "wayside_shrine"   ) or
+       ((  passedt.historic   == "memorial"        )  and
+        (( passedt.memorial   == "mercat_cross"   )   or
+         ( passedt.memorial   == "cross"          )   or
+         ( passedt.memorial   == "celtic_cross"   )   or
+         ( passedt.memorial   == "cross;stone"    )))) then
+      passedt.historic = "memorialcross"
+   end
+
+   if (( passedt.historic   == "memorial"     ) and
+       ( passedt.memorial   == "war_memorial" )) then
+      passedt.historic = "warmemorial"
+   end
+
+   if ((  passedt.historic      == "memorial"     ) and
+       (( passedt.memorial      == "plaque"      )  or
+        ( passedt.memorial      == "blue_plaque" )  or
+        ( passedt.memorialCtype == "plaque"      ))) then
+      passedt.historic = "memorialplaque"
+   end
+
+   if ((  passedt.historic   == "memorial"         ) and
+       (( passedt.memorial   == "pavement plaque" )  or
+        ( passedt.memorial   == "pavement_plaque" ))) then
+      passedt.historic = "memorialpavementplaque"
+   end
+
+   if ((  passedt.historic      == "memorial"  ) and
+       (( passedt.memorial      == "statue"   )  or
+        ( passedt.memorialCtype == "statue"   ))) then
+      passedt.historic = "memorialstatue"
+   end
+
+   if (( passedt.historic   == "memorial"    ) and
+       ( passedt.memorial   == "sculpture"   )) then
+      passedt.historic = "memorialsculpture"
+   end
+
+   if (( passedt.historic   == "memorial"    ) and
+       ( passedt.memorial   == "stone"       )) then
+      passedt.historic = "memorialstone"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Ogham stones mapped without other tags
+-- ----------------------------------------------------------------------------
+   if ( passedt.historic   == "ogham_stone" ) then
+      passedt.historic = "oghamstone"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Stones that are not boundary stones.
+-- Note that "marker=boundary_stone" are handled elsewhere.
+-- ----------------------------------------------------------------------------
+   if (( passedt.marker   == "stone"          ) or
+       ( passedt.natural  == "stone"          ) or
+       ( passedt.man_made == "stone"          ) or
+       ( passedt.man_made == "standing_stone" )) then
+      passedt.historic = "naturalstone"
+
+      append_inscription( passedt )
+   end
+
+-- ----------------------------------------------------------------------------
+-- stones and standing stones
+-- The latter is intended to look proper ancient history; 
+-- the former more recent,
+-- See also historic=archaeological_site, especially megalith, below
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "stone"         ) or
+       ( passedt.historic == "bullaun_stone" )) then
+      passedt.historic = "historicstone"
+   end
+
+   if ( passedt.historic   == "standing_stone" ) then
+      passedt.historic = "historicstandingstone"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show earthworks as archaeological rather than historic.
+-- ----------------------------------------------------------------------------
+   if ( passedt.historic == "earthworks"        ) then
+      passedt.historic = "archaeological_site"
+   end
+
+-- ----------------------------------------------------------------------------
+-- archaeological sites
+--
+-- The subtag of archaeological_site was traditionally site_type, but after
+-- some tagfiddling to and fro was then both archaeological_site and site_type
+-- and then (July 2023) just archaeological_site; I handle both.
+--
+-- If something is tagged as both an archaeological site and a place or a 
+-- tourist attraction, lose the other tag.
+-- Add historic landuse if there isn't already something 
+-- that would set an area fill such as landuse or natural.
+--
+-- Then handle different types of archaeological sites.
+-- fortification
+-- tumulus
+--
+-- megalith / standing stone
+-- The default icon for a megalith / standing stone is one standing stone.
+-- Stone circles are shown as such 
+-- Some groups of stones are shown with two stones.
+-- ----------------------------------------------------------------------------
+   if ( passedt.historic == "archaeological_site" ) then
+      passedt.place = nil
+      passedt.tourism = nil
+
+      if (( passedt.landuse               == nil      ) and
+          ( passedt.leisure               == nil      ) and
+          ( passedt.natural               == nil      )  and
+          ( passedt.historicCcivilization ~= "modern" )) then
+         passedt.landuse = "historic"
+      end
+
+      if (( passedt.archaeological_site == "fortification" ) or 
+          ( passedt.site_type           == "fortification" )) then
+-- ----------------------------------------------------------------------------
+-- Is the fortification a ringfort?
+-- There are 9k of them in Ireland
+-- ----------------------------------------------------------------------------
+         if ( passedt.fortification_type == "ringfort" ) then
+            passedt.historic = "historicringfort"
+         else
+-- ----------------------------------------------------------------------------
+-- Is the fortification a hill fort (either spelling)?
+-- Confusingly, some of these are mapped as fortification_type and some as
+-- archaeological_site.
+-- Also look for "hilltop_enclosure" here - see e.g. 
+-- https://www.openstreetmap.org/changeset/145424438 and
+-- comments in https://www.openstreetmap.org/changeset/145424213 .
+-- ----------------------------------------------------------------------------
+            if (( passedt.fortification_type == "hill_fort"          ) or
+                ( passedt.fortification_type == "hillfort"           ) or
+                ( passedt.fortification_type == "hilltop_enclosure"  )) then
+               passedt.historic = "historichillfort"
+            else
+-- ----------------------------------------------------------------------------
+-- Is the fortification a motte?
+-- ----------------------------------------------------------------------------
+               if (( passedt.fortification_type == "motte"             ) or
+                   ( passedt.fortification_type == "motte_and_bailey"  )) then
+                  passedt.historic = "historicarchmotte"
+               else
+-- ----------------------------------------------------------------------------
+-- Is the fortification a castle?
+-- Confusingly, some of these are mapped as fortification_type and some as
+-- archaeological_site.
+-- ----------------------------------------------------------------------------
+                  if ( passedt.fortification_type == "castle" ) then
+                     passedt.historic = "historicarchcastle"
+                  else
+-- ----------------------------------------------------------------------------
+-- Is the fortification a promontory fort?
+-- ----------------------------------------------------------------------------
+                     if ( passedt.fortification_type == "promontory_fort" ) then
+                        passedt.historic = "historicpromontoryfort"
+                     else
+-- ----------------------------------------------------------------------------
+-- Show as a generic fortification
+-- ----------------------------------------------------------------------------
+                        passedt.historic = "historicfortification"
+                     end  -- promontory fort
+                  end  -- castle
+               end  -- motte
+            end  -- hill_fort
+         end  -- ringfort
+      else
+-- ----------------------------------------------------------------------------
+-- Not a fortification.  Check for tumulus
+-- ----------------------------------------------------------------------------
+         if ((  passedt.archaeological_site == "tumulus"  ) or 
+             (  passedt.site_type           == "tumulus"  ) or
+             (( passedt.archaeological_site == "tomb"    )  and
+              ( passedt.tomb                == "tumulus" ))) then
+            passedt.historic = "historictumulus"
+         else
+-- ----------------------------------------------------------------------------
+-- Not a fortification or tumulus.  Check for megalith or standing stone.
+-- ----------------------------------------------------------------------------
+            if (( passedt.archaeological_site == "megalith"       ) or 
+                ( passedt.site_type           == "megalith"       ) or
+                ( passedt.archaeological_site == "standing_stone" ) or 
+                ( passedt.site_type           == "standing_stone" )) then
+               if (( passedt.megalith_type == "stone_circle" ) or
+                   ( passedt.megalith_type == "ring_cairn"   ) or
+                   ( passedt.megalith_type == "henge"        )) then
+                  passedt.historic = "historicstonecircle"
+               else
+-- ----------------------------------------------------------------------------
+-- We have a megalith or standing stone. Check megalith_type for dolmen etc.
+-- ----------------------------------------------------------------------------
+                  if (( passedt.megalith_type == "dolmen"          ) or
+                      ( passedt.megalith_type == "long_barrow"     ) or
+                      ( passedt.megalith_type == "passage_grave"   ) or
+                      ( passedt.megalith_type == "court_tomb"      ) or
+                      ( passedt.megalith_type == "cist"            ) or
+                      ( passedt.megalith_type == "wedge_tomb"      ) or
+                      ( passedt.megalith_type == "tholos"          ) or
+                      ( passedt.megalith_type == "chamber"         ) or
+                      ( passedt.megalith_type == "cairn"           ) or
+                      ( passedt.megalith_type == "round_barrow"    ) or
+                      ( passedt.megalith_type == "gallery_grave"   ) or
+                      ( passedt.megalith_type == "tomb"            ) or
+                      ( passedt.megalith_type == "chambered_cairn" ) or
+                      ( passedt.megalith_type == "chamber_cairn"   ) or
+                      ( passedt.megalith_type == "portal_tomb"     )) then
+                     passedt.historic = "historicmegalithtomb"
+                  else
+-- ----------------------------------------------------------------------------
+-- We have a megalith or standing stone. Check megalith_type for stone_row
+-- ----------------------------------------------------------------------------
+                     if (( passedt.megalith_type == "alignment"  ) or
+                         ( passedt.megalith_type == "stone_row"  ) or
+                         ( passedt.megalith_type == "stone_line" )) then
+                           passedt.historic = "historicstonerow"
+                     else
+-- ----------------------------------------------------------------------------
+-- We have a megalith or standing stone, but megalith_type says it is not a 
+-- dolmen etc., stone circle or stone row.  
+-- Just use the normal standing stone icon.
+-- ----------------------------------------------------------------------------
+                        passedt.historic = "historicstandingstone"
+                     end  -- if alignment
+                  end  -- if dolmen
+               end  -- if stone circle
+            else
+-- ----------------------------------------------------------------------------
+-- Not a fortification, tumulus, megalith or standing stone.
+-- Check for hill fort (either spelling) or "hilltop_enclosure"
+-- (see https://www.openstreetmap.org/changeset/145424213 )
+-- ----------------------------------------------------------------------------
+               if (( passedt.archaeological_site == "hill_fort"         ) or
+                   ( passedt.site_type           == "hill_fort"         ) or
+                   ( passedt.archaeological_site == "hillfort"          ) or
+                   ( passedt.site_type           == "hillfort"          ) or
+                   ( passedt.archaeological_site == "hilltop_enclosure" )) then
+                  passedt.historic = "historichillfort"
+               else
+-- ----------------------------------------------------------------------------
+-- Check for castle
+-- Confusingly, some of these are mapped as fortification_type and some as
+-- archaeological_site.
+-- ----------------------------------------------------------------------------
+                  if ( passedt.archaeological_site == "castle" ) then
+                     passedt.historic = "historicarchcastle"
+                  else
+-- ----------------------------------------------------------------------------
+-- Is the archaeological site a crannog?
+-- ----------------------------------------------------------------------------
+                     if ( passedt.archaeological_site == "crannog" ) then
+                        passedt.historic = "historiccrannog"
+                     else
+                        if (( passedt.archaeological_site == "settlement" ) and
+                            ( passedt.fortification_type  == "ringfort"   )) then
+                           passedt.historic = "historicringfort"
+-- ----------------------------------------------------------------------------
+-- There's no code an an "else" here, just this comment:
+--                      else
+--
+-- If set, archaeological_site is not fortification, tumulus, 
+-- megalith / standing stone, hill fort, castle or settlement that is also 
+-- a ringfort.  Most will not have archaeological_site set.
+-- The standard icon for historic=archaeological_site will be used 
+-- ----------------------------------------------------------------------------
+                        end -- settlement that is also ringfort
+                     end  -- crannog
+                  end  -- if castle
+               end  -- if hill fort
+            end  -- if megalith
+         end  -- if tumulus
+      end  -- if fortification
+   end  -- if archaeological site
+
+   if ( passedt.historic   == "rune_stone" ) then
+      passedt.historic = "runestone"
+   end
+
+   if ( passedt.place_of_worship   == "mass_rock" ) then
+      passedt.amenity = nil
+      passedt.historic = "massrock"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Memorial plates
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic      == "memorial"  ) and
+       (( passedt.memorial      == "plate"    )  or
+        ( passedt.memorialCtype == "plate"    ))) then
+      passedt.historic = "memorialplate"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Memorial benches
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic   == "memorial"    ) and
+       ( passedt.memorial   == "bench"       )) then
+      passedt.historic = "memorialbench"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Historic graves, and memorial graves and graveyards
+-- ----------------------------------------------------------------------------
+   if ((   passedt.historic   == "grave"         ) or
+       ((  passedt.historic   == "memorial"     )  and
+        (( passedt.memorial   == "grave"       )   or
+         ( passedt.memorial   == "graveyard"   )))) then
+      passedt.historic = "memorialgrave"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Memorial obelisks
+-- ----------------------------------------------------------------------------
+   if ((   passedt.man_made      == "obelisk"     ) or
+       (   passedt.landmark      == "obelisk"     ) or
+       ((  passedt.historic      == "memorial"   ) and
+        (( passedt.memorial      == "obelisk"   )  or
+         ( passedt.memorialCtype == "obelisk"   )))) then
+      passedt.historic = "memorialobelisk"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Render alternative taggings of camp_site etc.
 -- ----------------------------------------------------------------------------
    if (( passedt.tourism == "camping"                ) or
@@ -3194,23 +3609,6 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ( passedt.amenity == "information"  ) then
       passedt.tourism = "information"
-   end
-
--- ----------------------------------------------------------------------------
--- Add landuse=military to some military things.
--- ----------------------------------------------------------------------------
-   if (( passedt.military == "office"                             ) or
-       ( passedt.military == "offices"                            ) or
-       ( passedt.military == "barracks"                           ) or
-       ( passedt.military == "naval_base"                         ) or
-       ( passedt.military == "depot"                              ) or
-       ( passedt.military == "registration_and_enlistment_office" ) or
-       ( passedt.military == "checkpoint"                         ) or
-       ( passedt.military == "danger_area"                        ) or
-       ( passedt.hazard   == "shooting_range"                     ) or
-       ( passedt.sport    == "shooting"                           ) or
-       ( passedt.sport    == "shooting_range"                     )) then
-      passedt.landuse = "military"
    end
 
 -- ----------------------------------------------------------------------------
@@ -3651,6 +4049,65 @@ function append_prow_ref( passedt )
        end
     end
 end -- append_prow_ref
+
+function append_accommodation( passedt )
+   if (( passedt.accommodation ~= nil  ) and
+       ( passedt.accommodation ~= "no" )) then
+      passedt.amenity = passedt.amenity .. "y"
+   else
+      passedt.amenity = passedt.amenity .. "n"
+   end
+end
+
+function append_wheelchair( passedt )
+   if ( passedt.wheelchair == "yes" ) then
+      passedt.amenity = passedt.amenity .. "y"
+   else
+      if ( passedt.wheelchair == "limited" ) then
+         passedt.amenity = passedt.amenity .. "l"
+      else
+         if ( passedt.wheelchair == "no" ) then
+            passedt.amenity = passedt.amenity .. "n"
+         else
+            passedt.amenity = passedt.amenity .. "d"
+         end
+      end
+   end
+end
+
+
+function append_beer_garden( passedt )
+   if ( passedt.beer_garden == "yes" ) then
+      passedt.amenity = passedt.amenity .. "g"
+   else
+      if ( passedt.outdoor_seating == "yes" ) then
+         passedt.amenity = passedt.amenity .. "o"
+      else
+         passedt.amenity = passedt.amenity .. "d"
+      end
+   end
+end
+
+-- ----------------------------------------------------------------------------
+-- Designed to set "ele" to a new value
+-- ----------------------------------------------------------------------------
+function append_inscription( passedt )
+   if (( passedt.name ~= nil ) and
+       ( passedt.name ~= ""  )) then
+      passedt.ele = passedt.name
+   else
+      passedt.ele = nil
+   end
+
+   if ( passedt.inscription ~= nil ) then
+       if ( passedt.ele == nil ) then
+           passedt.ele = passedt.inscription
+       else
+           passedt.ele = passedt.ele .. " " .. passedt.inscription
+       end
+   end
+end
+
 
 function generic_after_function( passedt )
 -- ----------------------------------------------------------------------------
