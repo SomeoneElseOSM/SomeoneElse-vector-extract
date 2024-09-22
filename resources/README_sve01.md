@@ -18,11 +18,15 @@ More important places are written to lower numbered layers: country, state, city
 
 There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas go.  Most go into "land1", except in the case of some overlays (e.g. military red hatching) which goes into "land2".  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into "land2".
 
+Values are written as e.g. "landuse_farmland" with the OSM tag as part of the key.
+
 ### name
 
 The value of the OSM name tag
 
 ## "transportation"
+
+This is for linear highways etc.
 
 ### class
 
@@ -52,9 +56,15 @@ This will be "sidewalk", "verge" or unset.  Designed to influence the rendering 
 
 ## "waterway"
 
+This is for linear waterways.
+
 ### class
 
-The OSM value for "waterway"
+The OSM value for "waterway" after processing based on "intermittent" etc.
+
+### name
+
+the value of the OSM name tag, after any postprocessing e.g. for "operator".
 
 ## "building"
 

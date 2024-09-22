@@ -518,17 +518,46 @@ function way_function()
 
         AttributeBoolean( "bridge", ( wayt.bridge == "yes" ) )
         AttributeBoolean( "tunnel", ( wayt.tunnel == "yes" ) )
-    end -- highway
+    end -- linear highways
 
 -- ----------------------------------------------------------------------------
--- Other processing - still to be added
+-- waterway processing
 -- ----------------------------------------------------------------------------
     if (( wayt.waterway ~= nil ) and
         ( wayt.waterway ~= ""  )) then
         Layer("waterway", false)
         Attribute("class", wayt.waterway)
-    end
+        Attribute( "name", Find( "name" ) )
 
+        if (( wayt.waterway == "river"          ) or
+            ( wayt.waterway == "canal"          ) or
+            ( wayt.waterway == "derelict_canal" )) then
+            MinZoom( 12 )
+        else
+            if (( wayt.waterway == "stream"   ) or
+                ( wayt.waterway == "drain"    ) or
+                ( wayt.waterway == "intriver" ) or
+                ( wayt.waterway == "intstream" )) then
+                MinZoom( 13 )
+            else
+                if ( wayt.waterway == "ditch" ) then
+                    MinZoom( 14 )
+                else
+                    if ( wayt.waterway == "weir" ) then
+                        MinZoom( 15 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
+                    end -- weir
+                end  -- ditch
+            end -- stream etc.
+        end -- river etc.
+    end -- linear waterways
+
+-- ----------------------------------------------------------------------------
+-- Most other "adding to mbtiles" processing is shared for points and polygons
+-- and is called from here:
+-- ----------------------------------------------------------------------------
     generic_after_function( wayt )
 end -- way_function()
 
