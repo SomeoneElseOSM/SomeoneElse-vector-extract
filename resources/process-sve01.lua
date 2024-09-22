@@ -1539,10 +1539,11 @@ function generic_before_function( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Retag any remaining animal attractions or zoo enclosures for rendering.
--- Unlike aviaries, these aren't assumed to have a roof
 -- ----------------------------------------------------------------------------
-   if (( passedt.attraction == "animal"    )  or
-       ( passedt.zoo        == "enclosure" )) then
+   if ((( passedt.attraction == "animal"    )  or
+        ( passedt.zoo        == "enclosure" )) and
+       (( passedt.amenity    == nil         )  or
+        ( passedt.amenity    == ""          ))) then
       passedt.amenity = "zooenclosure"
       passedt.attraction = nil
       passedt.zoo = nil
