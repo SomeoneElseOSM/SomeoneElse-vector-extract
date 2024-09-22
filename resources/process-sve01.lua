@@ -532,19 +532,19 @@ function way_function()
         if (( wayt.waterway == "river"          ) or
             ( wayt.waterway == "canal"          ) or
             ( wayt.waterway == "derelict_canal" )) then
-            MinZoom( 12 )
+            MinZoom( 11 )
         else
             if (( wayt.waterway == "stream"   ) or
                 ( wayt.waterway == "drain"    ) or
                 ( wayt.waterway == "intriver" ) or
                 ( wayt.waterway == "intstream" )) then
-                MinZoom( 13 )
+                MinZoom( 12 )
             else
                 if ( wayt.waterway == "ditch" ) then
-                    MinZoom( 14 )
+                    MinZoom( 13 )
                 else
                     if ( wayt.waterway == "weir" ) then
-                        MinZoom( 15 )
+                        MinZoom( 14 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
