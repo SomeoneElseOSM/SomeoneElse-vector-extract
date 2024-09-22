@@ -198,6 +198,8 @@ function node_function()
     nodet.megalith_type = Find("megalith_type")
     nodet.place_of_worship = Find("place_of_worship")
     nodet.climbing = Find("climbing")
+    nodet.disusedCman_made = Find("disused:man_made")
+    nodet.castle_type = Find("castle_type")
 
     generic_before_function( nodet )
 
@@ -365,6 +367,8 @@ function way_function()
     wayt.megalith_type = Find("megalith_type")
     wayt.place_of_worship = Find("place_of_worship")
     wayt.climbing = Find("climbing")
+    wayt.disusedCman_made = Find("disused:man_made")
+    wayt.castle_type = Find("castle_type")
 
     generic_before_function( wayt )
 
@@ -2760,6 +2764,297 @@ function generic_before_function( passedt )
         ( passedt.sport   == "baseball;american_football;ice_hockey;basketball" ))) then
       passedt.amenity = "pitch_baseball"
       passedt.leisure = "unnamedpitch"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Things that are both towers and monuments or memorials 
+-- should render as the latter.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made  == "tower"     ) and
+       (( passedt.historic  == "memorial" )  or
+        ( passedt.historic  == "monument" ))) then
+      passedt.man_made = nil
+   end
+
+   if ((( passedt.tourism == "gallery"     )   or
+        ( passedt.tourism == "museum"      ))  and
+       (  passedt.amenity == "arts_centre"  )) then
+      passedt.amenity = nil
+   end
+
+   if ((( passedt.tourism == "attraction"  )   or 
+        ( passedt.tourism == "artwork"     )   or
+        ( passedt.tourism == "yes"         ))  and
+       (  passedt.amenity == "arts_centre"  )) then
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Mineshafts
+-- First make sure that we treat historic ones also tagged as man_made 
+-- as historic
+-- ----------------------------------------------------------------------------
+   if (((( passedt.disusedCman_made == "mine"       )  or
+         ( passedt.disusedCman_made == "mineshaft"  )  or
+         ( passedt.disusedCman_made == "mine_shaft" )) and
+        (( passedt.man_made         == nil          )  or
+         ( passedt.man_made         == ""           ))) or
+       ((( passedt.man_made == "mine"               )  or
+         ( passedt.man_made == "mineshaft"          )  or
+         ( passedt.man_made == "mine_shaft"         )) and
+        (( passedt.historic == "yes"                )  or
+         ( passedt.historic == "mine"               )  or
+         ( passedt.historic == "mineshaft"          )  or
+         ( passedt.historic == "mine_shaft"         )  or
+         ( passedt.historic == "mine_adit"          )  or
+         ( passedt.historic == "mine_level"         )  or
+         ( passedt.disused  == "yes"                )))) then
+      passedt.historic = "mineshaft"
+      passedt.man_made = nil
+      passedt.disusedCman_made = nil
+      passedt.tourism  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Then other spellings of man_made=mineshaft
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made   == "mine"       )  or
+       ( passedt.industrial == "mine"       )  or
+       ( passedt.man_made   == "mine_shaft" )) then
+      passedt.man_made = "mineshaft"
+   end
+
+-- ----------------------------------------------------------------------------
+-- and the historic equivalents
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "mine_shaft"        ) or
+       ( passedt.historic == "mine_adit"         ) or
+       ( passedt.historic == "mine_level"        ) or
+       ( passedt.historic == "mine"              )) then
+      passedt.historic = "mineshaft"
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Before we assume that a "historic=fort" is some sort of castle (big walls,
+-- moat, that sort of thing) check that it's not prehistoric or some sort of 
+-- hill fort (banks and ditches, people running around painted blue).  If it 
+-- is, set "historic=archaeological_site" so it gets picked up as one below.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic              == "fort"          ) and
+       (( passedt.fortification_type    == "hill_fort"    )  or
+        ( passedt.fortification_type    == "hillfort"     ))) then
+      passedt.historic            = "archaeological_site"
+      passedt.archaeological_site = "fortification"
+      passedt.fortification_type  = "hill_fort"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Similarly, catch "historic" "ringfort"s
+-- ----------------------------------------------------------------------------
+   if ((( passedt.historic           == "fortification" )   and
+        ( passedt.fortification_type == "ringfort"      ))  or
+       (  passedt.historic           == "rath"           )) then
+      passedt.historic            = "archaeological_site"
+      passedt.archaeological_site = "fortification"
+      passedt.fortification_type  = "ringfort"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Catch other archaeological fortifications.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic              == "fort"           ) and
+       (( passedt.fortification_type    == "broch"         )  or
+        ( passedt.historicCcivilization == "prehistoric"   )  or
+        ( passedt.historicCcivilization == "iron_age"      )  or
+        ( passedt.historicCcivilization == "ancient_roman" ))) then
+      passedt.historic            = "archaeological_site"
+      passedt.archaeological_site = "fortification"
+   end
+
+-- ----------------------------------------------------------------------------
+-- First, remove non-castle castles that have been tagfiddled into the data.
+-- Castles go through as "historic=castle"
+-- Note that archaeological sites that are castles are handled elsewhere.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic    == "castle"       ) and
+       (( passedt.castle_type == "stately"     )  or
+        ( passedt.castle_type == "manor"       )  or
+        ( passedt.castle_type == "palace"      )  or
+        ( passedt.castle_type == "manor_house" ))) then
+      passedt.historic = "manor"
+   end
+
+   if (( passedt.historic == "castle" ) or
+       ( passedt.historic == "fort"   )) then
+      passedt.historic = "castle"
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Manors go through as "historic=manor"
+-- Note that archaeological sites that are manors are handled elsewhere.
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "manor"           ) or
+       ( passedt.historic == "lodge"           ) or
+       ( passedt.historic == "mansion"         ) or
+       ( passedt.historic == "country_mansion" ) or
+       ( passedt.historic == "stately_home"    ) or
+       ( passedt.historic == "palace"          )) then
+      passedt.historic = "manor"
+      passedt.tourism = nil
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Martello Towers go through as "historic=martello_tower"
+-- Some other structural tags that might otherwise get shown are removed.
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "martello_tower"        ) or
+       ( passedt.historic == "martello_tower;bunker" ) or
+       ( passedt.historic == "martello_tower;fort"   )) then
+      passedt.historic = "martello_tower"
+      passedt.fortification_type = nil
+      passedt.man_made = nil
+      passedt.towerCtype = nil
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Unless an active place of worship,
+-- monasteries etc. go through as "historic=monastery"
+-- "historic=ruins;ruins=monastery" are handled the same way.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.historic == "abbey"            ) or
+       (   passedt.historic == "cathedral"        ) or
+       (   passedt.historic == "monastery"        ) or
+       (   passedt.historic == "priory"           ) or
+       ((  passedt.historic == "ruins"            )  and
+        (( passedt.ruins == "abbey"              )  or
+         ( passedt.ruins == "cathedral"          )  or
+         ( passedt.ruins == "monastery"          )  or
+         ( passedt.ruins == "priory"             )))) then
+      if ( passedt.amenity == "place_of_worship" ) then
+         passedt.historic = nil
+      else
+         passedt.historic = "monastery"
+
+         if ((( passedt.landuse == nil )  or
+              ( passedt.landuse == ""  )) and
+             (( passedt.leisure == nil )  or
+              ( passedt.leisure == ""  )) and
+             (( passedt.natural == nil )  or
+              ( passedt.natural == ""  ))) then
+            passedt.landuse = "historic"
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Non-historic crosses go through as "man_made=cross".  
+-- See also memorial crosses below.
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made == "cross"         ) or
+       ( passedt.man_made == "summit_cross"  ) or
+       ( passedt.man_made == "wayside_cross" )) then
+      passedt.man_made = "cross"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various historic crosses go through as "historic=cross".  
+-- See also memorial crosses below.
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "wayside_cross"    ) or
+       ( passedt.historic == "high_cross"       ) or
+       ( passedt.historic == "cross"            ) or
+       ( passedt.historic == "market_cross"     ) or
+       ( passedt.historic == "tau_cross"        ) or
+       ( passedt.historic == "celtic_cross"     )) then
+      passedt.historic = "cross"
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Historic churches go through as "historic=church", 
+-- if they're not also an amenity or something else.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.historic == "chapel"           )  or
+        ( passedt.historic == "church"           )  or
+        ( passedt.historic == "place_of_worship" )  or
+        ( passedt.historic == "wayside_chapel"   )) and
+       (  passedt.amenity  == nil                 ) and
+       (  passedt.shop     == nil                 )) then
+      passedt.historic = "church"
+      passedt.building = "yes"
+      passedt.tourism = nil
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Historic pinfolds go through as "historic=pinfold", 
+-- Some have recently been added as "historic=pound".
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic == "pinfold" )  or
+       ( passedt.amenity  == "pinfold" )  or
+       ( passedt.historic == "pound"   )) then
+      passedt.historic = "pinfold"
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
    end
 
 -- ----------------------------------------------------------------------------
