@@ -2255,9 +2255,6 @@ function generic_before_function( passedt )
        (( passedt.fee     ~= nil       )  and
         ( passedt.fee     ~= ""        )  and
         ( passedt.fee     ~= "no"      )  and
-        ( passedt.fee     ~= "none"    )  and
-        ( passedt.fee     ~= "None"    )  and
-        ( passedt.fee     ~= "Free"    )  and
         ( passedt.fee     ~= "0"       ))) then
       passedt.amenity = "parking_pay"
    end
@@ -2269,9 +2266,6 @@ function generic_before_function( passedt )
        (( passedt.fee     ~= nil               )  and
         ( passedt.fee     ~= ""                )  and
         ( passedt.fee     ~= "no"              )  and
-        ( passedt.fee     ~= "none"            )  and
-        ( passedt.fee     ~= "None"            )  and
-        ( passedt.fee     ~= "Free"            )  and
         ( passedt.fee     ~= "0"               ))) then
       passedt.amenity = "bicycle_parking_pay"
    end
@@ -2283,9 +2277,6 @@ function generic_before_function( passedt )
        (( passedt.fee     ~= nil               )  and
         ( passedt.fee     ~= ""                )  and
         ( passedt.fee     ~= "no"              )  and
-        ( passedt.fee     ~= "none"            )  and
-        ( passedt.fee     ~= "None"            )  and
-        ( passedt.fee     ~= "Free"            )  and
         ( passedt.fee     ~= "0"               ))) then
       passedt.amenity = "motorcycle_parking_pay"
    end
@@ -2298,9 +2289,6 @@ function generic_before_function( passedt )
       if (( passedt.fee     ~= nil       )  and
           ( passedt.fee     ~= ""        )  and
           ( passedt.fee     ~= "no"      )  and
-          ( passedt.fee     ~= "none"    )  and
-          ( passedt.fee     ~= "None"    )  and
-          ( passedt.fee     ~= "Free"    )  and
           ( passedt.fee     ~= "0"       )) then
          if (( passedt.male   == "yes" ) and
              ( passedt.female ~= "yes" )) then
@@ -2334,9 +2322,6 @@ function generic_before_function( passedt )
       if (( passedt.fee     ~= nil       )  and
           ( passedt.fee     ~= ""        )  and
           ( passedt.fee     ~= "no"      )  and
-          ( passedt.fee     ~= "none"    )  and
-          ( passedt.fee     ~= "None"    )  and
-          ( passedt.fee     ~= "Free"    )  and
           ( passedt.fee     ~= "0"       )) then
          if (( passedt.male   == "yes" ) and
              ( passedt.female ~= "yes" )) then
@@ -2376,9 +2361,6 @@ function generic_before_function( passedt )
        if (( passedt.fee     ~= nil       )  and
            ( passedt.fee     ~= ""        )  and
            ( passedt.fee     ~= "no"      )  and
-           ( passedt.fee     ~= "none"    )  and
-           ( passedt.fee     ~= "None"    )  and
-           ( passedt.fee     ~= "Free"    )  and
            ( passedt.fee     ~= "0"       )) then
          if ( passedt.parking_space == "disabled" ) then
             passedt.amenity = "parking_paydisabled"
