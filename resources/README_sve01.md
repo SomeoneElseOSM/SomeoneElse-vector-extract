@@ -31,16 +31,16 @@ This is derived from the OSM value for "highway" and the designation.  Values ar
 * motorway, trunk, primary, secondary, tertiary, unclassified and residential are handled as normal.
 * service without designation are handled as normal
 * service with designation are handled as per the designation
-* unpaved - unpaved unclassified roads, shown with a solid brown line
-* ucrwide, ucrnarrow - unclassified country road; long brown dashes widely or narrowly spaced
-* boatwide, boatnarrow - Byway Open to All Traffic; brown dashes widely or narrowly spaced
-* rbywide, rbynarrow - Restricted Byway; blue dashes and dots widely or narrowly spaced
-* bridlewaywide, bridlewaynarrow - Public Bridleway; blue dots widely or narrowly spaced
-* bridlewaysteps - Public Bridleway; wide blue dashes
-* footwaywide, footwaynarrow - Public Footpath; salmon dots widely or narrowly spaced
-* footwaysteps - Public Footpath; wide salmon dashes
-* pathwide, pathnarrow - no designation; black dots widely or narrowly spaced
-* steps - no designation; wide black dashes
+* unpaved - unpaved unclassified roads, intended to be shown visually different from paved ones
+* ucrwide, ucrnarrow - unclassified country road intended to be shown visually between unpaved and BOAT
+* boatwide, boatnarrow - Byway Open to All Traffic; wide or narrow
+* rbywide, rbynarrow - Restricted Byway; wide or narrow
+* bridlewaywide, bridlewaynarrow - Public Bridleway; wide or narrow
+* bridlewaysteps - Public Bridleway; but steps
+* footwaywide, footwaynarrow - Public Footpath; wide or narrow
+* footwaysteps - Public Footpath; but steps
+* pathwide, pathnarrow - no designation; wide or narrow
+* steps - no designation; steps
 
 ### name
 
@@ -48,7 +48,7 @@ The value of the OSM name tag, after postprocessing to e.g. put in brackets if n
 
 ### edge
 
-This will be "sidewalk", "verge" or unset.  Influences the rendering on major road types.
+This will be "sidewalk", "verge" or unset.  Designed to influence the rendering on major road types.
 
 ## "waterway"
 
@@ -58,7 +58,13 @@ The OSM value for "waterway"
 
 ## "building"
 
-No fields yet
+### class
+
+Stored as the processed OSM tag and value, such as "building_roof"
+
+### name
+
+the value of the OSM name tag, after any postprocessing e.g. for "operator".
 
 ## "poi"
 
@@ -70,6 +76,8 @@ Stored as the OSM tag and value, such as "amenity_pub"
 
 the value of the OSM name tag, after any postprocessing e.g. for "operator".
 
+
+For individual source tag values used see [here](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags)
 
 This style is very much still a work in progress.
 
