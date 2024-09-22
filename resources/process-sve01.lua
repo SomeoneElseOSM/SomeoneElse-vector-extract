@@ -200,6 +200,8 @@ function node_function()
     nodet.climbing = Find("climbing")
     nodet.disusedCman_made = Find("disused:man_made")
     nodet.castle_type = Find("castle_type")
+    nodet.pipeline = Find("pipeline")
+    nodet.intermittent = Find("intermittent")
 
     generic_before_function( nodet )
 
@@ -369,6 +371,8 @@ function way_function()
     wayt.climbing = Find("climbing")
     wayt.disusedCman_made = Find("disused:man_made")
     wayt.castle_type = Find("castle_type")
+    wayt.pipeline = Find("pipeline")
+    wayt.intermittent = Find("intermittent")
 
     generic_before_function( wayt )
 
@@ -628,6 +632,15 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Before processing footways, turn certain corridors into footways
+--
+-- Note that https://wiki.openstreetmap.org/wiki/Key:indoor defines
+-- indoor=corridor as a closed way.  highway=corridor is not documented there
+-- but is used for corridors.  We'll only process layer or level 0 (or nil)
+-- ----------------------------------------------------------------------------
+   passedt.highway = fix_corridors( passedt.highway, passedt.layer, passedt.level )
+
+-- ----------------------------------------------------------------------------
 -- If there are different names on each side of the street, we create one name
 -- containing both.
 -- If "name" does not exist but "name:en" does, use that.
@@ -682,13 +695,6 @@ function generic_before_function( passedt )
    if ( t[8] ~= nil ) then
       passedt.unsigned = t[8]
    end
-
--- ----------------------------------------------------------------------------
--- Handle place=islet as place=island
--- Handle place=quarter
--- Handle natural=cape etc. as place=locality if no other place tag.
--- ----------------------------------------------------------------------------
-   passedt.place = consolidate_place( passedt.place, passedt.natural )
 
 -- ----------------------------------------------------------------------------
 -- Show natural=bracken as scrub
@@ -1312,7 +1318,8 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
--- Send driveways through to the rendering code as a specific highway type
+-- Send driveways through to the vector rendering code as 
+-- a specific highway type (raster does not do this)
 -- ----------------------------------------------------------------------------
    if (( passedt.highway == "service"  ) and
        ( passedt.service == "driveway" )) then
@@ -1461,6 +1468,11 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Here the raster code has "Use unclassified_sidewalk to indicate sidewalk"
+-- We don't do that here because we write an "edge" value through.
+-- ----------------------------------------------------------------------------
+
+-- ----------------------------------------------------------------------------
 -- Render narrow tertiary roads as unclassified
 -- ----------------------------------------------------------------------------
    if ((  passedt.highway    == "tertiary"  )  and
@@ -1577,6 +1589,20 @@ function generic_before_function( passedt )
       passedt.attraction = nil
       passedt.zoo = nil
    end
+
+-- ----------------------------------------------------------------------------
+-- Handle spoil heaps as landfill
+-- ----------------------------------------------------------------------------
+   if ( passedt.man_made == "spoil_heap" ) then
+      passedt.landuse = "landfill"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle place=islet as place=island
+-- Handle place=quarter
+-- Handle natural=cape etc. as place=locality if no other place tag.
+-- ----------------------------------------------------------------------------
+   passedt.place = consolidate_place( passedt.place, passedt.natural )
 
 -- ----------------------------------------------------------------------------
 -- Handle shoals, either as mud or reef
@@ -1703,6 +1729,51 @@ function generic_before_function( passedt )
        (( passedt.tidal     == "yes"       ) or
         ( passedt.wetland   == "tidalflat" ))) then
       passedt.natural = "tidal_mud"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle various sorts of milestones.
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway  == "milestone" )  or
+       ( passedt.historic == "milestone" )  or
+       ( passedt.historic == "milepost"  )  or
+       ( passedt.waterway == "milestone" )  or
+       ( passedt.railway  == "milestone" )  or
+       ( passedt.man_made == "mile_post" )) then
+      passedt.highway = "milestone"
+
+      append_inscription( passedt )
+      append_directions( passedt )
+   end
+
+-- ----------------------------------------------------------------------------
+-- Aerial markers for pipelines etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.marker   == "aerial"          ) or
+       ( passedt.marker   == "pipeline"        ) or
+       ( passedt.marker   == "post"            ) or
+       ( passedt.man_made == "pipeline_marker" ) or
+       ( passedt.man_made == "marker"          ) or
+       ( passedt.pipeline == "marker"          )) then
+      passedt.man_made = "markeraerial"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Boundary stones.  If they're already tagged as tourism=attraction, remove
+-- that tag.
+-- Note that "marker=stone" (for "non boundary stones") are handled elsewhere.
+-- For March Stones see https://en.wikipedia.org/wiki/March_Stones_of_Aberdeen
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic    == "boundary_stone"  )  or
+       ( passedt.historic    == "boundary_marker" )  or
+       ( passedt.man_made    == "boundary_marker" )  or
+       ( passedt.marker      == "boundary_stone"  )  or
+       ( passedt.boundary    == "marker"          )  or
+       ( passedt.designation == "March Stone"     )) then
+      passedt.man_made = "boundary_stone"
+      passedt.tourism  = nil
+
+      append_inscription( passedt )
    end
 
 -- ----------------------------------------------------------------------------
@@ -2776,6 +2847,51 @@ function generic_before_function( passedt )
         ( passedt.sport   == "baseball;american_football;ice_hockey;basketball" ))) then
       passedt.amenity = "pitch_baseball"
       passedt.leisure = "unnamedpitch"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Apparently there are a few "waterway=brook" in the UK.  Render as stream.
+-- Likewise "tidal_channel" as stream and "drainage_channel" as ditch.
+-- ----------------------------------------------------------------------------
+   if (( passedt.waterway == "brook"         ) or
+       ( passedt.waterway == "flowline"      ) or
+       ( passedt.waterway == "tidal_channel" )) then
+      passedt.waterway = "stream"
+   end
+
+   if ( passedt.waterway == "drainage_channel" ) then
+      passedt.waterway = "ditch"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle "natural=pond" as water.
+-- ----------------------------------------------------------------------------
+   if ( passedt.natural == "pond" ) then
+      passedt.natural = "water"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle "waterway=mill_pond" as water.
+-- "dock" is displayed with a water fill.
+-- ----------------------------------------------------------------------------
+   if ( passedt.waterway == "mill_pond" ) then
+      passedt.waterway = "dock"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Display intermittent rivers as "intriver"
+-- ----------------------------------------------------------------------------
+   if (( passedt.waterway     == "river"  )  and
+       ( passedt.intermittent == "yes"    )) then
+      passedt.waterway = "intriver"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Display intermittent stream as "intstream"
+-- ----------------------------------------------------------------------------
+   if (( passedt.waterway     == "stream"  )  and
+       ( passedt.intermittent == "yes"     )) then
+      passedt.waterway = "intstream"
    end
 
 -- ----------------------------------------------------------------------------
@@ -4440,6 +4556,92 @@ function append_inscription( passedt )
    end
 end
 
+
+-- ----------------------------------------------------------------------------
+-- Designed to append any directions to an "ele" that might already have
+-- "inscription" in it.
+-- ----------------------------------------------------------------------------
+function append_directions( passedt )
+   if (( passedt.direction_north ~= nil ) and
+       ( passedt.direction_north ~= ""  )) then
+      if (( passedt.ele == nil ) and
+          ( passedt.ele == ""  )) then
+         passedt.ele = "N: " .. passedt.direction_north
+      else
+         passedt.ele = passedt.ele .. ", N: " .. passedt.direction_north
+      end
+   end
+
+   if (( passedt.direction_northeast ~= nil ) and
+       ( passedt.direction_northeast ~= ""  )) then
+      if (( passedt.ele == nil ) and
+          ( passedt.ele == ""  )) then
+         passedt.ele = "NE: " .. passedt.direction_northeast
+      else
+         passedt.ele = passedt.ele .. ", NE: " .. passedt.direction_northeast
+      end
+   end
+
+   if (( passedt.direction_east ~= nil ) and
+       ( passedt.direction_east ~= ""  )) then
+      if (( passedt.ele == nil ) and
+          ( passedt.ele == ""  )) then
+         passedt.ele = "E: " .. passedt.direction_east
+      else
+         passedt.ele = passedt.ele .. ", E: " .. passedt.direction_east
+      end
+   end
+
+   if (( passedt.direction_southeast ~= nil ) and
+       ( passedt.direction_southeast ~= ""  )) then
+      if (( passedt.ele == nil ) and
+          ( passedt.ele == ""  )) then
+         passedt.ele = "SE: " .. passedt.direction_southeast
+      else
+         passedt.ele = passedt.ele .. ", SE: " .. passedt.direction_southeast
+      end
+   end
+
+   if (( passedt.direction_south ~= nil ) and
+       ( passedt.direction_south ~= ""  )) then
+      if (( passedt.ele == nil ) and
+          ( passedt.ele == ""  )) then
+         passedt.ele = "S: " .. passedt.direction_south
+      else
+         passedt.ele = passedt.ele .. ", S: " .. passedt.direction_south
+      end
+   end
+
+   if (( passedt.direction_southwest ~= nil ) and
+       ( passedt.direction_southwest ~= ""  )) then
+      if (( passedt.ele == nil ) and
+          ( passedt.ele == ""  )) then
+         passedt.ele = "SW: " .. passedt.direction_southwest
+      else
+         passedt.ele = passedt.ele .. ", SW: " .. passedt.direction_southwest
+      end
+   end
+
+   if (( passedt.direction_west ~= nil ) and
+       ( passedt.direction_west ~= ""  )) then
+      if (( passedt.ele == nil ) and
+          ( passedt.ele == ""  )) then
+         passedt.ele = "W: " .. passedt.direction_west
+      else
+         passedt.ele = passedt.ele .. ", W: " .. passedt.direction_west
+      end
+   end
+
+   if (( passedt.direction_northwest ~= nil ) and
+       ( passedt.direction_northwest ~= ""  )) then
+      if (( passedt.ele == nil ) and
+          ( passedt.ele == ""  )) then
+         passedt.ele = "NW: " .. passedt.direction_northwest
+      else
+         passedt.ele = passedt.ele .. ", NW: " .. passedt.direction_northwest
+      end
+   end
+end
 
 function generic_after_function( passedt )
 -- ----------------------------------------------------------------------------
