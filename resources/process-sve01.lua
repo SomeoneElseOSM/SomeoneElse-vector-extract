@@ -197,6 +197,7 @@ function node_function()
     nodet.fortification_type = Find("fortification_type")
     nodet.megalith_type = Find("megalith_type")
     nodet.place_of_worship = Find("place_of_worship")
+    nodet.climbing = Find("climbing")
 
     generic_before_function( nodet )
 
@@ -363,6 +364,7 @@ function way_function()
     wayt.fortification_type = Find("fortification_type")
     wayt.megalith_type = Find("megalith_type")
     wayt.place_of_worship = Find("place_of_worship")
+    wayt.climbing = Find("climbing")
 
     generic_before_function( wayt )
 
@@ -1794,12 +1796,12 @@ function generic_before_function( passedt )
       passedt.tourism = nil
    end
 
-   if ((  passedt.tourism == "attraction"  ) and
-       (( passedt.shop    ~= nil          )  or
-        ( passedt.shop    ~= ""           )  or
-        ( passedt.amenity ~= nil          )  or
-        ( passedt.amenity ~= ""           )  or
-        ( passedt.leisure == "park"       ))) then
+   if ((   passedt.tourism == "attraction"   ) and
+       ((( passedt.shop    ~= nil          )   and
+         ( passedt.shop    ~= ""           ))  or
+        (( passedt.amenity ~= nil          )   and
+         ( passedt.amenity ~= ""           ))  or
+        (  passedt.leisure == "park"       ))) then
       passedt.tourism = nil
    end
 
@@ -1908,6 +1910,28 @@ function generic_before_function( passedt )
    if (( passedt.leisure == "beach_resort" ) and
        ( passedt.natural == "beach"        )) then
       passedt.leisure = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Remove tourism=attraction from rock features that are rendered as rock(s)
+-- ----------------------------------------------------------------------------
+   if ((  passedt.tourism   == "attraction"     ) and
+       (( passedt.natural   == "bare_rock"     ) or
+        ( passedt.natural   == "boulder"       ) or
+        ( passedt.natural   == "rock"          ) or
+        ( passedt.natural   == "rocks"         ) or
+        ( passedt.natural   == "stone"         ) or
+        ( passedt.natural   == "stones"        ) or
+        ( passedt.climbing  == "boulder"       ))) then
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- There is at least one closed "natural=couloir" with "surface=scree".
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural ~= nil     ) and
+       ( passedt.surface == "scree" )) then
+      passedt.natural = "scree"
    end
 
 -- ----------------------------------------------------------------------------
@@ -4405,7 +4429,8 @@ function render_power_land1( passedt )
 end -- render_power_land1()
 
 function render_tourism_land1( passedt )
-    if ( passedt.tourism == "zoo" ) then
+    if (( passedt.tourism == "zoo"        ) or
+        ( passedt.tourism == "attraction" )) then
         Layer( "land1", true )
         Attribute( "class", "tourism_" .. passedt.tourism )
         Attribute( "name", Find( "name" ) )
