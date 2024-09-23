@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20240922T130700Z",
+  "data_updated": "20240923T103100Z",
   "project": {
     "name": "SomeoneElse: Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -167,8 +167,6 @@
     { "key": "landuse", "value": "landfill", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "landuse", "value": "historic", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "landuse", "value": "orchard", "description": "Written into 'land1' or 'land2' at minzoom 9" },
-    { "key": "landuse", "value": "saltmarsh", "description": "Written into 'land1' or 'land2' at minzoom 9" },
-    { "key": "landuse", "value": "reedbed", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "landuse", "value": "allotments", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "landuse", "value": "village_green", "description": "Written into 'land1' or 'land2' at minzoom 10" },
     { "key": "landuse", "value": "quarry", "description": "Written into 'land1' or 'land2' as quarry or historicquarry at minzoom 10" },
@@ -210,7 +208,7 @@
     { "key": "natural", "value": "sand", "description": "Written into 'land1' or 'land2' (differently if tidal) at minzoom 9" },
     { "key": "natural", "value": "scree", "description": "Written into 'land1' or 'land2' (differently if tidal) at minzoom 9" },
     { "key": "natural", "value": "shingle", "description": "Written into 'land1' or 'land2' (differently if tidal) at minzoom 9" },
-    { "key": "natural", "value": "ehath", "description": "Written into 'land1' or 'land2' at minzoom 9" },
+    { "key": "natural", "value": "heath", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "natural", "value": "grassland", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "natural", "value": "scrub", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "natural", "value": "wetland", "description": "Written into 'land1' or 'land2' based on subtag at minzoom 12" },
@@ -330,6 +328,12 @@
     { "key": "waterway:abandoned", "value": "canal", "description": "Disused canals are extracted as derelict canals" },
     { "key": "waterway:historic", "description": "Handle disused version of tag" },
     { "key": "waterway:historic", "value": "canal", "description": "Disused canals are extracted as derelict canals" },
+    { "key": "wetland", "description": "Modify wetland landuse value in 'land1' or 'land2'" },
+    { "key": "wetland", "value": "mud", "description": "Modify wetland landuse to mud or tidal mud" },
+    { "key": "wetland", "value": "reedbed", "description": "Modify wetland landuse to reedbed" },
+    { "key": "wetland", "value": "saltmarsh", "description": "Modify wetland landuse to saltmarsh" },
+    { "key": "wetland", "value": "tidalflat", "description": "Modify wetland landuse to mud or tidal mud" },
+    { "key": "wetland", "value": "wet_meadow", "description": "Modify wetland landuse to wet_meadow" },
     { "key": "width", "description": "Depending on context, go down a road class. Also changes path to track and vice versa." }
   ]
 }
