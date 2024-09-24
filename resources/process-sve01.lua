@@ -202,6 +202,10 @@ function node_function()
     nodet.castle_type = Find("castle_type")
     nodet.pipeline = Find("pipeline")
     nodet.intermittent = Find("intermittent")
+    nodet.basin = Find("basin")
+    nodet.flood_prone = Find("flood_prone")
+    nodet.hazard_prone = Find("hazard_prone")
+    nodet.hazard_type = Find("hazard_type")
 
     generic_before_function( nodet )
 
@@ -373,6 +377,10 @@ function way_function()
     wayt.castle_type = Find("castle_type")
     wayt.pipeline = Find("pipeline")
     wayt.intermittent = Find("intermittent")
+    wayt.basin = Find("basin")
+    wayt.flood_prone = Find("flood_prone")
+    wayt.hazard_prone = Find("hazard_prone")
+    wayt.hazard_type = Find("hazard_type")
 
     generic_before_function( wayt )
 
@@ -3575,14 +3583,87 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Add "water" to some "wet" features for rendering.
+-- (the last part currently vector only)
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made   == "wastewater_reservoir"  ) or
+       ( passedt.man_made   == "lagoon"                ) or
+       ( passedt.man_made   == "lake"                  ) or
+       ( passedt.man_made   == "reservoir"             ) or
+       ( passedt.basin      == "wastewater"            ) or
+       ( passedt.natural    == "lake"                  )) then
+      passedt.natural = "water"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Coalesce non-intermittent water into one tag.
+-- ----------------------------------------------------------------------------
+   if ( passedt.landuse == "reservoir"  ) then
+      passedt.natural = "water"
+      passedt.landuse = nil
+   end
+
+   if ( passedt.waterway == "riverbank"  ) then
+      passedt.natural = "water"
+      passedt.waterway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Suppress "name" on riverbanks mapped as "natural=water"
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural   == "water"  ) and
+       ( passedt.water     == "river"  )) then
+      passedt.name = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle intermittent water areas.
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural      == "water"  ) and
+       ( passedt.intermittent == "yes"  )) then
+      passedt.natural = "intermittentwater"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Also try and detect flood plains etc.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.natural      == "floodplain"     ) or
+       ((( passedt.flood_prone  == "yes"          )   or
+         (( passedt.hazard_prone == "yes"        )    and
+          ( passedt.hazard_type  == "flood"      )))  and
+        (( passedt.natural      == nil            )   or
+         ( passedt.natural      == ""             ))  and
+        (( passedt.highway      == nil            )   or
+         ( passedt.highway      == ""             ))) or
+       ((( passedt.natural      == nil            )   or
+         ( passedt.natural      == ""             ))  and
+        (  passedt.landuse      ~= "basin"         )  and
+        (( passedt.basin        == "detention"    )   or
+         ( passedt.basin        == "retention"    )   or
+         ( passedt.basin        == "infiltration" )   or
+         ( passedt.basin        == "side_pound"   )))) then
+      passedt.natural = "flood_prone"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle intermittent wetland areas.
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural      == "wetland"  )  and
+       ( passedt.intermittent == "yes"      )) then
+      passedt.natural = "intermittentwetland"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Beacons - render historic ones, not radio ones.
 -- ----------------------------------------------------------------------------
    if ((( passedt.man_made == "beacon"        )  or
         ( passedt.man_made == "signal_beacon" )  or
         ( passedt.landmark == "beacon"        )  or
         ( passedt.historic == "beacon"        )) and
-       (  passedt.airmark  == nil              ) and
-       (  passedt.aeroway  == nil              ) and
+       (( passedt.airmark  == nil             )  or
+        ( passedt.airmark  == ""              )) and
+       (( passedt.aeroway  == nil             )  or
+        ( passedt.aeroway  == ""              )) and
        (  passedt.natural  ~= "hill"           ) and
        (  passedt.natural  ~= "peak"           )) then
       passedt.historic = "nonspecific"
@@ -3628,10 +3709,13 @@ function generic_before_function( passedt )
 -- Get rid of landuse=conservation if we can.  It's a bit of a special case;
 -- in raster maps it has a label like grass but no green fill.
 -- ----------------------------------------------------------------------------
-   if ((  passedt.landuse  == "conservation"  ) and
-       (( passedt.historic ~= nil            )  or
-        ( passedt.leisure  ~= nil            )  or
-        ( passedt.natural  ~= nil            ))) then
+   if ((   passedt.landuse  == "conservation"   ) and
+       ((( passedt.historic ~= nil            )   and
+         ( passedt.historic ~= ""             ))  or
+        (( passedt.leisure  ~= nil            )   and
+         ( passedt.leisure  ~= ""             ))  or
+        (( passedt.natural  ~= nil            )   and
+         ( passedt.natural  ~= ""             )))) then
       passedt.landuse = nil
    end
 
@@ -3748,10 +3832,13 @@ function generic_before_function( passedt )
       passedt.place = nil
       passedt.tourism = nil
 
-      if (( passedt.landuse               == nil      ) and
-          ( passedt.leisure               == nil      ) and
-          ( passedt.natural               == nil      )  and
-          ( passedt.historicCcivilization ~= "modern" )) then
+      if ((( passedt.landuse               == nil      )   or
+           ( passedt.landuse               == ""       ))  and
+          (( passedt.leisure               == nil      )   or
+           ( passedt.leisure               == ""       ))  and
+          (( passedt.natural               == nil      )   or
+           ( passedt.natural               == ""       ))  and
+          (  passedt.historicCcivilization ~= "modern"  )) then
          passedt.landuse = "historic"
       end
 
@@ -4738,9 +4825,22 @@ end -- generic_after_poi()
 -- Where two features might get shown, the lua code above adds the one to
 -- show the label for to "land1" and adds the other "unnamed" one to "land2"
 --
+-- The first thing we process is non-intermittent water
+-- 
 -- land1 layer
 -- ----------------------------------------------------------------------------
 function generic_after_land1( passedt )
+    if ( passedt.natural == "water" ) then
+        Layer( "land1", true )
+        Attribute( "class", "natural_" .. passedt.natural )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 5 )
+    else
+        render_landuse_land1( passedt )
+    end
+end -- generic_after_land1()
+
+function render_landuse_land1( passedt )
     if (( passedt.landuse == "forest"          ) or
         ( passedt.landuse == "farmland"        )) then
         Layer( "land1", true )
@@ -4805,7 +4905,7 @@ function generic_after_land1( passedt )
             end -- landuse=quarry 10
         end -- landuse=grass etc. 9
     end -- landuse=forest 8
-end -- generic_after_land1()
+end -- render_landuse_land1()
 
 function render_leisure_land1( passedt )
     if ( passedt.leisure == "nature_reserve" ) then
@@ -4994,6 +5094,18 @@ end -- render_amenity_land1()
 -- land2 layer
 -- ----------------------------------------------------------------------------
 function generic_after_land2( passedt )
+    if (( passedt.natural == "intermittentwater" ) or
+        ( passedt.natural == "flood_prone"       )) then
+        Layer( "land2", true )
+        Attribute( "class", "natural_" .. passedt.natural )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 9 )
+    else
+        render_landuse_land2( passedt )
+    end
+end -- generic_after_land2()
+
+function render_landuse_land2( passedt )
     if (( passedt.landuse == "unnamedforest"   ) or
         ( passedt.landuse == "unnamedfarmland" )) then
         Layer( "land2", true )
