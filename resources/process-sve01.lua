@@ -5156,7 +5156,13 @@ function render_leisure_land2( passedt )
         Attribute( "class", "leisure_" .. passedt.leisure )
         MinZoom( 9 )
     else
-        render_natural_land2( passedt )
+        if ( passedt.leisure == "marina" ) then
+            Layer( "land2", true )
+            Attribute( "class", "leisure_" .. passedt.leisure )
+            MinZoom( 13 )
+        else
+            render_natural_land2( passedt )
+        end -- leisure=marina 13
     end -- leisure=unnamedpitch 9
 end -- render_leisure_land2()
 
