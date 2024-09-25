@@ -2874,16 +2874,11 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Handle "natural=pond" as water.
 -- ----------------------------------------------------------------------------
-   if ( passedt.natural == "pond" ) then
+   if (( passedt.natural  == "pond"       ) or
+       ( passedt.waterway == "dock"       ) or
+       ( passedt.waterway == "mill_pond"  )) then
       passedt.natural = "water"
-   end
-
--- ----------------------------------------------------------------------------
--- Handle "waterway=mill_pond" as water.
--- "dock" is displayed with a water fill.
--- ----------------------------------------------------------------------------
-   if ( passedt.waterway == "mill_pond" ) then
-      passedt.waterway = "dock"
+      passedt.waterway = nil
    end
 
 -- ----------------------------------------------------------------------------
