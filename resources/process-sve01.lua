@@ -3619,9 +3619,11 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Handle intermittent water areas.
 -- ----------------------------------------------------------------------------
-   if (( passedt.natural      == "water"  ) and
-       ( passedt.intermittent == "yes"  )) then
+   if ((( passedt.natural      == "water"  )  or
+        ( passedt.landuse      == "basin"  )) and
+       ( passedt.intermittent == "yes"      )) then
       passedt.natural = "intermittentwater"
+      passedt.landuse = nil
    end
 
 -- ----------------------------------------------------------------------------
