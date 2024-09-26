@@ -5207,9 +5207,20 @@ function render_aeroway_land2( passedt )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
         Attribute( "name", Find( "name" ) )
         MinZoom( 12 )
+    else
+        render_boundary_land2( passedt )
+    end -- aeroway=aerodrome 12
+end -- render_aeroway_land2()
+
+function render_boundary_land2( passedt )
+    if ( passedt.boundary == "national_park" ) then
+        Layer( "land2", true )
+        Attribute( "class", "boundary_" .. passedt.boundary )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 6 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-    end -- aeroway=aerodrome 12
-end -- render_aeroway_land2()
+    end -- boundary=national_park 6
+end -- render_boundary_land2()
 
