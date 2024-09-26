@@ -4827,7 +4827,8 @@ end -- generic_after_poi()
 -- land1 layer
 -- ----------------------------------------------------------------------------
 function generic_after_land1( passedt )
-    if ( passedt.natural == "water" ) then
+    if (( passedt.natural == "water"   ) or
+        ( passedt.natural == "glacier" )) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
         Attribute( "name", Find( "name" ) )
