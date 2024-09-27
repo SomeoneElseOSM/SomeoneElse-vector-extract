@@ -4730,11 +4730,25 @@ end
 function generic_after_function( passedt )
 -- ----------------------------------------------------------------------------
 -- When processing data for layers note that something might have be a feature
--- that needs adding to more than one layer (perhaps based on the same 
--- key/value combination, perhaps based on a different one).
+-- that needs adding to more than one layer.  For example, something might 
+-- be a nature reserve (which will end up in the "land1" layer") and a wood
+-- (which will go into land2).  The code, mostly called from 
+-- "generic_before_function()" makes sure that things that (mostly) should 
+-- have names go in "land1" and things that should not go in "land2"
+--
+-- Each of "land1" and "land2" should also look after icons (and if relevent 
+-- names) for things in that layer.  
+--
+-- After the "land1" processing we go into "generic_after_poi" to pick up 
+-- any leftover names and/or icons that haven't already been processed as 
+-- part of the "land1" layer.  
+--
+-- After that, "land2" is processed for any second tags that should also get
+-- shown alongside "land1".  For example, "land1" may be 
+-- "leisure=nature_reserve" and "land2" could be "natural=wood".
 -- ----------------------------------------------------------------------------
     generic_after_building( passedt )
-    generic_after_poi( passedt )
+    
     generic_after_land1( passedt )
     generic_after_land2( passedt )
 end -- generic_after_function()
@@ -4750,72 +4764,6 @@ function generic_after_building( passedt )
 	Attribute( "name", Find( "name" ) )
     end
 end -- generic_after_building()
-
--- ----------------------------------------------------------------------------
--- poi layer
--- ----------------------------------------------------------------------------
-function generic_after_poi( passedt )
-    if (( passedt.amenity ~= ""  ) and
-        ( passedt.amenity ~= nil )) then
-        LayerAsCentroid( "poi" )
-	Attribute( "class","amenity_" .. passedt.amenity )
-	Attribute( "name", Find( "name" ) )
-        MinZoom( 14 )
-    else
-        if (( passedt.place ~= ""  ) and
-            ( passedt.place ~= nil )) then
-            LayerAsCentroid( "place" )
-    	    Attribute( "name", Find( "name" ))
-
-            if (( passedt.place == "country" ) or
-                ( passedt.place == "state"   )) then
-                MinZoom( 5 )
-            else
-                if ( passedt.place == "city" ) then
-                    MinZoom( 5 )
-                else
-                    if ( passedt.place == "town" ) then
-                        MinZoom( 8 )
-                    else
-                        if (( passedt.place == "suburb"  ) or
-                            ( passedt.place == "village" )) then
-                            MinZoom( 11 )
-                        else
-                            if (( passedt.place == "hamlet"            ) or
-                                ( passedt.place == "locality"          ) or
-                                ( passedt.place == "neighbourhood"     ) or
-                                ( passedt.place == "isolated_dwelling" ) or
-                                ( passedt.place == "farm"              )) then
-                                MinZoom( 13 )
-                            else
-                                MinZoom( 14 )
-                            end -- hamlet
-                        end -- suburb
-                    end -- town
-                end -- city
-            end --country
-	else -- place
-            if (( passedt.shop ~= ""  ) and
-                ( passedt.shop ~= nil )) then
-                LayerAsCentroid( "poi" )
-    	        Attribute( "class","shop_" .. passedt.shop )
-    	        Attribute( "name", Find( "name" ) )
-                MinZoom( 14 )
-            else
-                if (( passedt.tourism ~= ""  ) and
-                    ( passedt.tourism ~= nil )) then
-                    LayerAsCentroid( "poi" )
-                    Attribute( "class", "tourism_" .. passedt.tourism )
-                    Attribute( "name", Find( "name" ) )
-                    MinZoom( 14 )
--- ------------------------------------------------------------------------------
--- No "else" here yet
--- ------------------------------------------------------------------------------
-                end -- tourism
-            end -- shop
-        end -- place
-    end -- amenity
-end -- generic_after_poi()
 
 -- ----------------------------------------------------------------------------
 -- There are two "land" layers - "land1" and "land2".
@@ -5082,9 +5030,14 @@ function render_amenity_land1( passedt )
         Attribute( "class", "amenity_" .. passedt.amenity )
         Attribute( "name", Find( "name" ) )
         MinZoom( 9 )
+    else
 -- ------------------------------------------------------------------------------
--- No "else" here yet
+-- At this point we've done all thing "landuse" processing for things that might 
+-- be in the "land1" layer, including displaying names and/or icons for them.
+-- The call to "generic_after_poi()" below displays things that should also have
+-- a name and/or an icon, but don't have an area fill or outline.
 -- ------------------------------------------------------------------------------
+        generic_after_poi( passedt )
     end -- amenity=parking etc. 9
 end -- render_amenity_land1()
 
@@ -5223,4 +5176,71 @@ function render_boundary_land2( passedt )
 -- ------------------------------------------------------------------------------
     end -- boundary=national_park 6
 end -- render_boundary_land2()
+
+
+-- ----------------------------------------------------------------------------
+-- poi layer
+-- ----------------------------------------------------------------------------
+function generic_after_poi( passedt )
+    if (( passedt.amenity ~= ""  ) and
+        ( passedt.amenity ~= nil )) then
+        LayerAsCentroid( "poi" )
+	Attribute( "class","amenity_" .. passedt.amenity )
+	Attribute( "name", Find( "name" ) )
+        MinZoom( 14 )
+    else
+        if (( passedt.place ~= ""  ) and
+            ( passedt.place ~= nil )) then
+            LayerAsCentroid( "place" )
+    	    Attribute( "name", Find( "name" ))
+
+            if (( passedt.place == "country" ) or
+                ( passedt.place == "state"   )) then
+                MinZoom( 5 )
+            else
+                if ( passedt.place == "city" ) then
+                    MinZoom( 5 )
+                else
+                    if ( passedt.place == "town" ) then
+                        MinZoom( 8 )
+                    else
+                        if (( passedt.place == "suburb"  ) or
+                            ( passedt.place == "village" )) then
+                            MinZoom( 11 )
+                        else
+                            if (( passedt.place == "hamlet"            ) or
+                                ( passedt.place == "locality"          ) or
+                                ( passedt.place == "neighbourhood"     ) or
+                                ( passedt.place == "isolated_dwelling" ) or
+                                ( passedt.place == "farm"              )) then
+                                MinZoom( 13 )
+                            else
+                                MinZoom( 14 )
+                            end -- hamlet
+                        end -- suburb
+                    end -- town
+                end -- city
+            end --country
+	else -- place
+            if (( passedt.shop ~= ""  ) and
+                ( passedt.shop ~= nil )) then
+                LayerAsCentroid( "poi" )
+    	        Attribute( "class","shop_" .. passedt.shop )
+    	        Attribute( "name", Find( "name" ) )
+                MinZoom( 14 )
+            else
+                if (( passedt.tourism ~= ""  ) and
+                    ( passedt.tourism ~= nil )) then
+                    LayerAsCentroid( "poi" )
+                    Attribute( "class", "tourism_" .. passedt.tourism )
+                    Attribute( "name", Find( "name" ) )
+                    MinZoom( 14 )
+-- ------------------------------------------------------------------------------
+-- No else here yet
+-- ------------------------------------------------------------------------------
+                end -- tourism
+            end -- shop
+        end -- place
+    end -- amenity
+end -- generic_after_poi()
 

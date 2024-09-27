@@ -80,7 +80,7 @@ the value of the OSM name tag, after any postprocessing e.g. for "operator".
 
 ### class
 
-Stored as the OSM tag and value, such as "amenity_pub"
+Stored as the OSM tag and value, such as "amenity_pub".  Things that exist in "land1" won't also be written here - the display style must source name and class (for icon) from "land1".
 
 ### name
 
