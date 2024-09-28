@@ -4875,29 +4875,22 @@ function render_leisure_land1( passedt )
             Attribute( "name", Find( "name" ) )
             MinZoom( 9 )
         else
-            if ( passedt.leisure == "nature_reserve" ) then
+            if (( passedt.leisure == "playground" ) or
+                ( passedt.leisure == "schoolyard" )) then
                 Layer( "land1", true )
                 Attribute( "class", "leisure_" .. passedt.leisure )
                 Attribute( "name", Find( "name" ) )
-                MinZoom( 10 )
+                MinZoom( 12 )
             else
-                if (( passedt.leisure == "playground" ) or
-                    ( passedt.leisure == "schoolyard" )) then
+                if ( passedt.leisure == "swimming_pool" ) then
                     Layer( "land1", true )
                     Attribute( "class", "leisure_" .. passedt.leisure )
                     Attribute( "name", Find( "name" ) )
-                    MinZoom( 12 )
+                    MinZoom( 13 )
                 else
-                    if ( passedt.leisure == "swimming_pool" ) then
-                        Layer( "land1", true )
-                        Attribute( "class", "leisure_" .. passedt.leisure )
-                        Attribute( "name", Find( "name" ) )
-                        MinZoom( 13 )
-                    else
-                        render_military_land1( passedt )
-                    end -- leisure=swimming_pool etc. 13
-                end -- leisure=playground etc.  12
-            end -- leisure=nature_reserve etc. 10
+                    render_military_land1( passedt )
+                end -- leisure=swimming_pool etc. 13
+            end -- leisure=playground etc.  12
         end -- leisure=common etc. 9
     end -- leisure=nature_reserve 6
 end -- render_leisure_land1()
@@ -5006,7 +4999,7 @@ function render_tourism_land1( passedt )
 end -- render_tourism_land1()
 
 function render_aeroway_land1( passedt )
-    if ( passedt.aeroway == "apron"     ) then
+    if ( passedt.aeroway == "apron" ) then
         Layer( "land1", true )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
         Attribute( "name", Find( "name" ) )
