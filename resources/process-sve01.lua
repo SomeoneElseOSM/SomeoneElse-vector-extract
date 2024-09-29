@@ -218,6 +218,10 @@ function node_function()
     nodet.watermillCdisused = Find("watermill:disused")
     nodet.windmillCdisused = Find("windmill:disused")
     nodet.defensive_works = Find("defensive_works")
+    nodet.is_sidepath = Find("is_sidepath")
+    nodet.is_sidepathCof = Find("is_sidepath:of")
+    nodet.is_sidepathCofCname = Find("is_sidepath:of:name")
+    nodet.is_sidepathCofCref = Find("is_sidepath:of:ref")
 
     generic_before_function( nodet )
 
@@ -405,6 +409,10 @@ function way_function()
     wayt.watermillCdisused = Find("watermill:disused")
     wayt.windmillCdisused = Find("windmill:disused")
     wayt.defensive_works = Find("defensive_works")
+    wayt.is_sidepath = Find("is_sidepath")
+    wayt.is_sidepathCof = Find("is_sidepath:of")
+    wayt.is_sidepathCofCname = Find("is_sidepath:of:name")
+    wayt.is_sidepathCofCref = Find("is_sidepath:of:ref")
 
     generic_before_function( wayt )
 
@@ -495,7 +503,11 @@ function way_function()
         ( wayt.highway ~= ""  ))  then
         Layer("transportation", false)
         Attribute( "class", wayt.highway )
+
+        if (( wayt.name ~= nil )   and
+            ( wayt.name ~= ""  ))  then
 	Attribute( "name", wayt.name )
+        end
 
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
@@ -1703,25 +1715,30 @@ function generic_before_function( passedt )
 -- Also farmyard "bunker silos" and canopies, and natural arches.
 -- Also railway traversers and more.
 -- ----------------------------------------------------------------------------
-   if ((   passedt.man_made         == "bridge"          ) or
-       (   passedt.natural          == "arch"            ) or
-       (   passedt.man_made         == "bunker_silo"     ) or
-       (   passedt.amenity          == "feeding_place"   ) or
-       (   passedt.railway          == "traverser"       ) or
-       (   passedt.building         == "canopy"          ) or
-       (   passedt.building         == "car_port"        ) or
-       ((( passedt.disusedCbuilding ~= nil             )   or
-         ( passedt.amenity          == "parcel_locker" )   or
-         ( passedt.amenity          == "zooaviary"     )   or
-         ( passedt.animal           == "horse_walker"  )   or
-         ( passedt.leisure          == "bleachers"     )   or
-         ( passedt.leisure          == "bandstand"     )) and
-        (  passedt.building         == nil              )) or
-       (   passedt.buildingCtype    == "canopy"          ) or
-       ((  passedt.covered          == "roof"           )  and
-        (  passedt.building         == nil              )  and
-        (  passedt.highway          == nil              )  and
-        (  passedt.tourism          == nil              ))) then
+   if ((    passedt.man_made         == "bridge"          ) or
+       (    passedt.natural          == "arch"            ) or
+       (    passedt.man_made         == "bunker_silo"     ) or
+       (    passedt.amenity          == "feeding_place"   ) or
+       (    passedt.railway          == "traverser"       ) or
+       (    passedt.building         == "canopy"          ) or
+       (    passedt.building         == "car_port"        ) or
+       (((( passedt.disusedCbuilding ~= nil            )    and
+          ( passedt.disusedCbuilding ~= ""             ))   or
+         (  passedt.amenity          == "parcel_locker" )   or
+         (  passedt.amenity          == "zooaviary"     )   or
+         (  passedt.animal           == "horse_walker"  )   or
+         (  passedt.leisure          == "bleachers"     )   or
+         (  passedt.leisure          == "bandstand"     )) and
+        ((  passedt.building         == nil             )  and
+         (  passedt.building         == ""              ))) or
+       (    passedt.buildingCtype    == "canopy"          ) or
+       ((   passedt.covered          == "roof"           )  and
+        ((  passedt.building         == nil             )   or
+         (  passedt.building         == ""              ))  and
+        ((  passedt.highway          == nil             )   or
+         (  passedt.highway          == ""              ))  and
+        ((  passedt.tourism          == nil             )   or
+         (  passedt.tourism          == ""              )))) then
       passedt.building      = "roof"
       passedt.buildingCtype = nil
    end
@@ -1744,9 +1761,12 @@ function generic_before_function( passedt )
 
    if ((( passedt.disusedCman_made == "watermill")  or
         ( passedt.disusedCman_made == "windmill" )) and
-       (  passedt.amenity          == nil         ) and
-       (  passedt.man_made         == nil         ) and
-       (  passedt.shop             == nil         )) then
+       (( passedt.amenity          == nil        )  or
+        ( passedt.amenity          == ""         )) and
+       (( passedt.man_made         == nil        )  or
+        ( passedt.man_made         == ""         )) and
+       (( passedt.shop             == nil        )  or
+        ( passedt.shop             == ""         ))) then
       passedt.historic = passedt.disusedCman_made
       passedt.disusedCman_made = nil
    end
@@ -1764,9 +1784,12 @@ function generic_before_function( passedt )
 
    if (((   passedt.building == "watermill"        )  or
         (   passedt.building == "former_watermill" )) and
-       ((   passedt.amenity  == nil                 ) and
-        (   passedt.man_made == nil                 ) and
+       (((  passedt.amenity  == nil                )  or
+         (  passedt.amenity  == ""                 )) and
+        ((  passedt.man_made == nil                )  or
+         (  passedt.man_made == ""                 )) and
         ((  passedt.historic == nil                )  or
+         (  passedt.historic == ""                 )  or
          (  passedt.historic == "restoration"      )  or
          (  passedt.historic == "heritage"         )  or
          (  passedt.historic == "industrial"       )  or
@@ -1776,9 +1799,12 @@ function generic_before_function( passedt )
 
    if (((   passedt.building == "windmill"        )  or
         (   passedt.building == "former_windmill" )) and
-       ((   passedt.amenity  == nil                ) and
-        (   passedt.man_made == nil                ) and
+       (((  passedt.amenity  == nil               )  or
+         (  passedt.amenity  == ""                )) and
+        ((  passedt.man_made == nil               )  or
+         (  passedt.man_made == ""                )) and
         ((  passedt.historic == nil               )  or
+         (  passedt.historic == ""                )  or
          (  passedt.historic == "restoration"     )  or
          (  passedt.historic == "heritage"        )  or
          (  passedt.historic == "industrial"      )  or
@@ -1829,15 +1855,39 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Specific defensive_works not mapped as something else
 -- ----------------------------------------------------------------------------
-   if (( passedt.defensive_works == "battery" ) and
-       ( passedt.barrier         == nil       ) and
-       ( passedt.building        == nil       ) and
-       ( passedt.historic        == nil       ) and
-       ( passedt.landuse         == nil       ) and
-       ( passedt.man_made        == nil       ) and
-       ( passedt.place           == nil       )) then
+   if ((  passedt.defensive_works == "battery"  ) and
+       (( passedt.barrier         == nil       )  or
+        ( passedt.barrier         == ""        )) and
+       (( passedt.building        == nil       )  or
+        ( passedt.building        == ""        )) and
+       (( passedt.historic        == nil       )  or
+        ( passedt.historic        == ""        )) and
+       (( passedt.landuse         == nil       )  or
+        ( passedt.landuse         == ""        )) and
+       (( passedt.man_made        == nil       )  or
+        ( passedt.man_made        == ""        )) and
+       (( passedt.place           == nil       )  or
+        ( passedt.place           == ""        ))) then
       passedt.historic = "battery"
       passedt.defensive_works = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Remove name from footway=sidewalk (we expect it to be rendered via the
+-- road that this is a sidewalk for), or "is_sidepath=yes" etc.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.footway             == "sidewalk" )  or
+        ( passedt.cycleway            == "sidewalk" )  or
+        ( passedt.is_sidepath         == "yes"      )  or
+        ( passedt.is_sidepathCof      ~= nil        )  or
+        ( passedt.is_sidepathCof      ~= ""         )  or
+        ( passedt.is_sidepathCofCname ~= nil        )  or
+        ( passedt.is_sidepathCofCname ~= ""         )  or
+        ( passedt.is_sidepathCofCref  ~= nil        )  or
+        ( passedt.is_sidepathCofCref  ~= ""         )) and
+       (( passedt.name                ~= nil        )  or
+        ( passedt.name                ~= ""         ))) then
+      passedt.name = nil
    end
 
 -- ----------------------------------------------------------------------------
