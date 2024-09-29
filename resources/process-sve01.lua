@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "natural", "place", "shop", "tourism" }
+node_keys = { "amenity", "landuse", "leisure", "natural", "place", "power", "shop", "tourism" }
 
 -- Initialize Lua logic
 
