@@ -206,6 +206,15 @@ function node_function()
     nodet.flood_prone = Find("flood_prone")
     nodet.hazard_prone = Find("hazard_prone")
     nodet.hazard_type = Find("hazard_type")
+    nodet.fuelCelectricity = Find("fuel:electricity")
+    nodet.fuelCdiesel = Find("fuel:diesel")
+    nodet.LPG = Find("LPG")
+    nodet.H2 = Find("H2")
+    nodet.LH2 = Find("LH2")
+    nodet.fuelClpg = Find("fuel:lpg")
+    nodet.railway = Find("railway")
+    nodet.disusedCbuilding = Find("disused:building")
+    nodet.buildingCtype = Find("building:type")
 
     generic_before_function( nodet )
 
@@ -381,6 +390,15 @@ function way_function()
     wayt.flood_prone = Find("flood_prone")
     wayt.hazard_prone = Find("hazard_prone")
     wayt.hazard_type = Find("hazard_type")
+    wayt.fuelCelectricity = Find("fuel:electricity")
+    wayt.fuelCdiesel = Find("fuel:diesel")
+    wayt.LPG = Find("LPG")
+    wayt.H2 = Find("H2")
+    wayt.LH2 = Find("LH2")
+    wayt.fuelClpg = Find("fuel:lpg")
+    wayt.railway = Find("railway")
+    wayt.disusedCbuilding = Find("disused:building")
+    wayt.buildingCtype = Find("building:type")
 
     generic_before_function( wayt )
 
@@ -1494,6 +1512,15 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Render bus guideways as "a sort of railway" rather than in their own
+-- highway layer.
+-- ----------------------------------------------------------------------------
+   if (passedt.highway == "bus_guideway") then
+      passedt.highway = nil
+      passedt.railway = "bus_guideway"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Render bus-only service roads tagged as "highway=busway" as service roads.
 -- ----------------------------------------------------------------------------
    if ( passedt.highway == "busway" ) then
@@ -1564,6 +1591,73 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Alleged petrol stations that only do fuel:electricity are probably 
+-- actually charging stations.
+--
+-- The combination of "amenity=fuel, electricity, no diesel" is as good as
+-- we can make  it without guessing based on brand.  "fuel, electricity,
+-- some sort of petrol, no diesel" is not a thing in the UK/IE data currently.
+-- Similarly, electric waterway=fuel are charging stations.
+--
+-- Show vending machines that sell petrol as fuel.
+-- One UK/IE example, on an airfield, and "UL91" finds it.
+--
+-- Show aeroway=fuel as amenity=fuel.  All so far in UK/IE are 
+-- general aviation.
+--
+-- Show waterway=fuel with a "fuel pump on a boat" icon.
+--
+-- Once we've got those out of the way, detect amenity=fuel that also sell
+-- electricity, hydrogen and LPG.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity          == "fuel" ) and
+       ( passedt.fuelCelectricity == "yes"  )  and
+       ( passedt.fuelCdiesel      == nil    )) then
+      passedt.amenity = "charging_station"
+   end
+
+   if (( passedt.waterway         == "fuel" ) and
+       ( passedt.fuelCelectricity == "yes"  )) then
+      passedt.amenity = "charging_station"
+      passedt.waterway = nil
+   end
+
+   if (( passedt.amenity == "vending_machine" ) and
+       ( passedt.vending == "fuel"            )  and
+       ( passedt.fuel    == "UL91"            )) then
+      passedt.amenity = "fuel"
+   end
+
+   if ( passedt.aeroway == "fuel" ) then
+      passedt.aeroway = nil
+      passedt.amenity = "fuel"
+   end
+
+   if ( passedt.waterway == "fuel" ) then
+      passedt.amenity = "fuel_w"
+      passedt.waterway = nil
+   end
+
+   if (( passedt.amenity          == "fuel" ) and
+       ( passedt.fuelCelectricity == "yes"  )  and
+       ( passedt.fuelCdiesel      == "yes"  )) then
+      passedt.amenity = "fuel_e"
+   end
+
+   if ((  passedt.amenity  == "fuel"  ) and
+       (( passedt.fuelCH2  == "yes"  )  or
+        ( passedt.fuelCLH2 == "yes"  ))) then
+      passedt.amenity = "fuel_h"
+   end
+
+   if ((  passedt.amenity  == "fuel"  ) and
+       (( passedt.LPG      == "yes"  )  or
+        ( passedt.fuel     == "lpg"  )  or
+        ( passedt.fuelClpg == "yes"  ))) then
+      passedt.amenity = "fuel_l"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Aviaries in UK / IE seem to be always within a zoo or larger attraction, 
 -- and not "zoos" in their own right.
 -- ----------------------------------------------------------------------------
@@ -1596,6 +1690,34 @@ function generic_before_function( passedt )
       passedt.amenity = "zooenclosure"
       passedt.attraction = nil
       passedt.zoo = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Bridge structures - display as building=roof.
+-- Also farmyard "bunker silos" and canopies, and natural arches.
+-- Also railway traversers and more.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.man_made         == "bridge"          ) or
+       (   passedt.natural          == "arch"            ) or
+       (   passedt.man_made         == "bunker_silo"     ) or
+       (   passedt.amenity          == "feeding_place"   ) or
+       (   passedt.railway          == "traverser"       ) or
+       (   passedt.building         == "canopy"          ) or
+       (   passedt.building         == "car_port"        ) or
+       ((( passedt.disusedCbuilding ~= nil             )   or
+         ( passedt.amenity          == "parcel_locker" )   or
+         ( passedt.amenity          == "zooaviary"     )   or
+         ( passedt.animal           == "horse_walker"  )   or
+         ( passedt.leisure          == "bleachers"     )   or
+         ( passedt.leisure          == "bandstand"     )) and
+        (  passedt.building         == nil              )) or
+       (   passedt.buildingCtype    == "canopy"          ) or
+       ((  passedt.covered          == "roof"           )  and
+        (  passedt.building         == nil              )  and
+        (  passedt.highway          == nil              )  and
+        (  passedt.tourism          == nil              ))) then
+      passedt.building      = "roof"
+      passedt.buildingCtype = nil
    end
 
 -- ----------------------------------------------------------------------------
