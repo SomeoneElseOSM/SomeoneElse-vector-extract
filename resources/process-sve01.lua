@@ -215,6 +215,9 @@ function node_function()
     nodet.railway = Find("railway")
     nodet.disusedCbuilding = Find("disused:building")
     nodet.buildingCtype = Find("building:type")
+    nodet.watermillCdisused = Find("watermill:disused")
+    nodet.windmillCdisused = Find("windmill:disused")
+    nodet.defensive_works = Find("defensive_works")
 
     generic_before_function( nodet )
 
@@ -399,6 +402,9 @@ function way_function()
     wayt.railway = Find("railway")
     wayt.disusedCbuilding = Find("disused:building")
     wayt.buildingCtype = Find("building:type")
+    wayt.watermillCdisused = Find("watermill:disused")
+    wayt.windmillCdisused = Find("windmill:disused")
+    wayt.defensive_works = Find("defensive_works")
 
     generic_before_function( wayt )
 
@@ -1718,6 +1724,120 @@ function generic_before_function( passedt )
         (  passedt.tourism          == nil              ))) then
       passedt.building      = "roof"
       passedt.buildingCtype = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Ensure that allegedly operational windmills are treated as such and not as
+-- "historic".
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made == "watermill") or
+       ( passedt.man_made == "windmill" )) then
+      if (( passedt.disused           == "yes"  ) or
+          ( passedt.watermillCdisused == "yes"  ) or
+          ( passedt.windmillCdisused  == "yes"  )) then
+         passedt.historic = passedt.man_made
+         passedt.man_made = nil
+      else
+         passedt.historic = nil
+      end
+   end
+
+   if ((( passedt.disusedCman_made == "watermill")  or
+        ( passedt.disusedCman_made == "windmill" )) and
+       (  passedt.amenity          == nil         ) and
+       (  passedt.man_made         == nil         ) and
+       (  passedt.shop             == nil         )) then
+      passedt.historic = passedt.disusedCman_made
+      passedt.disusedCman_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render (windmill buildings and former windmills) that are not something 
+-- else as historic windmills.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.historic == "ruins"      ) and
+       (( passedt.ruins    == "watermill" )  or
+        ( passedt.ruins    == "windmill"  ))) then
+      passedt.historic = passedt.ruins
+      passedt.ruins = "yes"
+   end
+
+   if (((   passedt.building == "watermill"        )  or
+        (   passedt.building == "former_watermill" )) and
+       ((   passedt.amenity  == nil                 ) and
+        (   passedt.man_made == nil                 ) and
+        ((  passedt.historic == nil                )  or
+         (  passedt.historic == "restoration"      )  or
+         (  passedt.historic == "heritage"         )  or
+         (  passedt.historic == "industrial"       )  or
+         (  passedt.historic == "tower"            )))) then
+      passedt.historic = "watermill"
+   end
+
+   if (((   passedt.building == "windmill"        )  or
+        (   passedt.building == "former_windmill" )) and
+       ((   passedt.amenity  == nil                ) and
+        (   passedt.man_made == nil                ) and
+        ((  passedt.historic == nil               )  or
+         (  passedt.historic == "restoration"     )  or
+         (  passedt.historic == "heritage"        )  or
+         (  passedt.historic == "industrial"      )  or
+         (  passedt.historic == "tower"           )))) then
+      passedt.historic = "windmill"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render ruined mills and mines etc. that are not something else as historic.
+-- Items in this list are assumed to be not operational, so the "man_made" 
+-- tag is cleared.
+-- ----------------------------------------------------------------------------
+   if (( passedt.historic  == "ruins"        ) and
+       (( passedt.ruins    == "lime_kiln"   )  or
+        ( passedt.ruins    == "manor"       )  or
+        ( passedt.ruins    == "mill"        )  or
+        ( passedt.ruins    == "mine"        )  or
+        ( passedt.ruins    == "round_tower" )  or
+        ( passedt.ruins    == "village"     )  or
+        ( passedt.ruins    == "well"        ))) then
+      passedt.historic = passedt.ruins
+      passedt.ruins = "yes"
+      passedt.man_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- We can assume that any allegedly non-historic ice_houses are actually 
+-- historic.  Any coexisting historic keys will just be stuff like "building".
+-- ----------------------------------------------------------------------------
+   if ( passedt.man_made == "ice_house" ) then
+      passedt.historic = "ice_house"
+      passedt.man_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Sound mirrors
+-- ----------------------------------------------------------------------------
+   if ( passedt.man_made == "sound mirror" ) then
+
+      if ( passedt.historic == "ruins" ) then
+         passedt.ruins = "yes"
+      end
+
+      passedt.historic = "sound_mirror"
+      passedt.man_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Specific defensive_works not mapped as something else
+-- ----------------------------------------------------------------------------
+   if (( passedt.defensive_works == "battery" ) and
+       ( passedt.barrier         == nil       ) and
+       ( passedt.building        == nil       ) and
+       ( passedt.historic        == nil       ) and
+       ( passedt.landuse         == nil       ) and
+       ( passedt.man_made        == nil       ) and
+       ( passedt.place           == nil       )) then
+      passedt.historic = "battery"
+      passedt.defensive_works = nil
    end
 
 -- ----------------------------------------------------------------------------
