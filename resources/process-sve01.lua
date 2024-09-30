@@ -241,6 +241,12 @@ function node_function()
     nodet.diplomatic = Find("diplomatic")
     nodet.embassy = Find("embassy")
     nodet.consulate = Find("consulate")
+    nodet.peak = Find("peak")
+    nodet.place_of_worship = Find("place_of_worship")
+    nodet.disusedCmilitary = Find("disused:military")
+    nodet.geological = Find("geological")
+    nodet.hunting_stand = Find("hunting_stand")
+    nodet.harbour = Find("harbour")
 
     generic_before_function( nodet )
 
@@ -451,6 +457,12 @@ function way_function()
     wayt.diplomatic = Find("diplomatic")
     wayt.embassy = Find("embassy")
     wayt.consulate = Find("consulate")
+    wayt.peak = Find("peak")
+    wayt.place_of_worship = Find("place_of_worship")
+    wayt.disusedCmilitary = Find("disused:military")
+    wayt.geological = Find("geological")
+    wayt.hunting_stand = Find("hunting_stand")
+    wayt.harbour = Find("harbour")
 
     generic_before_function( wayt )
 
@@ -2591,6 +2603,53 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Detect unusual taggings of hills
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural == "peak" ) and
+       ( passedt.peak    == "hill" )) then
+      passedt.natural = "hill"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Holy wells might be natural=spring or something else.
+-- Make sure that we set "amenity" to something other than "place_of_worship"
+-- The one existing "holy_well" is actually a spring.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "holy_well" ) and
+       ( passedt.natural == "spring"    )) then
+      passedt.amenity = "holy_spring"
+      passedt.natural = nil
+   end
+
+   if ( passedt.place_of_worship == "holy_well" ) then
+      passedt.man_made = nil
+      if ( passedt.natural == "spring" ) then
+         passedt.amenity = "holy_spring"
+         passedt.natural = nil
+      else
+         passedt.amenity = "holy_well"
+         passedt.natural = nil
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Springs - lose a historic tag, if set.
+-- ----------------------------------------------------------------------------
+   if (( passedt.natural == "spring" ) and
+       ( passedt.historic ~= nil     ) and
+       ( passedt.historic ~= ""      )) then
+      passedt.historic = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Inverse springs - where water seeps below ground
+-- We already show "dry" sinkholes; show these in the same way.
+-- ----------------------------------------------------------------------------
+   if ( passedt.waterway == "cave_of_debouchement" ) then
+      passedt.natural = "sinkhole"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Boatyards
 -- ----------------------------------------------------------------------------
    if (( passedt.waterway   == "boatyard" ) or
@@ -2630,6 +2689,45 @@ function generic_before_function( passedt )
    if (( passedt.natural == "meadow" ) and
        ( passedt.landuse == nil      )) then
       passedt.landuse = "meadow"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "historic=bunker" and "historic=ruins;ruins=bunker"
+-- This is set here to prevent unnamedcommercial being set just below.
+-- 3 selections make up our "historic" bunkers, "or"ed together.
+-- The first "or" includes "building=pillbox" because they are all historic.
+-- In the "disused" check we also include "building=bunker".
+-- ----------------------------------------------------------------------------
+   if ((((  passedt.historic == "bunker"                      )   or
+         (( passedt.historic == "ruins"                      )    and
+          ( passedt.ruins    == "bunker"                     ))   or
+         (  passedt.historic == "pillbox"                     )   or
+         (  passedt.building == "pillbox"                     ))  and
+        (   passedt.military == nil                            )) or
+       ((   passedt.disusedCmilitary == "bunker"               )  and
+        ((  passedt.military         == nil                   )   or
+         (  passedt.military         == ""                    ))) or
+       (((  passedt.military         == "bunker"              )   or
+         (  passedt.building         == "bunker"              ))  and
+        ((  passedt.disused          == "yes"                 )   or
+         (( passedt.historic         ~= nil                  )   and
+          ( passedt.historic         ~= ""                   )   and
+          ( passedt.historic         ~= "no"                 ))))) then
+      passedt.historic = "bunker"
+      passedt.disused = nil
+      passedt.disusedCmilitary = nil
+      passedt.military = nil
+      passedt.ruins = nil
+      passedt.tourism  = nil
+
+      if ((( passedt.landuse == nil )  or
+           ( passedt.landuse == ""  )) and
+          (( passedt.leisure == nil )  or
+           ( passedt.leisure == ""  )) and
+          (( passedt.natural == nil )  or
+           ( passedt.natural == ""  ))) then
+         passedt.landuse = "historic"
+      end
    end
 
 -- ----------------------------------------------------------------------------
@@ -2749,6 +2847,80 @@ function generic_before_function( passedt )
        (( passedt.tidal     == "yes"       )  or
         ( passedt.wetland   == "tidalflat" ))) then
       passedt.natural = "tidal_rock"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Boulders - are they climbing boulders or not?
+-- If yes, let them get detected as "climbing pitches" ("amenity=pitch_climbing") 
+-- or non-pitch climbing features ("natural=climbing")
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural    == "boulder"          ) or
+       (( passedt.natural    == "stone"           )  and
+        ( passedt.geological == "glacial_erratic" ))) then
+      if (( passedt.sport    ~= "climbing"            ) and
+          ( passedt.sport    ~= "climbing;bouldering" ) and
+          ( passedt.climbing ~= "boulder"             )) then
+         passedt.natural = "rock"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- leisure=dog_park is used a few times.  Map to pitch to differentiate from
+-- underlying park.
+-- "cricket_nets" is an oddity.  See https://lists.openstreetmap.org/pipermail/tagging/2023-January/thread.html#66908 .
+-- ----------------------------------------------------------------------------
+   if (( passedt.leisure == "dog_park"           ) or
+       ( passedt.sport   == "cricket_nets"       ) or
+       ( passedt.sport   == "cricket_nets;multi" ) or
+       ( passedt.leisure == "practice_pitch"     )) then
+      passedt.leisure = "pitch"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show skate parks etc. (that aren't skate shops, or some other leisure 
+-- already) as pitches.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.sport    == "skateboard"     )  or
+        ( passedt.sport    == "skateboard;bmx" )) and
+       (( passedt.shop     == nil              )  or
+        ( passedt.shop     == ""               )) and
+       (( passedt.leisure  == nil              )  or
+        ( passedt.leisure  == ""               ))) then
+      passedt.leisure = "pitch"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map leisure=wildlife_hide to bird_hide etc.  Many times it will be.
+-- ----------------------------------------------------------------------------
+   if (( passedt.leisure      == "wildlife_hide" ) or
+       ( passedt.amenity      == "wildlife_hide" ) or
+       ( passedt.man_made     == "wildlife_hide" ) or
+       ( passedt.amenity      == "bird_hide"     )) then
+      passedt.leisure  = "bird_hide"
+      passedt.amenity  = nil
+      passedt.man_made = nil
+   end
+
+   if ((( passedt.amenity       == "hunting_stand" )   and
+        ( passedt.hunting_stand == "grouse_butt"   ))  or
+       ( passedt.man_made       == "grouse_butt"    )) then
+      passedt.leisure = "grouse_butt"
+      passedt.amenity = nil
+      passedt.man_made = nil
+   end
+
+   if ( passedt.amenity == "hunting_stand" ) then
+      passedt.leisure = "hunting_stand"
+      passedt.amenity = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat harbour=yes as landuse=harbour, if not already landuse.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.harbour == "yes"  ) and
+       (( passedt.landuse == nil   )  or
+        ( passedt.landuse == ""    ))) then
+      passedt.landuse = "harbour"
    end
 
 -- ----------------------------------------------------------------------------
