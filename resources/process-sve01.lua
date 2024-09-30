@@ -222,6 +222,25 @@ function node_function()
     nodet.is_sidepathCof = Find("is_sidepath:of")
     nodet.is_sidepathCofCname = Find("is_sidepath:of:name")
     nodet.is_sidepathCofCref = Find("is_sidepath:of:ref")
+    nodet.recycling_type = Find("recycling_type")
+    nodet.outlet = Find("outlet")
+    nodet.covered = Find("covered")
+    nodet.booth = Find("booth")
+    nodet.telephone_kiosk = Find("telephone_kiosk")
+    nodet.removedCamenity = Find("removed:amenity")
+    nodet.abandonedCamenity = Find("abandoned:amenity")
+    nodet.demolishedCamenity = Find("demolished:amenity")
+    nodet.razedCamenity = Find("razed:amenity")
+    nodet.old_amenity = Find("old_amenity")
+    nodet.emergency = Find("emergency")
+    nodet.colour = Find("colour")
+    nodet.business = Find("business")
+    nodet.office = Find("office")
+    nodet.company = Find("company")
+    nodet.craft = Find("craft")
+    nodet.diplomatic = Find("diplomatic")
+    nodet.embassy = Find("embassy")
+    nodet.consulate = Find("consulate")
 
     generic_before_function( nodet )
 
@@ -413,6 +432,25 @@ function way_function()
     wayt.is_sidepathCof = Find("is_sidepath:of")
     wayt.is_sidepathCofCname = Find("is_sidepath:of:name")
     wayt.is_sidepathCofCref = Find("is_sidepath:of:ref")
+    wayt.recycling_type = Find("recycling_type")
+    wayt.outlet = Find("outlet")
+    wayt.covered = Find("covered")
+    wayt.booth = Find("booth")
+    wayt.telephone_kiosk = Find("telephone_kiosk")
+    wayt.removedCamenity = Find("removed:amenity")
+    wayt.abandonedCamenity = Find("abandoned:amenity")
+    wayt.demolishedCamenity = Find("demolished:amenity")
+    wayt.razedCamenity = Find("razed:amenity")
+    wayt.old_amenity = Find("old_amenity")
+    wayt.emergency = Find("emergency")
+    wayt.colour = Find("colour")
+    wayt.business = Find("business")
+    wayt.office = Find("office")
+    wayt.company = Find("company")
+    wayt.craft = Find("craft")
+    wayt.diplomatic = Find("diplomatic")
+    wayt.embassy = Find("embassy")
+    wayt.consulate = Find("consulate")
 
     generic_before_function( wayt )
 
@@ -1891,6 +1929,90 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Waste transfer stations
+-- First, try and identify mistagged ones.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "waste_transfer_station" ) and
+       ( passedt.recycling_type == "centre"          )) then
+      passedt.amenity = "recyclingcentre"
+      passedt.landuse = "industrial"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Next, treat "real" waste transfer stations as industrial.  We remove the 
+-- amenity tag here because there's no icon for amenity=waste_transfer_station;
+-- an amenity tag would see it treated as landuse=unnamedcommercial with the
+-- amenity tag bringing the name (which it won't here).  The "industrial" tag
+-- forces it through the brand/operator logic.
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "waste_transfer_station" ) then
+      passedt.amenity = nil
+      passedt.landuse = "industrial"
+      passedt.industrial = "waste_transfer_station"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Recycling bins and recycling centres.
+-- Recycling bins are only shown from z19.  Recycling centres are shown from
+-- z16 and have a characteristic icon.  Any object without recycling_type, or
+-- with a different value, is assumed to be a bin, apart from one rogue
+-- "scrap_yard".
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "recycling"         ) and
+       ( passedt.recycling_type == "scrap_yard" )) then
+         passedt.amenity = "scrapyard"
+   end
+
+   if ( passedt.amenity == "recycling" ) then
+      if ( passedt.recycling_type == "centre" ) then
+         passedt.amenity = "recyclingcentre"
+         passedt.landuse = "industrial"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Mistaggings for wastewater_plant
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made   == "sewage_works"      ) or
+       ( passedt.man_made   == "wastewater_works"  )) then
+      passedt.man_made = "wastewater_plant"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Outfalls, sewage and otherwise.  We process "man_made=outfall", but also
+-- catch outlets not tagged with that.
+-- ----------------------------------------------------------------------------
+   if (( passedt.outlet ~= nil  ) and
+       ( passedt.outlet ~= ""   ) and
+       ( passedt.outlet ~= "no" )) then
+      passedt.man_made = "outfall"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Electricity substations
+-- ----------------------------------------------------------------------------
+   if (( passedt.power == "substation"  )  or
+       ( passedt.power == "sub_station" )) then
+      passedt.power   = nil
+
+      if (( passedt.building == nil  ) or
+          ( passedt.building == ""   ) or
+          ( passedt.building == "no" )) then
+         passedt.landuse = "industrial"
+      else
+         passedt.building = "yes"
+         passedt.landuse = "industrialbuilding"
+      end
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = "(el.sub.)"
+      else
+         passedt.name = passedt.name .. " (el.sub.)"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
 -- Handle spoil heaps as landfill
 -- ----------------------------------------------------------------------------
    if ( passedt.man_made == "spoil_heap" ) then
@@ -2077,18 +2199,266 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Former telephone boxes
+-- ----------------------------------------------------------------------------
+   if ((( passedt.covered         == "booth"          )   and
+        ( passedt.booth           ~= "K1"             )   and
+        ( passedt.booth           ~= "KX100"          )   and
+        ( passedt.booth           ~= "KX200"          )   and
+        ( passedt.booth           ~= "KX300"          )   and
+        ( passedt.booth           ~= "KXPlus"         )   and
+        ( passedt.booth           ~= "KX410"          )   and
+        ( passedt.booth           ~= "KX420"          )   and
+        ( passedt.booth           ~= "KX520"          )   and
+        ( passedt.booth           ~= "oakham"         )   and
+        ( passedt.booth           ~= "ST6"            ))  or
+       (  passedt.booth           == "K2"              )  or
+       (  passedt.booth           == "K4 Post Office"  )  or
+       (  passedt.booth           == "K6"              )  or
+       (  passedt.booth           == "K8"              )  or
+       (  passedt.telephone_kiosk == "K6"              )  or
+       (  passedt.man_made        == "telephone_box"   )  or
+       (  passedt.building        == "telephone_box"   )  or
+       (  passedt.historic        == "telephone"       )  or
+       (  passedt.disusedCamenity == "telephone"       )  or
+       (  passedt.removedCamenity == "telephone"       )) then
+      if ((( passedt.amenity   == "telephone"    )  or
+           ( passedt.amenity   == "phone"        )) and
+          (  passedt.emergency ~= "defibrillator" ) and
+          (  passedt.emergency ~= "phone"         ) and
+          (  passedt.tourism   ~= "information"   ) and
+          (  passedt.tourism   ~= "artwork"       ) and
+          (  passedt.tourism   ~= "museum"        )) then
+	 if ( passedt.colour == "black" ) then
+            passedt.amenity = "boothtelephoneblack"
+	 else
+	    if (( passedt.colour == "white" ) or
+	        ( passedt.colour == "cream" )) then
+               passedt.amenity = "boothtelephonewhite"
+	    else
+    	       if ( passedt.colour == "blue" ) then
+                  passedt.amenity = "boothtelephoneblue"
+	       else
+    	          if ( passedt.colour == "green" ) then
+                     passedt.amenity = "boothtelephonegreen"
+		  else
+    	             if ( passedt.colour == "grey" ) then
+                        passedt.amenity = "boothtelephonegrey"
+		     else
+    	                if ( passedt.colour == "gold" ) then
+                           passedt.amenity = "boothtelephonegold"
+			else
+                           passedt.amenity = "boothtelephonered"
+			end
+		     end
+		  end
+	       end
+	    end
+	 end
+	    
+         passedt.tourism = nil
+         passedt.emergency = nil
+      else
+         if ( passedt.emergency == "defibrillator" ) then
+             passedt.amenity   = "boothdefibrillator"
+             passedt.disusedCamenity = nil
+             passedt.emergency = nil
+         else
+            if (( passedt.amenity == "public_bookcase" )  or
+                ( passedt.amenity == "library"         )) then
+               passedt.amenity = "boothlibrary"
+               passedt.disusedCamenity = nil
+            else
+               if ( passedt.amenity == "bicycle_repair_station" ) then
+                  passedt.amenity = "boothbicyclerepairstation"
+                  passedt.disusedCamenity = nil
+               else
+                  if ( passedt.amenity == "atm" ) then
+                     passedt.amenity = "boothatm"
+                     passedt.disusedCamenity = nil
+                  else
+                     if ( passedt.tourism == "information" ) then
+                        passedt.amenity = "boothinformation"
+                        passedt.disusedCamenity = nil
+                        passedt.tourism = nil
+                     else
+                        if ( passedt.tourism == "artwork" ) then
+                           passedt.amenity = "boothartwork"
+                           passedt.disusedCamenity = nil
+                           passedt.tourism = nil
+                        else
+                           if ( passedt.tourism == "museum" ) then
+                              passedt.amenity = "boothmuseum"
+                              passedt.disusedCamenity = nil
+                              passedt.tourism = nil
+		  	   else
+                              if (( passedt.disusedCamenity    == "telephone"        )  or
+                                  ( passedt.removedCamenity    == "telephone"        )  or
+                                  ( passedt.abandonedCamenity  == "telephone"        )  or
+                                  ( passedt.demolishedCamenity == "telephone"        )  or
+                                  ( passedt.razedCamenity      == "telephone"        )  or
+                                  ( passedt.old_amenity        == "telephone"        )  or
+                                  ( passedt.historicCamenity   == "telephone"        )  or
+                                  ( passedt.disused            == "telephone"        )  or
+                                  ( passedt.wasCamenity        == "telephone"        )  or
+                                  ( passedt.oldCamenity        == "telephone"        )  or
+                                  ( passedt.amenity            == "former_telephone" )  or
+                                  ( passedt.historic           == "telephone"        )) then
+                                 passedt.amenity         = "boothdisused"
+                                 passedt.disusedCamenity = nil
+                                 passedt.historic        = nil
+                              end
+                           end
+			end
+                     end
+                  end
+               end
+            end
+         end
+      end
+   end
+   
+-- ----------------------------------------------------------------------------
+-- "business" and "company" are used as an alternative to "office" and 
+-- "industrial" by some people.  Wherever someone has used a more 
+-- frequently-used tag we defer to that.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.business   ~= nil  )  and
+        ( passedt.business   ~= ""   )) and
+       (( passedt.office     == nil  )  or
+        ( passedt.office     == ""   )) and
+       (( passedt.shop       == nil  )  or
+        ( passedt.shop       == ""   ))) then
+      passedt.office = "yes"
+      passedt.business = nil
+   end
+
+   if ((( passedt.company   ~= nil  )  and
+        ( passedt.company   ~= ""   )) and
+       (( passedt.man_made  == nil  )  or
+        ( passedt.man_made  == ""   )) and
+       (( passedt.office    == nil  )  or
+        ( passedt.office    == ""   )) and
+       (( passedt.shop      == nil  )  or
+        ( passedt.shop      == ""   ))) then
+      passedt.office = "yes"
+      passedt.company = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Remove generic offices if shop is set.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.shop   ~= nil        )  and
+       (  passedt.shop   ~= ""         )  and
+       (  passedt.shop   ~= "no"       )  and
+       (  passedt.shop   ~= "vacant"   )  and
+       (( passedt.office == "company" )   or
+        ( passedt.office == "vacant"  )   or
+        ( passedt.office == "yes"     ))) then
+      passedt.office = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Mappings to shop=car
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "car;car_repair"  )  or
+       ( passedt.shop    == "car_showroom"    )  or
+       ( passedt.shop    == "vehicle"         )) then
+      passedt.shop = "car"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Mappings to shop=bicycle
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "bicycle_repair"   ) then
+      passedt.shop = "bicycle"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map craft=car_repair etc. to shop=car_repair
+-- ----------------------------------------------------------------------------
+   if (( passedt.craft   == "car_repair"         )  or
+       ( passedt.craft   == "coachbuilder"       )  or
+       ( passedt.shop    == "car_service"        )  or
+       ( passedt.amenity == "vehicle_inspection" )  or
+       ( passedt.shop    == "car_bodyshop"       )  or
+       ( passedt.shop    == "vehicle_inspection" )  or
+       ( passedt.shop    == "mechanic"           )  or
+       ( passedt.shop    == "car_repair;car"     )  or
+       ( passedt.shop    == "car_repair;tyres"   )) then
+      passedt.shop    = "car_repair"
+      passedt.amenity = nil
+      passedt.craft   = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map various diplomatic things to embassy.
+-- Pedants may claim that some of these aren't legally embassies, and they'd
+-- be correct, but I use the same icon for all of these currently.
+-- ----------------------------------------------------------------------------
+   if (((  passedt.diplomatic == "embassy"            )  and
+        (( passedt.embassy    == nil                 )   or
+         ( passedt.embassy    == ""                  )   or
+         ( passedt.embassy    == "yes"               )   or
+         ( passedt.embassy    == "high_commission"   )   or
+         ( passedt.embassy    == "nunciature"        )   or
+         ( passedt.embassy    == "delegation"        ))) or
+       ((  passedt.diplomatic == "consulate"          )  and
+        (( passedt.consulate  == nil                 )   or
+         ( passedt.consulate  == ""                  )   or
+         ( passedt.consulate  == "consulate_general" )   or
+         ( passedt.consulate  == "yes"               ))) or
+       ( passedt.diplomatic == "embassy;consulate"     ) or
+       ( passedt.diplomatic == "embassy;mission"       ) or
+       ( passedt.diplomatic == "consulate;embassy"     )) then
+      passedt.amenity    = "embassy"
+      passedt.diplomatic = nil
+      passedt.office     = nil
+   end
+
+   if (((  passedt.diplomatic == "embassy"              )  and
+        (( passedt.embassy    == "residence"           )   or
+         ( passedt.embassy    == "branch_embassy"      )   or
+         ( passedt.embassy    == "mission"             ))) or
+       ((  passedt.diplomatic == "consulate"            )  and
+        (( passedt.consulate  == "consular_office"     )   or
+         ( passedt.consulate  == "residence"           )   or
+         ( passedt.consulate  == "consular_agency"     ))) or
+       (   passedt.diplomatic == "permanent_mission"     ) or
+       (   passedt.diplomatic == "trade_delegation"      ) or
+       (   passedt.diplomatic == "liaison"               ) or
+       (   passedt.diplomatic == "non_diplomatic"        ) or
+       (   passedt.diplomatic == "mission"               ) or
+       (   passedt.diplomatic == "trade_mission"         )) then
+      if ( passedt.amenity == "embassy" ) then
+         passedt.amenity = nil
+      end
+
+      passedt.diplomatic = nil
+
+-- ----------------------------------------------------------------------------
+-- "office" is set to something that will definitely display here, just in case
+-- it was set to some value that would not.
+-- ----------------------------------------------------------------------------
+      passedt.office = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Things that are both localities and peaks or hills 
 -- should render as the latter.
 -- Also, some other combinations (most amenities, some man_made, etc.)
 -- Note that "hill" is handled by the rendering code as similar to "peak" but
 -- only at higher zooms.  See 19/03/2023 in changelog.html .
 -- ----------------------------------------------------------------------------
-   if ((  passedt.place    == "locality"      ) and
-       (( passedt.natural  == "peak"         )  or
-        ( passedt.natural  == "hill"         )  or
-        ( passedt.amenity  ~= nil            )  or
-        ( passedt.man_made ~= nil            )  or
-        ( passedt.historic ~= nil            ))) then
+   if ((   passedt.place    == "locality"       ) and
+       ((  passedt.natural  == "peak"          )  or
+        (  passedt.natural  == "hill"          )  or
+        (( passedt.amenity  ~= nil            )   and
+         ( passedt.amenity  ~= ""             ))  or
+        (( passedt.man_made ~= nil            )   and
+         ( passedt.man_made ~= ""             ))  or
+        (( passedt.historic ~= nil            )   and
+         ( passedt.historic ~= ""             )))) then
       passedt.place = nil
    end
 
@@ -4446,7 +4816,7 @@ function generic_before_function( passedt )
 
 -- ----------------------------------------------------------------------------
 -- A special case to check before the "vacant shops" check at the end - 
--- potentially remove disused:amenity=grave_yard
+-- potentially remove disusedCamenity=grave_yard
 -- ----------------------------------------------------------------------------
    if (( passedt.disusedCamenity == "grave_yard" ) and
        ( passedt.landuse         == "cemetery"   )) then
