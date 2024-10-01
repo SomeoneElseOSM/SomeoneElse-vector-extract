@@ -246,6 +246,10 @@ function node_function()
     nodet.geological = Find("geological")
     nodet.hunting_stand = Find("hunting_stand")
     nodet.harbour = Find("harbour")
+    nodet.accommodation = Find("accommodation")
+    nodet.cuisine = Find("cuisine")
+    nodet.wheelchair = Find("wheelchair")
+    nodet.outdoor_seating = Find("outdoor_seating")
 
     generic_before_function( nodet )
 
@@ -461,6 +465,10 @@ function way_function()
     wayt.geological = Find("geological")
     wayt.hunting_stand = Find("hunting_stand")
     wayt.harbour = Find("harbour")
+    wayt.accommodation = Find("accommodation")
+    wayt.cuisine = Find("cuisine")
+    wayt.wheelchair = Find("wheelchair")
+    wayt.outdoor_seating = Find("outdoor_seating")
 
     generic_before_function( wayt )
 
@@ -3139,6 +3147,187 @@ function generic_before_function( passedt )
        ( passedt.natural     == "wood"         )) then
       passedt.landuse = nil
       passedt.natural = "mixedleaved"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Restaurants with accommodation
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity       == "restaurant" )  and
+       ( passedt.accommodation == "yes"        )) then
+      passedt.amenity = "restaccomm"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "cafe" - consolidation of lesser used tags
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "cafe"       ) then
+      passedt.amenity = "cafe"
+   end
+
+   if (( passedt.shop == "sandwiches" ) or
+       ( passedt.shop == "sandwich"   )) then
+      passedt.amenity = "cafe"
+      passedt.cuisine = "sandwich"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Cafes with accommodation, without, and with wheelchair tags or without
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "cafe" ) then
+      if ( passedt.accommodation == "yes" ) then
+         if ( passedt.wheelchair == "yes" ) then
+            if ( passedt.outdoor_seating == "yes" ) then
+               passedt.amenity = "cafe_yyy"
+            else
+               passedt.amenity = "cafe_yyd"
+            end
+         else
+            if ( passedt.wheelchair == "limited" ) then
+               if ( passedt.outdoor_seating == "yes" ) then
+                  passedt.amenity = "cafe_yly"
+               else
+                  passedt.amenity = "cafe_yld"
+               end
+	    else
+	       if ( passedt.wheelchair == "no" ) then
+                  if ( passedt.outdoor_seating == "yes" ) then
+                     passedt.amenity = "cafe_yny"
+                  else
+                     passedt.amenity = "cafe_ynd"
+                  end
+	       else
+                  if ( passedt.outdoor_seating == "yes" ) then
+                     passedt.amenity = "cafe_ydy"
+                  else
+                     passedt.amenity = "cafe_ydd"
+                  end
+	       end
+	    end
+         end
+      else
+         if ( passedt.wheelchair == "yes" ) then
+            if ( passedt.outdoor_seating == "yes" ) then
+               passedt.amenity = "cafe_dyy"
+            else
+               passedt.amenity = "cafe_dyd"
+            end
+         else
+            if ( passedt.wheelchair == "limited" ) then
+               if ( passedt.outdoor_seating == "yes" ) then
+                  passedt.amenity = "cafe_dly"
+               else
+                  passedt.amenity = "cafe_dld"
+               end
+	    else
+	       if ( passedt.wheelchair == "no" ) then
+                  if ( passedt.outdoor_seating == "yes" ) then
+                     passedt.amenity = "cafe_dny"
+                  else
+                     passedt.amenity = "cafe_dnd"
+                  end
+               else
+                  if ( passedt.outdoor_seating == "yes" ) then
+                     passedt.amenity = "cafe_ddy"
+                  else
+                     passedt.amenity = "cafe_ddd"
+                  end
+	       end
+	    end
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Bars with accommodation, without, and with wheelchair tags or without
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "bar" ) then
+      if ( passedt.accommodation == "yes" ) then
+         if ( passedt.wheelchair == "yes" ) then
+            if ( passedt.outdoor_seating == "yes" ) then
+               passedt.amenity = "bar_yyy"
+            else
+               passedt.amenity = "bar_yyd"
+            end
+         else
+            if ( passedt.wheelchair == "limited" ) then
+               if ( passedt.outdoor_seating == "yes" ) then
+                  passedt.amenity = "bar_yly"
+               else
+                  passedt.amenity = "bar_yld"
+               end
+	    else
+	       if ( passedt.wheelchair == "no" ) then
+                  if ( passedt.outdoor_seating == "yes" ) then
+                     passedt.amenity = "bar_yny"
+                  else
+                     passedt.amenity = "bar_ynd"
+                  end
+	       else
+                  if ( passedt.outdoor_seating == "yes" ) then
+                     passedt.amenity = "bar_ydy"
+                  else
+                     passedt.amenity = "bar_ydd"
+                  end
+	       end
+	    end
+         end
+      else
+         if ( passedt.wheelchair == "yes" ) then
+            if ( passedt.outdoor_seating == "yes" ) then
+               passedt.amenity = "bar_dyy"
+            else
+               passedt.amenity = "bar_dyd"
+            end
+         else
+            if ( passedt.wheelchair == "limited" ) then
+               if ( passedt.outdoor_seating == "yes" ) then
+                  passedt.amenity = "bar_dly"
+               else
+                  passedt.amenity = "bar_dld"
+               end
+	    else
+	       if ( passedt.wheelchair == "no" ) then
+                  if ( passedt.outdoor_seating == "yes" ) then
+                     passedt.amenity = "bar_dny"
+                  else
+                     passedt.amenity = "bar_dnd"
+                  end
+               else
+                  if ( passedt.outdoor_seating == "yes" ) then
+                     passedt.amenity = "bar_ddy"
+                  else
+                     passedt.amenity = "bar_ddd"
+                  end
+	       end
+	    end
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render building societies as banks.  Also shop=bank and credit unions.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "building_society" ) or
+       ( passedt.shop    == "bank"             ) or
+       ( passedt.amenity == "credit_union"     )) then
+      passedt.amenity = "bank"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Banks with wheelchair tags or without
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "bank" ) then
+      if ( passedt.wheelchair == "yes" ) then
+         passedt.amenity = "bank_y"
+      else
+         if ( passedt.wheelchair == "limited" ) then
+            passedt.amenity = "bank_l"
+         else
+            if ( passedt.wheelchair == "no" ) then
+               passedt.amenity = "bank_n"
+            end
+          end
+      end
    end
 
 -- ----------------------------------------------------------------------------
@@ -5856,13 +6045,25 @@ function render_amenity_land1( passedt )
         Attribute( "name", Find( "name" ) )
         MinZoom( 9 )
     else
+        if (( passedt.amenity == "shelter" ) or
+            ( passedt.amenity == "atm"     ) or
+            ( passedt.amenity == "bank"    ) or
+            ( passedt.amenity == "bank_l"  ) or
+            ( passedt.amenity == "bank_n"  ) or
+            ( passedt.amenity == "bank_y"  )) then
+            Layer( "land1", true )
+            Attribute( "class", "amenity_" .. passedt.amenity )
+            Attribute( "name", Find( "name" ) )
+            MinZoom( 14 )
+        else
 -- ------------------------------------------------------------------------------
 -- At this point we've done all thing "landuse" processing for things that might 
 -- be in the "land1" layer, including displaying names and/or icons for them.
 -- The call to "generic_after_poi()" below displays things that should also have
 -- a name and/or an icon, but don't have an area fill or outline.
 -- ------------------------------------------------------------------------------
-        generic_after_poi( passedt )
+            generic_after_poi( passedt )
+        end -- amenity=shelter 15
     end -- amenity=parking etc. 9
 end -- render_amenity_land1()
 
