@@ -250,6 +250,12 @@ function node_function()
     nodet.cuisine = Find("cuisine")
     nodet.wheelchair = Find("wheelchair")
     nodet.outdoor_seating = Find("outdoor_seating")
+    nodet.gate = Find("gate")
+    nodet.locked = Find("locked")
+    nodet.dog_gate = Find("dog_gate")
+    nodet.entrance = Find("entrance")
+    nodet.public_transport = Find("public_transport")
+    nodet.school = Find("school")
 
     generic_before_function( nodet )
 
@@ -469,6 +475,12 @@ function way_function()
     wayt.cuisine = Find("cuisine")
     wayt.wheelchair = Find("wheelchair")
     wayt.outdoor_seating = Find("outdoor_seating")
+    wayt.gate = Find("gate")
+    wayt.locked = Find("locked")
+    wayt.dog_gate = Find("dog_gate")
+    wayt.entrance = Find("entrance")
+    wayt.public_transport = Find("public_transport")
+    wayt.school = Find("school")
 
     generic_before_function( wayt )
 
@@ -4716,6 +4728,145 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- There's now a barrier=kissing_gate icon.
+-- For gates, choose which of the two gate icons to used based on tagging.
+-- "sally_port" is mapped to gate largely because of misuse in the data.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.barrier   == "turnstile"              )  or
+       (  passedt.barrier   == "full-height_turnstile"  )  or
+       (  passedt.barrier   == "kissing_gate;gate"      )  or
+       (( passedt.barrier   == "gate"                  )   and
+        ( passedt.gate      == "kissing"               ))) then
+      passedt.barrier = "kissing_gate"
+   end
+
+-- ----------------------------------------------------------------------------
+-- gates
+-- ----------------------------------------------------------------------------
+   if (( passedt.barrier   == "gate"                  )  or
+       ( passedt.barrier   == "swing_gate"            )  or
+       ( passedt.barrier   == "footgate"              )  or
+       ( passedt.barrier   == "wicket_gate"           )  or
+       ( passedt.barrier   == "hampshire_gate"        )  or
+       ( passedt.barrier   == "bump_gate"             )  or
+       ( passedt.barrier   == "lych_gate"             )  or
+       ( passedt.barrier   == "lytch_gate"            )  or
+       ( passedt.barrier   == "flood_gate"            )  or
+       ( passedt.barrier   == "sally_port"            )  or
+       ( passedt.barrier   == "pengate"               )  or
+       ( passedt.barrier   == "pengates"              )  or
+       ( passedt.barrier   == "gate;stile"            )  or
+       ( passedt.barrier   == "cattle_grid;gate"      )  or
+       ( passedt.barrier   == "gate;kissing_gate"     )  or
+       ( passedt.barrier   == "pull_apart_gate"       )  or
+       ( passedt.barrier   == "snow_gate"             )) then
+      if (( passedt.locked == "yes"         ) or
+          ( passedt.locked == "permanently" ) or
+          ( passedt.status == "locked"      ) or
+          ( passedt.gate   == "locked"      )) then
+         passedt.barrier = "gate_locked"
+      else
+         passedt.barrier = "gate"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- lift gates
+-- ----------------------------------------------------------------------------
+   if (( passedt.barrier    == "border_control"   ) or
+       ( passedt.barrier    == "ticket_barrier"   ) or
+       ( passedt.barrier    == "ticket"           ) or
+       ( passedt.barrier    == "security_control" ) or
+       ( passedt.barrier    == "checkpoint"       ) or
+       ( passedt.industrial == "checkpoint"       ) or
+       ( passedt.barrier    == "gatehouse"        )) then
+      passedt.barrier = "lift_gate"
+   end
+
+-- ----------------------------------------------------------------------------
+-- render barrier=bar as barrier=horse_stile (Norfolk)
+-- ----------------------------------------------------------------------------
+   if ( passedt.barrier == "bar" ) then
+      passedt.barrier = "horse_stile"
+   end
+
+-- ----------------------------------------------------------------------------
+-- render various cycle barrier synonyms
+-- ----------------------------------------------------------------------------
+   if (( passedt.barrier   == "chicane"               )  or
+       ( passedt.barrier   == "squeeze"               )  or
+       ( passedt.barrier   == "motorcycle_barrier"    )  or
+       ( passedt.barrier   == "horse_barrier"         )  or
+       ( passedt.barrier   == "a_frame"               )) then
+      passedt.barrier = "cycle_barrier"
+   end
+
+-- ----------------------------------------------------------------------------
+-- render various synonyms for stile as barrier=stile
+-- ----------------------------------------------------------------------------
+   if (( passedt.barrier   == "squeeze_stile"   )  or
+       ( passedt.barrier   == "ramblers_gate"   )  or
+       ( passedt.barrier   == "squeeze_point"   )  or
+       ( passedt.barrier   == "step_over"       )  or
+       ( passedt.barrier   == "stile;gate"      )) then
+      passedt.barrier = "stile"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Has this stile got a dog gate?
+-- ----------------------------------------------------------------------------
+   if (( passedt.barrier  == "stile" ) and
+       ( passedt.dog_gate == "yes"   )) then
+      passedt.barrier = "dog_gate_stile"
+   end
+
+-- ----------------------------------------------------------------------------
+-- remove barrier=entrance as it's not really a barrier.
+-- ----------------------------------------------------------------------------
+   if ( passedt.barrier   == "entrance" ) then
+      passedt.barrier = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render main entrances
+-- Note that "railway=train_station_entrance" isn't shown as a subway entrance.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.entrance         == "main"                   )  or
+        ( passedt.building         == "entrance"               )  or
+        ( passedt.entrance         == "entrance"               )  or
+        ( passedt.public_transport == "entrance"               )  or
+        ( passedt.railway          == "entrance"               )  or
+        ( passedt.railway          == "train_station_entrance" )  or
+        ( passedt.school           == "entrance"               )) and
+       (( passedt.amenity          == nil                      )  or
+        ( passedt.amenity          == ""                       )) and
+       (( passedt.barrier          == nil                      )  or
+        ( passedt.barrier          == ""                       )) and
+       (( passedt.building         == nil                      )  or
+        ( passedt.building         == ""                       )) and
+       (( passedt.craft            == nil                      )  or
+        ( passedt.craft            == ""                       )) and
+       (( passedt.highway          == nil                      )  or
+        ( passedt.highway          == ""                       )) and
+       (( passedt.office           == nil                      )  or
+        ( passedt.office           == ""                       )) and
+       (( passedt.shop             == nil                      )  or
+        ( passedt.shop             == ""                       )) and
+       (( passedt.tourism          == nil                      )  or
+        ( passedt.tourism          == ""                       ))) then
+      passedt.amenity = "entrancemain"
+   end
+
+-- ----------------------------------------------------------------------------
+-- natural=tree_row was added to the standard style file after my version.
+-- I'm not convinced that it makes sense to distinguish from hedge, so I'll
+-- just display as hedge.
+-- ----------------------------------------------------------------------------
+   if ( passedt.natural   == "tree_row" ) then
+      passedt.barrier = "hedgeline"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Render castle_wall as city_wall
 -- ----------------------------------------------------------------------------
    if (( passedt.barrier   == "wall"        )  and
@@ -6078,7 +6229,26 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "bicycle_parking"         ) or
             ( passedt.amenity == "bicycle_parking_pay"     ) or
             ( passedt.amenity == "motorcycle_parking"      ) or
-            ( passedt.amenity == "motorcycle_parking_pay"  )) then
+            ( passedt.amenity == "motorcycle_parking_pay"  ) or
+            ( passedt.amenity == "bus_station"             ) or
+            ( passedt.amenity == "ferry_terminal"          ) or
+            ( passedt.amenity == "entrancemain"            ) or
+            ( passedt.amenity == "cafe_ddd"                ) or
+            ( passedt.amenity == "cafe_dld"                ) or
+            ( passedt.amenity == "cafe_dnd"                ) or
+            ( passedt.amenity == "cafe_dyd"                ) or
+            ( passedt.amenity == "cafe_ydd"                ) or
+            ( passedt.amenity == "cafe_yld"                ) or
+            ( passedt.amenity == "cafe_ynd"                ) or
+            ( passedt.amenity == "cafe_yyd"                ) or
+            ( passedt.amenity == "cafe_ddy"                ) or
+            ( passedt.amenity == "cafe_dly"                ) or
+            ( passedt.amenity == "cafe_dny"                ) or
+            ( passedt.amenity == "cafe_dyy"                ) or
+            ( passedt.amenity == "cafe_ydy"                ) or
+            ( passedt.amenity == "cafe_yly"                ) or
+            ( passedt.amenity == "cafe_yny"                ) or
+            ( passedt.amenity == "cafe_yyy"                )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
