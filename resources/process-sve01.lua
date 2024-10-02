@@ -6045,31 +6045,40 @@ function render_amenity_land1( passedt )
         Attribute( "name", Find( "name" ) )
         MinZoom( 9 )
     else
-        if (( passedt.amenity == "shelter"      ) or
-            ( passedt.amenity == "atm"          ) or
-            ( passedt.amenity == "bank"         ) or
-            ( passedt.amenity == "bank_l"       ) or
-            ( passedt.amenity == "bank_n"       ) or
-            ( passedt.amenity == "bank_y"       ) or
-            ( passedt.amenity == "bar"          ) or
-            ( passedt.amenity == "bar_ddd"      ) or
-            ( passedt.amenity == "bar_dld"      ) or
-            ( passedt.amenity == "bar_dnd"      ) or
-            ( passedt.amenity == "bar_dyd"      ) or
-            ( passedt.amenity == "bar_ydd"      ) or
-            ( passedt.amenity == "bar_yld"      ) or
-            ( passedt.amenity == "bar_ynd"      ) or
-            ( passedt.amenity == "bar_yyd"      ) or
-            ( passedt.amenity == "bar_ddy"      ) or
-            ( passedt.amenity == "bar_dly"      ) or
-            ( passedt.amenity == "bar_dny"      ) or
-            ( passedt.amenity == "bar_dyy"      ) or
-            ( passedt.amenity == "bar_ydy"      ) or
-            ( passedt.amenity == "bar_yly"      ) or
-            ( passedt.amenity == "bar_yny"      ) or
-            ( passedt.amenity == "bar_yyy"      ) or
-            ( passedt.amenity == "nightclub"    ) or
-            ( passedt.amenity == "concert_hall" )) then
+        if (( passedt.amenity == "shelter"                 ) or
+            ( passedt.amenity == "atm"                     ) or
+            ( passedt.amenity == "bank"                    ) or
+            ( passedt.amenity == "bank_l"                  ) or
+            ( passedt.amenity == "bank_n"                  ) or
+            ( passedt.amenity == "bank_y"                  ) or
+            ( passedt.amenity == "bar"                     ) or
+            ( passedt.amenity == "bar_ddd"                 ) or
+            ( passedt.amenity == "bar_dld"                 ) or
+            ( passedt.amenity == "bar_dnd"                 ) or
+            ( passedt.amenity == "bar_dyd"                 ) or
+            ( passedt.amenity == "bar_ydd"                 ) or
+            ( passedt.amenity == "bar_yld"                 ) or
+            ( passedt.amenity == "bar_ynd"                 ) or
+            ( passedt.amenity == "bar_yyd"                 ) or
+            ( passedt.amenity == "bar_ddy"                 ) or
+            ( passedt.amenity == "bar_dly"                 ) or
+            ( passedt.amenity == "bar_dny"                 ) or
+            ( passedt.amenity == "bar_dyy"                 ) or
+            ( passedt.amenity == "bar_ydy"                 ) or
+            ( passedt.amenity == "bar_yly"                 ) or
+            ( passedt.amenity == "bar_yny"                 ) or
+            ( passedt.amenity == "bar_yyy"                 ) or
+            ( passedt.amenity == "nightclub"               ) or
+            ( passedt.amenity == "concert_hall"            ) or
+            ( passedt.amenity == "car_sharing"             ) or
+            ( passedt.amenity == "taxi"                    ) or
+            ( passedt.amenity == "taxi_office"             ) or
+            ( passedt.amenity == "bicycle_rental"          ) or
+            ( passedt.amenity == "scooter_rental"          ) or
+            ( passedt.amenity == "bicycle_parking"         ) or
+            ( passedt.amenity == "bicycle_parking_pay"     ) or
+            ( passedt.amenity == "motorcycle_parking"      ) or
+            ( passedt.amenity == "motorcycle_parking_pay"  )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
