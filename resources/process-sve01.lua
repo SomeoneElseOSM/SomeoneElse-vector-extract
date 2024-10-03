@@ -294,6 +294,31 @@ function node_function()
     nodet.generatorCsource = Find("generator:source")
     nodet.generatorCmethod = Find("generator:method")
     nodet.plantCsource = Find("plant:source")
+    nodet.monitoringCwater_level = Find("monitoring:water_level")
+    nodet.monitoringCwater_flow = Find("monitoring:water_flow")
+    nodet.monitoringCwater_velocity = Find("monitoring:water_velocity")
+    nodet.monitoringCweather = Find("monitoring:weather")
+    nodet.weatherCradar = Find("weather:radar")
+    nodet.monitoringCwater_level = Find("monitoring:water_level")
+    nodet.monitoringCrainfall = Find("monitoring:rainfall")
+    nodet.monitoringCseismic_activity = Find("monitoring:seismic_activity")
+    nodet.monitoringCsky_brightness = Find("monitoring:sky_brightness")
+    nodet.monitoringCair_quality = Find("monitoring:air_quality")
+    nodet.usage = Find("usage")
+    nodet.station = Find("station")
+    nodet.railwayCminiature = Find("railway:miniature")
+    nodet.crossing = Find("crossing")
+    nodet.disusedCtourism = Find("disused:tourism")
+    nodet.ruinsCtourism = Find("ruins:tourism")
+    nodet.board_type = Find("board_type")
+    nodet.information = Find("information")
+    nodet.operatorCtype = Find("operator:type")
+    nodet.boardCtitle = Find("board:title")
+    nodet.guide_type = Find("guide_type")
+    nodet.ncn_milepost = Find("ncn_milepost")
+    nodet.sustrans_ref = Find("sustrans_ref")
+    nodet.theatre = Find("theatre")
+    nodet.fence_type = Find("fence_type")
 
     generic_before_function( nodet )
 
@@ -555,6 +580,31 @@ function way_function()
     wayt.generatorCsource = Find("generator:source")
     wayt.generatorCmethod = Find("generator:method")
     wayt.plantCsource = Find("plant:source")
+    wayt.monitoringCwater_level = Find("monitoring:water_level")
+    wayt.monitoringCwater_flow = Find("monitoring:water_flow")
+    wayt.monitoringCwater_velocity = Find("monitoring:water_velocity")
+    wayt.monitoringCweather = Find("monitoring:weather")
+    wayt.weatherCradar = Find("weather:radar")
+    wayt.monitoringCwater_level = Find("monitoring:water_level")
+    wayt.monitoringCrainfall = Find("monitoring:rainfall")
+    wayt.monitoringCseismic_activity = Find("monitoring:seismic_activity")
+    wayt.monitoringCsky_brightness = Find("monitoring:sky_brightness")
+    wayt.monitoringCair_quality = Find("monitoring:air_quality")
+    wayt.usage = Find("usage")
+    wayt.station = Find("station")
+    wayt.railwayCminiature = Find("railway:miniature")
+    wayt.crossing = Find("crossing")
+    wayt.disusedCtourism = Find("disused:tourism")
+    wayt.ruinsCtourism = Find("ruins:tourism")
+    wayt.board_type = Find("board_type")
+    wayt.information = Find("information")
+    wayt.operatorCtype = Find("operator:type")
+    wayt.boardCtitle = Find("board:title")
+    wayt.guide_type = Find("guide_type")
+    wayt.ncn_milepost = Find("ncn_milepost")
+    wayt.sustrans_ref = Find("sustrans_ref")
+    wayt.theatre = Find("theatre")
+    wayt.fence_type = Find("fence_type")
 
     generic_before_function( wayt )
 
@@ -5316,6 +5366,517 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Water monitoring stations
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made                  == "monitoring_station"  ) and
+       (( passedt.monitoringCwater_level    == "yes"                )  or
+        ( passedt.monitoringCwater_flow     == "yes"                )  or
+        ( passedt.monitoringCwater_velocity == "yes"                ))) then
+      passedt.man_made = "monitoringwater"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Weather monitoring stations
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made               == "monitoring_station" ) and
+       ( passedt.monitoringCweather     == "yes"                ) and
+       ( passedt.weatherCradar          == nil                  ) and
+       ( passedt.monitoringCwater_level == nil                  )) then
+      passedt.man_made = "monitoringweather"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Rainfall monitoring stations
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made               == "monitoring_station" ) and
+       ( passedt.monitoringCrainfall    == "yes"                ) and
+       ( passedt.monitoringCweather     == nil                  ) and
+       ( passedt.monitoringCwater_level == nil                  )) then
+      passedt.man_made = "monitoringrainfall"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Earthquake monitoring stations
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made                     == "monitoring_station" ) and
+       ( passedt.monitoringCseismic_activity  == "yes"                )) then
+      passedt.man_made = "monitoringearthquake"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Sky brightness monitoring stations
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made                   == "monitoring_station" ) and
+       ( passedt.monitoringCsky_brightness  == "yes"                )) then
+      passedt.man_made = "monitoringsky"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Air quality monitoring stations
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made               == "monitoring_station" ) and
+       ( passedt.monitoringCair_quality == "yes"                ) and
+       ( passedt.monitoringCweather     == nil                  )) then
+      passedt.man_made = nil
+      passedt.landuse = "industrial"
+      if ( passedt.name == nil ) then
+         passedt.name = "(air quality)"
+      else
+         passedt.name = passedt.name .. " (air quality)"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Golf ball washers
+-- ----------------------------------------------------------------------------
+   if ( passedt.golf == "ball_washer" ) then
+      passedt.man_made = "golfballwasher"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Advertising Columns
+-- ----------------------------------------------------------------------------
+   if ( passedt.advertising == "column" ) then
+      passedt.tourism = "advertising_column"
+   end
+
+-- ----------------------------------------------------------------------------
+-- railway=transfer_station - show as "halt"
+-- This is for Manulla Junction, https://www.openstreetmap.org/node/5524753168
+-- ----------------------------------------------------------------------------
+   if ( passedt.railway == "transfer_station" ) then
+      passedt.railway = "halt"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show unspecified "public_transport=station" as "railway=halt"
+-- These are normally one of amenity=bus_station, railway=station or
+--  aerialway=station.  If they are none of these at least sow them as something.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.public_transport == "station" ) and
+       (( passedt.amenity          == nil      )  or
+        ( passedt.amenity          == ""       )) and
+       (( passedt.railway          == nil      )  or
+        ( passedt.railway          == ""       )) and
+       (( passedt.aerialway        == nil      )  or
+        ( passedt.aerialway        == ""       ))) then
+      passedt.railway          = "halt"
+      passedt.public_transport = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- "tourism" stations - show with brown text rather than blue.
+-- ----------------------------------------------------------------------------
+   if (((( passedt.railway           == "station"   )    or
+         ( passedt.railway           == "halt"      ))   and
+        (( passedt.usage             == "tourism"   )    or
+         ( passedt.station           == "miniature" )    or
+         ( passedt.tourism           == "yes"       )))  or
+       (   passedt.railwayCminiature == "station"     )) then
+      passedt.amenity = "tourismstation"
+      passedt.railway = nil
+      passedt.railwayCminiature = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- railway=crossing - show as level crossings.
+-- ----------------------------------------------------------------------------
+   if ( passedt.railway == "crossing" ) then
+      passedt.railway = "level_crossing"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various types of traffic light controlled crossings
+-- ----------------------------------------------------------------------------
+   if ((( passedt.crossing == "traffic_signals"         )  or
+        ( passedt.crossing == "toucan"                  )  or
+        ( passedt.crossing == "puffin"                  )  or
+        ( passedt.crossing == "traffic_signals;island"  )  or
+        ( passedt.crossing == "traffic_lights"          )  or
+        ( passedt.crossing == "island;traffic_signals"  )  or
+        ( passedt.crossing == "signals"                 )  or
+        ( passedt.crossing == "pegasus"                 )  or
+        ( passedt.crossing == "pedestrian_signals"      )  or
+        ( passedt.crossing == "light_controlled"        )  or
+        ( passedt.crossing == "light controlled"        )) and
+       (( passedt.highway  == nil                       )  or
+        ( passedt.highway  == ""                        ))) then
+      passedt.highway = "traffic_signals"
+      passedt.crossing = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- highway=passing_place to turning_circle
+-- Not really the same thing, but a "widening of the road" should be good 
+-- enough.  
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway == "passing_place" ) then
+      passedt.highway = "turning_circle"
+   end
+
+-- ----------------------------------------------------------------------------
+-- highway=escape to service
+-- There aren't many escape lanes mapped, but they do exist
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway   == "escape" ) then
+      passedt.highway = "service"
+      passedt.access  = "destination"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render guest houses subtagged as B&B as B&B
+-- ----------------------------------------------------------------------------
+   if (( passedt.tourism     == "guest_house"       ) and
+       ( passedt.guest_house == "bed_and_breakfast" )) then
+      passedt.tourism = "bed_and_breakfast"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "self_catering" is increasingly common and a series of different icons are
+-- used for them, based on values for whether it is:
+--
+-- self catering       yes or no
+-- multiple occupancy  yes, no, or don't know
+-- urban setting       urban, rural, or don't know
+-- cheap               yes (like a hostel) or no (like a hotel)
+--
+-- The resulting values such as "tourism_guest_yyyy" are passed through to be 
+-- rendered.
+-- ----------------------------------------------------------------------------
+   if (( passedt.tourism   == "self_catering"           ) or
+       ( passedt.tourism   == "accommodation"           ) or
+       ( passedt.tourism   == "holiday_let"             )) then
+      passedt.tourism = "tourism_guest_yddd"
+   end
+
+   if ( passedt.tourism   == "apartment"               ) then
+      passedt.tourism = "tourism_guest_ynyn"
+   end
+
+   if (( passedt.tourism   == "holiday_cottage"         ) or
+       ( passedt.tourism   == "cottage"                 )) then
+      passedt.tourism = "tourism_guest_ynnn"
+   end
+
+   if (( passedt.tourism   == "holiday_village"         ) or
+       ( passedt.tourism   == "holiday_park"            ) or
+       ( passedt.tourism   == "holiday_lets"            )) then
+      passedt.tourism = "tourism_guest_dynd"
+   end
+
+   if ( passedt.tourism   == "spa_resort"              ) then
+      passedt.tourism = "tourism_guest_nynn"
+   end
+
+   if ( passedt.tourism   == "Holiday Lodges"          ) then
+      passedt.tourism = "tourism_guest_yynd"
+   end
+
+   if (( passedt.tourism   == "aparthotel"              ) or
+       ( passedt.tourism   == "apartments"              )) then
+      passedt.tourism = "tourism_guest_yyyn"
+   end
+
+-- ----------------------------------------------------------------------------
+-- tourism=bed_and_breakfast was removed by the "style police" in
+-- https://github.com/gravitystorm/openstreetmap-carto/pull/695
+-- That now has its own icon.
+-- Self-catering is handled above.
+-- That just leaves "tourism=guest_house":
+-- ----------------------------------------------------------------------------
+   if ( passedt.tourism   == "guest_house"          ) then
+      passedt.tourism = "tourism_guest_nydn"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render alternative taggings of camp_site etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.tourism == "camping"                ) or
+       ( passedt.tourism == "camp_site;caravan_site" )) then
+      passedt.tourism = "camp_site"
+   end
+
+   if ( passedt.tourism == "caravan_site;camp_site" ) then
+      passedt.tourism = "caravan_site"
+   end
+
+   if ( passedt.tourism == "adventure_holiday"  ) then
+      passedt.tourism = "hostel"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Chalets
+--
+-- Depending on other tags, these will be treated as singlechalet (z17)
+-- or as chalet (z16).  Processing here is simpler than for Garmin as we don't
+-- have to worry where on the search menu something will appear.
+--
+-- We assume that tourism=chalet with no building tag could be either a
+-- self-contained chalet park or just one chalet.  Leave tagging as is.
+--
+-- We assume that tourism=chalet with a building tag is a 
+-- self-contained chalet or chalet within a resort.  Change to "singlechalet".
+-- ----------------------------------------------------------------------------
+   if ( passedt.tourism == "chalet" ) then
+      passedt.leisure = nil
+
+      if ((( passedt.name     == nil )  or
+           ( passedt.name     == ""  )) or
+          (( passedt.building ~= nil )  and
+           ( passedt.building ~= ""  ))) then
+         passedt.tourism = "singlechalet"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- "leisure=trailhead" is an occasional mistagging for "highway=trailhead"
+-- ----------------------------------------------------------------------------
+   if ((  passedt.leisure == "trailhead" ) and
+       (( passedt.highway == nil        )  or
+        ( passedt.highway == ""         ))) then
+      passedt.highway = "trailhead"
+      passedt.leisure = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Trailheads appear in odd combinations, not all of which make sense.
+--
+-- If someone's tagged a trailhead as a locality; likely it's not really one
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway == "trailhead" ) and
+       ( passedt.place   == "locality"  )) then
+      passedt.place = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a trailhead also has a tourism tag, go with whatever tourism tag that is,
+-- rather than sending it through as "informationroutemarker" below.
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway == "trailhead" ) and
+       ( passedt.tourism ~= nil         ) and
+       ( passedt.tourism ~= ""          )) then
+      passedt.highway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a trailhead has no name but an operator, use that
+-- ----------------------------------------------------------------------------
+   if ((  passedt.highway  == "trailhead"  ) and
+       (( passedt.name     == nil         )  or
+        ( passedt.name     == ""          )) and
+       (  passedt.operator ~= nil          ) and
+       (  passedt.operator ~= ""           )) then
+      passedt.name = passedt.operator
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a trailhead still has no name, remove it
+-- ----------------------------------------------------------------------------
+   if ((  passedt.highway  == "trailhead" ) and
+       (( passedt.name     == nil        )  or
+        ( passedt.name     == ""         ))) then
+      passedt.highway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render amenity=information as tourism
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "information"  ) then
+      passedt.tourism = "information"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various types of information - PNFS guideposts first.
+-- ----------------------------------------------------------------------------
+   if (( passedt.tourism    == "information"                          ) and
+       (( passedt.operator  == "Peak & Northern Footpaths Society"   )  or
+        ( passedt.operator  == "Peak and Northern Footpaths Society" )  or
+        ( passedt.operator  == "Peak District & Northern Counties Footpaths Preservation Society" ))) then
+      passedt.tourism = "informationpnfs"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Some information boards don't have a "tourism" tag
+-- ----------------------------------------------------------------------------
+   if (( passedt.information     == "board" ) and
+       ( passedt.disusedCtourism == nil     ) and
+       ( passedt.ruinsCtourism   == nil     ) and
+       ( passedt.historic        == nil     )) then
+      if ( passedt.board_type == "public_transport" ) then
+         passedt.tourism = "informationpublictransport"
+      else
+         passedt.tourism = "informationboard"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Information boards
+-- ----------------------------------------------------------------------------
+   if ((   passedt.amenity     == "notice_board"                       )  or
+       (   passedt.tourism     == "village_sign"                       )  or
+       (   passedt.man_made    == "village_sign"                       )  or
+       ((  passedt.tourism     == "information"                       )   and
+        (( passedt.information == "board"                            )    or
+         ( passedt.information == "board;map"                        )    or
+         ( passedt.information == "citymap"                          )    or
+         ( passedt.information == "departure times and destinations" )    or
+         ( passedt.information == "electronic_board"                 )    or
+         ( passedt.information == "estate_map"                       )    or
+         ( passedt.information == "former_telephone_box"             )    or
+         ( passedt.information == "hikingmap"                        )    or
+         ( passedt.information == "history"                          )    or
+         ( passedt.information == "hospital map"                     )    or
+         ( passedt.information == "information_board"                )    or
+         ( passedt.information == "interpretation"                   )    or
+         ( passedt.information == "interpretive_board"               )    or
+         ( passedt.information == "leaflet_board"                    )    or
+         ( passedt.information == "leaflets"                         )    or
+         ( passedt.information == "map and posters"                  )    or
+         ( passedt.information == "map"                              )    or
+         ( passedt.information == "map;board"                        )    or
+         ( passedt.information == "map_board"                        )    or
+         ( passedt.information == "nature"                           )    or
+         ( passedt.information == "notice_board"                     )    or
+         ( passedt.information == "noticeboard"                      )    or
+         ( passedt.information == "orientation_map"                  )    or
+         ( passedt.information == "sitemap"                          )    or
+         ( passedt.information == "tactile_map"                      )    or
+         ( passedt.information == "tactile_model"                    )    or
+         ( passedt.information == "terminal"                         )    or
+         ( passedt.information == "wildlife"                         )))) then
+      if ( passedt.board_type == "public_transport" ) then
+         passedt.tourism = "informationpublictransport"
+      else
+         passedt.tourism = "informationboard"
+      end
+   end
+
+   if ((  passedt.amenity     == "notice_board"       )  or
+       (  passedt.tourism     == "sign"               )  or
+       (  passedt.emergency   == "beach_safety_sign"  )  or
+       (( passedt.tourism     == "information"       )   and
+        ( passedt.information == "sign"              ))) then
+      if ( passedt.operatorCtype == "military" ) then
+         passedt.tourism = "militarysign"
+      else
+         passedt.tourism = "informationsign"
+      end
+   end
+
+   if ((( passedt.tourism     == "informationboard"           )   or
+        ( passedt.tourism     == "informationpublictransport" )   or
+        ( passedt.tourism     == "informationsign"            )   or
+        ( passedt.tourism     == "militarysign"               ))  and
+       (  passedt.name        == nil                           )  and
+       (  passedt.boardCtitle ~= nil                           )) then
+      passedt.name = passedt.boardCtitle
+   end
+
+   if (((  passedt.tourism     == "information"                       )  and
+        (( passedt.information == "guidepost"                        )   or
+         ( passedt.information == "fingerpost"                       )   or
+         ( passedt.information == "marker"                           ))) or
+       (   passedt.man_made    == "signpost"                           )) then
+      if ( passedt.guide_type == "intermediary" ) then
+         passedt.tourism = "informationroutemarker"
+      else
+         passedt.tourism = "informationmarker"
+         passedt.ele = nil
+
+	 if (( passedt.name ~= nil ) and
+             ( passedt.name ~= ""  )) then
+	    passedt.ele = passedt.name
+	 end
+
+         append_directions( passedt )
+      end
+   end
+
+   if (((  passedt.tourism     == "information"                       )   and
+        (( passedt.information == "route_marker"                     )    or
+         ( passedt.information == "trail_blaze"                      )))  or
+       (   passedt.highway     == "trailhead"                          )) then
+      passedt.tourism = "informationroutemarker"
+   end
+
+   if ((  passedt.tourism     == "information"                       )  and
+       (( passedt.information == "office"                           )   or
+        ( passedt.information == "kiosk"                            )   or
+        ( passedt.information == "visitor_centre"                   ))) then
+      passedt.tourism = "informationoffice"
+   end
+
+   if ((  passedt.tourism     == "information"                       )  and
+       (( passedt.information == "blue_plaque"                      )   or
+        ( passedt.information == "plaque"                           ))) then
+      passedt.tourism = "informationplaque"
+   end
+
+   if (( passedt.tourism     == "information"                       )  and
+       ( passedt.information == "audioguide"                        )) then
+      passedt.tourism = "informationear"
+   end
+
+-- ----------------------------------------------------------------------------
+-- NCN Route markers
+-- ----------------------------------------------------------------------------
+   if ( passedt.ncn_milepost == "dudgeon" ) then
+      passedt.tourism = "informationncndudgeon"
+      passedt.name    = passedt.sustrans_ref
+   end
+
+   if ( passedt.ncn_milepost == "mccoll" ) then
+      passedt.tourism = "informationncnmccoll"
+      passedt.name    = passedt.sustrans_ref
+   end
+
+   if ( passedt.ncn_milepost == "mills" ) then
+      passedt.tourism = "informationncnmills"
+      passedt.name    = passedt.sustrans_ref
+   end
+
+   if ( passedt.ncn_milepost == "rowe" ) then
+      passedt.tourism = "informationncnrowe"
+      passedt.name    = passedt.sustrans_ref
+   end
+
+   if (( passedt.ncn_milepost == "unknown" )  or
+       ( passedt.ncn_milepost == "yes"     )) then
+      passedt.tourism = "informationncnunknown"
+      passedt.name    = passedt.sustrans_ref
+   end
+
+
+-- ----------------------------------------------------------------------------
+-- Change some common semicolon values to the first in the list.
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "bar;restaurant" ) then
+      passedt.amenity = "bar"
+   end
+
+   if ( passedt.shop == "butcher;greengrocer" ) then
+      passedt.shop = "butcher"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Things that are both peaks and memorials should render as the latter.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.natural   == "hill"     )  or
+        ( passedt.natural   == "peak"     )) and
+       (  passedt.historic  == "memorial"  )) then
+      passedt.natural = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Things that are both peaks and cairns should render as the former.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.natural   == "hill"     )  or
+        ( passedt.natural   == "peak"     )) and
+       (  passedt.man_made  == "cairn"     )) then
+      passedt.man_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
 -- Beacons - render historic ones, not radio ones.
 -- ----------------------------------------------------------------------------
    if ((( passedt.man_made == "beacon"        )  or
@@ -5352,11 +5913,159 @@ function generic_before_function( passedt )
        ( passedt.military == "depot"                              ) or
        ( passedt.military == "registration_and_enlistment_office" ) or
        ( passedt.military == "checkpoint"                         ) or
-       ( passedt.military == "danger_area"                        ) or
        ( passedt.hazard   == "shooting_range"                     ) or
        ( passedt.sport    == "shooting"                           ) or
        ( passedt.sport    == "shooting_range"                     )) then
       passedt.landuse = "military"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Extract concert hall theatres as concert halls
+-- ----------------------------------------------------------------------------
+   if ((( passedt.amenity == "theatre"      )  and
+        ( passedt.theatre == "concert_hall" )) or
+       (  passedt.amenity == "music_venue"   )) then
+      passedt.amenity = "concert_hall"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show natural=embankment as man_made=embankment.
+-- Where it is used in UK/IE (which is rarely) it seems to be for single-sided
+-- ones.
+-- ----------------------------------------------------------------------------
+   if ( passedt.natural == "embankment"   ) then
+      passedt.man_made = "embankment"
+   end
+
+-- ----------------------------------------------------------------------------
+-- man_made=embankment and natural=cliff displays as a non-sided cliff 
+-- Often it's combined with highway though, and that is handled separately.
+-- In that case it's passed through to the stylesheet as bridge=levee.
+-- embankment handling is asymmetric for railways currently - it's checked
+-- before we apply the "man_made=levee" tag, but "bridge=levee" is not applied.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.barrier    == "flood_bank"    )  or
+        ( passedt.barrier    == "bund"          )  or
+        ( passedt.barrier    == "mound"         )  or
+        ( passedt.barrier    == "ridge"         )  or
+        ( passedt.barrier    == "embankment"    )  or
+        ( passedt.man_made   == "dyke"          )  or
+        ( passedt.man_made   == "levee"         )  or
+        ( passedt.embankment == "yes"           )  or
+        ( passedt.barrier    == "berm"          )  or
+        ( passedt.natural    == "ridge"         )  or
+        ( passedt.natural    == "earth_bank"    )  or
+        ( passedt.natural    == "arete"         )) and
+       (( passedt.highway    == nil             )  or
+        ( passedt.highway    == ""              )  or
+        ( passedt.highway    == "badpathwide"   )  or
+        ( passedt.highway    == "badpathnarrow" )) and
+       (( passedt.railway    == nil             )  or
+        ( passedt.railway    == ""              )) and
+       (( passedt.waterway   == nil             )  or
+        ( passedt.waterway   == ""              ))) then
+      passedt.man_made = "levee"
+      passedt.barrier = nil
+      passedt.embankment = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Re the "bridge" check below, we've already changed valid ones to "yes"
+-- above.
+-- ----------------------------------------------------------------------------
+   if (((  passedt.barrier    == "flood_bank"     )  or
+        (  passedt.man_made   == "dyke"           )  or
+        (  passedt.man_made   == "levee"          )  or
+        (  passedt.embankment == "yes"            )  or
+        (  passedt.natural    == "ridge"          )  or
+        (  passedt.natural    == "arete"          )) and
+       ((( passedt.highway    ~= nil             )   and
+         ( passedt.highway    ~= "badpathwide"   )   and
+         ( passedt.highway    ~= "badpathnarrow" ))  or
+        (( passedt.railway    ~= nil             )   and
+         ( passedt.railway    ~= ""              ))  or
+        (( passedt.waterway   ~= nil             )   and
+         ( passedt.waterway   ~= ""              ))) and
+       (   passedt.bridge     ~= "yes"             ) and
+       (   passedt.tunnel     ~= "yes"             )) then
+      passedt.bridge = "levee"
+      passedt.barrier = nil
+      passedt.man_made = nil
+      passedt.embankment = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Assume "natural=hedge" should be "barrier=hedge".
+-- ----------------------------------------------------------------------------
+   if ( passedt.natural == "hedge" ) then
+      passedt.barrier = "hedge"
+   end
+
+-- ----------------------------------------------------------------------------
+-- map "fences that are really hedges" as fences.
+-- ----------------------------------------------------------------------------
+   if (( passedt.barrier    == "fence" ) and
+       ( passedt.fence_type == "hedge" )) then
+      passedt.barrier = "hedge"
+   end
+
+-- ----------------------------------------------------------------------------
+-- At this point let's try and handle hedge tags on other area features as
+-- linear hedges.
+-- "hedge" can be either a linear or an area feature in this style.
+-- "hedgeline" can only be a linear feature in this style.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.barrier    == "hedge"              ) and
+       ((( passedt.landuse    ~= nil                )   and
+         ( passedt.landuse    ~= ""                 ))  or
+        (( passedt.natural    ~= nil                )   and
+         ( passedt.natural    ~= ""                 ))  or
+        (( passedt.leisure    ~= nil                )   and
+         ( passedt.leisure    ~= ""                 ))  or
+        (( passedt.amenity    ~= nil                )   and
+         ( passedt.amenity    ~= ""                 ))  or
+        (( passedt.historic   ~= nil                )   and
+         ( passedt.historic   ~= ""                 ))  or
+        (( passedt.landcover  ~= nil                )   and
+         ( passedt.landcover  ~= ""                 ))  or
+        (( passedt.tourism    ~= nil                )   and
+         ( passedt.tourism    ~= ""                 ))  or
+        (  passedt.man_made   == "wastewater_plant"  )  or
+        (( passedt.surface    ~= nil                )   and
+         ( passedt.surface    ~= ""                 )))) then
+      passedt.barrier = "hedgeline"
+   end
+
+-- ----------------------------------------------------------------------------
+-- map "alleged shrubberies" as hedge areas.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural == "shrubbery"  ) and
+       (( passedt.barrier == nil         )  or
+        ( passedt.barrier == ""          ))) then
+      passedt.natural = nil
+      passedt.barrier = "hedge"
+      passedt.area = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- barrier=horse_jump is used almost exclusively on ways, so map to fence.
+-- Also some other barriers.
+-- ----------------------------------------------------------------------------
+   if (( passedt.barrier == "horse_jump"     ) or
+       ( passedt.barrier == "traffic_island" ) or
+       ( passedt.barrier == "wire_fence"     ) or
+       ( passedt.barrier == "wood_fence"     ) or
+       ( passedt.barrier == "guard_rail"     ) or
+       ( passedt.barrier == "railing"        )) then
+      passedt.barrier = "fence"
+   end
+
+-- ----------------------------------------------------------------------------
+-- barrier=ditch; handle as waterway=ditch.
+-- ----------------------------------------------------------------------------
+   if ( passedt.barrier == "ditch" ) then
+      passedt.waterway = "ditch"
+      passedt.barrier  = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -5924,103 +6633,6 @@ function generic_before_function( passedt )
         (( passedt.memorial      == "obelisk"   )  or
          ( passedt.memorialCtype == "obelisk"   )))) then
       passedt.historic = "memorialobelisk"
-   end
-
--- ----------------------------------------------------------------------------
--- Render alternative taggings of camp_site etc.
--- ----------------------------------------------------------------------------
-   if (( passedt.tourism == "camping"                ) or
-       ( passedt.tourism == "camp_site;caravan_site" )) then
-      passedt.tourism = "camp_site"
-   end
-
-   if ( passedt.tourism == "caravan_site;camp_site" ) then
-      passedt.tourism = "caravan_site"
-   end
-
-   if ( passedt.tourism == "adventure_holiday"  ) then
-      passedt.tourism = "hostel"
-   end
-
--- ----------------------------------------------------------------------------
--- Chalets
---
--- Depending on other tags, these will be treated as singlechalet (z17)
--- or as chalet (z16).  Processing here is simpler than for Garmin as we don't
--- have to worry where on the search menu something will appear.
---
--- We assume that tourism=chalet with no building tag could be either a
--- self-contained chalet park or just one chalet.  Leave tagging as is.
---
--- We assume that tourism=chalet with a building tag is a 
--- self-contained chalet or chalet within a resort.  Change to "singlechalet".
--- ----------------------------------------------------------------------------
-   if ( passedt.tourism == "chalet" ) then
-      passedt.leisure = nil
-
-      if ((  passedt.name     == nil  ) or
-          (  passedt.name     == ""   ) or
-          (( passedt.building ~= nil ) and
-           ( passedt.building ~= ""  ))) then
-         passedt.tourism = "singlechalet"
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- "leisure=trailhead" is an occasional mistagging for "highway=trailhead"
--- ----------------------------------------------------------------------------
-   if ((  passedt.leisure == "trailhead"  ) and
-       (( passedt.highway == nil         )  or
-        ( passedt.highway == ""          ))) then
-      passedt.highway = "trailhead"
-      passedt.leisure = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Trailheads appear in odd combinations, not all of which make sense.
---
--- If someone's tagged a trailhead as a locality; likely it's not really one
--- ----------------------------------------------------------------------------
-   if (( passedt.highway == "trailhead" ) and
-       ( passedt.place   == "locality"  )) then
-      passedt.place = nil
-   end
-
--- ----------------------------------------------------------------------------
--- If a trailhead also has a tourism tag, go with whatever tourism tag that is,
--- rather than sending it through as "informationroutemarker" below.
--- ----------------------------------------------------------------------------
-   if (( passedt.highway == "trailhead" ) and
-       ( passedt.tourism ~= nil         ) and
-       ( passedt.tourism ~= ""          )) then
-      passedt.highway = nil
-   end
-
--- ----------------------------------------------------------------------------
--- If a trailhead has no name but an operator, use that
--- ----------------------------------------------------------------------------
-   if ((  passedt.highway  == "trailhead"  ) and
-       (( passedt.name     == nil         )  or
-        ( passedt.name     == ""          )) and
-       (  passedt.operator ~= nil          ) and
-       (  passedt.operator ~= ""           )) then
-      passedt.name = passedt.operator
-   end
-
--- ----------------------------------------------------------------------------
--- If a trailhead still has no name, remove it
--- ----------------------------------------------------------------------------
-   if ((  passedt.highway  == "trailhead"  ) and
-       (( passedt.name     == nil         )  or
-        ( passedt.name     == ""          ))) then
-      passedt.highway = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Render amenity=information as tourism
--- ----------------------------------------------------------------------------
-   if ( passedt.amenity == "information"  ) then
-      passedt.tourism = "information"
    end
 
 -- ----------------------------------------------------------------------------
