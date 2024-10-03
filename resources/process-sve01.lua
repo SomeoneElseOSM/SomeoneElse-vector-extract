@@ -26,8 +26,8 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "attraction", "emergency", "entrance", "healthcare", 
-              "landuse", "leisure", "natural", "place", "power", "shop", "tourism", "zoo" }
+node_keys = { "amenity", "attraction", "climbing", "emergency", "entrance", "healthcare", 
+              "landuse", "leisure", "natural", "pitch", "place", "power", "shop", "sport", "tourism", "zoo" }
 
 -- Initialize Lua logic
 
@@ -268,6 +268,11 @@ function node_function()
     nodet.vending_machine = Find("vending_machine")
     nodet.paymentChonesty_box = Find("payment:honesty_box")
     nodet.foodCeggs = Find("food:eggs")
+    nodet.pitch = Find("pitch")
+    nodet.ele = Find("ele")
+    nodet.prominence = Find("prominence")
+    nodet.bench = Find("bench")
+    nodet.munro = Find("munro")
 
     generic_before_function( nodet )
 
@@ -504,6 +509,11 @@ function way_function()
     wayt.vending_machine = Find("vending_machine")
     wayt.paymentChonesty_box = Find("payment:honesty_box")
     wayt.foodCeggs = Find("food:eggs")
+    wayt.pitch = Find("pitch")
+    wayt.ele = Find("ele")
+    wayt.prominence = Find("prominence")
+    wayt.bench = Find("bench")
+    wayt.munro = Find("munro")
 
     generic_before_function( wayt )
 
@@ -5090,6 +5100,83 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Render lines on sports pitches
+-- ----------------------------------------------------------------------------
+   if ( passedt.pitch == "line" ) then
+      passedt.barrier = "pitchline"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Climbing features (boulders, stones, etc.)
+-- Deliberately only use this for outdoor features that would not otherwise
+-- display, so not cliffs etc.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.sport    == "climbing"            )  or
+        ( passedt.sport    == "climbing;bouldering" )  or
+        ( passedt.climbing == "boulder"             )) and
+       (  passedt.natural  ~= "hill"           ) and
+       (  passedt.natural  ~= "peak"           ) and
+       (  passedt.natural  ~= "cliff"          ) and
+       (  passedt.leisure  ~= "sports_centre"  ) and
+       (  passedt.leisure  ~= "climbing_wall"  ) and
+       (  passedt.shop     ~= "sports"         ) and
+       (  passedt.tourism  ~= "attraction"     ) and
+       (( passedt.building == nil             )  or
+        ( passedt.building == ""              )) and
+       (  passedt.man_made ~= "tower"          ) and
+       (  passedt.barrier  ~= "wall"           ) and
+       (  passedt.amenity  ~= "pitch_climbing" )) then
+      passedt.natural = "climbing"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Big peaks and big prominent peaks
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural              == "peak"     ) and
+       (( tonumber(passedt.ele) or 0 ) >  914        )) then
+      if (( tonumber(passedt.prominence) or 0 ) == 0 ) then
+         if ( passedt.munro == "yes" ) then
+            passedt.prominence = "0"
+         else
+            passedt.prominence = passedt.ele
+	 end
+      end
+      if (( tonumber(passedt.prominence) or 0 ) >  500 ) then
+         passedt.natural = "bigprompeak"
+      else
+         passedt.natural = "bigpeak"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- natural=fell is used for all sorts of things, but render as heath, except
+-- where someone's mapped it on a footpath.
+-- ----------------------------------------------------------------------------
+   if ( passedt.natural == "fell" ) then
+      if (( passedt.highway == nil ) or
+          ( passedt.highway == ""  )) then
+         passedt.natural = "heath"
+      else
+         passedt.natural = nil
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Do show loungers as benches.
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "lounger" ) then
+      passedt.amenity = "bench"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Don't show "standing benches" as benches.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "bench"          ) and
+       ( passedt.bench   == "stand_up_bench" )) then
+      passedt.amenity = nil
+   end
+
+-- ----------------------------------------------------------------------------
 -- Get rid of landuse=conservation if we can.  It's a bit of a special case;
 -- in raster maps it has a label like grass but no green fill.
 -- ----------------------------------------------------------------------------
@@ -7023,7 +7110,8 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "waste_disposal"          ) or
             ( passedt.amenity == "grit_bin"                ) or
             ( passedt.amenity == "left_luggage"            ) or
-            ( passedt.amenity == "parcel_locker"           )) then
+            ( passedt.amenity == "parcel_locker"           ) or
+            ( passedt.amenity == "bench"                   )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
