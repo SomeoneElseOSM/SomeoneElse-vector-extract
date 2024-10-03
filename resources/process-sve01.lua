@@ -6806,7 +6806,8 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "fuel_h"                  ) or
             ( passedt.amenity == "fuel_l"                  ) or
             ( passedt.amenity == "fuel_w"                  ) or
-            ( passedt.amenity == "charging_station"        )) then
+            ( passedt.amenity == "charging_station"        ) or
+            ( passedt.amenity == "embassy"                 )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
