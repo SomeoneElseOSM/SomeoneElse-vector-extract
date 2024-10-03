@@ -153,6 +153,7 @@ function node_function()
     nodet.historic = Find("historic")
     nodet.ruins = Find("ruins")
     nodet.ruinsCman_made = Find("ruins:man_made")
+    nodet.ruinsCbuilding = Find("ruins:building")
     nodet.towerCtype = Find("tower:type")
     nodet.aircraftCmodel = Find("aircraft:model")
     nodet.inscription = Find("inscription")
@@ -170,6 +171,7 @@ function node_function()
     nodet.operator = Find("operator")
     nodet.leaf_type = Find("leaf_type")
     nodet.power = Find("power")
+    nodet.power_source = Find("power_source")
     nodet.zoo = Find("zoo")
     nodet.industrial = Find("industrial")
     nodet.seamarkCtype = Find("seamark:type")
@@ -273,6 +275,25 @@ function node_function()
     nodet.prominence = Find("prominence")
     nodet.bench = Find("bench")
     nodet.munro = Find("munro")
+    nodet.location = Find("location")
+    nodet.buildingCruins = Find("building:ruins")
+    nodet.ruinedCbuilding = Find("ruined:building")
+    nodet.species = Find("species")
+    nodet.taxon = Find("taxon")
+    nodet.lock_ref = Find("lock_ref")
+    nodet.lock_name = Find("lock_name")
+    nodet.bridgeCname = Find("bridge:name")
+    nodet.bridge_name = Find("bridge_name")
+    nodet.bridgeCref = Find("bridge:ref")
+    nodet.canal_bridge_ref = Find("canal_bridge_ref")
+    nodet.bridge_ref = Find("bridge_ref")
+    nodet.tunnelCname = Find("tunnel:name")
+    nodet.tunnel_name = Find("tunnel_name")
+    nodet.tpuk_ref = Find("tpuk_ref")
+    nodet.underground = Find("underground")
+    nodet.generatorCsource = Find("generator:source")
+    nodet.generatorCmethod = Find("generator:method")
+    nodet.plantCsource = Find("plant:source")
 
     generic_before_function( nodet )
 
@@ -411,6 +432,7 @@ function way_function()
     wayt.operator = Find("operator")
     wayt.leaf_type = Find("leaf_type")
     wayt.power = Find("power")
+    wayt.power_source = Find("power_source")
     wayt.zoo = Find("zoo")
     wayt.industrial = Find("industrial")
     wayt.seamarkCtype = Find("seamark:type")
@@ -514,6 +536,25 @@ function way_function()
     wayt.prominence = Find("prominence")
     wayt.bench = Find("bench")
     wayt.munro = Find("munro")
+    wayt.location = Find("location")
+    wayt.buildingCruins = Find("building:ruins")
+    wayt.ruinedCbuilding = Find("ruined:building")
+    wayt.species = Find("species")
+    wayt.taxon = Find("taxon")
+    wayt.lock_ref = Find("lock_ref")
+    wayt.lock_name = Find("lock_name")
+    wayt.bridgeCname = Find("bridge:name")
+    wayt.bridge_name = Find("bridge_name")
+    wayt.bridgeCref = Find("bridge:ref")
+    wayt.canal_bridge_ref = Find("canal_bridge_ref")
+    wayt.bridge_ref = Find("bridge_ref")
+    wayt.tunnelCname = Find("tunnel:name")
+    wayt.tunnel_name = Find("tunnel_name")
+    wayt.tpuk_ref = Find("tpuk_ref")
+    wayt.underground = Find("underground")
+    wayt.generatorCsource = Find("generator:source")
+    wayt.generatorCmethod = Find("generator:method")
+    wayt.plantCsource = Find("plant:source")
 
     generic_before_function( wayt )
 
@@ -4156,6 +4197,158 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Display "location=underground" waterways as tunnels.
+--
+-- There are currently no "location=overground" waterways that are not
+-- also "man_made=pipeline".
+-- ----------------------------------------------------------------------------
+   if ((( passedt.waterway ~= nil           )   and
+        ( passedt.waterway ~= ""            ))  and
+       (( passedt.location == "underground" )   or
+        ( passedt.covered  == "yes"         ))  and
+       (( passedt.tunnel   == nil           )   or
+        ( passedt.tunnel   == ""            ))) then
+      passedt.tunnel = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Display "location=overground" and "location=overhead" pipelines as bridges.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made == "pipeline"    ) and
+       (( passedt.location == "overground" )  or
+        ( passedt.location == "overhead"   )) and
+       (( passedt.bridge   == nil          )  or
+        ( passedt.bridge   == ""           ))) then
+      passedt.bridge = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Pipelines
+-- We display pipelines as waterways, because there is explicit bridge handling
+-- for waterways.
+-- Also note that some seamarks
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made     == "pipeline"           ) or
+       ( passedt.seamarkCtype == "pipeline_submarine" )) then
+      passedt.man_made     = nil
+      passedt.seamarkCtype = nil
+      passedt.waterway     = "pipeline"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Display gantries as pipeline bridges
+-- ----------------------------------------------------------------------------
+   if ( passedt.man_made == "gantry" ) then
+      passedt.man_made = nil
+      passedt.waterway = "pipeline"
+      passedt.bridge = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Display military bunkers
+-- Historic bunkers have been dealt with higher up.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.military == "bunker"   ) or
+       ((  passedt.building == "bunker"  )  and
+        (( passedt.disused  == nil      )   or
+         ( passedt.disused  == ""       ))  and
+        (( passedt.historic == nil      )   or
+         ( passedt.historic == ""       )))) then
+      passedt.man_made = "militarybunker"
+      passedt.military = nil
+
+      if ( passedt.building == nil ) then
+         passedt.building = "yes"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Supermarkets as normal buildings
+-- ----------------------------------------------------------------------------
+   if ((  passedt.building   == "supermarket"      ) or
+       (  passedt.man_made   == "storage_tank"     ) or
+       (  passedt.man_made   == "silo"             ) or
+       (  passedt.man_made   == "tank"             ) or
+       (  passedt.man_made   == "water_tank"       ) or
+       (  passedt.man_made   == "kiln"             ) or
+       (  passedt.man_made   == "gasometer"        ) or
+       (  passedt.man_made   == "oil_tank"         ) or
+       (  passedt.man_made   == "greenhouse"       ) or
+       (  passedt.man_made   == "water_treatment"  ) or
+       (  passedt.man_made   == "trickling_filter" ) or
+       (  passedt.man_made   == "filter_bed"       ) or
+       (  passedt.man_made   == "filtration_bed"   ) or
+       (  passedt.man_made   == "waste_treatment"  ) or
+       (  passedt.man_made   == "lighthouse"       ) or
+       (  passedt.man_made   == "street_cabinet"   ) or
+       (  passedt.man_made   == "aeroplane"        ) or
+       (  passedt.man_made   == "helicopter"       )) then
+      passedt.building = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Only show telescopes as buildings if they don't already have a landuse set.
+-- Some large radio telescopes aren't large buildings.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made == "telescope"  ) and
+       (( passedt.landuse  == nil         )  or
+        ( passedt.landuse  == ""          ))) then
+      passedt.building = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- building=ruins is rendered as a half-dark building.
+-- The wiki tries to guide building=ruins towards follies only but ruins=yes
+-- "not a folly but falling down".  That doesn't match what mappers do but 
+-- render both as half-dark.
+-- ----------------------------------------------------------------------------
+   if (((    passedt.building        ~= nil               )   and
+        (    passedt.building        ~= ""                )   and
+        (((  passedt.historic        == "ruins"         )     and
+          (( passedt.ruins           == nil            )      or
+           ( passedt.ruins           == ""             )))    or
+         (   passedt.ruins           == "yes"            )    or
+         (   passedt.ruins           == "barn"           )    or
+         (   passedt.ruins           == "barrack"        )    or
+         (   passedt.ruins           == "blackhouse"     )    or
+         (   passedt.ruins           == "house"          )    or
+         (   passedt.ruins           == "hut"            )    or
+         (   passedt.ruins           == "farm_auxiliary" )    or
+         (   passedt.ruins           == "farmhouse"      )))  or
+       (     passedt.ruinsCbuilding  == "yes"              )  or
+       (     passedt.buildingCruins  == "yes"              )  or
+       (     passedt.ruinedCbuilding == "yes"              )  or
+       (     passedt.building        == "collapsed"        )) then
+      passedt.building = "ruins"
+   end
+   
+-- ----------------------------------------------------------------------------
+-- Map man_made=monument to historic=monument (handled below).
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made == "monument" )  and
+       (( passedt.tourism  == nil       )   or
+        ( passedt.tourism  == ""        ))) then
+      passedt.historic = "monument"
+      passedt.man_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map man_made=geoglyph to natural=bare_rock if another natural tag such as 
+-- scree is not already set
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made == "geoglyph"  ) and
+       (( passedt.leisure  == nil        )  or
+        ( passedt.leisure  == ""         ))) then
+      if (( passedt.natural  == nil ) or
+          ( passedt.natural  == ""  )) then
+         passedt.natural  = "bare_rock"
+      end
+
+      passedt.man_made = nil
+      passedt.tourism  = nil
+   end
+   
+-- ----------------------------------------------------------------------------
 -- Things that are both towers and monuments or memorials 
 -- should render as the latter.
 -- ----------------------------------------------------------------------------
@@ -4836,6 +5029,155 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- hazard=plant is fairly rare, but render as a nonspecific historic dot.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.hazard  == "plant"                    )  or
+        ( passedt.hazard  == "toxic_plant"              )) and
+       (( passedt.species == "Heracleum mantegazzianum" )  or
+        ( passedt.taxon   == "Heracleum mantegazzianum" ))) then
+      passedt.historic = "nonspecific"
+      passedt.name = "Hogweed"
+   end
+
+-- ----------------------------------------------------------------------------
+-- If something has a "lock_ref", append it to "lock_name" (if it exists) or
+-- "name" (if it doesn't)
+-- ----------------------------------------------------------------------------
+   if (( passedt.lock_ref ~= nil ) and
+       ( passedt.lock_ref ~= ""  )) then
+      if (( passedt.lock_name ~= nil ) and
+          ( passedt.lock_name ~= ""  )) then
+         passedt.lock_name = passedt.lock_name .. " (" .. passedt.lock_ref .. ")"
+      else
+         if (( passedt.name ~= nil ) and
+             ( passedt.name ~= ""  )) then
+            passedt.name = passedt.name .. " (" .. passedt.lock_ref .. ")"
+         else
+            passedt.lock_name = "(" .. passedt.lock_ref .. ")"
+         end
+      end
+
+      passedt.lock_ref = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If something (now) has a "lock_name", use it in preference to "name".
+-- ----------------------------------------------------------------------------
+   if (( passedt.lock_name ~= nil ) and
+       ( passedt.lock_name ~= ""  )) then
+      passedt.name = passedt.lock_name
+   end
+
+-- ----------------------------------------------------------------------------
+-- If set, move bridge:name to bridge_name
+-- ----------------------------------------------------------------------------
+   if ( passedt.bridgeCname ~= nil ) then
+      passedt.bridge_name = passedt.bridgeCname
+      passedt.bridgeCname = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If set, move bridge_name to name
+-- ----------------------------------------------------------------------------
+   if ( passedt.bridge_name ~= nil ) then
+      passedt.name = passedt.bridge_name
+      passedt.bridge_name = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If set, move bridge:ref to bridge_ref
+-- ----------------------------------------------------------------------------
+   if ( passedt.bridgeCref ~= nil ) then
+      passedt.bridge_ref = passedt.bridgeCref
+      passedt.bridgeCref = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If set, move canal_bridge_ref to bridge_ref
+-- ----------------------------------------------------------------------------
+   if ( passedt.canal_bridge_ref ~= nil ) then
+      passedt.bridge_ref = passedt.canal_bridge_ref
+      passedt.canal_bridge_ref = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If set and relevant, do something with bridge_ref
+-- ----------------------------------------------------------------------------
+   if ((   passedt.bridge_ref ~= nil   ) and
+       (   passedt.bridge_ref ~= ""    ) and
+       ((( passedt.highway    ~= nil )   and
+         ( passedt.highway    ~= ""  ))  or
+        (( passedt.railway    ~= nil )   and
+         ( passedt.railway    ~= ""  ))  or
+        (( passedt.waterway   ~= nil )   and
+         ( passedt.waterway   ~= ""  )))) then
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = "{" .. passedt.bridge_ref .. ")"
+      else
+         passedt.name = passedt.name .. " {" .. passedt.bridge_ref .. ")"
+      end
+
+      passedt.bridge_ref = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If set, move tunnel:name to tunnel_name
+-- ----------------------------------------------------------------------------
+   if (( passedt.tunnelCname ~= nil ) and
+       ( passedt.tunnelCname ~= ""  )) then
+      passedt.tunnel_name = passedt.tunnelCname
+      passedt.tunnelCname = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If set, move tunnel_name to name
+-- ----------------------------------------------------------------------------
+   if (( passedt.tunnel_name ~= nil ) and
+       ( passedt.tunnel_name ~= ""  )) then
+      passedt.name = passedt.tunnel_name
+      passedt.tunnel_name = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If something has a "tpuk_ref", use it in preference to "name".
+-- It's in brackets because it's likely not signed.
+-- ----------------------------------------------------------------------------
+   if (( passedt.tpuk_ref ~= nil ) and
+       ( passedt.tpuk_ref ~= ""  )) then
+      passedt.name = "(" .. passedt.tpuk_ref .. ")"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Disused railway platforms
+-- ----------------------------------------------------------------------------
+   if (( passedt.railway == "platform" ) and
+       ( passedt.disused == "yes"       )) then
+      passedt.railway = nil
+      passedt.disusedCrailway = "platform"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Suppress Underground railway platforms
+-- ----------------------------------------------------------------------------
+   if ((  passedt.railway     == "platform"     ) and
+       (( passedt.location    == "underground" )  or
+        ( passedt.underground == "yes"         )  or
+        (( tonumber(passedt.layer) or 0 ) <  0 ))) then
+      passedt.railway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If railway platforms have a ref, use it.
+-- ----------------------------------------------------------------------------
+   if (( passedt.railway == "platform" ) and
+       ( passedt.ref     ~= nil        ) and
+       ( passedt.ref     ~= ""         )) then
+      passedt.name = "Platform " .. passedt.ref
+      passedt.ref  = nil
+   end
+
+-- ----------------------------------------------------------------------------
 -- Add "water" to some "wet" features for rendering.
 -- (the last part currently vector only)
 -- ----------------------------------------------------------------------------
@@ -4906,6 +5248,71 @@ function generic_before_function( passedt )
    if (( passedt.natural      == "wetland"  )  and
        ( passedt.intermittent == "yes"      )) then
       passedt.natural = "intermittentwetland"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map wind turbines to, er, wind turbines and make sure that they don't also
+-- appear as towers.
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made   == "wind_turbine" ) or
+       ( passedt.man_made   == "windpump"     )) then
+      passedt.power        = "generator"
+      passedt.power_source = "wind"
+   end
+
+   if ((  passedt.man_made         == "tower"         ) and
+       (  passedt.power            == "generator"     ) and
+       (( passedt.power_source     == "wind"         )  or
+        ( passedt.generatorCsource == "wind"         )  or
+        ( passedt.generatorCmethod == "wind_turbine" )  or
+        ( passedt.plantCsource     == "wind"         )  or
+        ( passedt.generatorCmethod == "wind"         ))) then
+      passedt.man_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Change solar panels to "roof"
+-- ----------------------------------------------------------------------------
+   if (( passedt.power            == "generator"    ) and
+       ( passedt.generatorCmethod == "photovoltaic" )) then
+      passedt.power    = nil
+      passedt.building = "roof"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Railway ventilation shaft nodes.
+-- These are rendered as a stubby black tower.
+-- ----------------------------------------------------------------------------
+   if (( passedt.building   == "air_shaft"         ) or
+       ( passedt.man_made   == "air_shaft"         ) or
+       ( passedt.tunnel     == "air_shaft"         ) or
+       ( passedt.historic   == "air_shaft"         ) or
+       ( passedt.railway    == "ventilation_shaft" ) or
+       ( passedt.tunnel     == "ventilation_shaft" ) or
+       ( passedt.tunnel     == "ventilation shaft" ) or
+       ( passedt.building   == "ventilation_shaft" ) or
+       ( passedt.man_made   == "ventilation_shaft" ) or
+       ( passedt.building   == "vent_shaft"        ) or
+       ( passedt.man_made   == "vent_shaft"        ) or
+       ( passedt.towerCtype == "vent"              ) or
+       ( passedt.towerCtype == "ventilation_shaft" )) then
+      passedt.man_made = "ventilation_shaft"
+
+      if (( passedt.building == nil ) or
+          ( passedt.building == ""  )) then
+         passedt.building = "roof"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Horse mounting blocks
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity   == "mounting_block"       ) or
+       ( passedt.historic  == "mounting_block"       ) or
+       ( passedt.amenity   == "mounting_step"        ) or
+       ( passedt.amenity   == "mounting_steps"       ) or
+       ( passedt.amenity   == "horse_dismount_block" )) then
+      passedt.man_made = "mounting_block"
    end
 
 -- ----------------------------------------------------------------------------
