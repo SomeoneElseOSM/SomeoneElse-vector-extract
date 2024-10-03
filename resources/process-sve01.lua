@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "landuse", "leisure", "natural", "place", "power", "shop", "tourism" }
+node_keys = { "amenity", "emergency", "entrance", "landuse", "leisure", "natural", "place", "power", "shop", "tourism" }
 
 -- Initialize Lua logic
 
@@ -256,6 +256,12 @@ function node_function()
     nodet.entrance = Find("entrance")
     nodet.public_transport = Find("public_transport")
     nodet.school = Find("school")
+    nodet.seamarkCrescue_stationCcategory = Find("seamark:rescue_station:category")
+    nodet.healthcare = Find("healthcare")
+    nodet.social_facility = Find("social_facility")
+    nodet.club = Find("club")
+    nodet.gambling = Find("gambling")
+    nodet.danceCteaching = Find("dance:teaching")
 
     generic_before_function( nodet )
 
@@ -481,6 +487,12 @@ function way_function()
     wayt.entrance = Find("entrance")
     wayt.public_transport = Find("public_transport")
     wayt.school = Find("school")
+    wayt.seamarkCrescue_stationCcategory = Find("seamark:rescue_station:category")
+    wayt.healthcare = Find("healthcare")
+    wayt.social_facility = Find("social_facility")
+    wayt.club = Find("club")
+    wayt.gambling = Find("gambling")
+    wayt.danceCteaching = Find("dance:teaching")
 
     generic_before_function( wayt )
 
@@ -5315,6 +5327,544 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- emergency=water_rescue is a poorly-designed key that makes it difficult to
+-- tell e.g. lifeboats from lifeboat stations.
+-- However, if we've got one of various buildings, it's a lifeboat station.
+-- ----------------------------------------------------------------------------
+   if (  passedt.emergency == "water_rescue" ) then
+      if (( passedt.building  == "boathouse"        ) or
+          ( passedt.building  == "commercial"       ) or
+          ( passedt.building  == "container"        ) or
+          ( passedt.building  == "house"            ) or
+          ( passedt.building  == "industrial"       ) or
+          ( passedt.building  == "lifeboat_station" ) or
+          ( passedt.building  == "no"               ) or
+          ( passedt.building  == "office"           ) or
+          ( passedt.building  == "public"           ) or
+          ( passedt.building  == "retail"           ) or
+          ( passedt.building  == "roof"             ) or
+          ( passedt.building  == "ruins"            ) or
+          ( passedt.building  == "service"          ) or
+          ( passedt.building  == "yes"              )) then
+         passedt.emergency = "lifeboat_station"
+      else
+         if (( passedt.building                         == "ship"                ) or
+             ( passedt.seamarkCrescue_stationCcategory  == "lifeboat_on_mooring" )) then
+            passedt.amenity   = "lifeboat"
+            passedt.emergency = nil
+         else
+            passedt.emergency = "lifeboat_station"
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handling of objects not (yet) tagfiddled to "emergency=water_rescue":
+-- Sometimes lifeboats are mapped in the see separately to the 
+-- lifeboat station, and sometimes they're tagged _on_ the lifeboat station.
+-- If the latter, show the lifeboat station.
+-- Also detect lifeboats and coastguards tagged only as seamarks.
+--
+-- See below for the similar but different tag "emergency=water_rescue_station"
+-- which seems to be used on buildings, huts, etc. (not lifeboats).
+-- ----------------------------------------------------------------------------
+   if ((  passedt.seamarkCrescue_stationCcategory == "lifeboat_on_mooring"  ) and
+       (( passedt.amenity                         == nil                   )  or
+        ( passedt.amenity                         == ""                    ))) then
+      passedt.amenity  = "lifeboat"
+   end
+
+   if ((  passedt.seamarkCtype == "coastguard_station"  ) and
+       (( passedt.amenity      == nil                  )  or
+        ( passedt.amenity      == ""                   ))) then
+      passedt.amenity  = "coast_guard"
+   end
+
+   if (( passedt.amenity   == "lifeboat"         ) and
+       ( passedt.emergency == "lifeboat_station" )) then
+      passedt.amenity  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Similarly, various government offices.  Job Centres first.
+-- Lifeboat stations are also in here.
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.amenity    == "job_centre"               ) or
+       (  passedt.amenity    == "jobcentre"                ) or
+       (  passedt.name       == "Jobcentre Plus"           ) or
+       (  passedt.name       == "JobCentre Plus"           ) or
+       (  passedt.name       == "Job Centre Plus"          ) or
+       (  passedt.office     == "government"               ) or
+       (  passedt.office     == "police"                   ) or
+       (  passedt.government == "police"                   ) or
+       (  passedt.amenity    == "public_building"          ) or
+       (  passedt.office     == "administrative"           ) or
+       (  passedt.office     == "register"                 ) or
+       (  passedt.amenity    == "register_office"          ) or
+       (  passedt.office     == "council"                  ) or
+       (  passedt.office     == "drainage_board"           ) or
+       (  passedt.office     == "forestry"                 ) or
+       (  passedt.amenity    == "courthouse"               ) or
+       (  passedt.office     == "justice"                  ) or
+       (  passedt.amenity    == "townhall"                 ) or
+       (  passedt.amenity    == "village_hall"             ) or
+       (  passedt.building   == "village_hall"             ) or
+       (  passedt.amenity    == "crematorium"              ) or
+       (  passedt.amenity    == "hall"                     ) or
+       (  passedt.amenity    == "fire_station"             ) or
+       (  passedt.emergency  == "fire_station"             ) or
+       (  passedt.amenity    == "lifeboat_station"         ) or
+       (  passedt.emergency  == "lifeboat_station"         ) or
+       (  passedt.emergency  == "lifeguard_tower"          ) or
+       (  passedt.emergency  == "water_rescue_station"     ) or
+       (( passedt.emergency  == "lifeguard"               )  and
+        (( passedt.lifeguard == "base"                   )   or
+         ( passedt.lifeguard == "tower"                  ))) or
+       (  passedt.amenity    == "coast_guard"              ) or
+       (  passedt.emergency  == "coast_guard"              ) or
+       (  passedt.emergency  == "ses_station"              ) or
+       (  passedt.amenity    == "archive"                  )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.office  = "nonspecific"
+      passedt.government  = nil
+      passedt.tourism  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Ambulance stations
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity   == "ambulance_station"       ) or
+       ( passedt.emergency == "ambulance_station"       )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.amenity  = "ambulance_station"
+   end
+
+   if (( passedt.amenity   == "mountain_rescue"       ) or
+       ( passedt.emergency == "mountain_rescue"       )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.amenity  = "mountain_rescue"
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = "Mountain Rescue"
+      end
+   end
+
+   if (( passedt.amenity   == "mountain_rescue_box"       ) or
+       ( passedt.emergency == "rescue_box"                )) then
+      passedt.amenity  = "mountain_rescue_box"
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = "Mountain Rescue Supplies"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Current monasteries et al go through as "amenity=monastery"
+-- Note that historic=gate are generally much smaller and are not included here.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "monastery" ) or
+       ( passedt.amenity == "convent"   )) then
+      passedt.amenity = "monastery"
+
+      if (( passedt.landuse == nil ) or
+          ( passedt.landuse == ""  )) then
+         passedt.landuse = "unnamedcommercial"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Non-government (commercial) offices that you might visit for a service.
+-- "communication" below seems to be used for marketing / commercial PR.
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.office      == "it"                      ) or
+       ( passedt.office      == "computer"                ) or
+       ( passedt.office      == "consulting"              ) or
+       ( passedt.office      == "construction_company"    ) or
+       ( passedt.office      == "courier"                 ) or
+       ( passedt.office      == "advertising"             ) or
+       ( passedt.office      == "advertising_agency"      ) or
+       ( passedt.amenity     == "post_depot"              ) or
+       ( passedt.office      == "lawyer"                  ) or
+       ( passedt.shop        == "lawyer"                  ) or
+       ( passedt.amenity     == "lawyer"                  ) or
+       ( passedt.shop        == "legal"                   ) or
+       ( passedt.office      == "solicitor"               ) or
+       ( passedt.shop        == "solicitor"               ) or
+       ( passedt.amenity     == "solicitor"               ) or
+       ( passedt.office      == "solicitors"              ) or
+       ( passedt.amenity     == "solicitors"              ) or
+       ( passedt.office      == "accountant"              ) or
+       ( passedt.shop        == "accountant"              ) or
+       ( passedt.office      == "accountants"             ) or
+       ( passedt.amenity     == "accountants"             ) or
+       ( passedt.office      == "tax_advisor"             ) or
+       ( passedt.amenity     == "tax_advisor"             ) or
+       ( passedt.office      == "employment_agency"       ) or
+       ( passedt.office      == "home_care"               ) or
+       ( passedt.healthcare  == "home_care"               ) or
+       ( passedt.shop        == "employment_agency"       ) or
+       ( passedt.shop        == "employment"              ) or
+       ( passedt.shop        == "jobs"                    ) or
+       ( passedt.office      == "recruitment_agency"      ) or
+       ( passedt.office      == "recruitment"             ) or
+       ( passedt.shop        == "recruitment"             ) or
+       ( passedt.office      == "insurance"               ) or
+       ( passedt.office      == "architect"               ) or
+       ( passedt.office      == "telecommunication"       ) or
+       ( passedt.office      == "financial"               ) or
+       ( passedt.office      == "newspaper"               ) or
+       ( passedt.office      == "delivery"                ) or
+       ( passedt.amenity     == "delivery_office"         ) or
+       ( passedt.amenity     == "sorting_office"          ) or
+       ( passedt.office      == "parcel"                  ) or
+       ( passedt.office      == "therapist"               ) or
+       ( passedt.office      == "surveyor"                ) or
+       ( passedt.office      == "geodesist"               ) or
+       ( passedt.office      == "marketing"               ) or
+       ( passedt.office      == "graphic_design"          ) or
+       ( passedt.office      == "interior_design"         ) or
+       ( passedt.office      == "builder"                 ) or
+       ( passedt.office      == "training"                ) or
+       ( passedt.office      == "web_design"              ) or
+       ( passedt.office      == "design"                  ) or
+       ( passedt.shop        == "design"                  ) or
+       ( passedt.office      == "communication"           ) or
+       ( passedt.office      == "security"                ) or
+       ( passedt.office      == "engineer"                ) or
+       ( passedt.office      == "engineering"             ) or
+       ( passedt.craft       == "hvac"                    ) or
+       ( passedt.office      == "hvac"                    ) or
+       ( passedt.shop        == "heating"                 ) or
+       ( passedt.office      == "laundry"                 ) or
+       ( passedt.amenity     == "coworking_space"         ) or
+       ( passedt.office      == "coworking"               ) or
+       ( passedt.office      == "coworking_space"         ) or
+       ( passedt.office      == "serviced_offices"        ) or
+       ( passedt.amenity     == "studio"                  ) or
+       ( passedt.amenity     == "prison"                  ) or
+       ( passedt.amenity     == "music_school"            ) or
+       ( passedt.amenity     == "cooking_school"          ) or
+       ( passedt.craft       == "electrician"             ) or
+       ( passedt.craft       == "electrician;plumber"     ) or
+       ( passedt.office      == "electrician"             ) or
+       ( passedt.shop        == "electrician"             )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.office = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Other nonspecific offices.  
+-- If any of the "diplomatic" ones should be shown as embassies, the "office"
+-- tag will have been removed above.
+-- ----------------------------------------------------------------------------
+   if (( passedt.office     == "it"                      ) or
+       ( passedt.office     == "ngo"                     ) or
+       ( passedt.office     == "organization"            ) or
+       ( passedt.office     == "diplomatic"              ) or
+       ( passedt.office     == "educational_institution" ) or
+       ( passedt.office     == "university"              ) or
+       ( passedt.office     == "charity"                 ) or
+       ((( passedt.office          == nil              )   or
+         ( passedt.office          == ""               ))  and
+        (( passedt.social_facility == "outreach"       )   or
+         ( passedt.social_facility == "food_bank"      ))) or
+       ( passedt.office     == "religion"                ) or
+       ( passedt.office     == "marriage_guidance"       ) or
+       ( passedt.amenity    == "education_centre"        ) or
+       ( passedt.man_made   == "observatory"             ) or
+       ( passedt.man_made   == "telescope"               ) or
+       ( passedt.amenity    == "laboratory"              ) or
+       ( passedt.healthcare == "laboratory"              ) or
+       ( passedt.amenity    == "medical_laboratory"      ) or
+       ( passedt.amenity    == "research_institute"      ) or
+       ( passedt.office     == "political_party"         ) or
+       ( passedt.office     == "politician"              ) or
+       ( passedt.office     == "political"               ) or
+       ( passedt.office     == "property_maintenance"    ) or
+       ( passedt.office     == "quango"                  ) or
+       ( passedt.office     == "association"             ) or
+       ( passedt.amenity    == "advice"                  ) or
+       ( passedt.amenity    == "advice_service"          )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.office  = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Similarly, nonspecific leisure facilities.
+-- Non-private swimming pools:
+--
+-- Note - this is an old tag that was often used for the whole area 
+-- (building etc.) of a swimming pool, although the wiki documentation wasn't 
+-- explicit.  It corresponds best with "leisure=sports_centre" 
+-- (rendered in its own right).  "leisure=swimming_pool" is for the wet bit;
+-- that is also rendered in its own right (in blue).
+-- Note there's no explicit "if private" check on the wet bit.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "swimming_pool" ) and
+       ( passedt.access  ~= "no"            )) then
+      passedt.leisure = "leisurenonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render outdoor swimming areas with blue names (if named)
+-- leisure=pool is either a turkish bath, a hot spring or a private 
+-- swimming pool.
+-- leisure=swimming is either a mistagged swimming area or a 
+-- mistagged swimming pool
+-- ----------------------------------------------------------------------------
+   if (( passedt.leisure == "swimming_area" ) or
+       ( passedt.leisure == "pool"          ) or
+       ( passedt.leisure == "swimming"      )) then
+      passedt.leisure = "swimming_pool"
+   end
+
+-- ----------------------------------------------------------------------------
+-- A couple of odd sports taggings:
+-- ----------------------------------------------------------------------------
+   if ( passedt.leisure == "sport" ) then
+      if ( passedt.sport   == "golf"  ) then
+         passedt.leisure = "golf_course"
+      else
+         passedt.leisure = "leisurenonspecific"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Try and catch grass on horse_riding
+-- ----------------------------------------------------------------------------
+   if ( passedt.leisure == "horse_riding" ) then
+      passedt.leisure = "leisurenonspecific"
+
+      if ((  passedt.surface == "grass"  ) and
+          (( passedt.landuse == nil     )  or
+           ( passedt.landuse == ""      ))) then
+         passedt.landuse = "unnamedgrass"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- If we have any named leisure=outdoor_seating left, 
+-- change it to "leisurenonspecific", but don't set landuse.
+-- ----------------------------------------------------------------------------
+   if (( passedt.leisure == "outdoor_seating" ) and
+       ( passedt.name    ~= nil               ) and
+       ( passedt.name    ~= ""                )) then
+      passedt.leisure = "leisurenonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Mazes
+-- ----------------------------------------------------------------------------
+   if ((( passedt.leisure    == "maze" )  or
+        ( passedt.attraction == "maze" )) and
+       (( passedt.historic   == nil    )  or
+        ( passedt.historic   == ""     ))) then
+      passedt.leisure = "leisurenonspecific"
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Other nonspecific leisure.  We add an icon and label via "leisurenonspecific".
+-- In most cases we also add unnamedcommercial landuse 
+-- to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity  == "arts_centre"              ) or
+       ( passedt.amenity  == "bingo"                    ) or
+       ( passedt.amenity  == "boat_rental"              ) or
+       ( passedt.amenity  == "brothel"                  ) or
+       ( passedt.amenity  == "church_hall"              ) or
+       ( passedt.amenity  == "club"                     ) or
+       ( passedt.amenity  == "club_house"               ) or
+       ( passedt.amenity  == "clubhouse"                ) or
+       ( passedt.amenity  == "community_centre"         ) or
+       ( passedt.amenity  == "community_hall"           ) or
+       ( passedt.amenity  == "conference_centre"        ) or
+       ( passedt.amenity  == "dancing_school"           ) or
+       ( passedt.amenity  == "dojo"                     ) or
+       ( passedt.amenity  == "escape_game"              ) or
+       ( passedt.amenity  == "events_venue"             ) or
+       ( passedt.amenity  == "exhibition_centre"        ) or
+       ( passedt.amenity  == "function_room"            ) or
+       ( passedt.amenity  == "gym"                      ) or
+       ( passedt.amenity  == "outdoor_education_centre" ) or
+       ( passedt.amenity  == "public_bath"              ) or
+       ( passedt.amenity  == "scout_hall"               ) or
+       ( passedt.amenity  == "scout_hut"                ) or
+       ( passedt.amenity  == "social_centre"            ) or
+       ( passedt.amenity  == "social_club"              ) or
+       ( passedt.amenity  == "working_mens_club"        ) or
+       ( passedt.amenity  == "youth_centre"             ) or
+       ( passedt.amenity  == "youth_club"               ) or
+       ( passedt.building == "club_house"               ) or
+       ( passedt.building == "clubhouse"                ) or
+       ( passedt.building == "community_centre"         ) or
+       ( passedt.building == "scout_hut"                ) or
+       ( passedt.club     == "scout"                    ) or
+       ( passedt.club     == "scouts"                   ) or
+       ( passedt.club     == "sport"                    ) or
+       ((( passedt.club    == "yes"                   )   or
+         ( passedt.club    == "social"                )   or
+         ( passedt.club    == "freemasonry"           )   or
+         ( passedt.club    == "sailing"               )   or
+         ( passedt.club    == "youth"                 )   or
+         ( passedt.club    == "politics"              )   or
+         ( passedt.club    == "veterans"              )   or
+         ( passedt.club    == "social_club"           )   or
+         ( passedt.club    == "music"                 )   or
+         ( passedt.club    == "working_men"           )   or
+         ( passedt.club    == "yachting"              )   or
+         ( passedt.club    == "tennis"                )   or
+         ( passedt.club    == "army_cadets"           )   or
+         ( passedt.club    == "sports"                )   or
+         ( passedt.club    == "rowing"                )   or
+         ( passedt.club    == "football"              )   or
+         ( passedt.club    == "snooker"               )   or
+         ( passedt.club    == "fishing"               )   or
+         ( passedt.club    == "sea_scout"             )   or
+         ( passedt.club    == "conservative"          )   or
+         ( passedt.club    == "golf"                  )   or
+         ( passedt.club    == "cadet"                 )   or
+         ( passedt.club    == "youth_movement"        )   or
+         ( passedt.club    == "bridge"                )   or
+         ( passedt.club    == "bowling"               )   or
+         ( passedt.club    == "air_cadets"            )   or
+         ( passedt.club    == "scuba_diving"          )   or
+         ( passedt.club    == "model_railway"         )   or
+         ( passedt.club    == "boat"                  )   or
+         ( passedt.club    == "card_games"            )   or
+         ( passedt.club    == "girlguiding"           )   or
+         ( passedt.club    == "guide"                 )   or
+         ( passedt.club    == "photography"           )   or
+         ( passedt.club    == "sea_cadets"            )   or
+         ( passedt.club    == "theatre"               )   or
+         ( passedt.club    == "women"                 )   or
+         ( passedt.club    == "charity"               )   or
+         ( passedt.club    == "bowls"                 )   or
+         ( passedt.club    == "military"              )   or
+         ( passedt.club    == "model_aircraft"        )   or
+         ( passedt.club    == "labour_club"           )   or
+         ( passedt.club    == "boxing"                )   or
+         ( passedt.club    == "game"                  )   or
+         ( passedt.club    == "automobile"            ))  and
+        (( passedt.leisure == nil                     )   or
+         ( passedt.leisure == ""                      ))  and
+        (( passedt.amenity == nil                     )   or
+         ( passedt.amenity == ""                      ))  and
+        (( passedt.shop    == nil                     )   or
+         ( passedt.shop    == ""                      ))  and
+        (  passedt.name    ~= nil                      )  and
+        (  passedt.name    ~= ""                       )) or
+       ((  passedt.club    == "cricket"                )  and
+        (( passedt.leisure == nil                     )   or
+         ( passedt.leisure == ""                      ))  and
+        (( passedt.amenity == nil                     )   or
+         ( passedt.amenity == ""                      ))  and
+        (( passedt.shop    == nil                     )   or
+         ( passedt.shop    == ""                      ))  and
+        (( passedt.landuse == nil                     )   or
+         ( passedt.landuse == ""                      ))  and
+        (( passedt.name    ~= nil                     )   and
+         ( passedt.name    ~= ""                      ))) or
+       ( passedt.gambling == "bingo"                    ) or
+       ( passedt.leisure  == "adventure_park"           ) or
+       ( passedt.leisure  == "beach_resort"             ) or
+       ( passedt.leisure  == "bingo"                    ) or
+       ( passedt.leisure  == "bingo_hall"               ) or
+       ( passedt.leisure  == "bowling_alley"            ) or
+       ( passedt.leisure  == "climbing"                 ) or
+       ( passedt.leisure  == "club"                     ) or
+       ( passedt.leisure  == "dance"                    ) or
+       ( passedt.leisure  == "dojo"                     ) or
+       ( passedt.leisure  == "escape_game"              ) or
+       ( passedt.leisure  == "firepit"                  ) or
+       ( passedt.leisure  == "fitness_centre"           ) or
+       ( passedt.leisure  == "hackerspace"              ) or
+       ( passedt.leisure  == "high_ropes_course"        ) or
+       ( passedt.leisure  == "horse_riding"             ) or
+       ( passedt.leisure  == "ice_rink"                 ) or
+       ((  passedt.leisure == "indoor_golf"             )  and
+        (( passedt.amenity == nil                      )   or
+         ( passedt.amenity == ""                       ))) or
+       ( passedt.leisure  == "indoor_play"              ) or
+       ( passedt.leisure  == "inflatable_park"          ) or
+       ( passedt.leisure  == "miniature_golf"           ) or
+       ( passedt.leisure  == "resort"                   ) or
+       ( passedt.leisure  == "sailing_club"             ) or
+       ( passedt.leisure  == "sauna"                    ) or
+       ( passedt.leisure  == "social_club"              ) or
+       ( passedt.leisure  == "soft_play"                ) or
+       ( passedt.leisure  == "summer_camp"              ) or
+       ( passedt.leisure  == "trampoline"               ) or
+       ( passedt.playground  == "trampoline"            ) or
+       ( passedt.leisure  == "trampoline_park"          ) or
+       ( passedt.leisure  == "water_park"               ) or
+       ( passedt.leisure  == "yoga"                     ) or
+       ((( passedt.leisure        == nil               )   or
+         ( passedt.leisure        == ""                ))  and
+        (( passedt.amenity        == nil               )   or
+         ( passedt.amenity        == ""                ))  and
+        (( passedt.shop           == nil               )   or
+         ( passedt.shop           == ""                ))  and
+        (  passedt.danceCteaching == "yes"              )) or
+       ( passedt.name     == "Bingo Hall"               ) or
+       ( passedt.name     == "Castle Bingo"             ) or
+       ( passedt.name     == "Gala Bingo"               ) or
+       ( passedt.name     == "Mecca Bingo"              ) or
+       ( passedt.name     == "Scout Hall"               ) or
+       ( passedt.name     == "Scout Hut"                ) or
+       ( passedt.name     == "Scout hut"                ) or
+       ( passedt.shop     == "boat_rental"              ) or
+       ( passedt.shop     == "fitness"                  ) or
+       ( passedt.sport    == "laser_tag"                ) or
+       ( passedt.sport    == "model_aerodrome"          ) or
+       ((( passedt.sport   == "yoga"                  )   or
+         ( passedt.sport   == "yoga;pilates"          ))  and
+        (( passedt.shop     == nil                    )   or
+         ( passedt.shop     == ""                     ))  and
+        (( passedt.amenity  == nil                    )   or
+         ( passedt.amenity  == ""                     ))) or
+       ( passedt.tourism  == "cabin"                    ) or
+       ( passedt.tourism  == "resort"                   ) or
+       ( passedt.tourism  == "trail_riding_station"     ) or
+       ( passedt.tourism  == "wilderness_hut"           ) or
+       (( passedt.building == "yes"                    )  and
+        (( passedt.amenity  == nil                    )   or
+         ( passedt.amenity  == ""                     ))  and
+        (( passedt.leisure  == nil                    )   or
+         ( passedt.leisure  == ""                     ))  and
+        (  passedt.sport    ~= nil                     )  and
+        (  passedt.sport    ~= ""                      ))) then
+      if (( passedt.landuse == nil ) or
+          ( passedt.landuse == ""  )) then
+         passedt.landuse = "unnamedcommercial"
+      end
+
+      passedt.leisure = "leisurenonspecific"
+      passedt.disusedCamenity = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Some museum / leisure combinations are likely more "leisury" than "museumy"
+-- ----------------------------------------------------------------------------
+   if (( passedt.tourism == "museum"             ) and 
+       ( passedt.leisure == "leisurenonspecific" )) then
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Emergency phones
+-- ----------------------------------------------------------------------------
+   if ((  passedt.emergency == "phone"  ) and
+       (( passedt.amenity   == nil     )  or
+        ( passedt.amenity   == ""      ))) then
+      passedt.amenity = "emergency_phone"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Let's send amenity=grave_yard and landuse=cemetery through as
 -- landuse=cemetery.
 -- ----------------------------------------------------------------------------
@@ -5737,7 +6287,6 @@ function generic_before_function( passedt )
          passedt.landuse = "unnamedcommercial"
       end
    end
-
 end -- generic_before_function()
 
 function append_prow_ref( passedt )
@@ -6248,7 +6797,10 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "cafe_ydy"                ) or
             ( passedt.amenity == "cafe_yly"                ) or
             ( passedt.amenity == "cafe_yny"                ) or
-            ( passedt.amenity == "cafe_yyy"                )) then
+            ( passedt.amenity == "cafe_yyy"                ) or
+            ( passedt.amenity == "cinema"                  ) or
+            ( passedt.amenity == "fire_station"            ) or
+            ( passedt.amenity == "lifeboat"                )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
