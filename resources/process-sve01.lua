@@ -27,7 +27,7 @@ require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "amenity", "attraction", "climbing", "emergency", "entrance", "healthcare", 
-              "landuse", "leisure", "natural", "pitch", "place", "power", "shop", "sport", "tourism", "zoo" }
+              "landuse", "leisure", "natural", "pitch", "playground", "place", "power", "shop", "sport", "tourism", "zoo" }
 
 -- Initialize Lua logic
 
@@ -7035,83 +7035,91 @@ function render_amenity_land1( passedt )
         Attribute( "name", Find( "name" ) )
         MinZoom( 9 )
     else
-        if (( passedt.amenity == "shelter"                 ) or
-            ( passedt.amenity == "atm"                     ) or
-            ( passedt.amenity == "bank"                    ) or
-            ( passedt.amenity == "bank_l"                  ) or
-            ( passedt.amenity == "bank_n"                  ) or
-            ( passedt.amenity == "bank_y"                  ) or
-            ( passedt.amenity == "bar"                     ) or
-            ( passedt.amenity == "bar_ddd"                 ) or
-            ( passedt.amenity == "bar_dld"                 ) or
-            ( passedt.amenity == "bar_dnd"                 ) or
-            ( passedt.amenity == "bar_dyd"                 ) or
-            ( passedt.amenity == "bar_ydd"                 ) or
-            ( passedt.amenity == "bar_yld"                 ) or
-            ( passedt.amenity == "bar_ynd"                 ) or
-            ( passedt.amenity == "bar_yyd"                 ) or
-            ( passedt.amenity == "bar_ddy"                 ) or
-            ( passedt.amenity == "bar_dly"                 ) or
-            ( passedt.amenity == "bar_dny"                 ) or
-            ( passedt.amenity == "bar_dyy"                 ) or
-            ( passedt.amenity == "bar_ydy"                 ) or
-            ( passedt.amenity == "bar_yly"                 ) or
-            ( passedt.amenity == "bar_yny"                 ) or
-            ( passedt.amenity == "bar_yyy"                 ) or
-            ( passedt.amenity == "nightclub"               ) or
-            ( passedt.amenity == "concert_hall"            ) or
-            ( passedt.amenity == "car_sharing"             ) or
-            ( passedt.amenity == "taxi"                    ) or
-            ( passedt.amenity == "taxi_office"             ) or
-            ( passedt.amenity == "bicycle_rental"          ) or
-            ( passedt.amenity == "scooter_rental"          ) or
-            ( passedt.amenity == "bicycle_parking"         ) or
-            ( passedt.amenity == "bicycle_parking_pay"     ) or
-            ( passedt.amenity == "motorcycle_parking"      ) or
-            ( passedt.amenity == "motorcycle_parking_pay"  ) or
-            ( passedt.amenity == "bus_station"             ) or
-            ( passedt.amenity == "ferry_terminal"          ) or
-            ( passedt.amenity == "entrancemain"            ) or
-            ( passedt.amenity == "cafe_ddd"                ) or
-            ( passedt.amenity == "cafe_dld"                ) or
-            ( passedt.amenity == "cafe_dnd"                ) or
-            ( passedt.amenity == "cafe_dyd"                ) or
-            ( passedt.amenity == "cafe_ydd"                ) or
-            ( passedt.amenity == "cafe_yld"                ) or
-            ( passedt.amenity == "cafe_ynd"                ) or
-            ( passedt.amenity == "cafe_yyd"                ) or
-            ( passedt.amenity == "cafe_ddy"                ) or
-            ( passedt.amenity == "cafe_dly"                ) or
-            ( passedt.amenity == "cafe_dny"                ) or
-            ( passedt.amenity == "cafe_dyy"                ) or
-            ( passedt.amenity == "cafe_ydy"                ) or
-            ( passedt.amenity == "cafe_yly"                ) or
-            ( passedt.amenity == "cafe_yny"                ) or
-            ( passedt.amenity == "cafe_yyy"                ) or
-            ( passedt.amenity == "cinema"                  ) or
-            ( passedt.amenity == "fire_station"            ) or
-            ( passedt.amenity == "lifeboat"                ) or
-            ( passedt.amenity == "fuel"                    ) or
-            ( passedt.amenity == "fuel_e"                  ) or
-            ( passedt.amenity == "fuel_h"                  ) or
-            ( passedt.amenity == "fuel_l"                  ) or
-            ( passedt.amenity == "fuel_w"                  ) or
-            ( passedt.amenity == "charging_station"        ) or
-            ( passedt.amenity == "embassy"                 ) or
-            ( passedt.amenity == "library"                 ) or
-            ( passedt.amenity == "courthouse"              ) or
-            ( passedt.amenity == "monastery"               ) or
-            ( passedt.amenity == "zooaviary"               ) or
-            ( passedt.amenity == "zooenclosure"            ) or
-            ( passedt.amenity == "vending_machine"         ) or
-            ( passedt.amenity == "vending_excrement"       ) or
-            ( passedt.amenity == "bottle_return"           ) or
-            ( passedt.amenity == "waste_basket"            ) or
-            ( passedt.amenity == "waste_disposal"          ) or
-            ( passedt.amenity == "grit_bin"                ) or
-            ( passedt.amenity == "left_luggage"            ) or
-            ( passedt.amenity == "parcel_locker"           ) or
-            ( passedt.amenity == "bench"                   )) then
+        if (( passedt.amenity == "shelter"                  ) or
+            ( passedt.amenity == "atm"                      ) or
+            ( passedt.amenity == "bank"                     ) or
+            ( passedt.amenity == "bank_l"                   ) or
+            ( passedt.amenity == "bank_n"                   ) or
+            ( passedt.amenity == "bank_y"                   ) or
+            ( passedt.amenity == "bar"                      ) or
+            ( passedt.amenity == "bar_ddd"                  ) or
+            ( passedt.amenity == "bar_dld"                  ) or
+            ( passedt.amenity == "bar_dnd"                  ) or
+            ( passedt.amenity == "bar_dyd"                  ) or
+            ( passedt.amenity == "bar_ydd"                  ) or
+            ( passedt.amenity == "bar_yld"                  ) or
+            ( passedt.amenity == "bar_ynd"                  ) or
+            ( passedt.amenity == "bar_yyd"                  ) or
+            ( passedt.amenity == "bar_ddy"                  ) or
+            ( passedt.amenity == "bar_dly"                  ) or
+            ( passedt.amenity == "bar_dny"                  ) or
+            ( passedt.amenity == "bar_dyy"                  ) or
+            ( passedt.amenity == "bar_ydy"                  ) or
+            ( passedt.amenity == "bar_yly"                  ) or
+            ( passedt.amenity == "bar_yny"                  ) or
+            ( passedt.amenity == "bar_yyy"                  ) or
+            ( passedt.amenity == "nightclub"                ) or
+            ( passedt.amenity == "concert_hall"             ) or
+            ( passedt.amenity == "car_sharing"              ) or
+            ( passedt.amenity == "taxi"                     ) or
+            ( passedt.amenity == "taxi_office"              ) or
+            ( passedt.amenity == "bicycle_rental"           ) or
+            ( passedt.amenity == "scooter_rental"           ) or
+            ( passedt.amenity == "bicycle_parking"          ) or
+            ( passedt.amenity == "bicycle_parking_pay"      ) or
+            ( passedt.amenity == "motorcycle_parking"       ) or
+            ( passedt.amenity == "motorcycle_parking_pay"   ) or
+            ( passedt.amenity == "bus_station"              ) or
+            ( passedt.amenity == "ferry_terminal"           ) or
+            ( passedt.amenity == "entrancemain"             ) or
+            ( passedt.amenity == "cafe_ddd"                 ) or
+            ( passedt.amenity == "cafe_dld"                 ) or
+            ( passedt.amenity == "cafe_dnd"                 ) or
+            ( passedt.amenity == "cafe_dyd"                 ) or
+            ( passedt.amenity == "cafe_ydd"                 ) or
+            ( passedt.amenity == "cafe_yld"                 ) or
+            ( passedt.amenity == "cafe_ynd"                 ) or
+            ( passedt.amenity == "cafe_yyd"                 ) or
+            ( passedt.amenity == "cafe_ddy"                 ) or
+            ( passedt.amenity == "cafe_dly"                 ) or
+            ( passedt.amenity == "cafe_dny"                 ) or
+            ( passedt.amenity == "cafe_dyy"                 ) or
+            ( passedt.amenity == "cafe_ydy"                 ) or
+            ( passedt.amenity == "cafe_yly"                 ) or
+            ( passedt.amenity == "cafe_yny"                 ) or
+            ( passedt.amenity == "cafe_yyy"                 ) or
+            ( passedt.amenity == "cinema"                   ) or
+            ( passedt.amenity == "fire_station"             ) or
+            ( passedt.amenity == "lifeboat"                 ) or
+            ( passedt.amenity == "fuel"                     ) or
+            ( passedt.amenity == "fuel_e"                   ) or
+            ( passedt.amenity == "fuel_h"                   ) or
+            ( passedt.amenity == "fuel_l"                   ) or
+            ( passedt.amenity == "fuel_w"                   ) or
+            ( passedt.amenity == "charging_station"         ) or
+            ( passedt.amenity == "embassy"                  ) or
+            ( passedt.amenity == "library"                  ) or
+            ( passedt.amenity == "courthouse"               ) or
+            ( passedt.amenity == "monastery"                ) or
+            ( passedt.amenity == "zooaviary"                ) or
+            ( passedt.amenity == "zooenclosure"             ) or
+            ( passedt.amenity == "vending_machine"          ) or
+            ( passedt.amenity == "vending_excrement"        ) or
+            ( passedt.amenity == "bottle_return"            ) or
+            ( passedt.amenity == "waste_basket"             ) or
+            ( passedt.amenity == "waste_disposal"           ) or
+            ( passedt.amenity == "grit_bin"                 ) or
+            ( passedt.amenity == "left_luggage"             ) or
+            ( passedt.amenity == "parcel_locker"            ) or
+            ( passedt.amenity == "bench"                    ) or
+            ( passedt.amenity == "playground_swing"         ) or
+            ( passedt.amenity == "playground_structure"     ) or
+            ( passedt.amenity == "playground_climbingframe" ) or
+            ( passedt.amenity == "playground_slide"         ) or
+            ( passedt.amenity == "playground_springy"       ) or
+            ( passedt.amenity == "playground_zipwire"       ) or
+            ( passedt.amenity == "playground_seesaw"        ) or
+            ( passedt.amenity == "playground_roundabout"    )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
