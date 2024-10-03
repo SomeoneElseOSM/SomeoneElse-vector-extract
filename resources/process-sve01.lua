@@ -7119,7 +7119,29 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "playground_springy"       ) or
             ( passedt.amenity == "playground_zipwire"       ) or
             ( passedt.amenity == "playground_seesaw"        ) or
-            ( passedt.amenity == "playground_roundabout"    )) then
+            ( passedt.amenity == "playground_roundabout"    ) or
+            ( passedt.amenity == "pitch_tabletennis"        ) or
+            ( passedt.amenity == "pitch_soccer"             ) or
+            ( passedt.amenity == "pitch_basketball"         ) or
+            ( passedt.amenity == "pitch_cricket"            ) or
+            ( passedt.amenity == "pitch_skateboard"         ) or
+            ( passedt.amenity == "pitch_climbing"           ) or
+            ( passedt.amenity == "pitch_rugby"              ) or
+            ( passedt.amenity == "pitch_chess"              ) or
+            ( passedt.amenity == "pitch_tennis"             ) or
+            ( passedt.amenity == "pitch_athletics"          ) or
+            ( passedt.amenity == "pitch_boules"             ) or
+            ( passedt.amenity == "pitch_bowls"              ) or
+            ( passedt.amenity == "pitch_croquet"            ) or
+            ( passedt.amenity == "pitch_cycling"            ) or
+            ( passedt.amenity == "pitch_equestrian"         ) or
+            ( passedt.amenity == "pitch_gaa"                ) or
+            ( passedt.amenity == "pitch_hockey"             ) or
+            ( passedt.amenity == "pitch_multi"              ) or
+            ( passedt.amenity == "pitch_netball"            ) or
+            ( passedt.amenity == "pitch_polo"               ) or
+            ( passedt.amenity == "pitch_shooting"           ) or
+            ( passedt.amenity == "pitch_baseball"           )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
