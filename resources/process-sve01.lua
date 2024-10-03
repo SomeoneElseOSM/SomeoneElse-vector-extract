@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "attraction", "emergency", "entrance", 
+node_keys = { "amenity", "attraction", "emergency", "entrance", "healthcare", 
               "landuse", "leisure", "natural", "place", "power", "shop", "tourism", "zoo" }
 
 -- Initialize Lua logic
@@ -263,6 +263,11 @@ function node_function()
     nodet.club = Find("club")
     nodet.gambling = Find("gambling")
     nodet.danceCteaching = Find("dance:teaching")
+    nodet.healthcareCspeciality = Find("healthcare:speciality")
+    nodet.vending = Find("vending")
+    nodet.vending_machine = Find("vending_machine")
+    nodet.paymentChonesty_box = Find("payment:honesty_box")
+    nodet.foodCeggs = Find("food:eggs")
 
     generic_before_function( nodet )
 
@@ -494,6 +499,11 @@ function way_function()
     wayt.club = Find("club")
     wayt.gambling = Find("gambling")
     wayt.danceCteaching = Find("dance:teaching")
+    wayt.healthcareCspeciality = Find("healthcare:speciality")
+    wayt.vending = Find("vending")
+    wayt.vending_machine = Find("vending_machine")
+    wayt.paymentChonesty_box = Find("payment:honesty_box")
+    wayt.foodCeggs = Find("food:eggs")
 
     generic_before_function( wayt )
 
@@ -3352,6 +3362,198 @@ function generic_before_function( passedt )
                passedt.amenity = "bank_n"
             end
           end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various mistagging, comma and semicolon healthcare
+-- Note that health centres currently appear as "health nonspecific".
+-- ----------------------------------------------------------------------------
+   if ((   passedt.amenity    == "doctors; pharmacy"       ) or
+       (   passedt.amenity    == "surgery"                 ) or
+       ((( passedt.healthcare == "doctor"                )   or
+         ( passedt.healthcare == "doctor;pharmacy"       )   or
+         ( passedt.healthcare == "general_practitioner"  ))  and
+        (( passedt.amenity    == nil                     )   or
+         ( passedt.amenity    == ""                      )))) then
+      passedt.amenity = "doctors"
+   end
+
+   if (((   passedt.healthcare            == "dentist"    )  or
+        ((  passedt.healthcareCspeciality == "dentistry" )   and
+         (( passedt.healthcare            == "yes"      )    or
+          ( passedt.healthcare            == "centre"   )    or
+          ( passedt.healthcare            == "clinic"   )))) and
+       ((  passedt.amenity    == nil                      )  or
+        (  passedt.amenity    == ""                       ))) then
+      passedt.amenity = "dentist"
+      passedt.healthcare = nil
+   end
+
+   if ((  passedt.healthcare == "hospital"  ) and
+       (( passedt.amenity    == nil        )  or
+        ( passedt.amenity    == ""         ))) then
+      passedt.amenity = "hospital"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Ensure that vaccination centries (e.g. for COVID 19) that aren't already
+-- something else get shown as something.
+-- Things that _are_ something else get (e.g. community centres) get left as
+-- that something else.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.healthcare            == "vaccination_centre" )  or
+        ( passedt.healthcare            == "sample_collection"  )  or
+        ( passedt.healthcareCspeciality == "vaccination"        )) and
+       (( passedt.amenity               == nil                  )  or
+        ( passedt.amenity               == ""                   )) and
+       (( passedt.leisure               == nil                  )  or
+        ( passedt.leisure               == ""                   )) and
+       (( passedt.shop                  == nil                  )  or
+        ( passedt.shop                  == ""                   ))) then
+      passedt.amenity = "clinic"
+   end
+
+-- ----------------------------------------------------------------------------
+-- If something is mapped both as a supermarket and a pharmacy, suppress the
+-- tags for the latter.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "supermarket" ) and
+       ( passedt.amenity == "pharmacy"    )) then
+      passedt.amenity = nil
+   end
+
+   if (((  passedt.healthcare == "pharmacy"                   )  and
+        (( passedt.amenity    == nil                         )   or
+         ( passedt.amenity    == ""                          ))) or
+       ((  passedt.shop       == "cosmetics"                  )  and
+        (  passedt.pharmacy   == "yes"                        )  and
+        (( passedt.amenity    == nil                         )   or
+         ( passedt.amenity    == ""                          ))) or
+       ((  passedt.shop       == "chemist"                    )  and
+        (  passedt.pharmacy   == "yes"                        )  and
+        (( passedt.amenity    == nil                         )   or
+         ( passedt.amenity    == ""                          ))) or
+       ((  passedt.amenity    == "clinic"                     )  and
+        (  passedt.pharmacy   == "yes"                        ))) then
+      passedt.amenity = "pharmacy"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Pharmacies with wheelchair tags or without
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "pharmacy" ) then
+      if ( passedt.wheelchair == "yes" ) then
+         passedt.amenity = "pharmacy_y"
+      else
+         if ( passedt.wheelchair == "limited" ) then
+            passedt.amenity = "pharmacy_l"
+         else
+            if ( passedt.wheelchair == "no" ) then
+               passedt.amenity = "pharmacy_n"
+            end
+          end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Left luggage
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "luggage_locker"  ) then
+      passedt.amenity = "left_luggage"
+      passedt.shop    = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Parcel lockers
+-- ----------------------------------------------------------------------------
+   if (((  passedt.amenity         == "vending_machine"                )  and
+        (( passedt.vending         == "parcel_pickup;parcel_mail_in"  )   or
+         ( passedt.vending         == "parcel_mail_in;parcel_pickup"  )   or
+         ( passedt.vending         == "parcel_mail_in"                )   or
+         ( passedt.vending         == "parcel_pickup"                 )   or
+         ( passedt.vending_machine == "parcel_pickup"                 )))  or
+       (   passedt.amenity         == "parcel_box"                      )  or
+       (   passedt.amenity         == "parcel_pickup"                   )) then
+      passedt.amenity  = "parcel_locker"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Excrement bags
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "vending_machine" ) and
+       ( passedt.vending == "excrement_bags"  )) then
+      passedt.amenity  = "vending_excrement"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Reverse vending machines
+-- Other vending machines have their own icon
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "vending_machine" ) and
+       ( passedt.vending == "bottle_return"   )) then
+      passedt.amenity  = "bottle_return"
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a farm shop doesn't have a name but does have named produce, map across
+-- to vending machine, and also the produce into "vending" for consideration 
+-- below.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.shop                == "farm"  ) and
+       (  passedt.name                == nil     ) and
+       (( passedt.produce             ~= nil    )  or
+        ( passedt.paymentChonesty_box == "yes"  ))) then
+      passedt.amenity = "vending_machine"
+
+      if ( passedt.produce == nil )  then
+         if ( passedt.foodCeggs == "yes" )  then
+            passedt.produce = "eggs"
+         else
+            passedt.produce = "farm shop honesty box"
+         end
+      end
+
+      passedt.vending = passedt.produce
+      passedt.shop    = nil
+   end
+
+   if ((  passedt.shop == "eggs"  ) and
+       (  passedt.name == nil     )) then
+      passedt.amenity = "vending_machine"
+      passedt.vending = passedt.shop
+      passedt.shop    = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Some vending machines get the thing sold as the label.
+-- "farm shop honesty box" might have been assigned higher up.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.amenity == "vending_machine"        ) and
+       (  passedt.name    == nil                      ) and
+       (( passedt.vending == "milk"                  )  or
+        ( passedt.vending == "eggs"                  )  or
+        ( passedt.vending == "potatoes"              )  or
+        ( passedt.vending == "honey"                 )  or
+        ( passedt.vending == "cheese"                )  or
+        ( passedt.vending == "vegetables"            )  or
+        ( passedt.vending == "fruit"                 )  or
+        ( passedt.vending == "food"                  )  or
+        ( passedt.vending == "photos"                )  or
+        ( passedt.vending == "maps"                  )  or
+        ( passedt.vending == "newspapers"            )  or
+        ( passedt.vending == "farm shop honesty box" ))) then
+      passedt.name = "(" .. passedt.vending .. ")"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render amenity=piano as musical_instrument
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "piano" ) then
+      passedt.amenity = "musical_instrument"
+
+      if ( passedt.name == nil ) then
+            passedt.name = "Piano"
       end
    end
 
@@ -6813,7 +7015,10 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "courthouse"              ) or
             ( passedt.amenity == "monastery"               ) or
             ( passedt.amenity == "zooaviary"               ) or
-            ( passedt.amenity == "zooenclosure"            )) then
+            ( passedt.amenity == "zooenclosure"            ) or
+            ( passedt.amenity == "vending_machine"         ) or
+            ( passedt.amenity == "vending_excrement"       ) or
+            ( passedt.amenity == "bottle_return"           )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
