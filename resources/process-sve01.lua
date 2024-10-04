@@ -319,6 +319,11 @@ function node_function()
     nodet.sustrans_ref = Find("sustrans_ref")
     nodet.theatre = Find("theatre")
     nodet.fence_type = Find("fence_type")
+    nodet.zero_waste = Find("zero_waste")
+    nodet.bulk_purchase = Find("bulk_purchase")
+    nodet.reusable_packaging = Find("reusable_packaging")
+    nodet.trade = Find("trade")
+    nodet.brand = Find("brand")
 
     generic_before_function( nodet )
 
@@ -605,6 +610,11 @@ function way_function()
     wayt.sustrans_ref = Find("sustrans_ref")
     wayt.theatre = Find("theatre")
     wayt.fence_type = Find("fence_type")
+    wayt.zero_waste = Find("zero_waste")
+    wayt.bulk_purchase = Find("bulk_purchase")
+    wayt.reusable_packaging = Find("reusable_packaging")
+    wayt.trade = Find("trade")
+    wayt.brand = Find("brand")
 
     generic_before_function( wayt )
 
@@ -6633,6 +6643,324 @@ function generic_before_function( passedt )
         (( passedt.memorial      == "obelisk"   )  or
          ( passedt.memorialCtype == "obelisk"   )))) then
       passedt.historic = "memorialobelisk"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render shop=newsagent as shop=convenience
+-- It's near enough in meaning I think.  Likewise kiosk (bit of a stretch,
+-- but nearer than anything else)
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "newsagent"           ) or
+       ( passedt.shop   == "kiosk"               ) or
+       ( passedt.shop   == "forecourt"           ) or
+       ( passedt.shop   == "food"                ) or
+       ( passedt.shop   == "grocery"             ) or
+       ( passedt.shop   == "grocer"              ) or
+       ( passedt.shop   == "frozen_food"         ) or
+       ( passedt.shop   == "convenience;alcohol" )) then
+      passedt.shop = "convenience"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render "eco" shops with their own icons
+-- ----------------------------------------------------------------------------
+   if ((   passedt.shop               == "zero_waste"          ) or
+       (   passedt.shop               == "eco_refill"          ) or
+       (   passedt.shop               == "refill"              ) or
+       ((( passedt.shop               == "convenience"        )  or
+         ( passedt.shop               == "general"            )  or
+         ( passedt.shop               == "grocer"             )  or
+         ( passedt.shop               == "grocery"            )  or
+         ( passedt.shop               == "yes"                )  or
+         ( passedt.shop               == "food"               )) and
+        (( passedt.zero_waste         == "yes"                )  or
+         ( passedt.zero_waste         == "only"               )  or
+         ( passedt.bulk_purchase      == "yes"                )  or
+         ( passedt.bulk_purchase      == "only"               )  or
+         ( passedt.reusable_packaging == "yes"                )))) then
+      passedt.shop = "ecoconv"
+   end
+
+   if ((  passedt.shop               == "supermarket"         ) and
+       (( passedt.zero_waste         == "yes"                )  or
+        ( passedt.zero_waste         == "only"               )  or
+        ( passedt.bulk_purchase      == "yes"                )  or
+        ( passedt.bulk_purchase      == "only"               )  or
+        ( passedt.reusable_packaging == "yes"                ))) then
+      passedt.shop = "ecosupermarket"
+   end
+
+   if ((  passedt.shop               == "greengrocer"         ) and
+       (( passedt.zero_waste         == "yes"                )  or
+        ( passedt.zero_waste         == "only"               )  or
+        ( passedt.bulk_purchase      == "yes"                )  or
+        ( passedt.bulk_purchase      == "only"               )  or
+        ( passedt.reusable_packaging == "yes"                ))) then
+      passedt.shop = "ecogreengrocer"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render shop=variety etc. with a "pound" icon.  "variety_store" is the most 
+-- popular tagging but "variety" is also used.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "variety"       ) or
+       ( passedt.shop   == "pound"         ) or
+       ( passedt.shop   == "thrift"        ) or
+       ( passedt.shop   == "variety_store" )) then
+      passedt.shop = "discount"
+   end
+
+-- ----------------------------------------------------------------------------
+-- shoe shops
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop == "shoes"        ) or
+       ( passedt.shop == "footwear"     )) then
+      passedt.shop = "shoes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "clothes" consolidation.  "baby_goods" is here because there will surely
+-- be some clothes there!
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop == "fashion"      ) or
+       ( passedt.shop == "boutique"     ) or
+       ( passedt.shop == "vintage"      ) or
+       ( passedt.shop == "bridal"       ) or
+       ( passedt.shop == "wedding"      ) or
+       ( passedt.shop == "baby_goods"   ) or
+       ( passedt.shop == "baby"         ) or
+       ( passedt.shop == "dance"        ) or
+       ( passedt.shop == "clothes_hire" ) or
+       ( passedt.shop == "clothing"     ) or
+       ( passedt.shop == "hat"          ) or
+       ( passedt.shop == "hats"         ) or
+       ( passedt.shop == "wigs"         )) then
+      passedt.shop = "clothes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "electronics"
+-- Looking at the tagging of shop=electronics, there's a fair crossover with 
+-- electrical.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "electronics"             ) or
+       ( passedt.craft   == "electronics_repair"      ) or
+       ( passedt.shop    == "electronics_repair"      ) or
+       ( passedt.amenity == "electronics_repair"      )) then
+      passedt.shop = "electronics"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "electrical" consolidation
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "radiotechnics"           ) or
+       ( passedt.shop    == "appliance"               ) or
+       ( passedt.shop    == "electrical_supplies"     ) or
+       ( passedt.shop    == "electrical_repair"       ) or
+       ( passedt.shop    == "tv_repair"               ) or
+       ( passedt.shop    == "gadget"                  ) or
+       ( passedt.shop    == "appliances"              ) or
+       ( passedt.shop    == "vacuum_cleaner"          ) or
+       ( passedt.shop    == "sewing_machines"         ) or
+       ( passedt.shop    == "domestic_appliances"     ) or
+       ( passedt.shop    == "white_goods"             ) or
+       ( passedt.shop    == "electricals"             ) or
+       ( passedt.trade   == "electrical"              ) or
+       ( passedt.name    == "City Electrical Factors" )) then
+      passedt.shop = "electrical"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show industrial=distributor as offices.
+-- This sounds odd, but matches how this is used UK/IE
+-- ----------------------------------------------------------------------------
+   if ((  passedt.industrial == "distributor" ) and
+       (( passedt.office     == nil          ) or
+        ( passedt.office     == ""           ))) then
+      passedt.office = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "funeral" consolidation.  All of these spellings currently in use in the UK
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "funeral"             ) or
+       ( passedt.office  == "funeral_director"    ) or
+       ( passedt.office  == "funeral_directors"   ) or
+       ( passedt.amenity == "funeral"             ) or
+       ( passedt.amenity == "funeral_directors"   ) or
+       ( passedt.amenity == "undertaker"          )) then
+      passedt.shop = "funeral_directors"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "jewellery" consolidation.  "jewelry" is in the database, until recently
+-- "jewellery" was too.  The style handles "jewellery", hence the change here.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop  == "jewelry"                 ) or
+       ( passedt.shop  == "jewelry;pawnbroker"      ) or
+       ( passedt.shop  == "yes;jewelry;e-cigarette" ) or
+       ( passedt.shop  == "jewelry;sunglasses"      ) or
+       ( passedt.shop  == "yes;jewelry"             ) or
+       ( passedt.shop  == "jewelry;art;crafts"      ) or
+       ( passedt.shop  == "jewelry;fabric"          ) or
+       ( passedt.shop  == "watch"                   ) or
+       ( passedt.shop  == "watches"                 ) or
+       ( passedt.craft == "jeweller"                ) or
+       ( passedt.craft == "jewellery_repair"        ) or
+       ( passedt.craft == "engraver"                )) then
+      passedt.shop  = "jewellery"
+      passedt.craft = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- "department_store" consolidation.
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "department" ) then
+      passedt.shop = "department_store"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "catalogue shop" consolidation.
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "outpost"  ) then
+      passedt.shop = "catalogue"
+   end
+
+-- ----------------------------------------------------------------------------
+-- man_made=flagpole
+-- Non-MOD ones are passed straight through to be rendered.  MOD ones are
+-- changed to flagpole_red so that they can be rendered differently.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made == "flagpole"             )  and
+       (( passedt.operator == "Ministry of Defence" )   or
+        ( passedt.operator == "MOD"                 ))) then
+      passedt.man_made = "flagpole_red"
+      passedt.operator = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Windsocks
+-- ----------------------------------------------------------------------------
+   if (( passedt.aeroway  == "windsock" ) or
+       ( passedt.landmark == "windsock" )) then
+      passedt.man_made = "windsock"
+   end
+   
+-- ----------------------------------------------------------------------------
+-- Before potentially using brand or operator as a bracketed suffix after the
+-- name, explicitly exclude some "non-brands" - "Independent", etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.brand   == "Independant"            ) or
+       ( passedt.brand   == "Independent"            ) or
+       ( passedt.brand   == "Traditional Free House" ) or
+       ( passedt.brand   == "independant"            ) or
+       ( passedt.brand   == "independent"            )) then
+      passedt.brand = nil
+   end
+
+   if (( passedt.operator   == "(free_house)"            ) or
+       ( passedt.operator   == "Free Brewery"            ) or
+       ( passedt.operator   == "Free House"              ) or
+       ( passedt.operator   == "Free house"              ) or
+       ( passedt.operator   == "Free"                    ) or
+       ( passedt.operator   == "Freehold"                ) or
+       ( passedt.operator   == "Freehouse"               ) or
+       ( passedt.operator   == "Independant"             ) or
+       ( passedt.operator   == "Independent"             ) or
+       ( passedt.operator   == "free house"              ) or
+       ( passedt.operator   == "free"                    ) or
+       ( passedt.operator   == "free_house"              ) or
+       ( passedt.operator   == "freehouse"               ) or
+       ( passedt.operator   == "independant"             ) or
+       ( passedt.operator   == "independent free house"  ) or
+       ( passedt.operator   == "independent"             )) then
+      passedt.operator = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle these as bicycle_rental:
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "bicycle_parking;bicycle_rental" ) then
+      passedt.amenity = "bicycle_rental"
+   end
+
+-- ----------------------------------------------------------------------------
+-- If no name use brand or operator on amenity=fuel, among others.  
+-- If there is brand or operator, use that with name.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity   == "atm"              ) or
+       ( passedt.amenity   == "fuel"             ) or
+       ( passedt.amenity   == "fuel_e"           ) or
+       ( passedt.amenity   == "fuel_h"           ) or
+       ( passedt.amenity   == "fuel_l"           ) or
+       ( passedt.amenity   == "fuel_w"           ) or
+       ( passedt.amenity   == "charging_station" ) or
+       ( passedt.amenity   == "bicycle_rental"   ) or
+       ( passedt.amenity   == "scooter_rental"   ) or
+       ( passedt.amenity   == "vending_machine"   ) or
+       (( passedt.amenity  ~= nil                )  and
+        ( string.match( passedt.amenity, "pub_" ))) or
+       ( passedt.amenity   == "pub"               ) or
+       ( passedt.amenity   == "cafe"             ) or
+       ( passedt.amenity   == "cafe_dld"         ) or
+       ( passedt.amenity   == "cafe_dnd"         ) or
+       ( passedt.amenity   == "cafe_dyd"         ) or
+       ( passedt.amenity   == "cafe_ydd"         ) or
+       ( passedt.amenity   == "cafe_yld"         ) or
+       ( passedt.amenity   == "cafe_ynd"         ) or
+       ( passedt.amenity   == "cafe_yyd"         ) or
+       ( passedt.amenity   == "restaurant"       ) or
+       ( passedt.amenity   == "restaccomm"       ) or
+       ( passedt.amenity   == "doctors"          ) or
+       ( passedt.amenity   == "pharmacy"         ) or
+       ( passedt.amenity   == "pharmacy_l"       ) or
+       ( passedt.amenity   == "pharmacy_n"       ) or
+       ( passedt.amenity   == "pharmacy_y"       ) or
+       ( passedt.amenity   == "parcel_locker"    ) or
+       ( passedt.amenity   == "veterinary"       ) or
+       ( passedt.amenity   == "animal_boarding"  ) or
+       ( passedt.amenity   == "cattery"          ) or
+       ( passedt.amenity   == "kennels"          ) or
+       ( passedt.amenity   == "animal_shelter"   ) or
+       ( passedt.animal    == "shelter"          ) or
+       ( passedt.craft      ~= nil               ) or
+       ( passedt.emergency  ~= nil               ) or
+       ( passedt.industrial ~= nil               ) or
+       ( passedt.man_made   ~= nil               ) or
+       ( passedt.office     ~= nil               ) or
+       ( passedt.shop       ~= nil               ) or
+       ( passedt.tourism    == "hotel"           ) or
+       ( passedt.military   == "barracks"        )) then
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         if (( passedt.brand ~= nil ) and
+             ( passedt.brand ~= ""  )) then
+            passedt.name = passedt.brand
+            passedt.brand = nil
+         else
+            if (( passedt.operator ~= nil ) and
+                ( passedt.operator ~= ""  )) then
+               passedt.name = passedt.operator
+               passedt.operator = nil
+            end
+         end
+      else
+         if (( passedt.brand ~= nil                                ) and
+             ( passedt.brand ~= ""                                 ) and
+             ( not string.match( passedt.name, passedt.brand )) and
+             ( not string.match( passedt.brand, passedt.name ))) then
+            passedt.name = passedt.name .. " (" .. passedt.brand .. ")"
+            passedt.brand = nil
+	 else
+            if (( passedt.operator ~= nil                                ) and
+                ( passedt.operator ~= ""                                 ) and
+                ( not string.match( passedt.name, passedt.operator )) and
+                ( not string.match( passedt.operator, passedt.name ))) then
+               passedt.name = passedt.name .. " (" .. passedt.operator .. ")"
+               passedt.operator = nil
+            end
+         end
+      end
    end
 
 -- ----------------------------------------------------------------------------
