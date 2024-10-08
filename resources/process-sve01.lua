@@ -27,7 +27,8 @@ require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "amenity", "attraction", "climbing", "emergency", "entrance", "healthcare", 
-              "landuse", "leisure", "natural", "pitch", "playground", "place", "power", "shop", "sport", "tourism", "zoo" }
+              "landuse", "leisure", "natural", "pitch", "place", "place_of_worship", "playground", 
+              "power", "shop", "sport", "tourism", "zoo" }
 
 -- Initialize Lua logic
 
@@ -8324,7 +8325,9 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "place_of_worship_buddhist"  ) or
             ( passedt.amenity == "place_of_worship_shinto"    ) or
             ( passedt.amenity == "place_of_worship_taoist"    ) or
-            ( passedt.amenity == "place_of_worship_other"     )) then
+            ( passedt.amenity == "place_of_worship_other"     ) or
+            ( passedt.amenity == "holy_spring"                ) or
+            ( passedt.amenity == "holy_well"                  )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
             Attribute( "name", Find( "name" ) )
