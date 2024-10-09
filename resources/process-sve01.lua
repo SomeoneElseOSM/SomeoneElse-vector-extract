@@ -327,6 +327,7 @@ function node_function()
     nodet.reusable_packaging = Find("reusable_packaging")
     nodet.trade = Find("trade")
     nodet.brand = Find("brand")
+    nodet.agrarian = Find("agrarian")
 
     generic_before_function( nodet )
 
@@ -620,6 +621,7 @@ function way_function()
     wayt.reusable_packaging = Find("reusable_packaging")
     wayt.trade = Find("trade")
     wayt.brand = Find("brand")
+    wayt.agrarian = Find("agrarian")
 
     generic_before_function( wayt )
 
@@ -7237,6 +7239,702 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Sundials
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "clock"   )  and
+       ( passedt.display == "sundial" )) then
+      passedt.amenity = "sundial"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render shop=hardware stores etc. as shop=doityourself
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "hardware"             ) or
+       ( passedt.shop    == "tool_hire"            ) or
+       ( passedt.shop    == "equipment_hire"       ) or
+       ( passedt.shop    == "tools"                ) or
+       ( passedt.shop    == "hardware_rental"      ) or
+       ( passedt.shop    == "builders_merchant"    ) or
+       ( passedt.shop    == "builders_merchants"   ) or
+       ( passedt.shop    == "timber"               ) or
+       ( passedt.shop    == "fencing"              ) or
+       ( passedt.shop    == "plumbers_merchant"    ) or
+       ( passedt.shop    == "building_supplies"    ) or
+       ( passedt.shop    == "industrial_supplies"  ) or
+       ( passedt.office  == "industrial_supplies"  ) or
+       ( passedt.shop    == "plant_hire"           ) or
+       ( passedt.amenity == "plant_hire;tool_hire" ) or
+       ( passedt.shop    == "signs"                ) or
+       ( passedt.shop    == "sign"                 ) or
+       ( passedt.shop    == "signwriter"           ) or
+       ( passedt.craft   == "signmaker"            ) or
+       ( passedt.craft   == "roofer"               ) or
+       ( passedt.shop    == "roofing"              ) or
+       ( passedt.craft   == "floorer"              ) or
+       ( passedt.shop    == "building_materials"   ) or
+       ( passedt.craft   == "builder"              )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop    = "doityourself"
+      passedt.amenity = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Consolidate "lenders of last resort" as pawnbroker
+-- "money_transfer" and down from there is perhaps a bit of a stretch; 
+-- as there is a distinctive pawnbroker icon, so generic is used for those.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop == "money"              ) or
+       ( passedt.shop == "money_lender"       ) or
+       ( passedt.shop == "loan_shark"         ) or
+       ( passedt.shop == "cash"               )) then
+      passedt.shop = "pawnbroker"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Deli is quite popular and has its own icon
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "delicatessen" ) then
+      passedt.shop = "deli"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Other money shops
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "money_transfer"      ) or
+       ( passedt.shop    == "finance"             ) or
+       ( passedt.office  == "finance"             ) or
+       ( passedt.shop    == "financial"           ) or
+       ( passedt.shop    == "mortgage"            ) or
+       ( passedt.shop    == "financial_services"  ) or
+       ( passedt.office  == "financial_services"  ) or
+       ( passedt.office  == "financial_advisor"   ) or
+       ( passedt.shop    == "financial_advisors"  ) or
+       ( passedt.amenity == "financial_advice"    ) or
+       ( passedt.amenity == "bureau_de_change"    )) then
+      passedt.shop = "shopnonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- hairdresser;beauty
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "hairdresser;beauty" ) then
+      passedt.shop = "hairdresser"
+   end
+
+-- ----------------------------------------------------------------------------
+-- sports
+-- the name is usually characteristic, but try and use an icon.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "golf"              ) or
+       ( passedt.shop   == "scuba_diving"      ) or
+       ( passedt.shop   == "water_sports"      ) or
+       ( passedt.shop   == "fishing"           ) or
+       ( passedt.shop   == "fishing_tackle"    ) or
+       ( passedt.shop   == "angling"           ) or
+       ( passedt.shop   == "fitness_equipment" )) then
+      passedt.shop = "sports"
+   end
+
+-- ----------------------------------------------------------------------------
+-- e-cigarette
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "vaping"               ) or
+       ( passedt.shop   == "vape_shop"            )) then
+      passedt.shop = "e-cigarette"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various not-really-clothes things best rendered as clothes shops
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "tailor"                  ) or
+       ( passedt.craft   == "tailor"                  ) or
+       ( passedt.craft   == "dressmaker"              )) then
+      passedt.shop = "clothes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Currently handle beauty salons etc. as just generic beauty.  Also "chemist"
+-- Mostly these have names that describe the business, so less need for a
+-- specific icon.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop         == "beauty_salon"      ) or
+       ( passedt.leisure      == "spa"               ) or
+       ( passedt.shop         == "spa"               ) or
+       ( passedt.amenity      == "spa"               ) or
+       ( passedt.tourism      == "spa"               ) or
+       (( passedt.club    == "health"               )  and
+        ( passedt.leisure == nil                    )  and
+        ( passedt.amenity == nil                    )  and
+        ( passedt.name    ~= nil                    )) or
+       ( passedt.shop         == "salon"             ) or
+       ( passedt.shop         == "nails"             ) or
+       ( passedt.shop         == "nail_salon"        ) or
+       ( passedt.shop         == "nail"              ) or
+       ( passedt.shop         == "chemist"           ) or
+       ( passedt.shop         == "soap"              ) or
+       ( passedt.shop         == "toiletries"        ) or
+       ( passedt.shop         == "beauty_products"   ) or
+       ( passedt.shop         == "beauty_treatment"  ) or
+       ( passedt.shop         == "perfumery"         ) or
+       ( passedt.shop         == "cosmetics"         ) or
+       ( passedt.shop         == "tanning"           ) or
+       ( passedt.shop         == "tan"               ) or
+       ( passedt.shop         == "suntan"            ) or
+       ( passedt.leisure      == "tanning_salon"     ) or
+       ( passedt.shop         == "health_and_beauty" )) then
+      passedt.shop = "beauty"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "Non-electrical" electronics (i.e. ones for which the "electrical" icon
+-- is inappropriate).
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop  == "security"         ) or
+       ( passedt.shop  == "survey"           ) or
+       ( passedt.shop  == "survey_equipment" ) or       
+       ( passedt.shop  == "hifi"             )) then
+      passedt.shop = "shopnonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Computer
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop  == "computer_repair" ) then
+      passedt.shop = "computer"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Betting Shops etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "betting"             ) or
+       ( passedt.amenity == "betting"             ) or
+       ( passedt.shop    == "gambling"            ) or
+       ( passedt.amenity == "gambling"            ) or
+       ( passedt.leisure == "gambling"            ) or
+       ( passedt.shop    == "lottery"             ) or
+       ( passedt.amenity == "lottery"             ) or
+       ( passedt.shop    == "amusements"          ) or
+       ( passedt.amenity == "amusements"          ) or
+       ( passedt.amenity == "amusement"           ) or
+       ( passedt.leisure == "amusement_arcade"    ) or
+       ( passedt.leisure == "video_arcade"        ) or
+       ( passedt.leisure == "adult_gaming_centre" ) or
+       ( passedt.amenity == "casino"              )) then
+      passedt.shop = "bookmaker"
+   end
+
+-- ----------------------------------------------------------------------------
+-- mobile_phone shops 
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "phone"        ) or
+       ( passedt.shop   == "phone_repair" ) or
+       ( passedt.shop   == "telephone"    )) then
+      passedt.shop = "mobile_phone"
+   end
+
+-- ----------------------------------------------------------------------------
+-- gift and other tat shops
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "souvenir"            ) or
+       ( passedt.shop   == "souvenirs"           ) or
+       ( passedt.shop   == "leather"             ) or
+       ( passedt.shop   == "luxury"              ) or
+       ( passedt.shop   == "candle"              ) or
+       ( passedt.shop   == "candles"             ) or
+       ( passedt.shop   == "sunglasses"          ) or
+       ( passedt.shop   == "tourist"             ) or
+       ( passedt.shop   == "tourism"             ) or
+       ( passedt.shop   == "bag"                 ) or
+       ( passedt.shop   == "balloon"             ) or
+       ( passedt.shop   == "accessories"         ) or
+       ( passedt.shop   == "beach"               ) or
+       ( passedt.shop   == "magic"               ) or
+       ( passedt.shop   == "party"               ) or
+       ( passedt.shop   == "party_goods"         ) or
+       ( passedt.shop   == "christmas"           ) or
+       ( passedt.shop   == "fashion_accessories" ) or
+       ( passedt.shop   == "duty_free"           )) then
+      passedt.shop = "gift"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various alcohol shops
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "beer"            ) or
+       ( passedt.shop    == "off_licence"     ) or
+       ( passedt.shop    == "off_license"     ) or
+       ( passedt.shop    == "wine"            ) or
+       ( passedt.shop    == "whisky"          ) or
+       ( passedt.craft   == "winery"          ) or
+       ( passedt.shop    == "winery"          ) or
+       ( passedt.tourism == "wine_cellar"     )) then
+      passedt.shop = "alcohol"
+   end
+
+   if (( passedt.shop    == "sweets"          ) or
+       ( passedt.shop    == "sweet"           )) then
+      passedt.shop = "confectionery"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show pastry shops as bakeries
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "pastry" ) then
+      passedt.shop = "bakery"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Fresh fish shops
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "fish" ) then
+      passedt.shop = "seafood"
+   end
+
+   if (( passedt.shop    == "camera"             ) or
+       ( passedt.shop    == "photo_studio"       ) or
+       ( passedt.shop    == "photography"        ) or
+       ( passedt.office  == "photography"        ) or
+       ( passedt.shop    == "photographic"       ) or
+       ( passedt.shop    == "photographer"       ) or
+       ( passedt.craft   == "photographer"       )) then
+      passedt.shop = "photo"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various "homeware" shops.  The icon for these is a generic "room interior".
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "floor"                       ) or
+       ( passedt.shop   == "flooring"                    ) or
+       ( passedt.shop   == "floors"                      ) or
+       ( passedt.shop   == "floor_covering"              ) or
+       ( passedt.shop   == "homeware"                    ) or
+       ( passedt.shop   == "homewares"                   ) or
+       ( passedt.shop   == "home"                        ) or
+       ( passedt.shop   == "carpet"                      ) or
+       ( passedt.shop   == "carpet;bed"                  ) or
+       ( passedt.shop   == "interior_decoration"         ) or
+       ( passedt.shop   == "household"                   ) or
+       ( passedt.shop   == "houseware"                   ) or
+       ( passedt.shop   == "bathroom_furnishing"         ) or
+       ( passedt.shop   == "paint"                       ) or
+       ( passedt.shop   == "curtain"                     ) or
+       ( passedt.shop   == "furnishings"                 ) or
+       ( passedt.shop   == "furnishing"                  ) or
+       ( passedt.shop   == "fireplace"                   ) or
+       ( passedt.shop   == "lighting"                    ) or
+       ( passedt.shop   == "blinds"                      ) or
+       ( passedt.shop   == "window_blind"                ) or
+       ( passedt.shop   == "kitchenware"                 ) or
+       ( passedt.shop   == "interior_design"             ) or
+       ( passedt.shop   == "interior"                    ) or
+       ( passedt.shop   == "interiors"                   ) or
+       ( passedt.shop   == "stoves"                      ) or
+       ( passedt.shop   == "stove"                       ) or
+       ( passedt.shop   == "tiles"                       ) or
+       ( passedt.shop   == "tile"                        ) or
+       ( passedt.shop   == "ceramics"                    ) or
+       ( passedt.shop   == "windows"                     ) or
+       ( passedt.craft  == "window_construction"         ) or
+       ( passedt.shop   == "frame"                       ) or
+       ( passedt.shop   == "framing"                     ) or
+       ( passedt.shop   == "picture_framing"             ) or
+       ( passedt.shop   == "picture_framer"              ) or
+       ( passedt.craft  == "framing"                     ) or
+       ( passedt.shop   == "frame;restoration"           ) or
+       ( passedt.shop   == "bedding"                     ) or
+       ( passedt.shop   == "cookware"                    ) or
+       ( passedt.shop   == "glassware"                   ) or
+       ( passedt.shop   == "cookery"                     ) or
+       ( passedt.shop   == "catering_supplies"           ) or
+       ( passedt.craft  == "upholsterer"                 )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop = "homeware"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Other "homeware-like" shops.  These get the furniture icon.
+-- Some are a bit of a stretch.
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "upholsterer"                 ) or
+       ( passedt.shop   == "chair"                       ) or
+       ( passedt.shop   == "luggage"                     ) or
+       ( passedt.shop   == "clock"                       ) or
+       ( passedt.shop   == "clocks"                      ) or
+       ( passedt.shop   == "home_improvement"            ) or
+       ( passedt.shop   == "decorating"                  ) or
+       ( passedt.shop   == "bed;carpet"                  ) or
+       ( passedt.shop   == "country_store"               ) or
+       ( passedt.shop   == "equestrian"                  ) or
+       ( passedt.shop   == "kitchen"                     ) or
+       ( passedt.shop   == "kitchen;bathroom"            ) or
+       ( passedt.shop   == "kitchen;bathroom_furnishing" ) or
+       ( passedt.shop   == "bedroom"                     ) or
+       ( passedt.shop   == "bathroom"                    ) or
+       ( passedt.shop   == "glaziery"                    ) or
+       ( passedt.craft  == "glaziery"                    ) or
+       ( passedt.shop   == "glazier"                     ) or
+       ( passedt.shop   == "glazing"                     ) or
+       ( passedt.shop   == "stone"                       ) or
+       ( passedt.shop   == "brewing"                     ) or
+       ( passedt.shop   == "gates"                       ) or
+       ( passedt.shop   == "sheds"                       ) or
+       ( passedt.shop   == "shed"                        ) or
+       ( passedt.shop   == "ironmonger"                  ) or
+       ( passedt.shop   == "furnace"                     ) or
+       ( passedt.shop   == "plumbing"                    ) or
+       ( passedt.craft  == "plumber"                     ) or
+       ( passedt.craft  == "carpenter"                   ) or
+       ( passedt.craft  == "decorator"                   ) or
+       ( passedt.shop   == "bed"                         ) or
+       ( passedt.shop   == "mattress"                    ) or
+       ( passedt.shop   == "waterbed"                    ) or
+       ( passedt.shop   == "glass"                       ) or
+       ( passedt.shop   == "garage"                      ) or
+       ( passedt.shop   == "conservatory"                ) or
+       ( passedt.shop   == "conservatories"              ) or
+       ( passedt.shop   == "bathrooms"                   ) or
+       ( passedt.shop   == "swimming_pool"               ) or
+       ( passedt.shop   == "fitted_furniture"            ) or
+       ( passedt.shop   == "upholstery"                  ) or
+       ( passedt.shop   == "saddlery"                    )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop = "furniture"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Shops that sell coffee etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "beverages"       ) or
+       ( passedt.shop    == "coffee"          ) or
+       ( passedt.shop    == "tea"             )) then
+      passedt.shop = "coffee"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Copyshops
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "printing"       ) or
+       ( passedt.shop    == "print"          ) or
+       ( passedt.shop    == "printer"        )) then
+      passedt.shop = "copyshop"
+      passedt.amenity = nil
+      passedt.craft = nil
+      passedt.office = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- This category used to be larger, but the values have been consolidated.
+-- Difficult to do an icon for.
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop    == "printer_ink" ) then
+      passedt.shop = "shopnonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various single food item and other food shops
+-- Unnamed egg honesty boxes have been dealt with above.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "cake"            ) or
+       ( passedt.shop    == "chocolate"       ) or
+       ( passedt.shop    == "milk"            ) or
+       ( passedt.shop    == "cheese"          ) or
+       ( passedt.shop    == "cheese;wine"     ) or
+       ( passedt.shop    == "wine;cheese"     ) or
+       ( passedt.shop    == "dairy"           ) or
+       ( passedt.shop    == "eggs"            ) or
+       ( passedt.shop    == "honey"           ) or
+       ( passedt.shop    == "catering"        ) or
+       ( passedt.shop    == "fishmonger"      ) or
+       ( passedt.shop    == "spices"           ) or
+       ( passedt.shop    == "nuts"            )) then
+      passedt.shop = "shopnonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- fabric and wool etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "fabric"               ) or
+       ( passedt.shop   == "linen"                ) or
+       ( passedt.shop   == "linens"               ) or
+       ( passedt.shop   == "haberdashery"         ) or
+       ( passedt.shop   == "sewing"               ) or
+       ( passedt.shop   == "needlecraft"          ) or
+       ( passedt.shop   == "embroidery"           ) or
+       ( passedt.shop   == "knitting"             ) or
+       ( passedt.shop   == "wool"                 ) or
+       ( passedt.shop   == "yarn"                 ) or
+       ( passedt.shop   == "alteration"           ) or
+       ( passedt.shop   == "clothing_alterations" ) or
+       ( passedt.craft  == "embroiderer"          )) then
+      passedt.shop = "shopnonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- health_food etc., and also "non-medical medical" and "woo" shops.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop       == "health_food"             ) or
+       ( passedt.shop       == "health"                  ) or
+       ( passedt.shop       == "organic"                 ) or
+       ( passedt.shop       == "supplements"             ) or
+       ( passedt.shop       == "nutrition_supplements"   ) or
+       ( passedt.shop       == "dietary_supplements"     ) or
+       ( passedt.name       == "Holland and Barrett"     )) then
+      if (( passedt.zero_waste         == "yes"                )  or
+          ( passedt.zero_waste         == "only"               )  or
+          ( passedt.bulk_purchase      == "yes"                )  or
+          ( passedt.bulk_purchase      == "only"               )  or
+          ( passedt.reusable_packaging == "yes"                )) then
+         passedt.shop = "ecohealth_food"
+      else
+         passedt.shop = "health_food"
+      end
+   end
+
+   if (( passedt.shop       == "alternative_medicine"    ) or
+       ( passedt.shop       == "massage"                 ) or
+       ( passedt.shop       == "herbalist"               ) or
+       ( passedt.shop       == "herbal_medicine"         ) or
+       ( passedt.shop       == "chinese_medicine"        ) or
+       ( passedt.shop       == "new_age"                 ) or
+       ( passedt.shop       == "alternative_health"      ) or
+       ( passedt.healthcare == "alternative"             ) or
+       ( passedt.shop       == "acupuncture"             ) or
+       ( passedt.healthcare == "acupuncture"             ) or
+       ( passedt.shop       == "aromatherapy"            ) or
+       ( passedt.shop       == "meditation"              ) or
+       ( passedt.shop       == "esoteric"                )) then
+      passedt.shop = "shopnonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- travel agents
+-- the name is usually characteristic
+-- ----------------------------------------------------------------------------
+   if (( passedt.office == "travel_agent"  ) or
+       ( passedt.shop   == "travel_agency" ) or
+       ( passedt.shop   == "travel"        )) then
+      passedt.shop = "travel_agent"
+   end
+
+-- ----------------------------------------------------------------------------
+-- books and stationery
+-- the name is often characteristic
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "comics"          ) or
+       ( passedt.shop   == "comic"           ) or
+       ( passedt.shop   == "anime"           ) or
+       ( passedt.shop   == "maps"            )) then
+      passedt.shop = "books"
+   end
+
+   if ( passedt.shop   == "office_supplies" ) then
+      passedt.shop = "stationery"
+   end
+
+-- ----------------------------------------------------------------------------
+-- toys and games etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "model"          ) or
+       ( passedt.shop   == "games"          ) or
+       ( passedt.shop   == "computer_games" ) or
+       ( passedt.shop   == "video_games"    ) or
+       ( passedt.shop   == "hobby"          ) or
+       ( passedt.shop   == "fancy_dress"    )) then
+      passedt.shop = "toys"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Art etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop   == "craft"          ) or
+       ( passedt.shop   == "art_supplies"   ) or
+       ( passedt.shop   == "pottery"        ) or
+       ( passedt.craft  == "artist"         ) or
+       ( passedt.craft  == "pottery"        ) or
+       ( passedt.craft  == "sculptor"       )) then
+      passedt.shop  = "art"
+      passedt.craft = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- pets and pet services
+-- Normally the names are punningly characteristic (e.g. "Bark-in-Style" 
+-- dog grooming).
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "pet;garden"              ) or
+       ( passedt.shop    == "aquatics"                ) or
+       ( passedt.shop    == "aquarium"                ) or
+       ( passedt.shop    == "pet;corn"                )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop = "pet"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Pet and animal food
+-- ----------------------------------------------------------------------------
+   if (((  passedt.shop     == "agrarian"                        )  and
+        (( passedt.agrarian == "feed"                           )  or
+         ( passedt.agrarian == "yes"                            )  or
+         ( passedt.agrarian == "feed;fertilizer;seed;pesticide" )  or
+         ( passedt.agrarian == "feed;seed"                      )  or
+         ( passedt.agrarian == "feed;pesticide;seed"            )  or
+         ( passedt.agrarian == "feed;tools"                     )  or
+         ( passedt.agrarian == "feed;tools;fuel;firewood"       ))) or
+       ( passedt.shop    == "pet_supplies"            ) or
+       ( passedt.shop    == "pet_care"                ) or
+       ( passedt.shop    == "pet_food"                ) or
+       ( passedt.shop    == "petfood"                 ) or
+       ( passedt.shop    == "animal_feed"             )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop = "pet_food"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Pet grooming
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "pet_grooming"            ) or
+       ( passedt.shop    == "dog_grooming"            ) or
+       ( passedt.amenity == "dog_grooming"            ) or
+       ( passedt.craft   == "dog_grooming"            ) or
+       ( passedt.animal  == "wellness"                )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop = "pet_grooming"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Animal boarding
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "animal_boarding"         ) or
+       ( passedt.amenity == "cattery"                 ) or
+       ( passedt.amenity == "kennels"                 )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.amenity = "animal_boarding"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Animal shelters
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "animal_shelter"          ) or
+       ( passedt.animal  == "shelter"                 )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.amenity = "animal_shelter"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Car parts
+-- ----------------------------------------------------------------------------
+   if ((( passedt.shop    == "trade"                       )  and
+        ( passedt.trade   == "car_parts"                   )) or
+       (  passedt.shop    == "car_accessories"              )  or
+       (  passedt.shop    == "tyres"                        )  or
+       (  passedt.shop    == "automotive"                   )  or
+       (  passedt.shop    == "battery"                      )  or
+       (  passedt.shop    == "batteries"                    )  or
+       (  passedt.shop    == "number_plate"                 )  or
+       (  passedt.shop    == "number_plates"                )  or
+       (  passedt.shop    == "license_plates"               )  or
+       (  passedt.shop    == "car_audio"                    )  or
+       (  passedt.shop    == "motor"                        )  or
+       (  passedt.shop    == "motor_spares"                 )  or
+       (  passedt.shop    == "motor_accessories"            )  or
+       (  passedt.shop    == "car_parts;car_repair"         )  or
+       (  passedt.shop    == "bicycle;car_parts"            )  or
+       (  passedt.shop    == "car_parts;bicycle"            )) then
+      passedt.shop = "car_parts"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Shopmobility
+-- Note that "shop=mobility" is something that _sells_ mobility aids, and is
+-- handled as shop=nonspecific for now.
+-- We handle some specific cases of shop=mobility here; the rest below.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.amenity  == "mobility"                 ) or
+       (   passedt.amenity  == "mobility_equipment_hire"  ) or
+       (   passedt.amenity  == "mobility_aids_hire"       ) or
+       (   passedt.amenity  == "shop_mobility"            ) or
+       ((  passedt.amenity  == "social_facility"         )  and
+        (  passedt.social_facility == "shopmobility"     )) or
+       ((( passedt.shop     == "yes"                    )   or
+         ( passedt.shop     == "mobility"               )   or
+         ( passedt.shop     == "mobility_hire"          )   or
+         ( passedt.building == "yes"                    )   or
+         ( passedt.building == "unit"                   ))  and
+        (( passedt.name     == "Shopmobility"           )   or
+         ( passedt.name     == "Shop Mobility"          )))) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.amenity = "shopmobility"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Music
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "music;video"             ) or
+       ( passedt.shop    == "records"                 ) or
+       ( passedt.shop    == "record"                  )) then
+      passedt.shop = "music"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Motorcycle
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "motorcycle_repair"            ) or
+       ( passedt.shop    == "motorcycle_parts"             ) or
+       ( passedt.amenity == "motorcycle_rental"            ) or
+       ( passedt.shop    == "atv"                          )) then
+      passedt.shop = "motorcycle"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Tattoo
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "piercing"                ) or
+       ( passedt.shop    == "tattoo;piercing"         )) then
+      passedt.shop = "tattoo"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Musical Instrument
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop    == "piano" ) then
+      passedt.shop = "musical_instrument"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Locksmith
+-- ----------------------------------------------------------------------------
+   if ( passedt.craft == "locksmith" ) then
+      passedt.shop = "locksmith"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Storage Rental
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "storage"              ) or
+       ( passedt.amenity == "self_storage"         ) or
+       ( passedt.office  == "storage_rental"       ) or
+       ( passedt.shop    == "storage"              )) then
+      passedt.shop = "storage_rental"
+   end
+
+-- ----------------------------------------------------------------------------
+-- car and van rental.
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "car_rental"                   ) or
+       ( passedt.amenity == "van_rental"                   ) or
+       ( passedt.amenity == "car_rental;bicycle_rental"    ) or
+       ( passedt.shop    == "car_rental"                   ) or
+       ( passedt.shop    == "van_rental"                   )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.amenity    = "car_rental"
+   end
+
+-- ----------------------------------------------------------------------------
 -- emergency=water_rescue is a poorly-designed key that makes it difficult to
 -- tell e.g. lifeboats from lifeboat stations.
 -- However, if we've got one of various buildings, it's a lifeboat station.
@@ -8604,7 +9302,11 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "boothmuseum"                ) or
                 ( passedt.amenity == "boothdisused"               ) or
                 ( passedt.amenity == "public_bookcase"            ) or
-                ( passedt.amenity == "bicycle_repair_station"     )) then
+                ( passedt.amenity == "bicycle_repair_station"     ) or
+                ( passedt.amenity == "sundial"                    ) or
+                ( passedt.amenity == "shopmobility"               ) or
+                ( passedt.amenity == "emergency_phone"            ) or
+                ( passedt.amenity == "theatre"                    )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
