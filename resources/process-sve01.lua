@@ -7006,6 +7006,233 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- office=estate_agent.  There's now an icon for "shop", so use that.
+-- Also letting_agent
+-- ----------------------------------------------------------------------------
+   if (( passedt.office  == "estate_agent"      ) or
+       ( passedt.amenity == "estate_agent"      ) or
+       ( passedt.shop    == "letting_agent"     ) or
+       ( passedt.shop    == "council_house"     ) or
+       ( passedt.office  == "letting_agent"     )) then
+      passedt.shop = "estate_agent"
+   end
+
+-- ----------------------------------------------------------------------------
+-- plant_nursery and lawnmower etc. to garden_centre
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- Usage suggests shop=nursery means plant_nursery.
+-- ----------------------------------------------------------------------------
+   if (( passedt.landuse == "plant_nursery"              ) or
+       ( passedt.shop    == "plant_nursery"              ) or
+       ( passedt.shop    == "plant_centre"               ) or
+       ( passedt.shop    == "nursery"                    ) or
+       ( passedt.shop    == "lawn_mower"                 ) or
+       ( passedt.shop    == "lawnmowers"                 ) or
+       ( passedt.shop    == "garden_furniture"           ) or
+       ( passedt.shop    == "garden_machinery"           ) or
+       ( passedt.shop    == "gardening"                  ) or
+       ( passedt.shop    == "garden_equipment"           ) or
+       ( passedt.shop    == "garden_tools"               ) or
+       ( passedt.shop    == "garden"                     ) or
+       ( passedt.shop    == "doityourself;garden_centre" ) or
+       ( passedt.shop    == "garden_machines"            )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop    = "garden_centre"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "fast_food" consolidation of lesser used tags.  
+-- Also render fish and chips etc. with a unique icon.
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "fast_food" ) then
+      passedt.amenity = "fast_food"
+   end
+
+   if ((  passedt.amenity == "fast_food"                            )  and
+       (( passedt.cuisine == "american"                            )   or
+        ( passedt.cuisine == "argentinian"                         )   or
+        ( passedt.cuisine == "brazilian"                           )   or
+        ( passedt.cuisine == "burger"                              )   or
+        ( passedt.cuisine == "burger;chicken"                      )   or
+        ( passedt.cuisine == "burger;chicken;fish_and_chips;kebab" )   or
+        ( passedt.cuisine == "burger;chicken;indian;kebab;pizza"   )   or
+        ( passedt.cuisine == "burger;chicken;kebab"                )   or
+        ( passedt.cuisine == "burger;chicken;kebab;pizza"          )   or
+        ( passedt.cuisine == "burger;chicken;pizza"                )   or
+        ( passedt.cuisine == "burger;fish_and_chips"               )   or
+        ( passedt.cuisine == "burger;fish_and_chips;kebab;pizza"   )   or
+        ( passedt.cuisine == "burger;indian;kebab;pizza"           )   or
+        ( passedt.cuisine == "burger;kebab"                        )   or
+        ( passedt.cuisine == "burger;kebab;pizza"                  )   or
+        ( passedt.cuisine == "burger;pizza"                        )   or
+        ( passedt.cuisine == "burger;pizza;kebab"                  )   or
+        ( passedt.cuisine == "burger;sandwich"                     )   or
+        ( passedt.cuisine == "diner"                               )   or
+        ( passedt.cuisine == "grill"                               )   or
+        ( passedt.cuisine == "steak_house"                         ))) then
+      passedt.amenity = "fast_food_burger"
+   end
+
+   if ((  passedt.amenity == "fast_food"               )  and
+       (( passedt.cuisine == "chicken"                )   or
+        ( passedt.cuisine == "chicken;burger;pizza"   )   or
+        ( passedt.cuisine == "chicken;fish_and_chips" )   or
+        ( passedt.cuisine == "chicken;grill"          )   or
+        ( passedt.cuisine == "chicken;kebab"          )   or
+        ( passedt.cuisine == "chicken;pizza"          )   or
+        ( passedt.cuisine == "chicken;portuguese"     )   or
+        ( passedt.cuisine == "fried_chicken"          )   or
+        ( passedt.cuisine == "wings"                  ))) then
+      passedt.amenity = "fast_food_chicken"
+   end
+
+   if ((  passedt.amenity == "fast_food"               )  and
+       (( passedt.cuisine == "chinese"                )   or
+        ( passedt.cuisine == "thai"                   )   or
+        ( passedt.cuisine == "chinese;thai"           )   or
+        ( passedt.cuisine == "chinese;thai;malaysian" )   or
+        ( passedt.cuisine == "thai;chinese"           )   or
+        ( passedt.cuisine == "asian"                  )   or
+        ( passedt.cuisine == "japanese"               )   or
+        ( passedt.cuisine == "japanese;sushi"         )   or
+        ( passedt.cuisine == "sushi;japanese"         )   or
+        ( passedt.cuisine == "japanese;korean"        )   or
+        ( passedt.cuisine == "korean;japanese"        )   or
+        ( passedt.cuisine == "vietnamese"             )   or
+        ( passedt.cuisine == "korean"                 )   or
+        ( passedt.cuisine == "ramen"                  )   or
+        ( passedt.cuisine == "noodle"                 )   or
+        ( passedt.cuisine == "noodle;ramen"           )   or
+        ( passedt.cuisine == "malaysian"              )   or
+        ( passedt.cuisine == "malaysian;chinese"      )   or
+        ( passedt.cuisine == "indonesian"             )   or
+        ( passedt.cuisine == "cantonese"              )   or
+        ( passedt.cuisine == "chinese;cantonese"      )   or
+        ( passedt.cuisine == "chinese;asian"          )   or
+        ( passedt.cuisine == "oriental"               )   or
+        ( passedt.cuisine == "chinese;english"        )   or
+        ( passedt.cuisine == "chinese;japanese"       )   or
+        ( passedt.cuisine == "sushi"                  ))) then
+      passedt.amenity = "fast_food_chinese"
+   end
+
+   if ((  passedt.amenity == "fast_food"                  )  and
+       (( passedt.cuisine == "coffee"                    )   or
+        ( passedt.cuisine == "coffee_shop"               )   or
+        ( passedt.cuisine == "coffee_shop;sandwich"      )   or
+        ( passedt.cuisine == "coffee_shop;local"         )   or
+        ( passedt.cuisine == "coffee_shop;regional"      )   or
+        ( passedt.cuisine == "coffee_shop;cake"          )   or
+        ( passedt.cuisine == "coffee_shop;sandwich;cake" )   or
+        ( passedt.cuisine == "coffee_shop;breakfast"     )   or
+        ( passedt.cuisine == "coffee_shop;italian"       )   or
+        ( passedt.cuisine == "cake;coffee_shop"          )   or
+        ( passedt.cuisine == "coffee_shop;ice_cream"     ))) then
+      passedt.amenity = "fast_food_coffee"
+   end
+
+   if ((  passedt.amenity == "fast_food"                          ) and
+       (( passedt.cuisine == "fish_and_chips"                    )  or
+        ( passedt.cuisine == "chinese;fish_and_chips"            )  or
+        ( passedt.cuisine == "fish"                              )  or
+        ( passedt.cuisine == "fish_and_chips;chinese"            )  or
+        ( passedt.cuisine == "fish_and_chips;indian"             )  or
+        ( passedt.cuisine == "fish_and_chips;kebab"              )  or
+        ( passedt.cuisine == "fish_and_chips;pizza;kebab"        )  or
+        ( passedt.cuisine == "fish_and_chips;pizza;burger;kebab" )  or
+        ( passedt.cuisine == "fish_and_chips;pizza"              ))) then
+      passedt.amenity = "fast_food_fish_and_chips"
+   end
+
+   if ((( passedt.amenity == "fast_food"                        )  and
+        ( passedt.cuisine == "ice_cream"                       )   or
+        ( passedt.cuisine == "ice_cream;cake;coffee"           )   or
+        ( passedt.cuisine == "ice_cream;cake;sandwich"         )   or
+        ( passedt.cuisine == "ice_cream;coffee_shop"           )   or
+        ( passedt.cuisine == "ice_cream;coffee;waffle"         )   or
+        ( passedt.cuisine == "ice_cream;donut"                 )   or
+        ( passedt.cuisine == "ice_cream;pizza"                 )   or
+        ( passedt.cuisine == "ice_cream;sandwich"              )   or
+        ( passedt.cuisine == "ice_cream;tea;coffee"            ))  or
+       (  passedt.shop    == "ice_cream"                        )  or
+       (  passedt.amenity == "ice_cream"                        )) then
+      passedt.amenity = "fast_food_ice_cream"
+   end
+
+   if ((  passedt.amenity == "fast_food"            ) and
+       (( passedt.cuisine == "indian"              )  or
+        ( passedt.cuisine == "curry"               )  or
+        ( passedt.cuisine == "nepalese"            )  or
+        ( passedt.cuisine == "nepalese;indian"     )  or
+        ( passedt.cuisine == "indian;nepalese"     )  or
+        ( passedt.cuisine == "bangladeshi"         )  or
+        ( passedt.cuisine == "indian;bangladeshi"  )  or
+        ( passedt.cuisine == "bangladeshi;indian"  )  or
+        ( passedt.cuisine == "indian;curry"        )  or
+        ( passedt.cuisine == "indian;kebab"        )  or
+        ( passedt.cuisine == "indian;kebab;burger" )  or
+        ( passedt.cuisine == "indian;thai"         )  or
+        ( passedt.cuisine == "curry;indian"        )  or
+        ( passedt.cuisine == "pakistani"           )  or
+        ( passedt.cuisine == "indian;pakistani"    )  or
+        ( passedt.cuisine == "tandoori"            )  or
+        ( passedt.cuisine == "afghan"              )  or
+        ( passedt.cuisine == "sri_lankan"          )  or
+        ( passedt.cuisine == "punjabi"             )  or
+        ( passedt.cuisine == "indian;pizza"        ))) then
+      passedt.amenity = "fast_food_indian"
+   end
+
+   if ((  passedt.amenity == "fast_food"             ) and
+       (( passedt.cuisine == "kebab"                )  or
+        ( passedt.cuisine == "kebab;pizza"          )  or
+        ( passedt.cuisine == "kebab;pizza;burger"   )  or
+        ( passedt.cuisine == "kebab;burger;pizza"   )  or
+        ( passedt.cuisine == "kebab;burger;chicken" )  or
+        ( passedt.cuisine == "kebab;burger"         )  or
+        ( passedt.cuisine == "kebab;fish_and_chips" )  or
+        ( passedt.cuisine == "turkish"              ))) then
+      passedt.amenity = "fast_food_kebab"
+   end
+
+   if ((  passedt.amenity == "fast_food"      )  and
+       (( passedt.cuisine == "pasties"       )   or
+        ( passedt.cuisine == "pasty"         )   or
+        ( passedt.cuisine == "cornish_pasty" )   or
+        ( passedt.cuisine == "pie"           )   or
+        ( passedt.cuisine == "pies"          ))) then
+      passedt.amenity = "fast_food_pie"
+   end
+
+   if ((  passedt.amenity == "fast_food"                   )  and
+       (( passedt.cuisine == "italian"                    )   or
+        ( passedt.cuisine == "italian;pizza"              )   or
+        ( passedt.cuisine == "italian_pizza"              )   or
+        ( passedt.cuisine == "mediterranean"              )   or
+        ( passedt.cuisine == "pasta"                      )   or
+        ( passedt.cuisine == "pizza"                      )   or
+        ( passedt.cuisine == "pizza;burger"               )   or
+        ( passedt.cuisine == "pizza;burger;kebab"         )   or
+        ( passedt.cuisine == "pizza;chicken"              )   or
+        ( passedt.cuisine == "pizza;fish_and_chips"       )   or
+        ( passedt.cuisine == "pizza;indian"               )   or
+        ( passedt.cuisine == "pizza;italian"              )   or
+        ( passedt.cuisine == "pizza;kebab"                )   or
+        ( passedt.cuisine == "pizza;kebab;burger"         )   or
+        ( passedt.cuisine == "pizza;kebab;burger;chicken" )   or
+        ( passedt.cuisine == "pizza;kebab;chicken"        )   or
+        ( passedt.cuisine == "pizza;pasta"                ))) then
+      passedt.amenity = "fast_food_pizza"
+   end
+
+   if ((  passedt.amenity == "fast_food"             )  and
+       (( passedt.cuisine == "sandwich"             )   or
+        ( passedt.cuisine == "sandwich;bakery"      )   or
+        ( passedt.cuisine == "sandwich;coffee_shop" ))) then
+      passedt.amenity = "fast_food_sandwich"
+   end
+
+-- ----------------------------------------------------------------------------
 -- emergency=water_rescue is a poorly-designed key that makes it difficult to
 -- tell e.g. lifeboats from lifeboat stations.
 -- However, if we've got one of various buildings, it's a lifeboat station.
@@ -8343,7 +8570,19 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "recycling"                  ) or
                 ( passedt.amenity == "recyclingcentre"            ) or
                 ( passedt.amenity == "restaurant"                 ) or
-                ( passedt.amenity == "restaccomm"                 )) then
+                ( passedt.amenity == "restaccomm"                 ) or
+                ( passedt.amenity == "fast_food"                  ) or
+                ( passedt.amenity == "fast_food_burger"           ) or
+                ( passedt.amenity == "fast_food_chicken"          ) or
+                ( passedt.amenity == "fast_food_chinese"          ) or
+                ( passedt.amenity == "fast_food_coffee"           ) or
+                ( passedt.amenity == "fast_food_fish_and_chips"   ) or
+                ( passedt.amenity == "fast_food_ice_cream"        ) or
+                ( passedt.amenity == "fast_food_indian"           ) or
+                ( passedt.amenity == "fast_food_kebab"            ) or
+                ( passedt.amenity == "fast_food_pie"              ) or
+                ( passedt.amenity == "fast_food_pizza"            ) or
+                ( passedt.amenity == "fast_food_sandwich"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
