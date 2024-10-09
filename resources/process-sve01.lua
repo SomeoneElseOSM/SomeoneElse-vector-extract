@@ -9306,7 +9306,19 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "sundial"                    ) or
                 ( passedt.amenity == "shopmobility"               ) or
                 ( passedt.amenity == "emergency_phone"            ) or
-                ( passedt.amenity == "theatre"                    )) then
+                ( passedt.amenity == "theatre"                    ) or
+                ( passedt.amenity == "toilets"                    ) or
+                ( passedt.amenity == "toilets_free_m"             ) or
+                ( passedt.amenity == "toilets_free_w"             ) or
+                ( passedt.amenity == "toilets_pay"                ) or
+                ( passedt.amenity == "toilets_pay_m"              ) or
+                ( passedt.amenity == "toilets_pay_w"              ) or
+                ( passedt.amenity == "shower"                     ) or
+                ( passedt.amenity == "shower_free_m"              ) or
+                ( passedt.amenity == "shower_free_w"              ) or
+                ( passedt.amenity == "shower_pay"                 ) or
+                ( passedt.amenity == "shower_pay_m"               ) or
+                ( passedt.amenity == "shower_pay_w"               )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
