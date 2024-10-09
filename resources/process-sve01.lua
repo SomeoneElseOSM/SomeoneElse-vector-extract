@@ -9318,7 +9318,8 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "shower_free_w"              ) or
                 ( passedt.amenity == "shower_pay"                 ) or
                 ( passedt.amenity == "shower_pay_m"               ) or
-                ( passedt.amenity == "shower_pay_w"               )) then
+                ( passedt.amenity == "shower_pay_w"               ) or
+                ( passedt.amenity == "musical_instrument"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
