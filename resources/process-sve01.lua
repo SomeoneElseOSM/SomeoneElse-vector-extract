@@ -8602,7 +8602,8 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "boothinformation"           ) or
                 ( passedt.amenity == "boothartwork"               ) or
                 ( passedt.amenity == "boothmuseum"                ) or
-                ( passedt.amenity == "boothdisused"               )) then
+                ( passedt.amenity == "boothdisused"               ) or
+                ( passedt.amenity == "public_bookcase"            )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
