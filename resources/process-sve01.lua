@@ -84,6 +84,8 @@ function node_function()
     nodet.building = Find("building")
     nodet.natural = Find("natural")
     nodet.wasCamenity = Find("was:amenity")
+    nodet.oldCamenity = Find("old:amenity")
+    nodet.historicCamenity = Find("historic:amenity")
     nodet.closedCamenity = Find("closed:amenity")
     nodet.disusedCamenity = Find("disused:amenity")
     nodet.wasCwaterway = Find("was:waterway")
@@ -376,6 +378,8 @@ function way_function()
     wayt.building = Find("building")
     wayt.natural = Find("natural")
     wayt.wasCamenity = Find("was:amenity")
+    wayt.oldCamenity = Find("old:amenity")
+    wayt.historicCamenity = Find("historic:amenity")
     wayt.closedCamenity = Find("closed:amenity")
     wayt.disusedCamenity = Find("disused:amenity")
     wayt.wasCwaterway = Find("was:waterway")
@@ -8582,7 +8586,23 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "fast_food_kebab"            ) or
                 ( passedt.amenity == "fast_food_pie"              ) or
                 ( passedt.amenity == "fast_food_pizza"            ) or
-                ( passedt.amenity == "fast_food_sandwich"         )) then
+                ( passedt.amenity == "fast_food_sandwich"         ) or
+                ( passedt.amenity == "telephone"                  ) or
+                ( passedt.amenity == "boothtelephonered"          ) or
+                ( passedt.amenity == "boothtelephoneblack"        ) or
+                ( passedt.amenity == "boothtelephonewhite"        ) or
+                ( passedt.amenity == "boothtelephoneblue"         ) or
+                ( passedt.amenity == "boothtelephonegreen"        ) or
+                ( passedt.amenity == "boothtelephonegrey"         ) or
+                ( passedt.amenity == "boothtelephonegold"         ) or
+                ( passedt.amenity == "boothdefibrillator"         ) or
+                ( passedt.amenity == "boothlibrary"               ) or
+                ( passedt.amenity == "boothbicyclerepairstation"  ) or
+                ( passedt.amenity == "boothatm"                   ) or
+                ( passedt.amenity == "boothinformation"           ) or
+                ( passedt.amenity == "boothartwork"               ) or
+                ( passedt.amenity == "boothmuseum"                ) or
+                ( passedt.amenity == "boothdisused"               )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
