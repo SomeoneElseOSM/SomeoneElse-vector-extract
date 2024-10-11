@@ -9802,7 +9802,14 @@ function render_tourism_land1( passedt )
             Attribute( "name", Find( "name" ) )
             MinZoom( 12 )
         else
-            render_aeroway_land1( passedt )
+            if ( passedt.tourism == "viewpoint" ) then
+                Layer( "land1", true )
+                Attribute( "class", "tourism_" .. passedt.tourism )
+                Attribute( "name", Find( "name" ) )
+                MinZoom( 14 )
+            else
+                render_aeroway_land1( passedt )
+            end -- tourism=viewpoint
         end -- tourism=camp_site etc. 12
     end -- tourism=zoo 9
 end -- render_tourism_land1()
