@@ -333,6 +333,8 @@ function node_function()
     nodet.support = Find("support")
     nodet.buildingCpart = Find("building:part")
     nodet.drinking_water = Find("drinking_water")
+    nodet.indoor = Find("indoor")
+    nodet.rescue_equipment = Find("rescue_equipment")
 
     generic_before_function( nodet )
 
@@ -632,6 +634,8 @@ function way_function()
     wayt.support = Find("support")
     wayt.buildingCpart = Find("building:part")
     wayt.drinking_water = Find("drinking_water")
+    wayt.indoor = Find("indoor")
+    wayt.rescue_equipment = Find("rescue_equipment")
 
     generic_before_function( wayt )
 
@@ -8006,6 +8010,368 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Nonspecific car and related shops.
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "caravan"                      ) or
+       ( passedt.shop    == "motorhome"                    ) or
+       ( passedt.shop    == "boat"                         ) or
+       ( passedt.shop    == "truck"                        ) or
+       ( passedt.shop    == "commercial_vehicles"          ) or
+       ( passedt.shop    == "commercial_vehicle"           ) or
+       ( passedt.shop    == "agricultural_vehicles"        ) or
+       ((  passedt.shop    == "agrarian"                                           ) and
+        (( passedt.agrarian == "agricultural_machinery"                           )  or
+         ( passedt.agrarian == "machine_parts;agricultural_machinery;tools"       )  or
+         ( passedt.agrarian == "agricultural_machinery;machine_parts;tools"       )  or
+         ( passedt.agrarian == "agricultural_machinery;feed"                      )  or
+         ( passedt.agrarian == "agricultural_machinery;machine_parts;tools;signs" )  or
+         ( passedt.agrarian == "agricultural_machinery;machine_parts"             )  or
+         ( passedt.agrarian == "agricultural_machinery;seed"                      )  or
+         ( passedt.agrarian == "machine_parts;agricultural_machinery"             ))) or
+       ( passedt.shop    == "tractor"                      ) or
+       ( passedt.shop    == "tractors"                     ) or
+       ( passedt.shop    == "tractor_repair"               ) or
+       ( passedt.shop    == "tractor_parts"                ) or
+       ( passedt.shop    == "van"                          ) or
+       ( passedt.shop    == "truck_repair"                 ) or
+       ( passedt.industrial == "truck_repair"              ) or
+       ( passedt.shop    == "forklift_repair"              ) or
+       ( passedt.amenity == "driving_school"               ) or
+       ( passedt.shop    == "chandler"                     ) or
+       ( passedt.shop    == "chandlery"                    ) or
+       ( passedt.shop    == "ship_chandler"                ) or
+       ( passedt.craft   == "boatbuilder"                  ) or
+       ( passedt.shop    == "marine"                       ) or
+       ( passedt.shop    == "boat_repair"                  )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop    = "shopnonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Timpson and similar shops.
+-- Timpson is brand:wikidata=Q7807658, but all of those are name=Timpson.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "shoe_repair"                        ) or
+       ( passedt.shop    == "keys"                               ) or
+       ( passedt.shop    == "key"                                ) or
+       ( passedt.shop    == "cobblers"                           ) or
+       ( passedt.shop    == "cobbler"                            ) or
+       ( passedt.shop    == "key_cutting"                        ) or
+       ( passedt.shop    == "key_cutting;shoe_repair"            ) or
+       ( passedt.shop    == "shoe_repair;key_cutting"            ) or
+       ( passedt.shop    == "locksmith;dry_cleaning;shoe_repair" ) or
+       ( passedt.craft   == "key_cutter"                         ) or
+       ( passedt.craft   == "shoe_repair"                        ) or
+       ( passedt.craft   == "key_cutter;shoe_repair"             )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop    = "shoe_repair_etc"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Taxi offices
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "taxi"                    ) or
+       ( passedt.office  == "taxi"                    ) or
+       ( passedt.office  == "minicab"                 ) or
+       ( passedt.shop    == "minicab"                 ) or
+       ( passedt.amenity == "minicab"                 )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.amenity = "taxi_office"
+      passedt.shop    = nil
+      passedt.office  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Other shops that don't have a specific icon are handled here. including
+-- variations.
+--
+-- Shops are in this list either because they tend to have a characteristic
+-- name (e.g. the various card shops), they're difficult to do an icon for
+-- or they're rare.
+--
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "card"                    ) or
+       ( passedt.shop    == "cards"                   ) or
+       ( passedt.shop    == "greeting_card"           ) or
+       ( passedt.shop    == "greeting_cards"          ) or
+       ( passedt.shop    == "greetings_cards"         ) or
+       ( passedt.shop    == "greetings"               ) or
+       ( passedt.shop    == "card;gift"               ) or
+       ( passedt.craft   == "cobbler"                 ) or
+       ( passedt.craft   == "shoemaker"               ) or
+       ( passedt.shop    == "shoemaker"               ) or
+       ( passedt.shop    == "watch_repair"            ) or
+       ( passedt.shop    == "cleaning"                ) or
+       ( passedt.shop    == "collector"               ) or
+       ( passedt.shop    == "coins"                   ) or
+       ( passedt.shop    == "video"                   ) or
+       ( passedt.shop    == "audio_video"             ) or
+       ( passedt.shop    == "erotic"                  ) or
+       ( passedt.shop    == "service"                 ) or
+       ( passedt.shop    == "tobacco"                 ) or
+       ( passedt.shop    == "tobacconist"             ) or
+       ( passedt.shop    == "ticket"                  ) or
+       ( passedt.shop    == "insurance"               ) or
+       ( passedt.shop    == "gallery"                 ) or
+       ( passedt.tourism == "gallery"                 ) or
+       ( passedt.amenity == "gallery"                 ) or
+       ( passedt.amenity == "art_gallery"             ) or
+       ( passedt.shop    == "plumber"                 ) or
+       ( passedt.shop    == "builder"                 ) or
+       ( passedt.shop    == "builders"                ) or
+       ( passedt.shop    == "trophy"                  ) or
+       ( passedt.shop    == "communication"           ) or
+       ( passedt.shop    == "communications"          ) or
+       ( passedt.shop    == "internet"                ) or
+       ( passedt.amenity == "internet_cafe"           ) or
+       ( passedt.shop    == "internet_cafe"           ) or
+       ( passedt.shop    == "recycling"               ) or
+       ( passedt.shop    == "gun"                     ) or
+       ( passedt.craft   == "gunsmith"                ) or
+       ( passedt.shop    == "weapons"                 ) or
+       ( passedt.shop    == "pyrotechnics"            ) or
+       ( passedt.shop    == "hunting"                 ) or
+       ( passedt.shop    == "military_surplus"        ) or
+       ( passedt.shop    == "fireworks"               ) or
+       ( passedt.shop    == "auction"                 ) or
+       ( passedt.shop    == "auction_house"           ) or
+       ( passedt.office  == "auctioneer"              ) or
+       ( passedt.shop    == "religion"                ) or
+       ( passedt.shop    == "gas"                     ) or
+       ( passedt.shop    == "fuel"                    ) or
+       ( passedt.shop    == "energy"                  ) or
+       ( passedt.shop    == "coal_merchant"           ) or
+       ( passedt.amenity == "training"                ) or
+       ((( passedt.amenity  == nil                  )   or
+         ( passedt.amenity  == ""                   ))  and
+        (( passedt.training == "dance"              )   or
+         ( passedt.training == "language"           )   or
+         ( passedt.training == "performing_arts"    ))) or
+       ( passedt.amenity == "tutoring_centre"         ) or
+       ( passedt.office  == "tutoring"                ) or
+       ( passedt.shop    == "ironing"                 ) or
+       ( passedt.amenity == "stripclub"               ) or
+       ( passedt.amenity == "courier"                 )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop = "shopnonspecific"
+   end
+
+   if (( passedt.shop    == "launderette"             ) or
+       ( passedt.shop    == "dry_cleaning"            ) or
+       ( passedt.shop    == "dry_cleaning;laundry"    )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop = "laundry"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Stonemasons etc.
+-- ----------------------------------------------------------------------------
+   if (( passedt.craft   == "stonemason"        ) or
+       ( passedt.shop    == "gravestone"        ) or
+       ( passedt.shop    == "monumental_mason"  ) or
+       ( passedt.shop    == "memorials"         )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop    = "funeral_directors"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Specific handling for incompletely tagged "Howdens".
+-- Unfortunately there are a few of these.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.name     == "Howdens"             )  or
+        ( passedt.name     == "Howdens Joinery"     )  or
+        ( passedt.name     == "Howdens Joinery Co"  )  or
+        ( passedt.name     == "Howdens Joinery Co." )  or
+        ( passedt.name     == "Howdens Joinery Ltd" )) and
+       (( passedt.shop     == nil                   )  or
+        ( passedt.shop     == ""                    )) and
+       (( passedt.craft    == nil                   )  or
+        ( passedt.craft    == ""                    )) and
+       (( passedt.highway  == nil                   )  or
+        ( passedt.highway  == ""                    )) and
+       (( passedt.landuse  == nil                   )  or
+        ( passedt.landuse  == ""                    )) and
+       (( passedt.man_made == nil                   )  or
+        ( passedt.man_made == ""                    ))) then
+      passedt.shop = "trade"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Shops that we don't know the type of.  Things such as "hire" are here 
+-- because we don't know "hire of what".
+-- "wood" is here because it's used for different sorts of shops.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "yes"             ) or
+       ( passedt.craft   == "yes"             ) or
+       ( passedt.shop    == "other"           ) or
+       ( passedt.shop    == "hire"            ) or
+       ( passedt.shop    == "rental"          ) or
+       ( passedt.office  == "rental"          ) or
+       ( passedt.amenity == "rental"          ) or
+       ( passedt.shop    == "second_hand"     ) or
+       ( passedt.shop    == "junk"            ) or
+       ( passedt.shop    == "general"         ) or
+       ( passedt.shop    == "general_store"   ) or
+       ( passedt.shop    == "retail"          ) or
+       ( passedt.shop    == "trade"           ) or
+       ( passedt.shop    == "cash_and_carry"  ) or
+       ( passedt.shop    == "fixme"           ) or
+       ( passedt.shop    == "wholesale"       ) or
+       ( passedt.shop    == "wood"            ) or
+       ( passedt.shop    == "childrens"       ) or
+       ( passedt.shop    == "factory_outlet"  ) or
+       ( passedt.shop    == "specialist"      ) or
+       ( passedt.shop    == "specialist_shop" )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop    = "shopnonspecific"
+   end
+
+   if (( passedt.amenity     == "optician"                     ) or
+       ( passedt.craft       == "optician"                     ) or
+       ( passedt.office      == "optician"                     ) or
+       ( passedt.shop        == "optometrist"                  ) or
+       ( passedt.amenity     == "optometrist"                  ) or
+       ( passedt.healthcare  == "optometrist"                  )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop    = "optician"
+   end
+
+-- ----------------------------------------------------------------------------
+-- chiropodists etc. - render as "nonspecific health".
+-- Add unnamedcommercial landuse to give non-building areas a background.
+--
+-- Places that _sell_ mobility aids are in here.  Shopmobility handled
+-- seperately.
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop        == "hearing_aids"                 ) or
+       ( passedt.healthcare  == "hearing_care"                 ) or
+       ( passedt.shop        == "medical_supply"               ) or
+       ( passedt.office      == "medical_supply"               ) or
+       ( passedt.shop        == "mobility"                     ) or
+       ( passedt.shop        == "disability"                   ) or
+       ( passedt.shop        == "chiropodist"                  ) or
+       ( passedt.amenity     == "chiropodist"                  ) or
+       ( passedt.healthcare  == "chiropodist"                  ) or
+       ( passedt.amenity     == "chiropractor"                 ) or
+       ( passedt.healthcare  == "chiropractor"                 ) or
+       ( passedt.healthcare  == "department"                   ) or
+       ( passedt.healthcare  == "diagnostics"                  ) or
+       ( passedt.healthcare  == "dialysis"                     ) or
+       ( passedt.healthcare  == "osteopath"                    ) or
+       ( passedt.shop        == "osteopath"                    ) or
+       ( passedt.amenity     == "physiotherapist"              ) or
+       ( passedt.healthcare  == "physiotherapist"              ) or
+       ( passedt.healthcare  == "physiotherapist;podiatrist"   ) or
+       ( passedt.shop        == "physiotherapist"              ) or
+       ( passedt.healthcare  == "physiotherapy"                ) or
+       ( passedt.shop        == "physiotherapy"                ) or
+       ( passedt.healthcare  == "psychotherapist"              ) or
+       ( passedt.healthcare  == "therapy"                      ) or
+       ( passedt.healthcare  == "podiatrist"                   ) or
+       ( passedt.healthcare  == "podiatrist;chiropodist"       ) or
+       ( passedt.amenity     == "podiatrist"                   ) or
+       ( passedt.healthcare  == "podiatry"                     ) or
+       ( passedt.amenity     == "healthcare"                   ) or
+       ( passedt.amenity     == "clinic"                       ) or
+       ( passedt.healthcare  == "clinic"                       ) or
+       ( passedt.healthcare  == "clinic;doctor"                ) or
+       ( passedt.shop        == "clinic"                       ) or
+       ( passedt.amenity     == "social_facility"              ) or
+       ((( passedt.amenity         == nil                    )   or
+         ( passedt.amenity         == ""                     ))  and
+        (( passedt.social_facility == "group_home"           )   or
+         ( passedt.social_facility == "nursing_home"         )   or
+         ( passedt.social_facility == "assisted_living"      )   or
+         ( passedt.social_facility == "care_home"            )   or
+         ( passedt.social_facility == "shelter"              )   or
+         ( passedt.social_facility == "day_care"             )   or
+         ( passedt.social_facility == "day_centre"           )   or
+         ( passedt.social_facility == "residential_home"     ))) or
+       ( passedt.amenity     == "nursing_home"                 ) or
+       ( passedt.healthcare  == "nursing_home"                 ) or
+       ( passedt.residential == "nursing_home"                 ) or
+       ( passedt.building    == "nursing_home"                 ) or
+       ( passedt.amenity     == "care_home"                    ) or
+       ( passedt.residential == "care_home"                    ) or
+       ( passedt.amenity     == "retirement_home"              ) or
+       ( passedt.amenity     == "residential_home"             ) or
+       ( passedt.residential == "residential_home"             ) or
+       ( passedt.amenity     == "sheltered_housing"            ) or
+       ( passedt.residential == "sheltered_housing"            ) or
+       ( passedt.amenity     == "childcare"                    ) or
+       ( passedt.amenity     == "childrens_centre"             ) or
+       ( passedt.amenity     == "preschool"                    ) or
+       ( passedt.building    == "preschool"                    ) or
+       ( passedt.amenity     == "nursery"                      ) or
+       ( passedt.amenity     == "nursery_school"               ) or
+       ( passedt.amenity     == "health_centre"                ) or
+       ( passedt.healthcare  == "health_centre"                ) or
+       ( passedt.building    == "health_centre"                ) or
+       ( passedt.amenity     == "medical_centre"               ) or
+       ( passedt.building    == "medical_centre"               ) or
+       ( passedt.healthcare  == "centre"                       ) or
+       ( passedt.healthcare  == "counselling"                  ) or
+       ( passedt.craft       == "counsellor"                   ) or
+       ( passedt.amenity     == "hospice"                      ) or
+       ( passedt.healthcare  == "hospice"                      ) or
+       ( passedt.healthcare  == "cosmetic"                     ) or
+       ( passedt.healthcare  == "cosmetic_surgery"             ) or
+       ( passedt.healthcare  == "dentures"                     ) or
+       ( passedt.shop        == "dentures"                     ) or
+       ( passedt.shop        == "denture"                      ) or
+       ( passedt.healthcare  == "blood_donation"               ) or
+       ( passedt.healthcare  == "blood_bank"                   ) or
+       ( passedt.healthcare  == "sports_massage_therapist"     ) or
+       ( passedt.healthcare  == "massage"                      ) or
+       ( passedt.healthcare  == "rehabilitation"               ) or
+       ( passedt.healthcare  == "drug_rehabilitation"          ) or
+       ( passedt.healthcare  == "medical_imaging"              ) or
+       ( passedt.healthcare  == "midwife"                      ) or
+       ( passedt.healthcare  == "occupational_therapist"       ) or
+       ( passedt.healthcare  == "speech_therapist"             ) or
+       ( passedt.healthcare  == "tattoo_removal"               ) or
+       ( passedt.healthcare  == "trichologist"                 ) or
+       ( passedt.healthcare  == "ocular_prosthetics"           ) or
+       ( passedt.healthcare  == "audiologist"                  ) or
+       ( passedt.healthcare  == "hearing"                      ) or
+       ( passedt.healthcare  == "mental_health"                ) or
+       ( passedt.amenity     == "daycare"                      )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.shop    = "healthnonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Defibrillators etc.
+-- Move these to the "amenity" key to reduce the code needed to render them.
+-- Ones with an non-public, non-yes access value will be rendered less opaque,
+-- like other private items such as car parks.
+-- ----------------------------------------------------------------------------
+   if ( passedt.emergency == "defibrillator" ) then
+      passedt.amenity = "defibrillator"
+      if ( passedt.indoor == "yes" ) then
+         passedt.access = "customers"
+      end
+   end
+
+   if ((  passedt.emergency        == "life_ring"         ) or
+       (  passedt.emergency        == "lifevest"          ) or
+       (  passedt.emergency        == "flotation device"  ) or
+       (( passedt.emergency        == "rescue_equipment" )  and
+        ( passedt.rescue_equipment == "lifering"         ))) then
+      passedt.amenity = "life_ring"
+   end
+
+   if ( passedt.emergency == "fire_extinguisher" ) then
+      passedt.amenity = "fire_extinguisher"
+   end
+
+   if ( passedt.emergency == "fire_hydrant" ) then
+      passedt.amenity = "fire_hydrant"
+   end
+
+-- ----------------------------------------------------------------------------
 -- emergency=water_rescue is a poorly-designed key that makes it difficult to
 -- tell e.g. lifeboats from lifeboat stations.
 -- However, if we've got one of various buildings, it's a lifeboat station.
@@ -9589,7 +9955,11 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "animal_shelter"             ) or
                 ( passedt.amenity == "car_wash"                   ) or
                 ( passedt.amenity == "car_rental"                 ) or
-                ( passedt.amenity == "compressed_air"             )) then
+                ( passedt.amenity == "compressed_air"             ) or
+                ( passedt.amenity == "defibrillator"              ) or
+                ( passedt.amenity == "life_ring"                  ) or 
+                ( passedt.amenity == "fire_extinguisher"          ) or
+                ( passedt.amenity == "fire_hydrant"               )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
