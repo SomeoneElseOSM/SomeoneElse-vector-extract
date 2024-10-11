@@ -27,8 +27,8 @@ require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "amenity", "attraction", "climbing", "emergency", "entrance", "healthcare", 
-              "landuse", "leisure", "natural", "pitch", "place", "place_of_worship", "playground", 
-              "power", "railway", "shop", "sport", "tourism", "zoo" }
+              "landuse", "leisure", "man_made", "natural", "pitch", "place", "place_of_worship", 
+              "playground", "power", "railway", "shop", "sport", "tourism", "zoo" }
 
 -- Initialize Lua logic
 
@@ -328,6 +328,11 @@ function node_function()
     nodet.trade = Find("trade")
     nodet.brand = Find("brand")
     nodet.agrarian = Find("agrarian")
+    nodet.height = Find("height")
+    nodet.towerCconstruction = Find("tower:type")
+    nodet.support = Find("support")
+    nodet.buildingCpart = Find("building:part")
+    nodet.drinking_water = Find("drinking_water")
 
     generic_before_function( nodet )
 
@@ -622,6 +627,11 @@ function way_function()
     wayt.trade = Find("trade")
     wayt.brand = Find("brand")
     wayt.agrarian = Find("agrarian")
+    wayt.height = Find("height")
+    wayt.towerCconstruction = Find("tower:type")
+    wayt.support = Find("support")
+    wayt.buildingCpart = Find("building:part")
+    wayt.drinking_water = Find("drinking_water")
 
     generic_before_function( wayt )
 
@@ -834,46 +844,62 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Treat "was:" as "disused:"
 -- ----------------------------------------------------------------------------
-   if (( passedt.wasCamenity     ~= nil ) and
-       ( passedt.disusedCamenity == nil )) then
+   if ((  passedt.wasCamenity     ~= nil  ) and
+       (  passedt.wasCamenity     ~= ""   ) and
+       (( passedt.disusedCamenity == nil )  or
+        ( passedt.disusedCamenity == ""  ))) then
       passedt.disusedCamenity = passedt.wasCamenity
    end
 
-   if (( passedt.wasCwaterway     ~= nil ) and
-       ( passedt.disusedCwaterway == nil )) then
+   if ((  passedt.wasCwaterway     ~= nil  ) and
+       (  passedt.wasCwaterway     ~= ""   ) and
+       (( passedt.disusedCwaterway == nil )  or
+        ( passedt.disusedCwaterway == ""  ))) then
       passedt.disusedCwaterway = passedt.wasCwaterway
    end
 
-   if (( passedt.wasCrailway     ~= nil ) and
-       ( passedt.disusedCrailway == nil )) then
+   if ((  passedt.wasCrailway     ~= nil  ) and
+       (  passedt.wasCrailway     ~= ""   ) and
+       (( passedt.disusedCrailway == nil )  or
+        ( passedt.disusedCrailway == ""  ))) then
       passedt.disusedCrailway = passedt.wasCrailway
    end
 
-   if (( passedt.wasCaeroway     ~= nil ) and
-       ( passedt.disusedCaeroway == nil )) then
+   if ((  passedt.wasCaeroway     ~= nil  ) and
+       (  passedt.wasCaeroway     ~= ""   ) and
+       (( passedt.disusedCaeroway == nil )  or
+        ( passedt.disusedCaeroway == ""  ))) then
       passedt.disusedCaeroway = passedt.wasCaeroway
    end
 
-   if (( passedt.wasClanduse     ~= nil ) and
-       ( passedt.disusedClanduse == nil )) then
+   if ((  passedt.wasClanduse     ~= nil  ) and
+       (  passedt.wasClanduse     ~= ""   ) and
+       (( passedt.disusedClanduse == nil )  or
+        ( passedt.disusedClanduse == ""  ))) then
       passedt.disusedClanduse = passedt.wasClanduse
    end
 
-   if (( passedt.wasCshop     ~= nil ) and
-       ( passedt.disusedCshop == nil )) then
+   if ((  passedt.wasCshop     ~= nil  ) and
+       (  passedt.wasCshop     ~= ""   ) and
+       (( passedt.disusedCshop == nil )  or
+        ( passedt.disusedCshop == ""  ))) then
       passedt.disusedCshop = passedt.wasCshop
    end
 
 -- ----------------------------------------------------------------------------
 -- Treat "closed:" as "disused:" in some cases too.
 -- ----------------------------------------------------------------------------
-   if (( passedt.closedCamenity  ~= nil ) and
-       ( passedt.disusedCamenity == nil )) then
+   if ((  passedt.closedCamenity  ~= nil  ) and
+       (  passedt.closedCamenity  ~= ""   ) and
+       (( passedt.disusedCamenity == nil )  or
+        ( passedt.disusedCamenity == ""  ))) then
       passedt.disusedCamenity = passedt.closedCamenity
    end
 
-   if (( passedt.closedCshop  ~= nil ) and
-       ( passedt.disusedCshop == nil )) then
+   if ((  passedt.closedCshop  ~= nil  ) and
+       (  passedt.closedCshop  ~= ""   ) and
+       (( passedt.disusedCshop == nil )  or
+        ( passedt.disusedCshop == ""  ))) then
       passedt.disusedCshop = passedt.closedCshop
    end
 
@@ -969,8 +995,10 @@ function generic_before_function( passedt )
    if ((( passedt.landuse  == "farmland"       )  or
         ( passedt.natural  == "grassland"      )  or
         ( passedt.natural  == "scrub"          )) and
-       (  passedt.name     == nil               ) and
-       (  passedt.old_name ~= nil               )) then
+       (( passedt.name     == nil              )  or
+        ( passedt.name     == ""               )) and
+       (  passedt.old_name ~= nil               ) and
+       (  passedt.old_name ~= ""                )) then
       passedt.name = "(" .. passedt.old_name .. ")"
       passedt.old_name = nil
    end
@@ -978,8 +1006,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If "visibility" is set but "trail_visibility" is not, use "visibility".
 -- ----------------------------------------------------------------------------
-   if (( passedt.visibility       ~= nil ) and
-       ( passedt.trail_visibility == nil )) then
+   if ((  passedt.visibility       ~= nil  ) and
+       (  passedt.visibility       ~= ""   ) and
+       (( passedt.trail_visibility == nil )  or
+        ( passedt.trail_visibility == ""  ))) then
       passedt.trail_visibility = passedt.visibility
    end
 
@@ -1031,8 +1061,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If we have an est_width but no width, use the est_width
 -- ----------------------------------------------------------------------------
-   if (( passedt.width     == nil  ) and
-       ( passedt.est_width ~= nil  )) then
+   if ((  passedt.est_width ~= nil   ) and
+       (  passedt.est_width ~= ""    ) and
+       (( passedt.width     == nil  )  or
+        ( passedt.width     == ""   ))) then
       passedt.width = passedt.est_width
    end
 
@@ -1054,10 +1086,13 @@ function generic_before_function( passedt )
       end
    end
 
-   if (( passedt.highway          ~= nil   ) and
-       ( passedt.scramble         == "yes" ) and
-       ( passedt.sac_scale        == nil   ) and
-       ( passedt.trail_visibility == nil   )) then
+   if ((  passedt.highway          ~= nil    ) and
+       (  passedt.highway          ~= ""     ) and
+       (  passedt.scramble         == "yes"  ) and
+       (( passedt.sac_scale        == nil   )  or
+        ( passedt.sac_scale        == ""    )) and
+       (( passedt.trail_visibility == nil   )  or
+        ( passedt.trail_visibility == ""    ))) then
       passedt.trail_visibility = "intermediate"
    end
 
@@ -1068,9 +1103,11 @@ function generic_before_function( passedt )
 -- The "bridge" check (on trail_visibility, not sac_scale) is because if 
 -- there's really a bridge there, surely you can see it?
 -- ----------------------------------------------------------------------------
-   if (( passedt.highway          ~= nil   ) and
-       ( passedt.designation      == nil   ) and
-       ( passedt.trail_visibility == "bad" )) then
+   if ((  passedt.highway          ~= nil    ) and
+       (  passedt.highway          ~= ""     ) and
+       (( passedt.designation      == nil   )  or
+        ( passedt.designation      == ""    )) and
+       (  passedt.trail_visibility == "bad"  )) then
       if ((( tonumber(passedt.width) or 0 ) >=  2 ) or
           ( passedt.width == "2 m"                ) or
           ( passedt.width == "2.5 m"              ) or
@@ -1094,6 +1131,7 @@ function generic_before_function( passedt )
 -- Various low-visibility trail_visibility values have been set to "bad" above.
 -- ----------------------------------------------------------------------------
    if (( passedt.highway ~= nil   ) and
+       ( passedt.highway ~= ""    ) and
        ( passedt.ladder  == "yes" )) then
       passedt.highway = "steps"
       passedt.ladder  = nil
@@ -1559,6 +1597,7 @@ function generic_before_function( passedt )
           ( passedt.designation == "unclassified_country_road" )    or
           ( passedt.designation == "unclassified_highway"      ))   and
          (  passedt.foot        ~= nil                          )   and
+         (  passedt.foot        ~= ""                           )   and
          (  passedt.foot        ~= "no"                         ))  or
         ((( passedt.highway     == "pathnarrow"                )    or
           ( passedt.highway     == "pathwide"                  )    or
@@ -2962,6 +3001,7 @@ function generic_before_function( passedt )
 -- There is at least one closed "natural=couloir" with "surface=scree".
 -- ----------------------------------------------------------------------------
    if (( passedt.natural ~= nil     ) and
+       ( passedt.natural ~= ""      ) and
        ( passedt.surface == "scree" )) then
       passedt.natural = "scree"
    end
@@ -3618,13 +3658,16 @@ function generic_before_function( passedt )
 -- to vending machine, and also the produce into "vending" for consideration 
 -- below.
 -- ----------------------------------------------------------------------------
-   if ((  passedt.shop                == "farm"  ) and
-       (  passedt.name                == nil     ) and
-       (( passedt.produce             ~= nil    )  or
-        ( passedt.paymentChonesty_box == "yes"  ))) then
+   if ((  passedt.shop                == "farm"   )  and
+       (( passedt.name                == nil     )   or
+        ( passedt.name                == ""      ))  and
+       ((( passedt.produce             ~= nil    )   and
+         ( passedt.produce             ~= ""     ))  or
+        (  passedt.paymentChonesty_box == "yes"   ))) then
       passedt.amenity = "vending_machine"
 
-      if ( passedt.produce == nil )  then
+      if (( passedt.produce == nil ) or
+          ( passedt.produce == ""  )) then
          if ( passedt.foodCeggs == "yes" )  then
             passedt.produce = "eggs"
          else
@@ -3636,8 +3679,9 @@ function generic_before_function( passedt )
       passedt.shop    = nil
    end
 
-   if ((  passedt.shop == "eggs"  ) and
-       (  passedt.name == nil     )) then
+   if ((  passedt.shop == "eggs"  )  and
+       (( passedt.name == nil    )   or
+        ( passedt.name == ""     ))) then
       passedt.amenity = "vending_machine"
       passedt.vending = passedt.shop
       passedt.shop    = nil
@@ -3648,7 +3692,8 @@ function generic_before_function( passedt )
 -- "farm shop honesty box" might have been assigned higher up.
 -- ----------------------------------------------------------------------------
    if ((  passedt.amenity == "vending_machine"        ) and
-       (  passedt.name    == nil                      ) and
+       (( passedt.name    == nil                     )  or
+        ( passedt.name    == ""                      )) and
        (( passedt.vending == "milk"                  )  or
         ( passedt.vending == "eggs"                  )  or
         ( passedt.vending == "potatoes"              )  or
@@ -5138,7 +5183,8 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If set, move bridge:name to bridge_name
 -- ----------------------------------------------------------------------------
-   if ( passedt.bridgeCname ~= nil ) then
+   if (( passedt.bridgeCname ~= nil ) and
+       ( passedt.bridgeCname ~= ""  )) then
       passedt.bridge_name = passedt.bridgeCname
       passedt.bridgeCname = nil
    end
@@ -5146,7 +5192,8 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If set, move bridge_name to name
 -- ----------------------------------------------------------------------------
-   if ( passedt.bridge_name ~= nil ) then
+   if (( passedt.bridge_name ~= nil ) and
+       ( passedt.bridge_name ~= ""  )) then
       passedt.name = passedt.bridge_name
       passedt.bridge_name = nil
    end
@@ -5154,7 +5201,8 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If set, move bridge:ref to bridge_ref
 -- ----------------------------------------------------------------------------
-   if ( passedt.bridgeCref ~= nil ) then
+   if (( passedt.bridgeCref ~= nil ) and
+       ( passedt.bridgeCref ~= ""  )) then
       passedt.bridge_ref = passedt.bridgeCref
       passedt.bridgeCref = nil
    end
@@ -5162,7 +5210,8 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If set, move canal_bridge_ref to bridge_ref
 -- ----------------------------------------------------------------------------
-   if ( passedt.canal_bridge_ref ~= nil ) then
+   if (( passedt.canal_bridge_ref ~= nil ) and
+       ( passedt.canal_bridge_ref ~= ""  )) then
       passedt.bridge_ref = passedt.canal_bridge_ref
       passedt.canal_bridge_ref = nil
    end
@@ -5395,20 +5444,24 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Weather monitoring stations
 -- ----------------------------------------------------------------------------
-   if (( passedt.man_made               == "monitoring_station" ) and
-       ( passedt.monitoringCweather     == "yes"                ) and
-       ( passedt.weatherCradar          == nil                  ) and
-       ( passedt.monitoringCwater_level == nil                  )) then
+   if ((  passedt.man_made               == "monitoring_station" ) and
+       (  passedt.monitoringCweather     == "yes"                ) and
+       (( passedt.weatherCradar          == nil                 )  or
+        ( passedt.weatherCradar          == ""                  )) and
+       (( passedt.monitoringCwater_level == nil                 )  or
+        ( passedt.monitoringCwater_level == ""                  ))) then
       passedt.man_made = "monitoringweather"
    end
 
 -- ----------------------------------------------------------------------------
 -- Rainfall monitoring stations
 -- ----------------------------------------------------------------------------
-   if (( passedt.man_made               == "monitoring_station" ) and
-       ( passedt.monitoringCrainfall    == "yes"                ) and
-       ( passedt.monitoringCweather     == nil                  ) and
-       ( passedt.monitoringCwater_level == nil                  )) then
+   if ((  passedt.man_made               == "monitoring_station" ) and
+       (  passedt.monitoringCrainfall    == "yes"                ) and
+       (( passedt.monitoringCweather     == nil                 )  or
+        ( passedt.monitoringCweather     == ""                  )) and
+       (( passedt.monitoringCwater_level == nil                 )  or
+        ( passedt.monitoringCwater_level == ""                  ))) then
       passedt.man_made = "monitoringrainfall"
    end
 
@@ -5431,12 +5484,14 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Air quality monitoring stations
 -- ----------------------------------------------------------------------------
-   if (( passedt.man_made               == "monitoring_station" ) and
-       ( passedt.monitoringCair_quality == "yes"                ) and
-       ( passedt.monitoringCweather     == nil                  )) then
+   if ((  passedt.man_made               == "monitoring_station" ) and
+       (  passedt.monitoringCair_quality == "yes"                ) and
+       (( passedt.monitoringCweather     == nil                 )  or
+        ( passedt.monitoringCweather     == ""                  ))) then
       passedt.man_made = nil
       passedt.landuse = "industrial"
-      if ( passedt.name == nil ) then
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
          passedt.name = "(air quality)"
       else
          passedt.name = passedt.name .. " (air quality)"
@@ -5715,10 +5770,13 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Some information boards don't have a "tourism" tag
 -- ----------------------------------------------------------------------------
-   if (( passedt.information     == "board" ) and
-       ( passedt.disusedCtourism == nil     ) and
-       ( passedt.ruinsCtourism   == nil     ) and
-       ( passedt.historic        == nil     )) then
+   if ((  passedt.information     == "board"  ) and
+       (( passedt.disusedCtourism == nil     )  or
+        ( passedt.disusedCtourism == ""      )) and
+       (( passedt.ruinsCtourism   == nil     )  or
+        ( passedt.ruinsCtourism   == ""      )) and
+       (( passedt.historic        == nil     )  or
+        ( passedt.historic        == ""      ))) then
       if ( passedt.board_type == "public_transport" ) then
          passedt.tourism = "informationpublictransport"
       else
@@ -5784,8 +5842,10 @@ function generic_before_function( passedt )
         ( passedt.tourism     == "informationpublictransport" )   or
         ( passedt.tourism     == "informationsign"            )   or
         ( passedt.tourism     == "militarysign"               ))  and
-       (  passedt.name        == nil                           )  and
-       (  passedt.boardCtitle ~= nil                           )) then
+       (( passedt.name        == nil                          )   or
+        ( passedt.name        == ""                           ))  and
+       (  passedt.boardCtitle ~= nil                           )  and
+       (  passedt.boardCtitle ~= ""                            )) then
       passedt.name = passedt.boardCtitle
    end
 
@@ -5997,6 +6057,7 @@ function generic_before_function( passedt )
         (  passedt.natural    == "ridge"          )  or
         (  passedt.natural    == "arete"          )) and
        ((( passedt.highway    ~= nil             )   and
+         ( passedt.highway    ~= ""              )   and
          ( passedt.highway    ~= "badpathwide"   )   and
          ( passedt.highway    ~= "badpathnarrow" ))  or
         (( passedt.railway    ~= nil             )   and
@@ -6936,49 +6997,56 @@ function generic_before_function( passedt )
 -- If no name use brand or operator on amenity=fuel, among others.  
 -- If there is brand or operator, use that with name.
 -- ----------------------------------------------------------------------------
-   if (( passedt.amenity   == "atm"              ) or
-       ( passedt.amenity   == "fuel"             ) or
-       ( passedt.amenity   == "fuel_e"           ) or
-       ( passedt.amenity   == "fuel_h"           ) or
-       ( passedt.amenity   == "fuel_l"           ) or
-       ( passedt.amenity   == "fuel_w"           ) or
-       ( passedt.amenity   == "charging_station" ) or
-       ( passedt.amenity   == "bicycle_rental"   ) or
-       ( passedt.amenity   == "scooter_rental"   ) or
-       ( passedt.amenity   == "vending_machine"   ) or
-       (( passedt.amenity  ~= nil                )  and
-        ( string.match( passedt.amenity, "pub_" ))) or
-       ( passedt.amenity   == "pub"               ) or
-       ( passedt.amenity   == "cafe"             ) or
-       ( passedt.amenity   == "cafe_dld"         ) or
-       ( passedt.amenity   == "cafe_dnd"         ) or
-       ( passedt.amenity   == "cafe_dyd"         ) or
-       ( passedt.amenity   == "cafe_ydd"         ) or
-       ( passedt.amenity   == "cafe_yld"         ) or
-       ( passedt.amenity   == "cafe_ynd"         ) or
-       ( passedt.amenity   == "cafe_yyd"         ) or
-       ( passedt.amenity   == "restaurant"       ) or
-       ( passedt.amenity   == "restaccomm"       ) or
-       ( passedt.amenity   == "doctors"          ) or
-       ( passedt.amenity   == "pharmacy"         ) or
-       ( passedt.amenity   == "pharmacy_l"       ) or
-       ( passedt.amenity   == "pharmacy_n"       ) or
-       ( passedt.amenity   == "pharmacy_y"       ) or
-       ( passedt.amenity   == "parcel_locker"    ) or
-       ( passedt.amenity   == "veterinary"       ) or
-       ( passedt.amenity   == "animal_boarding"  ) or
-       ( passedt.amenity   == "cattery"          ) or
-       ( passedt.amenity   == "kennels"          ) or
-       ( passedt.amenity   == "animal_shelter"   ) or
-       ( passedt.animal    == "shelter"          ) or
-       ( passedt.craft      ~= nil               ) or
-       ( passedt.emergency  ~= nil               ) or
-       ( passedt.industrial ~= nil               ) or
-       ( passedt.man_made   ~= nil               ) or
-       ( passedt.office     ~= nil               ) or
-       ( passedt.shop       ~= nil               ) or
-       ( passedt.tourism    == "hotel"           ) or
-       ( passedt.military   == "barracks"        )) then
+   if ((  passedt.amenity   == "atm"              ) or
+       (  passedt.amenity   == "fuel"             ) or
+       (  passedt.amenity   == "fuel_e"           ) or
+       (  passedt.amenity   == "fuel_h"           ) or
+       (  passedt.amenity   == "fuel_l"           ) or
+       (  passedt.amenity   == "fuel_w"           ) or
+       (  passedt.amenity   == "charging_station" ) or
+       (  passedt.amenity   == "bicycle_rental"   ) or
+       (  passedt.amenity   == "scooter_rental"   ) or
+       (  passedt.amenity   == "vending_machine"   ) or
+       (( passedt.amenity  ~= nil                 )  and
+        ( passedt.amenity  ~= ""                  )  and
+        ( string.match( passedt.amenity, "pub_"  ))) or
+       (  passedt.amenity   == "pub"               ) or
+       (  passedt.amenity   == "cafe"             ) or
+       (  passedt.amenity   == "cafe_dld"         ) or
+       (  passedt.amenity   == "cafe_dnd"         ) or
+       (  passedt.amenity   == "cafe_dyd"         ) or
+       (  passedt.amenity   == "cafe_ydd"         ) or
+       (  passedt.amenity   == "cafe_yld"         ) or
+       (  passedt.amenity   == "cafe_ynd"         ) or
+       (  passedt.amenity   == "cafe_yyd"         ) or
+       (  passedt.amenity   == "restaurant"       ) or
+       (  passedt.amenity   == "restaccomm"       ) or
+       (  passedt.amenity   == "doctors"          ) or
+       (  passedt.amenity   == "pharmacy"         ) or
+       (  passedt.amenity   == "pharmacy_l"       ) or
+       (  passedt.amenity   == "pharmacy_n"       ) or
+       (  passedt.amenity   == "pharmacy_y"       ) or
+       (  passedt.amenity   == "parcel_locker"    ) or
+       (  passedt.amenity   == "veterinary"       ) or
+       (  passedt.amenity   == "animal_boarding"  ) or
+       (  passedt.amenity   == "cattery"          ) or
+       (  passedt.amenity   == "kennels"          ) or
+       (  passedt.amenity   == "animal_shelter"   ) or
+       (  passedt.animal    == "shelter"          ) or
+       (( passedt.craft      ~= nil              )  and
+        ( passedt.craft      ~= ""               )) or
+       (( passedt.emergency  ~= nil              )  and
+        ( passedt.emergency  ~= ""               )) or
+       (( passedt.industrial ~= nil              )  and
+        ( passedt.industrial ~= ""               )) or
+       (( passedt.man_made   ~= nil              )  and
+        ( passedt.man_made   ~= ""               )) or
+       (( passedt.office     ~= nil              )  and
+        ( passedt.office     ~= ""               )) or
+       (( passedt.shop       ~= nil              )  and
+        ( passedt.shop       ~= ""               )) or
+       (  passedt.tourism    == "hotel"           ) or
+       (  passedt.military   == "barracks"        )) then
       if (( passedt.name == nil ) or
           ( passedt.name == ""  )) then
          if (( passedt.brand ~= nil ) and
@@ -7364,9 +7432,12 @@ function generic_before_function( passedt )
        ( passedt.amenity      == "spa"               ) or
        ( passedt.tourism      == "spa"               ) or
        (( passedt.club    == "health"               )  and
-        ( passedt.leisure == nil                    )  and
-        ( passedt.amenity == nil                    )  and
-        ( passedt.name    ~= nil                    )) or
+        (( passedt.leisure == nil                  )   or
+         ( passedt.leisure == ""                   ))  and
+        (( passedt.amenity == nil                  )   or
+         ( passedt.amenity == ""                   ))  and
+        ( passedt.name    ~= nil                    )  and
+        ( passedt.name    ~= ""                     )) or
        ( passedt.shop         == "salon"             ) or
        ( passedt.shop         == "nails"             ) or
        ( passedt.shop         == "nail_salon"        ) or
@@ -8846,6 +8917,192 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Masts etc.  Consolidate various sorts of masts and towers into the "mast"
+-- group.  Note that this includes "tower" temporarily, and "campanile" is in 
+-- here as a sort of tower (only 2 mapped in UK currently).
+-- Also remove any "tourism" tags (which may be semi-valid mapping but are
+-- often just "for the renderer").
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made   == "tower"    ) and
+       (( passedt.towerCtype == "cooling" )  or
+        ( passedt.towerCtype == "chimney" ))) then
+      if (( tonumber(passedt.height) or 0 ) >  100 ) then
+         passedt.man_made = "bigchimney"
+      else
+         passedt.man_made = "chimney"
+      end
+      passedt.tourism = nil
+   end
+
+   if (( passedt.man_made   == "tower"    ) and
+       ( passedt.towerCtype == "lighting" )) then
+      passedt.man_made = "illuminationtower"
+      passedt.tourism = nil
+   end
+
+   if ((   passedt.man_made           == "tower"       ) and
+       ((  passedt.towerCtype         == "defensive"  )  or
+        ((( passedt.towerCtype         == nil        )   or
+          ( passedt.towerCtype         == ""         ))   and
+         ( passedt.towerCconstruction == "stone"     )))) then
+      passedt.man_made = "defensivetower"
+      passedt.tourism = nil
+   end
+
+   if (( passedt.man_made   == "tower"       ) and
+       ( passedt.towerCtype == "observation" )) then
+      if (( tonumber(passedt.height) or 0 ) >  100 ) then
+         passedt.man_made = "bigobservationtower"
+      else
+         passedt.man_made = "observationtower"
+      end
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Clock towers
+-- ----------------------------------------------------------------------------
+   if (((  passedt.man_made   == "tower"        )  and
+        (( passedt.towerCtype == "clock"       )   or
+         ( passedt.building   == "clock_tower" )   or
+         ( passedt.amenity    == "clock"       ))) or
+       ((  passedt.amenity    == "clock"        )  and
+        (  passedt.support    == "tower"        ))) then
+      passedt.man_made = "clocktower"
+      passedt.tourism = nil
+   end
+
+   if ((  passedt.amenity    == "clock"         )  and
+       (( passedt.support    == "pedestal"     )   or
+        ( passedt.support    == "pole"         )   or
+        ( passedt.support    == "stone_pillar" )   or
+        ( passedt.support    == "plinth"       )   or
+        ( passedt.support    == "column"       ))) then
+      passedt.man_made = "clockpedestal"
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Aircraft control towers
+-- ----------------------------------------------------------------------------
+   if (((  passedt.man_made   == "tower"             )   and
+        (( passedt.towerCtype == "aircraft_control" )    or
+         ( passedt.service    == "aircraft_control" )))  or
+       (   passedt.aeroway    == "control_tower"      )) then
+      passedt.man_made = "aircraftcontroltower"
+      passedt.building = "yes"
+      passedt.tourism = nil
+   end
+
+   if ((( passedt.man_made   == "tower"              )   or
+        ( passedt.man_made   == "monitoring_station" ))  and
+       (( passedt.towerCtype == "radar"              )   or
+        ( passedt.towerCtype == "weather_radar"      ))) then
+      passedt.man_made = "radartower"
+      passedt.building = "yes"
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- All the domes in the UK are radomes.
+-- ----------------------------------------------------------------------------
+   if (( passedt.man_made            == "tower"   ) and
+       (( passedt.towerCconstruction == "dome"   )  or
+        ( passedt.towerCconstruction == "dish"   ))) then
+      passedt.man_made = "radartower"
+      passedt.building = "yes"
+      passedt.tourism = nil
+   end
+
+   if (( passedt.man_made   == "tower"                ) and
+       ( passedt.towerCtype == "firefighter_training" )) then
+      passedt.man_made = "squaretower"
+      passedt.building = "yes"
+      passedt.tourism = nil
+   end
+
+   if ((((  passedt.man_made    == "tower"             )  and
+         (( passedt.towerCtype  == "church"           )   or
+          ( passedt.towerCtype  == "square"           )   or
+          ( passedt.towerCtype  == "campanile"        )   or
+          ( passedt.towerCtype  == "bell_tower"       ))) or
+        (   passedt.man_made    == "campanile"          )) and
+       (((  passedt.amenity     == nil                 )   or
+         (  passedt.amenity     == ""                  ))  or
+        (   passedt.amenity     ~= "place_of_worship"   ))) then
+      passedt.man_made = "churchtower"
+      passedt.tourism = nil
+   end
+
+   if (((  passedt.man_made      == "tower"            ) or
+        (  passedt.building      == "tower"            ) or
+        (  passedt.buildingCpart == "yes"              )) and
+        ((  passedt.towerCtype   == "spire"            )  or
+         (  passedt.towerCtype   == "steeple"          )  or
+         (  passedt.towerCtype   == "minaret"          )  or
+         (  passedt.towerCtype   == "round"            )) and
+       ((  passedt.amenity       == nil                 )  or
+        (  passedt.amenity       == ""                  )  or
+        (  passedt.amenity       ~= "place_of_worship"  ))) then
+      passedt.man_made = "churchspire"
+      passedt.building = "yes"
+      passedt.tourism = nil
+   end
+
+   if (( passedt.man_made == "phone_mast"           ) or
+       ( passedt.man_made == "radio_mast"           ) or
+       ( passedt.man_made == "communications_mast"  ) or
+       ( passedt.man_made == "tower"                ) or
+       ( passedt.man_made == "communications_tower" ) or
+       ( passedt.man_made == "transmitter"          ) or
+       ( passedt.man_made == "antenna"              ) or
+       ( passedt.man_made == "mast"                 )) then
+      if (( tonumber(passedt.height) or 0 ) >  300 ) then
+         passedt.man_made = "bigmast"
+      else
+         passedt.man_made = "mast"
+      end
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Drinking water and water that's not OK for drinking
+-- "amenity=drinking_water" is shown as "tap_drinking.p.20.png"
+-- "amenity=nondrinking_water" is shown as "tap_nondrinking.p.20.png"
+--
+-- First, catch any mistagged fountains:
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity        == "fountain" ) and
+       ( passedt.drinking_water == "yes"      )) then
+      passedt.amenity = "drinking_water"
+   end
+
+   if (((( passedt.man_made == "water_tap"   )   or
+         ( passedt.waterway == "water_point" ))  and
+        (( passedt.amenity  == nil           )   or
+         ( passedt.amenity  == ""            ))) or
+       (   passedt.amenity  == "water_point"   ) or
+       (   passedt.amenity  == "dish_washing"  ) or
+       (   passedt.amenity  == "washing_area"  ) or
+       (   passedt.amenity  == "utilities"     )) then
+      if ( passedt.drinking_water == "yes" ) then
+         passedt.amenity = "drinking_water"
+      else
+         passedt.amenity = "nondrinking_water"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- man_made=maypole
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made == "maypole"   ) or
+       (  passedt.man_made == "may_pole"  ) or
+       (  passedt.historic == "maypole"   )) then
+      passedt.man_made = "maypole"
+      passedt.tourism = nil
+   end
+
+-- ----------------------------------------------------------------------------
 -- Shops etc. with icons already - just add "unnamedcommercial" landuse.
 -- The exception is where landuse is set to something we want to keep.
 -- ----------------------------------------------------------------------------
@@ -8913,6 +9170,7 @@ end -- append_prow_ref
 
 function append_accommodation( passedt )
    if (( passedt.accommodation ~= nil  ) and
+       ( passedt.accommodation ~= ""   ) and
        ( passedt.accommodation ~= "no" )) then
       passedt.amenity = passedt.amenity .. "y"
    else
@@ -8960,8 +9218,10 @@ function append_inscription( passedt )
       passedt.ele = nil
    end
 
-   if ( passedt.inscription ~= nil ) then
-       if ( passedt.ele == nil ) then
+   if (( passedt.inscription ~= nil ) and
+       ( passedt.inscription ~= ""  )) then
+       if (( passedt.ele == nil ) or
+           ( passedt.ele == ""  )) then
            passedt.ele = passedt.inscription
        else
            passedt.ele = passedt.ele .. " " .. passedt.inscription
@@ -9319,7 +9579,10 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "shower_pay"                 ) or
                 ( passedt.amenity == "shower_pay_m"               ) or
                 ( passedt.amenity == "shower_pay_w"               ) or
-                ( passedt.amenity == "musical_instrument"         )) then
+                ( passedt.amenity == "musical_instrument"         ) or
+                ( passedt.amenity == "drinking_water"             ) or
+                ( passedt.amenity == "nondrinking_water"          ) or
+                ( passedt.amenity == "fountain"                   )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
@@ -9701,15 +9964,15 @@ end -- render_boundary_land2()
 -- poi layer
 -- ----------------------------------------------------------------------------
 function generic_after_poi( passedt )
-    if (( passedt.amenity ~= ""  ) and
-        ( passedt.amenity ~= nil )) then
+    if (( passedt.amenity ~= nil ) and
+        ( passedt.amenity ~= ""  )) then
         LayerAsCentroid( "poi" )
 	Attribute( "class","amenity_" .. passedt.amenity )
 	Attribute( "name", Find( "name" ) )
         MinZoom( 14 )
     else
-        if (( passedt.place ~= ""  ) and
-            ( passedt.place ~= nil )) then
+        if (( passedt.place ~= nil ) and
+            ( passedt.place ~= ""  )) then
             LayerAsCentroid( "place" )
     	    Attribute( "name", Find( "name" ))
 
@@ -9741,15 +10004,15 @@ function generic_after_poi( passedt )
                 end -- city
             end --country
 	else -- place
-            if (( passedt.shop ~= ""  ) and
-                ( passedt.shop ~= nil )) then
+            if (( passedt.shop ~= nil ) and
+                ( passedt.shop ~= ""  )) then
                 LayerAsCentroid( "poi" )
     	        Attribute( "class","shop_" .. passedt.shop )
     	        Attribute( "name", Find( "name" ) )
                 MinZoom( 14 )
             else
-                if (( passedt.tourism ~= ""  ) and
-                    ( passedt.tourism ~= nil )) then
+                if (( passedt.tourism ~= nil ) and
+                    ( passedt.tourism ~= ""  )) then
                     LayerAsCentroid( "poi" )
                     Attribute( "class", "tourism_" .. passedt.tourism )
                     Attribute( "name", Find( "name" ) )
