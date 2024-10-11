@@ -26,9 +26,9 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "attraction", "climbing", "emergency", "entrance", "healthcare", 
+node_keys = { "amenity", "attraction", "canoe", "climbing", "emergency", "entrance", "healthcare", 
               "landuse", "leisure", "man_made", "natural", "pitch", "place", "place_of_worship", 
-              "playground", "power", "railway", "shop", "sport", "tourism", "zoo" }
+              "playground", "power", "railway", "shop", "sport", "tourism", "whitewater", "zoo" }
 
 -- Initialize Lua logic
 
@@ -335,6 +335,17 @@ function node_function()
     nodet.drinking_water = Find("drinking_water")
     nodet.indoor = Find("indoor")
     nodet.rescue_equipment = Find("rescue_equipment")
+    nodet.railwayChistoric = Find("railway:historic")
+    nodet.railwayCpreserved = Find("railway:preserved")
+    nodet.whitewater = Find("whitewater")
+    nodet.canoe = Find("canoe")
+    nodet.flow_control = Find("flow_control")
+    nodet.historicCwaterway = Find("historic:waterway")
+    nodet.abandonedCwaterway = Find("abandoned:waterway")
+    nodet.waterwayChistoric = Find("waterway:historic")
+    nodet.waterwayCabandoned = Find("waterway:abandoned")
+    nodet.nameChistoric = Find("name:historic")
+    nodet.historicCname = Find("historic:name")
 
     generic_before_function( nodet )
 
@@ -636,6 +647,17 @@ function way_function()
     wayt.drinking_water = Find("drinking_water")
     wayt.indoor = Find("indoor")
     wayt.rescue_equipment = Find("rescue_equipment")
+    wayt.railwayChistoric = Find("railway:historic")
+    wayt.railwayCpreserved = Find("railway:preserved")
+    wayt.whitewater = Find("whitewater")
+    wayt.canoe = Find("canoe")
+    wayt.flow_control = Find("flow_control")
+    wayt.historicCwaterway = Find("historic:waterway")
+    wayt.abandonedCwaterway = Find("abandoned:waterway")
+    wayt.waterwayChistoric = Find("waterway:historic")
+    wayt.waterwayCabandoned = Find("waterway:abandoned")
+    wayt.nameChistoric = Find("name:historic")
+    wayt.historicCname = Find("historic:name")
 
     generic_before_function( wayt )
 
@@ -4273,6 +4295,183 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Handle razed railways and old inclined_planes as dismantled.
+-- dismantled, abandoned are now handled separately to disused in roads.mss
+-- ----------------------------------------------------------------------------
+   if ((( passedt.railwayChistoric == "rail"           )  or
+        ( passedt.historic         == "inclined_plane" )  or
+        ( passedt.historic         == "tramway"        )) and
+       (( passedt.building         == nil              )  or
+        ( passedt.building         == ""               )) and
+       (( passedt.highway          == nil              )  or
+        ( passedt.highway          == ""               )) and
+       (( passedt.railway          == nil              )  or
+        ( passedt.railway          == ""               )) and
+       (( passedt.waterway         == nil              )  or
+        ( passedt.waterway         == ""               ))) then
+      passedt.railway = "abandoned"
+   end
+
+   if ( passedt.railway == "razed" ) then
+      passedt.railway = "dismantled"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Railway construction
+-- This is done mostly to make the HS2 show up.
+-- ----------------------------------------------------------------------------
+   if ( passedt.railway   == "proposed" ) then
+      passedt.railway = "construction"
+   end
+
+-- ----------------------------------------------------------------------------
+-- The "OpenRailwayMap" crowd prefer the less popular railway:preserved=yes
+-- instead of railway=preserved (which has the advantage of still allowing
+-- e.g. narrow_gauge in addition to rail).
+-- ----------------------------------------------------------------------------
+   if ( passedt.railwayCpreserved == "yes" ) then
+      passedt.railway = "preserved"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show preserved railway tunnels as tunnels.
+-- ----------------------------------------------------------------------------
+   if (( passedt.railway == "preserved" ) and
+       ( passedt.tunnel  == "yes"       )) then
+      passedt.railway = "rail"
+   end
+
+   if ((( passedt.railway == "miniature"    ) or
+        ( passedt.railway == "narrow_gauge" )) and
+       (  passedt.tunnel  == "yes"           )) then
+      passedt.railway = "light_rail"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Goods Conveyors - render as miniature railway.
+-- ----------------------------------------------------------------------------
+   if ( passedt.man_made == "goods_conveyor" ) then
+      passedt.railway = "miniature"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Slipways - render ways as miniature railway in addition to slipway icon
+-- ----------------------------------------------------------------------------
+   if ( passedt.leisure == "slipway" ) then
+      passedt.railway = "miniature"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Other waterway access points
+-- ----------------------------------------------------------------------------
+   if (( passedt.waterway   == "access_point"  ) or
+       ( passedt.whitewater == "put_in"        ) or
+       ( passedt.whitewater == "put_in;egress" ) or
+       ( passedt.canoe      == "put_in"        )) then
+      passedt.amenity = "waterway_access_point"
+      passedt.leisure = nil
+      passedt.sport = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Sluice gates - send through as man_made, also display as building=roof.
+-- Also waterfall (the dot or line is generic enough to work there too)
+-- The change of waterway to weir ensures line features appear too.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.waterway     == "sluice_gate"      ) or
+       (  passedt.waterway     == "sluice"           ) or
+       (( passedt.waterway     == "flow_control"    )  and
+        ( passedt.flow_control == "sluice_gate"     )) or
+       (  passedt.waterway     == "waterfall"        ) or
+       (  passedt.natural      == "waterfall"        ) or
+       (  passedt.water        == "waterfall"        ) or
+       (  passedt.waterway     == "weir"             ) or
+       (  passedt.waterway     == "floating_barrier" )) then
+      passedt.man_made = "sluice_gate"
+      passedt.building = "roof"
+      passedt.waterway = "weir"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Historic canal
+-- A former canal can, like an abandoned railway, still be a major
+-- physical feature.
+--
+-- Also treat historic=moat in the same way, unless it has an area=yes tag.
+-- Most closed ways for historic=moat appear to be linear ways, not areas.
+-- ----------------------------------------------------------------------------
+   if ((   passedt.historic           == "canal"           ) or
+       (   passedt.historicCwaterway  == "canal"           ) or
+       (   passedt.historic           == "leat"            ) or
+       (   passedt.disusedCwaterway   == "canal"           ) or
+       (   passedt.disused            == "canal"           ) or
+       (   passedt.abandonedCwaterway == "canal"           ) or
+       (   passedt.waterway           == "disused_canal"   ) or
+       (   passedt.waterway           == "historic_canal"  ) or
+       (   passedt.waterway           == "abandoned_canal" ) or
+       (   passedt.waterway           == "former_canal"    ) or
+       (   passedt.waterwayChistoric  == "canal"           ) or
+       (   passedt.waterwayCabandoned == "canal"           ) or
+       (   passedt.abandoned          == "waterway=canal"  ) or
+       ((  passedt.historic           == "moat"           )  and
+        (( passedt.natural            == nil             )   or
+         ( passedt.natural            == ""              ))  and
+        (( passedt.man_made           == nil             )   or
+         ( passedt.man_made           == ""              ))  and
+        (( passedt.waterway           == nil             )   or
+         ( passedt.waterway           == ""              ))  and
+        (  passedt.area               ~= "yes"            ))) then
+      passedt.waterway = "derelict_canal"
+      passedt.historic = nil
+      passedt.area     = "no"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Use historical names if present for historical canals.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.waterway      == "derelict_canal"  ) and
+       (( passedt.name          == nil              )  or
+        ( passedt.name          == ""               )) and
+       (  passedt.nameChistoric ~= nil               ) and
+       (  passedt.nameChistoric ~= ""                )) then
+      passedt.name = passedt.nameChistoric
+   end
+
+   if ((  passedt.waterway      == "derelict_canal"  ) and
+       (( passedt.name          == nil              )  or
+        ( passedt.name          == ""               )) and
+       (  passedt.historicCname ~= nil               ) and
+       (  passedt.historicCname ~= ""                )) then
+      passedt.name = passedt.historicCname
+   end
+   
+-- ----------------------------------------------------------------------------
+-- Display "waterway=leat" and "waterway=spillway" etc. as drain.
+-- "man_made=spillway" tends to be used on areas, hence show as "natural=water".
+-- ----------------------------------------------------------------------------
+   if ((   passedt.waterway == "leat"        )  or
+       (   passedt.waterway == "spillway"    )  or
+       (   passedt.waterway == "fish_pass"   )  or
+       (   passedt.waterway == "rapids"      )  or
+       ((  passedt.waterway == "canal"      )   and
+        (( passedt.usage    == "headrace"  )    or
+         ( passedt.usage    == "spillway"  )))) then
+      passedt.waterway = "drain"
+   end
+
+   if ( passedt.man_made == "spillway" ) then
+      passedt.natural = "water"
+      passedt.man_made = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Any remaining extant canals will be linear features, even closed loops.
+-- ----------------------------------------------------------------------------
+   if ( passedt.waterway == "canal" ) then
+      passedt.area     = "no"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Apparently there are a few "waterway=brook" in the UK.  Render as stream.
 -- Likewise "tidal_channel" as stream and "drainage_channel" as ditch.
 -- ----------------------------------------------------------------------------
@@ -4373,7 +4572,8 @@ function generic_before_function( passedt )
       passedt.man_made = "militarybunker"
       passedt.military = nil
 
-      if ( passedt.building == nil ) then
+      if (( passedt.building == nil ) or
+          ( passedt.building == ""  )) then
          passedt.building = "yes"
       end
    end
@@ -4720,8 +4920,10 @@ function generic_before_function( passedt )
         ( passedt.historic == "church"           )  or
         ( passedt.historic == "place_of_worship" )  or
         ( passedt.historic == "wayside_chapel"   )) and
-       (  passedt.amenity  == nil                 ) and
-       (  passedt.shop     == nil                 )) then
+       (( passedt.amenity  == nil                )  or
+        ( passedt.amenity  == ""                 )) and
+       (( passedt.shop     == nil                )  or
+        ( passedt.shop     == ""                 ))) then
       passedt.historic = "church"
       passedt.building = "yes"
       passedt.tourism = nil
@@ -9959,7 +10161,9 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "defibrillator"              ) or
                 ( passedt.amenity == "life_ring"                  ) or 
                 ( passedt.amenity == "fire_extinguisher"          ) or
-                ( passedt.amenity == "fire_hydrant"               )) then
+                ( passedt.amenity == "fire_hydrant"               ) or
+                ( passedt.amenity == "bbq"                        ) or
+                ( passedt.amenity == "waterway_access_point"      )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
