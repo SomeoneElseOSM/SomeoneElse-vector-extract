@@ -6334,6 +6334,8 @@ function generic_before_function( passedt )
        ( passedt.man_made   == "lagoon"                ) or
        ( passedt.man_made   == "lake"                  ) or
        ( passedt.man_made   == "reservoir"             ) or
+       ( passedt.landuse    == "reservoir"             ) or
+       ( passedt.landuse    == "basin"                 ) or
        ( passedt.basin      == "wastewater"            ) or
        ( passedt.natural    == "lake"                  )) then
       passedt.natural = "water"
