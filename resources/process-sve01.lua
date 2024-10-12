@@ -11429,7 +11429,14 @@ function render_landuse_land1( passedt )
                             Attribute( "name", Find( "name" ) )
                             MinZoom( 13 )
                         else
-                            render_leisure_land1( passedt )
+                            if ( passedt.landuse == "industrialbuilding" ) then
+                                Layer( "land1", true )
+                                Attribute( "class", "landuse_" .. passedt.landuse )
+                                Attribute( "name", Find( "name" ) )
+                                MinZoom( 14 )
+                            else
+                                render_leisure_land1( passedt )
+                            end -- landuse=industrialbuilding
                         end -- landuse=conservation 13
                     end -- landuse=vineyard 12
                 end -- landuse=garages 11
