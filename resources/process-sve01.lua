@@ -11482,14 +11482,15 @@ function render_leisure_land1( passedt )
                 else
                     if (( passedt.leisure == "leisurenonspecific" ) or
                         ( passedt.leisure == "bandstand"          ) or
-                        ( passedt.leisure == "bleachers"          )) then
+                        ( passedt.leisure == "bleachers"          ) or
+                        ( passedt.leisure == "fitness_station"    )) then
                         Layer( "land1", true )
                         Attribute( "class", "leisure_" .. passedt.leisure )
                         Attribute( "name", Find( "name" ) )
-                        MinZoom( 16 )
+                        MinZoom( 14 )
                     else
                         render_military_land1( passedt )
-                    end -- leisure=leisurenonspecific 16
+                    end -- leisure=leisurenonspecific 14
                 end -- leisure=swimming_pool etc. 13
             end -- leisure=playground etc.  12
         end -- leisure=common etc. 9
