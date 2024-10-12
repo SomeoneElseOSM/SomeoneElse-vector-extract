@@ -11480,7 +11480,9 @@ function render_leisure_land1( passedt )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 13 )
                 else
-                    if ( passedt.leisure == "leisurenonspecific" ) then
+                    if (( passedt.leisure == "leisurenonspecific" ) or
+                        ( passedt.leisure == "bandstand"          ) or
+                        ( passedt.leisure == "bleachers"          )) then
                         Layer( "land1", true )
                         Attribute( "class", "leisure_" .. passedt.leisure )
                         Attribute( "name", Find( "name" ) )
