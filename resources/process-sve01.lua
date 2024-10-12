@@ -11480,7 +11480,14 @@ function render_leisure_land1( passedt )
                     Attribute( "name", Find( "name" ) )
                     MinZoom( 13 )
                 else
-                    render_military_land1( passedt )
+                    if ( passedt.leisure == "leisurenonspecific" ) then
+                        Layer( "land1", true )
+                        Attribute( "class", "leisure_" .. passedt.leisure )
+                        Attribute( "name", Find( "name" ) )
+                        MinZoom( 16 )
+                    else
+                        render_military_land1( passedt )
+                    end -- leisure=leisurenonspecific 16
                 end -- leisure=swimming_pool etc. 13
             end -- leisure=playground etc.  12
         end -- leisure=common etc. 9
