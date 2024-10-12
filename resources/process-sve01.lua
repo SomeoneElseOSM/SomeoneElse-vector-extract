@@ -346,6 +346,19 @@ function node_function()
     nodet.waterwayCabandoned = Find("waterway:abandoned")
     nodet.nameChistoric = Find("name:historic")
     nodet.historicCname = Find("historic:name")
+    nodet.real_ale = Find("real_ale")
+    nodet.beer_garden = Find("beer_garden")
+    nodet.amenityCdisused = Find("amenity:disused")
+    nodet.disusedCpub = Find("disused:pub")
+    nodet.descriptionCfloor = Find("description:floor")
+    nodet.floorCmaterial = Find("floor:material")
+    nodet.micropub = Find("micropub")
+    nodet.pub = Find("pub")
+    nodet.opening_hoursCcovid19 = Find("opening_hours:covid19")
+    nodet.accessCcovid19 = Find("access:covid19")
+    nodet.food = Find("food")
+    nodet.noncarpeted = Find("noncarpeted")
+    nodet.microbrewery = Find("microbrewery")
 
     generic_before_function( nodet )
 
@@ -658,6 +671,19 @@ function way_function()
     wayt.waterwayCabandoned = Find("waterway:abandoned")
     wayt.nameChistoric = Find("name:historic")
     wayt.historicCname = Find("historic:name")
+    wayt.real_ale = Find("real_ale")
+    wayt.beer_garden = Find("beer_garden")
+    wayt.amenityCdisused = Find("amenity:disused")
+    wayt.disusedCpub = Find("disused:pub")
+    wayt.descriptionCfloor = Find("description:floor")
+    wayt.floorCmaterial = Find("floor:material")
+    wayt.micropub = Find("micropub")
+    wayt.pub = Find("pub")
+    wayt.opening_hoursCcovid19 = Find("opening_hours:covid19")
+    wayt.accessCcovid19 = Find("access:covid19")
+    wayt.food = Find("food")
+    wayt.noncarpeted = Find("noncarpeted")
+    wayt.microbrewery = Find("microbrewery")
 
     generic_before_function( wayt )
 
@@ -3367,6 +3393,807 @@ function generic_before_function( passedt )
       passedt.landuse = nil
       passedt.natural = "mixedleaved"
    end
+
+-- ----------------------------------------------------------------------------
+-- Consolidate some unusual wheelchair tags
+-- ----------------------------------------------------------------------------
+   if (( passedt.wheelchair == "1"                )  or
+       ( passedt.wheelchair == "2"                )  or
+       ( passedt.wheelchair == "3"                )  or
+       ( passedt.wheelchair == "5"                )  or
+       ( passedt.wheelchair == "bell"             )  or
+       ( passedt.wheelchair == "customers"        )  or
+       ( passedt.wheelchair == "designated"       )  or
+       ( passedt.wheelchair == "destination"      )  or
+       ( passedt.wheelchair == "friendly"         )  or
+       ( passedt.wheelchair == "full"             )  or
+       ( passedt.wheelchair == "number of rooms"  )  or
+       ( passedt.wheelchair == "official"         )  or
+       ( passedt.wheelchair == "on request"       )  or
+       ( passedt.wheelchair == "only"             )  or
+       ( passedt.wheelchair == "permissive"       )  or
+       ( passedt.wheelchair == "ramp"             )  or
+       ( passedt.wheelchair == "unisex"           )) then
+      passedt.wheelchair = "yes"
+   end
+
+   if (( passedt.wheelchair == "difficult"                    )  or
+       ( passedt.wheelchair == "limited (No automatic door)"  )  or
+       ( passedt.wheelchair == "limited, notice required"     )  or
+       ( passedt.wheelchair == "restricted"                   )) then
+      passedt.wheelchair = "limited"
+   end
+
+   if ( passedt.wheelchair == "impractical" ) then
+      passedt.wheelchair = "limited"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Remove "real_ale" tag on industrial and craft breweries that aren't also
+-- a pub, bar, restaurant, cafe etc. or hotel.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.industrial == "brewery" ) or
+        ( passedt.craft      == "brewery" )) and
+       (  passedt.real_ale   ~= nil        ) and
+       (  passedt.real_ale   ~= ""         ) and
+       (  passedt.real_ale   ~= "maybe"    ) and
+       (  passedt.real_ale   ~= "no"       ) and
+       (( passedt.amenity    == nil       )  or
+        ( passedt.amenity    == ""        )) and
+       (  passedt.tourism   ~= "hotel"     )) then
+      passedt.real_ale = nil
+      passedt.real_cider = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Remove "shop" tag on industrial or craft breweries.
+-- We pick one thing to display them as, and in this case it's "brewery".
+-- ----------------------------------------------------------------------------
+   if ((( passedt.industrial == "brewery" ) or
+        ( passedt.craft      == "brewery" ) or
+        ( passedt.craft      == "cider"   )) and
+       (  passedt.shop       ~= nil        ) and
+       (  passedt.shop       ~= ""         )) then
+      passedt.shop = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Don't show pubs, cafes or restaurants if you can't actually get to them.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.amenity == "pub"        ) or
+        ( passedt.amenity == "cafe"       ) or
+        ( passedt.amenity == "restaurant" )) and
+       (  passedt.access  == "no"          )) then
+      passedt.amenity = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Suppress historic tag on pubs.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity  == "pub"     ) and
+       ( passedt.historic ~= nil       ) and
+       ( passedt.historic ~= ""        )) then
+      passedt.historic = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If "leisure=music_venue" is set try and work out if something should take 
+-- precedence.
+-- We do this check here rather than at "concert_hall" further down because 
+-- "bar" and "pub" can be changed below based on other tags.
+-- ----------------------------------------------------------------------------
+   if ( passedt.leisure == "music_venue" ) then
+      if (( passedt.amenity == "bar" ) or
+          ( passedt.amenity == "pub" )) then
+         passedt.leisure = nil
+      else
+         passedt.amenity = "concert_hall"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Things that are both hotels, B&Bs etc. and pubs should render as pubs, 
+-- because I'm far more likely to be looking for the latter than the former.
+-- This is done by removing the tourism tag for them.
+--
+-- People have used lots of tags for "former" or "dead" pubs.
+-- "disused:amenity=pub" is the most popular.
+--
+-- Treat things that were pubs but are now something else as whatever else 
+-- they now are.
+--
+-- If a real_ale tag has got stuck on something unexpected, don't render that
+-- as a pub.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity   == "pub"   ) and
+       ( passedt.tourism   ~= nil     ) and
+       ( passedt.tourism   ~= ""      )) then
+      if (( passedt.tourism   == "hotel"             ) or
+          ( passedt.tourism   == "guest_house"       ) or
+          ( passedt.tourism   == "bed_and_breakfast" ) or
+          ( passedt.tourism   == "chalet"            ) or
+          ( passedt.tourism   == "hostel"            ) or
+          ( passedt.tourism   == "motel"             )) then
+         passedt.accommodation = "yes"
+      end
+
+      passedt.tourism = nil
+   end
+
+   if (( passedt.tourism == "hotel" ) and
+       ( passedt.pub     == "yes"   )) then
+      passedt.accommodation = "yes"
+      passedt.amenity = "pub"
+      passedt.pub = nil
+      passedt.tourism = nil
+   end
+
+   if ((( passedt.tourism  == "hotel"       )   or
+        ( passedt.tourism  == "guest_house" ))  and
+       (  passedt.real_ale ~= nil            )  and
+       (  passedt.real_ale ~= ""             )  and
+       (  passedt.real_ale ~= "maybe"        )  and
+       (  passedt.real_ale ~= "no"           )) then
+      passedt.accommodation = "yes"
+      passedt.amenity = "pub"
+      passedt.tourism = nil
+   end
+
+   if ((  passedt.leisure         == "outdoor_seating" ) and
+       (( passedt.surface         == "grass"          ) or
+        ( passedt.beer_garden     == "yes"            ) or
+        ( passedt.outdoor_seating == "garden"         ))) then
+      passedt.leisure = "garden"
+      passedt.garden = "beer_garden"
+   end
+
+   if ((  passedt.abandonedCamenity == "pub"             )   or
+       (  passedt.amenityCdisused   == "pub"             )   or
+       (  passedt.disused           == "pub"             )   or
+       (  passedt.disusedCpub       == "yes"             )   or
+       (  passedt.former_amenity    == "former_pub"      )   or
+       (  passedt.former_amenity    == "pub"             )   or
+       (  passedt.former_amenity    == "old_pub"         )   or
+       (  passedt.formerCamenity    == "pub"             )   or
+       (  passedt.old_amenity       == "pub"             )) then
+      passedt.disusedCamenity = "pub"
+      passedt.amenityCdisused = nil
+      passedt.disused = nil
+      passedt.disusedCpub = nil
+      passedt.former_amenity = nil
+      passedt.old_amenity = nil
+   end
+
+   if ((  passedt.historic == "pub"  ) and
+       (( passedt.amenity  == nil   )  or
+        ( passedt.amenity  == ""    )) and
+       (( passedt.shop     == nil   )  or
+        ( passedt.shop     == ""    ))) then
+      passedt.disusedCamenity = "pub"
+      passedt.historic = nil
+   end
+
+   if ((  passedt.amenity           == "closed_pub"      )   or
+       (  passedt.amenity           == "dead_pub"        )   or
+       (  passedt.amenity           == "disused_pub"     )   or
+       (  passedt.amenity           == "former_pub"      )   or
+       (  passedt.amenity           == "old_pub"         )   or
+       (( passedt.amenity           == "pub"            )    and
+        ( passedt.disused           == "yes"            ))   or
+       (( passedt.amenity           == "pub"            )    and
+        ( passedt.opening_hours     == "closed"         ))) then
+      passedt.disusedCamenity = "pub"
+      passedt.amenityCdisused = nil
+      passedt.disused = nil
+      passedt.disusedCpub = nil
+      passedt.former_amenity = nil
+      passedt.old_amenity = nil
+      passedt.amenity = nil
+   end
+
+   if ((   passedt.disusedCamenity   == "pub"     ) and
+       ((( passedt.tourism           ~= nil     )   and
+         ( passedt.tourism           ~= ""      ))  or
+        (( passedt.amenity           ~= nil     )   and
+         ( passedt.amenity           ~= ""      ))  or
+        (( passedt.leisure           ~= nil     )   and
+         ( passedt.leisure           ~= ""      ))  or
+        (( passedt.shop              ~= nil     )   and
+         ( passedt.shop              ~= ""      ))  or
+        (( passedt.office            ~= nil     )   and
+         ( passedt.office            ~= ""      ))  or
+        (( passedt.craft             ~= nil     )   and
+         ( passedt.craft             ~= ""      )))) then
+      passedt.disusedCamenity = nil
+   end
+
+   if ((   passedt.real_ale  ~= nil    ) and
+       (   passedt.real_ale  ~= ""     ) and
+       ((( passedt.amenity   == nil  )   or
+         ( passedt.amenity   == ""   ))  and
+        (( passedt.shop      == nil  )   or
+         ( passedt.shop      == ""   ))  and
+        (( passedt.tourism   == nil  )   or
+         ( passedt.tourism   == ""   ))  and
+        (( passedt.room      == nil  )   or
+         ( passedt.room      == ""   ))  and
+        (( passedt.leisure   == nil  )   or
+         ( passedt.leisure   == ""   ))  and
+        (( passedt.club      == nil  )   or
+         ( passedt.club      == ""   )))) then
+      passedt.real_ale = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If something has been tagged both as a brewery and a pub or bar, render as
+-- a pub with a microbrewery.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.amenity    == "pub"     )  or
+        ( passedt.amenity    == "bar"     )) and
+       (( passedt.craft      == "brewery" )  or
+        ( passedt.industrial == "brewery" ))) then
+      passedt.amenity  = "pub"
+      passedt.microbrewery  = "yes"
+      passedt.craft  = nil
+      passedt.industrial  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a food place has a real_ale tag, also add a food tag an let the real_ale
+-- tag render.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.amenity  == "cafe"       )  or
+        ( passedt.amenity  == "restaurant" )) and
+       (( passedt.real_ale ~= nil          )  and
+        ( passedt.real_ale ~= ""           )  and
+        ( passedt.real_ale ~= "maybe"      )  and
+        ( passedt.real_ale ~= "no"         )) and
+       (( passedt.food     == nil          )  or
+        ( passedt.food     == ""           ))) then
+      passedt.food  = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Attempt to do something sensible with pubs (and other places that serve
+-- real_ale)
+-- Pubs that serve real_ale get a nice IPA, ones that don't a yellowy lager,
+-- closed pubs an "X".  Food gets an F on the right, micropubs a u on the left.
+-- Noncarpeted floor gets an underline, accommodation a blue "roof", and 
+-- Microbrewery a "mash tun in the background".  Not all combinations exist so
+-- not all are checked for.  Pubs without any other tags get the default empty 
+-- glass.
+--
+-- Pub flags:
+-- Live or dead pub?  y or n, or c (closed due to covid)
+-- Real ale?          y n or d (don't know)
+-- Food 	      y or d
+-- Noncarpeted floor  y or d
+-- Microbrewery	      y n or d
+-- Micropub	      y n or d
+-- Accommodation      y n or d
+-- Wheelchair	      y, l, n or d
+-- Beer Garden	      g (beer garden), o (outside seating), d (don't know)
+-- ----------------------------------------------------------------------------
+   if ((( passedt.descriptionCfloor ~= nil                 )  and
+        ( passedt.descriptionCfloor ~= ""                  )) or
+       (  passedt.floorCmaterial    == "brick"              ) or
+       (  passedt.floorCmaterial    == "brick;concrete"     ) or
+       (  passedt.floorCmaterial    == "concrete"           ) or
+       (  passedt.floorCmaterial    == "grubby carpet"      ) or
+       (  passedt.floorCmaterial    == "lino"               ) or
+       (  passedt.floorCmaterial    == "lino;carpet"        ) or
+       (  passedt.floorCmaterial    == "lino;rough_wood"    ) or
+       (  passedt.floorCmaterial    == "lino;tiles;stone"   ) or
+       (  passedt.floorCmaterial    == "paving_stones"      ) or
+       (  passedt.floorCmaterial    == "rough_carpet"       ) or
+       (  passedt.floorCmaterial    == "rough_wood"         ) or
+       (  passedt.floorCmaterial    == "rough_wood;carpet"  ) or
+       (  passedt.floorCmaterial    == "rough_wood;lino"    ) or
+       (  passedt.floorCmaterial    == "rough_wood;stone"   ) or
+       (  passedt.floorCmaterial    == "rough_wood;tiles"   ) or
+       (  passedt.floorCmaterial    == "slate"              ) or
+       (  passedt.floorCmaterial    == "slate;carpet"       ) or
+       (  passedt.floorCmaterial    == "stone"              ) or
+       (  passedt.floorCmaterial    == "stone;carpet"       ) or
+       (  passedt.floorCmaterial    == "stone;rough_carpet" ) or
+       (  passedt.floorCmaterial    == "stone;rough_wood"   ) or
+       (  passedt.floorCmaterial    == "tiles"              ) or
+       (  passedt.floorCmaterial    == "tiles;rough_wood"   )) then
+      passedt.noncarpeted = "yes"
+   end
+
+   if (( passedt.micropub == "yes"   ) or
+       ( passedt.pub      == "micro" )) then
+      passedt.micropub = nil
+      passedt.pub      = "micropub"
+   end
+
+-- ----------------------------------------------------------------------------
+-- The misspelling "accomodation" (with one "m") is quite common.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.accommodation == nil )   or
+        ( passedt.accommodation == ""  ))  and
+       (  passedt.accomodation  ~= nil  )  and
+       (  passedt.accomodation  ~= ""   )) then
+      passedt.accommodation = passedt.accomodation
+      passedt.accomodation  = nil
+   end
+		  
+-- ----------------------------------------------------------------------------
+-- Next, "closed due to covid" pubs
+-- ----------------------------------------------------------------------------
+   if ((  passedt.amenity               == "pub"        ) and
+       (( passedt.opening_hoursCcovid19 == "off"       ) or
+        ( passedt.opening_hoursCcovid19 == "closed"    ) or
+        ( passedt.accessCcovid19        == "no"        ))) then
+      passedt.amenity = "pub_cddddddd"
+      passedt.real_ale = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Does a pub really serve food?
+-- Below we check for "any food value but no".
+-- Here we exclude certain food values from counting towards displaying the "F"
+-- that says a pub serves food.  As far as I am concerned, sandwiches, pies,
+-- or even one of Michael Gove's scotch eggs would count as "food" but a packet
+-- of crisps would not.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.amenity == "pub"         ) and
+       (( passedt.food    == "snacks"     ) or
+        ( passedt.food    == "bar_snacks" ))) then
+      passedt.food = "no"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Main "real_ale icon selection" logic
+-- Note that there's no "if pub" here, so any non-pub establishment that serves
+-- real ale will get the icon (hotels, restaurants, cafes, etc.)
+-- We have explicitly excluded pubs "closed for covid" above.
+-- After this large "if" there is no "else" but another "if" for non-real ale
+-- pubs (that does check that the thing is actually a pub).
+-- ----------------------------------------------------------------------------
+   if (( passedt.real_ale ~= nil     ) and
+       ( passedt.real_ale ~= ""      ) and
+       ( passedt.real_ale ~= "maybe" ) and
+       ( passedt.real_ale ~= "no"    )) then
+      if (( passedt.food ~= nil  ) and
+          ( passedt.food ~= ""   ) and
+          ( passedt.food ~= "no" )) then
+         if ( passedt.noncarpeted == "yes"  ) then
+            if ( passedt.microbrewery == "yes"  ) then
+                           -- pub_yyyyy micropub unchecked (no examples yet)
+               if (( passedt.accommodation ~= nil  ) and
+                   ( passedt.accommodation ~= ""   ) and
+                   ( passedt.accommodation ~= "no" )) then
+                  passedt.amenity = "pub_yyyyydy"
+                  append_wheelchair( passedt )
+                           -- no beer garden appended (no examples yet)
+	       else -- no accommodation
+		  if ( passedt.wheelchair == "yes" ) then
+                     passedt.amenity = "pub_yyyyydny"
+                     append_beer_garden( passedt )
+                  else
+		     if ( passedt.wheelchair == "limited" ) then
+                        passedt.amenity = "pub_yyyyydnl"
+                        append_beer_garden( passedt )
+                     else
+                        if ( passedt.wheelchair == "no" ) then
+                           passedt.amenity = "pub_yyyyydnn"
+                                              -- no beer garden appended (no examples yet)
+                        else
+                           passedt.amenity = "pub_yyyyydnd"
+                           append_beer_garden( passedt )
+                        end
+                     end
+                  end
+	       end -- accommodation
+            else -- no microbrewery
+	       if ( passedt.pub == "micropub" ) then
+                  passedt.amenity = "pub_yyyynyd"
+                                              -- accommodation unchecked (no examples yet)
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+               else
+                  passedt.amenity = "pub_yyyynn"
+                  append_accommodation( passedt )
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+               end
+	    end -- microbrewery
+         else -- not noncarpeted
+            if ( passedt.microbrewery == "yes"  ) then
+               if (( passedt.accommodation ~= nil  ) and
+                   ( passedt.accommodation ~= ""   ) and
+                   ( passedt.accommodation ~= "no" )) then
+		  if ( passedt.wheelchair == "yes" ) then
+                     passedt.amenity = "pub_yyydydyy"
+                                              -- no beer garden appended (no examples yet)
+		  else
+		     if ( passedt.wheelchair == "limited" ) then
+                        passedt.amenity = "pub_yyydydyl"
+                                              -- no beer garden appended (no examples yet)
+		     else
+		        if ( passedt.wheelchair == "no" ) then
+                           passedt.amenity = "pub_yyydydyn"
+                                              -- no beer garden appended (no examples yet)
+			else
+                           passedt.amenity = "pub_yyydydyd"
+                           append_beer_garden( passedt )
+			end
+		     end
+		  end
+	       else
+		  if ( passedt.wheelchair == "yes" ) then
+                     passedt.amenity = "pub_yyydydny"
+                                              -- no beer garden appended (no examples yet)
+                  else
+		     if ( passedt.wheelchair == "limited" ) then
+                        passedt.amenity = "pub_yyydydnl"
+                        append_beer_garden( passedt )
+                     else
+		        if ( passedt.wheelchair == "no" ) then
+                           passedt.amenity = "pub_yyydydnn"
+                                              -- no beer garden appended (no examples yet)
+                        else
+                           passedt.amenity = "pub_yyydydnd"
+                           append_beer_garden( passedt )
+                        end
+                     end
+                  end
+	       end
+	    else
+	       if ( passedt.pub == "micropub" ) then
+                  passedt.amenity = "pub_yyydnyd"
+                                              -- accommodation unchecked (no examples yet)
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+               else
+                  passedt.amenity = "pub_yyydnn"
+                  append_accommodation( passedt )
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+               end
+	    end
+         end -- noncarpeted
+      else -- no food
+         if ( passedt.noncarpeted == "yes"  ) then
+            if ( passedt.microbrewery == "yes"  ) then
+                                              -- micropub unchecked (no examples yet)
+               if (( passedt.accommodation ~= nil  ) and
+                   ( passedt.accommodation ~= ""   ) and
+                   ( passedt.accommodation ~= "no" )) then
+                  passedt.amenity = "pub_yydyydy"
+                  append_wheelchair( passedt )
+                                              -- no beer garden appended (no examples yet)
+	       else
+	          if ( passedt.wheelchair == "yes" ) then
+                     passedt.amenity = "pub_yydyydny"
+                                              -- no beer garden appended (no examples yet)
+     		  else
+	             if ( passedt.wheelchair == "limited" ) then
+                        passedt.amenity = "pub_yydyydnl"
+                        append_beer_garden( passedt )
+		     else
+		        if ( passedt.wheelchair == "no" ) then
+                           passedt.amenity = "pub_yydyydnn"
+                           append_beer_garden( passedt )
+		        else
+                           passedt.amenity = "pub_yydyydnd"
+                           append_beer_garden( passedt )
+		        end
+		     end
+	          end
+	       end
+	    else
+	       if ( passedt.pub == "micropub" ) then
+		  if ( passedt.wheelchair == "yes" ) then
+                     passedt.amenity = "pub_yydynydy"
+                                              -- no beer garden appended (no examples yet)
+		  else
+		     if ( passedt.wheelchair == "limited" ) then
+                        passedt.amenity = "pub_yydynydl"
+                        append_beer_garden( passedt )
+	             else
+			if ( passedt.wheelchair == "no" ) then
+                           passedt.amenity = "pub_yydynydn"
+                           append_beer_garden( passedt )
+			else
+                           passedt.amenity = "pub_yydynydd"
+                                              -- no beer garden appended (no examples yet)
+			end
+	             end
+		  end
+	       else
+                  passedt.amenity = "pub_yydynn"
+                  append_accommodation( passedt )
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+	       end
+	    end
+         else
+            if ( passedt.microbrewery == "yes"  ) then
+	       if ( passedt.pub == "micropub" ) then
+                           -- accommodation unchecked (no examples yet)
+		  if ( passedt.wheelchair == "yes" ) then
+                     passedt.amenity = "pub_yyddyydy"
+                     append_beer_garden( passedt )
+                  else
+		     if ( passedt.wheelchair == "limited" ) then
+                        passedt.amenity = "pub_yyddyydl"
+                                             -- no beer garden appended (no examples yet)
+                     else
+		        if ( passedt.wheelchair == "no" ) then
+                           passedt.amenity = "pub_yyddyydn"
+                                             -- no beer garden appended (no examples yet)
+                        else
+                           passedt.amenity = "pub_yyddyydd"
+                                             -- no beer garden appended (no examples yet)
+                        end
+                     end
+                  end
+               else  -- not micropub
+                  if (( passedt.accommodation ~= nil  ) and
+                      ( passedt.accommodation ~= ""   ) and
+                      ( passedt.accommodation ~= "no" )) then
+		     if ( passedt.wheelchair == "yes" ) then
+                        passedt.amenity = "pub_yyddynyy"
+                        append_beer_garden( passedt )
+                     else
+		        if ( passedt.wheelchair == "limited" ) then
+                           passedt.amenity = "pub_yyddynyl"
+                                             -- no beer garden appended (no examples yet)
+                        else
+			   if ( passedt.wheelchair == "no" ) then
+                              passedt.amenity = "pub_yyddynyn"
+                                             -- no beer garden appended (no examples yet)
+                           else
+                              passedt.amenity = "pub_yyddynyd"
+                              append_beer_garden( passedt )
+                           end
+                        end
+                     end
+                  else  -- no accommodation
+                     passedt.amenity = "pub_yyddynn"
+                     append_wheelchair( passedt )
+                     append_beer_garden( passedt )
+                  end -- accommodation
+               end  -- micropub
+	    else  -- not microbrewery
+	       if ( passedt.pub == "micropub" ) then
+		  if ( passedt.wheelchair == "yes" ) then
+                     passedt.amenity = "pub_yyddnydy"
+                                             -- no beer garden appended (no examples yet)
+		  else
+		     if ( passedt.wheelchair == "limited" ) then
+                        passedt.amenity = "pub_yyddnydl"
+                                             -- no beer garden appended (no examples yet)
+		     else
+			if ( passedt.wheelchair == "no" ) then
+                           passedt.amenity = "pub_yyddnydn"
+                           append_beer_garden( passedt )
+			else
+                           passedt.amenity = "pub_yyddnydd"
+                           append_beer_garden( passedt )
+			end
+		     end
+		  end
+               else
+                  passedt.amenity = "pub_yyddnn"
+                  append_accommodation( passedt )
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+               end
+	    end -- microbrewery
+         end
+      end -- food
+   end -- real_ale
+
+   if (( passedt.real_ale == "no" ) and
+       ( passedt.amenity == "pub" )) then
+      if (( passedt.food ~= nil  ) and
+          ( passedt.food ~= ""   ) and
+          ( passedt.food ~= "no" )) then
+         if ( passedt.noncarpeted == "yes"  ) then
+            passedt.amenity = "pub_ynyyddd"
+                                              -- accommodation unchecked (no examples yet)
+            append_wheelchair( passedt )
+            append_beer_garden( passedt )
+         else
+            if (( passedt.accommodation ~= nil  ) and
+                ( passedt.accommodation ~= ""   ) and
+                ( passedt.accommodation ~= "no" )) then
+               if ( passedt.wheelchair == "yes" ) then
+                  passedt.amenity = "pub_ynydddyy"
+                  append_beer_garden( passedt )
+	       else
+	          if ( passedt.wheelchair == "limited" ) then
+                     passedt.amenity = "pub_ynydddyl"
+                                              -- no beer garden appended (no examples yet)
+	          else
+	             if ( passedt.wheelchair == "no" ) then
+                        passedt.amenity = "pub_ynydddyn"
+                                             -- no beer garden appended (no examples yet)
+		     else
+                        passedt.amenity = "pub_ynydddyd"
+                        append_beer_garden( passedt )
+	             end
+	          end
+	       end
+	    else  -- accommodation
+               if ( passedt.wheelchair == "yes" ) then
+                  passedt.amenity = "pub_ynydddny"
+                  append_beer_garden( passedt )
+	       else
+	          if ( passedt.wheelchair == "limited" ) then
+                     passedt.amenity = "pub_ynydddnl"
+                                              -- no beer garden appended (no examples yet)
+	          else
+	             if ( passedt.wheelchair == "no" ) then
+                        passedt.amenity = "pub_ynydddnn"
+                                              -- no beer garden appended (no examples yet)
+		     else
+                        passedt.amenity = "pub_ynydddnd"
+                        append_beer_garden( passedt )
+	             end
+	          end
+	       end
+	    end  -- accommodation
+         end
+      else
+         if ( passedt.noncarpeted == "yes"  ) then
+            if (( passedt.accommodation ~= nil  ) and
+                ( passedt.accommodation ~= ""   ) and
+                ( passedt.accommodation ~= "no" )) then
+               passedt.amenity = "pub_yndyddy"
+               append_wheelchair( passedt )
+                                              -- no beer garden appended (no examples yet)
+	    else
+               passedt.amenity = "pub_yndyddn"
+               append_wheelchair( passedt )
+               append_beer_garden( passedt )
+	    end
+         else
+            if (( passedt.accommodation ~= nil  ) and
+                ( passedt.accommodation ~= ""   ) and
+                ( passedt.accommodation ~= "no" )) then
+               passedt.amenity = "pub_ynddddy"
+                                              -- no wheelchair appended (no examples yet)
+                                              -- no beer garden appended (no examples yet)
+	    else
+               passedt.amenity = "pub_ynddddn"
+               append_wheelchair( passedt )
+               append_beer_garden( passedt )
+	    end
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- The many and varied taggings for former pubs should have been turned into
+-- disused:amenity=pub above, unless some other tag applies.
+-- ----------------------------------------------------------------------------
+   if ( passedt.disusedCamenity == "pub" ) then
+      passedt.amenity = "pub_nddddddd"
+                                                 -- no other attributes checked
+   end
+
+-- ----------------------------------------------------------------------------
+-- The catch-all here is still "pub" (leaving the tag unchanged)
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "pub" ) then
+      if (( passedt.food ~= nil  ) and
+          ( passedt.food ~= ""   ) and
+          ( passedt.food ~= "no" )) then
+         if ( passedt.noncarpeted == "yes"  ) then
+            if ( passedt.microbrewery == "yes"  ) then
+               passedt.amenity = "pub_ydyyydd"
+                                              -- no wheelchair appended (no examples yet)
+                                              -- no beer garden appended (no examples yet)
+	    else
+               passedt.amenity = "pub_ydyyndd"
+               append_wheelchair( passedt )
+               append_beer_garden( passedt )
+	    end
+         else
+            if ( passedt.microbrewery == "yes"  ) then
+               if ( passedt.wheelchair == "yes" ) then
+                  passedt.amenity = "pub_ydydyddy"
+                                              -- no beer garden appended (no examples yet)
+       	       else
+                  if ( passedt.wheelchair == "limited" ) then
+                     passedt.amenity = "pub_ydydyddl"
+                                              -- no beer garden appended (no examples yet)
+                  else
+                     if ( passedt.wheelchair == "no" ) then
+                        passedt.amenity = "pub_ydydyddn"
+                                              -- no beer garden appended (no examples yet)
+                     else
+                        passedt.amenity = "pub_ydydyddd"
+                        append_beer_garden( passedt )
+                     end
+                  end
+               end
+	    else
+	       if ( passedt.pub == "micropub" ) then
+                  if ( passedt.wheelchair == "yes" ) then
+                     passedt.amenity = "pub_ydydnydy"
+                                              -- no beer garden appended (no examples yet)
+           	  else
+                     if ( passedt.wheelchair == "limited" ) then
+                        passedt.amenity = "pub_ydydnydl"
+                                              -- no beer garden appended (no examples yet)
+                     else
+                        if ( passedt.wheelchair == "no" ) then
+                           passedt.amenity = "pub_ydydnydn"
+                                              -- no beer garden appended (no examples yet)
+	                else
+                           passedt.amenity = "pub_ydydnydd"
+                           append_beer_garden( passedt )
+                        end
+                     end
+	          end
+	       else
+                  passedt.amenity = "pub_ydydnn"
+                  append_accommodation( passedt )
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+	       end
+	    end
+         end
+      else -- food don't know
+         if ( passedt.noncarpeted == "yes"  ) then
+            if ( passedt.microbrewery == "yes"  ) then
+                                              -- micropub unchecked (no examples yet)
+               if (( passedt.accommodation ~= nil  ) and
+                   ( passedt.accommodation ~= ""   ) and
+                   ( passedt.accommodation ~= "no" )) then
+                  passedt.amenity = "pub_yddyydy"
+                                              -- no wheelchair appended (no examples yet)
+                                              -- no beer garden appended (no examples yet)
+	       else
+                  passedt.amenity = "pub_yddyydn"
+                  append_beer_garden( passedt )
+	       end
+	    else
+	       if ( passedt.pub == "micropub" ) then
+                  passedt.amenity = "pub_yddynyd"
+                                              -- no wheelchair appended (no examples yet)
+                                              -- no beer garden appended (no examples yet)
+	       else
+                  passedt.amenity = "pub_yddynnd"
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+	       end
+	    end
+	 else
+            if ( passedt.microbrewery == "yes"  ) then
+               if (( passedt.accommodation ~= nil  ) and
+                   ( passedt.accommodation ~= ""   ) and
+                   ( passedt.accommodation ~= "no" )) then
+                  passedt.amenity = "pub_ydddydy"
+                                              -- no wheelchair appended (no examples yet)
+                                              -- no beer garden appended (no examples yet)
+               else
+                  passedt.amenity = "pub_ydddydn"
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+               end
+            else
+	       if ( passedt.pub == "micropub" ) then
+                  passedt.amenity = "pub_ydddnyd"
+                  append_wheelchair( passedt )
+                                            -- no beer garden appended (no examples yet)
+               else
+                  passedt.amenity = "pub_ydddnn"
+                  append_accommodation( passedt )
+                  append_wheelchair( passedt )
+                  append_beer_garden( passedt )
+               end
+	    end
+         end
+      end
+   end
+
 
 -- ----------------------------------------------------------------------------
 -- Restaurants with accommodation
@@ -10163,7 +10990,367 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "fire_extinguisher"          ) or
                 ( passedt.amenity == "fire_hydrant"               ) or
                 ( passedt.amenity == "bbq"                        ) or
-                ( passedt.amenity == "waterway_access_point"      )) then
+                ( passedt.amenity == "waterway_access_point"      ) or
+                ( passedt.amenity == "pub"                        ) or
+                ( passedt.amenity == "pub_yyyyydyy"               ) or
+                ( passedt.amenity == "pub_yyyyydyl"               ) or
+                ( passedt.amenity == "pub_yyyyydyn"               ) or
+                ( passedt.amenity == "pub_yyyyydyd"               ) or
+                ( passedt.amenity == "pub_yyyyydnyg"              ) or
+                ( passedt.amenity == "pub_yyyyydnyo"              ) or
+                ( passedt.amenity == "pub_yyyyydnyd"              ) or
+                ( passedt.amenity == "pub_yyyyydnlg"              ) or
+                ( passedt.amenity == "pub_yyyyydnlo"              ) or
+                ( passedt.amenity == "pub_yyyyydnld"              ) or
+                ( passedt.amenity == "pub_yyyyydnn"               ) or
+                ( passedt.amenity == "pub_yyyyydndg"              ) or
+                ( passedt.amenity == "pub_yyyyydndo"              ) or
+                ( passedt.amenity == "pub_yyyyydndd"              ) or
+                ( passedt.amenity == "pub_yyyynydyg"              ) or
+                ( passedt.amenity == "pub_yyyynydyo"              ) or
+                ( passedt.amenity == "pub_yyyynydyd"              ) or
+                ( passedt.amenity == "pub_yyyynydlg"              ) or
+                ( passedt.amenity == "pub_yyyynydlo"              ) or
+                ( passedt.amenity == "pub_yyyynydld"              ) or
+                ( passedt.amenity == "pub_yyyynydng"              ) or
+                ( passedt.amenity == "pub_yyyynydno"              ) or
+                ( passedt.amenity == "pub_yyyynydnd"              ) or
+                ( passedt.amenity == "pub_yyyynyddg"              ) or
+                ( passedt.amenity == "pub_yyyynyddo"              ) or
+                ( passedt.amenity == "pub_yyyynyddd"              ) or
+                ( passedt.amenity == "pub_yyyynnyyg"              ) or
+                ( passedt.amenity == "pub_yyyynnyyo"              ) or
+                ( passedt.amenity == "pub_yyyynnyyd"              ) or
+                ( passedt.amenity == "pub_yyyynnylg"              ) or
+                ( passedt.amenity == "pub_yyyynnylo"              ) or
+                ( passedt.amenity == "pub_yyyynnyld"              ) or
+                ( passedt.amenity == "pub_yyyynnyng"              ) or
+                ( passedt.amenity == "pub_yyyynnyno"              ) or
+                ( passedt.amenity == "pub_yyyynnynd"              ) or
+                ( passedt.amenity == "pub_yyyynnydg"              ) or
+                ( passedt.amenity == "pub_yyyynnydo"              ) or
+                ( passedt.amenity == "pub_yyyynnydd"              ) or
+                ( passedt.amenity == "pub_yyyynnnyg"              ) or
+                ( passedt.amenity == "pub_yyyynnnyo"              ) or
+                ( passedt.amenity == "pub_yyyynnnyd"              ) or
+                ( passedt.amenity == "pub_yyyynnnlg"              ) or
+                ( passedt.amenity == "pub_yyyynnnlo"              ) or
+                ( passedt.amenity == "pub_yyyynnnld"              ) or
+                ( passedt.amenity == "pub_yyyynnnng"              ) or
+                ( passedt.amenity == "pub_yyyynnnno"              ) or
+                ( passedt.amenity == "pub_yyyynnnnd"              ) or
+                ( passedt.amenity == "pub_yyyynnndg"              ) or
+                ( passedt.amenity == "pub_yyyynnndo"              ) or
+                ( passedt.amenity == "pub_yyyynnndd"              ) or
+                ( passedt.amenity == "pub_yyydydyy"               ) or
+                ( passedt.amenity == "pub_yyydydyl"               ) or
+                ( passedt.amenity == "pub_yyydydyn"               ) or
+                ( passedt.amenity == "pub_yyydydydg"              ) or
+                ( passedt.amenity == "pub_yyydydydo"              ) or
+                ( passedt.amenity == "pub_yyydydydd"              ) or
+                ( passedt.amenity == "pub_yyydydny"               ) or
+                ( passedt.amenity == "pub_yyydydnlg"              ) or
+                ( passedt.amenity == "pub_yyydydnlo"              ) or
+                ( passedt.amenity == "pub_yyydydnld"              ) or
+                ( passedt.amenity == "pub_yyydydnn"               ) or
+                ( passedt.amenity == "pub_yyydydndg"              ) or
+                ( passedt.amenity == "pub_yyydydndo"              ) or
+                ( passedt.amenity == "pub_yyydydndd"              ) or
+                ( passedt.amenity == "pub_yyydnydyg"              ) or
+                ( passedt.amenity == "pub_yyydnydyo"              ) or
+                ( passedt.amenity == "pub_yyydnydyd"              ) or
+                ( passedt.amenity == "pub_yyydnydlg"              ) or
+                ( passedt.amenity == "pub_yyydnydlo"              ) or
+                ( passedt.amenity == "pub_yyydnydld"              ) or
+                ( passedt.amenity == "pub_yyydnydng"              ) or
+                ( passedt.amenity == "pub_yyydnydno"              ) or
+                ( passedt.amenity == "pub_yyydnydnd"              ) or
+                ( passedt.amenity == "pub_yyydnyddg"              ) or
+                ( passedt.amenity == "pub_yyydnyddo"              ) or
+                ( passedt.amenity == "pub_yyydnyddd"              ) or
+                ( passedt.amenity == "pub_yyydnnyyg"              ) or
+                ( passedt.amenity == "pub_yyydnnyyo"              ) or
+                ( passedt.amenity == "pub_yyydnnyyd"              ) or
+                ( passedt.amenity == "pub_yyydnnylg"              ) or
+                ( passedt.amenity == "pub_yyydnnylo"              ) or
+                ( passedt.amenity == "pub_yyydnnyld"              ) or
+                ( passedt.amenity == "pub_yyydnnyng"              ) or
+                ( passedt.amenity == "pub_yyydnnyno"              ) or
+                ( passedt.amenity == "pub_yyydnnynd"              ) or
+                ( passedt.amenity == "pub_yyydnnydg"              ) or
+                ( passedt.amenity == "pub_yyydnnydo"              ) or
+                ( passedt.amenity == "pub_yyydnnydd"              ) or
+                ( passedt.amenity == "pub_yyydnnnyg"              ) or
+                ( passedt.amenity == "pub_yyydnnnyo"              ) or
+                ( passedt.amenity == "pub_yyydnnnyd"              ) or
+                ( passedt.amenity == "pub_yyydnnnlg"              ) or
+                ( passedt.amenity == "pub_yyydnnnlo"              ) or
+                ( passedt.amenity == "pub_yyydnnnld"              ) or
+                ( passedt.amenity == "pub_yyydnnnng"              ) or
+                ( passedt.amenity == "pub_yyydnnnno"              ) or
+                ( passedt.amenity == "pub_yyydnnnnd"              ) or
+                ( passedt.amenity == "pub_yyydnnndg"              ) or
+                ( passedt.amenity == "pub_yyydnnndo"              ) or
+                ( passedt.amenity == "pub_yyydnnndd"              ) or
+                ( passedt.amenity == "pub_yydyydyy"               ) or
+                ( passedt.amenity == "pub_yydyydyl"               ) or
+                ( passedt.amenity == "pub_yydyydyn"               ) or
+                ( passedt.amenity == "pub_yydyydyd"               ) or
+                ( passedt.amenity == "pub_yydyydny"               ) or
+                ( passedt.amenity == "pub_yydyydnlg"              ) or
+                ( passedt.amenity == "pub_yydyydnlo"              ) or
+                ( passedt.amenity == "pub_yydyydnld"              ) or
+                ( passedt.amenity == "pub_yydyydnng"              ) or
+                ( passedt.amenity == "pub_yydyydnno"              ) or
+                ( passedt.amenity == "pub_yydyydnnd"              ) or
+                ( passedt.amenity == "pub_yydyydndg"              ) or
+                ( passedt.amenity == "pub_yydyydndo"              ) or
+                ( passedt.amenity == "pub_yydyydndd"              ) or
+                ( passedt.amenity == "pub_yydynydy"               ) or
+                ( passedt.amenity == "pub_yydynydlg"              ) or
+                ( passedt.amenity == "pub_yydynydlo"              ) or
+                ( passedt.amenity == "pub_yydynydld"              ) or
+                ( passedt.amenity == "pub_yydynydng"              ) or
+                ( passedt.amenity == "pub_yydynydno"              ) or
+                ( passedt.amenity == "pub_yydynydnd"              ) or
+                ( passedt.amenity == "pub_yydynydd"               ) or
+                ( passedt.amenity == "pub_yydynnyyg"              ) or
+                ( passedt.amenity == "pub_yydynnyyo"              ) or
+                ( passedt.amenity == "pub_yydynnyyd"              ) or
+                ( passedt.amenity == "pub_yydynnylg"              ) or
+                ( passedt.amenity == "pub_yydynnylo"              ) or
+                ( passedt.amenity == "pub_yydynnyld"              ) or
+                ( passedt.amenity == "pub_yydynnyng"              ) or
+                ( passedt.amenity == "pub_yydynnyno"              ) or
+                ( passedt.amenity == "pub_yydynnynd"              ) or
+                ( passedt.amenity == "pub_yydynnydg"              ) or
+                ( passedt.amenity == "pub_yydynnydo"              ) or
+                ( passedt.amenity == "pub_yydynnydd"              ) or
+                ( passedt.amenity == "pub_yydynnnyg"              ) or
+                ( passedt.amenity == "pub_yydynnnyo"              ) or
+                ( passedt.amenity == "pub_yydynnnyd"              ) or
+                ( passedt.amenity == "pub_yydynnnlg"              ) or
+                ( passedt.amenity == "pub_yydynnnlo"              ) or
+                ( passedt.amenity == "pub_yydynnnld"              ) or
+                ( passedt.amenity == "pub_yydynnnng"              ) or
+                ( passedt.amenity == "pub_yydynnnno"              ) or
+                ( passedt.amenity == "pub_yydynnnnd"              ) or
+                ( passedt.amenity == "pub_yydynnndg"              ) or
+                ( passedt.amenity == "pub_yydynnndo"              ) or
+                ( passedt.amenity == "pub_yydynnndd"              ) or
+                ( passedt.amenity == "pub_yyddyydyg"              ) or
+                ( passedt.amenity == "pub_yyddyydyo"              ) or
+                ( passedt.amenity == "pub_yyddyydyd"              ) or
+                ( passedt.amenity == "pub_yyddyydl"               ) or
+                ( passedt.amenity == "pub_yyddyydn"               ) or
+                ( passedt.amenity == "pub_yyddyydd"               ) or
+                ( passedt.amenity == "pub_yyddynyyg"              ) or
+                ( passedt.amenity == "pub_yyddynyyo"              ) or
+                ( passedt.amenity == "pub_yyddynyyd"              ) or
+                ( passedt.amenity == "pub_yyddynyl"               ) or
+                ( passedt.amenity == "pub_yyddynyn"               ) or
+                ( passedt.amenity == "pub_yyddynydg"              ) or
+                ( passedt.amenity == "pub_yyddynydo"              ) or
+                ( passedt.amenity == "pub_yyddynydd"              ) or
+                ( passedt.amenity == "pub_yyddynnyg"              ) or
+                ( passedt.amenity == "pub_yyddynnyo"              ) or
+                ( passedt.amenity == "pub_yyddynnyd"              ) or
+                ( passedt.amenity == "pub_yyddynnlg"              ) or
+                ( passedt.amenity == "pub_yyddynnlo"              ) or
+                ( passedt.amenity == "pub_yyddynnld"              ) or
+                ( passedt.amenity == "pub_yyddynnng"              ) or
+                ( passedt.amenity == "pub_yyddynnno"              ) or
+                ( passedt.amenity == "pub_yyddynnnd"              ) or
+                ( passedt.amenity == "pub_yyddynndg"              ) or
+                ( passedt.amenity == "pub_yyddynndo"              ) or
+                ( passedt.amenity == "pub_yyddynndd"              ) or
+                ( passedt.amenity == "pub_yyddnydy"               ) or
+                ( passedt.amenity == "pub_yyddnydl"               ) or
+                ( passedt.amenity == "pub_yyddnydng"              ) or
+                ( passedt.amenity == "pub_yyddnydno"              ) or
+                ( passedt.amenity == "pub_yyddnydnd"              ) or
+                ( passedt.amenity == "pub_yyddnyddg"              ) or
+                ( passedt.amenity == "pub_yyddnyddo"              ) or
+                ( passedt.amenity == "pub_yyddnyddd"              ) or
+                ( passedt.amenity == "pub_yyddnnyyg"              ) or
+                ( passedt.amenity == "pub_yyddnnyyo"              ) or
+                ( passedt.amenity == "pub_yyddnnyyd"              ) or
+                ( passedt.amenity == "pub_yyddnnylg"              ) or
+                ( passedt.amenity == "pub_yyddnnylo"              ) or
+                ( passedt.amenity == "pub_yyddnnyld"              ) or
+                ( passedt.amenity == "pub_yyddnnyng"              ) or
+                ( passedt.amenity == "pub_yyddnnyno"              ) or
+                ( passedt.amenity == "pub_yyddnnynd"              ) or
+                ( passedt.amenity == "pub_yyddnnydg"              ) or
+                ( passedt.amenity == "pub_yyddnnydo"              ) or
+                ( passedt.amenity == "pub_yyddnnydd"              ) or
+                ( passedt.amenity == "pub_yyddnnnyg"              ) or
+                ( passedt.amenity == "pub_yyddnnnyo"              ) or
+                ( passedt.amenity == "pub_yyddnnnyd"              ) or
+                ( passedt.amenity == "pub_yyddnnnlg"              ) or
+                ( passedt.amenity == "pub_yyddnnnlo"              ) or
+                ( passedt.amenity == "pub_yyddnnnld"              ) or
+                ( passedt.amenity == "pub_yyddnnnng"              ) or
+                ( passedt.amenity == "pub_yyddnnnno"              ) or
+                ( passedt.amenity == "pub_yyddnnnnd"              ) or
+                ( passedt.amenity == "pub_yyddnnndg"              ) or
+                ( passedt.amenity == "pub_yyddnnndo"              ) or
+                ( passedt.amenity == "pub_yyddnnndd"              ) or
+                ( passedt.amenity == "pub_ynyydddyg"              ) or
+                ( passedt.amenity == "pub_ynyydddyo"              ) or
+                ( passedt.amenity == "pub_ynyydddyd"              ) or
+                ( passedt.amenity == "pub_ynyydddlg"              ) or
+                ( passedt.amenity == "pub_ynyydddlo"              ) or
+                ( passedt.amenity == "pub_ynyydddld"              ) or
+                ( passedt.amenity == "pub_ynyydddng"              ) or
+                ( passedt.amenity == "pub_ynyydddno"              ) or
+                ( passedt.amenity == "pub_ynyydddnd"              ) or
+                ( passedt.amenity == "pub_ynyyddddg"              ) or
+                ( passedt.amenity == "pub_ynyyddddo"              ) or
+                ( passedt.amenity == "pub_ynyyddddd"              ) or
+                ( passedt.amenity == "pub_ynydddyyg"              ) or
+                ( passedt.amenity == "pub_ynydddyyo"              ) or
+                ( passedt.amenity == "pub_ynydddyyd"              ) or
+                ( passedt.amenity == "pub_ynydddyl"               ) or
+                ( passedt.amenity == "pub_ynydddyn"               ) or
+                ( passedt.amenity == "pub_ynydddydg"              ) or
+                ( passedt.amenity == "pub_ynydddydo"              ) or
+                ( passedt.amenity == "pub_ynydddydd"              ) or
+                ( passedt.amenity == "pub_ynydddnyg"              ) or
+                ( passedt.amenity == "pub_ynydddnyo"              ) or
+                ( passedt.amenity == "pub_ynydddnyd"              ) or
+                ( passedt.amenity == "pub_ynydddnl"               ) or
+                ( passedt.amenity == "pub_ynydddnn"               ) or
+                ( passedt.amenity == "pub_ynydddndg"              ) or
+                ( passedt.amenity == "pub_ynydddndo"              ) or
+                ( passedt.amenity == "pub_ynydddndd"              ) or
+                ( passedt.amenity == "pub_yndyddyy"               ) or
+                ( passedt.amenity == "pub_yndyddyl"               ) or
+                ( passedt.amenity == "pub_yndyddyn"               ) or
+                ( passedt.amenity == "pub_yndyddyd"               ) or
+                ( passedt.amenity == "pub_yndyddnyg"              ) or
+                ( passedt.amenity == "pub_yndyddnyo"              ) or
+                ( passedt.amenity == "pub_yndyddnyd"              ) or
+                ( passedt.amenity == "pub_yndyddnlg"              ) or
+                ( passedt.amenity == "pub_yndyddnlo"              ) or
+                ( passedt.amenity == "pub_yndyddnld"              ) or
+                ( passedt.amenity == "pub_yndyddnng"              ) or
+                ( passedt.amenity == "pub_yndyddnno"              ) or
+                ( passedt.amenity == "pub_yndyddnnd"              ) or
+                ( passedt.amenity == "pub_yndyddndg"              ) or
+                ( passedt.amenity == "pub_yndyddndo"              ) or
+                ( passedt.amenity == "pub_yndyddndd"              ) or
+                ( passedt.amenity == "pub_ynddddy"                ) or
+                ( passedt.amenity == "pub_ynddddnyg"              ) or
+                ( passedt.amenity == "pub_ynddddnyo"              ) or
+                ( passedt.amenity == "pub_ynddddnyd"              ) or
+                ( passedt.amenity == "pub_ynddddnl"               ) or
+                ( passedt.amenity == "pub_ynddddnng"              ) or
+                ( passedt.amenity == "pub_ynddddnno"              ) or
+                ( passedt.amenity == "pub_ynddddnnd"              ) or
+                ( passedt.amenity == "pub_ynddddndg"              ) or
+                ( passedt.amenity == "pub_ynddddndo"              ) or
+                ( passedt.amenity == "pub_ynddddndd"              ) or
+                ( passedt.amenity == "pub_ydyyydd"                ) or
+                ( passedt.amenity == "pub_ydyynddyg"              ) or
+                ( passedt.amenity == "pub_ydyynddyo"              ) or
+                ( passedt.amenity == "pub_ydyynddyd"              ) or
+                ( passedt.amenity == "pub_ydyynddlg"              ) or
+                ( passedt.amenity == "pub_ydyynddlo"              ) or
+                ( passedt.amenity == "pub_ydyynddld"              ) or
+                ( passedt.amenity == "pub_ydyynddng"              ) or
+                ( passedt.amenity == "pub_ydyynddno"              ) or
+                ( passedt.amenity == "pub_ydyynddnd"              ) or
+                ( passedt.amenity == "pub_ydyyndddg"              ) or
+                ( passedt.amenity == "pub_ydyyndddo"              ) or
+                ( passedt.amenity == "pub_ydyyndddd"              ) or
+                ( passedt.amenity == "pub_ydydyddy"               ) or
+                ( passedt.amenity == "pub_ydydyddl"               ) or
+                ( passedt.amenity == "pub_ydydyddn"               ) or
+                ( passedt.amenity == "pub_ydydydddg"              ) or
+                ( passedt.amenity == "pub_ydydydddo"              ) or
+                ( passedt.amenity == "pub_ydydydddd"              ) or
+                ( passedt.amenity == "pub_ydydnydy"               ) or
+                ( passedt.amenity == "pub_ydydnydl"               ) or
+                ( passedt.amenity == "pub_ydydnydn"               ) or
+                ( passedt.amenity == "pub_ydydnyddg"              ) or
+                ( passedt.amenity == "pub_ydydnyddo"              ) or
+                ( passedt.amenity == "pub_ydydnyddd"              ) or
+                ( passedt.amenity == "pub_ydydnnyyg"              ) or
+                ( passedt.amenity == "pub_ydydnnyyo"              ) or
+                ( passedt.amenity == "pub_ydydnnyyd"              ) or
+                ( passedt.amenity == "pub_ydydnnyl"               ) or
+                ( passedt.amenity == "pub_ydydnnyng"              ) or
+                ( passedt.amenity == "pub_ydydnnyno"              ) or
+                ( passedt.amenity == "pub_ydydnnynd"              ) or
+                ( passedt.amenity == "pub_ydydnnydg"              ) or
+                ( passedt.amenity == "pub_ydydnnydo"              ) or
+                ( passedt.amenity == "pub_ydydnnydd"              ) or
+                ( passedt.amenity == "pub_ydydnnnyg"              ) or
+                ( passedt.amenity == "pub_ydydnnnyo"              ) or
+                ( passedt.amenity == "pub_ydydnnnyd"              ) or
+                ( passedt.amenity == "pub_ydydnnnlg"              ) or
+                ( passedt.amenity == "pub_ydydnnnlo"              ) or
+                ( passedt.amenity == "pub_ydydnnnld"              ) or
+                ( passedt.amenity == "pub_ydydnnnng"              ) or
+                ( passedt.amenity == "pub_ydydnnnno"              ) or
+                ( passedt.amenity == "pub_ydydnnnnd"              ) or
+                ( passedt.amenity == "pub_ydydnnndg"              ) or
+                ( passedt.amenity == "pub_ydydnnndo"              ) or
+                ( passedt.amenity == "pub_ydydnnndd"              ) or
+                ( passedt.amenity == "pub_yddyydy"                ) or
+                ( passedt.amenity == "pub_yddyydng"               ) or
+                ( passedt.amenity == "pub_yddyydno"               ) or
+                ( passedt.amenity == "pub_yddyydnd"               ) or
+                ( passedt.amenity == "pub_yddynndyg"              ) or
+                ( passedt.amenity == "pub_yddynndyo"              ) or
+                ( passedt.amenity == "pub_yddynndyd"              ) or
+                ( passedt.amenity == "pub_yddynndlg"              ) or
+                ( passedt.amenity == "pub_yddynndlo"              ) or
+                ( passedt.amenity == "pub_yddynndld"              ) or
+                ( passedt.amenity == "pub_yddynndng"              ) or
+                ( passedt.amenity == "pub_yddynndno"              ) or
+                ( passedt.amenity == "pub_yddynndnd"              ) or
+                ( passedt.amenity == "pub_yddynnddg"              ) or
+                ( passedt.amenity == "pub_yddynnddo"              ) or
+                ( passedt.amenity == "pub_yddynnddd"              ) or
+                ( passedt.amenity == "pub_ydddydy"                ) or
+                ( passedt.amenity == "pub_ydddydnyg"              ) or
+                ( passedt.amenity == "pub_ydddydnyo"              ) or
+                ( passedt.amenity == "pub_ydddydnyd"              ) or
+                ( passedt.amenity == "pub_ydddydnl"               ) or
+                ( passedt.amenity == "pub_ydddydnn"               ) or
+                ( passedt.amenity == "pub_ydddydndg"              ) or
+                ( passedt.amenity == "pub_ydddydndo"              ) or
+                ( passedt.amenity == "pub_ydddydndd"              ) or
+                ( passedt.amenity == "pub_ydddnydy"               ) or
+                ( passedt.amenity == "pub_ydddnydl"               ) or
+                ( passedt.amenity == "pub_ydddnydn"               ) or
+                ( passedt.amenity == "pub_ydddnydd"               ) or
+                ( passedt.amenity == "pub_ydddnnyyg"              ) or
+                ( passedt.amenity == "pub_ydddnnyyo"              ) or
+                ( passedt.amenity == "pub_ydddnnyyd"              ) or
+                ( passedt.amenity == "pub_ydddnnylg"              ) or
+                ( passedt.amenity == "pub_ydddnnylo"              ) or
+                ( passedt.amenity == "pub_ydddnnyld"              ) or
+                ( passedt.amenity == "pub_ydddnnyn"               ) or
+                ( passedt.amenity == "pub_ydddnnydg"              ) or
+                ( passedt.amenity == "pub_ydddnnydo"              ) or
+                ( passedt.amenity == "pub_ydddnnydd"              ) or
+                ( passedt.amenity == "pub_ydddnnnyg"              ) or
+                ( passedt.amenity == "pub_ydddnnnyo"              ) or
+                ( passedt.amenity == "pub_ydddnnnyd"              ) or
+                ( passedt.amenity == "pub_ydddnnnlg"              ) or
+                ( passedt.amenity == "pub_ydddnnnlo"              ) or
+                ( passedt.amenity == "pub_ydddnnnld"              ) or
+                ( passedt.amenity == "pub_ydddnnnng"              ) or
+                ( passedt.amenity == "pub_ydddnnnno"              ) or
+                ( passedt.amenity == "pub_ydddnnnnd"              ) or
+                ( passedt.amenity == "pub_ydddnnndg"              ) or
+                ( passedt.amenity == "pub_ydddnnndo"              ) or
+                ( passedt.amenity == "pub_ydddnnndd"              ) or
+                ( passedt.amenity == "pub_cddddddd"               ) or
+                ( passedt.amenity == "pub_nddddddd"               )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
                 Attribute( "name", Find( "name" ) )
