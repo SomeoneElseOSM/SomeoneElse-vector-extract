@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "attraction", "canoe", "climbing", "emergency", "entrance", "healthcare", 
+node_keys = { "amenity", "attraction", "canoe", "climbing", "emergency", "entrance", "harbour", "healthcare", 
               "landuse", "leisure", "man_made", "natural", "pitch", "place", "place_of_worship", 
               "playground", "power", "railway", "shop", "sport", "tourism", "whitewater", "zoo" }
 
@@ -11671,7 +11671,14 @@ function render_landuse_land2( passedt )
                 Attribute( "class", "landuse_" .. passedt.landuse )
                 MinZoom( 10 )
             else
-                render_leisure_land2( passedt )
+                if ( passedt.landuse == "harbour" ) then
+                    Layer( "land2", true )
+                    Attribute( "class", "landuse_" .. passedt.landuse )
+                    Attribute( "name", Find( "name" ) )
+                    MinZoom( 13 )
+                else
+                    render_leisure_land2( passedt )
+                end -- landuse=harbour 13
             end -- landuse=unnamedquarry 10
         end -- landuse=unnamedgrass etc. 9
     end -- landuse=unnamedforest 8
@@ -11686,6 +11693,7 @@ function render_leisure_land2( passedt )
         if ( passedt.leisure == "marina" ) then
             Layer( "land2", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
+            Attribute( "name", Find( "name" ) )
             MinZoom( 13 )
         else
             render_natural_land2( passedt )
