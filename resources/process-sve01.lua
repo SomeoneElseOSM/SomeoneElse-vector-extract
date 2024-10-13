@@ -30,7 +30,7 @@ node_keys = { "amenity", "attraction", "canoe", "climbing", "emergency",
               "entrance", "harbour", "healthcare", "highway", "information", 
               "landuse", "leisure", "man_made", "natural", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
-              "sport", "tourism", "whitewater", "zoo" }
+              "sport", "tourism", "waterway", "whitewater", "zoo" }
 
 -- Initialize Lua logic
 
@@ -376,6 +376,14 @@ function node_function()
     nodet.flag = Find("flag")
     nodet.pole = Find("pole")
     nodet.naptanCBusStopType = Find("naptan:BusStopType")
+    nodet.direction_north = Find("direction_north")
+    nodet.direction_northeast = Find("direction_northeast")
+    nodet.direction_east = Find("direction_east")
+    nodet.direction_southeast = Find("direction_southeast")
+    nodet.direction_south = Find("direction_south")
+    nodet.direction_southwest = Find("direction_southwest")
+    nodet.direction_west = Find("direction_west")
+    nodet.direction_northwest = Find("direction_northwest")
 
     generic_before_function( nodet )
 
@@ -716,6 +724,14 @@ function way_function()
     wayt.flag = Find("flag")
     wayt.pole = Find("pole")
     wayt.naptanCBusStopType = Find("naptan:BusStopType")
+    wayt.direction_north = Find("direction_north")
+    wayt.direction_northeast = Find("direction_northeast")
+    wayt.direction_east = Find("direction_east")
+    wayt.direction_southeast = Find("direction_southeast")
+    wayt.direction_south = Find("direction_south")
+    wayt.direction_southwest = Find("direction_southwest")
+    wayt.direction_west = Find("direction_west")
+    wayt.direction_northwest = Find("direction_northwest")
 
     generic_before_function( wayt )
 
@@ -809,7 +825,7 @@ function way_function()
 
         if (( wayt.name ~= nil )   and
             ( wayt.name ~= ""  ))  then
-	Attribute( "name", wayt.name )
+	    Attribute( "name", wayt.name )
         end
 
 -- ----------------------------------------------------------------------------
@@ -2208,17 +2224,17 @@ function generic_before_function( passedt )
 -- Remove name from footway=sidewalk (we expect it to be rendered via the
 -- road that this is a sidewalk for), or "is_sidepath=yes" etc.
 -- ----------------------------------------------------------------------------
-   if ((( passedt.footway             == "sidewalk" )  or
-        ( passedt.cycleway            == "sidewalk" )  or
-        ( passedt.is_sidepath         == "yes"      )  or
-        ( passedt.is_sidepathCof      ~= nil        )  or
-        ( passedt.is_sidepathCof      ~= ""         )  or
-        ( passedt.is_sidepathCofCname ~= nil        )  or
-        ( passedt.is_sidepathCofCname ~= ""         )  or
-        ( passedt.is_sidepathCofCref  ~= nil        )  or
-        ( passedt.is_sidepathCofCref  ~= ""         )) and
-       (( passedt.name                ~= nil        )  or
-        ( passedt.name                ~= ""         ))) then
+   if (((  passedt.footway             == "sidewalk" )  or
+        (  passedt.cycleway            == "sidewalk" )  or
+        (  passedt.is_sidepath         == "yes"      )  or
+        (( passedt.is_sidepathCof      ~= nil       )   and
+         ( passedt.is_sidepathCof      ~= ""        ))  or
+        (( passedt.is_sidepathCofCname ~= nil       )   and
+         ( passedt.is_sidepathCofCname ~= ""        ))  or
+        (( passedt.is_sidepathCofCref  ~= nil       )   and
+         ( passedt.is_sidepathCofCref  ~= ""        ))) and
+       ( passedt.name                ~= nil           ) and
+       ( passedt.name                ~= ""            )) then
       passedt.name = nil
    end
 
@@ -8064,56 +8080,56 @@ function generic_before_function( passedt )
 -- If no name use brand or operator on amenity=fuel, among others.  
 -- If there is brand or operator, use that with name.
 -- ----------------------------------------------------------------------------
-   if ((  passedt.amenity   == "atm"              ) or
-       (  passedt.amenity   == "fuel"             ) or
-       (  passedt.amenity   == "fuel_e"           ) or
-       (  passedt.amenity   == "fuel_h"           ) or
-       (  passedt.amenity   == "fuel_l"           ) or
-       (  passedt.amenity   == "fuel_w"           ) or
-       (  passedt.amenity   == "charging_station" ) or
-       (  passedt.amenity   == "bicycle_rental"   ) or
-       (  passedt.amenity   == "scooter_rental"   ) or
+   if ((  passedt.amenity   == "atm"               ) or
+       (  passedt.amenity   == "fuel"              ) or
+       (  passedt.amenity   == "fuel_e"            ) or
+       (  passedt.amenity   == "fuel_h"            ) or
+       (  passedt.amenity   == "fuel_l"            ) or
+       (  passedt.amenity   == "fuel_w"            ) or
+       (  passedt.amenity   == "charging_station"  ) or
+       (  passedt.amenity   == "bicycle_rental"    ) or
+       (  passedt.amenity   == "scooter_rental"    ) or
        (  passedt.amenity   == "vending_machine"   ) or
        (( passedt.amenity  ~= nil                 )  and
         ( passedt.amenity  ~= ""                  )  and
         ( string.match( passedt.amenity, "pub_"  ))) or
        (  passedt.amenity   == "pub"               ) or
-       (  passedt.amenity   == "cafe"             ) or
-       (  passedt.amenity   == "cafe_dld"         ) or
-       (  passedt.amenity   == "cafe_dnd"         ) or
-       (  passedt.amenity   == "cafe_dyd"         ) or
-       (  passedt.amenity   == "cafe_ydd"         ) or
-       (  passedt.amenity   == "cafe_yld"         ) or
-       (  passedt.amenity   == "cafe_ynd"         ) or
-       (  passedt.amenity   == "cafe_yyd"         ) or
-       (  passedt.amenity   == "restaurant"       ) or
-       (  passedt.amenity   == "restaccomm"       ) or
-       (  passedt.amenity   == "doctors"          ) or
-       (  passedt.amenity   == "pharmacy"         ) or
-       (  passedt.amenity   == "pharmacy_l"       ) or
-       (  passedt.amenity   == "pharmacy_n"       ) or
-       (  passedt.amenity   == "pharmacy_y"       ) or
-       (  passedt.amenity   == "parcel_locker"    ) or
-       (  passedt.amenity   == "veterinary"       ) or
-       (  passedt.amenity   == "animal_boarding"  ) or
-       (  passedt.amenity   == "cattery"          ) or
-       (  passedt.amenity   == "kennels"          ) or
-       (  passedt.amenity   == "animal_shelter"   ) or
-       (  passedt.animal    == "shelter"          ) or
-       (( passedt.craft      ~= nil              )  and
-        ( passedt.craft      ~= ""               )) or
-       (( passedt.emergency  ~= nil              )  and
-        ( passedt.emergency  ~= ""               )) or
-       (( passedt.industrial ~= nil              )  and
-        ( passedt.industrial ~= ""               )) or
-       (( passedt.man_made   ~= nil              )  and
-        ( passedt.man_made   ~= ""               )) or
-       (( passedt.office     ~= nil              )  and
-        ( passedt.office     ~= ""               )) or
-       (( passedt.shop       ~= nil              )  and
-        ( passedt.shop       ~= ""               )) or
-       (  passedt.tourism    == "hotel"           ) or
-       (  passedt.military   == "barracks"        )) then
+       (  passedt.amenity   == "cafe"              ) or
+       (  passedt.amenity   == "cafe_dld"          ) or
+       (  passedt.amenity   == "cafe_dnd"          ) or
+       (  passedt.amenity   == "cafe_dyd"          ) or
+       (  passedt.amenity   == "cafe_ydd"          ) or
+       (  passedt.amenity   == "cafe_yld"          ) or
+       (  passedt.amenity   == "cafe_ynd"          ) or
+       (  passedt.amenity   == "cafe_yyd"          ) or
+       (  passedt.amenity   == "restaurant"        ) or
+       (  passedt.amenity   == "restaccomm"        ) or
+       (  passedt.amenity   == "doctors"           ) or
+       (  passedt.amenity   == "pharmacy"          ) or
+       (  passedt.amenity   == "pharmacy_l"        ) or
+       (  passedt.amenity   == "pharmacy_n"        ) or
+       (  passedt.amenity   == "pharmacy_y"        ) or
+       (  passedt.amenity   == "parcel_locker"     ) or
+       (  passedt.amenity   == "veterinary"        ) or
+       (  passedt.amenity   == "animal_boarding"   ) or
+       (  passedt.amenity   == "cattery"           ) or
+       (  passedt.amenity   == "kennels"           ) or
+       (  passedt.amenity   == "animal_shelter"    ) or
+       (  passedt.animal    == "shelter"           ) or
+       (( passedt.craft      ~= nil               )  and
+        ( passedt.craft      ~= ""                )) or
+       (( passedt.emergency  ~= nil               )  and
+        ( passedt.emergency  ~= ""                )) or
+       (( passedt.industrial ~= nil               )  and
+        ( passedt.industrial ~= ""                )) or
+       (( passedt.man_made   ~= nil               )  and
+        ( passedt.man_made   ~= ""                )) or
+       (( passedt.office     ~= nil               )  and
+        ( passedt.office     ~= ""                )) or
+       (( passedt.shop       ~= nil               )  and
+        ( passedt.shop       ~= ""                )) or
+       (  passedt.tourism    == "hotel"            ) or
+       (  passedt.military   == "barracks"         )) then
       if (( passedt.name == nil ) or
           ( passedt.name == ""  )) then
          if (( passedt.brand ~= nil ) and
@@ -10877,7 +10893,7 @@ end
 function append_directions( passedt )
    if (( passedt.direction_north ~= nil ) and
        ( passedt.direction_north ~= ""  )) then
-      if (( passedt.ele == nil ) and
+      if (( passedt.ele == nil ) or
           ( passedt.ele == ""  )) then
          passedt.ele = "N: " .. passedt.direction_north
       else
@@ -10887,7 +10903,7 @@ function append_directions( passedt )
 
    if (( passedt.direction_northeast ~= nil ) and
        ( passedt.direction_northeast ~= ""  )) then
-      if (( passedt.ele == nil ) and
+      if (( passedt.ele == nil ) or
           ( passedt.ele == ""  )) then
          passedt.ele = "NE: " .. passedt.direction_northeast
       else
@@ -10897,7 +10913,7 @@ function append_directions( passedt )
 
    if (( passedt.direction_east ~= nil ) and
        ( passedt.direction_east ~= ""  )) then
-      if (( passedt.ele == nil ) and
+      if (( passedt.ele == nil ) or
           ( passedt.ele == ""  )) then
          passedt.ele = "E: " .. passedt.direction_east
       else
@@ -10907,7 +10923,7 @@ function append_directions( passedt )
 
    if (( passedt.direction_southeast ~= nil ) and
        ( passedt.direction_southeast ~= ""  )) then
-      if (( passedt.ele == nil ) and
+      if (( passedt.ele == nil ) or
           ( passedt.ele == ""  )) then
          passedt.ele = "SE: " .. passedt.direction_southeast
       else
@@ -10917,7 +10933,7 @@ function append_directions( passedt )
 
    if (( passedt.direction_south ~= nil ) and
        ( passedt.direction_south ~= ""  )) then
-      if (( passedt.ele == nil ) and
+      if (( passedt.ele == nil ) or
           ( passedt.ele == ""  )) then
          passedt.ele = "S: " .. passedt.direction_south
       else
@@ -10927,7 +10943,7 @@ function append_directions( passedt )
 
    if (( passedt.direction_southwest ~= nil ) and
        ( passedt.direction_southwest ~= ""  )) then
-      if (( passedt.ele == nil ) and
+      if (( passedt.ele == nil ) or
           ( passedt.ele == ""  )) then
          passedt.ele = "SW: " .. passedt.direction_southwest
       else
@@ -10937,7 +10953,7 @@ function append_directions( passedt )
 
    if (( passedt.direction_west ~= nil ) and
        ( passedt.direction_west ~= ""  )) then
-      if (( passedt.ele == nil ) and
+      if (( passedt.ele == nil ) or
           ( passedt.ele == ""  )) then
          passedt.ele = "W: " .. passedt.direction_west
       else
@@ -10947,7 +10963,7 @@ function append_directions( passedt )
 
    if (( passedt.direction_northwest ~= nil ) and
        ( passedt.direction_northwest ~= ""  )) then
-      if (( passedt.ele == nil ) and
+      if (( passedt.ele == nil ) or
           ( passedt.ele == ""  )) then
          passedt.ele = "NW: " .. passedt.direction_northwest
       else
@@ -10990,7 +11006,11 @@ function generic_after_building( passedt )
         ( passedt.building ~= ""  )) then
         Layer("building", true)
 	Attribute( "class", "building_" .. passedt.building )
-	Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
     end
 end -- generic_after_building()
 
@@ -11008,7 +11028,12 @@ function generic_after_land1( passedt )
         ( passedt.natural == "glacier" )) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 5 )
     else
         render_amenity_land1( passedt )
@@ -11027,7 +11052,12 @@ function render_amenity_land1( passedt )
         ( passedt.amenity == "kindergarten"         )) then
         Layer( "land1", true )
         Attribute( "class", "amenity_" .. passedt.amenity )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 9 )
     else
         if (( passedt.amenity == "holy_spring"                ) or
@@ -11035,7 +11065,12 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "watering_place"             )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
-            Attribute( "name", Find( "name" ) )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
+            end
+
             MinZoom( 13 )
         else
             if (( passedt.amenity == "shelter"                    ) or
@@ -11598,7 +11633,12 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "pub_nddddddd"               )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
-                Attribute( "name", Find( "name" ) )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                    Attribute( "name", passedt.name )
+                end
+
                 MinZoom( 14 )
             else
                 render_highway_land1( passedt )
@@ -11618,10 +11658,23 @@ function render_highway_land1( passedt )
         ( passedt.highway == "bus_stop_speech_realtime"  ) or
         ( passedt.highway == "traffic_signals"           ) or
         ( passedt.highway == "streetlamp_electric"       ) or
-        ( passedt.highway == "streetlamp_gas"            )) then
+        ( passedt.highway == "streetlamp_gas"            ) or
+        ( passedt.highway == "crossing"                  ) or
+        ( passedt.highway == "milestone"                 ) or
+        ( passedt.highway == "mini_roundabout"           )) then
         Layer( "land1", true )
         Attribute( "class", "highway_" .. passedt.highway )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+            Attribute( "name", passedt.name )
+        end
+
+        if (( passedt.ele ~= nil ) and
+            ( passedt.ele ~= ""  )) then
+            Attribute( "ele", passedt.ele )
+        end
+
         MinZoom( 14 )
     else
         render_landuse_land1( passedt )
@@ -11633,7 +11686,12 @@ function render_landuse_land1( passedt )
         ( passedt.landuse == "farmland"        )) then
         Layer( "land1", true )
         Attribute( "class", "landuse_" .. passedt.landuse )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 8 )
     else
         if (( passedt.landuse == "grass"                     ) or
@@ -11664,7 +11722,12 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "othercemetery"             )) then
             Layer( "land1", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
-            Attribute( "name", Find( "name" ) )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
+            end
+
             MinZoom( 9 )
         else
             if (( passedt.landuse == "village_green"          ) or
@@ -11672,31 +11735,56 @@ function render_landuse_land1( passedt )
                 ( passedt.landuse == "historicquarry"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "landuse_" .. passedt.landuse )
-                Attribute( "name", Find( "name" ) )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                     Attribute( "name", passedt.name )
+                end
+
                 MinZoom( 10 )
             else
                 if ( passedt.landuse == "garages" ) then
                     Layer( "land1", true )
                     Attribute( "class", "landuse_" .. passedt.landuse )
-                    Attribute( "name", Find( "name" ) )
+
+                    if (( passedt.name ~= nil ) and
+                        ( passedt.name ~= ""  )) then
+                        Attribute( "name", passedt.name )
+                    end
+
                     MinZoom( 11 )
                 else
                     if ( passedt.landuse == "vineyard" ) then
                         Layer( "land1", true )
                         Attribute( "class", "landuse_" .. passedt.landuse )
-                        Attribute( "name", Find( "name" ) )
+
+                        if (( passedt.name ~= nil ) and
+                            ( passedt.name ~= ""  )) then
+                            Attribute( "name", passedt.name )
+                        end
+
                         MinZoom( 12 )
                     else
                         if ( passedt.landuse == "conservation" ) then
                             Layer( "land1", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
-                            Attribute( "name", Find( "name" ) )
+
+                            if (( passedt.name ~= nil ) and
+                                ( passedt.name ~= ""  )) then
+                                  Attribute( "name", passedt.name )
+                            end
+
                             MinZoom( 13 )
                         else
                             if ( passedt.landuse == "industrialbuilding" ) then
                                 Layer( "land1", true )
                                 Attribute( "class", "landuse_" .. passedt.landuse )
-                                Attribute( "name", Find( "name" ) )
+
+                                if (( passedt.name ~= nil ) and
+                                    ( passedt.name ~= ""  )) then
+                                    Attribute( "name", passedt.name )
+                                end
+
                                 MinZoom( 14 )
                             else
                                 render_leisure_land1( passedt )
@@ -11713,7 +11801,12 @@ function render_leisure_land1( passedt )
     if ( passedt.leisure == "nature_reserve" ) then
         Layer( "land1", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 6 )
     else
         if (( passedt.leisure == "common"            ) or
@@ -11728,20 +11821,35 @@ function render_leisure_land1( passedt )
             ( passedt.leisure == "track"             )) then
             Layer( "land1", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
-            Attribute( "name", Find( "name" ) )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
+            end
+
             MinZoom( 9 )
         else
             if (( passedt.leisure == "playground" ) or
                 ( passedt.leisure == "schoolyard" )) then
                 Layer( "land1", true )
                 Attribute( "class", "leisure_" .. passedt.leisure )
-                Attribute( "name", Find( "name" ) )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                     Attribute( "name", passedt.name )
+                end
+
                 MinZoom( 12 )
             else
                 if ( passedt.leisure == "swimming_pool" ) then
                     Layer( "land1", true )
                     Attribute( "class", "leisure_" .. passedt.leisure )
-                    Attribute( "name", Find( "name" ) )
+
+                    if (( passedt.name ~= nil ) and
+                        ( passedt.name ~= ""  )) then
+                         Attribute( "name", passedt.name )
+                    end
+
                     MinZoom( 13 )
                 else
                     if (( passedt.leisure == "leisurenonspecific" ) or
@@ -11755,7 +11863,12 @@ function render_leisure_land1( passedt )
                         ( passedt.leisure == "grouse_butt"        )) then
                         Layer( "land1", true )
                         Attribute( "class", "leisure_" .. passedt.leisure )
-                        Attribute( "name", Find( "name" ) )
+
+                        if (( passedt.name ~= nil ) and
+                            ( passedt.name ~= ""  )) then
+                             Attribute( "name", passedt.name )
+                        end
+
                         MinZoom( 14 )
                     else
                         render_military_land1( passedt )
@@ -11770,7 +11883,12 @@ function render_military_land1( passedt )
     if ( passedt.military == "barracks" ) then
         Layer( "land1", true )
         Attribute( "class", "military_" .. passedt.military )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 9 )
     else
         render_natural_land1( passedt )
@@ -11781,7 +11899,12 @@ function render_natural_land1( passedt )
     if ( passedt.natural == "desert" ) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 7 )
     else
         if (( passedt.natural == "wood"         ) or
@@ -11790,7 +11913,12 @@ function render_natural_land1( passedt )
             ( passedt.natural == "mixedleaved"  )) then
             Layer( "land1", true )
             Attribute( "class", "natural_" .. passedt.natural )
-            Attribute( "name", Find( "name" ) )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
+            end
+
             MinZoom( 8 )
         else
             if (( passedt.natural == "beach"         ) or
@@ -11810,7 +11938,12 @@ function render_natural_land1( passedt )
                 ( passedt.natural == "scrub"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "natural_" .. passedt.natural )
-                Attribute( "name", Find( "name" ) )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                     Attribute( "name", passedt.name )
+                end
+
                 MinZoom( 9 )
             else
                 if (( passedt.natural == "wetland"  ) or
@@ -11818,7 +11951,12 @@ function render_natural_land1( passedt )
                     ( passedt.natural == "reefsand" )) then
                     Layer( "land1", true )
                     Attribute( "class", "natural_" .. passedt.natural )
-                    Attribute( "name", Find( "name" ) )
+
+                    if (( passedt.name ~= nil ) and
+                        ( passedt.name ~= ""  )) then
+                        Attribute( "name", passedt.name )
+                    end
+
                     MinZoom( 12 )
                 else
                     render_power_land1( passedt )
@@ -11833,13 +11971,23 @@ function render_power_land1( passedt )
         ( passedt.power == "generator" )) then
         Layer( "land1", true )
         Attribute( "class", "power_" .. passedt.power )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 9 )
     else
         if ( passedt.power == "substation" ) then
             Layer( "land1", true )
             Attribute( "class", "power_" .. passedt.power )
-            Attribute( "name", Find( "name" ) )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
+            end
+
             MinZoom( 12 )
         else
             render_tourism_land1( passedt )
@@ -11852,7 +12000,12 @@ function render_tourism_land1( passedt )
         ( passedt.tourism == "attraction" )) then
         Layer( "land1", true )
         Attribute( "class", "tourism_" .. passedt.tourism )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 9 )
     else
         if (( passedt.tourism == "camp_site"    ) or
@@ -11861,13 +12014,23 @@ function render_tourism_land1( passedt )
             ( passedt.tourism == "theme_park"   )) then
             Layer( "land1", true )
             Attribute( "class", "tourism_" .. passedt.tourism )
-            Attribute( "name", Find( "name" ) )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
+            end
+
             MinZoom( 12 )
         else
             if ( passedt.tourism == "viewpoint" ) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
-                Attribute( "name", Find( "name" ) )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                     Attribute( "name", passedt.name )
+                end
+
                 MinZoom( 14 )
             else
                 render_aeroway_land1( passedt )
@@ -11880,7 +12043,12 @@ function render_aeroway_land1( passedt )
     if ( passedt.aeroway == "apron" ) then
         Layer( "land1", true )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 12 )
     else
 -- ------------------------------------------------------------------------------
@@ -11901,7 +12069,12 @@ function generic_after_land2( passedt )
         ( passedt.natural == "flood_prone"       )) then
         Layer( "land2", true )
         Attribute( "class", "natural_" .. passedt.natural )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 9 )
     else
         render_landuse_land2( passedt )
@@ -11939,7 +12112,10 @@ function render_landuse_land2( passedt )
             Attribute( "class", "landuse_" .. passedt.landuse )
 
             if ( passedt.landuse == "military" ) then
-                Attribute( "name", Find( "name" ) )
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                     Attribute( "name", passedt.name )
+                end
             end
 
             MinZoom( 9 )
@@ -11953,7 +12129,12 @@ function render_landuse_land2( passedt )
                 if ( passedt.landuse == "harbour" ) then
                     Layer( "land2", true )
                     Attribute( "class", "landuse_" .. passedt.landuse )
-                    Attribute( "name", Find( "name" ) )
+
+                    if (( passedt.name ~= nil ) and
+                        ( passedt.name ~= ""  )) then
+                         Attribute( "name", passedt.name )
+                    end
+
                     MinZoom( 13 )
                 else
                     render_leisure_land2( passedt )
@@ -11972,7 +12153,12 @@ function render_leisure_land2( passedt )
         if ( passedt.leisure == "marina" ) then
             Layer( "land2", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
-            Attribute( "name", Find( "name" ) )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
+            end
+
             MinZoom( 13 )
         else
             render_natural_land2( passedt )
@@ -12018,7 +12204,12 @@ function render_aeroway_land2( passedt )
         ( passedt.aeroway == "large_aerodrome" )) then
         Layer( "land2", true )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 12 )
     else
         render_boundary_land2( passedt )
@@ -12029,7 +12220,12 @@ function render_boundary_land2( passedt )
     if ( passedt.boundary == "national_park" ) then
         Layer( "land2", true )
         Attribute( "class", "boundary_" .. passedt.boundary )
-        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 6 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
@@ -12046,13 +12242,22 @@ function generic_after_poi( passedt )
         ( passedt.amenity ~= ""  )) then
         LayerAsCentroid( "poi" )
 	Attribute( "class","amenity_" .. passedt.amenity )
-	Attribute( "name", Find( "name" ) )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
         MinZoom( 14 )
     else
         if (( passedt.place ~= nil ) and
             ( passedt.place ~= ""  )) then
             LayerAsCentroid( "place" )
-    	    Attribute( "name", Find( "name" ))
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
+            end
 
             if (( passedt.place == "country" ) or
                 ( passedt.place == "state"   )) then
@@ -12086,14 +12291,24 @@ function generic_after_poi( passedt )
                 ( passedt.shop ~= ""  )) then
                 LayerAsCentroid( "poi" )
     	        Attribute( "class","shop_" .. passedt.shop )
-    	        Attribute( "name", Find( "name" ) )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                    Attribute( "name", passedt.name )
+                end
+
                 MinZoom( 14 )
             else
                 if (( passedt.tourism ~= nil ) and
                     ( passedt.tourism ~= ""  )) then
                     LayerAsCentroid( "poi" )
                     Attribute( "class", "tourism_" .. passedt.tourism )
-                    Attribute( "name", Find( "name" ) )
+
+                    if (( passedt.name ~= nil ) and
+                        ( passedt.name ~= ""  )) then
+                        Attribute( "name", passedt.name )
+                    end
+
                     MinZoom( 14 )
 -- ------------------------------------------------------------------------------
 -- No else here yet
