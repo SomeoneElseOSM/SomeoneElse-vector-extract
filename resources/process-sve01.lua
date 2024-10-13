@@ -12435,7 +12435,8 @@ function render_barrier_land1( passedt )
         ( passedt.barrier == "block"           ) or
         ( passedt.barrier == "bollard"         ) or
         ( passedt.barrier == "lift_gate"       ) or
-        ( passedt.barrier == "toll_booth"      )) then
+        ( passedt.barrier == "toll_booth"      ) or
+        ( passedt.barrier == "door"            )) then
         Layer( "land1", true )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
