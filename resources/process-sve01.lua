@@ -26,9 +26,11 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "attraction", "canoe", "climbing", "emergency", "entrance", "harbour", "healthcare", 
-              "landuse", "leisure", "man_made", "natural", "pitch", "place", "place_of_worship", 
-              "playground", "power", "railway", "shop", "sport", "tourism", "whitewater", "zoo" }
+node_keys = { "amenity", "attraction", "canoe", "climbing", "emergency", 
+              "entrance", "harbour", "healthcare", "highway", "information", 
+              "landuse", "leisure", "man_made", "natural", "pitch", "place", 
+              "place_of_worship", "playground", "power", "railway", "shop", 
+              "sport", "tourism", "whitewater", "zoo" }
 
 -- Initialize Lua logic
 
@@ -359,6 +361,21 @@ function node_function()
     nodet.food = Find("food")
     nodet.noncarpeted = Find("noncarpeted")
     nodet.microbrewery = Find("microbrewery")
+    nodet.lamp_type = Find("lamp_type")
+    nodet.departures_board = Find("departures_board")
+    nodet.passenger_information_display = Find("passenger_information_display")
+    nodet.disusedChighway = Find("disused:highway")
+    nodet.physically_present = Find("physically_present")
+    nodet.naptanCindicator = Find("naptan:indicator")
+    nodet.bus_speech_output_name = Find("bus_speech_output_name")
+    nodet.bus_display_name = Find("bus_display_name")
+    nodet.website = Find("website")
+    nodet.timetable = Find("timetable")
+    nodet.departures_boardCspeech_output = Find("departures_board:speech_output")
+    nodet.passenger_information_displayCspeech_output = Find("passenger_information_display:speech_output")
+    nodet.flag = Find("flag")
+    nodet.pole = Find("pole")
+    nodet.naptanCBusStopType = Find("naptan:BusStopType")
 
     generic_before_function( nodet )
 
@@ -684,6 +701,21 @@ function way_function()
     wayt.food = Find("food")
     wayt.noncarpeted = Find("noncarpeted")
     wayt.microbrewery = Find("microbrewery")
+    wayt.lamp_type = Find("lamp_type")
+    wayt.departures_board = Find("departures_board")
+    wayt.passenger_information_display = Find("passenger_information_display")
+    wayt.disusedChighway = Find("disused:highway")
+    wayt.physically_present = Find("physically_present")
+    wayt.naptanCindicator = Find("naptan:indicator")
+    wayt.bus_speech_output_name = Find("bus_speech_output_name")
+    wayt.bus_display_name = Find("bus_display_name")
+    wayt.website = Find("website")
+    wayt.timetable = Find("timetable")
+    wayt.departures_boardCspeech_output = Find("departures_board:speech_output")
+    wayt.passenger_information_displayCspeech_output = Find("passenger_information_display:speech_output")
+    wayt.flag = Find("flag")
+    wayt.pole = Find("pole")
+    wayt.naptanCBusStopType = Find("naptan:BusStopType")
 
     generic_before_function( wayt )
 
@@ -10500,6 +10532,217 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- highway=streetlamp
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway == "street_lamp" ) then
+      if ( passedt.lamp_type == "gaslight" ) then
+         passedt.highway = "streetlamp_gas"
+      else
+         passedt.highway = "streetlamp_electric"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Departure boards not associated with bus stops etc.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.highway                       == nil                            )  or
+        ( passedt.highway                       == ""                             )) and
+       (( passedt.railway                       == nil                            )  or
+        ( passedt.railway                       == ""                             )) and
+       (( passedt.public_transport              == nil                            )  or
+        ( passedt.public_transport              == ""                             )) and
+       (( passedt.building                      == nil                            )  or
+        ( passedt.building                      == ""                             )) and
+       (( passedt.departures_board              == "realtime"                     ) or
+        ( passedt.departures_board              == "timetable; realtime"          ) or
+        ( passedt.departures_board              == "realtime;timetable"           ) or
+        ( passedt.departures_board              == "timetable;realtime"           ) or
+        ( passedt.departures_board              == "realtime_multiline"           ) or
+        ( passedt.departures_board              == "realtime,timetable"           ) or
+        ( passedt.departures_board              == "multiline"                    ) or
+        ( passedt.departures_board              == "realtime_multiline;timetable" ) or
+        ( passedt.passenger_information_display == "realtime"                     ))) then
+         passedt.highway = "board_realtime"
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a bus stop pole exists but it's known to be disused, indicate that.
+--
+-- We also show bus stands as disused bus stops - they are somewhere where you
+-- might expect to be able to get on a bus, but cannot.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.disusedChighway    == "bus_stop"  )  and
+        ( passedt.physically_present == "yes"       )) or
+       (  passedt.highway            == "bus_stand"  ) or
+       (  passedt.amenity            == "bus_stand"  )) then
+      passedt.highway = "bus_stop_disused_pole"
+      passedt.disusedChighway = nil
+      passedt.amenity = nil
+
+      if (( passedt.name ~= nil ) and
+          ( passedt.name ~= ""  )) then
+         passedt.ele = passedt.name
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Some people tag waste_basket on bus_stop.  We render just bus_stop.
+-- ----------------------------------------------------------------------------
+   if (( passedt.highway == "bus_stop"     ) and
+       ( passedt.amenity == "waste_basket" )) then
+      passedt.amenity = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Many "naptan:Indicator" are "opp" or "adj", but some are "Stop XYZ" or
+-- various other bits and pieces.  See 
+-- https://taginfo.openstreetmap.org/keys/naptan%3AIndicator#values
+-- We remove overly long ones.
+-- Similarly, long "ref" values.
+-- ----------------------------------------------------------------------------
+   if (( passedt.naptanCIndicator ~= nil           ) and
+       ( passedt.naptanCIndicator ~= ""            ) and
+       ( string.len( passedt.naptanCIndicator) > 3 )) then
+      passedt.naptanCIndicator = nil
+   end
+
+   if (( passedt.highway == "bus_stop" ) and
+       ( passedt.ref     ~= nil        ) and
+       ( passedt.ref     ~= ""         ) and
+       ( string.len( passedt.ref) > 3  )) then
+      passedt.ref = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Concatenate a couple of names for bus stops so that the most useful ones
+-- are displayed.
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway == "bus_stop" ) then
+      if (( passedt.name ~= nil ) and
+          ( passedt.name ~= ""  )) then
+         if (( passedt.bus_speech_output_name ~= nil                                ) and
+             ( passedt.bus_speech_output_name ~= ""                                 ) and
+             ( not string.match( passedt.name, passedt.bus_speech_output_name ))) then
+            passedt.name = passedt.name .. " / " .. passedt.bus_speech_output_name
+         end
+
+         if (( passedt.bus_display_name ~= nil                                ) and
+             ( passedt.bus_display_name ~= ""                                 ) and
+             ( not string.match( passedt.name, passedt.bus_display_name ))) then
+            passedt.name = passedt.name .. " / " .. passedt.bus_display_name
+         end
+      end
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         if (( passedt.ref == nil ) or
+             ( passedt.ref == ""  )) then
+            if (( passedt.naptanCIndicator ~= nil )  and
+                ( passedt.naptanCIndicator ~= ""  )) then
+               passedt.name = passedt.naptanCIndicator
+            end
+         else -- ref not nil
+            if (( passedt.naptanCIndicator == nil ) or
+                ( passedt.naptanCIndicator == ""  )) then
+               passedt.name = passedt.ref
+            else
+               passedt.name = passedt.ref .. " " .. passedt.naptanCIndicator
+            end
+         end
+      else -- name not nil
+         if (( passedt.ref == nil ) or
+             ( passedt.ref == ""  )) then
+            if (( passedt.naptanCIndicator ~= nil )  and
+                ( passedt.naptanCIndicator ~= ""  )) then
+               passedt.name = passedt.name .. " " .. passedt.naptanCIndicator
+            end
+         else -- neither name nor ref nil
+            if (( passedt.naptanCIndicator == nil )  or
+                ( passedt.naptanCIndicator == ""  )) then
+               passedt.name = passedt.name .. " " .. passedt.ref
+            else -- naptanCIndicator not nil
+               passedt.name = passedt.name .. " " .. passedt.ref .. " " .. passedt.naptanCIndicator
+            end
+         end
+      end
+
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         if (( passedt.website ~= nil ) and
+             ( passedt.website ~= ""  )) then
+            passedt.ele = passedt.website
+         end
+      else -- name not nil
+         if (( passedt.website == nil ) or
+             ( passedt.website == ""  )) then
+            passedt.ele = passedt.name
+         else -- website not nil
+            passedt.ele = passedt.name .. " " .. passedt.website
+         end
+      end
+
+-- ----------------------------------------------------------------------------
+-- Can we set a "departures_board" value based on a "timetable" value?
+-- ----------------------------------------------------------------------------
+      if ((( passedt.departures_board == nil         )  or
+           ( passedt.departures_board == ""          )) and
+          (  passedt.timetable        == "real_time"  )) then
+         passedt.departures_board = "realtime"
+      end
+
+      if ((( passedt.departures_board == nil   )  or
+           ( passedt.departures_board == ""    )) and
+          (  passedt.timetable        == "yes"  )) then
+         passedt.departures_board = "timetable"
+      end
+
+-- ----------------------------------------------------------------------------
+-- Based on the other tags that are set, 
+-- let's use different symbols for bus stops
+-- ----------------------------------------------------------------------------
+      if (( passedt.departures_board              == "realtime"                     ) or
+          ( passedt.departures_board              == "timetable; realtime"          ) or
+          ( passedt.departures_board              == "realtime;timetable"           ) or
+          ( passedt.departures_board              == "timetable;realtime"           ) or
+          ( passedt.departures_board              == "realtime_multiline"           ) or
+          ( passedt.departures_board              == "realtime,timetable"           ) or
+          ( passedt.departures_board              == "multiline"                    ) or
+          ( passedt.departures_board              == "realtime_multiline;timetable" ) or
+          ( passedt.passenger_information_display == "realtime"                     )) then
+         if (( passedt.departures_boardCspeech_output              == "yes" ) or
+             ( passedt.passenger_information_displayCspeech_output == "yes" )) then
+            passedt.highway = "bus_stop_speech_realtime"
+         else
+            passedt.highway = "bus_stop_realtime"
+         end
+      else
+         if (( passedt.departures_board              == "timetable"        ) or
+             ( passedt.departures_board              == "schedule"         ) or
+             ( passedt.departures_board              == "separate"         ) or
+             ( passedt.departures_board              == "paper timetable"  ) or
+             ( passedt.departures_board              == "yes"              ) or
+             ( passedt.passenger_information_display == "timetable"        ) or
+             ( passedt.passenger_information_display == "yes"              )) then
+            if (( passedt.departures_boardCspeech_output              == "yes" ) or
+                ( passedt.passenger_information_displayCspeech_output == "yes" )) then
+               passedt.highway = "bus_stop_speech_timetable"
+            else
+               passedt.highway = "bus_stop_timetable"
+            end
+         else
+            if (( passedt.flag               == "no"  ) or
+                ( passedt.pole               == "no"  ) or
+                ( passedt.physically_present == "no"  ) or
+                ( passedt.naptanCBusStopType == "CUS" )) then
+               passedt.highway = "bus_stop_nothing"
+            else
+               passedt.highway = "bus_stop_pole"
+            end
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
 -- Shops etc. with icons already - just add "unnamedcommercial" landuse.
 -- The exception is where landuse is set to something we want to keep.
 -- ----------------------------------------------------------------------------
@@ -11358,11 +11601,29 @@ function render_amenity_land1( passedt )
                 Attribute( "name", Find( "name" ) )
                 MinZoom( 14 )
             else
-                render_landuse_land1( passedt )
+                render_highway_land1( passedt )
             end -- amenity=shelter etc. 14
         end -- amenity=holy_well etc. 1e
     end -- amenity=parking etc. 9
 end -- render_amenity_land1()
+
+function render_highway_land1( passedt )
+    if (( passedt.highway == "board_realtime"            ) or
+        ( passedt.highway == "bus_stop_nothing"          ) or
+        ( passedt.highway == "bus_stop_pole"             ) or
+        ( passedt.highway == "bus_stop_disused_pole"     ) or
+        ( passedt.highway == "bus_stop_timetable"        ) or
+        ( passedt.highway == "bus_stop_realtime"         ) or
+        ( passedt.highway == "bus_stop_speech_timetable" ) or
+        ( passedt.highway == "bus_stop_speech_realtime"  )) then
+        Layer( "land1", true )
+        Attribute( "class", "highway_" .. passedt.highway )
+        Attribute( "name", Find( "name" ) )
+        MinZoom( 14 )
+    else
+        render_landuse_land1( passedt )
+    end -- highway=board_realtime etc.
+end -- render_highway_land1()
 
 function render_landuse_land1( passedt )
     if (( passedt.landuse == "forest"          ) or
