@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "aeroway", "amenity", "attraction", "canoe", "climbing", "emergency", 
+node_keys = { "aeroway", "amenity", "attraction", "barrier", "canoe", "climbing", "emergency", 
               "entrance", "harbour", "healthcare", "highway", "information", 
               "landuse", "leisure", "man_made", "natural", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
@@ -11959,12 +11959,36 @@ function render_natural_land1( passedt )
 
                     MinZoom( 12 )
                 else
-                    render_power_land1( passedt )
+                    render_barrier_land1( passedt )
                 end -- wetland 12
             end -- beach etc. 9
         end -- wood 8
     end -- desert 7
 end -- render_natural_land1()
+
+function render_barrier_land1( passedt )
+    if (( passedt.barrier == "cattle_grid"     ) or
+        ( passedt.barrier == "cycle_barrier"   ) or
+        ( passedt.barrier == "gate"            ) or
+        ( passedt.barrier == "gate_locked"     ) or
+        ( passedt.barrier == "horse_stile"     ) or
+        ( passedt.barrier == "kissing_gate"    ) or
+        ( passedt.barrier == "dog_gate_stile"  ) or
+        ( passedt.barrier == "stepping_stones" ) or
+        ( passedt.barrier == "stile"           )) then
+        Layer( "land1", true )
+        Attribute( "class", "barrier_" .. passedt.barrier )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
+        MinZoom( 14 )
+    else
+        render_power_land1( passedt )
+    end -- barrier=cattle_grid etc. 15
+end -- render_barrier_land1()
 
 function render_power_land1( passedt )
     if (( passedt.power == "station"   ) or
