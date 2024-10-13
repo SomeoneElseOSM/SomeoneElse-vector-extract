@@ -11615,7 +11615,10 @@ function render_highway_land1( passedt )
         ( passedt.highway == "bus_stop_timetable"        ) or
         ( passedt.highway == "bus_stop_realtime"         ) or
         ( passedt.highway == "bus_stop_speech_timetable" ) or
-        ( passedt.highway == "bus_stop_speech_realtime"  )) then
+        ( passedt.highway == "bus_stop_speech_realtime"  ) or
+        ( passedt.highway == "traffic_signals"           ) or
+        ( passedt.highway == "streetlamp_electric"       ) or
+        ( passedt.highway == "streetlamp_gas"            )) then
         Layer( "land1", true )
         Attribute( "class", "highway_" .. passedt.highway )
         Attribute( "name", Find( "name" ) )
