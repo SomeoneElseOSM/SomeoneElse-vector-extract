@@ -11483,7 +11483,12 @@ function render_leisure_land1( passedt )
                     if (( passedt.leisure == "leisurenonspecific" ) or
                         ( passedt.leisure == "bandstand"          ) or
                         ( passedt.leisure == "bleachers"          ) or
-                        ( passedt.leisure == "fitness_station"    )) then
+                        ( passedt.leisure == "fitness_station"    ) or
+                        ( passedt.leisure == "picnic_table"       ) or
+                        ( passedt.leisure == "slipway"            ) or
+                        ( passedt.leisure == "bird_hide"          ) or
+                        ( passedt.leisure == "hunting_stand"      ) or
+                        ( passedt.leisure == "grouse_butt"        )) then
                         Layer( "land1", true )
                         Attribute( "class", "leisure_" .. passedt.leisure )
                         Attribute( "name", Find( "name" ) )
