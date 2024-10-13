@@ -384,6 +384,12 @@ function node_function()
     nodet.direction_southwest = Find("direction_southwest")
     nodet.direction_west = Find("direction_west")
     nodet.direction_northwest = Find("direction_northwest")
+    nodet.parking = Find("parking")
+    nodet.opening_hours = Find("opening_hours")
+    nodet.addrChousename = Find("addr:housename")
+    nodet.addrCunit = Find("addr:unit")
+    nodet.addrChousenumber = Find("addr:housenumber")
+    nodet.areaChighway = Find("area:highway")
 
     generic_before_function( nodet )
 
@@ -732,6 +738,12 @@ function way_function()
     wayt.direction_southwest = Find("direction_southwest")
     wayt.direction_west = Find("direction_west")
     wayt.direction_northwest = Find("direction_northwest")
+    wayt.parking = Find("parking")
+    wayt.opening_hours = Find("opening_hours")
+    wayt.addrChousename = Find("addr:housename")
+    wayt.addrCunit = Find("addr:unit")
+    wayt.addrChousenumber = Find("addr:housenumber")
+    wayt.areaChighway = Find("area:highway")
 
     generic_before_function( wayt )
 
@@ -2320,6 +2332,119 @@ function generic_before_function( passedt )
       else
          passedt.name = passedt.name .. " (el.sub.)"
       end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Pretend add landuse=industrial to some industrial sub-types to force 
+-- name rendering.  Similarly, some commercial and leisure.
+-- man_made=works drops the man_made tag to avoid duplicate labelling.
+-- "parking=depot" is a special case - drop the parking tag there too.
+-- ----------------------------------------------------------------------------
+   if ( passedt.man_made   == "wastewater_plant" ) then
+      passedt.man_made = nil
+      passedt.landuse = "industrial"
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name = "(sewage)"
+      else
+         passedt.name = passedt.name .. " (sewage)"
+      end
+   end
+
+   if (( passedt.amenity    == "bus_depot"              ) or
+       ( passedt.amenity    == "depot"                  ) or
+       ( passedt.amenity    == "fuel_depot"             ) or
+       ( passedt.amenity    == "scrapyard"              ) or 
+       ( passedt.craft      == "bakery"                 ) or
+       ( passedt.craft      == "distillery"             ) or
+       ( passedt.craft      == "sawmill"                ) or
+       ( passedt.industrial == "auto_wrecker"           ) or 
+       ( passedt.industrial == "automotive_industry"    ) or
+       ( passedt.industrial == "bakery"                 ) or
+       ( passedt.industrial == "brewery"                ) or 
+       ( passedt.industrial == "bus_depot"              ) or
+       ( passedt.industrial == "chemical"               ) or
+       ( passedt.industrial == "concrete_plant"         ) or
+       ( passedt.industrial == "construction"           ) or
+       ( passedt.industrial == "depot"                  ) or 
+       ( passedt.industrial == "distillery"             ) or 
+       ( passedt.industrial == "electrical"             ) or
+       ( passedt.industrial == "engineering"            ) or
+       ( passedt.industrial == "factory"                ) or 
+       ( passedt.industrial == "furniture"              ) or
+       ( passedt.industrial == "gas"                    ) or
+       ( passedt.industrial == "haulage"                ) or
+       ( passedt.industrial == "machine_shop"           ) or
+       ( passedt.industrial == "machinery"              ) or
+       ( passedt.industrial == "metal_finishing"        ) or
+       ( passedt.industrial == "mobile_equipment"       ) or
+       ( passedt.industrial == "oil"                    ) or
+       ( passedt.industrial == "packaging"              ) or
+       ( passedt.industrial == "sawmill"                ) or
+       ( passedt.industrial == "scaffolding"            ) or
+       ( passedt.industrial == "scrap_yard"             ) or 
+       ( passedt.industrial == "shop_fitters"           ) or
+       ( passedt.industrial == "warehouse"              ) or
+       ( passedt.industrial == "waste_handling"         ) or
+       ( passedt.industrial == "woodworking"            ) or
+       ( passedt.industrial == "yard"                   ) or 
+       ( passedt.industrial == "yes"                    ) or 
+       ( passedt.landuse    == "depot"                  ) or
+       ( passedt.man_made   == "gas_station"            ) or
+       ( passedt.man_made   == "gas_works"              ) or
+       ( passedt.man_made   == "petroleum_well"         ) or 
+       ( passedt.man_made   == "pumping_station"        ) or
+       ( passedt.man_made   == "water_treatment"        ) or
+       ( passedt.man_made   == "water_works"            ) or
+       ( passedt.power      == "plant"                  )) then
+      passedt.landuse = "industrial"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Sometimes covered reservoirs are "basically buildings", sometimes they have
+-- e.g. landuse=grass set.  If the latter, don't show them as buildings.
+-- The name will still appear via landuse.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made   == "reservoir_covered"  ) and
+       (( passedt.landuse    == nil                 )  or
+        ( passedt.landuse    == ""                  ))) then
+      passedt.building = "roof"
+      passedt.landuse  = "industrialbuilding"
+   end
+
+   if (( passedt.building   == "industrial"             ) or
+       ( passedt.building   == "depot"                  ) or 
+       ( passedt.building   == "warehouse"              ) or
+       ( passedt.building   == "works"                  ) or
+       ( passedt.building   == "manufacture"            )) then
+      passedt.landuse = "industrialbuilding"
+   end
+
+   if ( passedt.man_made   == "works" ) then
+      passedt.man_made = nil
+
+      if (( passedt.building == nil  ) or
+          ( passedt.building == ""   ) or
+          ( passedt.building == "no" )) then
+         passedt.landuse = "industrial"
+      else
+         passedt.building = "yes"
+         passedt.landuse = "industrialbuilding"
+      end
+   end
+
+   if ( passedt.man_made   == "water_tower" ) then
+      if ( passedt.building == "no" ) then
+         passedt.landuse = "industrial"
+      else
+         passedt.building = "yes"
+         passedt.landuse = "industrialbuilding"
+      end
+   end
+
+   if ( passedt.parking   == "depot" ) then
+      passedt.parking = nil
+      passedt.landuse = "industrial"
    end
 
 -- ----------------------------------------------------------------------------
@@ -4622,6 +4747,15 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Motorcycle parking - if "motorcycle" has been used as a subtag,
+-- set main tag.  Rendering (with fee or not) is handled below.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity == "parking"    )  and
+       ( passedt.parking == "motorcycle" )) then
+      passedt.amenity = "motorcycle_parking"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Render amenity=layby as parking.
 -- highway=rest_area is used a lot in the UK for laybies, so map that over too.
 -- ----------------------------------------------------------------------------
@@ -5368,6 +5502,14 @@ function generic_before_function( passedt )
        ( passedt.waterway == "mill_pond"  )) then
       passedt.natural = "water"
       passedt.waterway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Handle "waterway=mill_pond" as water.
+-- "dock" is displayed with a water fill.
+-- ----------------------------------------------------------------------------
+   if ( passedt.waterway == "mill_pond" ) then
+      passedt.waterway = "dock"
    end
 
 -- ----------------------------------------------------------------------------
@@ -9451,6 +9593,141 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Craft cider
+-- Also remove tourism tag (we want to display brewery in preference to
+-- attraction or museum).
+-- ----------------------------------------------------------------------------
+   if ((  passedt.craft   == "cider"    ) or
+       (( passedt.craft   == "brewery" )  and
+        ( passedt.product == "cider"   ))) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.office  = "craftcider"
+      passedt.craft  = nil
+      passedt.tourism  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Craft breweries
+-- Also remove tourism tag (we want to display brewery in preference to
+-- attraction or museum).
+-- ----------------------------------------------------------------------------
+   if (( passedt.craft == "brewery"       ) or
+       ( passedt.craft == "brewery;cider" )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.office  = "craftbrewery"
+      passedt.craft  = nil
+      passedt.tourism  = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various "printer" offices
+-- ----------------------------------------------------------------------------
+   if (( passedt.shop    == "printers"          ) or
+       ( passedt.amenity == "printer"           ) or
+       ( passedt.craft   == "printer"           ) or
+       ( passedt.office  == "printer"           ) or
+       ( passedt.office  == "design"            ) or
+       ( passedt.craft   == "printmaker"        ) or
+       ( passedt.craft   == "print_shop"        )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.office  = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Various crafts that should appear as at least a nonspecific office.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.amenity == nil                       )   or
+        ( passedt.amenity == ""                        ))  and
+       (( passedt.shop    == nil                       )   or
+        ( passedt.shop    == ""                        ))  and
+       (( passedt.tourism == nil                       )   or
+        ( passedt.tourism == ""                        ))  and
+       (( passedt.craft   == "agricultural_engines"    )   or
+        ( passedt.craft   == "atelier"                 )   or
+        ( passedt.craft   == "blacksmith"              )   or
+        ( passedt.craft   == "beekeeper"               )   or
+        ( passedt.craft   == "bookbinder"              )   or
+        ( passedt.craft   == "carpet_layer"            )   or
+        ( passedt.craft   == "cabinet_maker"           )   or
+        ( passedt.craft   == "caterer"                 )   or
+        ( passedt.craft   == "cleaning"                )   or
+        ( passedt.craft   == "clockmaker"              )   or
+        ( passedt.craft   == "confectionery"           )   or
+        ( passedt.craft   == "dental_technician"       )   or
+        ( passedt.craft   == "engineering"             )   or
+        ( passedt.craft   == "furniture"               )   or
+        ( passedt.craft   == "furniture_maker"         )   or
+        ( passedt.craft   == "gardener"                )   or
+        ( passedt.craft   == "handicraft"              )   or
+        ( passedt.craft   == "insulation"              )   or
+        ( passedt.craft   == "joiner"                  )   or
+        ( passedt.craft   == "metal_construction"      )   or
+        ( passedt.craft   == "painter"                 )   or
+        ( passedt.craft   == "plasterer"               )   or
+        ( passedt.craft   == "photographic_laboratory" )   or
+        ( passedt.craft   == "saddler"                 )   or
+        ( passedt.craft   == "sailmaker"               )   or
+        ( passedt.craft   == "scaffolder"              )   or
+        ( passedt.craft   == "tiler"                   )   or
+        ( passedt.craft   == "watchmaker"              ))) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.office  = "nonspecific"
+      passedt.craft   = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Telephone Exchanges
+-- ----------------------------------------------------------------------------
+   if ((    passedt.man_made   == "telephone_exchange"  )  or
+       (    passedt.amenity    == "telephone_exchange"  )  or
+       ((   passedt.building   == "telephone_exchange" )   and
+        ((( passedt.amenity    == nil                )     or
+          ( passedt.amenity    == ""                 ))    and
+         (( passedt.man_made   == nil                )     or
+          ( passedt.man_made   == ""                 ))    and
+         (( passedt.office     == nil                )     or
+          ( passedt.office     == ""                 )))   or
+        (   passedt.telecom    == "exchange"           ))) then
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         passedt.name  = "Telephone Exchange"
+      end
+
+      passedt.office  = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- If we know that something is a building=office, and it has a name, but is
+-- not already known as an amenity, office or shop, add office=nonspecific.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.building == "office" ) and
+       (  passedt.name     ~= nil      ) and
+       (  passedt.name     ~= ""       ) and
+       (( passedt.amenity  == nil     )  or
+        ( passedt.amenity  == ""      )) and
+       (( passedt.office   == nil     )  or
+        ( passedt.office   == ""      )) and
+       (( passedt.shop     == nil     )  or
+        ( passedt.shop     == ""      ))) then
+      passedt.office  = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Offices that we don't know the type of.  
+-- Add unnamedcommercial landuse to give non-building areas a background.
+-- ----------------------------------------------------------------------------
+   if (( passedt.office     == "company"           ) or
+       ( passedt.shop       == "office"            ) or
+       ( passedt.amenity    == "office"            ) or
+       ( passedt.office     == "private"           ) or
+       ( passedt.office     == "research"          ) or
+       ( passedt.office     == "yes"               ) or
+       ( passedt.commercial == "office"            )) then
+      passedt.landuse = "unnamedcommercial"
+      passedt.office  = "nonspecific"
+   end
+
+-- ----------------------------------------------------------------------------
 -- emergency=water_rescue is a poorly-designed key that makes it difficult to
 -- tell e.g. lifeboats from lifeboat stations.
 -- However, if we've got one of various buildings, it's a lifeboat station.
@@ -10759,6 +11036,185 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Names for vacant shops
+-- ----------------------------------------------------------------------------
+   if ((((( passedt.disusedCshop    ~= nil        )    and
+          ( passedt.disusedCshop    ~= ""         ))   or
+         (( passedt.disusedCamenity ~= nil        )    and
+          ( passedt.disusedCamenity ~= ""         )))  and
+         (  passedt.disusedCamenity ~= "fountain"   )  and
+         (  passedt.disusedCamenity ~= "parking"    )  and
+         (( passedt.shop            == nil         )   or
+          ( passedt.shop            == ""          ))  and
+         (( passedt.amenity         == nil         )   or
+          ( passedt.amenity         == ""          ))) or
+       (    passedt.office          == "vacant"      ) or
+       (    passedt.office          == "disused"     ) or
+       (    passedt.shop            == "disused"     ) or
+       (    passedt.shop            == "abandoned"   ) or
+       ((   passedt.shop            ~= nil          )  and
+        (   passedt.shop            ~= ""           )  and
+        (   passedt.opening_hours   == "closed"     ))) then
+      passedt.shop = "vacant"
+   end
+
+   if ( passedt.shop == "vacant" ) then
+      if ((( passedt.name     == nil )  or
+           ( passedt.name     == ""  )) and
+          (  passedt.old_name ~= nil  ) and
+          (  passedt.old_name ~= ""   )) then
+         passedt.name     = passedt.old_name
+         passedt.old_name = nil
+      end
+
+      if ((( passedt.name     == nil   )  or
+           ( passedt.name     == ""    )) and
+          (  passedt.former_name ~= nil ) and
+          (  passedt.former_name ~= ""  )) then
+         passedt.name     = passedt.former_name
+         passedt.former_name = nil
+      end
+
+      if (( passedt.name == nil )  or
+          ( passedt.name == ""  )) then
+         passedt.ref = "(vacant)"
+      else
+         passedt.ref = "(vacant: " .. passedt.name .. ")"
+         passedt.name = nil
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Remove icon for public transport and animal field shelters and render as
+-- "roof" (if they are a way).
+-- "roof" isn't rendered for nodes, so this has the effect of suppressing
+-- public_transport shelters and shopping_cart shelters on nodes.
+-- shopping_cart, parking and animal_shelter aren't really a "shelter" type 
+-- that we are interested in (for humans).  There are no field or parking 
+-- shelters on nodes in GB/IE.
+-- ----------------------------------------------------------------------------
+   if (( passedt.amenity      == "shelter"            ) and
+       (( passedt.shelter_type == "public_transport" )  or
+        ( passedt.shelter_type == "field_shelter"    )  or
+        ( passedt.shelter_type == "shopping_cart"    )  or
+        ( passedt.shelter_type == "trolley_park"     )  or
+        ( passedt.shelter_type == "parking"          )  or
+        ( passedt.shelter_type == "animal_shelter"   ))) then
+      passedt.amenity = nil
+      if (( passedt.building == nil )  or
+          ( passedt.building == ""  )) then
+         passedt.building = "roof"
+      end
+   end
+
+  if (( passedt.amenity      == "shelter"            ) and
+      ( passedt.shelter_type == "bicycle_parking"    )) then
+      passedt.amenity = "bicycle_parking"
+      if (( passedt.building == nil )  or
+          ( passedt.building == ""  )) then
+         passedt.building = "roof"
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- Prevent highway=raceway from appearing in the polygon table.
+-- ----------------------------------------------------------------------------
+   if ( passedt.highway == "raceway" ) then
+      passedt.area = "no"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Drop some highway areas - "track" etc. areas wherever I have seen them are 
+-- garbage.
+-- "footway" (pedestrian areas) and "service" (e.g. petrol station forecourts)
+-- tend to be OK.  Other options tend not to occur.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.highway == "track"          )  or
+        ( passedt.highway == "leisuretrack"   )  or
+        ( passedt.highway == "gallop"         )  or
+        ( passedt.highway == "residential"    )  or
+        ( passedt.highway == "unclassified"   )  or
+        ( passedt.highway == "tertiary"       )) and
+       (  passedt.area    == "yes"             )) then
+      passedt.highway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Show traffic islands as kerbs
+-- ----------------------------------------------------------------------------
+   if (( passedt.areaChighway == "traffic_island" )  or
+       ( passedt.landuse      == "traffic_island" )) then
+      passedt.barrier = "kerb"
+   end
+
+-- ----------------------------------------------------------------------------
+-- name and addr:housename
+-- If a building that isn't something else has a name but no addr:housename,
+-- use that there.
+--
+-- There are some odd combinations of "place" and "building" - we remove 
+-- "place" in those cases
+-- ----------------------------------------------------------------------------
+   if ((  passedt.building       ~= nil   ) and
+       (  passedt.building       ~= ""    ) and
+       (  passedt.building       ~= "no"  ) and
+       (( passedt.addrChousename == nil  )  or
+        ( passedt.addrChousename == ""   )) and
+       (  passedt.name           ~= nil   ) and
+       (  passedt.name           ~= ""    ) and
+       (( passedt.aeroway        == nil  )  or
+        ( passedt.aeroway        == ""   )) and
+       (( passedt.amenity        == nil  )  or
+        ( passedt.amenity        == ""   )) and
+       (( passedt.barrier        == nil  )  or
+        ( passedt.barrier        == ""   )) and
+       (( passedt.craft          == nil  )  or
+        ( passedt.craft          == ""   )) and
+       (( passedt.emergency      == nil  )  or
+        ( passedt.emergency      == ""   )) and
+       (( passedt.highway        == nil  )  or
+        ( passedt.highway        == ""   )) and
+       (( passedt.historic       == nil  )  or
+        ( passedt.historic       == ""   )) and
+       (( passedt.landuse        == nil  )  or
+        ( passedt.landuse        == ""   )) and
+       (( passedt.leisure        == nil  )  or
+        ( passedt.leisure        == ""   )) and
+       (( passedt.man_made       == nil  )  or
+        ( passedt.man_made       == ""   )) and
+       (( passedt.natural        == nil  )  or
+        ( passedt.natural        == ""   )) and
+       (( passedt.office         == nil  )  or
+        ( passedt.office         == ""   )) and
+       (( passedt.railway        == nil  )  or
+        ( passedt.railway        == ""   )) and
+       (( passedt.shop           == nil  )  or
+        ( passedt.shop           == ""   )) and
+       (( passedt.sport          == nil  )  or
+        ( passedt.sport          == ""   )) and
+       (( passedt.tourism        == nil  )  or
+        ( passedt.tourism        == ""   )) and
+       (( passedt.waterway       == nil  )  or
+        ( passedt.waterway       == ""   ))) then
+      passedt.addrChousename = passedt.name
+      passedt.name  = nil
+      passedt.place = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- addr:unit
+-- ----------------------------------------------------------------------------
+   if (( passedt.addrCunit ~= nil ) and
+       ( passedt.addrCunit ~= ""  )) then
+      if (( passedt.addrChousenumber ~= nil ) and
+          ( passedt.addrChousenumber ~= ""  )) then
+         passedt.addrChousenumber = passedt.addrCunit .. ", " .. passedt.addrChousenumber
+      else
+         passedt.addrChousenumber = passedt.addrCunit
+      end
+   end
+
+-- ----------------------------------------------------------------------------
 -- Shops etc. with icons already - just add "unnamedcommercial" landuse.
 -- The exception is where landuse is set to something we want to keep.
 -- ----------------------------------------------------------------------------
@@ -11975,7 +12431,11 @@ function render_barrier_land1( passedt )
         ( passedt.barrier == "kissing_gate"    ) or
         ( passedt.barrier == "dog_gate_stile"  ) or
         ( passedt.barrier == "stepping_stones" ) or
-        ( passedt.barrier == "stile"           )) then
+        ( passedt.barrier == "stile"           ) or
+        ( passedt.barrier == "block"           ) or
+        ( passedt.barrier == "bollard"         ) or
+        ( passedt.barrier == "lift_gate"       ) or
+        ( passedt.barrier == "toll_booth"      )) then
         Layer( "land1", true )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
