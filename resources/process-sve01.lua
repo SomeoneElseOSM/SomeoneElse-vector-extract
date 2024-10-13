@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "amenity", "attraction", "canoe", "climbing", "emergency", 
+node_keys = { "aeroway", "amenity", "attraction", "canoe", "climbing", "emergency", 
               "entrance", "harbour", "healthcare", "highway", "information", 
               "landuse", "leisure", "man_made", "natural", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
@@ -12051,6 +12051,17 @@ function render_aeroway_land1( passedt )
 
         MinZoom( 12 )
     else
+        if ( passedt.aeroway == "gate" ) then
+            Layer( "land1", true )
+            Attribute( "class", "aeroway_" .. passedt.aeroway )
+
+            if (( passedt.ref ~= nil ) and
+                ( passedt.ref ~= ""  )) then
+                 Attribute( "name", passedt.ref )
+            end
+
+            MinZoom( 16 )
+        else
 -- ------------------------------------------------------------------------------
 -- At this point we've done all thing "landuse" processing for things that might 
 -- be in the "land1" layer, including displaying names and/or icons for them.
@@ -12058,6 +12069,7 @@ function render_aeroway_land1( passedt )
 -- a name and/or an icon, but don't have an area fill or outline.
 -- ------------------------------------------------------------------------------
             generic_after_poi( passedt )
+        end -- aeroway=gate 16
     end -- aeroway=apron 12
 end -- render_aeroway_land1()
 
