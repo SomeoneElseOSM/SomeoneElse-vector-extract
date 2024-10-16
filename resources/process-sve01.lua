@@ -27,7 +27,7 @@ require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "aeroway", "amenity", "attraction", "barrier", "canoe", "climbing", "emergency", 
-              "entrance", "harbour", "healthcare", "highway", "information", 
+              "entrance", "harbour", "historic", "healthcare", "highway", "information", 
               "landuse", "leisure", "man_made", "natural", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
               "sport", "tourism", "waterway", "whitewater", "zoo" }
@@ -12133,9 +12133,37 @@ function render_highway_land1( passedt )
 
         MinZoom( 14 )
     else
-        render_landuse_land1( passedt )
+        render_historic_land1( passedt )
     end -- highway=board_realtime etc.
 end -- render_highway_land1()
+
+function render_historic_land1( passedt )
+    if (( passedt.historic == "archaeological_site"    ) or
+        ( passedt.historic == "battlefield"            ) or
+        ( passedt.historic == "historicarchcastle"     ) or
+        ( passedt.historic == "historicarchmotte"      ) or
+        ( passedt.historic == "historiccrannog"        ) or
+        ( passedt.historic == "historicfortification"  ) or
+        ( passedt.historic == "historichillfort"       ) or
+        ( passedt.historic == "historicpromontoryfort" ) or
+        ( passedt.historic == "historicringfort"       ) or
+        ( passedt.historic == "historictumulus"        ) or
+        ( passedt.historic == "manor"                  ) or
+        ( passedt.historic == "monastery"              ) or
+        ( passedt.historic == "palaeontological_site"  )) then
+        Layer( "land1", true )
+        Attribute( "class", "historic_" .. passedt.historic )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
+        MinZoom( 14 )
+    else
+        render_landuse_land1( passedt )
+    end -- historic=qqq
+end -- render_historic_land1()
 
 function render_landuse_land1( passedt )
     if (( passedt.landuse == "forest"          ) or
