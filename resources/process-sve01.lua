@@ -12138,19 +12138,40 @@ function render_highway_land1( passedt )
 end -- render_highway_land1()
 
 function render_historic_land1( passedt )
-    if (( passedt.historic == "archaeological_site"    ) or
-        ( passedt.historic == "battlefield"            ) or
-        ( passedt.historic == "historicarchcastle"     ) or
-        ( passedt.historic == "historicarchmotte"      ) or
-        ( passedt.historic == "historiccrannog"        ) or
-        ( passedt.historic == "historicfortification"  ) or
-        ( passedt.historic == "historichillfort"       ) or
-        ( passedt.historic == "historicpromontoryfort" ) or
-        ( passedt.historic == "historicringfort"       ) or
-        ( passedt.historic == "historictumulus"        ) or
-        ( passedt.historic == "manor"                  ) or
-        ( passedt.historic == "monastery"              ) or
-        ( passedt.historic == "palaeontological_site"  )) then
+    if (( passedt.historic == "archaeological_site"      ) or
+        ( passedt.historic == "battlefield"              ) or
+        ( passedt.historic == "historicarchcastle"       ) or
+        ( passedt.historic == "historicarchmotte"        ) or
+        ( passedt.historic == "historiccrannog"          ) or
+        ( passedt.historic == "historicfortification"    ) or
+        ( passedt.historic == "historichillfort"         ) or
+        ( passedt.historic == "historicpromontoryfort"   ) or
+        ( passedt.historic == "historicringfort"         ) or
+        ( passedt.historic == "historictumulus"          ) or
+        ( passedt.historic == "manor"                    ) or
+        ( passedt.historic == "monastery"                ) or
+        ( passedt.historic == "palaeontological_site"    ) or
+        ( passedt.historic == "castle"                   ) or
+        ( passedt.historic == "church"                   ) or
+        ( passedt.historic == "city_gate"                ) or
+        ( passedt.historic == "dovecote"                 ) or
+        ( passedt.historic == "folly"                    ) or
+        ( passedt.historic == "historicchurchtower"      ) or
+        ( passedt.historic == "historicdefensivetower"   ) or
+        ( passedt.historic == "historicmegalithtomb"     ) or
+        ( passedt.historic == "historicobservationtower" ) or
+        ( passedt.historic == "historicroundtower"       ) or
+        ( passedt.historic == "historicsquaretower"      ) or
+        ( passedt.historic == "historicstandingstone"    ) or
+        ( passedt.historic == "historicstone"            ) or
+        ( passedt.historic == "historicstonecircle"      ) or
+        ( passedt.historic == "historicstonerow"         ) or
+        ( passedt.historic == "martello_tower"           ) or
+        ( passedt.historic == "massrock"                 ) or
+        ( passedt.historic == "naturalstone"             ) or
+        ( passedt.historic == "oghamstone"               ) or
+        ( passedt.historic == "pinfold"                  ) or
+        ( passedt.historic == "runestone"                )) then
         Layer( "land1", true )
         Attribute( "class", "historic_" .. passedt.historic )
 
