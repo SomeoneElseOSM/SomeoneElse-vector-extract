@@ -26,7 +26,8 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "aeroway", "amenity", "attraction", "barrier", "canoe", "climbing", "emergency", 
+node_keys = { "aeroway", "amenity", "attraction", "barrier", 
+              "canoe", "climbing", "disused:military", "emergency", 
               "entrance", "harbour", "historic", "healthcare", "highway", "information", 
               "landuse", "leisure", "man_made", "natural", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
@@ -12171,7 +12172,39 @@ function render_historic_land1( passedt )
         ( passedt.historic == "naturalstone"             ) or
         ( passedt.historic == "oghamstone"               ) or
         ( passedt.historic == "pinfold"                  ) or
-        ( passedt.historic == "runestone"                )) then
+        ( passedt.historic == "runestone"                ) or
+        ( passedt.historic == "aircraft"                 ) or
+        ( passedt.historic == "aircraft_wreck"           ) or
+        ( passedt.historic == "bunker"                   ) or
+        ( passedt.historic == "cannon"                   ) or
+        ( passedt.historic == "cross"                    ) or
+        ( passedt.historic == "ice_house"                ) or
+        ( passedt.historic == "kiln"                     ) or
+        ( passedt.historic == "memorial"                 ) or
+        ( passedt.historic == "memorialbench"            ) or
+        ( passedt.historic == "memorialcross"            ) or
+        ( passedt.historic == "memorialgrave"            ) or
+        ( passedt.historic == "memorialobelisk"          ) or
+        ( passedt.historic == "memorialpavementplaque"   ) or
+        ( passedt.historic == "memorialplaque"           ) or
+        ( passedt.historic == "memorialplate"            ) or
+        ( passedt.historic == "memorialsculpture"        ) or
+        ( passedt.historic == "memorialstatue"           ) or
+        ( passedt.historic == "memorialstone"            ) or
+        ( passedt.historic == "mill"                     ) or
+        ( passedt.historic == "monument"                 ) or
+        ( passedt.historic == "ship"                     ) or
+        ( passedt.historic == "stocks"                   ) or
+        ( passedt.historic == "tank"                     ) or
+        ( passedt.historic == "tomb"                     ) or
+        ( passedt.historic == "warmemorial"              ) or
+        ( passedt.historic == "water_pump"               ) or
+        ( passedt.historic == "watermill"                ) or
+        ( passedt.historic == "well"                     ) or
+        ( passedt.historic == "windmill"                 ) or
+        ( passedt.historic == "wreck"                    ) or
+        ( passedt.historic == "mineshaft"                ) or
+        ( passedt.historic == "nonspecific"              )) then
         Layer( "land1", true )
         Attribute( "class", "historic_" .. passedt.historic )
 
