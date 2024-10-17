@@ -12138,6 +12138,10 @@ function render_man_made_land1( passedt )
 
                 MinZoom( 13 )
             else
+-- ----------------------------------------------------------------------------
+-- These are all extracted at zoom 14 but may not get displayed until 
+-- higher zoom levels.
+-- ----------------------------------------------------------------------------
                 if (( passedt.man_made == "chimney"                  ) or
                     ( passedt.man_made == "lighthouse"               ) or
                     ( passedt.man_made == "mast"                     ) or
@@ -12179,7 +12183,23 @@ function render_man_made_land1( passedt )
 
                     MinZoom( 14 )
                 else
-                    render_highway_land1( passedt )
+-- ----------------------------------------------------------------------------
+-- man_made == "markeraerial" gets written through with "ref" in the name,
+-- but is still extracted at zoom 14.
+-- ----------------------------------------------------------------------------
+                    if ( passedt.man_made == "markeraerial" ) then
+                        Layer( "land1", true )
+                        Attribute( "class", "man_made_" .. passedt.man_made )
+
+                        if (( passedt.ref ~= nil ) and
+                            ( passedt.ref ~= ""  )) then
+                            Attribute( "name", passedt.ref )
+                        end
+
+                        MinZoom( 14 )
+                    else
+                        render_highway_land1( passedt )
+                    end -- man_made=markeraerial etc. 14
                 end -- man_made=chimney etc. 14
             end -- man_made=bigobservationtower 13
         end -- man_made=bigchimney 12
