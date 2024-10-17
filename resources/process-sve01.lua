@@ -12098,11 +12098,27 @@ function render_amenity_land1( passedt )
 
                 MinZoom( 14 )
             else
-                render_highway_land1( passedt )
+                render_man_made_land1( passedt )
             end -- amenity=shelter etc. 14
         end -- amenity=holy_well etc. 1e
     end -- amenity=parking etc. 9
 end -- render_amenity_land1()
+
+function render_man_made_land1( passedt )
+    if ( passedt.man_made == "bigmast" ) then
+        Layer( "land1", true )
+        Attribute( "class", "man_made_" .. passedt.man_made )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+            Attribute( "name", passedt.name )
+        end
+
+        MinZoom( 11 )
+    else
+        render_highway_land1( passedt )
+    end -- man_made=bigmast 11
+end -- render_man_made_land1()
 
 function render_highway_land1( passedt )
     if (( passedt.highway == "board_realtime"            ) or
