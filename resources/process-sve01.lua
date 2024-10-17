@@ -29,7 +29,7 @@ require "shared_lua"
 node_keys = { "aeroway", "amenity", "attraction", "barrier", 
               "canoe", "climbing", "disused:military", "emergency", 
               "entrance", "harbour", "historic", "healthcare", "highway", "information", 
-              "landuse", "leisure", "man_made", "natural", "pitch", "place", 
+              "landuse", "leisure", "man_made", "military", "natural", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
               "sport", "tourism", "waterway", "whitewater", "zoo" }
 
@@ -12138,16 +12138,37 @@ function render_man_made_land1( passedt )
 
                 MinZoom( 13 )
             else
-                if (( passedt.man_made == "chimney"           ) or
-                    ( passedt.man_made == "lighthouse"        ) or
-                    ( passedt.man_made == "mast"              ) or
-                    ( passedt.man_made == "power_wind"        ) or
-                    ( passedt.man_made == "ventilation_shaft" ) or
-                    ( passedt.man_made == "water_tower"       ) or
-                    ( passedt.man_made == "windsock"          ) or
-                    ( passedt.man_made == "cross"             ) or
-                    ( passedt.man_made == "flagpole"          ) or
-                    ( passedt.man_made == "maypole"           )) then
+                if (( passedt.man_made == "chimney"                  ) or
+                    ( passedt.man_made == "lighthouse"               ) or
+                    ( passedt.man_made == "mast"                     ) or
+                    ( passedt.man_made == "power_wind"               ) or
+                    ( passedt.man_made == "ventilation_shaft"        ) or
+                    ( passedt.man_made == "water_tower"              ) or
+                    ( passedt.man_made == "windsock"                 ) or
+                    ( passedt.man_made == "cross"                    ) or
+                    ( passedt.man_made == "flagpole"                 ) or
+                    ( passedt.man_made == "maypole"                  ) or
+                    ( passedt.man_made == "aircraftcontroltower"     ) or
+                    ( passedt.man_made == "churchspire"              ) or
+                    ( passedt.man_made == "churchtower"              ) or
+                    ( passedt.man_made == "clockpedestal"            ) or
+                    ( passedt.man_made == "clocktower"               ) or
+                    ( passedt.man_made == "defensivetower"           ) or
+                    ( passedt.man_made == "footwear_decontamination" ) or
+                    ( passedt.man_made == "illuminationtower"        ) or
+                    ( passedt.man_made == "militarybunker"           ) or
+                    ( passedt.man_made == "mineshaft"                ) or
+                    ( passedt.man_made == "monitoringearthquake"     ) or
+                    ( passedt.man_made == "monitoringrainfall"       ) or
+                    ( passedt.man_made == "monitoringky"             ) or
+                    ( passedt.man_made == "monitoringwater"          ) or
+                    ( passedt.man_made == "monitoringweather"        ) or
+                    ( passedt.man_made == "mounting_block"           ) or
+                    ( passedt.man_made == "observationtower"         ) or
+                    ( passedt.man_made == "radartower"               ) or
+                    ( passedt.man_made == "squaretower"              ) or
+                    ( passedt.man_made == "watermill"                ) or
+                    ( passedt.man_made == "windmill"                 )) then
                     Layer( "land1", true )
                     Attribute( "class", "man_made_" .. passedt.man_made )
 
