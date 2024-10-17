@@ -12116,7 +12116,19 @@ function render_man_made_land1( passedt )
 
         MinZoom( 11 )
     else
-        render_highway_land1( passedt )
+        if ( passedt.man_made == "bigchimney" ) then
+            Layer( "land1", true )
+            Attribute( "class", "man_made_" .. passedt.man_made )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                Attribute( "name", passedt.name )
+            end
+
+            MinZoom( 12 )
+        else
+            render_highway_land1( passedt )
+        end -- man_made=bigchimney 12
     end -- man_made=bigmast 11
 end -- render_man_made_land1()
 
