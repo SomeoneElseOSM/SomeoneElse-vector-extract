@@ -12663,13 +12663,19 @@ function render_natural_land1( passedt )
         if (( passedt.natural == "wood"         ) or
             ( passedt.natural == "broadleaved"  ) or
             ( passedt.natural == "needleleaved" ) or
-            ( passedt.natural == "mixedleaved"  )) then
+            ( passedt.natural == "mixedleaved"  ) or
+            ( passedt.natural == "bigprompeak"  )) then
             Layer( "land1", true )
             Attribute( "class", "natural_" .. passedt.natural )
 
             if (( passedt.name ~= nil ) and
                 ( passedt.name ~= ""  )) then
                  Attribute( "name", passedt.name )
+            end
+
+            if (( passedt.ele ~= nil ) and
+                ( passedt.ele ~= ""  )) then
+                 Attribute( "ele", passedt.ele )
             end
 
             MinZoom( 8 )
@@ -12689,7 +12695,7 @@ function render_natural_land1( passedt )
                 ( passedt.natural == "heath"         ) or
                 ( passedt.natural == "grassland"     ) or
                 ( passedt.natural == "scrub"         ) or
-                ( passedt.natural == "bigprompeak"   )) then
+                ( passedt.natural == "bigpeak"       )) then
                 Layer( "land1", true )
                 Attribute( "class", "natural_" .. passedt.natural )
 
@@ -12705,7 +12711,9 @@ function render_natural_land1( passedt )
 
                 MinZoom( 9 )
             else
-                if ( passedt.natural == "bigpeak" ) then
+                if (( passedt.natural == "peak"    ) or
+                    ( passedt.natural == "saddle"  ) or
+                    ( passedt.natural == "volcano" )) then
                     Layer( "land1", true )
                     Attribute( "class", "natural_" .. passedt.natural )
 
@@ -12719,11 +12727,12 @@ function render_natural_land1( passedt )
                         Attribute( "ele", passedt.ele )
                     end
 
-                    MinZoom( 11 )
+                    MinZoom( 10 )
                 else
                     if (( passedt.natural == "wetland"  ) or
                         ( passedt.natural == "reef"     ) or
-                        ( passedt.natural == "reefsand" )) then
+                        ( passedt.natural == "reefsand" ) or
+                        ( passedt.natural == "hill"     )) then
                         Layer( "land1", true )
                         Attribute( "class", "natural_" .. passedt.natural )
 
@@ -12732,11 +12741,16 @@ function render_natural_land1( passedt )
                             Attribute( "name", passedt.name )
                         end
 
+                        if (( passedt.ele ~= nil ) and
+                            ( passedt.ele ~= ""  )) then
+                            Attribute( "ele", passedt.ele )
+                        end
+
                         MinZoom( 12 )
                     else
                         render_barrier_land1( passedt )
-                    end -- wetland 12
-                end -- bigpeak 11
+                    end -- wetland etc. 12
+                end -- peak etc. 10
             end -- beach etc. 9
         end -- wood 8
     end -- desert 7
