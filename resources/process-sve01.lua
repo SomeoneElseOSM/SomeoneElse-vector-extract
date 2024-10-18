@@ -27,7 +27,7 @@ require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "aeroway", "amenity", "attraction", "barrier", 
-              "canoe", "climbing", "disused:military", "emergency", 
+              "canoe", "climbing", "craft", "disused:military", "emergency", 
               "entrance", "harbour", "historic", "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", 
               "military", "natural", "pitch", "place", 
@@ -12311,13 +12311,31 @@ function render_man_made_land1( passedt )
 
                         MinZoom( 14 )
                     else
-                        render_highway_land1( passedt )
+                        render_office_land1( passedt )
                     end -- man_made=markeraerial etc. 14
                 end -- man_made=chimney etc. 14
             end -- man_made=bigobservationtower 13
         end -- man_made=bigchimney 12
     end -- man_made=bigmast 11
 end -- render_man_made_land1()
+
+function render_office_land1( passedt )
+    if (( passedt.office == "craftbrewery" ) or
+        ( passedt.office == "craftcider"   ) or
+        ( passedt.office == "nonspecific"  )) then
+        Layer( "land1", true )
+        Attribute( "class", "office_" .. passedt.office )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+            Attribute( "name", passedt.name )
+        end
+
+        MinZoom( 16 )
+    else
+        render_highway_land1( passedt )
+    end -- office=craftbrewery etc. 16
+end -- render_office_land1()
 
 function render_highway_land1( passedt )
     if (( passedt.highway == "board_realtime"            ) or
