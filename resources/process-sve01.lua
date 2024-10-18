@@ -12176,7 +12176,8 @@ function render_man_made_land1( passedt )
                     ( passedt.man_made == "survey_point"             ) or
                     ( passedt.man_made == "water_well"               ) or
                     ( passedt.man_made == "cairn"                    ) or
-                    ( passedt.man_made == "flagpole_red"             )) then
+                    ( passedt.man_made == "flagpole_red"             ) or
+                    ( passedt.man_made == "sluice_gate"              )) then
                     Layer( "land1", true )
                     Attribute( "class", "man_made_" .. passedt.man_made )
 
