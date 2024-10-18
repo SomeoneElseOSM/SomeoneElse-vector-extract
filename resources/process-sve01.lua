@@ -12761,7 +12761,11 @@ function render_natural_land1( passedt )
                             MinZoom( 13 )
                         else
                             if (( passedt.natural == "cave_entrance" ) or
-                                ( passedt.natural == "sinkhole"      )) then
+                                ( passedt.natural == "sinkhole"      ) or
+                                ( passedt.natural == "climbing"      ) or
+                                ( passedt.natural == "rock"          ) or
+                                ( passedt.natural == "tree"          ) or
+                                ( passedt.natural == "shrub"         )) then
                                 Layer( "land1", true )
                                 Attribute( "class", "natural_" .. passedt.natural )
 
