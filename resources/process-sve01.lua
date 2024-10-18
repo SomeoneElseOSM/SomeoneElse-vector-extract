@@ -12748,7 +12748,19 @@ function render_natural_land1( passedt )
 
                         MinZoom( 12 )
                     else
-                        render_barrier_land1( passedt )
+                        if ( passedt.natural == "bay" ) then
+                            Layer( "land1", true )
+                            Attribute( "class", "natural_" .. passedt.natural )
+
+                            if (( passedt.name ~= nil ) and
+                                ( passedt.name ~= ""  )) then
+                                Attribute( "name", passedt.name )
+                            end
+
+                            MinZoom( 13 )
+                        else
+                            render_barrier_land1( passedt )
+                        end -- bay 13
                     end -- wetland etc. 12
                 end -- peak etc. 10
             end -- beach etc. 9
