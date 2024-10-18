@@ -29,7 +29,8 @@ require "shared_lua"
 node_keys = { "aeroway", "amenity", "attraction", "barrier", 
               "canoe", "climbing", "disused:military", "emergency", 
               "entrance", "harbour", "historic", "healthcare", "highway", "information", 
-              "landuse", "leisure", "man_made", "military", "natural", "pitch", "place", 
+              "landuse", "lcn_ref", "leisure", "man_made", 
+              "military", "natural", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
               "sport", "tourism", "waterway", "whitewater", "zoo" }
 
@@ -391,10 +392,109 @@ function node_function()
     nodet.addrCunit = Find("addr:unit")
     nodet.addrChousenumber = Find("addr:housenumber")
     nodet.areaChighway = Find("area:highway")
+    nodet.lcn_ref = Find("lcn_ref")
 
     generic_before_function( nodet )
 
--- No node-specific code yet
+-- ----------------------------------------------------------------------------
+-- Node-specific code
+-- Consolidate some "ford" values into "yes".
+-- This is here rather than in "generic" because "generic" is called after this
+-- There is a similar section in way-only.
+-- ----------------------------------------------------------------------------
+   if (( nodet.ford == "Tidal_Causeway" ) or
+       ( nodet.ford == "ford"           ) or 
+       ( nodet.ford == "intermittent"   ) or
+       ( nodet.ford == "seasonal"       ) or
+       ( nodet.ford == "stream"         ) or
+       ( nodet.ford == "tidal"          )) then
+      nodet.ford = "yes"
+   end
+
+   if ( nodet.ford == "yes" ) then
+      nodet.highway = "ford"
+      nodet.ford    = nil
+   end
+
+   if ( nodet.ford    == "stepping_stones" ) then
+      nodet.barrier = "stepping_stones"
+      nodet.ford    = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map non-linear unknown (and some known) barriers to bollard
+-- ----------------------------------------------------------------------------
+   if (( nodet.barrier  == "yes"            ) or
+       ( nodet.barrier  == "barrier"        ) or
+       ( nodet.barrier  == "tank_trap"      ) or
+       ( nodet.barrier  == "dragons_teeth"  ) or
+       ( nodet.barrier  == "bollards"       ) or
+       ( nodet.barrier  == "bus_trap"       ) or
+       ( nodet.barrier  == "car_trap"       ) or
+       ( nodet.barrier  == "rising_bollard" ) or
+       ( nodet.barrier  == "steps"          ) or
+       ( nodet.barrier  == "step"           ) or
+       ( nodet.barrier  == "post"           ) or
+       ( nodet.man_made == "post"           ) or
+       ( nodet.man_made == "marker_post"    ) or
+       ( nodet.man_made == "boundary_post"  ) or
+       ( nodet.man_made == "concrete_post"  ) or
+       ( nodet.barrier  == "stone"          ) or
+       ( nodet.barrier  == "hoarding"       ) or
+       ( nodet.barrier  == "sump_buster"    ) or
+       ( nodet.barrier  == "gate_pier"      ) or
+       ( nodet.barrier  == "gate_post"      ) or
+       ( nodet.man_made == "gate_post"      ) or
+       ( nodet.man_made == "gatepost"       ) or
+       ( nodet.barrier  == "pole"           )) then
+      nodet.barrier = "bollard"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render barrier=chain on nodes as horse_stile.  At least sone of the time 
+-- it's correct.
+-- ----------------------------------------------------------------------------
+   if ( nodet.barrier == "chain" ) then
+      nodet.barrier = "horse_stile"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Render barrier=v_stile on nodes as stile.  
+-- ----------------------------------------------------------------------------
+   if ( nodet.barrier == "v_stile" ) then
+      nodet.barrier = "stile"
+   end
+
+-- ----------------------------------------------------------------------------
+-- highway=turning_loop on nodes to turning_circle
+-- "turning_loop" is mostly used on nodes, with one way in UK/IE data.
+-- ----------------------------------------------------------------------------
+   if ( nodet.highway == "turning_loop" ) then
+      nodet.highway = "turning_circle"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Change natural=bare_rock and natural=rocks on nodes to natural=rock
+-- So that an icon (the all-black, non-climbing boulder one) is displayed
+-- ----------------------------------------------------------------------------
+   if (( nodet.natural == "bare_rock" ) or
+       ( nodet.natural == "rocks"     ) or
+       ( nodet.natural == "stones"    )) then
+      nodet.natural = "rock"
+   end
+
+-- ----------------------------------------------------------------------------
+-- If lcn_ref exists (for example as a location in a local cycling network),
+-- render it via a "man_made" tag if there's no other tags on that node.
+-- ----------------------------------------------------------------------------
+   if ((  nodet.lcn_ref ~= nil  ) and
+       (  nodet.lcn_ref ~= ""   ) and
+       (( nodet.ref     == nil )  or
+        ( nodet.ref     == ""  ))) then
+      nodet.man_made = "lcn_ref"
+      nodet.ref     = nodet.lcn_ref
+      nodet.lcn_ref = nil
+   end
 
     generic_after_function( nodet )
 end -- node_function()
@@ -745,6 +845,7 @@ function way_function()
     wayt.addrCunit = Find("addr:unit")
     wayt.addrChousenumber = Find("addr:housenumber")
     wayt.areaChighway = Find("area:highway")
+    wayt.lcn_ref = Find("lcn_ref")
 
     generic_before_function( wayt )
 
@@ -12189,10 +12290,11 @@ function render_man_made_land1( passedt )
                     MinZoom( 14 )
                 else
 -- ----------------------------------------------------------------------------
--- man_made == "markeraerial" gets written through with "ref" in the name,
--- but is still extracted at zoom 14.
+-- man_made == "markeraerial" and "lcn_ref" get written through with "ref"
+-- in the name, but are still extracted at zoom 14.
 -- ----------------------------------------------------------------------------
-                    if ( passedt.man_made == "markeraerial" ) then
+                    if (( passedt.man_made == "markeraerial" ) or
+                        ( passedt.man_made == "lcn_ref"      )) then
                         Layer( "land1", true )
                         Attribute( "class", "man_made_" .. passedt.man_made )
 
