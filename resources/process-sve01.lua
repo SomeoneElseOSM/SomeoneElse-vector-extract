@@ -12278,13 +12278,19 @@ function render_man_made_land1( passedt )
                     ( passedt.man_made == "water_well"               ) or
                     ( passedt.man_made == "cairn"                    ) or
                     ( passedt.man_made == "flagpole_red"             ) or
-                    ( passedt.man_made == "sluice_gate"              )) then
+                    ( passedt.man_made == "sluice_gate"              ) or
+                    ( passedt.man_made == "boundary_stone"           )) then
                     Layer( "land1", true )
                     Attribute( "class", "man_made_" .. passedt.man_made )
 
                     if (( passedt.name ~= nil ) and
                         ( passedt.name ~= ""  )) then
                         Attribute( "name", passedt.name )
+                    end
+
+                    if (( passedt.ele ~= nil ) and
+                        ( passedt.ele ~= ""  )) then
+                        Attribute( "ele", passedt.ele )
                     end
 
                     MinZoom( 14 )
