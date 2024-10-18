@@ -12748,7 +12748,8 @@ function render_natural_land1( passedt )
 
                         MinZoom( 12 )
                     else
-                        if ( passedt.natural == "bay" ) then
+                        if (( passedt.natural == "bay"    ) or
+                            ( passedt.natural == "spring" )) then
                             Layer( "land1", true )
                             Attribute( "class", "natural_" .. passedt.natural )
 
@@ -12773,7 +12774,7 @@ function render_natural_land1( passedt )
                             else
                                 render_barrier_land1( passedt )
                             end -- cave_entrance etc. 14
-                        end -- bay 13
+                        end -- bay etc. 13
                     end -- wetland etc. 12
                 end -- peak etc. 10
             end -- beach etc. 9
