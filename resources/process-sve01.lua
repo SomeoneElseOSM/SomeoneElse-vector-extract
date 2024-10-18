@@ -12199,11 +12199,27 @@ function render_amenity_land1( passedt )
 
                 MinZoom( 14 )
             else
-                render_man_made_land1( passedt )
+                render_shop_land1( passedt )
             end -- amenity=shelter etc. 14
         end -- amenity=holy_well etc. 1e
     end -- amenity=parking etc. 9
 end -- render_amenity_land1()
+
+function render_shop_land1( passedt )
+    if ( passedt.shop == "supermarket" ) then
+        Layer( "land1", true )
+        Attribute( "class", "shop_" .. passedt.shop )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+            Attribute( "name", passedt.name )
+        end
+
+        MinZoom( 14 )
+    else
+        render_man_made_land1( passedt )
+    end -- shop=supermarket etc. 14
+end -- render_shop_land1()
 
 function render_man_made_land1( passedt )
     if ( passedt.man_made == "bigmast" ) then
@@ -12449,7 +12465,7 @@ function render_historic_land1( passedt )
         MinZoom( 14 )
     else
         render_landuse_land1( passedt )
-    end -- historic=qqq
+    end -- historic=archaeological_site etc. 14
 end -- render_historic_land1()
 
 function render_landuse_land1( passedt )
