@@ -12688,7 +12688,8 @@ function render_natural_land1( passedt )
                 ( passedt.natural == "tidal_shingle" ) or
                 ( passedt.natural == "heath"         ) or
                 ( passedt.natural == "grassland"     ) or
-                ( passedt.natural == "scrub"         )) then
+                ( passedt.natural == "scrub"         ) or
+                ( passedt.natural == "bigprompeak"   )) then
                 Layer( "land1", true )
                 Attribute( "class", "natural_" .. passedt.natural )
 
@@ -12697,11 +12698,14 @@ function render_natural_land1( passedt )
                      Attribute( "name", passedt.name )
                 end
 
+                if (( passedt.ele ~= nil ) and
+                    ( passedt.ele ~= ""  )) then
+                     Attribute( "ele", passedt.ele )
+                end
+
                 MinZoom( 9 )
             else
-                if (( passedt.natural == "wetland"  ) or
-                    ( passedt.natural == "reef"     ) or
-                    ( passedt.natural == "reefsand" )) then
+                if ( passedt.natural == "bigpeak" ) then
                     Layer( "land1", true )
                     Attribute( "class", "natural_" .. passedt.natural )
 
@@ -12710,10 +12714,29 @@ function render_natural_land1( passedt )
                         Attribute( "name", passedt.name )
                     end
 
-                    MinZoom( 12 )
+                    if (( passedt.ele ~= nil ) and
+                        ( passedt.ele ~= ""  )) then
+                        Attribute( "ele", passedt.ele )
+                    end
+
+                    MinZoom( 11 )
                 else
-                    render_barrier_land1( passedt )
-                end -- wetland 12
+                    if (( passedt.natural == "wetland"  ) or
+                        ( passedt.natural == "reef"     ) or
+                        ( passedt.natural == "reefsand" )) then
+                        Layer( "land1", true )
+                        Attribute( "class", "natural_" .. passedt.natural )
+
+                        if (( passedt.name ~= nil ) and
+                            ( passedt.name ~= ""  )) then
+                            Attribute( "name", passedt.name )
+                        end
+
+                        MinZoom( 12 )
+                    else
+                        render_barrier_land1( passedt )
+                    end -- wetland 12
+                end -- bigpeak 11
             end -- beach etc. 9
         end -- wood 8
     end -- desert 7
