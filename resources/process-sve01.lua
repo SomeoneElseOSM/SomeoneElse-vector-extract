@@ -12283,7 +12283,19 @@ function render_shop_land1( passedt )
 
         MinZoom( 14 )
     else
-        render_man_made_land1( passedt )
+        if ( passedt.shop == "vacant" ) then
+            Layer( "land1", true )
+            Attribute( "class", "shop_" .. passedt.shop )
+
+            if (( passedt.ref ~= nil ) and
+                ( passedt.ref ~= ""  )) then
+                Attribute( "name", passedt.ref )
+            end
+
+            MinZoom( 14 )
+        else
+            render_man_made_land1( passedt )
+        end -- shop=vacant 14
     end -- shop=supermarket etc. 14
 end -- render_shop_land1()
 
