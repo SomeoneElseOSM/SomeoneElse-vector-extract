@@ -12206,7 +12206,48 @@ function render_amenity_land1( passedt )
 end -- render_amenity_land1()
 
 function render_shop_land1( passedt )
-    if ( passedt.shop == "supermarket" ) then
+    if (( passedt.shop == "supermarket"       ) or
+        ( passedt.shop == "department_store"  ) or
+        ( passedt.shop == "ecosupermarket"    ) or
+        ( passedt.shop == "alcohol"           ) or
+        ( passedt.shop == "antiques"          ) or
+        ( passedt.shop == "art"               ) or
+        ( passedt.shop == "bakery"            ) or
+        ( passedt.shop == "beauty"            ) or
+        ( passedt.shop == "bicycle"           ) or
+        ( passedt.shop == "bookmaker"         ) or
+        ( passedt.shop == "books"             ) or
+        ( passedt.shop == "butcher"           ) or
+        ( passedt.shop == "car"               ) or
+        ( passedt.shop == "car_parts"         ) or
+        ( passedt.shop == "car_repair"        ) or
+        ( passedt.shop == "catalogue"         ) or
+        ( passedt.shop == "charity"           ) or
+        ( passedt.shop == "clothes"           ) or
+        ( passedt.shop == "coffee"            ) or
+        ( passedt.shop == "computer"          ) or
+        ( passedt.shop == "confectionery"     ) or
+        ( passedt.shop == "convenience"       ) or
+        ( passedt.shop == "deli"              ) or
+        ( passedt.shop == "discount"          ) or
+        ( passedt.shop == "doityourself"      ) or
+        ( passedt.shop == "e-cigarette"       ) or
+        ( passedt.shop == "ecoconv"           ) or
+        ( passedt.shop == "ecogreengrocer"    ) or
+        ( passedt.shop == "ecohealth"         ) or
+        ( passedt.shop == "electrical"        ) or
+        ( passedt.shop == "electronics"       ) or
+        ( passedt.shop == "estate_agent"      ) or
+        ( passedt.shop == "farm"              ) or
+        ( passedt.shop == "florist"           ) or
+        ( passedt.shop == "funeral_directors" ) or
+        ( passedt.shop == "furniture"         ) or
+        ( passedt.shop == "garden_centre"     ) or
+        ( passedt.shop == "gift"              ) or
+        ( passedt.shop == "greengrocer"       ) or
+        ( passedt.shop == "hairdresser"       ) or
+        ( passedt.shop == "health_food"       ) or
+        ( passedt.shop == "healthnonspecific" )) then
         Layer( "land1", true )
         Attribute( "class", "shop_" .. passedt.shop )
 
