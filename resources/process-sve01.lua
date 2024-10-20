@@ -12984,16 +12984,23 @@ function render_tourism_land1( passedt )
 
             MinZoom( 12 )
         else
-            if (( passedt.tourism == "viewpoint"             ) or
-                ( passedt.tourism == "informationncndudgeon" ) or
-                ( passedt.tourism == "informationncnmccoll"  ) or
-                ( passedt.tourism == "informationncnmills"   ) or
-                ( passedt.tourism == "informationncnrowe"    ) or
-                ( passedt.tourism == "informationncnunknown" ) or
-                ( passedt.tourism == "informationpnfs"       ) or
-                ( passedt.tourism == "informationoffice"     ) or
-                ( passedt.tourism == "information"           ) or
-                ( passedt.tourism == "chalet"                )) then
+            if (( passedt.tourism == "viewpoint"                  ) or
+                ( passedt.tourism == "information"                ) or
+                ( passedt.tourism == "informationncndudgeon"      ) or
+                ( passedt.tourism == "informationncnmccoll"       ) or
+                ( passedt.tourism == "informationncnmills"        ) or
+                ( passedt.tourism == "informationncnrowe"         ) or
+                ( passedt.tourism == "informationncnunknown"      ) or
+                ( passedt.tourism == "informationpnfs"            ) or
+                ( passedt.tourism == "informationoffice"          ) or
+                ( passedt.tourism == "informationboard"           ) or
+                ( passedt.tourism == "informationear"             ) or
+                ( passedt.tourism == "informationplaque"          ) or
+                ( passedt.tourism == "informationpublictransport" ) or
+                ( passedt.tourism == "informationroutemarker"     ) or
+                ( passedt.tourism == "informationsign"            ) or
+                ( passedt.tourism == "militarysign"               ) or
+                ( passedt.tourism == "chalet"                     )) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
 
