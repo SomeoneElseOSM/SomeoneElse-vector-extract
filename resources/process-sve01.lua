@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "aeroway", "amenity", "attraction", "barrier", 
+node_keys = { "advertising", "aeroway", "amenity", "attraction", "barrier", 
               "canoe", "climbing", "craft", "disused:military", "emergency", 
               "entrance", "harbour", "historic", "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", 
@@ -393,6 +393,7 @@ function node_function()
     nodet.addrChousenumber = Find("addr:housenumber")
     nodet.areaChighway = Find("area:highway")
     nodet.lcn_ref = Find("lcn_ref")
+    nodet.advertising = Find("advertising")
 
     generic_before_function( nodet )
 
@@ -846,6 +847,7 @@ function way_function()
     wayt.addrChousenumber = Find("addr:housenumber")
     wayt.areaChighway = Find("area:highway")
     wayt.lcn_ref = Find("lcn_ref")
+    wayt.advertising = Find("advertising")
 
     generic_before_function( wayt )
 
@@ -13001,7 +13003,11 @@ function render_tourism_land1( passedt )
                 ( passedt.tourism == "informationsign"            ) or
                 ( passedt.tourism == "informationmarker"          ) or
                 ( passedt.tourism == "militarysign"               ) or
-                ( passedt.tourism == "chalet"                     )) then
+                ( passedt.tourism == "chalet"                     ) or
+                ( passedt.tourism == "museum"                     ) or
+                ( passedt.tourism == "aquarium"                   ) or
+                ( passedt.tourism == "advertising_column"         ) or
+                ( passedt.tourism == "artwork"                    )) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
 
