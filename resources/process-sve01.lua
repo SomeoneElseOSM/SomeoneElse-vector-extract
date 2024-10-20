@@ -30,7 +30,7 @@ node_keys = { "aeroway", "amenity", "attraction", "barrier",
               "canoe", "climbing", "craft", "disused:military", "emergency", 
               "entrance", "harbour", "historic", "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", 
-              "military", "natural", "pitch", "place", 
+              "military", "natural", "ncn_milepost", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
               "sport", "tourism", "waterway", "whitewater", "zoo" }
 
@@ -12984,7 +12984,12 @@ function render_tourism_land1( passedt )
 
             MinZoom( 12 )
         else
-            if ( passedt.tourism == "viewpoint" ) then
+            if (( passedt.tourism == "viewpoint"             ) or
+                ( passedt.tourism == "informationncndudgeon" ) or
+                ( passedt.tourism == "informationncnmccoll"  ) or
+                ( passedt.tourism == "informationncnmills"   ) or
+                ( passedt.tourism == "informationncnrowe"    ) or
+                ( passedt.tourism == "informationncnunknown" )) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
 
