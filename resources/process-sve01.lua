@@ -12990,7 +12990,10 @@ function render_tourism_land1( passedt )
                 ( passedt.tourism == "informationncnmills"   ) or
                 ( passedt.tourism == "informationncnrowe"    ) or
                 ( passedt.tourism == "informationncnunknown" ) or
-                ( passedt.tourism == "informationpnfs"       )) then
+                ( passedt.tourism == "informationpnfs"       ) or
+                ( passedt.tourism == "informationoffice"     ) or
+                ( passedt.tourism == "information"           ) or
+                ( passedt.tourism == "chalet"                )) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
 
