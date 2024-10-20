@@ -12972,7 +12972,8 @@ function render_tourism_land1( passedt )
         if (( passedt.tourism == "camp_site"    ) or
             ( passedt.tourism == "caravan_site" ) or
             ( passedt.tourism == "picnic_site"  ) or
-            ( passedt.tourism == "theme_park"   )) then
+            ( passedt.tourism == "theme_park"   ) or
+            ( passedt.tourism == "alpine_hut"   )) then
             Layer( "land1", true )
             Attribute( "class", "tourism_" .. passedt.tourism )
 
