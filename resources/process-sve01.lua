@@ -12999,6 +12999,7 @@ function render_tourism_land1( passedt )
                 ( passedt.tourism == "informationpublictransport" ) or
                 ( passedt.tourism == "informationroutemarker"     ) or
                 ( passedt.tourism == "informationsign"            ) or
+                ( passedt.tourism == "informationmarker"          ) or
                 ( passedt.tourism == "militarysign"               ) or
                 ( passedt.tourism == "chalet"                     )) then
                 Layer( "land1", true )
@@ -13007,6 +13008,11 @@ function render_tourism_land1( passedt )
                 if (( passedt.name ~= nil ) and
                     ( passedt.name ~= ""  )) then
                      Attribute( "name", passedt.name )
+                end
+
+                if (( passedt.ele ~= nil ) and
+                    ( passedt.ele ~= ""  )) then
+                     Attribute( "ele", passedt.ele )
                 end
 
                 MinZoom( 14 )
