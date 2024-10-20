@@ -13022,7 +13022,8 @@ function render_tourism_land1( passedt )
                 ( passedt.tourism == "tourism_guest_ynyn"         ) or
                 ( passedt.tourism == "tourism_guest_yynd"         ) or
                 ( passedt.tourism == "tourism_guest_yyyn"         ) or
-                ( passedt.tourism == "tourism_guest_yyyy"         )) then
+                ( passedt.tourism == "tourism_guest_yyyy"         ) or
+                ( passedt.tourism == "camp_pitch"                 )) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
 
