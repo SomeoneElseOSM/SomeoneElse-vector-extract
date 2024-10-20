@@ -13007,7 +13007,22 @@ function render_tourism_land1( passedt )
                 ( passedt.tourism == "museum"                     ) or
                 ( passedt.tourism == "aquarium"                   ) or
                 ( passedt.tourism == "advertising_column"         ) or
-                ( passedt.tourism == "artwork"                    )) then
+                ( passedt.tourism == "artwork"                    ) or
+                ( passedt.tourism == "singlechalet"               ) or
+                ( passedt.tourism == "motel"                      ) or
+                ( passedt.tourism == "hotel"                      ) or
+                ( passedt.tourism == "hostel"                     ) or
+                ( passedt.tourism == "bed_and_breakfast"          ) or
+                ( passedt.tourism == "guest_house"                ) or
+                ( passedt.tourism == "tourism_guest_dynd"         ) or
+                ( passedt.tourism == "tourism_guest_nydn"         ) or
+                ( passedt.tourism == "tourism_guest_nynn"         ) or
+                ( passedt.tourism == "tourism_guest_yddd"         ) or
+                ( passedt.tourism == "tourism_guest_ynnn"         ) or
+                ( passedt.tourism == "tourism_guest_ynyn"         ) or
+                ( passedt.tourism == "tourism_guest_yynd"         ) or
+                ( passedt.tourism == "tourism_guest_yyyn"         ) or
+                ( passedt.tourism == "tourism_guest_yyyy"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
 
