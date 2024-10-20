@@ -4753,6 +4753,14 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Show photo booths as vending machines
+-- ----------------------------------------------------------------------------
+   if ( passedt.amenity == "photo_booth" )  then
+      passedt.amenity = "vending_machine"
+      passedt.vending = "photos"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Parcel lockers
 -- ----------------------------------------------------------------------------
    if (((  passedt.amenity         == "vending_machine"                )  and

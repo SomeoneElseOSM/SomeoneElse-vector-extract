@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241013T020000Z",
+  "data_updated": "20241020T192700Z",
   "project": {
     "name": "SomeoneElse: Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -253,6 +253,7 @@
     { "key": "amenity", "value": "parking_space", "description": "Extract as small private parking area" },
     { "key": "amenity", "value": "pharmacy", "description": "Pharmacies: If tagged on supermarket, removed.  Underline extracts wheelchair tags" },
     { "key": "amenity", "value": "phone", "description": "Synonym for telephone" },
+    { "key": "amenity", "value": "photo_booth", "description": "Extracted as photo booths" },
     { "key": "amenity", "value": "physiotherapist", "description": "Synonym for shop=healthnonspecific" },
     { "key": "amenity", "value": "piano", "description": "Public and public-ish pianos extracted as public musical instruments" },
     { "key": "amenity", "value": "pinfold", "description": "Extracted as historic pinfold" },
