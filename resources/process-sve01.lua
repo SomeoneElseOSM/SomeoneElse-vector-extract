@@ -12120,7 +12120,9 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "pub_ynddddnyg"              ) or
                 ( passedt.amenity == "pub_ynddddnyo"              ) or
                 ( passedt.amenity == "pub_ynddddnyd"              ) or
-                ( passedt.amenity == "pub_ynddddnl"               ) or
+                ( passedt.amenity == "pub_ynddddnlg"              ) or
+                ( passedt.amenity == "pub_ynddddnlo"              ) or
+                ( passedt.amenity == "pub_ynddddnld"              ) or
                 ( passedt.amenity == "pub_ynddddnng"              ) or
                 ( passedt.amenity == "pub_ynddddnno"              ) or
                 ( passedt.amenity == "pub_ynddddnnd"              ) or
