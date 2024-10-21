@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241020T192700Z",
+  "data_updated": "20241021T014300Z",
   "project": {
     "name": "SomeoneElse: Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2498,6 +2498,8 @@
     { "key": "verge", "value": "right", "description": "Decide if a road has a verge" },
     { "key": "verge", "value": "yes", "description": "Decide if a road has a verge" },
     { "key": "visibility", "description": "If set and 'trail_visibility' is not; use 'visibility'" },
+    { "key": "volcano:status", "description": "Detect extinct volcanos" },
+    { "key": "volcano:status", "value": "extinct", "description": "Detect extinct volcanos" },
     { "key": "was:aeroway", "description": "Handle disused version of tag" },
     { "key": "was:amenity", "description": "Handle disused version of tag" },
     { "key": "was:landuse", "description": "Disused quarries are still extracted as quarries" },
