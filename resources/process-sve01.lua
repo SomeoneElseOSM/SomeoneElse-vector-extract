@@ -8863,9 +8863,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- mobile_phone shops 
 -- ----------------------------------------------------------------------------
-   if (( passedt.shop   == "phone"        ) or
-       ( passedt.shop   == "phone_repair" ) or
-       ( passedt.shop   == "telephone"    )) then
+   if (( passedt.shop   == "phone"               ) or
+       ( passedt.shop   == "phone_repair"        ) or
+       ( passedt.shop   == "telephone"           ) or
+       ( passedt.shop   == "mobile_phone_repair" )) then
       passedt.shop = "mobile_phone"
    end
 
