@@ -6706,6 +6706,9 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Map wind turbines to, er, wind turbines and make sure that they don't also
 -- appear as towers.
+--
+-- The "man_made=power" assignment is just so that a name can be easily 
+-- displayed by the rendering map style.
 -- ----------------------------------------------------------------------------
    if (( passedt.man_made   == "wind_turbine" ) or
        ( passedt.man_made   == "windpump"     )) then
@@ -6721,6 +6724,20 @@ function generic_before_function( passedt )
         ( passedt.plantCsource     == "wind"         )  or
         ( passedt.generatorCmethod == "wind"         ))) then
       passedt.man_made = nil
+   end
+
+   if ((( passedt.man_made == nil        )  or
+        ( passedt.man_made == ""         )) and
+       (  passedt.power    == "generator" )) then
+      if (( passedt.power_source     == "wind"         )  or
+          ( passedt.generatorCsource == "wind"         )  or
+          ( passedt.generatorCmethod == "wind_turbine" )  or
+          ( passedt.plantCsource     == "wind"         )  or
+          ( passedt.generatorCmethod == "wind"         )) then
+         passedt.man_made = "power_wind"
+      else
+         passedt.man_made = "power"
+      end
    end
 
 -- ----------------------------------------------------------------------------
@@ -12383,7 +12400,9 @@ function render_man_made_land1( passedt )
                     ( passedt.man_made == "cairn"                    ) or
                     ( passedt.man_made == "flagpole_red"             ) or
                     ( passedt.man_made == "sluice_gate"              ) or
-                    ( passedt.man_made == "boundary_stone"           )) then
+                    ( passedt.man_made == "boundary_stone"           ) or
+                    ( passedt.man_made == "power"                    ) or
+                    ( passedt.man_made == "power_wind"               )) then
                     Layer( "land1", true )
                     Attribute( "class", "man_made_" .. passedt.man_made )
 
