@@ -8772,8 +8772,9 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- e-cigarette
 -- ----------------------------------------------------------------------------
-   if (( passedt.shop   == "vaping"               ) or
-       ( passedt.shop   == "vape_shop"            )) then
+   if (( passedt.shop   == "vaping"                   ) or
+       ( passedt.shop   == "vape_shop"                ) or
+       ( passedt.shop   == "e-cigarette;mobile_phone" )) then
       passedt.shop = "e-cigarette"
    end
 
