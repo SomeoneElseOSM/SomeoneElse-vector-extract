@@ -394,6 +394,7 @@ function node_function()
     nodet.areaChighway = Find("area:highway")
     nodet.lcn_ref = Find("lcn_ref")
     nodet.advertising = Find("advertising")
+    nodet.volcanoCstatus = Find("volcano:status")
 
     generic_before_function( nodet )
 
@@ -848,6 +849,7 @@ function way_function()
     wayt.areaChighway = Find("area:highway")
     wayt.lcn_ref = Find("lcn_ref")
     wayt.advertising = Find("advertising")
+    wayt.volcanoCstatus = Find("volcano:status")
 
     generic_before_function( wayt )
 
@@ -2980,6 +2982,15 @@ function generic_before_function( passedt )
 -- it was set to some value that would not.
 -- ----------------------------------------------------------------------------
       passedt.office = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Don't show extinct volcanos as volcanos, just as peaks.
+-- That's still iffy in some cases (e.g. Rockall), but better than nothing.
+-- ----------------------------------------------------------------------------
+   if ((  passedt.natural        == "volcano" ) and
+       (  passedt.volcanoCstatus == "extinct" )) then
+      passedt.natural = "peak"
    end
 
 -- ----------------------------------------------------------------------------
