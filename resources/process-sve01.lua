@@ -8884,6 +8884,8 @@ function generic_before_function( passedt )
        ( passedt.shop   == "tourist"             ) or
        ( passedt.shop   == "tourism"             ) or
        ( passedt.shop   == "bag"                 ) or
+       ( passedt.shop   == "handbag"             ) or
+       ( passedt.shop   == "handbags"            ) or
        ( passedt.shop   == "balloon"             ) or
        ( passedt.shop   == "accessories"         ) or
        ( passedt.shop   == "beach"               ) or
@@ -8892,7 +8894,10 @@ function generic_before_function( passedt )
        ( passedt.shop   == "party_goods"         ) or
        ( passedt.shop   == "christmas"           ) or
        ( passedt.shop   == "fashion_accessories" ) or
-       ( passedt.shop   == "duty_free"           )) then
+       ( passedt.shop   == "duty_free"           ) or
+       ( passedt.shop   == "crystals"            ) or
+       ( passedt.shop   == "printing_stamps"     ) or
+       ( passedt.shop   == "armour"              )) then
       passedt.shop = "gift"
    end
 
