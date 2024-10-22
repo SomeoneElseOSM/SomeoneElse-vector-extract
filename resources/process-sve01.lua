@@ -7042,6 +7042,24 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Camp pitches - consolidate name and ref into the name.
+-- ----------------------------------------------------------------------------
+   if ( passedt.tourism == "camp_pitch"  ) then
+      if (( passedt.name == nil ) or
+          ( passedt.name == ""  )) then
+         if (( passedt.ref ~= nil ) and
+             ( passedt.ref ~= ""  )) then
+            passedt.name = passedt.ref
+         end
+      else
+         if (( passedt.ref ~= nil ) and
+             ( passedt.ref ~= ""  )) then
+            passedt.name = passedt.name .. " " .. passedt.ref
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
 -- Chalets
 --
 -- Depending on other tags, these will be treated as singlechalet (z17)
