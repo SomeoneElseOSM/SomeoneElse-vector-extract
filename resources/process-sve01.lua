@@ -854,6 +854,123 @@ function way_function()
     generic_before_function( wayt )
 
 -- ----------------------------------------------------------------------------
+-- Consolidate some "ford" values into "yes".
+-- This is here rather than in "generic" because "generic" is called after this
+-- There is a similar section in way-only.
+-- ----------------------------------------------------------------------------
+   if (( wayt.ford == "Tidal_Causeway" ) or
+       ( wayt.ford == "ford"           ) or 
+       ( wayt.ford == "intermittent"   ) or
+       ( wayt.ford == "seasonal"       ) or
+       ( wayt.ford == "stream"         ) or
+       ( wayt.ford == "tidal"          )) then
+      wayt.ford = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- If a highway has tidal=yes but not yet a ford or bridge tag, add ford=yes
+-- ----------------------------------------------------------------------------
+   if ((  wayt.tidal   == "yes"  ) and
+       (  wayt.highway ~= nil    ) and
+       (  wayt.highway ~= ""     ) and
+       (( wayt.ford    == nil   )  or
+        ( wayt.ford    == ""    )) and
+       (( wayt.bridge  == nil   )  or
+        ( wayt.bridge  == ""    ))) then
+      wayt.ford = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
+-- "barrier=gate" on a way is a dark line; on bridleways it looks 
+-- "sufficiently different" to mark fords out.
+-- ----------------------------------------------------------------------------
+   if (( wayt.ford == "yes"             ) or
+       ( wayt.ford == "stepping_stones" ))then
+      wayt.barrier = "ford"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat a linear "door" and some other linear barriers as "gate"
+--
+-- A "lock_gate" mapped as a node gets its own "locks" layer in 
+-- water-features.mss (for historical reasons that no longer make sense).
+-- There's no explicit node or generic code for lock_gate.
+-- ----------------------------------------------------------------------------
+   if (( wayt.barrier  == "door"       ) or
+       ( wayt.barrier  == "swing_gate" ) or
+       ( wayt.waterway == "lock_gate"  )) then
+      wayt.barrier  = "gate"
+      wayt.waterway = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map linear tank traps, and some others, to wall
+-- ----------------------------------------------------------------------------
+   if (( wayt.barrier == "tank_trap"      ) or
+       ( wayt.barrier == "dragons_teeth"  ) or
+       ( wayt.barrier == "obstruction"    ) or
+       ( wayt.barrier == "sea_wall"       ) or
+       ( wayt.barrier == "flood_wall"     ) or
+       ( wayt.barrier == "block"          ) or
+       ( wayt.barrier == "haha"           ) or
+       ( wayt.barrier == "jersey_barrier" ) or
+       ( wayt.barrier == "retaining_wall" )) then
+      wayt.barrier = "wall"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map linear unknown and other barriers to fence.
+-- In some cases this is a bit of a stretch - you can walk up some steps, or
+-- through a cycle barrier for example.  Fence was chosen as the "current
+-- minimal thickness linear barrier".  If a narrower one is introduced it
+-- would make sense to make traversable ones in this list to that.
+-- ----------------------------------------------------------------------------
+   if (( wayt.barrier == "yes"             ) or
+       ( wayt.barrier == "barrier"         ) or
+       ( wayt.barrier == "bollard"         ) or
+       ( wayt.barrier == "steps"           ) or
+       ( wayt.barrier == "step"            ) or
+       ( wayt.barrier == "hoarding"        ) or
+       ( wayt.barrier == "hand_rail_fence" ) or
+       ( wayt.barrier == "horse_stile"     ) or
+       ( wayt.barrier == "chain"           ) or
+       ( wayt.barrier == "stile"           ) or
+       ( wayt.barrier == "v_stile"         ) or
+       ( wayt.barrier == "cycle_barrier"   )) then
+      wayt.barrier = "fence"
+   end
+
+   if (( wayt.public_transport == "platform" ) and
+       ( wayt.highway          ~= "platform" ) and
+       ( wayt.highway          ~= "bus_stop" ) and
+       ( wayt.railway          ~= "platform" )) then
+      wayt.highway = "platform"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Map sinkholes mapped as ways to a non-area cliff.
+-- It's pot luck whether the triangles will appear on the right side of the
+-- cliff, but by chance most of the few UK ones do seem to be drawn the 
+-- "correct" way around.
+-- ----------------------------------------------------------------------------
+   if ( wayt.natural == "sinkhole" ) then
+      wayt.natural = "cliff"
+      wayt.area = "no"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Add building=roof on shelter and bicycle_parking ways if no building tag 
+-- already.
+-- ----------------------------------------------------------------------------
+   if ((( wayt.amenity  == "shelter"          )   or
+        ( wayt.amenity  == "bicycle_parking"  ))  and
+       (( wayt.building == nil                )   or
+        ( wayt.building == ""                 ))  and
+       (  wayt.covered  ~= "no"                )) then
+      wayt.building = "roof"
+   end
+
+-- ----------------------------------------------------------------------------
 -- A "leisure=track" can be either a linear or an area feature
 -- https://wiki.openstreetmap.org/wiki/Tag%3Aleisure%3Dtrack
 -- Assign a highway tag (gallop or leisuretrack) so that linear features can
@@ -1038,6 +1155,11 @@ function way_function()
             end -- stream etc.
         end -- river etc.
     end -- linear waterways
+
+-- ----------------------------------------------------------------------------
+-- The linearbarrier layer shouldn't have points in it, so we process that here
+-- ----------------------------------------------------------------------------
+    generic_after_linearbarrier( wayt )
 
 -- ----------------------------------------------------------------------------
 -- Most other "adding to mbtiles" processing is shared for points and polygons
@@ -11615,7 +11737,6 @@ function generic_after_function( passedt )
 -- ----------------------------------------------------------------------------
     generic_after_building( passedt )
     
-    generic_after_linearbarrier( passedt )
     generic_after_land1( passedt )
     generic_after_land2( passedt )
 end -- generic_after_function()
