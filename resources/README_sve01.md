@@ -24,6 +24,10 @@ Values are written as e.g. "landuse_farmland" with the OSM tag as part of the ke
 
 The value of the OSM name tag
 
+### ref
+
+Either the value of the OSM ref tag, or used to pass a "more detailed name" to the display map style.
+
 ## "transportation"
 
 This is for linear highways etc.
@@ -80,7 +84,7 @@ the value of the OSM name tag, after any postprocessing e.g. for "operator".
 
 ### class
 
-Stored as the OSM tag and value, such as "amenity_pub".  Things that exist in "land1" won't also be written here - the display style must source name and class (for icon) from "land1".
+Stored as the OSM tag and value, such as "amenity_pub".  This is a temporary catch-all; things that exist in "land1" won't also be written here - the display style must source name and class (for icon) from "land1".
 
 ### name
 
