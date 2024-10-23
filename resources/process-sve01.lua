@@ -11644,7 +11644,9 @@ function generic_after_linearbarrier( passedt )
     if (( passedt.barrier == "wall"      ) or
         ( passedt.barrier == "hedge"     ) or
         ( passedt.barrier == "hedgeline" ) or
-        ( passedt.barrier == "fence"     )) then
+        ( passedt.barrier == "fence"     ) or
+        ( passedt.barrier == "kerb"      ) or
+        ( passedt.barrier == "pitchline" )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
