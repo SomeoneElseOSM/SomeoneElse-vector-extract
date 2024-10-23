@@ -11615,7 +11615,7 @@ function generic_after_function( passedt )
 -- ----------------------------------------------------------------------------
     generic_after_building( passedt )
     
-    generic_after_barrier( passedt )
+    generic_after_linearbarrier( passedt )
     generic_after_land1( passedt )
     generic_after_land2( passedt )
 end -- generic_after_function()
@@ -11638,12 +11638,14 @@ end -- generic_after_building()
 
 
 -- ----------------------------------------------------------------------------
--- barrier layer
+-- linearbarrier layer
 -- ----------------------------------------------------------------------------
-function generic_after_barrier( passedt )
-    if (( passedt.barrier == "wall"   ) or
-        ( passedt.barrier == "hedge"  )) then
-        Layer( "barrier", false )
+function generic_after_linearbarrier( passedt )
+    if (( passedt.barrier == "wall"      ) or
+        ( passedt.barrier == "hedge"     ) or
+        ( passedt.barrier == "hedgeline" ) or
+        ( passedt.barrier == "fence"     )) then
+        Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
         if (( passedt.name ~= nil ) and
@@ -11653,7 +11655,7 @@ function generic_after_barrier( passedt )
 
         MinZoom( 13 )
     end
-end -- generic_after_barrier()
+end -- generic_after_linearbarrier()
 
 
 -- ----------------------------------------------------------------------------

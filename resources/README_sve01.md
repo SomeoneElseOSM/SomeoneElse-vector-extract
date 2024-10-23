@@ -14,7 +14,7 @@ The logic used here is actually very similar to that used for [raster maps](http
 
 More important places are written to lower numbered layers: country, state, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13, anything else at 14.
 
-## "barrier"
+## "linearbarrier"
 
 ### class
 
