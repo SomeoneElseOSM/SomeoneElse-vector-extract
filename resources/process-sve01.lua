@@ -11641,7 +11641,8 @@ end -- generic_after_building()
 -- barrier layer
 -- ----------------------------------------------------------------------------
 function generic_after_barrier( passedt )
-    if ( passedt.barrier == "wall"   ) then
+    if (( passedt.barrier == "wall"   ) or
+        ( passedt.barrier == "hedge"  )) then
         Layer( "barrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
