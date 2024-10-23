@@ -1,6 +1,7 @@
 {
 	"layers": {
 		"place": { "minzoom": 5, "maxzoom": 14 },
+		"barrier": { "minzoom": 13, "maxzoom": 14 },
 		"land1": { "minzoom": 5, "maxzoom": 14 },
 		"land2": { "minzoom": 5, "maxzoom": 14 },
 		"waterway": { "minzoom": 11, "maxzoom": 14 },

@@ -14,6 +14,16 @@ The logic used here is actually very similar to that used for [raster maps](http
 
 More important places are written to lower numbered layers: country, state, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13, anything else at 14.
 
+## "barrier"
+
+### class
+
+Generally speaking, the OSM value for "barrier".
+
+### name
+
+The value of the OSM name tag
+
 ## "land1" and "land2"
 
 There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas go.  Most go into "land1", except in the case of some overlays (e.g. military red hatching) which goes into "land2".  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into "land2".

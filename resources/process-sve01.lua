@@ -11615,6 +11615,7 @@ function generic_after_function( passedt )
 -- ----------------------------------------------------------------------------
     generic_after_building( passedt )
     
+    generic_after_barrier( passedt )
     generic_after_land1( passedt )
     generic_after_land2( passedt )
 end -- generic_after_function()
@@ -11634,6 +11635,25 @@ function generic_after_building( passedt )
         end
     end
 end -- generic_after_building()
+
+
+-- ----------------------------------------------------------------------------
+-- barrier layer
+-- ----------------------------------------------------------------------------
+function generic_after_barrier( passedt )
+    if ( passedt.barrier == "wall"   ) then
+        Layer( "barrier", false )
+        Attribute( "class", "barrier_" .. passedt.barrier )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
+        MinZoom( 13 )
+    end
+end -- generic_after_barrier()
+
 
 -- ----------------------------------------------------------------------------
 -- There are two "land" layers - "land1" and "land2".
