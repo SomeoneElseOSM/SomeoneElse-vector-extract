@@ -9645,6 +9645,7 @@ function generic_before_function( passedt )
        ( passedt.shop    == "fireworks"               ) or
        ( passedt.shop    == "auction"                 ) or
        ( passedt.shop    == "auction_house"           ) or
+       ( passedt.shop    == "auctioneer"              ) or
        ( passedt.office  == "auctioneer"              ) or
        ( passedt.shop    == "religion"                ) or
        ( passedt.shop    == "gas"                     ) or
@@ -12480,6 +12481,7 @@ function render_shop_land1( passedt )
         ( passedt.shop == "computer"           ) or
         ( passedt.shop == "confectionery"      ) or
         ( passedt.shop == "convenience"        ) or
+        ( passedt.shop == "copyshop"           ) or
         ( passedt.shop == "deli"               ) or
         ( passedt.shop == "discount"           ) or
         ( passedt.shop == "doityourself"       ) or
