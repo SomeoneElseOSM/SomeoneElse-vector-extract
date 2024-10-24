@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241021T235900Z",
+  "data_updated": "20241024T230000Z",
   "project": {
     "name": "SomeoneElse: Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2234,6 +2234,7 @@
     { "key": "shop", "value": "atv", "description": "Extracted as motorcycle shops" },
     { "key": "shop", "value": "auction", "description": "Various shops extracted" },
     { "key": "shop", "value": "auction_house", "description": "Various shops extracted" },
+    { "key": "shop", "value": "auctioneer", "description": "Various shops extracted" },
     { "key": "shop", "value": "audio_video", "description": "Various shops extracted" },
     { "key": "shop", "value": "automotive", "description": "Various shops extracted" },
     { "key": "shop", "value": "baby", "description": "Various shops extracted" },
@@ -2658,6 +2659,7 @@
     { "key": "shop", "value": "retail", "description": "Not an expected value in OSM data.  Extracted as a generic shop" },
     { "key": "shop", "value": "roofing", "description": "Various shops extracted" },
     { "key": "shop", "value": "saddlery", "description": "Various shops extracted" },
+    { "key": "shop", "value": "safety_equipment", "description": "Various shops shown" },
     { "key": "shop", "value": "salon", "description": "Various shops extracted" },
     { "key": "shop", "value": "sandwich", "description": "Various shops extracted" },
     { "key": "shop", "value": "sandwiches", "description": "Various shops extracted" },
