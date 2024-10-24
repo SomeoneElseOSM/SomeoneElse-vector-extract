@@ -13165,9 +13165,25 @@ function render_barrier_land1( passedt )
 
         MinZoom( 14 )
     else
-        render_power_land1( passedt )
+        render_waterway_land1( passedt )
     end -- barrier=cattle_grid etc. 15
 end -- render_barrier_land1()
+
+function render_waterway_land1( passedt )
+    if ( passedt.waterway == "lock_gate" ) then
+        Layer( "land1", true )
+        Attribute( "class", "waterway_" .. passedt.waterway )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+             Attribute( "name", passedt.name )
+        end
+
+        MinZoom( 14 )
+    else
+        render_power_land1( passedt )
+    end -- waterway=lock_gate 14
+end -- render_waterway_land1()
 
 function render_power_land1( passedt )
     if (( passedt.power == "station"   ) or
