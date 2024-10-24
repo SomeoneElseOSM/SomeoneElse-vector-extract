@@ -11781,6 +11781,12 @@ function generic_after_linearbarrier( passedt )
         end
 
         MinZoom( 13 )
+    else
+        if ( passedt.man_made == "cutline" ) then
+            Layer( "linearbarrier", false )
+            Attribute( "class", "man_made_" .. passedt.man_made )
+            MinZoom( 13 )
+        end
     end
 end -- generic_after_linearbarrier()
 
