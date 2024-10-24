@@ -11762,14 +11762,15 @@ end -- generic_after_building()
 -- linearbarrier layer
 -- ----------------------------------------------------------------------------
 function generic_after_linearbarrier( passedt )
-    if (( passedt.barrier == "wall"      ) or
-        ( passedt.barrier == "hedge"     ) or
-        ( passedt.barrier == "hedgeline" ) or
-        ( passedt.barrier == "fence"     ) or
-        ( passedt.barrier == "kerb"      ) or
-        ( passedt.barrier == "pitchline" ) or
-        ( passedt.barrier == "gate"      ) or
-        ( passedt.barrier == "stile"     )) then
+    if (( passedt.barrier == "wall"        ) or
+        ( passedt.barrier == "hedge"       ) or
+        ( passedt.barrier == "hedgeline"   ) or
+        ( passedt.barrier == "fence"       ) or
+        ( passedt.barrier == "kerb"        ) or
+        ( passedt.barrier == "pitchline"   ) or
+        ( passedt.barrier == "gate"        ) or
+        ( passedt.barrier == "stile"       ) or
+        ( passedt.barrier == "cattle_grid" )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
