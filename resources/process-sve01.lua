@@ -11803,6 +11803,18 @@ function generic_after_linearbarrier( passedt )
                     end
 
                     MinZoom( 12 )
+                else
+                    if ( passedt.historic == "citywalls" ) then
+                        Layer( "linearbarrier", false )
+                        Attribute( "class", "historic_" .. passedt.historic )
+
+                        if (( passedt.name ~= nil ) and
+                            ( passedt.name ~= ""  )) then
+                             Attribute( "name", passedt.name )
+                        end
+
+                        MinZoom( 13 )
+                    end  -- historic=citywalls 13
                 end -- waterway=dam 12
             end -- man_made=cutline 13
         end -- man_made=breakwater etc. 11
