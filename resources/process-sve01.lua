@@ -11806,7 +11806,8 @@ function generic_after_linearbarrier( passedt )
 
                     MinZoom( 12 )
                 else
-                    if ( passedt.historic == "citywalls" ) then
+                    if (( passedt.historic == "citywalls"    ) or
+                        ( passedt.historic == "castle_walls" )) then
                         Layer( "linearbarrier", false )
                         Attribute( "class", "historic_" .. passedt.historic )
 
