@@ -11786,8 +11786,20 @@ function generic_after_linearbarrier( passedt )
             Layer( "linearbarrier", false )
             Attribute( "class", "man_made_" .. passedt.man_made )
             MinZoom( 13 )
-        end
-    end
+        else
+            if ( passedt.waterway == "dam" ) then
+                Layer( "linearbarrier", false )
+                Attribute( "class", "waterway_" .. passedt.waterway )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                     Attribute( "name", passedt.name )
+                end
+
+                MinZoom( 12 )
+            end -- waterway=dam 12
+        end -- man_made=cutline 13
+    end -- barrier=wall etc. 13
 end -- generic_after_linearbarrier()
 
 
