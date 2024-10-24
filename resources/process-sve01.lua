@@ -11770,7 +11770,8 @@ function generic_after_linearbarrier( passedt )
         ( passedt.barrier == "pitchline"   ) or
         ( passedt.barrier == "gate"        ) or
         ( passedt.barrier == "stile"       ) or
-        ( passedt.barrier == "cattle_grid" )) then
+        ( passedt.barrier == "cattle_grid" ) or
+        ( passedt.barrier == "ford"        )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
