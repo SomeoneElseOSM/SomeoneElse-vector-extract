@@ -516,6 +516,7 @@ end -- node_function()
 -- ------------------------------------------------------------------------------
 function way_function()
     local wayt = {}
+    wayt.is_closed = IsClosed()
     wayt.amenity = Find("amenity")
     wayt.place = Find("place")
     wayt.shop = Find("shop")
@@ -11762,18 +11763,24 @@ end -- generic_after_building()
 
 -- ----------------------------------------------------------------------------
 -- linearbarrier layer
+--
+-- hedges are only written to this if they're not closed.
+-- hedges around some other area type (e.g. "landuse=farmland") have already been
+-- changed to "hedgeline" above.
+-- area hedges will be handled in "render_barrier_land1( passedt )" below
 -- ----------------------------------------------------------------------------
 function generic_after_linearbarrier( passedt )
-    if (( passedt.barrier == "wall"        ) or
-        ( passedt.barrier == "hedge"       ) or
-        ( passedt.barrier == "hedgeline"   ) or
-        ( passedt.barrier == "fence"       ) or
-        ( passedt.barrier == "kerb"        ) or
-        ( passedt.barrier == "pitchline"   ) or
-        ( passedt.barrier == "gate"        ) or
-        ( passedt.barrier == "stile"       ) or
-        ( passedt.barrier == "cattle_grid" ) or
-        ( passedt.barrier == "ford"        )) then
+    if ((  passedt.barrier == "wall"        ) or
+        (( passedt.barrier == "hedge"      )  and
+         ( not passedt.is_closed           )) or
+        (  passedt.barrier == "hedgeline"   ) or
+        (  passedt.barrier == "fence"       ) or
+        (  passedt.barrier == "kerb"        ) or
+        (  passedt.barrier == "pitchline"   ) or
+        (  passedt.barrier == "gate"        ) or
+        (  passedt.barrier == "stile"       ) or
+        (  passedt.barrier == "cattle_grid" ) or
+        (  passedt.barrier == "ford"        )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
@@ -13203,21 +13210,29 @@ function render_natural_land1( passedt )
     end -- desert 7
 end -- render_natural_land1()
 
+-- ----------------------------------------------------------------------------
+-- hedges are only written to this if they're closed hedge areas.
+-- hedges around some other area type (e.g. "landuse=farmland") have already been
+-- changed to "hedgeline" above and will have been written out as linear
+-- barriers already
+-- ----------------------------------------------------------------------------
 function render_barrier_land1( passedt )
-    if (( passedt.barrier == "cattle_grid"     ) or
-        ( passedt.barrier == "cycle_barrier"   ) or
-        ( passedt.barrier == "gate"            ) or
-        ( passedt.barrier == "gate_locked"     ) or
-        ( passedt.barrier == "horse_stile"     ) or
-        ( passedt.barrier == "kissing_gate"    ) or
-        ( passedt.barrier == "dog_gate_stile"  ) or
-        ( passedt.barrier == "stepping_stones" ) or
-        ( passedt.barrier == "stile"           ) or
-        ( passedt.barrier == "block"           ) or
-        ( passedt.barrier == "bollard"         ) or
-        ( passedt.barrier == "lift_gate"       ) or
-        ( passedt.barrier == "toll_booth"      ) or
-        ( passedt.barrier == "door"            )) then
+    if ((  passedt.barrier == "cattle_grid"     ) or
+        (  passedt.barrier == "cycle_barrier"   ) or
+        (  passedt.barrier == "gate"            ) or
+        (  passedt.barrier == "gate_locked"     ) or
+        (  passedt.barrier == "horse_stile"     ) or
+        (  passedt.barrier == "kissing_gate"    ) or
+        (  passedt.barrier == "dog_gate_stile"  ) or
+        (  passedt.barrier == "stepping_stones" ) or
+        (  passedt.barrier == "stile"           ) or
+        (  passedt.barrier == "block"           ) or
+        (  passedt.barrier == "bollard"         ) or
+        (  passedt.barrier == "lift_gate"       ) or
+        (  passedt.barrier == "toll_booth"      ) or
+        (  passedt.barrier == "door"            ) or
+        (( passedt.barrier == "hedge"          )  and
+         ( passedt.is_closed                   ))) then
         Layer( "land1", true )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
