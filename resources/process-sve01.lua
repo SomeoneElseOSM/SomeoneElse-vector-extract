@@ -11790,25 +11790,37 @@ function generic_after_linearbarrier( passedt )
             Attribute( "class", "man_made_" .. passedt.man_made )
             MinZoom( 11 )
         else
-            if ( passedt.man_made == "cutline" ) then
+            if (( passedt.man_made == "cutline" ) or
+                ( passedt.man_made == "levee"   )) then
                 Layer( "linearbarrier", false )
                 Attribute( "class", "man_made_" .. passedt.man_made )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                   Attribute( "name", passedt.name )
+                end
+
                 MinZoom( 13 )
             else
-                if (( passedt.man_made == "embankment" ) or
-                    ( passedt.man_made == "levee"      )) then
+                if ( passedt.man_made == "embankment" ) then
                     Layer( "linearbarrier", false )
                     Attribute( "class", "man_made_" .. passedt.man_made )
+
+                    if (( passedt.name ~= nil ) and
+                        ( passedt.name ~= ""  )) then
+                       Attribute( "name", passedt.name )
+                    end
+
                     MinZoom( 14 )
                 else
                     if ( passedt.waterway == "dam" ) then
                         Layer( "linearbarrier", false )
-                            Attribute( "class", "waterway_" .. passedt.waterway )
+                        Attribute( "class", "waterway_" .. passedt.waterway )
 
-                            if (( passedt.name ~= nil ) and
-                                ( passedt.name ~= ""  )) then
-                                Attribute( "name", passedt.name )
-                            end
+                        if (( passedt.name ~= nil ) and
+                            ( passedt.name ~= ""  )) then
+                            Attribute( "name", passedt.name )
+                        end
 
                         MinZoom( 12 )
                     else
@@ -11833,7 +11845,7 @@ function generic_linearbarrier_historic( passedt )
 
         MinZoom( 13 )
     else
-        if ( passedt.natural == "cliff" ) then
+        if ( passedt.natural == "valley" ) then
             Layer( "linearbarrier", false )
             Attribute( "class", "natural_" .. passedt.natural )
 
@@ -11842,8 +11854,20 @@ function generic_linearbarrier_historic( passedt )
                 Attribute( "name", passedt.name )
             end
 
-            MinZoom( 12 )
-        end  -- natural=cliff etc. 12
+            MinZoom( 10 )
+        else
+            if ( passedt.natural == "cliff" ) then
+                Layer( "linearbarrier", false )
+                Attribute( "class", "natural_" .. passedt.natural )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                    Attribute( "name", passedt.name )
+                end
+
+                MinZoom( 12 )
+            end  -- natural=cliff etc. 12
+        end  -- natural=valley 11
     end  -- historic=citywalls 13
 end -- generic_linearbarrier_historic()
 
