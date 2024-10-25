@@ -11817,6 +11817,18 @@ function generic_after_linearbarrier( passedt )
                         end
 
                         MinZoom( 13 )
+                    else
+                        if ( passedt.natural == "cliff" ) then
+                            Layer( "linearbarrier", false )
+                            Attribute( "class", "natural_" .. passedt.natural )
+
+                            if (( passedt.name ~= nil ) and
+                                ( passedt.name ~= ""  )) then
+                                Attribute( "name", passedt.name )
+                            end
+
+                            MinZoom( 12 )
+                        end  -- natural=cliff etc. 12
                     end  -- historic=citywalls 13
                 end -- waterway=dam 12
             end -- man_made=cutline 13
