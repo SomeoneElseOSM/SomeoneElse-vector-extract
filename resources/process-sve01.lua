@@ -11795,7 +11795,8 @@ function generic_after_linearbarrier( passedt )
                 Attribute( "class", "man_made_" .. passedt.man_made )
                 MinZoom( 13 )
             else
-                if ( passedt.man_made == "embankment" ) then
+                if (( passedt.man_made == "embankment" ) or
+                    ( passedt.man_made == "levee"      )) then
                     Layer( "linearbarrier", false )
                     Attribute( "class", "man_made_" .. passedt.man_made )
                     MinZoom( 14 )
