@@ -13043,16 +13043,17 @@ function render_leisure_land1( passedt )
 
         MinZoom( 6 )
     else
-        if (( passedt.leisure == "common"            ) or
-            ( passedt.leisure == "park"              ) or
-            ( passedt.leisure == "recreation_ground" ) or
-            ( passedt.leisure == "garden"            ) or
-            ( passedt.leisure == "golfgreen"         ) or
-            ( passedt.leisure == "golf_course"       ) or
-            ( passedt.leisure == "sports_centre"     ) or
-            ( passedt.leisure == "stadium"           ) or
-            ( passedt.leisure == "pitch"             ) or
-            ( passedt.leisure == "track"             )) then
+        if ((  passedt.leisure == "common"            ) or
+            (  passedt.leisure == "park"              ) or
+            (  passedt.leisure == "recreation_ground" ) or
+            (  passedt.leisure == "garden"            ) or
+            (  passedt.leisure == "golfgreen"         ) or
+            (  passedt.leisure == "golf_course"       ) or
+            (  passedt.leisure == "sports_centre"     ) or
+            (  passedt.leisure == "stadium"           ) or
+            (  passedt.leisure == "pitch"             ) or
+            (( passedt.leisure == "track"            )  and
+             ( passedt.area    ~= "no"               ))) then
             Layer( "land1", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
 
