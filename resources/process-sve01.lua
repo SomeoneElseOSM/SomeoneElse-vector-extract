@@ -498,6 +498,11 @@ function node_function()
       nodet.lcn_ref = nil
    end
 
+-- ------------------------------------------------------------------------------
+-- (end of the node-specific code)
+--
+-- Actually writing out nodes (and polygons) is done in "generic_after_function"
+-- ------------------------------------------------------------------------------
     generic_after_function( nodet )
 end -- node_function()
 
@@ -855,6 +860,7 @@ function way_function()
     generic_before_function( wayt )
 
 -- ----------------------------------------------------------------------------
+-- Way-specific code
 -- Consolidate some "ford" values into "yes".
 -- This is here rather than in "generic" because "generic" is called after this
 -- There is a similar section in way-only.
@@ -1052,119 +1058,28 @@ function way_function()
     wayt.highway = process_golf_tracks( wayt.highway, wayt.golf )
 
 -- ----------------------------------------------------------------------------
--- highway processing
+-- (end of the way-specific code)
+--
+-- Linear transportation layer
 -- ----------------------------------------------------------------------------
-    if (( wayt.highway ~= nil )   and
-        ( wayt.highway ~= ""  ))  then
-        Layer("transportation", false)
-        Attribute( "class", wayt.highway )
-
-        if (( wayt.name ~= nil )   and
-            ( wayt.name ~= ""  ))  then
-	    Attribute( "name", wayt.name )
-        end
+    way_after_transportation( wayt )
 
 -- ----------------------------------------------------------------------------
--- If there is a sidewalk, set "edge" to "sidewalk"
+-- Linear waterway layer
 -- ----------------------------------------------------------------------------
-        if (( wayt.sidewalk == "both"            ) or 
-            ( wayt.sidewalk == "left"            ) or 
-            ( wayt.sidewalk == "mapped"          ) or 
-            ( wayt.sidewalk == "separate"        ) or 
-            ( wayt.sidewalk == "right"           ) or 
-            ( wayt.sidewalk == "shared"          ) or 
-            ( wayt.sidewalk == "yes"             ) or
-            ( wayt.sidewalkCboth == "separate"   ) or 
-            ( wayt.sidewalkCboth == "yes"        ) or
-            ( wayt.sidewalkCleft == "segregated" ) or
-            ( wayt.sidewalkCleft == "separate"   ) or 
-            ( wayt.sidewalkCleft == "yes"        ) or
-            ( wayt.sidewalkCright == "segregated" ) or 
-            ( wayt.sidewalkCright == "separate"  ) or 
-            ( wayt.sidewalkCright == "yes"       ) or
-            ( wayt.footway  == "separate"        ) or 
-            ( wayt.footway  == "yes"             ) or
-            ( wayt.shoulder == "both"            ) or
-            ( wayt.shoulder == "left"            ) or 
-            ( wayt.shoulder == "right"           ) or 
-            ( wayt.shoulder == "yes"             ) or
-            ( wayt.hard_shoulder == "yes"        ) or
-            ( wayt.cycleway == "track"           ) or
-            ( wayt.cycleway == "opposite_track"  ) or
-            ( wayt.cycleway == "yes"             ) or
-            ( wayt.cycleway == "separate"        ) or
-            ( wayt.cycleway == "sidewalk"        ) or
-            ( wayt.cycleway == "sidepath"        ) or
-            ( wayt.cycleway == "segregated"      ) or
-            ( wayt.segregated == "yes"           ) or
-            ( wayt.segregated == "right"         )) then
-            Attribute("edge", "sidewalk")
-        else
--- ----------------------------------------------------------------------------
--- If there is not a sidewalk but there is a verge, set "edge" to "verge"
--- ----------------------------------------------------------------------------
-            if (( wayt.verge == "both"     ) or
-                ( wayt.verge == "left"     ) or
-                ( wayt.verge == "separate" ) or
-                ( wayt.verge == "right"    ) or
-                ( wayt.verge == "yes"      )) then
-                Attribute("edge", "verge")
-            else
--- ----------------------------------------------------------------------------
--- If there is not a sidewalk or verge but it is a long ford, set "edge" to "ford"
--- ----------------------------------------------------------------------------
-                if ( wayt.ford == "yes" ) then
-                    Attribute("edge", "ford")
-                end  -- ford
-            end -- verge
-        end -- sidewalk
-
-        AttributeBoolean( "bridge", ( wayt.bridge == "yes" ) )
-        AttributeBoolean( "tunnel", ( wayt.tunnel == "yes" ) )
-    end -- linear highways
+    way_after_waterway( wayt )
 
 -- ----------------------------------------------------------------------------
--- waterway processing
+-- The linearbarrier layer shouldn't have points in it, so we process that 
+-- here.  There are some checks for "not a polygon" here for e.g. hedges.
 -- ----------------------------------------------------------------------------
-    if (( wayt.waterway ~= nil ) and
-        ( wayt.waterway ~= ""  )) then
-        Layer("waterway", false)
-        Attribute("class", wayt.waterway)
-        Attribute( "name", Find( "name" ) )
-
-        if (( wayt.waterway == "river"          ) or
-            ( wayt.waterway == "canal"          ) or
-            ( wayt.waterway == "derelict_canal" )) then
-            MinZoom( 11 )
-        else
-            if (( wayt.waterway == "stream"   ) or
-                ( wayt.waterway == "drain"    ) or
-                ( wayt.waterway == "intriver" ) or
-                ( wayt.waterway == "intstream" )) then
-                MinZoom( 12 )
-            else
-                if ( wayt.waterway == "ditch" ) then
-                    MinZoom( 13 )
-                else
-                    if ( wayt.waterway == "weir" ) then
-                        MinZoom( 14 )
--- ------------------------------------------------------------------------------
--- No "else" here yet
--- ------------------------------------------------------------------------------
-                    end -- weir
-                end  -- ditch
-            end -- stream etc.
-        end -- river etc.
-    end -- linear waterways
+    way_after_linearbarrier( wayt )
 
 -- ----------------------------------------------------------------------------
--- The linearbarrier layer shouldn't have points in it, so we process that here
--- ----------------------------------------------------------------------------
-    generic_after_linearbarrier( wayt )
-
--- ----------------------------------------------------------------------------
--- Most other "adding to mbtiles" processing is shared for points and polygons
--- and is called from here:
+-- Actually writing out most other nodes (and polygons) is done 
+-- in "generic_after_function"
+-- 
+-- Linear features should have been handled above.
 -- ----------------------------------------------------------------------------
     generic_after_function( wayt )
 end -- way_function()
@@ -11761,14 +11676,133 @@ end -- generic_after_building()
 
 
 -- ----------------------------------------------------------------------------
+-- Linear transportation layer
+--
+-- First, highway processing
+-- ----------------------------------------------------------------------------
+function way_after_transportation( passedt )
+    if (( passedt.highway ~= nil )   and
+        ( passedt.highway ~= ""  ))  then
+        Layer("transportation", false)
+        Attribute( "class", passedt.highway )
+
+        if (( passedt.name ~= nil )   and
+            ( passedt.name ~= ""  ))  then
+	    Attribute( "name", passedt.name )
+        end
+
+-- ----------------------------------------------------------------------------
+-- If there is a sidewalk, set "edge" to "sidewalk"
+-- ----------------------------------------------------------------------------
+        if (( passedt.sidewalk == "both"            ) or 
+            ( passedt.sidewalk == "left"            ) or 
+            ( passedt.sidewalk == "mapped"          ) or 
+            ( passedt.sidewalk == "separate"        ) or 
+            ( passedt.sidewalk == "right"           ) or 
+            ( passedt.sidewalk == "shared"          ) or 
+            ( passedt.sidewalk == "yes"             ) or
+            ( passedt.sidewalkCboth == "separate"   ) or 
+            ( passedt.sidewalkCboth == "yes"        ) or
+            ( passedt.sidewalkCleft == "segregated" ) or
+            ( passedt.sidewalkCleft == "separate"   ) or 
+            ( passedt.sidewalkCleft == "yes"        ) or
+            ( passedt.sidewalkCright == "segregated" ) or 
+            ( passedt.sidewalkCright == "separate"  ) or 
+            ( passedt.sidewalkCright == "yes"       ) or
+            ( passedt.footway  == "separate"        ) or 
+            ( passedt.footway  == "yes"             ) or
+            ( passedt.shoulder == "both"            ) or
+            ( passedt.shoulder == "left"            ) or 
+            ( passedt.shoulder == "right"           ) or 
+            ( passedt.shoulder == "yes"             ) or
+            ( passedt.hard_shoulder == "yes"        ) or
+            ( passedt.cycleway == "track"           ) or
+            ( passedt.cycleway == "opposite_track"  ) or
+            ( passedt.cycleway == "yes"             ) or
+            ( passedt.cycleway == "separate"        ) or
+            ( passedt.cycleway == "sidewalk"        ) or
+            ( passedt.cycleway == "sidepath"        ) or
+            ( passedt.cycleway == "segregated"      ) or
+            ( passedt.segregated == "yes"           ) or
+            ( passedt.segregated == "right"         )) then
+            Attribute("edge", "sidewalk")
+        else
+-- ----------------------------------------------------------------------------
+-- If there is not a sidewalk but there is a verge, set "edge" to "verge"
+-- ----------------------------------------------------------------------------
+            if (( passedt.verge == "both"     ) or
+                ( passedt.verge == "left"     ) or
+                ( passedt.verge == "separate" ) or
+                ( passedt.verge == "right"    ) or
+                ( passedt.verge == "yes"      )) then
+                Attribute("edge", "verge")
+            else
+-- ----------------------------------------------------------------------------
+-- If there is not a sidewalk or verge but it is a long ford, set "edge" to "ford"
+-- ----------------------------------------------------------------------------
+                if ( passedt.ford == "yes" ) then
+                    Attribute("edge", "ford")
+                end  -- ford
+            end -- verge
+        end -- sidewalk
+
+        AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
+        AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
+    end -- linear highways
+end -- way_after_transportation( passedt )
+
+-- ----------------------------------------------------------------------------
+-- linear waterway layer
+-- ----------------------------------------------------------------------------
+function way_after_waterway( passedt )
+    if (( passedt.waterway ~= nil ) and
+        ( passedt.waterway ~= ""  )) then
+        Layer("waterway", false)
+        Attribute("class", passedt.waterway)
+        Attribute( "name", Find( "name" ) )
+
+        if (( passedt.waterway == "river"          ) or
+            ( passedt.waterway == "canal"          ) or
+            ( passedt.waterway == "derelict_canal" )) then
+            MinZoom( 11 )
+        else
+            if (( passedt.waterway == "stream"   ) or
+                ( passedt.waterway == "drain"    ) or
+                ( passedt.waterway == "intriver" ) or
+                ( passedt.waterway == "intstream" )) then
+                MinZoom( 12 )
+            else
+                if ( passedt.waterway == "ditch" ) then
+                    MinZoom( 13 )
+                else
+                    if ( passedt.waterway == "weir" ) then
+                        MinZoom( 14 )
+-- ------------------------------------------------------------------------------
+-- No "else" here yet
+-- ------------------------------------------------------------------------------
+                    end -- weir
+                end  -- ditch
+            end -- stream etc.
+        end -- river etc.
+    end -- linear waterways
+
+end -- way_after_waterway( passedt )
+
+-- ----------------------------------------------------------------------------
 -- linearbarrier layer
+-- This layer includes barriers (fences, walls) and other barrier-like features
+-- (cutlines, valleys) that aren't in another linear layer such as 
+-- transportation or waterway.
 --
 -- hedges are only written to this if they're not closed.
 -- hedges around some other area type (e.g. "landuse=farmland") have already been
 -- changed to "hedgeline" above.
 -- area hedges will be handled in "render_barrier_land1( passedt )" below
+--
+-- For more on the hedge logic (shared with raster) see 
+-- https://www.openstreetmap.org/user/SomeoneElse/diary/401631
 -- ----------------------------------------------------------------------------
-function generic_after_linearbarrier( passedt )
+function way_after_linearbarrier( passedt )
     if ((  passedt.barrier == "wall"        ) or
         (( passedt.barrier == "hedge"      )  and
          ( not passedt.is_closed           )) or
@@ -11837,7 +11871,7 @@ function generic_after_linearbarrier( passedt )
             end -- man_made=cutline 13
         end -- man_made=breakwater etc. 11
     end -- barrier=wall etc. 13
-end -- generic_after_linearbarrier()
+end -- way_after_linearbarrier()
 
 function generic_linearbarrier_historic( passedt )
     if (( passedt.historic == "citywalls"    ) or
