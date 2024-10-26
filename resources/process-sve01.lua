@@ -11752,6 +11752,8 @@ function way_after_transportation( passedt )
         AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
     else
 -- ----------------------------------------------------------------------------
+-- not a highway
+--
 -- Ferry routes
 -- ----------------------------------------------------------------------------
         if ( passedt.route == "ferry" ) then
