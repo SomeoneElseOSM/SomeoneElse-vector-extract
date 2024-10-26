@@ -7783,12 +7783,11 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
--- natural=tree_row was added to the standard style file after my version.
--- I'm not convinced that it makes sense to distinguish from hedge, so I'll
--- just display as hedge.
+-- Assign barrier=tree_row for natural=tree_row so that on raster 
+-- "area" tree_rows are shown as tree rows in the "area barriers" layer.
 -- ----------------------------------------------------------------------------
    if ( passedt.natural   == "tree_row" ) then
-      passedt.barrier = "hedgeline"
+      passedt.barrier = "tree_row"
    end
 
 -- ----------------------------------------------------------------------------
@@ -11780,7 +11779,8 @@ function generic_after_linearbarrier( passedt )
         (  passedt.barrier == "gate"        ) or
         (  passedt.barrier == "stile"       ) or
         (  passedt.barrier == "cattle_grid" ) or
-        (  passedt.barrier == "ford"        )) then
+        (  passedt.barrier == "ford"        ) or
+        (  passedt.barrier == "tree_row"    )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
 
