@@ -13053,7 +13053,8 @@ function render_leisure_land1( passedt )
             (  passedt.leisure == "stadium"           ) or
             (  passedt.leisure == "pitch"             ) or
             (( passedt.leisure == "track"            )  and
-             ( passedt.area    ~= "no"               ))) then
+             ( passedt.area    ~= "no"               )  and
+             ( passedt.is_closed                     ))) then
             Layer( "land1", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
 
