@@ -11681,10 +11681,14 @@ end -- generic_after_building()
 -- Linear transportation layer
 --
 -- First, highway processing
+-- We ignore highway areas here (those tagged "area=yes").  They will be
+-- processed elsewhere.  These highways may be closed ways or open-ended; they
+-- are still linear.
 -- ----------------------------------------------------------------------------
 function way_after_transportation( passedt )
-    if (( passedt.highway ~= nil )   and
-        ( passedt.highway ~= ""  ))  then
+    if (( passedt.highway ~= nil   ) and
+        ( passedt.highway ~= ""    ) and
+        ( passedt.area    ~= "yes" )) then
         Layer("transportation", false)
         Attribute( "class", passedt.highway )
 
