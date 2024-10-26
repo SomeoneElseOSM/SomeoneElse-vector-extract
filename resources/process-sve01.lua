@@ -395,6 +395,7 @@ function node_function()
     nodet.lcn_ref = Find("lcn_ref")
     nodet.advertising = Find("advertising")
     nodet.volcanoCstatus = Find("volcano:status")
+    nodet.route = Find("route")
 
     generic_before_function( nodet )
 
@@ -856,6 +857,7 @@ function way_function()
     wayt.lcn_ref = Find("lcn_ref")
     wayt.advertising = Find("advertising")
     wayt.volcanoCstatus = Find("volcano:status")
+    wayt.route = Find("route")
 
     generic_before_function( wayt )
 
@@ -11748,6 +11750,21 @@ function way_after_transportation( passedt )
 
         AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
         AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
+    else
+-- ----------------------------------------------------------------------------
+-- Ferry routes
+-- ----------------------------------------------------------------------------
+        if ( passedt.route == "ferry" ) then
+            Layer("transportation", false)
+            Attribute( "class", passedt.route )
+
+            if (( passedt.name ~= nil )   and
+                ( passedt.name ~= ""  ))  then
+	        Attribute( "name", passedt.name )
+            end
+
+            MinZoom( 6 )
+        end -- ferry routes
     end -- linear highways
 end -- way_after_transportation( passedt )
 
