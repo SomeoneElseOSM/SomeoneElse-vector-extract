@@ -12294,7 +12294,7 @@ function wr_after_transportation( passedt )
 
             if (( passedt.name ~= nil )   and
                 ( passedt.name ~= ""  ))  then
-    	    Attribute( "name", passedt.name )
+    	        Attribute( "name", passedt.name )
             end
 
             AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
