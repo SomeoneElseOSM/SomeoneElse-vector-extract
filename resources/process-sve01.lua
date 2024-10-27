@@ -43,7 +43,6 @@ end
 function exit_function()
 end
 
-
 -- ------------------------------------------------------------------------------
 -- Main entry point for processing nodes
 --
@@ -1086,6 +1085,528 @@ function way_function()
     generic_after_function( wayt )
 end -- way_function()
 
+
+-- ------------------------------------------------------------------------------
+-- Only certain relations are accepted.
+-- See https://github.com/systemed/tilemaker/blob/master/docs/RELATIONS.md#stage-1-accepting-relations
+-- Accept all route relations.
+-- Once done, relation_function() will be called for each one.
+-- ------------------------------------------------------------------------------
+function relation_scan_function()
+    if Find("type")=="route" then
+        Accept()
+    end
+end -- relation_scan_function()
+
+-- ------------------------------------------------------------------------------
+-- Main entry point for processing relations
+-- See https://github.com/systemed/tilemaker/blob/master/docs/RELATIONS.md#writing-relation-geometries
+-- ------------------------------------------------------------------------------
+function relation_function()
+    local relationt = {}
+    relationt.is_closed = IsClosed()
+    relationt.amenity = Find("amenity")
+    relationt.place = Find("place")
+    relationt.shop = Find("shop")
+    relationt.wasCshop = Find("was:shop")
+    relationt.closedCshop = Find("closed:shop")
+    relationt.disusedCshop = Find("disused:shop")
+    relationt.tourism = Find("tourism")
+    relationt.layer = Find("layer")
+    relationt.bridge = Find("bridge")
+    relationt.tunnel = Find("tunnel")
+    relationt.embankment = Find("embankment")
+    relationt.highrelation = Find("highrelation")
+    relationt.level = Find("level")
+    relationt.golf = Find("golf")
+    relationt.sidewalk = Find("sidewalk")
+    relationt.sidewalkCleft = Find("sidewalk:left")
+    relationt.sidewalkCright = Find("sidewalk:right")
+    relationt.sidewalkCboth = Find("sidewalk:both")
+    relationt.footrelation = Find("footrelation")
+    relationt.shoulder = Find("shoulder")
+    relationt.hard_shoulder = Find("hard_shoulder")
+    relationt.cyclerelation = Find("cyclerelation")
+    relationt.segregated = Find("segregated")
+    relationt.verge = Find("verge")
+    relationt.waterrelation = Find("waterrelation")
+    relationt.building = Find("building")
+    relationt.natural = Find("natural")
+    relationt.wasCamenity = Find("was:amenity")
+    relationt.oldCamenity = Find("old:amenity")
+    relationt.historicCamenity = Find("historic:amenity")
+    relationt.closedCamenity = Find("closed:amenity")
+    relationt.disusedCamenity = Find("disused:amenity")
+    relationt.wasCwaterrelation = Find("was:waterrelation")
+    relationt.disusedCwaterrelation = Find("disused:waterrelation")
+    relationt.wasCrailrelation = Find("was:railrelation")
+    relationt.disusedCrailrelation = Find("disused:railrelation")
+    relationt.aerorelation = Find("aerorelation")
+    relationt.wasCaerorelation = Find("was:aerorelation")
+    relationt.disusedCaerorelation = Find("disused:aerorelation")
+    relationt.landuse = Find("landuse")
+    relationt.wasClanduse = Find("was:landuse")
+    relationt.disusedClanduse = Find("disused:landuse")
+    relationt.status = Find("status")
+    relationt.disused = Find("disused")
+    relationt.name = Find("name")
+    relationt.nameCleft = Find("name:left")
+    relationt.nameCright = Find("name:right")
+    relationt.nameCen = Find("name:en")
+    relationt.nameCsigned = Find("name:signed")
+    relationt.nameCabsent = Find("name:absent")
+    relationt.old_name = Find("old_name")
+    relationt.official_ref = Find("official_ref")
+    relationt.highrelation_authority_ref = Find("highrelation_authority_ref")
+    relationt.highrelation_ref = Find("highrelation_ref")
+    relationt.admin_ref = Find("admin_ref")
+    relationt.adminCref = Find("admin:ref")
+    relationt.loc_ref = Find("loc_ref")
+    relationt.ref = Find("ref")
+    relationt.refCsigned = Find("ref:signed")
+    relationt.unsigned = Find("unsigned")
+    relationt.surface = Find("surface")
+    relationt.visibility = Find("visibility")
+    relationt.trail_visibility = Find("trail_visibility")
+    relationt.footCphysical = Find("foot:physical")
+    relationt.overgrown = Find("overgrown")
+    relationt.obstacle = Find("obstacle")
+    relationt.informal = Find("informal")
+    relationt.width = Find("width")
+    relationt.est_width = Find("est_width")
+    relationt.maxwidth = Find("maxwidth")
+    relationt.designation = Find("designation")
+    relationt.prow_ref = Find("prow_ref")
+    relationt.sac_scale = Find("sac_scale")
+    relationt.scramble = Find("scramble")
+    relationt.ladder = Find("ladder")
+    relationt.access = Find("access")
+    relationt.accessCfoot = Find("access:foot")
+    relationt.accessCbicycle = Find("access:bicycle")
+    relationt.accessChorse = Find("access:horse")
+    relationt.foot = Find("foot")
+    relationt.bicycle = Find("bicycle")
+    relationt.horse = Find("horse")
+    relationt.service = Find("service")
+    relationt.motor_vehicle = Find("motor_vehicle")
+    relationt.boundary = Find("boundary")
+    relationt.protect_class = Find("protect_class")
+    relationt.protection_title = Find("protection_title")
+    relationt.leisure = Find("leisure")
+    relationt.landcover = Find("landcover")
+    relationt.barrier = Find("barrier")
+    relationt.ford = Find("ford")
+    relationt.onerelation = Find("onerelation")
+    relationt.junction = Find("junction")
+    relationt.farmland = Find("farmland")
+    relationt.animal = Find("animal")
+    relationt.meadow = Find("meadow")
+    relationt.produce = Find("produce")
+    relationt.historic = Find("historic")
+    relationt.ruins = Find("ruins")
+    relationt.ruinsCman_made = Find("ruins:man_made")
+    relationt.towerCtype = Find("tower:type")
+    relationt.aircraftCmodel = Find("aircraft:model")
+    relationt.inscription = Find("inscription")
+    relationt.tomb = Find("tomb")
+    relationt.archaeological_site = Find("archaeological_site")
+    relationt.geological = Find("geological")
+    relationt.attraction = Find("attraction")
+    relationt.reef = Find("reef")
+    relationt.wetland = Find("wetland")
+    relationt.tidal = Find("tidal")
+    relationt.playground = Find("playground")
+    relationt.sport = Find("sport")
+    relationt.military = Find("military")
+    relationt.hazard = Find("hazard")
+    relationt.operator = Find("operator")
+    relationt.leaf_type = Find("leaf_type")
+    relationt.power = Find("power")
+    relationt.power_source = Find("power_source")
+    relationt.zoo = Find("zoo")
+    relationt.industrial = Find("industrial")
+    relationt.seamarkCtype = Find("seamark:type")
+    relationt.religion = Find("religion")
+    relationt.denomination = Find("denomination")
+    relationt.iata = Find("iata")
+    relationt.icao = Find("icao")
+    relationt.aerodromeCtype = Find("aerodrome:type")
+    relationt.small_electric_vehicle = Find("small_electric_vehicle")
+    relationt.network = Find("network")
+    relationt.fee = Find("fee")
+    relationt.male = Find("male")
+    relationt.female = Find("female")
+    relationt.area = Find("area")
+    relationt.man_made = Find("man_made")
+    relationt.landmark = Find("landmark")
+    relationt.airmark = Find("airmark")
+    relationt.abandonedCrailrelation = Find("abandoned:railrelation")
+    relationt.historicCrailrelation = Find("historic:railrelation")
+    relationt.wall = Find("wall")
+    relationt.memorial = Find("memorial")
+    relationt.memorialCtype = Find("memorial:type")
+    relationt.marker = Find("marker")
+    relationt.historicCcivilisation = Find("historic:civilisation")
+    relationt.site_type = Find("site_type")
+    relationt.fortification_type = Find("fortification_type")
+    relationt.megalith_type = Find("megalith_type")
+    relationt.place_of_worship = Find("place_of_worship")
+    relationt.climbing = Find("climbing")
+    relationt.disusedCman_made = Find("disused:man_made")
+    relationt.castle_type = Find("castle_type")
+    relationt.pipeline = Find("pipeline")
+    relationt.intermittent = Find("intermittent")
+    relationt.basin = Find("basin")
+    relationt.flood_prone = Find("flood_prone")
+    relationt.hazard_prone = Find("hazard_prone")
+    relationt.hazard_type = Find("hazard_type")
+    relationt.fuelCelectricity = Find("fuel:electricity")
+    relationt.fuelCdiesel = Find("fuel:diesel")
+    relationt.LPG = Find("LPG")
+    relationt.fuelClpg = Find("fuel:lpg")
+    relationt.fuelCH2 = Find("fuel:H2")
+    relationt.fuelCLH2 = Find("fuel:LH2")
+    relationt.railrelation = Find("railrelation")
+    relationt.disusedCbuilding = Find("disused:building")
+    relationt.buildingCtype = Find("building:type")
+    relationt.watermillCdisused = Find("watermill:disused")
+    relationt.windmillCdisused = Find("windmill:disused")
+    relationt.defensive_works = Find("defensive_works")
+    relationt.is_sidepath = Find("is_sidepath")
+    relationt.is_sidepathCof = Find("is_sidepath:of")
+    relationt.is_sidepathCofCname = Find("is_sidepath:of:name")
+    relationt.is_sidepathCofCref = Find("is_sidepath:of:ref")
+    relationt.recycling_type = Find("recycling_type")
+    relationt.outlet = Find("outlet")
+    relationt.covered = Find("covered")
+    relationt.booth = Find("booth")
+    relationt.telephone_kiosk = Find("telephone_kiosk")
+    relationt.removedCamenity = Find("removed:amenity")
+    relationt.abandonedCamenity = Find("abandoned:amenity")
+    relationt.demolishedCamenity = Find("demolished:amenity")
+    relationt.razedCamenity = Find("razed:amenity")
+    relationt.old_amenity = Find("old_amenity")
+    relationt.emergency = Find("emergency")
+    relationt.colour = Find("colour")
+    relationt.business = Find("business")
+    relationt.office = Find("office")
+    relationt.company = Find("company")
+    relationt.craft = Find("craft")
+    relationt.diplomatic = Find("diplomatic")
+    relationt.embassy = Find("embassy")
+    relationt.consulate = Find("consulate")
+    relationt.peak = Find("peak")
+    relationt.disusedCmilitary = Find("disused:military")
+    relationt.geological = Find("geological")
+    relationt.hunting_stand = Find("hunting_stand")
+    relationt.harbour = Find("harbour")
+    relationt.accommodation = Find("accommodation")
+    relationt.cuisine = Find("cuisine")
+    relationt.wheelchair = Find("wheelchair")
+    relationt.outdoor_seating = Find("outdoor_seating")
+    relationt.gate = Find("gate")
+    relationt.locked = Find("locked")
+    relationt.dog_gate = Find("dog_gate")
+    relationt.entrance = Find("entrance")
+    relationt.public_transport = Find("public_transport")
+    relationt.school = Find("school")
+    relationt.seamarkCrescue_stationCcategory = Find("seamark:rescue_station:category")
+    relationt.healthcare = Find("healthcare")
+    relationt.social_facility = Find("social_facility")
+    relationt.club = Find("club")
+    relationt.gambling = Find("gambling")
+    relationt.danceCteaching = Find("dance:teaching")
+    relationt.healthcareCspeciality = Find("healthcare:speciality")
+    relationt.vending = Find("vending")
+    relationt.vending_machine = Find("vending_machine")
+    relationt.paymentChonesty_box = Find("payment:honesty_box")
+    relationt.foodCeggs = Find("food:eggs")
+    relationt.pitch = Find("pitch")
+    relationt.ele = Find("ele")
+    relationt.prominence = Find("prominence")
+    relationt.bench = Find("bench")
+    relationt.munro = Find("munro")
+    relationt.location = Find("location")
+    relationt.buildingCruins = Find("building:ruins")
+    relationt.ruinedCbuilding = Find("ruined:building")
+    relationt.species = Find("species")
+    relationt.taxon = Find("taxon")
+    relationt.lock_ref = Find("lock_ref")
+    relationt.lock_name = Find("lock_name")
+    relationt.bridgeCname = Find("bridge:name")
+    relationt.bridge_name = Find("bridge_name")
+    relationt.bridgeCref = Find("bridge:ref")
+    relationt.canal_bridge_ref = Find("canal_bridge_ref")
+    relationt.bridge_ref = Find("bridge_ref")
+    relationt.tunnelCname = Find("tunnel:name")
+    relationt.tunnel_name = Find("tunnel_name")
+    relationt.tpuk_ref = Find("tpuk_ref")
+    relationt.underground = Find("underground")
+    relationt.generatorCsource = Find("generator:source")
+    relationt.generatorCmethod = Find("generator:method")
+    relationt.plantCsource = Find("plant:source")
+    relationt.monitoringCwater_level = Find("monitoring:water_level")
+    relationt.monitoringCwater_flow = Find("monitoring:water_flow")
+    relationt.monitoringCwater_velocity = Find("monitoring:water_velocity")
+    relationt.monitoringCweather = Find("monitoring:weather")
+    relationt.weatherCradar = Find("weather:radar")
+    relationt.monitoringCwater_level = Find("monitoring:water_level")
+    relationt.monitoringCrainfall = Find("monitoring:rainfall")
+    relationt.monitoringCseismic_activity = Find("monitoring:seismic_activity")
+    relationt.monitoringCsky_brightness = Find("monitoring:sky_brightness")
+    relationt.monitoringCair_quality = Find("monitoring:air_quality")
+    relationt.usage = Find("usage")
+    relationt.station = Find("station")
+    relationt.railrelationCminiature = Find("railrelation:miniature")
+    relationt.crossing = Find("crossing")
+    relationt.disusedCtourism = Find("disused:tourism")
+    relationt.ruinsCtourism = Find("ruins:tourism")
+    relationt.board_type = Find("board_type")
+    relationt.information = Find("information")
+    relationt.operatorCtype = Find("operator:type")
+    relationt.boardCtitle = Find("board:title")
+    relationt.guide_type = Find("guide_type")
+    relationt.ncn_milepost = Find("ncn_milepost")
+    relationt.sustrans_ref = Find("sustrans_ref")
+    relationt.theatre = Find("theatre")
+    relationt.fence_type = Find("fence_type")
+    relationt.zero_waste = Find("zero_waste")
+    relationt.bulk_purchase = Find("bulk_purchase")
+    relationt.reusable_packaging = Find("reusable_packaging")
+    relationt.trade = Find("trade")
+    relationt.brand = Find("brand")
+    relationt.agrarian = Find("agrarian")
+    relationt.height = Find("height")
+    relationt.towerCconstruction = Find("tower:type")
+    relationt.support = Find("support")
+    relationt.buildingCpart = Find("building:part")
+    relationt.drinking_water = Find("drinking_water")
+    relationt.indoor = Find("indoor")
+    relationt.rescue_equipment = Find("rescue_equipment")
+    relationt.railrelationChistoric = Find("railrelation:historic")
+    relationt.railrelationCpreserved = Find("railrelation:preserved")
+    relationt.whitewater = Find("whitewater")
+    relationt.canoe = Find("canoe")
+    relationt.flow_control = Find("flow_control")
+    relationt.historicCwaterrelation = Find("historic:waterrelation")
+    relationt.abandonedCwaterrelation = Find("abandoned:waterrelation")
+    relationt.waterrelationChistoric = Find("waterrelation:historic")
+    relationt.waterrelationCabandoned = Find("waterrelation:abandoned")
+    relationt.nameChistoric = Find("name:historic")
+    relationt.historicCname = Find("historic:name")
+    relationt.real_ale = Find("real_ale")
+    relationt.beer_garden = Find("beer_garden")
+    relationt.amenityCdisused = Find("amenity:disused")
+    relationt.disusedCpub = Find("disused:pub")
+    relationt.descriptionCfloor = Find("description:floor")
+    relationt.floorCmaterial = Find("floor:material")
+    relationt.micropub = Find("micropub")
+    relationt.pub = Find("pub")
+    relationt.opening_hoursCcovid19 = Find("opening_hours:covid19")
+    relationt.accessCcovid19 = Find("access:covid19")
+    relationt.food = Find("food")
+    relationt.noncarpeted = Find("noncarpeted")
+    relationt.microbrewery = Find("microbrewery")
+    relationt.lamp_type = Find("lamp_type")
+    relationt.departures_board = Find("departures_board")
+    relationt.passenger_information_display = Find("passenger_information_display")
+    relationt.disusedChighrelation = Find("disused:highrelation")
+    relationt.physically_present = Find("physically_present")
+    relationt.naptanCindicator = Find("naptan:indicator")
+    relationt.bus_speech_output_name = Find("bus_speech_output_name")
+    relationt.bus_display_name = Find("bus_display_name")
+    relationt.website = Find("website")
+    relationt.timetable = Find("timetable")
+    relationt.departures_boardCspeech_output = Find("departures_board:speech_output")
+    relationt.passenger_information_displayCspeech_output = Find("passenger_information_display:speech_output")
+    relationt.flag = Find("flag")
+    relationt.pole = Find("pole")
+    relationt.naptanCBusStopType = Find("naptan:BusStopType")
+    relationt.direction_north = Find("direction_north")
+    relationt.direction_northeast = Find("direction_northeast")
+    relationt.direction_east = Find("direction_east")
+    relationt.direction_southeast = Find("direction_southeast")
+    relationt.direction_south = Find("direction_south")
+    relationt.direction_southwest = Find("direction_southwest")
+    relationt.direction_west = Find("direction_west")
+    relationt.direction_northwest = Find("direction_northwest")
+    relationt.parking = Find("parking")
+    relationt.opening_hours = Find("opening_hours")
+    relationt.addrChousename = Find("addr:housename")
+    relationt.addrCunit = Find("addr:unit")
+    relationt.addrChousenumber = Find("addr:housenumber")
+    relationt.areaChighrelation = Find("area:highrelation")
+    relationt.lcn_ref = Find("lcn_ref")
+    relationt.advertising = Find("advertising")
+    relationt.volcanoCstatus = Find("volcano:status")
+    relationt.route = Find("route")
+    relationt.type = Find("type")
+
+    generic_before_function( relationt )
+
+-- ----------------------------------------------------------------------------
+-- Relation-specific code
+-- ----------------------------------------------------------------------------
+   if (( relationt.type     == "multipolygon" ) and
+       ( relationt.junction == "yes"          )) then
+      relationt.type = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Note that we're not doing any per-member processing for routes - we just
+-- add a highway type to the relation and ensure that the style rules for it
+-- handle it sensibly, as it's going to be overlaid over other highway types.
+-- "ldpnwn" is used to allow for future different processing of different 
+-- relations.
+--
+-- Name handling for cycle routes makes a special case of the National Byway.
+--
+-- MTB routes are processed only if they are not also another type of cycle
+-- route (including LCN, which isn't actually shown in this rendering).
+--
+-- Processing routes,
+-- Walking networks first.
+-- We use "ref" rather than "name" on IWNs but not others.
+-- We use "colour" as "name" if "colour" is set and "name" is not.
+-- ----------------------------------------------------------------------------
+   if (relationt.type == "route") then
+      if (( relationt.network == "iwn" ) and
+          ( relationt.ref     ~= nil   )) then
+         relationt.name = relationt.ref
+      end
+
+      if ((( relationt.network == "iwn"         ) or
+           ( relationt.network == "nwn"         ) or
+           ( relationt.network == "rwn"         ) or
+           ( relationt.network == "lwn"         ) or
+           ( relationt.network == "lwn;lcn"     ) or
+           ( relationt.network == "lwn;lcn;lhn" )) and
+          (( relationt.name    ~= nil           )  or
+           ( relationt.colour  ~= nil           ))) then
+         if (( relationt.name   == nil ) and
+             ( relationt.colour ~= nil )) then
+            relationt.name = relationt.colour
+         end
+
+         relationt.highway = "ldpnwn"
+      end  -- walking
+
+-- ----------------------------------------------------------------------------
+-- Cycle networks
+-- We exclude some obviously silly refs.
+-- We use "ref" rather than "name".
+-- We handle loops on the National Byway and append (r) on other RCNs.
+-- ----------------------------------------------------------------------------
+      if (((  relationt.network == "ncn"           )  or
+           (  relationt.network == "rcn"           )) and
+          ((  relationt.state   == nil             )  or
+           (( relationt.state   ~= "proposed"     )   and
+            ( relationt.state   ~= "construction" )   and
+            ( relationt.state   ~= "abandoned"    )))) then
+         relationt.highway = "ldpncn"
+
+         if ( relationt.ref == "N/A" ) then
+            relationt.ref = nil
+         end
+
+         if (( relationt.name ~= nil                 ) and
+             ( relationt.ref  == "NB"                ) and
+             ( string.match( relationt.name, "Loop" ))) then
+            relationt.ref = relationt.ref .. " (loop)"
+         end
+
+         if ( relationt.ref ~= nil ) then
+            relationt.name = relationt.ref
+         end
+
+         if (( relationt.network == "rcn"       )  and
+             ( relationt.name    ~= "NB"        )  and
+             ( relationt.name    ~= "NB (loop)" )) then
+            if ( relationt.name == nil ) then
+               relationt.name = "(r)"
+            else
+               relationt.name = relationt.name .. " (r)"
+            end
+         end
+      end -- cycle
+
+-- ----------------------------------------------------------------------------
+-- MTB networks
+-- As long as there is a name, we append (m) here.
+-- We don't show unnamed MTB "routes" as routes.
+-- ----------------------------------------------------------------------------
+      if (( relationt.route   == "mtb" ) and
+          ( relationt.network ~= "ncn" ) and
+          ( relationt.network ~= "rcn" ) and
+          ( relationt.network ~= "lcn" )) then
+         relationt.highway = "ldpmtb"
+
+         if ( relationt.name == nil ) then
+            relationt.highway = nil
+         else
+            relationt.name = relationt.name .. " (m)"
+         end
+      end -- MTB
+
+-- ----------------------------------------------------------------------------
+-- Horse networks
+-- ----------------------------------------------------------------------------
+      if (( relationt.network == "nhn"         ) or
+          ( relationt.network == "rhn"         )  or
+          ( relationt.network == "ncn;nhn;nwn" )) then
+         relationt.highway = "ldpnhn"
+      end
+
+-- ----------------------------------------------------------------------------
+-- Check for signage - remove unsigned networks
+-- ----------------------------------------------------------------------------
+      if (( relationt.highway == "ldpnwn" ) or
+          ( relationt.highway == "ldpncn" ) or
+          ( relationt.highway == "ldpmtb" ) or
+          ( relationt.highway == "ldpnhn" )) then
+         if ((  relationt.name        ~= nil     ) and
+             (( relationt.nameCsigned == "no"   )  or
+              ( relationt.nameCabsent == "yes"  )  or
+              ( relationt.unsigned    == "yes"  )  or
+              ( relationt.unsigned    == "name" ))) then
+            relationt.name = nil
+            relationt.nameCsigned = nil
+            relationt.highway = nil
+         end -- no name
+
+         if ((  relationt.ref        ~= nil     ) and
+             (( relationt.refCsigned == "no"   )  or
+              ( relationt.unsigned   == "yes"  ))) then
+            relationt.ref = nil
+            relationt.refCsigned = nil
+            relationt.unsigned = nil
+            relationt.highway = nil
+         end -- no ref
+      end -- check for signage
+   end -- route
+
+-- ----------------------------------------------------------------------------
+-- emergency=water_rescue is a poorly-designed key that makes it difficult to
+-- tell e.g. lifeboats from lifeboat stations.
+-- However, if we've got a multipolygon relation, it's a lifeboat station.
+-- ----------------------------------------------------------------------------
+   if (( relationt.type      == "multipolygon" ) and
+       ( relationt.emergency == "water_rescue" )) then
+      relationt.emergency = "lifeboat_station"
+   end
+
+-- ----------------------------------------------------------------------------
+-- (end of the relation-specific code)
+--
+-- Linear transportation layer
+-- ----------------------------------------------------------------------------
+    way_after_transportation( relationt )
+
+-- ----------------------------------------------------------------------------
+-- No calls to e.g. generic_after_function here because we don't currently
+-- have any relations that would make sense to that.
+-- ----------------------------------------------------------------------------
+end
 
 -- ------------------------------------------------------------------------------
 -- Generic code called for both nodes and ways.
