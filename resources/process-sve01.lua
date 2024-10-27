@@ -1063,7 +1063,7 @@ function way_function()
 --
 -- Linear transportation layer
 -- ----------------------------------------------------------------------------
-    way_after_transportation( wayt )
+    wr_after_transportation( wayt )
 
 -- ----------------------------------------------------------------------------
 -- Linear waterway layer
@@ -1600,7 +1600,7 @@ function relation_function()
 --
 -- Linear transportation layer
 -- ----------------------------------------------------------------------------
-    way_after_transportation( relationt )
+    wr_after_transportation( relationt )
 
 -- ----------------------------------------------------------------------------
 -- No calls to e.g. generic_after_function here because we don't currently
@@ -12200,13 +12200,15 @@ end -- generic_after_building()
 
 -- ----------------------------------------------------------------------------
 -- Linear transportation layer
+-- Called for ways and any relations that have been allowed to get this far
+-- (routes)
 --
 -- First, highway processing
 -- We ignore highway areas here (those tagged "area=yes").  They will be
 -- processed elsewhere.  These highways may be closed ways or open-ended; they
--- are still linear.
+-- are still linear, so we won't filter based on is_closed here.
 -- ----------------------------------------------------------------------------
-function way_after_transportation( passedt )
+function wr_after_transportation( passedt )
     if (( passedt.highway ~= nil   ) and
         ( passedt.highway ~= ""    ) and
         ( passedt.area    ~= "yes" )) then
@@ -12279,21 +12281,42 @@ function way_after_transportation( passedt )
 -- ----------------------------------------------------------------------------
 -- not a highway
 --
--- Ferry routes
+-- Linear railways
+-- We ignore railway areas such as platforms here (those tagged "area=yes").  
+-- They will be processed elsewhere.  These railways may be closed ways or 
+-- open-ended; theyare still linear, so we won't filter based on is_closed.
 -- ----------------------------------------------------------------------------
-        if ( passedt.route == "ferry" ) then
+        if (( passedt.railway ~= nil   ) and
+            ( passedt.railway ~= ""    ) and
+            ( passedt.area    ~= "yes" )) then
             Layer("transportation", false)
-            Attribute( "class", passedt.route )
+            Attribute( "class", passedt.railway )
 
             if (( passedt.name ~= nil )   and
                 ( passedt.name ~= ""  ))  then
-	        Attribute( "name", passedt.name )
+    	    Attribute( "name", passedt.name )
             end
 
-            MinZoom( 6 )
-        end -- ferry routes
+            AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
+            AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
+        else
+-- ----------------------------------------------------------------------------
+-- Ferry routes
+-- ----------------------------------------------------------------------------
+            if ( passedt.route == "ferry" ) then
+                Layer("transportation", false)
+                Attribute( "class", passedt.route )
+
+                if (( passedt.name ~= nil )   and
+                    ( passedt.name ~= ""  ))  then
+                    Attribute( "name", passedt.name )
+                end
+
+                MinZoom( 6 )
+            end -- ferry routes
+        end -- linear railways
     end -- linear highways
-end -- way_after_transportation( passedt )
+end -- wr_after_transportation( passedt )
 
 -- ----------------------------------------------------------------------------
 -- linear waterway layer
