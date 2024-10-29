@@ -9569,7 +9569,8 @@ function generic_before_function( passedt )
        ( passedt.shop   == "glassware"                   ) or
        ( passedt.shop   == "cookery"                     ) or
        ( passedt.shop   == "catering_supplies"           ) or
-       ( passedt.craft  == "upholsterer"                 )) then
+       ( passedt.craft  == "upholsterer"                 ) or
+       ( passedt.shop   == "doors"                       )) then
       passedt.landuse = "unnamedcommercial"
       passedt.shop = "homeware"
    end
