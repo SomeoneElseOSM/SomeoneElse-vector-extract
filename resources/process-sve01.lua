@@ -10171,7 +10171,8 @@ function generic_before_function( passedt )
        ( passedt.shop    == "childrens"       ) or
        ( passedt.shop    == "factory_outlet"  ) or
        ( passedt.shop    == "specialist"      ) or
-       ( passedt.shop    == "specialist_shop" )) then
+       ( passedt.shop    == "specialist_shop" ) or
+       ( passedt.shop    == "agrarian"        )) then
       passedt.landuse = "unnamedcommercial"
       passedt.shop    = "shopnonspecific"
    end
