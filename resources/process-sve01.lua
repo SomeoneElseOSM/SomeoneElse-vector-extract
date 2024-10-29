@@ -9915,7 +9915,11 @@ function generic_before_function( passedt )
 -- Tattoo
 -- ----------------------------------------------------------------------------
    if (( passedt.shop    == "piercing"                ) or
-       ( passedt.shop    == "tattoo;piercing"         )) then
+       ( passedt.shop    == "tattoo;piercing"         ) or
+       ( passedt.shop    == "piercing;tattoo"         ) or
+       ( passedt.shop    == "body_piercing"           ) or
+       ( passedt.shop    == "yes;piercing"            ) or
+       ( passedt.shop    == "piercings"               )) then
       passedt.shop = "tattoo"
    end
 
