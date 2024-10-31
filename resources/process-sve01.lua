@@ -6487,8 +6487,7 @@ function generic_before_function( passedt )
    if ((  passedt.historic    == "castle"       ) and
        (( passedt.castle_type == "stately"     )  or
         ( passedt.castle_type == "manor"       )  or
-        ( passedt.castle_type == "palace"      )  or
-        ( passedt.castle_type == "manor_house" ))) then
+        ( passedt.castle_type == "palace"      ))) then
       passedt.historic = "manor"
    end
 
