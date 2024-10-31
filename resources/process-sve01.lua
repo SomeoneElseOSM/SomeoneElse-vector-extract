@@ -9005,15 +9005,15 @@ function generic_before_function( passedt )
       else
          if (( passedt.brand ~= nil                                ) and
              ( passedt.brand ~= ""                                 ) and
-             ( not string.match( passedt.name, passedt.brand )) and
-             ( not string.match( passedt.brand, passedt.name ))) then
+             ( not string.find( passedt.name, passedt.brand, 1, true )) and
+             ( not string.find( passedt.brand, passedt.name, 1, true ))) then
             passedt.name = passedt.name .. " (" .. passedt.brand .. ")"
             passedt.brand = nil
 	 else
             if (( passedt.operator ~= nil                                ) and
                 ( passedt.operator ~= ""                                 ) and
-                ( not string.match( passedt.name, passedt.operator )) and
-                ( not string.match( passedt.operator, passedt.name ))) then
+                ( not string.find( passedt.name, passedt.operator, 1, true )) and
+                ( not string.find( passedt.operator, passedt.name, 1, true ))) then
                passedt.name = passedt.name .. " (" .. passedt.operator .. ")"
                passedt.operator = nil
             end
@@ -11647,13 +11647,13 @@ function generic_before_function( passedt )
           ( passedt.name ~= ""  )) then
          if (( passedt.bus_speech_output_name ~= nil                                ) and
              ( passedt.bus_speech_output_name ~= ""                                 ) and
-             ( not string.match( passedt.name, passedt.bus_speech_output_name ))) then
+             ( not string.find( passedt.name, passedt.bus_speech_output_name, 1, true ))) then
             passedt.name = passedt.name .. " / " .. passedt.bus_speech_output_name
          end
 
          if (( passedt.bus_display_name ~= nil                                ) and
              ( passedt.bus_display_name ~= ""                                 ) and
-             ( not string.match( passedt.name, passedt.bus_display_name ))) then
+             ( not string.find( passedt.name, passedt.bus_display_name, 1, true ))) then
             passedt.name = passedt.name .. " / " .. passedt.bus_display_name
          end
       end
