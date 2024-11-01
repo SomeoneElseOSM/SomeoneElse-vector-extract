@@ -395,6 +395,7 @@ function node_function()
     nodet.advertising = Find("advertising")
     nodet.volcanoCstatus = Find("volcano:status")
     nodet.route = Find("route")
+    nodet.water = Find("water")
 
     generic_before_function( nodet )
 
@@ -857,6 +858,7 @@ function way_function()
     wayt.advertising = Find("advertising")
     wayt.volcanoCstatus = Find("volcano:status")
     wayt.route = Find("route")
+    wayt.water = Find("water")
 
     generic_before_function( wayt )
 
@@ -7230,8 +7232,13 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Suppress "name" on riverbanks mapped as "natural=water"
 -- ----------------------------------------------------------------------------
-   if (( passedt.natural   == "water"  ) and
-       ( passedt.water     == "river"  )) then
+   if ((  passedt.natural   == "water"   ) and
+       (( passedt.water     == "river"  )  or
+        ( passedt.water     == "canal"  )  or
+        ( passedt.water     == "stream" )  or
+        ( passedt.water     == "ditch"  )  or
+        ( passedt.water     == "lock"   )  or
+        ( passedt.water     == "drain"  ))) then
       passedt.name = nil
    end
 
