@@ -2372,6 +2372,8 @@
     { "key": "shop", "value": "council_house", "description": "Not a current value in OSM data.  Various shops extracted" },
     { "key": "shop", "value": "country_store", "description": "Various shops extracted" },
     { "key": "shop", "value": "craft", "description": "Extracted as a synonym for 'art'" },
+    { "key": "shop", "value": "crystal", "description": "Extracted as gift shop" },
+    { "key": "shop", "value": "crystal_glass", "description": "Extracted as gift shop" },
     { "key": "shop", "value": "crystals", "description": "Extracted as gift shop" },
     { "key": "shop", "value": "curtain", "description": "Various shops extracted" },
     { "key": "shop", "value": "dairy", "description": "Various shops extracted" },

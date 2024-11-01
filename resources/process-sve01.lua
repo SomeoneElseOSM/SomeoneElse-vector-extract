@@ -9499,6 +9499,8 @@ function generic_before_function( passedt )
        ( passedt.shop   == "christmas"           ) or
        ( passedt.shop   == "fashion_accessories" ) or
        ( passedt.shop   == "duty_free"           ) or
+       ( passedt.shop   == "crystal"             ) or
+       ( passedt.shop   == "crystal_glass"       ) or
        ( passedt.shop   == "crystals"            ) or
        ( passedt.shop   == "printing_stamps"     ) or
        ( passedt.shop   == "armour"              ) or
