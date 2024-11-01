@@ -11439,7 +11439,7 @@ function generic_before_function( passedt )
 
    if (( passedt.aeroway == "taxiway"  ) and
        ( passedt.surface == "grass"    )) then
-      passedt.highway = "track"
+      passedt.highway = "pathwide"
       passedt.aeroway = nil
    end
 
@@ -12404,7 +12404,21 @@ function wr_after_transportation( passedt )
                 end
 
                 MinZoom( 6 )
-            end -- ferry routes
+            else
+                if (( passedt.aeroway == "runway"       ) or
+                    ( passedt.aeroway == "grass_runway" ) or
+                    ( passedt.aeroway == "taxiway"      )) then
+                    Layer("transportation", false)
+                    Attribute( "class", passedt.aeroway )
+
+                    if (( passedt.name ~= nil )   and
+                        ( passedt.name ~= ""  ))  then
+                        Attribute( "name", passedt.name )
+                    end
+
+                    MinZoom( 10 )
+                end -- aeroway=runway etc. 10
+            end -- ferry routes 6
         end -- linear railways
     end -- linear highways
 end -- wr_after_transportation( passedt )
