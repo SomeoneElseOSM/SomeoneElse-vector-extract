@@ -2503,9 +2503,12 @@ function generic_before_function( passedt )
 -- if there is no other more appropriate tag
 -- ----------------------------------------------------------------------------
    if (( passedt.natural  == "grass"  ) and
-       (( passedt.landuse == nil     )  and
-        ( passedt.leisure == nil     )  and
-        ( passedt.aeroway == nil     ))) then
+       ((( passedt.landuse == nil    )  or
+         ( passedt.landuse == ""     )) and
+        (( passedt.leisure == nil    )  or
+         ( passedt.leisure == ""     )) and
+        (( passedt.aeroway == nil    )  or
+         ( passedt.aeroway == ""     )))) then
       passedt.landuse = "grass"
    end
 
@@ -13454,7 +13457,7 @@ function render_office_land1( passedt )
             Attribute( "name", passedt.name )
         end
 
-        MinZoom( 16 )
+        MinZoom( 14 )
     else
         render_highway_land1( passedt )
     end -- office=craftbrewery etc. 16
@@ -14110,7 +14113,7 @@ function render_aeroway_land1( passedt )
 
         MinZoom( 12 )
     else
-        if ( passedt.aeroway == "gate" ) then
+        if ( passedt.aeroway == "helipad" ) then
             Layer( "land1", true )
             Attribute( "class", "aeroway_" .. passedt.aeroway )
 
@@ -14119,16 +14122,28 @@ function render_aeroway_land1( passedt )
                  Attribute( "name", passedt.ref )
             end
 
-            MinZoom( 16 )
+            MinZoom( 14 )
         else
+            if ( passedt.aeroway == "gate" ) then
+                Layer( "land1", true )
+                Attribute( "class", "aeroway_" .. passedt.aeroway )
+
+                if (( passedt.ref ~= nil ) and
+                    ( passedt.ref ~= ""  )) then
+                     Attribute( "name", passedt.ref )
+                end
+
+                MinZoom( 14 )
+            else
 -- ------------------------------------------------------------------------------
 -- At this point we've done all thing "landuse" processing for things that might 
 -- be in the "land1" layer, including displaying names and/or icons for them.
 -- The call to "generic_after_poi()" below displays things that should also have
 -- a name and/or an icon, but don't have an area fill or outline.
 -- ------------------------------------------------------------------------------
-            generic_after_poi( passedt )
-        end -- aeroway=gate 16
+                generic_after_poi( passedt )
+            end -- aeroway=gate 16
+        end -- aeroway=helipad 15
     end -- aeroway=apron 12
 end -- render_aeroway_land1()
 
@@ -14381,6 +14396,21 @@ function generic_after_poi( passedt )
                     end
 
                     MinZoom( 14 )
+-- ------------------------------------------------------------------------------
+-- Uncomment to write aeroways through to "poi" as well
+--                else
+--                    if (( passedt.aeroway ~= nil ) and
+--                        ( passedt.aeroway ~= ""  )) then
+--                        LayerAsCentroid( "poi" )
+--                        Attribute( "class", "aeroway_" .. passedt.aeroway )
+--
+--                        if (( passedt.name ~= nil ) and
+--                            ( passedt.name ~= ""  )) then
+--                            Attribute( "name", passedt.name )
+--                        end
+--
+--                        MinZoom( 14 )
+--                    end -- aeroway
 -- ------------------------------------------------------------------------------
 -- No else here yet
 -- ------------------------------------------------------------------------------
