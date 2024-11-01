@@ -3489,7 +3489,8 @@ function generic_before_function( passedt )
        ( passedt.shop    == "vehicle_inspection" )  or
        ( passedt.shop    == "mechanic"           )  or
        ( passedt.shop    == "car_repair;car"     )  or
-       ( passedt.shop    == "car_repair;tyres"   )) then
+       ( passedt.shop    == "car_repair;tyres"   )  or
+       ( passedt.shop    == "vehicle_repair"     )) then
       passedt.shop    = "car_repair"
       passedt.amenity = nil
       passedt.craft   = nil
@@ -5285,7 +5286,8 @@ function generic_before_function( passedt )
       passedt.amenity = nil
    end
 
-   if (((  passedt.healthcare == "pharmacy"                   )  and
+   if (((( passedt.healthcare == "pharmacy"                  )   or
+         ( passedt.shop       == "pharmacy"                  ))  and
         (( passedt.amenity    == nil                         )   or
          ( passedt.amenity    == ""                          ))) or
        ((  passedt.shop       == "cosmetics"                  )  and
@@ -7881,8 +7883,13 @@ function generic_before_function( passedt )
       passedt.amenity = "bar"
    end
 
-   if ( passedt.shop == "butcher;greengrocer" ) then
+   if (( passedt.shop == "butcher;greengrocer" ) or
+       ( passedt.shop == "butcher;deli"        )) then
       passedt.shop = "butcher"
+   end
+
+   if ( passedt.shop == "greengrocer;florist" ) then
+      passedt.shop = "greengrocer"
    end
 
 -- ----------------------------------------------------------------------------
@@ -8708,14 +8715,16 @@ function generic_before_function( passedt )
 -- It's near enough in meaning I think.  Likewise kiosk (bit of a stretch,
 -- but nearer than anything else)
 -- ----------------------------------------------------------------------------
-   if (( passedt.shop   == "newsagent"           ) or
-       ( passedt.shop   == "kiosk"               ) or
-       ( passedt.shop   == "forecourt"           ) or
-       ( passedt.shop   == "food"                ) or
-       ( passedt.shop   == "grocery"             ) or
-       ( passedt.shop   == "grocer"              ) or
-       ( passedt.shop   == "frozen_food"         ) or
-       ( passedt.shop   == "convenience;alcohol" )) then
+   if (( passedt.shop   == "newsagent"             ) or
+       ( passedt.shop   == "kiosk"                 ) or
+       ( passedt.shop   == "forecourt"             ) or
+       ( passedt.shop   == "food"                  ) or
+       ( passedt.shop   == "grocery"               ) or
+       ( passedt.shop   == "grocer"                ) or
+       ( passedt.shop   == "frozen_food"           ) or
+       ( passedt.shop   == "convenience;alcohol"   ) or
+       ( passedt.shop   == "convenience;newsagent" ) or
+       ( passedt.shop   == "newsagent;alcohol"     )) then
       passedt.shop = "convenience"
    end
 
@@ -9052,13 +9061,17 @@ function generic_before_function( passedt )
        ( passedt.shop    == "lawn_mower"                 ) or
        ( passedt.shop    == "lawnmowers"                 ) or
        ( passedt.shop    == "garden_furniture"           ) or
+       ( passedt.shop    == "hot_tub"                    ) or
        ( passedt.shop    == "garden_machinery"           ) or
        ( passedt.shop    == "gardening"                  ) or
        ( passedt.shop    == "garden_equipment"           ) or
        ( passedt.shop    == "garden_tools"               ) or
        ( passedt.shop    == "garden"                     ) or
        ( passedt.shop    == "doityourself;garden_centre" ) or
-       ( passedt.shop    == "garden_machines"            )) then
+       ( passedt.shop    == "garden_machines"            ) or
+       ( passedt.shop    == "groundskeeping"             ) or
+       ( passedt.shop    == "plants"                     ) or
+       ( passedt.shop    == "garden_centre;interior_decoration;pet;toys" )) then
       passedt.landuse = "unnamedcommercial"
       passedt.shop    = "garden_centre"
    end
@@ -9328,14 +9341,16 @@ function generic_before_function( passedt )
        ( passedt.office  == "financial_advisor"   ) or
        ( passedt.shop    == "financial_advisors"  ) or
        ( passedt.amenity == "financial_advice"    ) or
-       ( passedt.amenity == "bureau_de_change"    )) then
+       ( passedt.amenity == "bureau_de_change"    ) or
+       ( passedt.shop    == "gold_buyer"          )) then
       passedt.shop = "shopnonspecific"
    end
 
 -- ----------------------------------------------------------------------------
 -- hairdresser;beauty
 -- ----------------------------------------------------------------------------
-   if ( passedt.shop == "hairdresser;beauty" ) then
+   if (( passedt.shop == "hairdresser;beauty" ) or
+       ( passedt.shop == "barber"             )) then
       passedt.shop = "hairdresser"
    end
 
@@ -9376,34 +9391,35 @@ function generic_before_function( passedt )
 -- Mostly these have names that describe the business, so less need for a
 -- specific icon.
 -- ----------------------------------------------------------------------------
-   if (( passedt.shop         == "beauty_salon"      ) or
-       ( passedt.leisure      == "spa"               ) or
-       ( passedt.shop         == "spa"               ) or
-       ( passedt.amenity      == "spa"               ) or
-       ( passedt.tourism      == "spa"               ) or
-       (( passedt.club    == "health"               )  and
-        (( passedt.leisure == nil                  )   or
-         ( passedt.leisure == ""                   ))  and
-        (( passedt.amenity == nil                  )   or
-         ( passedt.amenity == ""                   ))  and
-        ( passedt.name    ~= nil                    )  and
-        ( passedt.name    ~= ""                     )) or
-       ( passedt.shop         == "salon"             ) or
-       ( passedt.shop         == "nails"             ) or
-       ( passedt.shop         == "nail_salon"        ) or
-       ( passedt.shop         == "nail"              ) or
-       ( passedt.shop         == "chemist"           ) or
-       ( passedt.shop         == "soap"              ) or
-       ( passedt.shop         == "toiletries"        ) or
-       ( passedt.shop         == "beauty_products"   ) or
-       ( passedt.shop         == "beauty_treatment"  ) or
-       ( passedt.shop         == "perfumery"         ) or
-       ( passedt.shop         == "cosmetics"         ) or
-       ( passedt.shop         == "tanning"           ) or
-       ( passedt.shop         == "tan"               ) or
-       ( passedt.shop         == "suntan"            ) or
-       ( passedt.leisure      == "tanning_salon"     ) or
-       ( passedt.shop         == "health_and_beauty" )) then
+   if (( passedt.shop         == "beauty_salon"       ) or
+       ( passedt.leisure      == "spa"                ) or
+       ( passedt.shop         == "spa"                ) or
+       ( passedt.amenity      == "spa"                ) or
+       ( passedt.tourism      == "spa"                ) or
+       (( passedt.club    == "health"                )  and
+        (( passedt.leisure == nil                   )   or
+         ( passedt.leisure == ""                    ))  and
+        (( passedt.amenity == nil                   )   or
+         ( passedt.amenity == ""                    ))  and
+        ( passedt.name    ~= nil                     )  and
+        ( passedt.name    ~= ""                      )) or
+       ( passedt.shop         == "salon"              ) or
+       ( passedt.shop         == "nails"              ) or
+       ( passedt.shop         == "nail_salon"         ) or
+       ( passedt.shop         == "nail"               ) or
+       ( passedt.shop         == "chemist"            ) or
+       ( passedt.shop         == "soap"               ) or
+       ( passedt.shop         == "toiletries"         ) or
+       ( passedt.shop         == "beauty_products"    ) or
+       ( passedt.shop         == "beauty_treatment"   ) or
+       ( passedt.shop         == "perfumery"          ) or
+       ( passedt.shop         == "cosmetics"          ) or
+       ( passedt.shop         == "tanning"            ) or
+       ( passedt.shop         == "tan"                ) or
+       ( passedt.shop         == "suntan"             ) or
+       ( passedt.leisure      == "tanning_salon"      ) or
+       ( passedt.shop         == "health_and_beauty"  ) or
+       ( passedt.shop         == "beauty;hairdresser" )) then
       passedt.shop = "beauty"
    end
 
@@ -9448,10 +9464,12 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- mobile_phone shops 
 -- ----------------------------------------------------------------------------
-   if (( passedt.shop   == "phone"               ) or
-       ( passedt.shop   == "phone_repair"        ) or
-       ( passedt.shop   == "telephone"           ) or
-       ( passedt.shop   == "mobile_phone_repair" )) then
+   if (( passedt.shop   == "phone"                    ) or
+       ( passedt.shop   == "phone_repair"             ) or
+       ( passedt.shop   == "telephone"                ) or
+       ( passedt.shop   == "mobile_phone_repair"      ) or
+       ( passedt.shop   == "mobile_phone_accessories" ) or
+       ( passedt.shop   == "mobile_phone;e-cigarette" )) then
       passedt.shop = "mobile_phone"
    end
 
@@ -9473,7 +9491,9 @@ function generic_before_function( passedt )
        ( passedt.shop   == "balloon"             ) or
        ( passedt.shop   == "accessories"         ) or
        ( passedt.shop   == "beach"               ) or
+       ( passedt.shop   == "surf"                ) or
        ( passedt.shop   == "magic"               ) or
+       ( passedt.shop   == "joke"                ) or
        ( passedt.shop   == "party"               ) or
        ( passedt.shop   == "party_goods"         ) or
        ( passedt.shop   == "christmas"           ) or
@@ -9481,7 +9501,8 @@ function generic_before_function( passedt )
        ( passedt.shop   == "duty_free"           ) or
        ( passedt.shop   == "crystals"            ) or
        ( passedt.shop   == "printing_stamps"     ) or
-       ( passedt.shop   == "armour"              )) then
+       ( passedt.shop   == "armour"              ) or
+       ( passedt.shop   == "arts_and_crafts"     )) then
       passedt.shop = "gift"
    end
 
@@ -9541,6 +9562,7 @@ function generic_before_function( passedt )
        ( passedt.shop   == "home"                        ) or
        ( passedt.shop   == "carpet"                      ) or
        ( passedt.shop   == "carpet;bed"                  ) or
+       ( passedt.shop   == "rugs"                        ) or
        ( passedt.shop   == "interior_decoration"         ) or
        ( passedt.shop   == "household"                   ) or
        ( passedt.shop   == "houseware"                   ) or
@@ -9575,8 +9597,11 @@ function generic_before_function( passedt )
        ( passedt.shop   == "glassware"                   ) or
        ( passedt.shop   == "cookery"                     ) or
        ( passedt.shop   == "catering_supplies"           ) or
+       ( passedt.shop   == "catering_equipment"          ) or
        ( passedt.craft  == "upholsterer"                 ) or
-       ( passedt.shop   == "doors"                       )) then
+       ( passedt.shop   == "doors"                       ) or
+       ( passedt.shop   == "doors;glaziery"              ) or
+       ( passedt.shop   == "mirrors"                     )) then
       passedt.landuse = "unnamedcommercial"
       passedt.shop = "homeware"
    end
@@ -9607,12 +9632,14 @@ function generic_before_function( passedt )
        ( passedt.shop   == "glazing"                     ) or
        ( passedt.shop   == "stone"                       ) or
        ( passedt.shop   == "brewing"                     ) or
+       ( passedt.shop   == "brewing_supplies"            ) or
        ( passedt.shop   == "gates"                       ) or
        ( passedt.shop   == "sheds"                       ) or
        ( passedt.shop   == "shed"                        ) or
        ( passedt.shop   == "ironmonger"                  ) or
        ( passedt.shop   == "furnace"                     ) or
        ( passedt.shop   == "plumbing"                    ) or
+       ( passedt.shop   == "plumbing_supplies"           ) or
        ( passedt.craft  == "plumber"                     ) or
        ( passedt.craft  == "carpenter"                   ) or
        ( passedt.craft  == "decorator"                   ) or
@@ -9676,8 +9703,9 @@ function generic_before_function( passedt )
        ( passedt.shop    == "honey"           ) or
        ( passedt.shop    == "catering"        ) or
        ( passedt.shop    == "fishmonger"      ) or
-       ( passedt.shop    == "spices"           ) or
-       ( passedt.shop    == "nuts"            )) then
+       ( passedt.shop    == "spices"          ) or
+       ( passedt.shop    == "nuts"            ) or
+       ( passedt.shop    == "patisserie"      )) then
       passedt.shop = "shopnonspecific"
    end
 
@@ -9686,6 +9714,7 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if (( passedt.shop   == "fabric"               ) or
        ( passedt.shop   == "linen"                ) or
+       ( passedt.shop   == "household_linen"      ) or
        ( passedt.shop   == "linens"               ) or
        ( passedt.shop   == "haberdashery"         ) or
        ( passedt.shop   == "sewing"               ) or
@@ -9695,6 +9724,7 @@ function generic_before_function( passedt )
        ( passedt.shop   == "wool"                 ) or
        ( passedt.shop   == "yarn"                 ) or
        ( passedt.shop   == "alteration"           ) or
+       ( passedt.shop   == "textiles"             ) or
        ( passedt.shop   == "clothing_alterations" ) or
        ( passedt.craft  == "embroiderer"          )) then
       passedt.shop = "shopnonspecific"
@@ -9709,6 +9739,8 @@ function generic_before_function( passedt )
        ( passedt.shop       == "supplements"             ) or
        ( passedt.shop       == "nutrition_supplements"   ) or
        ( passedt.shop       == "dietary_supplements"     ) or
+       ( passedt.shop       == "healthcare"              ) or
+       ( passedt.shop       == "wellness"                ) or
        ( passedt.name       == "Holland and Barrett"     )) then
       if (( passedt.zero_waste         == "yes"                )  or
           ( passedt.zero_waste         == "only"               )  or
@@ -9727,6 +9759,7 @@ function generic_before_function( passedt )
        ( passedt.shop       == "herbal_medicine"         ) or
        ( passedt.shop       == "chinese_medicine"        ) or
        ( passedt.shop       == "new_age"                 ) or
+       ( passedt.shop       == "psychic"                 ) or
        ( passedt.shop       == "alternative_health"      ) or
        ( passedt.healthcare == "alternative"             ) or
        ( passedt.shop       == "acupuncture"             ) or
@@ -9754,7 +9787,8 @@ function generic_before_function( passedt )
    if (( passedt.shop   == "comics"          ) or
        ( passedt.shop   == "comic"           ) or
        ( passedt.shop   == "anime"           ) or
-       ( passedt.shop   == "maps"            )) then
+       ( passedt.shop   == "maps"            ) or
+       ( passedt.shop   == "books;music"     )) then
       passedt.shop = "books"
    end
 
@@ -9780,11 +9814,20 @@ function generic_before_function( passedt )
    if (( passedt.shop   == "craft"          ) or
        ( passedt.shop   == "art_supplies"   ) or
        ( passedt.shop   == "pottery"        ) or
+       ( passedt.shop   == "art;frame"      ) or
        ( passedt.craft  == "artist"         ) or
        ( passedt.craft  == "pottery"        ) or
        ( passedt.craft  == "sculptor"       )) then
       passedt.shop  = "art"
       passedt.craft = nil
+   end
+
+-- ----------------------------------------------------------------------------
+-- Treat "agricultural" as "agrarian"
+-- "agrarian" is then further categories below based on other tags
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "agricultural" ) then
+      passedt.shop = "agrarian"
    end
 
 -- ----------------------------------------------------------------------------
@@ -9794,6 +9837,7 @@ function generic_before_function( passedt )
 -- Add unnamedcommercial landuse to give non-building areas a background.
 -- ----------------------------------------------------------------------------
    if (( passedt.shop    == "pet;garden"              ) or
+       ( passedt.shop    == "aquatic"                 ) or
        ( passedt.shop    == "aquatics"                ) or
        ( passedt.shop    == "aquarium"                ) or
        ( passedt.shop    == "pet;corn"                )) then
@@ -9913,7 +9957,8 @@ function generic_before_function( passedt )
    if (( passedt.shop    == "motorcycle_repair"            ) or
        ( passedt.shop    == "motorcycle_parts"             ) or
        ( passedt.amenity == "motorcycle_rental"            ) or
-       ( passedt.shop    == "atv"                          )) then
+       ( passedt.shop    == "atv"                          ) or
+       ( passedt.shop    == "scooter"                      )) then
       passedt.shop = "motorcycle"
    end
 
@@ -9934,6 +9979,13 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ( passedt.shop    == "piano" ) then
       passedt.shop = "musical_instrument"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Extract ski shops as outdoor shops
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "ski" ) then
+      passedt.shop = "outdoor"
    end
 
 -- ----------------------------------------------------------------------------
@@ -9994,6 +10046,7 @@ function generic_before_function( passedt )
        ( passedt.shop    == "truck_repair"                 ) or
        ( passedt.industrial == "truck_repair"              ) or
        ( passedt.shop    == "forklift_repair"              ) or
+       ( passedt.shop    == "trailer"                      ) or
        ( passedt.amenity == "driving_school"               ) or
        ( passedt.shop    == "chandler"                     ) or
        ( passedt.shop    == "chandlery"                    ) or
@@ -10096,6 +10149,7 @@ function generic_before_function( passedt )
        ( passedt.shop    == "auction_house"           ) or
        ( passedt.shop    == "auctioneer"              ) or
        ( passedt.office  == "auctioneer"              ) or
+       ( passedt.shop    == "livestock"               ) or
        ( passedt.shop    == "religion"                ) or
        ( passedt.shop    == "gas"                     ) or
        ( passedt.shop    == "fuel"                    ) or
@@ -10109,6 +10163,7 @@ function generic_before_function( passedt )
          ( passedt.training == "performing_arts"    ))) or
        ( passedt.amenity == "tutoring_centre"         ) or
        ( passedt.office  == "tutoring"                ) or
+       ( passedt.shop    == "education"               ) or
        ( passedt.shop    == "ironing"                 ) or
        ( passedt.amenity == "stripclub"               ) or
        ( passedt.amenity == "courier"                 ) or
@@ -10119,7 +10174,8 @@ function generic_before_function( passedt )
 
    if (( passedt.shop    == "launderette"             ) or
        ( passedt.shop    == "dry_cleaning"            ) or
-       ( passedt.shop    == "dry_cleaning;laundry"    )) then
+       ( passedt.shop    == "dry_cleaning;laundry"    ) or
+       ( passedt.shop    == "laundry;dry_cleaning"    )) then
       passedt.landuse = "unnamedcommercial"
       passedt.shop = "laundry"
    end
@@ -10162,28 +10218,37 @@ function generic_before_function( passedt )
 -- because we don't know "hire of what".
 -- "wood" is here because it's used for different sorts of shops.
 -- ----------------------------------------------------------------------------
-   if (( passedt.shop    == "yes"             ) or
-       ( passedt.craft   == "yes"             ) or
-       ( passedt.shop    == "other"           ) or
-       ( passedt.shop    == "hire"            ) or
-       ( passedt.shop    == "rental"          ) or
-       ( passedt.office  == "rental"          ) or
-       ( passedt.amenity == "rental"          ) or
-       ( passedt.shop    == "second_hand"     ) or
-       ( passedt.shop    == "junk"            ) or
-       ( passedt.shop    == "general"         ) or
-       ( passedt.shop    == "general_store"   ) or
-       ( passedt.shop    == "retail"          ) or
-       ( passedt.shop    == "trade"           ) or
-       ( passedt.shop    == "cash_and_carry"  ) or
-       ( passedt.shop    == "fixme"           ) or
-       ( passedt.shop    == "wholesale"       ) or
-       ( passedt.shop    == "wood"            ) or
-       ( passedt.shop    == "childrens"       ) or
-       ( passedt.shop    == "factory_outlet"  ) or
-       ( passedt.shop    == "specialist"      ) or
-       ( passedt.shop    == "specialist_shop" ) or
-       ( passedt.shop    == "agrarian"        )) then
+   if (( passedt.shop    == "yes"                ) or
+       ( passedt.craft   == "yes"                ) or
+       ( passedt.shop    == "other"              ) or
+       ( passedt.shop    == "hire"               ) or
+       ( passedt.shop    == "rental"             ) or
+       ( passedt.office  == "rental"             ) or
+       ( passedt.amenity == "rental"             ) or
+       ( passedt.shop    == "second_hand"        ) or
+       ( passedt.shop    == "junk"               ) or
+       ( passedt.shop    == "general"            ) or
+       ( passedt.shop    == "general_store"      ) or
+       ( passedt.shop    == "retail"             ) or
+       ( passedt.shop    == "trade"              ) or
+       ( passedt.shop    == "cash_and_carry"     ) or
+       ( passedt.shop    == "fixme"              ) or
+       ( passedt.shop    == "wholesale"          ) or
+       ( passedt.shop    == "wood"               ) or
+       ( passedt.shop    == "childrens"          ) or
+       ( passedt.shop    == "factory_outlet"     ) or
+       ( passedt.shop    == "specialist"         ) or
+       ( passedt.shop    == "specialist_shop"    ) or
+       ( passedt.shop    == "agrarian"           ) or
+       ( passedt.shop    == "hairdresser_supply" ) or
+       ( passedt.shop    == "repair"             ) or
+       ( passedt.shop    == "packaging"          ) or
+       ( passedt.shop    == "telecommunication"  ) or
+       ( passedt.shop    == "cannabis"           ) or
+       ( passedt.shop    == "hydroponics"        ) or
+       ( passedt.shop    == "headshop"           ) or
+       ( passedt.shop    == "skate"              ) or
+       ( passedt.shop    == "ethnic"             )) then
       passedt.landuse = "unnamedcommercial"
       passedt.shop    = "shopnonspecific"
    end
@@ -10210,6 +10275,9 @@ function generic_before_function( passedt )
        ( passedt.shop        == "medical_supply"               ) or
        ( passedt.office      == "medical_supply"               ) or
        ( passedt.shop        == "mobility"                     ) or
+       ( passedt.shop        == "mobility_scooter"             ) or
+       ( passedt.shop        == "wheelchair"                   ) or
+       ( passedt.shop        == "mobility_aids"                ) or
        ( passedt.shop        == "disability"                   ) or
        ( passedt.shop        == "chiropodist"                  ) or
        ( passedt.amenity     == "chiropodist"                  ) or
@@ -10295,6 +10363,7 @@ function generic_before_function( passedt )
        ( passedt.healthcare  == "trichologist"                 ) or
        ( passedt.healthcare  == "ocular_prosthetics"           ) or
        ( passedt.healthcare  == "audiologist"                  ) or
+       ( passedt.shop        == "audiologist"                  ) or
        ( passedt.healthcare  == "hearing"                      ) or
        ( passedt.healthcare  == "mental_health"                ) or
        ( passedt.amenity     == "daycare"                      )) then
@@ -10644,6 +10713,7 @@ function generic_before_function( passedt )
        ( passedt.office      == "tax_advisor"             ) or
        ( passedt.amenity     == "tax_advisor"             ) or
        ( passedt.office      == "employment_agency"       ) or
+       ( passedt.shop        == "home_care"               ) or
        ( passedt.office      == "home_care"               ) or
        ( passedt.healthcare  == "home_care"               ) or
        ( passedt.shop        == "employment_agency"       ) or
@@ -10678,6 +10748,7 @@ function generic_before_function( passedt )
        ( passedt.office      == "engineering"             ) or
        ( passedt.craft       == "hvac"                    ) or
        ( passedt.office      == "hvac"                    ) or
+       ( passedt.shop        == "hvac"                    ) or
        ( passedt.shop        == "heating"                 ) or
        ( passedt.office      == "laundry"                 ) or
        ( passedt.amenity     == "coworking_space"         ) or
@@ -10690,6 +10761,12 @@ function generic_before_function( passedt )
        ( passedt.amenity     == "cooking_school"          ) or
        ( passedt.craft       == "electrician"             ) or
        ( passedt.craft       == "electrician;plumber"     ) or
+       ( passedt.shop        == "machinery"               ) or
+       ( passedt.shop        == "industrial"              ) or
+       ( passedt.shop        == "engineering"             ) or
+       ( passedt.shop        == "construction"            ) or
+       ( passedt.shop        == "water"                   ) or
+       ( passedt.shop        == "pest_control"            ) or
        ( passedt.office      == "electrician"             ) or
        ( passedt.shop        == "electrician"             )) then
       passedt.landuse = "unnamedcommercial"
