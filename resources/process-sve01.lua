@@ -1061,6 +1061,17 @@ function way_function()
     wayt.highway = process_golf_tracks( wayt.highway, wayt.golf )
 
 -- ----------------------------------------------------------------------------
+-- Remove landuse=military from non-closed ways
+-- This is because while the linear raster rendering code doesn't even see this
+-- because it's in a different table, the vector code sees everything in land1
+-- or land2, regardless of geometry.
+-- ----------------------------------------------------------------------------
+    if (( not wayt.is_closed         ) and
+        ( wayt.landuse == "military" )) then
+        wayt.landuse = nil
+    end
+
+-- ----------------------------------------------------------------------------
 -- (end of the way-specific code)
 --
 -- Linear transportation layer
