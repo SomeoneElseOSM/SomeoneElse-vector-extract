@@ -2505,6 +2505,7 @@
     { "key": "shop", "value": "haberdashery", "description": "Various shops extracted" },
     { "key": "shop", "value": "hairdresser", "description": "Various shops extracted" },
     { "key": "shop", "value": "hairdresser;beauty", "description": "Various shops extracted" },
+    { "key": "shop", "value": "hairdresser_supply", "description": "Various shops extracted" },
     { "key": "shop", "value": "handbag", "description": "Extracted as gift shop" },
     { "key": "shop", "value": "handbags", "description": "Extracted as gift shop" },
     { "key": "shop", "value": "hardware", "description": "Various shops extracted" },
