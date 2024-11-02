@@ -12322,14 +12322,77 @@ end -- generic_after_building()
 -- (routes)
 --
 -- First, highway processing
--- We ignore highway areas here (those tagged "area=yes").  They will be
--- processed elsewhere.  These highways may be closed ways or open-ended; they
--- are still linear, so we won't filter based on is_closed here.
 -- ----------------------------------------------------------------------------
 function wr_after_transportation( passedt )
     if (( passedt.highway ~= nil   ) and
         ( passedt.highway ~= ""    ) and
         ( passedt.area    ~= "yes" )) then
+        wr_after_highway( passedt )
+    else
+-- ----------------------------------------------------------------------------
+-- not a highway
+--
+-- Linear railways
+-- We ignore railway areas such as platforms here (those tagged "area=yes").  
+-- They will be processed elsewhere.  These railways may be closed ways or 
+-- open-ended; theyare still linear, so we won't filter based on is_closed.
+-- ----------------------------------------------------------------------------
+        if (( passedt.railway ~= nil   ) and
+            ( passedt.railway ~= ""    ) and
+            ( passedt.area    ~= "yes" )) then
+            Layer("transportation", false)
+            Attribute( "class", passedt.railway )
+
+            if (( passedt.name ~= nil )   and
+                ( passedt.name ~= ""  ))  then
+    	        Attribute( "name", passedt.name )
+            end
+
+            AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
+            AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
+        else
+-- ----------------------------------------------------------------------------
+-- Ferry routes
+-- ----------------------------------------------------------------------------
+            if ( passedt.route == "ferry" ) then
+                Layer("transportation", false)
+                Attribute( "class", passedt.route )
+
+                if (( passedt.name ~= nil )   and
+                    ( passedt.name ~= ""  ))  then
+                    Attribute( "name", passedt.name )
+                end
+
+                MinZoom( 6 )
+            else
+                if (( passedt.aeroway == "runway"       ) or
+                    ( passedt.aeroway == "grass_runway" ) or
+                    ( passedt.aeroway == "taxiway"      )) then
+                    Layer("transportation", false)
+                    Attribute( "class", passedt.aeroway )
+
+                    if (( passedt.name ~= nil )   and
+                        ( passedt.name ~= ""  ))  then
+                        Attribute( "name", passedt.name )
+                    end
+
+                    MinZoom( 10 )
+                end -- aeroway=runway etc. 10
+            end -- ferry routes 6
+        end -- linear railways
+    end -- linear highways
+end -- wr_after_transportation( passedt )
+
+-- ----------------------------------------------------------------------------
+-- At this point we're processing a way or a relation, and we know we have a
+-- non-nil, non-blank highway value, and that "area" is not set.
+--
+-- Highway areas (which may have "area=yes" set or closed pedestrian areas, 
+-- which are implicitly areas if closed) are processed elsewhere.
+-- ----------------------------------------------------------------------------
+function wr_after_highway( passedt )
+    if (( passedt.highway == "motorway"      ) or
+        ( passedt.highway == "motorway_link" )) then
         Layer("transportation", false)
         Attribute( "class", passedt.highway )
 
@@ -12338,6 +12401,146 @@ function wr_after_transportation( passedt )
 	    Attribute( "name", passedt.name )
         end
 
+        append_edge_etc( passedt )
+        MinZoom( 3 )
+    else
+        if (( passedt.highway == "trunk"      ) or
+            ( passedt.highway == "trunk_link" )) then
+            Layer("transportation", false)
+            Attribute( "class", passedt.highway )
+
+            if (( passedt.name ~= nil )   and
+                ( passedt.name ~= ""  ))  then
+    	    Attribute( "name", passedt.name )
+            end
+
+            append_edge_etc( passedt )
+            MinZoom( 6 )
+        else
+            if (( passedt.highway == "primary"      ) or
+                ( passedt.highway == "primary_link" )) then
+                Layer("transportation", false)
+                Attribute( "class", passedt.highway )
+
+                if (( passedt.name ~= nil )   and
+                    ( passedt.name ~= ""  ))  then
+        	    Attribute( "name", passedt.name )
+                end
+
+                append_edge_etc( passedt )
+                MinZoom( 7 )
+            else
+                if (( passedt.highway == "secondary"      ) or
+                    ( passedt.highway == "secondary_link" )) then
+                    Layer("transportation", false)
+                    Attribute( "class", passedt.highway )
+
+                    if (( passedt.name ~= nil )   and
+                        ( passedt.name ~= ""  ))  then
+            	    Attribute( "name", passedt.name )
+                    end
+
+                    append_edge_etc( passedt )
+                    MinZoom( 8 )
+                else
+                    if (( passedt.highway == "tertiary"           ) or
+                        ( passedt.highway == "tertiary_link"      ) or
+                        ( passedt.highway == "unclassified"       ) or
+                        ( passedt.highway == "unclassified_link"  ) or
+                        ( passedt.highway == "residential"        ) or
+                        ( passedt.highway == "residential_link"   ) or
+                        ( passedt.highway == "living_street"      ) or
+                        ( passedt.highway == "living_street_link" )) then
+                        Layer("transportation", false)
+                        Attribute( "class", passedt.highway )
+
+                        if (( passedt.name ~= nil )   and
+                            ( passedt.name ~= ""  ))  then
+                	    Attribute( "name", passedt.name )
+                        end
+
+                        append_edge_etc( passedt )
+                        MinZoom( 9 )
+                    else
+                        if (( passedt.highway == "unpaved"            ) or
+                            ( passedt.highway == "ucrwide"            ) or
+                            ( passedt.highway == "ucrnarrow"          ) or
+                            ( passedt.highway == "boatwide"           ) or
+                            ( passedt.highway == "boatnarrow"         ) or
+                            ( passedt.highway == "rbywide"            ) or
+                            ( passedt.highway == "rbynarrow"          ) or
+                            ( passedt.highway == "bridlewaywide"      ) or
+                            ( passedt.highway == "bridlewaynarrow"    ) or
+                            ( passedt.highway == "bridlewaysteps"     ) or
+                            ( passedt.highway == "intbridlewaywide"   ) or
+                            ( passedt.highway == "intbridlewaynarrow" ) or
+                            ( passedt.highway == "intbridlewaysteps"  ) or
+                            ( passedt.highway == "badbridlewaywide"   ) or
+                            ( passedt.highway == "badbridlewaynarrow" ) or
+                            ( passedt.highway == "badbridlewaysteps"  ) or
+                            ( passedt.highway == "footwaywide"        ) or
+                            ( passedt.highway == "footwaynarrow"      ) or
+                            ( passedt.highway == "footwaysteps"       ) or
+                            ( passedt.highway == "intfootwaywide"     ) or
+                            ( passedt.highway == "intfootwaynarrow"   ) or
+                            ( passedt.highway == "intfootwaysteps"    ) or
+                            ( passedt.highway == "badfootwaywide"     ) or
+                            ( passedt.highway == "badfootwaynarrow"   ) or
+                            ( passedt.highway == "badfootwaysteps"    ) or
+                            ( passedt.highway == "service"            ) or
+                            ( passedt.highway == "driveway"           ) or
+                            ( passedt.highway == "steps"              ) or
+                            ( passedt.highway == "road"               ) or
+                            ( passedt.highway == "pathwide"           ) or
+                            ( passedt.highway == "pathnarrow"         ) or
+                            ( passedt.highway == "pathsteps"          ) or
+                            ( passedt.highway == "intpathwide"        ) or
+                            ( passedt.highway == "intpathnarrow"      ) or
+                            ( passedt.highway == "intpathsteps"       ) or
+                            ( passedt.highway == "badpathwide"        ) or
+                            ( passedt.highway == "badpathnarrow"      ) or
+                            ( passedt.highway == "badpathsteps"       ) or
+                            ( passedt.highway == "construction"       ) or
+                            ( passedt.highway == "gallop"             ) or
+                            ( passedt.highway == "ldpmtb"             ) or
+                            ( passedt.highway == "ldpncn"             ) or
+                            ( passedt.highway == "ldpnhn"             ) or
+                            ( passedt.highway == "ldpnwn"             ) or
+                            ( passedt.highway == "leisuretrack"       ) or
+                            ( passedt.highway == "raceway"            )) then
+                            Layer("transportation", false)
+                            Attribute( "class", passedt.highway )
+
+                            if (( passedt.name ~= nil )   and
+                                ( passedt.name ~= ""  ))  then
+                    	        Attribute( "name", passedt.name )
+                            end
+
+                            MinZoom( 12 )
+                        else
+                            if (( passedt.highway == "pedestrian" ) and
+                                ( not passedt.is_closed           )) then
+                                Layer("transportation", false)
+                                Attribute( "class", passedt.highway )
+
+                                if (( passedt.name ~= nil )   and
+                                    ( passedt.name ~= ""  ))  then
+                        	        Attribute( "name", passedt.name )
+                                end
+
+                                MinZoom( 12 )
+                            end -- linear pedestrian 12
+                        end -- unpaved etc. 12
+                    end -- tertiary etc. 9
+                end -- secondary 9
+            end -- primary 7
+        end -- trunk 6
+    end -- motorway 4
+end -- wr_after_highway( passedt )
+
+
+
+function append_edge_etc( passedt )
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
 -- ----------------------------------------------------------------------------
@@ -12395,60 +12598,8 @@ function wr_after_transportation( passedt )
 
         AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
         AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
-    else
--- ----------------------------------------------------------------------------
--- not a highway
---
--- Linear railways
--- We ignore railway areas such as platforms here (those tagged "area=yes").  
--- They will be processed elsewhere.  These railways may be closed ways or 
--- open-ended; theyare still linear, so we won't filter based on is_closed.
--- ----------------------------------------------------------------------------
-        if (( passedt.railway ~= nil   ) and
-            ( passedt.railway ~= ""    ) and
-            ( passedt.area    ~= "yes" )) then
-            Layer("transportation", false)
-            Attribute( "class", passedt.railway )
+end -- append_edge_etc( passedt )
 
-            if (( passedt.name ~= nil )   and
-                ( passedt.name ~= ""  ))  then
-    	        Attribute( "name", passedt.name )
-            end
-
-            AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
-            AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
-        else
--- ----------------------------------------------------------------------------
--- Ferry routes
--- ----------------------------------------------------------------------------
-            if ( passedt.route == "ferry" ) then
-                Layer("transportation", false)
-                Attribute( "class", passedt.route )
-
-                if (( passedt.name ~= nil )   and
-                    ( passedt.name ~= ""  ))  then
-                    Attribute( "name", passedt.name )
-                end
-
-                MinZoom( 6 )
-            else
-                if (( passedt.aeroway == "runway"       ) or
-                    ( passedt.aeroway == "grass_runway" ) or
-                    ( passedt.aeroway == "taxiway"      )) then
-                    Layer("transportation", false)
-                    Attribute( "class", passedt.aeroway )
-
-                    if (( passedt.name ~= nil )   and
-                        ( passedt.name ~= ""  ))  then
-                        Attribute( "name", passedt.name )
-                    end
-
-                    MinZoom( 10 )
-                end -- aeroway=runway etc. 10
-            end -- ferry routes 6
-        end -- linear railways
-    end -- linear highways
-end -- wr_after_transportation( passedt )
 
 -- ----------------------------------------------------------------------------
 -- linear waterway layer
