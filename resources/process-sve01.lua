@@ -2085,9 +2085,11 @@ function generic_before_function( passedt )
        (( passedt.foot    == "private"   )  or
         ( passedt.foot    == "no"        )) and
        (( passedt.bicycle == nil         )  or
+        ( passedt.bicycle == ""          )  or
         ( passedt.bicycle == "private"   )  or
         ( passedt.bicycle == "no"        )) and
        (( passedt.horse   == nil         )  or
+        ( passedt.horse   == ""          )  or
         ( passedt.horse   == "private"   )  or
         ( passedt.horse   == "no"        ))) then
       passedt.access = "no"
@@ -2373,7 +2375,8 @@ function generic_before_function( passedt )
 -- picked up below; we need to make sure that those that do not get an
 -- access=private tag first.
 -- ----------------------------------------------------------------------------
-   if ((  passedt.access      == nil                          )  and
+   if ((( passedt.access      == nil                         )   or
+        ( passedt.access      == ""                          ))  and
        (( passedt.designation == "public_footpath"           )   or
         ( passedt.designation == "public_bridleway"          )   or
         ( passedt.designation == "restricted_byway"          )   or
