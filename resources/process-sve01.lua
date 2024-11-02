@@ -12389,10 +12389,11 @@ end -- wr_after_transportation( passedt )
 --
 -- Highway areas (which may have "area=yes" set or closed pedestrian areas, 
 -- which are implicitly areas if closed) are processed elsewhere.
--- "highway=pedestrian" are ignored here if closed.
+-- "highway=pedestrian" are ignored here if closed, unless area=no is set.
 --
--- "gallop" and "leisuretrack" are special cases.  If "area==no", they are 
--- assumed to be linear and are rendered here, whether or not they are closed. 
+-- "gallop" and "leisuretrack" are also special cases.  If "area==no", 
+-- they are assumed to be linear and are rendered here, whether or not they 
+-- are closed. 
 -- ----------------------------------------------------------------------------
 function wr_after_highway( passedt )
     if (( passedt.highway == "motorway"      ) or
@@ -12520,8 +12521,9 @@ function wr_after_highway( passedt )
 
                             MinZoom( 12 )
                         else
-                            if (( passedt.highway == "pedestrian" ) and
-                                ( not passedt.is_closed           )) then
+                            if ((  passedt.highway == "pedestrian"  ) and
+                                (( not passedt.is_closed           )  or
+                                 ( passedt.area    == "no"         ))) then
                                 Layer("transportation", false)
                                 Attribute( "class", passedt.highway )
 
@@ -13644,13 +13646,17 @@ function render_office_land1( passedt )
 end -- render_office_land1()
 
 -- ----------------------------------------------------------------------------
--- highway=pedestrian are only written to land1 if they're closed areas.
--- All closed highway=pedestrian are assumed to be areas, if no area tag.
+-- highway=pedestrian and highway=platform are only written to land1 if they're
+-- closed areas.
+-- All closed highway=pedestrian and highway=platform are assumed to be areas, 
+-- regardless of any area tag.  There are some "area=no" examples, but this seem
+-- to be mistaggings.
 -- Closed highway=pathnarrow and highway=service are assumed to be areas, 
 -- only if area=yes tag.
 -- ----------------------------------------------------------------------------
 function render_highway_land1( passedt )
     if (((  passedt.highway == "pedestrian"  )  and
+         (  passedt.area    ~= "no"          )  and
          (  passedt.is_closed                )) or
         ((( passedt.highway == "service"    )   or
           ( passedt.highway == "pathnarrow" ))  and
@@ -13695,9 +13701,22 @@ function render_highway_land1( passedt )
 
             MinZoom( 14 )
         else
-            render_historic_land1( passedt )
-        end -- highway=pedestrian 12
-    end -- highway=board_realtime etc. 14
+            if (( passedt.highway == "platform" ) and
+                ( passedt.is_closed             )) then
+                Layer( "land1", true )
+                Attribute( "class", "highway_" .. passedt.highway )
+
+                if (( passedt.ref ~= nil ) and
+                    ( passedt.ref ~= ""  )) then
+                    Attribute( "name", passedt.ref )
+                end
+
+                MinZoom( 14 )
+            else
+                render_historic_land1( passedt )
+            end -- highway=platform 14
+        end -- highway=board_realtime etc. 14
+    end -- highway=pedestrian 12
 end -- render_highway_land1()
 
 function render_historic_land1( passedt )
