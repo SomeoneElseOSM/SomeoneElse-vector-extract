@@ -12539,9 +12539,10 @@ function wr_after_highway( passedt )
                                 append_edge_etc( passedt )
                                 MinZoom( 12 )
                             else
-                                if ((( passedt.highway == "leisuretrack" ) or
+                                if ((( passedt.highway == "leisuretrack" )  or
                                      ( passedt.highway == "gallop"       )) and
-                                    (  passedt.area == "no"               )) then
+                                    (( passedt.area == "no"              )  or
+                                     ( not passedt.is_closed             ))) then
                                     Layer("transportation", false)
                                     Attribute( "class", passedt.highway )
 
@@ -12550,6 +12551,7 @@ function wr_after_highway( passedt )
                             	        Attribute( "name", passedt.name )
                                     end
 
+                                    append_edge_etc( passedt )
                                     MinZoom( 12 )
                                 else
                                     if (( passedt.highway == "platform" ) and
