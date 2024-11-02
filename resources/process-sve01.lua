@@ -12519,6 +12519,7 @@ function wr_after_highway( passedt )
                     	        Attribute( "name", passedt.name )
                             end
 
+                            append_edge_etc( passedt )
                             MinZoom( 12 )
                         else
                             if ((  passedt.highway == "pedestrian"  ) and
@@ -12532,6 +12533,7 @@ function wr_after_highway( passedt )
                         	        Attribute( "name", passedt.name )
                                 end
 
+                                append_edge_etc( passedt )
                                 MinZoom( 12 )
                             else
                                 if ((( passedt.highway == "leisuretrack" ) or
@@ -12578,60 +12580,68 @@ function append_edge_etc( passedt )
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
 -- ----------------------------------------------------------------------------
-        if (( passedt.sidewalk == "both"            ) or 
-            ( passedt.sidewalk == "left"            ) or 
-            ( passedt.sidewalk == "mapped"          ) or 
-            ( passedt.sidewalk == "separate"        ) or 
-            ( passedt.sidewalk == "right"           ) or 
-            ( passedt.sidewalk == "shared"          ) or 
-            ( passedt.sidewalk == "yes"             ) or
-            ( passedt.sidewalkCboth == "separate"   ) or 
-            ( passedt.sidewalkCboth == "yes"        ) or
-            ( passedt.sidewalkCleft == "segregated" ) or
-            ( passedt.sidewalkCleft == "separate"   ) or 
-            ( passedt.sidewalkCleft == "yes"        ) or
-            ( passedt.sidewalkCright == "segregated" ) or 
-            ( passedt.sidewalkCright == "separate"  ) or 
-            ( passedt.sidewalkCright == "yes"       ) or
-            ( passedt.footway  == "separate"        ) or 
-            ( passedt.footway  == "yes"             ) or
-            ( passedt.shoulder == "both"            ) or
-            ( passedt.shoulder == "left"            ) or 
-            ( passedt.shoulder == "right"           ) or 
-            ( passedt.shoulder == "yes"             ) or
-            ( passedt.hard_shoulder == "yes"        ) or
-            ( passedt.cycleway == "track"           ) or
-            ( passedt.cycleway == "opposite_track"  ) or
-            ( passedt.cycleway == "yes"             ) or
-            ( passedt.cycleway == "separate"        ) or
-            ( passedt.cycleway == "sidewalk"        ) or
-            ( passedt.cycleway == "sidepath"        ) or
-            ( passedt.cycleway == "segregated"      ) or
-            ( passedt.segregated == "yes"           ) or
-            ( passedt.segregated == "right"         )) then
-            Attribute("edge", "sidewalk")
-        else
+    if (( passedt.sidewalk == "both"            ) or 
+        ( passedt.sidewalk == "left"            ) or 
+        ( passedt.sidewalk == "mapped"          ) or 
+        ( passedt.sidewalk == "separate"        ) or 
+        ( passedt.sidewalk == "right"           ) or 
+        ( passedt.sidewalk == "shared"          ) or 
+        ( passedt.sidewalk == "yes"             ) or
+        ( passedt.sidewalkCboth == "separate"   ) or 
+        ( passedt.sidewalkCboth == "yes"        ) or
+        ( passedt.sidewalkCleft == "segregated" ) or
+        ( passedt.sidewalkCleft == "separate"   ) or 
+        ( passedt.sidewalkCleft == "yes"        ) or
+        ( passedt.sidewalkCright == "segregated" ) or 
+        ( passedt.sidewalkCright == "separate"  ) or 
+        ( passedt.sidewalkCright == "yes"       ) or
+        ( passedt.footway  == "separate"        ) or 
+        ( passedt.footway  == "yes"             ) or
+        ( passedt.shoulder == "both"            ) or
+        ( passedt.shoulder == "left"            ) or 
+        ( passedt.shoulder == "right"           ) or 
+        ( passedt.shoulder == "yes"             ) or
+        ( passedt.hard_shoulder == "yes"        ) or
+        ( passedt.cycleway == "track"           ) or
+        ( passedt.cycleway == "opposite_track"  ) or
+        ( passedt.cycleway == "yes"             ) or
+        ( passedt.cycleway == "separate"        ) or
+        ( passedt.cycleway == "sidewalk"        ) or
+        ( passedt.cycleway == "sidepath"        ) or
+        ( passedt.cycleway == "segregated"      ) or
+        ( passedt.segregated == "yes"           ) or
+        ( passedt.segregated == "right"         )) then
+        Attribute("edge", "sidewalk")
+    else
 -- ----------------------------------------------------------------------------
 -- If there is not a sidewalk but there is a verge, set "edge" to "verge"
 -- ----------------------------------------------------------------------------
-            if (( passedt.verge == "both"     ) or
-                ( passedt.verge == "left"     ) or
-                ( passedt.verge == "separate" ) or
-                ( passedt.verge == "right"    ) or
-                ( passedt.verge == "yes"      )) then
-                Attribute("edge", "verge")
-            else
+        if (( passedt.verge == "both"     ) or
+            ( passedt.verge == "left"     ) or
+            ( passedt.verge == "separate" ) or
+            ( passedt.verge == "right"    ) or
+            ( passedt.verge == "yes"      )) then
+            Attribute("edge", "verge")
+        else
 -- ----------------------------------------------------------------------------
 -- If there is not a sidewalk or verge but it is a long ford, set "edge" to "ford"
 -- ----------------------------------------------------------------------------
-                if ( passedt.ford == "yes" ) then
-                    Attribute("edge", "ford")
-                end  -- ford
-            end -- verge
-        end -- sidewalk
+            if ( passedt.ford == "yes" ) then
+                Attribute("edge", "ford")
+            end  -- ford
+        end -- verge
+    end -- sidewalk
 
-        AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
-        AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
+    AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
+    AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
+
+    if ( passedt.access == "no" ) then   
+        Attribute("access", "no")
+    else
+        if ( passedt.access == "destination" ) then   
+            Attribute("access", "destination")
+        end -- access=destination
+    end -- access=no
 end -- append_edge_etc( passedt )
 
 

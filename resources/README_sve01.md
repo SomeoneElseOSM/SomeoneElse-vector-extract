@@ -47,7 +47,7 @@ This is for linear highways etc.
 This is derived from the OSM value for "highway" and the designation.  Values are:
 
 * motorway, trunk, primary, secondary, tertiary, unclassified and residential are handled as normal.
-* service without designation are handled as normal
+* service without designation: "important" ones are handled as normal, "less important" as driveway.
 * service with designation are handled as per the designation
 * unpaved - unpaved unclassified roads, intended to be shown visually different from paved ones
 * ucrwide, ucrnarrow - unclassified country road intended to be shown visually between unpaved and BOAT
@@ -60,13 +60,29 @@ This is derived from the OSM value for "highway" and the designation.  Values ar
 * pathwide, pathnarrow - no designation; wide or narrow
 * steps - no designation; steps
 
+The MinZoom on each of these is broadly appropriate to the road type, varying from 3 for motorways to 12 to paths.
+
+Genuine highway areas are handled via "land1", not here.  For some highway types that are closed ways, "area" needs to be checked to choose which layer something should be processed as.
+
 ### name
 
 The value of the OSM name tag, after postprocessing to e.g. put in brackets if not signed.
 
 ### edge
 
-This will be "sidewalk", "verge" or unset.  Designed to influence the rendering on major road types.
+This will be "sidewalk", "verge", "ford" or unset.  Designed to influence the rendering on major road types.
+
+### bridge
+
+A boolean value set to true if a bridge.
+
+### tunnel
+
+A boolean value set to true if a tunnel.
+
+### access
+
+Set to "no" if access=no.
 
 ## "waterway"
 
