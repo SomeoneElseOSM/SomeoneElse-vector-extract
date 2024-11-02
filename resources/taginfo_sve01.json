@@ -2667,7 +2667,7 @@
     { "key": "shop", "value": "pet_grooming", "description": "Synonym for 'pet'" },
     { "key": "shop", "value": "pet_supplies", "description": "Synonym for 'pet'" },
     { "key": "shop", "value": "petfood", "description": "Synonym for 'pet'" },
-    { "key": "shop", "value": "phatmacy", "description": "Synonym for 'amenity=pharmacy'" },
+    { "key": "shop", "value": "pharmacy", "description": "Synonym for 'amenity=pharmacy'" },
     { "key": "shop", "value": "phone", "description": "Various shops extracted" },
     { "key": "shop", "value": "phone_repair", "description": "Various shops extracted" },
     { "key": "shop", "value": "photo", "description": "Various shops extracted" },
