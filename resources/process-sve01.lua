@@ -1090,6 +1090,19 @@ function way_function()
     way_after_linearbarrier( wayt )
 
 -- ----------------------------------------------------------------------------
+-- After dealing with linear aeroways we need to deal with area ones in
+-- "generic_after_function", but we don't want that to have a go at showing
+-- linear ones as areas, so we remove those here.  We do want it to do points,
+-- which the "generic_after_function( nodet )" call above will do.
+-- ----------------------------------------------------------------------------
+    if ((  not wayt.is_closed              ) and
+        (( wayt.aeroway == "grass_runway" )  or
+         ( wayt.aeroway == "runway"       )  or
+         ( wayt.aeroway == "taxiway"      ))) then
+        wayt.aeroway = nil
+    end
+
+-- ----------------------------------------------------------------------------
 -- Actually writing out most other nodes (and polygons) is done 
 -- in "generic_after_function"
 -- 
@@ -14102,7 +14115,8 @@ function render_tourism_land1( passedt )
 end -- render_tourism_land1()
 
 function render_aeroway_land1( passedt )
-    if ( passedt.aeroway == "apron" ) then
+    if (( passedt.aeroway == "grass_runway" ) or
+        ( passedt.aeroway == "runway"       )) then
         Layer( "land1", true )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
 
@@ -14111,20 +14125,22 @@ function render_aeroway_land1( passedt )
              Attribute( "name", passedt.name )
         end
 
-        MinZoom( 12 )
+        MinZoom( 10 )
     else
-        if ( passedt.aeroway == "helipad" ) then
+        if (( passedt.aeroway == "apron"   ) or
+            ( passedt.aeroway == "taxiway" )) then
             Layer( "land1", true )
             Attribute( "class", "aeroway_" .. passedt.aeroway )
 
-            if (( passedt.ref ~= nil ) and
-                ( passedt.ref ~= ""  )) then
-                 Attribute( "name", passedt.ref )
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                 Attribute( "name", passedt.name )
             end
 
-            MinZoom( 14 )
+            MinZoom( 12 )
         else
-            if ( passedt.aeroway == "gate" ) then
+            if (( passedt.aeroway == "helipad" ) or
+                ( passedt.aeroway == "gate"    )) then
                 Layer( "land1", true )
                 Attribute( "class", "aeroway_" .. passedt.aeroway )
 
@@ -14142,9 +14158,9 @@ function render_aeroway_land1( passedt )
 -- a name and/or an icon, but don't have an area fill or outline.
 -- ------------------------------------------------------------------------------
                 generic_after_poi( passedt )
-            end -- aeroway=gate 16
-        end -- aeroway=helipad 15
-    end -- aeroway=apron 12
+            end -- aeroway=helipad etc. 14
+        end -- aeroway=apron 12
+    end -- aeroway=grass_runway etc. 10
 end -- render_aeroway_land1()
 
 -- ----------------------------------------------------------------------------
