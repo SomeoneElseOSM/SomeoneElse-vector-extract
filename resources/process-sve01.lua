@@ -12385,7 +12385,7 @@ end -- wr_after_transportation( passedt )
 
 -- ----------------------------------------------------------------------------
 -- At this point we're processing a way or a relation, and we know we have a
--- non-nil, non-blank highway value, and that "area" is not set.
+-- non-nil, non-blank highway value, and that "area" is not set to "yes".
 --
 -- Highway areas (which may have "area=yes" set or closed pedestrian areas, 
 -- which are implicitly areas if closed) are processed elsewhere.
@@ -13713,11 +13713,28 @@ function render_highway_land1( passedt )
 
                 MinZoom( 14 )
             else
-                render_historic_land1( passedt )
+                render_railway_land1( passedt )
             end -- highway=platform 14
         end -- highway=board_realtime etc. 14
     end -- highway=pedestrian 12
 end -- render_highway_land1()
+
+function render_railway_land1( passedt )
+    if (( passedt.railway == "platform" ) and
+        ( passedt.is_closed             )) then
+        Layer( "land1", true )
+        Attribute( "class", "railway_" .. passedt.railway )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+           Attribute( "name", passedt.name )
+        end
+
+        MinZoom( 14 )
+    else
+        render_historic_land1( passedt )
+    end -- railway=platform 14
+end -- render_railway_land1()
 
 function render_historic_land1( passedt )
     if (( passedt.historic == "archaeological_site"      ) or
