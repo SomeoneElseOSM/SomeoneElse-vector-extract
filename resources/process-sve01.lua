@@ -13643,21 +13643,19 @@ function render_office_land1( passedt )
     end -- office=craftbrewery etc. 16
 end -- render_office_land1()
 
+-- ----------------------------------------------------------------------------
+-- highway=pedestrian are only written to land1 if they're closed areas.
+-- All closed highway=pedestrian are assumed to be areas, if no area tag.
+-- Closed highway=pathnarrow and highway=service are assumed to be areas, 
+-- only if area=yes tag.
+-- ----------------------------------------------------------------------------
 function render_highway_land1( passedt )
-    if (( passedt.highway == "board_realtime"            ) or
-        ( passedt.highway == "bus_stop_nothing"          ) or
-        ( passedt.highway == "bus_stop_pole"             ) or
-        ( passedt.highway == "bus_stop_disused_pole"     ) or
-        ( passedt.highway == "bus_stop_timetable"        ) or
-        ( passedt.highway == "bus_stop_realtime"         ) or
-        ( passedt.highway == "bus_stop_speech_timetable" ) or
-        ( passedt.highway == "bus_stop_speech_realtime"  ) or
-        ( passedt.highway == "traffic_signals"           ) or
-        ( passedt.highway == "streetlamp_electric"       ) or
-        ( passedt.highway == "streetlamp_gas"            ) or
-        ( passedt.highway == "crossing"                  ) or
-        ( passedt.highway == "milestone"                 ) or
-        ( passedt.highway == "mini_roundabout"           )) then
+    if (((  passedt.highway == "pedestrian"  )  and
+         (  passedt.is_closed                )) or
+        ((( passedt.highway == "service"    )   or
+          ( passedt.highway == "pathnarrow" ))  and
+         (  passedt.area    == "yes"         )  and
+         (  passedt.is_closed                ))) then
         Layer( "land1", true )
         Attribute( "class", "highway_" .. passedt.highway )
 
@@ -13666,15 +13664,40 @@ function render_highway_land1( passedt )
             Attribute( "name", passedt.name )
         end
 
-        if (( passedt.ele ~= nil ) and
-            ( passedt.ele ~= ""  )) then
-            Attribute( "ele", passedt.ele )
-        end
-
-        MinZoom( 14 )
+        MinZoom( 12 )
     else
-        render_historic_land1( passedt )
-    end -- highway=board_realtime etc.
+        if (( passedt.highway == "board_realtime"            ) or
+            ( passedt.highway == "bus_stop_nothing"          ) or
+            ( passedt.highway == "bus_stop_pole"             ) or
+            ( passedt.highway == "bus_stop_disused_pole"     ) or
+            ( passedt.highway == "bus_stop_timetable"        ) or
+            ( passedt.highway == "bus_stop_realtime"         ) or
+            ( passedt.highway == "bus_stop_speech_timetable" ) or
+            ( passedt.highway == "bus_stop_speech_realtime"  ) or
+            ( passedt.highway == "traffic_signals"           ) or
+            ( passedt.highway == "streetlamp_electric"       ) or
+            ( passedt.highway == "streetlamp_gas"            ) or
+            ( passedt.highway == "crossing"                  ) or
+            ( passedt.highway == "milestone"                 ) or
+            ( passedt.highway == "mini_roundabout"           )) then
+            Layer( "land1", true )
+            Attribute( "class", "highway_" .. passedt.highway )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                Attribute( "name", passedt.name )
+            end
+
+            if (( passedt.ele ~= nil ) and
+                ( passedt.ele ~= ""  )) then
+                Attribute( "ele", passedt.ele )
+            end
+
+            MinZoom( 14 )
+        else
+            render_historic_land1( passedt )
+        end -- highway=pedestrian 12
+    end -- highway=board_realtime etc. 14
 end -- render_highway_land1()
 
 function render_historic_land1( passedt )
