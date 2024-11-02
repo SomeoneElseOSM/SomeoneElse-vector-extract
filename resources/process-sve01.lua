@@ -988,7 +988,7 @@ function way_function()
 -- "sport" is often (but not always) used to separate different types of
 -- leisure tracks.
 --
--- If on an area, the way will go into planet_osm_polygon and the highway
+-- If on an area, on raster the way will go into planet_osm_polygon and the highway
 -- feature won't be rendered (because both leisuretrack and gallop are only 
 -- processed as linear features) but the leisure=track will be (as an area).
 --
@@ -12389,6 +12389,10 @@ end -- wr_after_transportation( passedt )
 --
 -- Highway areas (which may have "area=yes" set or closed pedestrian areas, 
 -- which are implicitly areas if closed) are processed elsewhere.
+-- "highway=pedestrian" are ignored here if closed.
+--
+-- "gallop" and "leisuretrack" are special cases.  If "area==no", they are 
+-- assumed to be linear and are rendered here, whether or not they are closed. 
 -- ----------------------------------------------------------------------------
 function wr_after_highway( passedt )
     if (( passedt.highway == "motorway"      ) or
@@ -12501,12 +12505,10 @@ function wr_after_highway( passedt )
                             ( passedt.highway == "badpathnarrow"      ) or
                             ( passedt.highway == "badpathsteps"       ) or
                             ( passedt.highway == "construction"       ) or
-                            ( passedt.highway == "gallop"             ) or
                             ( passedt.highway == "ldpmtb"             ) or
                             ( passedt.highway == "ldpncn"             ) or
                             ( passedt.highway == "ldpnhn"             ) or
                             ( passedt.highway == "ldpnwn"             ) or
-                            ( passedt.highway == "leisuretrack"       ) or
                             ( passedt.highway == "raceway"            )) then
                             Layer("transportation", false)
                             Attribute( "class", passedt.highway )
@@ -12529,6 +12531,20 @@ function wr_after_highway( passedt )
                                 end
 
                                 MinZoom( 12 )
+                            else
+                                if ((( passedt.highway == "leisuretrack" ) or
+                                     ( passedt.highway == "gallop"       )) and
+                                    (  passedt.area == "no"               )) then
+                                    Layer("transportation", false)
+                                    Attribute( "class", passedt.highway )
+
+                                    if (( passedt.name ~= nil )   and
+                                        ( passedt.name ~= ""  ))  then
+                            	        Attribute( "name", passedt.name )
+                                    end
+
+                                    MinZoom( 12 )
+                                end -- linear gallop / leisuretrack 12
                             end -- linear pedestrian 12
                         end -- unpaved etc. 12
                     end -- tertiary etc. 9
