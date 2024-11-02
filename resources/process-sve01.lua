@@ -12546,6 +12546,22 @@ function wr_after_highway( passedt )
                                     end
 
                                     MinZoom( 12 )
+                                else
+                                    if (( passedt.highway == "platform" ) and
+                                        ( not passedt.is_closed         )) then
+                                        Layer("transportation", false)
+                                        Attribute( "class", passedt.highway )
+
+                                        if (( passedt.name ~= nil )   and
+                                            ( passedt.name ~= ""  ))  then
+                                	        Attribute( "name", passedt.name )
+                                        end
+
+                                        MinZoom( 14 )
+-- ----------------------------------------------------------------------------
+-- No other linear highways to consider
+-- ----------------------------------------------------------------------------
+                                    end -- linear platform 14
                                 end -- linear gallop / leisuretrack 12
                             end -- linear pedestrian 12
                         end -- unpaved etc. 12
