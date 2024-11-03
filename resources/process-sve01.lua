@@ -12409,6 +12409,11 @@ function wr_after_highway( passedt )
 	    Attribute( "name", passedt.name )
         end
 
+        if (( passedt.ref ~= nil )   and
+            ( passedt.ref ~= ""  ))  then
+	    Attribute( "ref", passedt.ref )
+        end
+
         append_edge_etc( passedt )
         MinZoom( 3 )
     else
