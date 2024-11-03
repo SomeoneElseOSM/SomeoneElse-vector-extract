@@ -12403,17 +12403,8 @@ function wr_after_highway( passedt )
         ( passedt.highway == "motorway_link" )) then
         Layer("transportation", false)
         Attribute( "class", passedt.highway )
-
-        if (( passedt.name ~= nil )   and
-            ( passedt.name ~= ""  ))  then
-            Attribute( "name", passedt.name )
-        end
-
-        if (( passedt.ref ~= nil )   and
-            ( passedt.ref ~= ""  ))  then
-            Attribute( "ref", passedt.ref )
-        end
-
+        append_name( passedt )
+        append_ref_etc( passedt )
         append_edge_etc( passedt )
         MinZoom( 3 )
     else
@@ -12421,17 +12412,8 @@ function wr_after_highway( passedt )
             ( passedt.highway == "trunk_link" )) then
             Layer("transportation", false)
             Attribute( "class", passedt.highway )
-
-            if (( passedt.name ~= nil )   and
-                ( passedt.name ~= ""  ))  then
-                Attribute( "name", passedt.name )
-            end
-
-            if (( passedt.ref ~= nil )   and
-                ( passedt.ref ~= ""  ))  then
-                Attribute( "ref", passedt.ref )
-            end
-
+            append_name( passedt )
+            append_ref_etc( passedt )
             append_edge_etc( passedt )
             MinZoom( 6 )
         else
@@ -12439,17 +12421,8 @@ function wr_after_highway( passedt )
                 ( passedt.highway == "primary_link" )) then
                 Layer("transportation", false)
                 Attribute( "class", passedt.highway )
-
-                if (( passedt.name ~= nil )   and
-                    ( passedt.name ~= ""  ))  then
-                    Attribute( "name", passedt.name )
-                end
-
-                if (( passedt.ref ~= nil )   and
-                    ( passedt.ref ~= ""  ))  then
-                    Attribute( "ref", passedt.ref )
-                end
-
+                append_name( passedt )
+                append_ref_etc( passedt )
                 append_edge_etc( passedt )
                 MinZoom( 7 )
             else
@@ -12457,17 +12430,8 @@ function wr_after_highway( passedt )
                     ( passedt.highway == "secondary_link" )) then
                     Layer("transportation", false)
                     Attribute( "class", passedt.highway )
-
-                    if (( passedt.name ~= nil )   and
-                        ( passedt.name ~= ""  ))  then
-                        Attribute( "name", passedt.name )
-                    end
-
-                    if (( passedt.ref ~= nil )   and
-                        ( passedt.ref ~= ""  ))  then
-                        Attribute( "ref", passedt.ref )
-                    end
-
+                    append_name( passedt )
+                    append_ref_etc( passedt )
                     append_edge_etc( passedt )
                     MinZoom( 8 )
                 else
@@ -12481,17 +12445,8 @@ function wr_after_highway( passedt )
                         ( passedt.highway == "living_street_link" )) then
                         Layer("transportation", false)
                         Attribute( "class", passedt.highway )
-
-                        if (( passedt.name ~= nil )   and
-                            ( passedt.name ~= ""  ))  then
-                            Attribute( "name", passedt.name )
-                        end
-
-                        if (( passedt.ref ~= nil )   and
-                            ( passedt.ref ~= ""  ))  then
-                            Attribute( "ref", passedt.ref )
-                        end
-
+                        append_name( passedt )
+                        append_ref_etc( passedt )
                         append_edge_etc( passedt )
                         MinZoom( 9 )
                     else
@@ -12541,17 +12496,8 @@ function wr_after_highway( passedt )
                             ( passedt.highway == "raceway"            )) then
                             Layer("transportation", false)
                             Attribute( "class", passedt.highway )
-
-                            if (( passedt.name ~= nil )   and
-                                ( passedt.name ~= ""  ))  then
-                                Attribute( "name", passedt.name )
-                            end
-
-                            if (( passedt.ref ~= nil )   and
-                                ( passedt.ref ~= ""  ))  then
-                                Attribute( "ref", passedt.ref )
-                            end
-
+                            append_name( passedt )
+                            append_ref_etc( passedt )
                             append_edge_etc( passedt )
                             MinZoom( 12 )
                         else
@@ -12560,17 +12506,8 @@ function wr_after_highway( passedt )
                                  ( passedt.area    == "no"         ))) then
                                 Layer("transportation", false)
                                 Attribute( "class", passedt.highway )
-
-                                if (( passedt.name ~= nil )   and
-                                    ( passedt.name ~= ""  ))  then
-                                   Attribute( "name", passedt.name )
-                                end
-
-                                if (( passedt.ref ~= nil )   and
-                                    ( passedt.ref ~= ""  ))  then
-                                    Attribute( "ref", passedt.ref )
-                                end
-
+                                append_name( passedt )
+                                append_ref_etc( passedt )
                                 append_edge_etc( passedt )
                                 MinZoom( 12 )
                             else
@@ -12580,12 +12517,7 @@ function wr_after_highway( passedt )
                                      ( not passedt.is_closed             ))) then
                                     Layer("transportation", false)
                                     Attribute( "class", passedt.highway )
-
-                                    if (( passedt.name ~= nil )   and
-                                        ( passedt.name ~= ""  ))  then
-                                        Attribute( "name", passedt.name )
-                                    end
-
+                                    append_name( passedt )
                                     append_edge_etc( passedt )
                                     MinZoom( 12 )
                                 else
@@ -12593,12 +12525,7 @@ function wr_after_highway( passedt )
                                         ( not passedt.is_closed         )) then
                                         Layer("transportation", false)
                                         Attribute( "class", passedt.highway )
-
-                                        if (( passedt.name ~= nil )   and
-                                            ( passedt.name ~= ""  ))  then
-                                            Attribute( "name", passedt.name )
-                                        end
-
+                                        append_name( passedt )
                                         MinZoom( 14 )
 -- ----------------------------------------------------------------------------
 -- No other linear highways to consider
@@ -12614,6 +12541,22 @@ function wr_after_highway( passedt )
     end -- motorway 4
 end -- wr_after_highway( passedt )
 
+
+function append_name( passedt )
+    if (( passedt.name ~= nil )   and
+        ( passedt.name ~= ""  ))  then
+        Attribute( "name", passedt.name )
+    end
+end -- function append_name( passedt )
+
+
+function append_ref_etc( passedt )
+    if (( passedt.ref ~= nil )   and
+        ( passedt.ref ~= ""  ))  then
+        Attribute( "ref", passedt.ref )
+        AttributeNumeric( "ref_len", string.len( passedt.ref ))
+    end
+end -- function append_ref_etc( passedt )
 
 
 function append_edge_etc( passedt )
