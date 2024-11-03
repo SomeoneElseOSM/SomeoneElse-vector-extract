@@ -2158,16 +2158,16 @@ function generic_before_function( passedt )
        ( passedt.designation == "quiet_lane;unclassified_highway"                ) or
        ( passedt.designation == "unclassified_highway;quiet_lane"                )) then
       if (( passedt.highway == "steps"         ) or 
-	  ( passedt.highway == "intpathnarrow" ) or
-	  ( passedt.highway == "pathnarrow"    )) then
-	  passedt.highway = "ucrnarrow"
+          ( passedt.highway == "intpathnarrow" ) or
+          ( passedt.highway == "pathnarrow"    )) then
+          passedt.highway = "ucrnarrow"
       else
          if (( passedt.highway == "service"     ) or 
              ( passedt.highway == "road"        ) or
              ( passedt.highway == "track"       ) or
              ( passedt.highway == "intpathwide" ) or
              ( passedt.highway == "pathwide"    )) then
-	     passedt.highway = "ucrwide"
+             passedt.highway = "ucrwide"
          end
       end
 
@@ -2179,18 +2179,18 @@ function generic_before_function( passedt )
        ( passedt.designation == "byway"                     ) or
        ( passedt.designation == "carriageway"               )) then
       if (( passedt.highway == "steps"         ) or 
-	  ( passedt.highway == "intpathnarrow" ) or
-	  ( passedt.highway == "pathnarrow"    )) then
-	  passedt.highway = "boatnarrow"
-	  passedt.designation = "byway_open_to_all_traffic"
+          ( passedt.highway == "intpathnarrow" ) or
+          ( passedt.highway == "pathnarrow"    )) then
+          passedt.highway = "boatnarrow"
+          passedt.designation = "byway_open_to_all_traffic"
       else
          if (( passedt.highway == "service"     ) or 
              ( passedt.highway == "road"        ) or
              ( passedt.highway == "track"       ) or
              ( passedt.highway == "intpathwide" ) or
              ( passedt.highway == "pathwide"    )) then
-	     passedt.highway = "boatwide"
-	     passedt.designation = "byway_open_to_all_traffic"
+             passedt.highway = "boatwide"
+             passedt.designation = "byway_open_to_all_traffic"
          end
       end
 
@@ -2213,8 +2213,8 @@ function generic_before_function( passedt )
        ( passedt.designation == "orpa"                                    ) or
        ( passedt.designation == "restricted_byway;quiet_lane"             )) then
       if (( passedt.highway == "steps"         ) or 
-	  ( passedt.highway == "intpathnarrow" ) or
-	  ( passedt.highway == "pathnarrow"    )) then
+          ( passedt.highway == "intpathnarrow" ) or
+          ( passedt.highway == "pathnarrow"    )) then
          passedt.highway = "rbynarrow"
          passedt.designation = "restricted_byway"
       else
@@ -2223,7 +2223,7 @@ function generic_before_function( passedt )
              ( passedt.highway == "track"       ) or
              ( passedt.highway == "intpathwide" ) or
              ( passedt.highway == "pathwide"    )) then
-	    passedt.highway = "rbywide"
+            passedt.highway = "rbywide"
             passedt.designation = "restricted_byway"
          end
       end
@@ -2238,7 +2238,7 @@ function generic_before_function( passedt )
        ( passedt.designation == "public_cycleway;public_bridleway"    ) or 
        ( passedt.designation == "public_bridleway;public_footpath"    )) then
       if (( passedt.highway == "intpathnarrow" ) or
-	  ( passedt.highway == "pathnarrow"    )) then
+          ( passedt.highway == "pathnarrow"    )) then
          if (( passedt.trail_visibility == "bad"          )  or
              ( passedt.trail_visibility == "intermediate" )) then
             passedt.highway = "intbridlewaynarrow"
@@ -8319,7 +8319,7 @@ function generic_before_function( passedt )
             passedt.prominence = "0"
          else
             passedt.prominence = passedt.ele
-	 end
+         end
       end
       if (( tonumber(passedt.prominence) or 0 ) >  500 ) then
          passedt.natural = "bigprompeak"
@@ -9055,7 +9055,7 @@ function generic_before_function( passedt )
              ( not string.find( passedt.brand, passedt.name, 1, true ))) then
             passedt.name = passedt.name .. " (" .. passedt.brand .. ")"
             passedt.brand = nil
-	 else
+         else
             if (( passedt.operator ~= nil                                ) and
                 ( passedt.operator ~= ""                                 ) and
                 ( not string.find( passedt.name, passedt.operator, 1, true )) and
@@ -12309,7 +12309,7 @@ function generic_after_building( passedt )
     if (( passedt.building ~= nil ) and
         ( passedt.building ~= ""  )) then
         Layer("building", true)
-	Attribute( "class", "building_" .. passedt.building )
+        Attribute( "class", "building_" .. passedt.building )
 
         if (( passedt.name ~= nil ) and
             ( passedt.name ~= ""  )) then
@@ -12348,7 +12348,7 @@ function wr_after_transportation( passedt )
 
             if (( passedt.name ~= nil )   and
                 ( passedt.name ~= ""  ))  then
-    	        Attribute( "name", passedt.name )
+                Attribute( "name", passedt.name )
             end
 
             AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
@@ -12406,12 +12406,12 @@ function wr_after_highway( passedt )
 
         if (( passedt.name ~= nil )   and
             ( passedt.name ~= ""  ))  then
-	    Attribute( "name", passedt.name )
+            Attribute( "name", passedt.name )
         end
 
         if (( passedt.ref ~= nil )   and
             ( passedt.ref ~= ""  ))  then
-	    Attribute( "ref", passedt.ref )
+            Attribute( "ref", passedt.ref )
         end
 
         append_edge_etc( passedt )
@@ -12424,7 +12424,12 @@ function wr_after_highway( passedt )
 
             if (( passedt.name ~= nil )   and
                 ( passedt.name ~= ""  ))  then
-    	    Attribute( "name", passedt.name )
+                Attribute( "name", passedt.name )
+            end
+
+            if (( passedt.ref ~= nil )   and
+                ( passedt.ref ~= ""  ))  then
+                Attribute( "ref", passedt.ref )
             end
 
             append_edge_etc( passedt )
@@ -12437,7 +12442,12 @@ function wr_after_highway( passedt )
 
                 if (( passedt.name ~= nil )   and
                     ( passedt.name ~= ""  ))  then
-        	    Attribute( "name", passedt.name )
+                    Attribute( "name", passedt.name )
+                end
+
+                if (( passedt.ref ~= nil )   and
+                    ( passedt.ref ~= ""  ))  then
+                    Attribute( "ref", passedt.ref )
                 end
 
                 append_edge_etc( passedt )
@@ -12450,7 +12460,12 @@ function wr_after_highway( passedt )
 
                     if (( passedt.name ~= nil )   and
                         ( passedt.name ~= ""  ))  then
-            	    Attribute( "name", passedt.name )
+                        Attribute( "name", passedt.name )
+                    end
+
+                    if (( passedt.ref ~= nil )   and
+                        ( passedt.ref ~= ""  ))  then
+                        Attribute( "ref", passedt.ref )
                     end
 
                     append_edge_etc( passedt )
@@ -12469,7 +12484,12 @@ function wr_after_highway( passedt )
 
                         if (( passedt.name ~= nil )   and
                             ( passedt.name ~= ""  ))  then
-                	    Attribute( "name", passedt.name )
+                            Attribute( "name", passedt.name )
+                        end
+
+                        if (( passedt.ref ~= nil )   and
+                            ( passedt.ref ~= ""  ))  then
+                            Attribute( "ref", passedt.ref )
                         end
 
                         append_edge_etc( passedt )
@@ -12524,7 +12544,7 @@ function wr_after_highway( passedt )
 
                             if (( passedt.name ~= nil )   and
                                 ( passedt.name ~= ""  ))  then
-                    	        Attribute( "name", passedt.name )
+                                Attribute( "name", passedt.name )
                             end
 
                             append_edge_etc( passedt )
@@ -12538,7 +12558,7 @@ function wr_after_highway( passedt )
 
                                 if (( passedt.name ~= nil )   and
                                     ( passedt.name ~= ""  ))  then
-                        	        Attribute( "name", passedt.name )
+                                   Attribute( "name", passedt.name )
                                 end
 
                                 append_edge_etc( passedt )
@@ -12553,7 +12573,7 @@ function wr_after_highway( passedt )
 
                                     if (( passedt.name ~= nil )   and
                                         ( passedt.name ~= ""  ))  then
-                            	        Attribute( "name", passedt.name )
+                                        Attribute( "name", passedt.name )
                                     end
 
                                     append_edge_etc( passedt )
@@ -12566,7 +12586,7 @@ function wr_after_highway( passedt )
 
                                         if (( passedt.name ~= nil )   and
                                             ( passedt.name ~= ""  ))  then
-                                	        Attribute( "name", passedt.name )
+                                            Attribute( "name", passedt.name )
                                         end
 
                                         MinZoom( 14 )
@@ -14605,7 +14625,7 @@ function generic_after_poi( passedt )
     if (( passedt.amenity ~= nil ) and
         ( passedt.amenity ~= ""  )) then
         LayerAsCentroid( "poi" )
-	Attribute( "class","amenity_" .. passedt.amenity )
+        Attribute( "class","amenity_" .. passedt.amenity )
 
         if (( passedt.name ~= nil ) and
             ( passedt.name ~= ""  )) then
@@ -14650,11 +14670,11 @@ function generic_after_poi( passedt )
                     end -- town
                 end -- city
             end --country
-	else -- place
+        else -- place
             if (( passedt.shop ~= nil ) and
                 ( passedt.shop ~= ""  )) then
                 LayerAsCentroid( "poi" )
-    	        Attribute( "class","shop_" .. passedt.shop )
+                Attribute( "class","shop_" .. passedt.shop )
 
                 if (( passedt.name ~= nil ) and
                     ( passedt.name ~= ""  )) then
