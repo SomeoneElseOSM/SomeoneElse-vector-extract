@@ -1222,7 +1222,7 @@ function relation_function()
     relationt.landcover = Find("landcover")
     relationt.barrier = Find("barrier")
     relationt.ford = Find("ford")
-    relationt.onerelation = Find("onerelation")
+    relationt.oneway = Find("oneway")
     relationt.junction = Find("junction")
     relationt.farmland = Find("farmland")
     relationt.animal = Find("animal")
@@ -12625,6 +12625,11 @@ function append_edge_etc( passedt )
             Attribute("access", "destination")
         end -- access=destination
     end -- access=no
+
+    if (( passedt.oneway ~= nil )   and
+        ( passedt.oneway ~= ""  ))  then
+        Attribute( "oneway", passedt.oneway )
+    end
 end -- append_edge_etc( passedt )
 
 
