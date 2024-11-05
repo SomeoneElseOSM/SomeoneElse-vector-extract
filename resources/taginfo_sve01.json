@@ -1714,7 +1714,7 @@
     { "key": "man_made", "value": "outfall", "description": "Detect outfalls, sewage and otherwise" },
     { "key": "man_made", "value": "petroleum_well", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "phone_mast", "description": "Extracted as large or small mast" },
-    { "key": "man_made", "value": "pier", "description": "Areas extracted into 'land1'" },
+    { "key": "man_made", "value": "pier", "description": "Areas extracted into 'land1, lines into 'linearbarrier''" },
     { "key": "man_made", "value": "pipeline", "description": "Extract overground pipelines as bridges; extract underground pipelines in light purple" },
     { "key": "man_made", "value": "pipeline_marker", "description": "Extracted as aerial pipeline marker" },
     { "key": "man_made", "value": "post", "description": "Handled as barrier=post" },
