@@ -133,6 +133,10 @@ fi
 # The layer created by that is called "water", so that will need to go in the 
 # style .json as '"source-layer": "water",'.
 #
+# To save memory, add an extra parameter after "--process $2" such as
+# --store /home/someuser/temp/tilemaker_store
+# where that directory is on a fast SSD.
+#
 # Some configs have relative references in them, so cd there first.
 # -----------------------------------------------------------------------------
 cd `dirname $1`
