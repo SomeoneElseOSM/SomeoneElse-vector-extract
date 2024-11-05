@@ -13524,8 +13524,13 @@ function render_shop_land1( passedt )
     end -- shop=supermarket etc. 14
 end -- render_shop_land1()
 
+-- ----------------------------------------------------------------------------
+-- man_made=pier is only written to land1 if it is a closed area.
+-- ----------------------------------------------------------------------------
 function render_man_made_land1( passedt )
-    if ( passedt.man_made == "bigmast" ) then
+    if ((  passedt.man_made == "bigmast"  ) or
+        (( passedt.man_made == "pier"    )  and
+         ( passedt.is_closed             ))) then
         Layer( "land1", true )
         Attribute( "class", "man_made_" .. passedt.man_made )
 
