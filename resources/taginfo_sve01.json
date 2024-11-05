@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241102T103800Z",
+  "data_updated": "20241105T114400Z",
   "project": {
     "name": "SomeoneElse: Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2666,7 +2666,6 @@
     { "key": "shop", "value": "pet_food", "description": "Synonym for 'pet'" },
     { "key": "shop", "value": "pet_grooming", "description": "Synonym for 'pet'" },
     { "key": "shop", "value": "pet_supplies", "description": "Synonym for 'pet'" },
-    { "key": "shop", "value": "petfood", "description": "Synonym for 'pet'" },
     { "key": "shop", "value": "pharmacy", "description": "Synonym for 'amenity=pharmacy'" },
     { "key": "shop", "value": "phone", "description": "Various shops extracted" },
     { "key": "shop", "value": "phone_repair", "description": "Various shops extracted" },

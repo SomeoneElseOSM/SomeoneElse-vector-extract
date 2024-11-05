@@ -9891,7 +9891,6 @@ function generic_before_function( passedt )
        ( passedt.shop    == "pet_supplies"            ) or
        ( passedt.shop    == "pet_care"                ) or
        ( passedt.shop    == "pet_food"                ) or
-       ( passedt.shop    == "petfood"                 ) or
        ( passedt.shop    == "animal_feed"             )) then
       passedt.landuse = "unnamedcommercial"
       passedt.shop = "pet_food"
