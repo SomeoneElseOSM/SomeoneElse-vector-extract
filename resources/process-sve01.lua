@@ -12698,52 +12698,35 @@ function way_after_linearbarrier( passedt )
         (  passedt.barrier == "tree_row"    )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+	append_name( passedt )
         MinZoom( 13 )
     else
-        if (( passedt.man_made == "breakwater" ) or
-            ( passedt.man_made == "groyne"     )) then
+        if ((  passedt.man_made == "breakwater" ) or
+            (  passedt.man_made == "groyne"     ) or
+            (( passedt.man_made == "pier"      )  and
+             ( not passedt.is_closed           ))) then
             Layer( "linearbarrier", false )
             Attribute( "class", "man_made_" .. passedt.man_made )
+	    append_name( passedt )
             MinZoom( 11 )
         else
             if (( passedt.man_made == "cutline" ) or
                 ( passedt.man_made == "levee"   )) then
                 Layer( "linearbarrier", false )
                 Attribute( "class", "man_made_" .. passedt.man_made )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                   Attribute( "name", passedt.name )
-                end
-
+	        append_name( passedt )
                 MinZoom( 13 )
             else
                 if ( passedt.man_made == "embankment" ) then
                     Layer( "linearbarrier", false )
                     Attribute( "class", "man_made_" .. passedt.man_made )
-
-                    if (( passedt.name ~= nil ) and
-                        ( passedt.name ~= ""  )) then
-                       Attribute( "name", passedt.name )
-                    end
-
+	            append_name( passedt )
                     MinZoom( 14 )
                 else
                     if ( passedt.waterway == "dam" ) then
                         Layer( "linearbarrier", false )
                         Attribute( "class", "waterway_" .. passedt.waterway )
-
-                        if (( passedt.name ~= nil ) and
-                            ( passedt.name ~= ""  )) then
-                            Attribute( "name", passedt.name )
-                        end
-
+	                append_name( passedt )
                         MinZoom( 12 )
                     else
                          generic_linearbarrier_historic( passedt )
