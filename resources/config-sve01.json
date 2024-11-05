@@ -1,5 +1,6 @@
 {
 	"layers": {
+		"water":       { "minzoom": 6,  "maxzoom": 14, "simplify_below": 12, "simplify_level": 0.0003, "simplify_ratio": 2 },
 		"place": { "minzoom": 5, "maxzoom": 14 },
 		"linearbarrier": { "minzoom": 13, "maxzoom": 14 },
 		"land1": { "minzoom": 5, "maxzoom": 14 },

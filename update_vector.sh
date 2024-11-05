@@ -1,6 +1,6 @@
 #!/bin/bash
 # -----------------------------------------------------------------------------
-# update_web_vector.sh
+# update_vector.sh
 #
 # Copyright (C) 2024  Andy Townsend
 #
@@ -17,9 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
-# Designed to update rendering database and related styles to latest version.
-# Note that it won't run on e.g. an NTFS file system, and makes a number of
-# assumptions about where things are.
+# This is a helper script designed to call scripts to extract OSM data and
+# create a .mbtiles file, make that available below apache, and install the
+# latest json map style.
+# See individual scripts for the parameters that each requires.
 # -----------------------------------------------------------------------------
 #
 # The local user account we are using.
@@ -33,7 +34,7 @@ sudo -u ${local_filesystem_user} git pull
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display
 sudo -u ${local_filesystem_user} git pull
 #
-sudo -u ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/sve_extract.sh /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/config-sve01.json /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/process-sve01.lua /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles   -27.57,34.5,40.17,71.64 europe britain-and-ireland
+sudo -u ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/sve_extract.sh /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/config-sve01.json /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/process-sve01.lua /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles  -27.57,34.5,40.17,71.64 nocoast   europe britain-and-ireland
 #
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/sve_into_apache.sh sve01 sve01 /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles   http://h12.atownsend.org.uk /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/default-ssl.conf
 #
