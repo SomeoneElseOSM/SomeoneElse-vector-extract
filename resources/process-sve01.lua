@@ -13737,8 +13737,9 @@ function render_railway_land1( passedt )
             append_name( passedt )
             MinZoom( 12 )
         else
-            if (( passedt.railway == "platform" ) and
-                ( passedt.is_closed             )) then
+            if ((( passedt.railway == "platform"        )  and
+                 ( passedt.is_closed                    )) or
+                (  passedt.railway == "subway_entrance"  )) then
                 Layer( "land1", true )
                 Attribute( "class", "railway_" .. passedt.railway )
                 append_name( passedt )
