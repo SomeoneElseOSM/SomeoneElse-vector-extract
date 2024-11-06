@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "advertising", "aeroway", "amenity", "attraction", "barrier", 
+node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
               "canoe", "climbing", "craft", "disused:military", "emergency", 
               "entrance", "harbour", "historic", "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", 
@@ -13718,17 +13718,36 @@ function render_railway_land1( passedt )
         append_name( passedt )
         MinZoom( 11 )
     else
-        if (( passedt.railway == "platform" ) and
-            ( passedt.is_closed             )) then
+        if (( passedt.railway == "halt"      ) or
+            ( passedt.railway == "tram_stop" )) then
             Layer( "land1", true )
             Attribute( "class", "railway_" .. passedt.railway )
             append_name( passedt )
-            MinZoom( 14 )
+            MinZoom( 12 )
         else
-            render_historic_land1( passedt )
-        end -- railway=platform 14
+            if (( passedt.railway == "platform" ) and
+                ( passedt.is_closed             )) then
+                Layer( "land1", true )
+                Attribute( "class", "railway_" .. passedt.railway )
+                append_name( passedt )
+                MinZoom( 14 )
+            else
+                render_aerialway_land1( passedt )
+            end -- railway=platform 14
+        end -- railway=halt 12
     end -- railway=station 11
 end -- render_railway_land1()
+
+function render_aerialway_land1( passedt )
+    if ( passedt.aerialway == "station" ) then
+        Layer( "land1", true )
+        Attribute( "class", "aerialway_" .. passedt.aerialway )
+        append_name( passedt )
+        MinZoom( 12 )
+    else
+        render_historic_land1( passedt )
+    end -- aerialway=station 12
+end -- render_aerialway_land1()
 
 function render_historic_land1( passedt )
     if (( passedt.historic == "archaeological_site"      ) or
