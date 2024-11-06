@@ -13689,11 +13689,7 @@ function render_highway_land1( passedt )
             ( passedt.highway == "mini_roundabout"           )) then
             Layer( "land1", true )
             Attribute( "class", "highway_" .. passedt.highway )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                Attribute( "name", passedt.name )
-            end
+            append_name( passedt )
 
             if (( passedt.ele ~= nil ) and
                 ( passedt.ele ~= ""  )) then
@@ -13706,12 +13702,7 @@ function render_highway_land1( passedt )
                 ( passedt.is_closed             )) then
                 Layer( "land1", true )
                 Attribute( "class", "highway_" .. passedt.highway )
-
-                if (( passedt.ref ~= nil ) and
-                    ( passedt.ref ~= ""  )) then
-                    Attribute( "name", passedt.ref )
-                end
-
+                append_ref_etc( passedt )
                 MinZoom( 14 )
             else
                 render_railway_land1( passedt )
@@ -13721,20 +13712,22 @@ function render_highway_land1( passedt )
 end -- render_highway_land1()
 
 function render_railway_land1( passedt )
-    if (( passedt.railway == "platform" ) and
-        ( passedt.is_closed             )) then
+    if ( passedt.railway == "station" ) then
         Layer( "land1", true )
         Attribute( "class", "railway_" .. passedt.railway )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-           Attribute( "name", passedt.name )
-        end
-
-        MinZoom( 14 )
+        append_name( passedt )
+        MinZoom( 11 )
     else
-        render_historic_land1( passedt )
-    end -- railway=platform 14
+        if (( passedt.railway == "platform" ) and
+            ( passedt.is_closed             )) then
+            Layer( "land1", true )
+            Attribute( "class", "railway_" .. passedt.railway )
+            append_name( passedt )
+            MinZoom( 14 )
+        else
+            render_historic_land1( passedt )
+        end -- railway=platform 14
+    end -- railway=station 11
 end -- render_railway_land1()
 
 function render_historic_land1( passedt )
