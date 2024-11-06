@@ -396,6 +396,7 @@ function node_function()
     nodet.volcanoCstatus = Find("volcano:status")
     nodet.route = Find("route")
     nodet.water = Find("water")
+    nodet.aerialway = Find("aerialway")
 
     generic_before_function( nodet )
 
@@ -859,6 +860,7 @@ function way_function()
     wayt.volcanoCstatus = Find("volcano:status")
     wayt.route = Find("route")
     wayt.water = Find("water")
+    wayt.aerialway = Find("aerialway")
 
     generic_before_function( wayt )
 
@@ -1467,6 +1469,7 @@ function relation_function()
     relationt.volcanoCstatus = Find("volcano:status")
     relationt.route = Find("route")
     relationt.type = Find("type")
+    relationt.aerialway = Find("aerialway")
 
     generic_before_function( relationt )
 
@@ -12344,12 +12347,7 @@ function wr_after_transportation( passedt )
             ( passedt.area    ~= "yes" )) then
             Layer("transportation", false)
             Attribute( "class", passedt.railway )
-
-            if (( passedt.name ~= nil )   and
-                ( passedt.name ~= ""  ))  then
-                Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
             AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
         else
@@ -12359,26 +12357,40 @@ function wr_after_transportation( passedt )
             if ( passedt.route == "ferry" ) then
                 Layer("transportation", false)
                 Attribute( "class", passedt.route )
-
-                if (( passedt.name ~= nil )   and
-                    ( passedt.name ~= ""  ))  then
-                    Attribute( "name", passedt.name )
-                end
-
+                append_name( passedt )
                 MinZoom( 6 )
             else
+-- ----------------------------------------------------------------------------
+-- aeroways
+-- ----------------------------------------------------------------------------
                 if (( passedt.aeroway == "runway"       ) or
                     ( passedt.aeroway == "grass_runway" ) or
                     ( passedt.aeroway == "taxiway"      )) then
                     Layer("transportation", false)
                     Attribute( "class", passedt.aeroway )
-
-                    if (( passedt.name ~= nil )   and
-                        ( passedt.name ~= ""  ))  then
-                        Attribute( "name", passedt.name )
-                    end
-
+                    append_name( passedt )
                     MinZoom( 10 )
+                else
+-- ----------------------------------------------------------------------------
+-- aerialways
+-- ----------------------------------------------------------------------------
+                    if (( passedt.aerialway == "cable_car"  ) or
+                        ( passedt.aerialway == "gondola"    ) or
+                        ( passedt.aerialway == "goods"      ) or
+                        ( passedt.aerialway == "chair_lift" ) or
+                        ( passedt.aerialway == "drag_lift"  ) or
+                        ( passedt.aerialway == "t-bar"      ) or
+                        ( passedt.aerialway == "j-bar"      ) or
+                        ( passedt.aerialway == "platter"    ) or
+                        ( passedt.aerialway == "rope_tow"   )) then
+                        Layer("transportation", false)
+                        Attribute( "class", passedt.aerialway )
+                        append_name( passedt )
+                        MinZoom( 11 )
+-- ----------------------------------------------------------------------------
+-- No else here yet
+-- ----------------------------------------------------------------------------
+                    end -- aerialway=cable_car etc. 11
                 end -- aeroway=runway etc. 10
             end -- ferry routes 6
         end -- linear railways
