@@ -12653,6 +12653,8 @@ function way_after_waterway( passedt )
         Layer("waterway", false)
         Attribute("class", passedt.waterway)
         Attribute( "name", Find( "name" ) )
+        AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
+        AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
 
         if (( passedt.waterway == "river"          ) or
             ( passedt.waterway == "canal"          ) or
