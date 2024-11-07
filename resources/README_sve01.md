@@ -96,6 +96,14 @@ The OSM value for "waterway" after processing based on "intermittent" etc.
 
 the value of the OSM name tag, after any postprocessing e.g. for "operator".
 
+### bridge
+
+A boolean value set to true if a bridge.
+
+### tunnel
+
+A boolean value set to true if a tunnel.
+
 ## "building"
 
 ### class
