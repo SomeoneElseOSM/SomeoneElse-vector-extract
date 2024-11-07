@@ -12553,23 +12553,6 @@ function wr_after_highway( passedt )
 end -- wr_after_highway( passedt )
 
 
-function append_name( passedt )
-    if (( passedt.name ~= nil )   and
-        ( passedt.name ~= ""  ))  then
-        Attribute( "name", passedt.name )
-    end
-end -- function append_name( passedt )
-
-
-function append_ref_etc( passedt )
-    if (( passedt.ref ~= nil )   and
-        ( passedt.ref ~= ""  ))  then
-        Attribute( "ref", passedt.ref )
-        AttributeNumeric( "ref_len", string.len( passedt.ref ))
-    end
-end -- function append_ref_etc( passedt )
-
-
 function append_edge_etc( passedt )
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
@@ -12626,9 +12609,15 @@ function append_edge_etc( passedt )
         end -- verge
     end -- sidewalk
 
+-- ----------------------------------------------------------------------------
+-- In addition to sidewalks and verges, is it a bridge or a tunnel?
+-- ----------------------------------------------------------------------------
     AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
     AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
 
+-- ----------------------------------------------------------------------------
+-- In addition to sidewalks and verges, is an access overlay needed?
+-- ----------------------------------------------------------------------------
     if ( passedt.access == "no" ) then   
         Attribute("access", "no")
     else
@@ -12637,6 +12626,9 @@ function append_edge_etc( passedt )
         end -- access=destination
     end -- access=no
 
+-- ----------------------------------------------------------------------------
+-- In addition to sidewalks and verges, is a oneway overlay needed?
+-- ----------------------------------------------------------------------------
     if (( passedt.oneway ~= nil )   and
         ( passedt.oneway ~= ""  ))  then
         Attribute( "oneway", passedt.oneway )
@@ -14416,6 +14408,23 @@ function render_aeroway_land1( passedt )
         end -- aeroway=apron 12
     end -- aeroway=grass_runway etc. 10
 end -- render_aeroway_land1()
+
+function append_name( passedt )
+    if (( passedt.name ~= nil )   and
+        ( passedt.name ~= ""  ))  then
+        Attribute( "name", passedt.name )
+    end
+end -- function append_name( passedt )
+
+
+function append_ref_etc( passedt )
+    if (( passedt.ref ~= nil )   and
+        ( passedt.ref ~= ""  ))  then
+        Attribute( "ref", passedt.ref )
+        AttributeNumeric( "ref_len", string.len( passedt.ref ))
+    end
+end -- function append_ref_etc( passedt )
+
 
 -- ----------------------------------------------------------------------------
 -- land2 layer
