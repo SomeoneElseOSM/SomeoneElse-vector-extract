@@ -14400,14 +14400,14 @@ function render_aeroway_land1( passedt )
                 end
 
                 MinZoom( 14 )
-            else
 -- ------------------------------------------------------------------------------
+--            else
 -- At this point we've done all thing "landuse" processing for things that might 
 -- be in the "land1" layer, including displaying names and/or icons for them.
 -- The call to "generic_after_poi()" below displays things that should also have
 -- a name and/or an icon, but don't have an area fill or outline.
+--                generic_after_poi( passedt )
 -- ------------------------------------------------------------------------------
-                generic_after_poi( passedt )
             end -- aeroway=helipad etc. 14
         end -- aeroway=apron 12
     end -- aeroway=grass_runway etc. 10
