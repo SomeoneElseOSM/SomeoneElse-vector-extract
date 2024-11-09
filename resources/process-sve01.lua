@@ -397,6 +397,7 @@ function node_function()
     nodet.route = Find("route")
     nodet.water = Find("water")
     nodet.aerialway = Find("aerialway")
+    nodet.capital = Find("capital")
 
     generic_before_function( nodet )
 
@@ -861,6 +862,7 @@ function way_function()
     wayt.route = Find("route")
     wayt.water = Find("water")
     wayt.aerialway = Find("aerialway")
+    wayt.capital = Find("capital")
 
     generic_before_function( wayt )
 
@@ -1470,6 +1472,7 @@ function relation_function()
     relationt.route = Find("route")
     relationt.type = Find("type")
     relationt.aerialway = Find("aerialway")
+    relationt.capital = Find("capital")
 
     generic_before_function( relationt )
 
@@ -12302,6 +12305,7 @@ function generic_after_function( passedt )
     
     generic_after_land1( passedt )
     generic_after_land2( passedt )
+    generic_after_place( passedt )
 end -- generic_after_function()
 
 -- ----------------------------------------------------------------------------
@@ -14409,23 +14413,6 @@ function render_aeroway_land1( passedt )
     end -- aeroway=grass_runway etc. 10
 end -- render_aeroway_land1()
 
-function append_name( passedt )
-    if (( passedt.name ~= nil )   and
-        ( passedt.name ~= ""  ))  then
-        Attribute( "name", passedt.name )
-    end
-end -- function append_name( passedt )
-
-
-function append_ref_etc( passedt )
-    if (( passedt.ref ~= nil )   and
-        ( passedt.ref ~= ""  ))  then
-        Attribute( "ref", passedt.ref )
-        AttributeNumeric( "ref_len", string.len( passedt.ref ))
-    end
-end -- function append_ref_etc( passedt )
-
-
 -- ----------------------------------------------------------------------------
 -- land2 layer
 -- ----------------------------------------------------------------------------
@@ -14607,95 +14594,102 @@ function generic_after_poi( passedt )
         ( passedt.amenity ~= ""  )) then
         LayerAsCentroid( "poi" )
         Attribute( "class","amenity_" .. passedt.amenity )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 14 )
     else
-        if (( passedt.place ~= nil ) and
-            ( passedt.place ~= ""  )) then
-            LayerAsCentroid( "place" )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
-
-            if (( passedt.place == "country" ) or
-                ( passedt.place == "state"   )) then
-                MinZoom( 5 )
-            else
-                if ( passedt.place == "city" ) then
-                    MinZoom( 5 )
-                else
-                    if ( passedt.place == "town" ) then
-                        MinZoom( 8 )
-                    else
-                        if (( passedt.place == "suburb"  ) or
-                            ( passedt.place == "village" )) then
-                            MinZoom( 11 )
-                        else
-                            if (( passedt.place == "hamlet"            ) or
-                                ( passedt.place == "locality"          ) or
-                                ( passedt.place == "neighbourhood"     ) or
-                                ( passedt.place == "isolated_dwelling" ) or
-                                ( passedt.place == "farm"              )) then
-                                MinZoom( 13 )
-                            else
-                                MinZoom( 14 )
-                            end -- hamlet
-                        end -- suburb
-                    end -- town
-                end -- city
-            end --country
-        else -- place
-            if (( passedt.shop ~= nil ) and
-                ( passedt.shop ~= ""  )) then
+        if (( passedt.shop ~= nil ) and
+            ( passedt.shop ~= ""  )) then
+            LayerAsCentroid( "poi" )
+            Attribute( "class","shop_" .. passedt.shop )
+            append_name( passedt )
+            MinZoom( 14 )
+        else
+            if (( passedt.tourism ~= nil ) and
+                ( passedt.tourism ~= ""  )) then
                 LayerAsCentroid( "poi" )
-                Attribute( "class","shop_" .. passedt.shop )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                    Attribute( "name", passedt.name )
-                end
-
+                Attribute( "class", "tourism_" .. passedt.tourism )
+                append_name( passedt )
                 MinZoom( 14 )
-            else
-                if (( passedt.tourism ~= nil ) and
-                    ( passedt.tourism ~= ""  )) then
-                    LayerAsCentroid( "poi" )
-                    Attribute( "class", "tourism_" .. passedt.tourism )
-
-                    if (( passedt.name ~= nil ) and
-                        ( passedt.name ~= ""  )) then
-                        Attribute( "name", passedt.name )
-                    end
-
-                    MinZoom( 14 )
--- ------------------------------------------------------------------------------
--- Uncomment to write aeroways through to "poi" as well
---                else
---                    if (( passedt.aeroway ~= nil ) and
---                        ( passedt.aeroway ~= ""  )) then
---                        LayerAsCentroid( "poi" )
---                        Attribute( "class", "aeroway_" .. passedt.aeroway )
---
---                        if (( passedt.name ~= nil ) and
---                            ( passedt.name ~= ""  )) then
---                            Attribute( "name", passedt.name )
---                        end
---
---                        MinZoom( 14 )
---                    end -- aeroway
 -- ------------------------------------------------------------------------------
 -- No else here yet
 -- ------------------------------------------------------------------------------
-                end -- tourism
-            end -- shop
-        end -- place
+            end -- tourism
+        end -- shop
     end -- amenity
 end -- generic_after_poi()
+
+function generic_after_place( passedt )
+    if (( passedt.place == "country" ) or
+        ( passedt.place == "state"   )) then
+        LayerAsCentroid( "place" )
+        append_name( passedt )
+        Attribute( "class", passedt.place )
+-- ------------------------------------------------------------------------------
+-- No minzoom for country or state
+-- ------------------------------------------------------------------------------
+    else
+        if (( passedt.capital == "yes" ) and
+            ( passedt.place   ~= nil   ) and
+            ( passedt.place   ~= ""    )) then
+                LayerAsCentroid( "place" )
+                append_name( passedt )
+                Attribute( "class", "capital" )
+                MinZoom( 3 )
+        else
+            if ( passedt.place == "city" ) then
+                LayerAsCentroid( "place" )
+                append_name( passedt )
+                Attribute( "class", passedt.place )
+                MinZoom( 5 )
+            else
+                if ( passedt.place == "town" ) then
+                    LayerAsCentroid( "place" )
+                    append_name( passedt )
+                    Attribute( "class", passedt.place )
+                    MinZoom( 8 )
+                else
+                    if (( passedt.place == "suburb"  ) or
+                        ( passedt.place == "village" )) then
+                        LayerAsCentroid( "place" )
+                        append_name( passedt )
+                        Attribute( "class", passedt.place )
+                        MinZoom( 11 )
+                    else
+                        if (( passedt.place == "hamlet"            ) or
+                            ( passedt.place == "locality"          ) or
+                            ( passedt.place == "neighbourhood"     ) or
+                            ( passedt.place == "isolated_dwelling" ) or
+                            ( passedt.place == "farm"              )) then
+                            LayerAsCentroid( "place" )
+                            append_name( passedt )
+                            Attribute( "class", passedt.place )
+                            MinZoom( 13 )
+-- ------------------------------------------------------------------------------
+-- There is no catch-all on place - 
+-- we only extract what we expect to want to process.
+-- ------------------------------------------------------------------------------
+                        end -- hamlet
+                    end -- suburb
+                end -- town
+            end -- city
+        end -- capital
+    end -- country
+end -- generic_after_place()
+
+function append_name( passedt )
+    if (( passedt.name ~= nil )   and
+        ( passedt.name ~= ""  ))  then
+        Attribute( "name", passedt.name )
+    end
+end -- function append_name( passedt )
+
+
+function append_ref_etc( passedt )
+    if (( passedt.ref ~= nil )   and
+        ( passedt.ref ~= ""  ))  then
+        Attribute( "ref", passedt.ref )
+        AttributeNumeric( "ref_len", string.len( passedt.ref ))
+    end
+end -- function append_ref_etc( passedt )
+
 

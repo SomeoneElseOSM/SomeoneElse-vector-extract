@@ -12,7 +12,15 @@ The logic used here is actually very similar to that used for [raster maps](http
 
 ## "place"
 
-More important places are written to lower numbered layers: country, state, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13, anything else at 14.
+More important places are written to lower numbered layers: country, state to all layers, capital at 3, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13, anything else at 14.
+
+### class
+
+Usually the place value (e.g. "city") or "capital" (regardless of the place value) if it is a capital.
+
+### name
+
+The value of the OSM name tag
 
 ## "linearbarrier"
 
