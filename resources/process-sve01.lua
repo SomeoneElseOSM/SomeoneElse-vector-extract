@@ -12553,7 +12553,7 @@ function wr_after_highway( passedt )
                 end -- secondary 9
             end -- primary 7
         end -- trunk 6
-    end -- motorway 4
+    end -- motorway 3
 end -- wr_after_highway( passedt )
 
 
