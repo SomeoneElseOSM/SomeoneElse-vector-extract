@@ -27,7 +27,7 @@ Note that there is a [helper script](https://github.com/SomeoneElseOSM/SomeoneEl
 
 Each script takes lots of parameters - taking the calls one at a time:
 
-"sve_extract.sh" needs to know the location of the [config](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/config-sve01.json) and [processing lua](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/process-sve01.lua) for the schema, and the output location for the ".mbtiles" file.  It also needs a bounding box ("-27.57,34.5,40.17,71.64" is "Brtian and Ireland and a bit more").
+"sve_extract.sh" needs to know the location of the [config](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/config-sve01.json) and [processing lua](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/process-sve01.lua) for the schema, and the output location for the ".mbtiles" file.  It also needs a bounding box ("-27.57,34.5,40.17,71.64" is "Britain and Ireland and a bit more").
 
 The next parameter is either a a path to a "coastline.mbtiles" file or "nocoast" to not merge with a set of coastline tiles.  When a coastline path is provided, that is copied to the output file and the OSM data merged into that, so the original "coastline.mbtiles" file is not modified.
 
