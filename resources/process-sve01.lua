@@ -12317,11 +12317,7 @@ function generic_after_building( passedt )
         ( passedt.building ~= ""  )) then
         Layer("building", true)
         Attribute( "class", "building_" .. passedt.building )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
+        append_name( passedt )
     end
 end -- generic_after_building()
 
@@ -12753,34 +12749,19 @@ function generic_linearbarrier_historic( passedt )
         ( passedt.historic == "castle_walls" )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "historic_" .. passedt.historic )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 13 )
     else
         if ( passedt.natural == "valley" ) then
             Layer( "linearbarrier", false )
             Attribute( "class", "natural_" .. passedt.natural )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 10 )
         else
             if ( passedt.natural == "cliff" ) then
                 Layer( "linearbarrier", false )
                 Attribute( "class", "natural_" .. passedt.natural )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                    Attribute( "name", passedt.name )
-                end
-
+                append_name( passedt )
                 MinZoom( 12 )
             end  -- natural=cliff etc. 12
         end  -- natural=valley 11
@@ -12802,12 +12783,7 @@ function generic_after_land1( passedt )
         ( passedt.natural == "glacier" )) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 5 )
     else
         render_amenity_land1( passedt )
@@ -12826,12 +12802,7 @@ function render_amenity_land1( passedt )
         ( passedt.amenity == "kindergarten"         )) then
         Layer( "land1", true )
         Attribute( "class", "amenity_" .. passedt.amenity )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 9 )
     else
         if (( passedt.amenity == "holy_spring"                ) or
@@ -12839,12 +12810,7 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "watering_place"             )) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 13 )
         else
             if (( passedt.amenity == "shelter"                    ) or
@@ -13409,12 +13375,7 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "pub_nddddddd"               )) then
                 Layer( "land1", true )
                 Attribute( "class", "amenity_" .. passedt.amenity )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                    Attribute( "name", passedt.name )
-                end
-
+                append_name( passedt )
                 MinZoom( 14 )
             else
                 render_shop_land1( passedt )
@@ -13494,12 +13455,7 @@ function render_shop_land1( passedt )
         ( passedt.shop == "travel_agent"       )) then
         Layer( "land1", true )
         Attribute( "class", "shop_" .. passedt.shop )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-            Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 14 )
     else
         if ( passedt.shop == "vacant" ) then
@@ -13527,34 +13483,19 @@ function render_man_made_land1( passedt )
          ( passedt.is_closed             ))) then
         Layer( "land1", true )
         Attribute( "class", "man_made_" .. passedt.man_made )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-            Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 11 )
     else
         if ( passedt.man_made == "bigchimney" ) then
             Layer( "land1", true )
             Attribute( "class", "man_made_" .. passedt.man_made )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 12 )
         else
             if ( passedt.man_made == "bigobservationtower" ) then
                 Layer( "land1", true )
                 Attribute( "class", "man_made_" .. passedt.man_made )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                    Attribute( "name", passedt.name )
-                end
-
+                append_name( passedt )
                 MinZoom( 13 )
             else
 -- ----------------------------------------------------------------------------
@@ -13643,12 +13584,7 @@ function render_office_land1( passedt )
         ( passedt.office == "nonspecific"  )) then
         Layer( "land1", true )
         Attribute( "class", "office_" .. passedt.office )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-            Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 14 )
     else
         render_highway_land1( passedt )
@@ -13674,12 +13610,7 @@ function render_highway_land1( passedt )
          (  passedt.is_closed                ))) then
         Layer( "land1", true )
         Attribute( "class", "highway_" .. passedt.highway )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-            Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 12 )
     else
         if (( passedt.highway == "board_realtime"            ) or
@@ -13829,12 +13760,7 @@ function render_historic_land1( passedt )
         ( passedt.historic == "nonspecific"              )) then
         Layer( "land1", true )
         Attribute( "class", "historic_" .. passedt.historic )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 14 )
     else
         render_landuse_land1( passedt )
@@ -13846,12 +13772,7 @@ function render_landuse_land1( passedt )
         ( passedt.landuse == "farmland"        )) then
         Layer( "land1", true )
         Attribute( "class", "landuse_" .. passedt.landuse )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 8 )
     else
         if (( passedt.landuse == "grass"                     ) or
@@ -13882,12 +13803,7 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "othercemetery"             )) then
             Layer( "land1", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 9 )
         else
             if (( passedt.landuse == "village_green"          ) or
@@ -13895,56 +13811,31 @@ function render_landuse_land1( passedt )
                 ( passedt.landuse == "historicquarry"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "landuse_" .. passedt.landuse )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                     Attribute( "name", passedt.name )
-                end
-
+                append_name( passedt )
                 MinZoom( 10 )
             else
                 if ( passedt.landuse == "garages" ) then
                     Layer( "land1", true )
                     Attribute( "class", "landuse_" .. passedt.landuse )
-
-                    if (( passedt.name ~= nil ) and
-                        ( passedt.name ~= ""  )) then
-                        Attribute( "name", passedt.name )
-                    end
-
+                    append_name( passedt )
                     MinZoom( 11 )
                 else
                     if ( passedt.landuse == "vineyard" ) then
                         Layer( "land1", true )
                         Attribute( "class", "landuse_" .. passedt.landuse )
-
-                        if (( passedt.name ~= nil ) and
-                            ( passedt.name ~= ""  )) then
-                            Attribute( "name", passedt.name )
-                        end
-
+                        append_name( passedt )
                         MinZoom( 12 )
                     else
                         if ( passedt.landuse == "conservation" ) then
                             Layer( "land1", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
-
-                            if (( passedt.name ~= nil ) and
-                                ( passedt.name ~= ""  )) then
-                                  Attribute( "name", passedt.name )
-                            end
-
+                            append_name( passedt )
                             MinZoom( 13 )
                         else
                             if ( passedt.landuse == "industrialbuilding" ) then
                                 Layer( "land1", true )
                                 Attribute( "class", "landuse_" .. passedt.landuse )
-
-                                if (( passedt.name ~= nil ) and
-                                    ( passedt.name ~= ""  )) then
-                                    Attribute( "name", passedt.name )
-                                end
-
+                                append_name( passedt )
                                 MinZoom( 14 )
                             else
                                 render_leisure_land1( passedt )
@@ -13961,12 +13852,7 @@ function render_leisure_land1( passedt )
     if ( passedt.leisure == "nature_reserve" ) then
         Layer( "land1", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 6 )
     else
         if ((  passedt.leisure == "common"            ) or
@@ -13983,35 +13869,20 @@ function render_leisure_land1( passedt )
              ( passedt.is_closed                     ))) then
             Layer( "land1", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 9 )
         else
             if (( passedt.leisure == "playground" ) or
                 ( passedt.leisure == "schoolyard" )) then
                 Layer( "land1", true )
                 Attribute( "class", "leisure_" .. passedt.leisure )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                     Attribute( "name", passedt.name )
-                end
-
+                append_name( passedt )
                 MinZoom( 12 )
             else
                 if ( passedt.leisure == "swimming_pool" ) then
                     Layer( "land1", true )
                     Attribute( "class", "leisure_" .. passedt.leisure )
-
-                    if (( passedt.name ~= nil ) and
-                        ( passedt.name ~= ""  )) then
-                         Attribute( "name", passedt.name )
-                    end
-
+                    append_name( passedt )
                     MinZoom( 13 )
                 else
                     if (( passedt.leisure == "leisurenonspecific" ) or
@@ -14025,12 +13896,7 @@ function render_leisure_land1( passedt )
                         ( passedt.leisure == "grouse_butt"        )) then
                         Layer( "land1", true )
                         Attribute( "class", "leisure_" .. passedt.leisure )
-
-                        if (( passedt.name ~= nil ) and
-                            ( passedt.name ~= ""  )) then
-                             Attribute( "name", passedt.name )
-                        end
-
+                        append_name( passedt )
                         MinZoom( 14 )
                     else
                         render_military_land1( passedt )
@@ -14045,12 +13911,7 @@ function render_military_land1( passedt )
     if ( passedt.military == "barracks" ) then
         Layer( "land1", true )
         Attribute( "class", "military_" .. passedt.military )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 9 )
     else
         render_natural_land1( passedt )
@@ -14061,12 +13922,7 @@ function render_natural_land1( passedt )
     if ( passedt.natural == "desert" ) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 7 )
     else
         if (( passedt.natural == "wood"         ) or
@@ -14076,11 +13932,7 @@ function render_natural_land1( passedt )
             ( passedt.natural == "bigprompeak"  )) then
             Layer( "land1", true )
             Attribute( "class", "natural_" .. passedt.natural )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
+            append_name( passedt )
 
             if (( passedt.ele ~= nil ) and
                 ( passedt.ele ~= ""  )) then
@@ -14107,11 +13959,7 @@ function render_natural_land1( passedt )
                 ( passedt.natural == "bigpeak"       )) then
                 Layer( "land1", true )
                 Attribute( "class", "natural_" .. passedt.natural )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                     Attribute( "name", passedt.name )
-                end
+                append_name( passedt )
 
                 if (( passedt.ele ~= nil ) and
                     ( passedt.ele ~= ""  )) then
@@ -14125,11 +13973,7 @@ function render_natural_land1( passedt )
                     ( passedt.natural == "volcano" )) then
                     Layer( "land1", true )
                     Attribute( "class", "natural_" .. passedt.natural )
-
-                    if (( passedt.name ~= nil ) and
-                        ( passedt.name ~= ""  )) then
-                        Attribute( "name", passedt.name )
-                    end
+                    append_name( passedt )
 
                     if (( passedt.ele ~= nil ) and
                         ( passedt.ele ~= ""  )) then
@@ -14144,11 +13988,7 @@ function render_natural_land1( passedt )
                         ( passedt.natural == "hill"     )) then
                         Layer( "land1", true )
                         Attribute( "class", "natural_" .. passedt.natural )
-
-                        if (( passedt.name ~= nil ) and
-                            ( passedt.name ~= ""  )) then
-                            Attribute( "name", passedt.name )
-                        end
+                        append_name( passedt )
 
                         if (( passedt.ele ~= nil ) and
                             ( passedt.ele ~= ""  )) then
@@ -14161,12 +14001,7 @@ function render_natural_land1( passedt )
                             ( passedt.natural == "spring" )) then
                             Layer( "land1", true )
                             Attribute( "class", "natural_" .. passedt.natural )
-
-                            if (( passedt.name ~= nil ) and
-                                ( passedt.name ~= ""  )) then
-                                Attribute( "name", passedt.name )
-                            end
-
+                            append_name( passedt )
                             MinZoom( 13 )
                         else
                             if (( passedt.natural == "cave_entrance" ) or
@@ -14177,12 +14012,7 @@ function render_natural_land1( passedt )
                                 ( passedt.natural == "shrub"         )) then
                                 Layer( "land1", true )
                                 Attribute( "class", "natural_" .. passedt.natural )
-
-                                if (( passedt.name ~= nil ) and
-                                    ( passedt.name ~= ""  )) then
-                                    Attribute( "name", passedt.name )
-                                end
-
+                                append_name( passedt )
                                 MinZoom( 14 )
                             else
                                 render_barrier_land1( passedt )
@@ -14220,12 +14050,7 @@ function render_barrier_land1( passedt )
          ( passedt.is_closed                   ))) then
         Layer( "land1", true )
         Attribute( "class", "barrier_" .. passedt.barrier )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 14 )
     else
         render_waterway_land1( passedt )
@@ -14236,12 +14061,7 @@ function render_waterway_land1( passedt )
     if ( passedt.waterway == "lock_gate" ) then
         Layer( "land1", true )
         Attribute( "class", "waterway_" .. passedt.waterway )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 14 )
     else
         render_power_land1( passedt )
@@ -14253,23 +14073,13 @@ function render_power_land1( passedt )
         ( passedt.power == "generator" )) then
         Layer( "land1", true )
         Attribute( "class", "power_" .. passedt.power )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 9 )
     else
         if ( passedt.power == "substation" ) then
             Layer( "land1", true )
             Attribute( "class", "power_" .. passedt.power )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 12 )
         else
             render_tourism_land1( passedt )
@@ -14282,12 +14092,7 @@ function render_tourism_land1( passedt )
         ( passedt.tourism == "attraction" )) then
         Layer( "land1", true )
         Attribute( "class", "tourism_" .. passedt.tourism )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 9 )
     else
         if (( passedt.tourism == "camp_site"    ) or
@@ -14297,12 +14102,7 @@ function render_tourism_land1( passedt )
             ( passedt.tourism == "alpine_hut"   )) then
             Layer( "land1", true )
             Attribute( "class", "tourism_" .. passedt.tourism )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 12 )
         else
             if (( passedt.tourism == "viewpoint"                  ) or
@@ -14345,11 +14145,7 @@ function render_tourism_land1( passedt )
                 ( passedt.tourism == "camp_pitch"                 )) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
-
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                     Attribute( "name", passedt.name )
-                end
+                append_name( passedt )
 
                 if (( passedt.ele ~= nil ) and
                     ( passedt.ele ~= ""  )) then
@@ -14369,24 +14165,14 @@ function render_aeroway_land1( passedt )
         ( passedt.aeroway == "runway"       )) then
         Layer( "land1", true )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 10 )
     else
         if (( passedt.aeroway == "apron"   ) or
             ( passedt.aeroway == "taxiway" )) then
             Layer( "land1", true )
             Attribute( "class", "aeroway_" .. passedt.aeroway )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 12 )
         else
             if (( passedt.aeroway == "helipad" ) or
@@ -14421,12 +14207,7 @@ function generic_after_land2( passedt )
         ( passedt.natural == "flood_prone"       )) then
         Layer( "land2", true )
         Attribute( "class", "natural_" .. passedt.natural )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 9 )
     else
         render_landuse_land2( passedt )
@@ -14464,10 +14245,7 @@ function render_landuse_land2( passedt )
             Attribute( "class", "landuse_" .. passedt.landuse )
 
             if ( passedt.landuse == "military" ) then
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                     Attribute( "name", passedt.name )
-                end
+                append_name( passedt )
             end
 
             MinZoom( 9 )
@@ -14481,12 +14259,7 @@ function render_landuse_land2( passedt )
                 if ( passedt.landuse == "harbour" ) then
                     Layer( "land2", true )
                     Attribute( "class", "landuse_" .. passedt.landuse )
-
-                    if (( passedt.name ~= nil ) and
-                        ( passedt.name ~= ""  )) then
-                         Attribute( "name", passedt.name )
-                    end
-
+                    append_name( passedt )
                     MinZoom( 13 )
                 else
                     render_leisure_land2( passedt )
@@ -14505,12 +14278,7 @@ function render_leisure_land2( passedt )
         if ( passedt.leisure == "marina" ) then
             Layer( "land2", true )
             Attribute( "class", "leisure_" .. passedt.leisure )
-
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                 Attribute( "name", passedt.name )
-            end
-
+            append_name( passedt )
             MinZoom( 13 )
         else
             render_natural_land2( passedt )
@@ -14556,12 +14324,7 @@ function render_aeroway_land2( passedt )
         ( passedt.aeroway == "large_aerodrome" )) then
         Layer( "land2", true )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 12 )
     else
         render_boundary_land2( passedt )
@@ -14572,12 +14335,7 @@ function render_boundary_land2( passedt )
     if ( passedt.boundary == "national_park" ) then
         Layer( "land2", true )
         Attribute( "class", "boundary_" .. passedt.boundary )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-             Attribute( "name", passedt.name )
-        end
-
+        append_name( passedt )
         MinZoom( 6 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
