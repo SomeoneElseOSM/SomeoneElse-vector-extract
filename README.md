@@ -7,7 +7,7 @@ This repository contains:
 
 It is designed to be used together with:
 
-* Scripts for managing vector map display styles (with Apache)
+* [Scripts](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/README.md) for managing vector map display styles (with Apache)
 * An example [web map style](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/resources/README_svwd01.md).
 
 The scripts here are:
@@ -16,9 +16,9 @@ The scripts here are:
 * `sve_into_apache.sh`, which installs that ".mbtiles" file into apache so that it can be served using [mod_mbtiles](https://github.com/systemed/mod_mbtiles).
 * `sve_delete.sh`, which removes a ".mbtiles" file from Apache.
 
-The parameters passed to `sve_extract.sh` include a set of Tilemaker data extraction rules (see e.g. https://github.com/systemed/tilemaker/blob/master/resources/config-example.json and https://github.com/systemed/tilemaker/blob/master/resources/process-example.lua ) that offer similar data extraction capabilities to https://github.com/SomeoneElseOSM/SomeoneElse-style/blob/master/style.lua (for raster web maps) or https://github.com/SomeoneElseOSM/mkgmap_style_ajt/blob/master/transform_03.lua (for mkgmap-built maps for Garmin devices).
+The parameters passed to `sve_extract.sh` include a set of Tilemaker data extraction rules (for simple examples see e.g. https://github.com/systemed/tilemaker/blob/master/resources/config-example.json and https://github.com/systemed/tilemaker/blob/master/resources/process-example.lua ) that offer similar data extraction capabilities to https://github.com/SomeoneElseOSM/SomeoneElse-style/blob/master/style.lua (for raster web maps) or https://github.com/SomeoneElseOSM/mkgmap_style_ajt/blob/master/transform_03.lua (for mkgmap-built maps for Garmin devices).
 
-It also allows this to be merged in with an existing set of [previously=extracted](https://github.com/systemed/tilemaker/blob/master/docs/RUNNING.md#creating-a-map-with-varying-detail) "sea" tiles.
+It also allows this to be merged in with an existing set of [previously-extracted](https://github.com/systemed/tilemaker/blob/master/docs/RUNNING.md#creating-a-map-with-varying-detail) "sea" tiles.
 
 
 ## Running the scripts - a simple example
