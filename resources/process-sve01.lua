@@ -12763,11 +12763,21 @@ function generic_linearbarrier_historic( passedt )
                 Attribute( "class", "natural_" .. passedt.natural )
                 append_name( passedt )
                 MinZoom( 12 )
+            else
+                generic_linearbarrier_power( passedt )
             end  -- natural=cliff etc. 12
         end  -- natural=valley 11
     end  -- historic=citywalls 13
 end -- generic_linearbarrier_historic()
 
+function generic_linearbarrier_power( passedt )
+    if (( passedt.power == "line"       ) or
+        ( passedt.power == "minor_line" )) then
+        Layer( "linearbarrier", false )
+        Attribute( "class", "power_" .. passedt.power )
+        MinZoom( 14 )
+    end -- power=line etc.
+end -- generic_linearbarrier_power()
 
 -- ----------------------------------------------------------------------------
 -- There are two "land" layers - "land1" and "land2".
@@ -14082,7 +14092,14 @@ function render_power_land1( passedt )
             append_name( passedt )
             MinZoom( 12 )
         else
-            render_tourism_land1( passedt )
+            if (( passedt.power == "tower" ) or
+                ( passedt.power == "pole"  )) then
+                Layer( "land1", true )
+                Attribute( "class", "power_" .. passedt.power )
+                MinZoom( 14 )
+            else
+                render_tourism_land1( passedt )
+            end -- power=tower etc. 14
         end -- power=substation 12
     end -- power=generator 9
 end -- render_power_land1()
