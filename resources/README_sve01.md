@@ -126,6 +126,10 @@ the value of the OSM "name" tag, after any postprocessing e.g. for "operator".
 
 the value of the OSM "addr:housenumber" tag, after postprocessing.
 
+### housename
+
+the value of the OSM "addr:housename" tag, after postprocessing.
+
 ## "poi"
 
 ### class

@@ -12323,6 +12323,11 @@ function generic_after_building( passedt )
             ( passedt.addrChousenumber ~= ""  ))  then
             Attribute( "housenumber", passedt.addrChousenumber )
         end
+
+        if (( passedt.addrChousename ~= nil )   and
+            ( passedt.addrChousename ~= ""  ))  then
+            Attribute( "housename", passedt.addrChousename )
+        end
     end
 end -- generic_after_building()
 
