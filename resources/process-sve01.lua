@@ -12318,6 +12318,11 @@ function generic_after_building( passedt )
         Layer("building", true)
         Attribute( "class", "building_" .. passedt.building )
         append_name( passedt )
+
+        if (( passedt.addrChousenumber ~= nil )   and
+            ( passedt.addrChousenumber ~= ""  ))  then
+            Attribute( "housenumber", passedt.addrChousenumber )
+        end
     end
 end -- generic_after_building()
 

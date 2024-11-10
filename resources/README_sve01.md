@@ -120,7 +120,11 @@ Stored as the processed OSM tag and value, such as "building_roof"
 
 ### name
 
-the value of the OSM name tag, after any postprocessing e.g. for "operator".
+the value of the OSM "name" tag, after any postprocessing e.g. for "operator".
+
+### housenumber
+
+the value of the OSM "addr:housenumber" tag, after postprocessing.
 
 ## "poi"
 
