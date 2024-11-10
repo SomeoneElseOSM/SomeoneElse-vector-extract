@@ -28,7 +28,8 @@ require "shared_lua"
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
               "canoe", "climbing", "craft", "disused:military", "emergency", 
-              "entrance", "harbour", "historic", "healthcare", "highway", "information", 
+              "entrance", "golf", "harbour", "historic", 
+              "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", 
               "military", "natural", "ncn_milepost", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
@@ -13598,14 +13599,12 @@ function render_man_made_land1( passedt )
                     ( passedt.man_made == "sluice_gate"              ) or
                     ( passedt.man_made == "boundary_stone"           ) or
                     ( passedt.man_made == "power"                    ) or
-                    ( passedt.man_made == "power_wind"               )) then
+                    ( passedt.man_made == "power_wind"               ) or
+                    ( passedt.man_made == "golfballwasher"           ) or
+                    ( passedt.man_made == "outfall"                  )) then
                     Layer( "land1", true )
                     Attribute( "class", "man_made_" .. passedt.man_made )
-
-                    if (( passedt.name ~= nil ) and
-                        ( passedt.name ~= ""  )) then
-                        Attribute( "name", passedt.name )
-                    end
+		    append_name( passedt )
 
                     if (( passedt.ele ~= nil ) and
                         ( passedt.ele ~= ""  )) then
@@ -13737,7 +13736,8 @@ function render_railway_land1( passedt )
         else
             if ((( passedt.railway == "platform"        )  and
                  ( passedt.is_closed                    )) or
-                (  passedt.railway == "subway_entrance"  )) then
+                (  passedt.railway == "subway_entrance"  ) or
+                (  passedt.railway == "level_crossing"   )) then
                 Layer( "land1", true )
                 Attribute( "class", "railway_" .. passedt.railway )
                 append_name( passedt )
