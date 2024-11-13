@@ -13838,8 +13838,15 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "othercemetery"             )) then
             Layer( "land1", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
-            append_name( passedt )
             MinZoom( 9 )
+
+            if (( passedt.name ~= nil ) and
+                ( passedt.name ~= ""  )) then
+                LayerAsCentroid( "land1" )
+                Attribute( "class", "landuse_" .. passedt.landuse )
+                Attribute( "name", passedt.name )
+                MinZoom( 9 )
+            end
         else
             if (( passedt.landuse == "village_green"          ) or
                 ( passedt.landuse == "quarry"                 ) or
