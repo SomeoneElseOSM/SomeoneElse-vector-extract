@@ -12799,8 +12799,9 @@ end -- generic_linearbarrier_power()
 -- land1 layer
 -- ----------------------------------------------------------------------------
 function generic_after_land1( passedt )
-    if (( passedt.natural == "water"   ) or
-        ( passedt.natural == "glacier" )) then
+    if (( passedt.natural == "water"             ) or
+        ( passedt.natural == "intermittentwater" ) or
+        ( passedt.natural == "glacier"           )) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
         append_name( passedt )
@@ -14230,8 +14231,7 @@ end -- render_aeroway_land1()
 -- land2 layer
 -- ----------------------------------------------------------------------------
 function generic_after_land2( passedt )
-    if (( passedt.natural == "intermittentwater" ) or
-        ( passedt.natural == "flood_prone"       )) then
+    if ( passedt.natural == "flood_prone" ) then
         Layer( "land2", true )
         Attribute( "class", "natural_" .. passedt.natural )
         append_name( passedt )
