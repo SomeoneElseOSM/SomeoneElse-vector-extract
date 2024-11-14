@@ -13912,8 +13912,15 @@ function render_leisure_land1( passedt )
     if ( passedt.leisure == "nature_reserve" ) then
         Layer( "land1", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
-        append_name( passedt )
         MinZoom( 6 )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+            LayerAsCentroid( "land1" )
+            Attribute( "class", "leisure_" .. passedt.leisure )
+            Attribute( "name", passedt.name )
+            MinZoom( 6 )
+        end
     else
         if ((  passedt.leisure == "common"            ) or
             (  passedt.leisure == "park"              ) or
