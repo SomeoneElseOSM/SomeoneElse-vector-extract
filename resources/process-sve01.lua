@@ -13713,6 +13713,10 @@ function render_aerialway_land1( passedt )
 end -- render_aerialway_land1()
 
 function render_historic_land1( passedt )
+-- ----------------------------------------------------------------------------
+-- For each of these we write out the area as "historic landuse" and then a 
+-- separate named "historic=blah" at the centroid.
+-- ----------------------------------------------------------------------------
     if (( passedt.historic == "archaeological_site"      ) or
         ( passedt.historic == "battlefield"              ) or
         ( passedt.historic == "historicarchcastle"       ) or
@@ -13780,9 +13784,16 @@ function render_historic_land1( passedt )
         ( passedt.historic == "mineshaft"                ) or
         ( passedt.historic == "nonspecific"              )) then
         Layer( "land1", true )
-        Attribute( "class", "historic_" .. passedt.historic )
-        append_name( passedt )
+        Attribute( "class", "landuse_historic" )
         MinZoom( 14 )
+
+        if (( passedt.name ~= nil ) and
+            ( passedt.name ~= ""  )) then
+            LayerAsCentroid( "land1" )
+            Attribute( "class", "historic_" .. passedt.historic )
+            Attribute( "name", passedt.name )
+            MinZoom( 14 )
+        end
     else
         render_landuse_land1( passedt )
     end -- historic=archaeological_site etc. 14
