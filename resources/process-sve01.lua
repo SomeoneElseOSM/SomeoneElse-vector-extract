@@ -13864,8 +13864,15 @@ function render_landuse_land1( passedt )
                 ( passedt.landuse == "historicquarry"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "landuse_" .. passedt.landuse )
-                append_name( passedt )
                 MinZoom( 10 )
+
+                if (( passedt.name ~= nil ) and
+                    ( passedt.name ~= ""  )) then
+                    LayerAsCentroid( "land1" )
+                    Attribute( "class", "landuse_" .. passedt.landuse )
+                    Attribute( "name", passedt.name )
+                    MinZoom( 10 )
+                end
             else
                 if ( passedt.landuse == "garages" ) then
                     Layer( "land1", true )
