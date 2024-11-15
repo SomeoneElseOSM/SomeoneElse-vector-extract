@@ -110,7 +110,15 @@ The value of the OSM "oneway" tag - typically "yes" or "-1".
 
 There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas go.  Most go into "land1", except in the case of some overlays (e.g. military red hatching) which goes into "land2".  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into "land2".
 
-Those "landuse, leisure, etc." features that are often large will be written out twice - once as a polygon without a name, and once as a centroid with a name (if one exists).
+Those "landuse, leisure, etc." features that are often large will be written out twice - once as a polygon without a name, and once as a centroid with a name (if one exists).  Things considered "large" and written out in this way include:
+
+* all zoom 14 "historic=" tags ("battlefield" etc. - here the area is written out as "landuse=historic" and the centroid as e.g. "historic=battlefield")
+* all zoom 10 "landuse=" tags ("forest", "farmland", etc.)
+* all zoom 13 "leisure=" tags ("nature_reserve", "park", etc.)
+
+Just the centroid is wrtten for:
+
+* "leisure=leisurenonspecific" at zoom 14
 
 ### class
 

@@ -13715,7 +13715,7 @@ end -- render_aerialway_land1()
 function render_historic_land1( passedt )
 -- ----------------------------------------------------------------------------
 -- For each of these we write out the area as "historic landuse" and then a 
--- separate named "historic=blah" at the centroid.
+-- separate named (if possible) "historic=blah" at the centroid.
 -- ----------------------------------------------------------------------------
     if (( passedt.historic == "archaeological_site"      ) or
         ( passedt.historic == "battlefield"              ) or
@@ -13787,13 +13787,10 @@ function render_historic_land1( passedt )
         Attribute( "class", "landuse_historic" )
         MinZoom( 14 )
 
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-            LayerAsCentroid( "land1" )
-            Attribute( "class", "historic_" .. passedt.historic )
-            Attribute( "name", passedt.name )
-            MinZoom( 14 )
-        end
+        LayerAsCentroid( "land1" )
+        Attribute( "class", "historic_" .. passedt.historic )
+        append_name( passedt )
+        MinZoom( 14 )
     else
         render_landuse_land1( passedt )
     end -- historic=archaeological_site etc. 14
@@ -13813,13 +13810,10 @@ function render_landuse_land1( passedt )
         Attribute( "class", "landuse_" .. passedt.landuse )
         MinZoom( 8 )
 
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-            LayerAsCentroid( "land1" )
-            Attribute( "class", "landuse_" .. passedt.landuse )
-            Attribute( "name", passedt.name )
-            MinZoom( 8 )
-        end
+        LayerAsCentroid( "land1" )
+        Attribute( "class", "landuse_" .. passedt.landuse )
+        append_name( passedt )
+        MinZoom( 8 )
     else
         if (( passedt.landuse == "grass"                     ) or
             ( passedt.landuse == "residential"               ) or
@@ -13851,13 +13845,10 @@ function render_landuse_land1( passedt )
             Attribute( "class", "landuse_" .. passedt.landuse )
             MinZoom( 9 )
 
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                LayerAsCentroid( "land1" )
-                Attribute( "class", "landuse_" .. passedt.landuse )
-                Attribute( "name", passedt.name )
-                MinZoom( 9 )
-            end
+            LayerAsCentroid( "land1" )
+            Attribute( "class", "landuse_" .. passedt.landuse )
+            append_name( passedt )
+            MinZoom( 9 )
         else
             if (( passedt.landuse == "village_green"          ) or
                 ( passedt.landuse == "quarry"                 ) or
@@ -13866,14 +13857,15 @@ function render_landuse_land1( passedt )
                 Attribute( "class", "landuse_" .. passedt.landuse )
                 MinZoom( 10 )
 
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                    LayerAsCentroid( "land1" )
-                    Attribute( "class", "landuse_" .. passedt.landuse )
-                    Attribute( "name", passedt.name )
-                    MinZoom( 10 )
-                end
+                LayerAsCentroid( "land1" )
+                Attribute( "class", "landuse_" .. passedt.landuse )
+                append_name( passedt )
+                MinZoom( 10 )
             else
+-- ----------------------------------------------------------------------------
+-- These are considered by the code "not large" landuse areas and get the name
+-- written as part of the name feature.
+-- ----------------------------------------------------------------------------
                 if ( passedt.landuse == "garages" ) then
                     Layer( "land1", true )
                     Attribute( "class", "landuse_" .. passedt.landuse )
@@ -13909,6 +13901,13 @@ function render_landuse_land1( passedt )
 end -- render_landuse_land1()
 
 function render_leisure_land1( passedt )
+-- ----------------------------------------------------------------------------
+-- For large landuse areas we write the polygon out without the name, and then
+-- the name on just the centroid.
+-- 
+-- The same display code can interpret "both features" without having to read
+-- it from a separate layer.
+-- ----------------------------------------------------------------------------
     if ( passedt.leisure == "nature_reserve" ) then
         Layer( "land1", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
@@ -13938,13 +13937,10 @@ function render_leisure_land1( passedt )
             Attribute( "class", "leisure_" .. passedt.leisure )
             MinZoom( 9 )
 
-            if (( passedt.name ~= nil ) and
-                ( passedt.name ~= ""  )) then
-                LayerAsCentroid( "land1" )
-                Attribute( "class", "leisure_" .. passedt.leisure )
-                Attribute( "name", passedt.name )
-                MinZoom( 6 )
-            end
+            LayerAsCentroid( "land1" )
+            Attribute( "class", "leisure_" .. passedt.leisure )
+            append_name( passedt )
+            MinZoom( 9 )
         else
             if (( passedt.leisure == "playground" ) or
                 ( passedt.leisure == "schoolyard" )) then
@@ -13952,42 +13948,57 @@ function render_leisure_land1( passedt )
                 Attribute( "class", "leisure_" .. passedt.leisure )
                 MinZoom( 12 )
 
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                    LayerAsCentroid( "land1" )
-                    Attribute( "class", "leisure_" .. passedt.leisure )
-                    Attribute( "name", passedt.name )
-                    MinZoom( 12 )
-                end
+                LayerAsCentroid( "land1" )
+                Attribute( "class", "leisure_" .. passedt.leisure )
+                append_name( passedt )
+                MinZoom( 12 )
             else
                 if ( passedt.leisure == "swimming_pool" ) then
                     Layer( "land1", true )
                     Attribute( "class", "leisure_" .. passedt.leisure )
                     MinZoom( 13 )
 
-                    if (( passedt.name ~= nil ) and
-                        ( passedt.name ~= ""  )) then
-                        LayerAsCentroid( "land1" )
-                        Attribute( "class", "leisure_" .. passedt.leisure )
-                        Attribute( "name", passedt.name )
-                        MinZoom( 13 )
-                    end
+                    LayerAsCentroid( "land1" )
+                    Attribute( "class", "leisure_" .. passedt.leisure )
+                    append_name( passedt )
+                    MinZoom( 13 )
                 else
-                    if (( passedt.leisure == "leisurenonspecific" ) or
-                        ( passedt.leisure == "bandstand"          ) or
-                        ( passedt.leisure == "bleachers"          ) or
-                        ( passedt.leisure == "fitness_station"    ) or
-                        ( passedt.leisure == "picnic_table"       ) or
-                        ( passedt.leisure == "slipway"            ) or
-                        ( passedt.leisure == "bird_hide"          ) or
-                        ( passedt.leisure == "hunting_stand"      ) or
-                        ( passedt.leisure == "grouse_butt"        )) then
+-- ----------------------------------------------------------------------------
+-- Actually, we don't expect leisure=leisurenonspecific will have a fill at 
+-- all, but write out a polygon just in case.
+-- ----------------------------------------------------------------------------
+                    if ( passedt.leisure == "leisurenonspecific" ) then
                         Layer( "land1", true )
                         Attribute( "class", "leisure_" .. passedt.leisure )
-                        append_name( passedt )
                         MinZoom( 14 )
+
+                        if (( passedt.name ~= nil ) and
+                            ( passedt.name ~= ""  )) then
+                            LayerAsCentroid( "land1" )
+                            Attribute( "class", "leisure_" .. passedt.leisure )
+                            Attribute( "name", passedt.name )
+                            MinZoom( 14 )
+                        end
                     else
-                        render_military_land1( passedt )
+-- ----------------------------------------------------------------------------
+-- These are considered by the code "not large" landuse areas and get the name
+-- written as part of the name feature.
+-- ----------------------------------------------------------------------------
+                        if (( passedt.leisure == "bandstand"          ) or
+                            ( passedt.leisure == "bleachers"          ) or
+                            ( passedt.leisure == "fitness_station"    ) or
+                            ( passedt.leisure == "picnic_table"       ) or
+                            ( passedt.leisure == "slipway"            ) or
+                            ( passedt.leisure == "bird_hide"          ) or
+                            ( passedt.leisure == "hunting_stand"      ) or
+                            ( passedt.leisure == "grouse_butt"        )) then
+                            Layer( "land1", true )
+                            Attribute( "class", "leisure_" .. passedt.leisure )
+                            append_name( passedt )
+                            MinZoom( 14 )
+                        else
+                            render_military_land1( passedt )
+                        end -- leisure=bandstand etc. 14
                     end -- leisure=leisurenonspecific 14
                 end -- leisure=swimming_pool etc. 13
             end -- leisure=playground etc.  12
