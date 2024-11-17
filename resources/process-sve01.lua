@@ -14470,9 +14470,20 @@ function render_natural_land2( passedt )
 end -- render_natural_land2()
 
 function render_aeroway_land2( passedt )
+-- ----------------------------------------------------------------------------
+-- For large landuse areas we write the polygon out without the name, and then
+-- the name on just the centroid.
+-- 
+-- The same display code can interpret "both features" without having to read
+-- it from a separate layer.
+-- ----------------------------------------------------------------------------
     if (( passedt.aeroway == "aerodrome"       ) or
         ( passedt.aeroway == "large_aerodrome" )) then
         Layer( "land2", true )
+        Attribute( "class", "aeroway_" .. passedt.aeroway )
+        MinZoom( 12 )
+
+        LayerAsCentroid( "land2" )
         Attribute( "class", "aeroway_" .. passedt.aeroway )
         append_name( passedt )
         MinZoom( 12 )
