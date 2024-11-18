@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Set minzoom for "natural=water" to 5-8 based on way_area.
 Set minzoom for "leisure=nature_reserve" to 6-9 based on way_area.
 If something is both a "natural=peak" and a "man_made=survey_point", display as the former.
+Moved the extraction from "tourism=zoo" from zoom 9 to 14.
 
 ## 17/11/2024
 Added "aeroway=aerodrome" in "land2" to the list of "larger landuse" that gets separate centroid object extracted with the name.

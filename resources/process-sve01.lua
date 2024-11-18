@@ -14282,8 +14282,7 @@ function render_power_land1( passedt )
 end -- render_power_land1()
 
 function render_tourism_land1( passedt )
-    if (( passedt.tourism == "zoo"        ) or
-        ( passedt.tourism == "attraction" )) then
+    if ( passedt.tourism == "attraction" ) then
         Layer( "land1", true )
         Attribute( "class", "tourism_" .. passedt.tourism )
         append_name( passedt )
@@ -14319,6 +14318,7 @@ function render_tourism_land1( passedt )
                 ( passedt.tourism == "chalet"                     ) or
                 ( passedt.tourism == "museum"                     ) or
                 ( passedt.tourism == "aquarium"                   ) or
+                ( passedt.tourism == "zoo"                        ) or
                 ( passedt.tourism == "advertising_column"         ) or
                 ( passedt.tourism == "artwork"                    ) or
                 ( passedt.tourism == "singlechalet"               ) or
