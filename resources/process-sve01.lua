@@ -13879,12 +13879,32 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "othercemetery"             )) then
             Layer( "land1", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
-            MinZoom( 9 )
+
+            if ( passedt.way_area > 141284 ) then
+                minzoom = 9
+            else
+                if ( passedt.way_area > 71668 ) then
+                    minzoom = 10
+                else
+                    if ( passedt.way_area > 12853 ) then
+                        minzoom = 11
+                    else
+                        if ( passedt.way_area > 2584 ) then
+                            minzoom = 12
+                        else
+                            minzoom = 13
+                        end
+                    end
+                end
+            end
+
+            MinZoom( minzoom )
 
             LayerAsCentroid( "land1" )
             Attribute( "class", "landuse_" .. passedt.landuse )
+            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
             append_name( passedt )
-            MinZoom( 9 )
+            MinZoom( minzoom )
         else
             if (( passedt.landuse == "village_green"          ) or
                 ( passedt.landuse == "quarry"                 ) or
