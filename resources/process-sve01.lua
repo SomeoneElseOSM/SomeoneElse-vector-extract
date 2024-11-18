@@ -7956,9 +7956,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Things that are both peaks and cairns should render as the former.
 -- ----------------------------------------------------------------------------
-   if ((( passedt.natural   == "hill"     )  or
-        ( passedt.natural   == "peak"     )) and
-       (  passedt.man_made  == "cairn"     )) then
+   if ((( passedt.natural   == "hill"         )  or
+        ( passedt.natural   == "peak"         )) and
+       (( passedt.man_made  == "cairn"        )  or
+        ( passedt.man_made  == "survey_point" ))) then
       passedt.man_made = nil
    end
 
