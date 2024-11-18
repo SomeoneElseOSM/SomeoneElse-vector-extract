@@ -112,6 +112,7 @@ There are two "landuse / landcover" layers into which all sorts of landuse, leis
 
 Those "landuse, leisure, etc." features that are often large will be written out twice - once as a polygon without a name, and once as a centroid with a name (if one exists).  Things considered "large" and written out in this way include:
 
+* zoom 5 "natural=water"
 * all zoom 14 "historic=" tags ("battlefield" etc. - here the area is written out as "landuse=historic" and the centroid as e.g. "historic=battlefield")
 * all zoom 10 "landuse=" tags ("forest", "farmland", etc.)
 * all zoom 13 "leisure=" tags ("nature_reserve", "park", etc.)
@@ -122,7 +123,7 @@ Just the centroid is wrtten for:
 
 ### class
 
-This is based on the OSM tag.
+This is based on the OSM tag, processed to create some derived values such as "landuse=farmgrass" for both agricultural meadows and farmland that is pasture, paddock, etc.
 
 Values are written as e.g. "landuse_farmland" with the OSM tag as part of the key.
 
@@ -134,6 +135,9 @@ The value of the OSM name tag, after any name processing logic to (perhaps) appe
 
 Either the value of the OSM ele tag, or for some features used to pass a "more detailed name" to the display map style.  This allows (for example) "headline information" to be displayed for a signpost at lower zoom levels but detailed directions at higher ones.
 
+### way_area
+
+Set to the results of "Area()" for certain types of closed polygons (currently "natural=water").  Values here are roughly 2.9 times the equivalent raster way_area values.
 
 ## "waterway"
 

@@ -60,6 +60,7 @@ end
 -- ------------------------------------------------------------------------------
 function node_function()
     local nodet = {}
+    nodet.way_area = 0
     nodet.amenity = Find("amenity")
     nodet.place = Find("place")
     nodet.shop = Find("shop")
@@ -526,6 +527,13 @@ end -- node_function()
 function way_function()
     local wayt = {}
     wayt.is_closed = IsClosed()
+
+    if ( wayt.is_closed ) then
+        wayt.way_area = Area()
+    else
+        wayt.way_area = 0
+    end
+
     wayt.amenity = Find("amenity")
     wayt.place = Find("place")
     wayt.shop = Find("shop")
@@ -1136,6 +1144,13 @@ end -- relation_scan_function()
 function relation_function()
     local relationt = {}
     relationt.is_closed = IsClosed()
+
+    if ( relationt.is_closed ) then
+        relationt.way_area = Area()
+    else
+        relationt.way_area = 0
+    end
+
     relationt.amenity = Find("amenity")
     relationt.place = Find("place")
     relationt.shop = Find("shop")
@@ -12804,6 +12819,11 @@ function generic_after_land1( passedt )
         ( passedt.natural == "glacier"           )) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
+        MinZoom( 5 )
+
+        LayerAsCentroid( "land1" )
+        Attribute( "class", "natural_" .. passedt.natural )
+        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
         append_name( passedt )
         MinZoom( 5 )
     else
