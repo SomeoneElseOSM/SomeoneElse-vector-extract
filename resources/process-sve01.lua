@@ -13946,14 +13946,29 @@ function render_leisure_land1( passedt )
     if ( passedt.leisure == "nature_reserve" ) then
         Layer( "land1", true )
         Attribute( "class", "leisure_" .. passedt.leisure )
-        MinZoom( 6 )
+
+        if ( passedt.way_area > 282314432 ) then
+            minzoom = 6
+        else
+            if ( passedt.way_area > 9514089 ) then
+                minzoom = 7
+            else
+                if ( passedt.way_area > 1357096 ) then
+                    minzoom = 8
+                else
+                    minzoom = 9
+                end
+            end
+        end
+
+        MinZoom( minzoom )
 
         if (( passedt.name ~= nil ) and
             ( passedt.name ~= ""  )) then
             LayerAsCentroid( "land1" )
             Attribute( "class", "leisure_" .. passedt.leisure )
             Attribute( "name", passedt.name )
-            MinZoom( 6 )
+            MinZoom( minzoom )
         end
     else
         if ((  passedt.leisure == "common"            ) or

@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Set minzoom for "natural=water" to 5-8 based on way_area.
+Set minzoom for "leisure=nature_reserve" to 6-9 based on way_area.
 
 ## 17/11/2024
 Added "aeroway=aerodrome" in "land2" to the list of "larger landuse" that gets separate centroid object extracted with the name.
