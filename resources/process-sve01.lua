@@ -12819,13 +12819,28 @@ function generic_after_land1( passedt )
         ( passedt.natural == "glacier"           )) then
         Layer( "land1", true )
         Attribute( "class", "natural_" .. passedt.natural )
-        MinZoom( 5 )
+
+        if ( passedt.way_area > 31700000 ) then
+            minzoom = 5
+        else
+            if ( passedt.way_area > 18135601 ) then
+                minzoom = 6
+            else
+                if ( passedt.way_area > 14763745 ) then
+                    minzoom = 7
+                else
+                    minzoom = 8
+                end
+            end
+        end
+
+        MinZoom( minzoom )
 
         LayerAsCentroid( "land1" )
         Attribute( "class", "natural_" .. passedt.natural )
         AttributeNumeric( "way_area", math.floor( passedt.way_area ))
         append_name( passedt )
-        MinZoom( 5 )
+        MinZoom( minzoom )
     else
         render_amenity_land1( passedt )
     end
