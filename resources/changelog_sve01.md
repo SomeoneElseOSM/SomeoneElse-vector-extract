@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract the way_area for various park and garden features so that a map style can display the names of larger ones at lower zooms than smaller ones.
+
 ## 18/11/2024
 Set minzoom for "natural=water" to 5-8 based on way_area.
 Set minzoom for "leisure=nature_reserve" to 6-9 based on way_area.
