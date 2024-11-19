@@ -1,12 +1,13 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 18/11/2024
 Set minzoom for "natural=water" to 5-8 based on way_area.
 Set minzoom for "leisure=nature_reserve" to 6-9 based on way_area.
 If something is both a "natural=peak" and a "man_made=survey_point", display as the former.
 Moved the extraction from "tourism=zoo" from zoom 9 to 14.
 Extract the way_area for lots of "landuse" areas so that a map style can display the names of larger ones at lower zooms than smaller ones.
+Extract the way_area for various beach and sand features so that a map style can display the names of larger ones at lower zooms than smaller ones.
 
 ## 17/11/2024
 Added "aeroway=aerodrome" in "land2" to the list of "larger landuse" that gets separate centroid object extracted with the name.

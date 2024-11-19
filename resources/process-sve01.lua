@@ -14135,15 +14135,31 @@ function render_natural_land1( passedt )
                 ( passedt.natural == "scrub"         )) then
                 Layer( "land1", true )
                 Attribute( "class", "natural_" .. passedt.natural )
-                MinZoom( 9 )
 
-                if (( passedt.name ~= nil ) and
-                    ( passedt.name ~= ""  )) then
-                    LayerAsCentroid( "land1" )
-                    Attribute( "class", "natural_" .. passedt.natural )
-                    Attribute( "name", passedt.name )
-                    MinZoom( 9 )
+                if ( passedt.way_area > 141284 ) then
+                    minzoom = 9
+                else
+                    if ( passedt.way_area > 71668 ) then
+                        minzoom = 10
+                    else
+                        if ( passedt.way_area > 12853 ) then
+                            minzoom = 11
+                        else
+                            if ( passedt.way_area > 2584 ) then
+                                minzoom = 12
+                            else
+                                minzoom = 13
+                            end
+                        end
+                    end
                 end
+
+                MinZoom( minzoom )
+
+                LayerAsCentroid( "land1" )
+                Attribute( "class", "natural_" .. passedt.natural )
+                Attribute( "name", passedt.name )
+                MinZoom( minzoom )
             else
                 if ( passedt.natural == "bigpeak" ) then
                     Layer( "land1", true )
