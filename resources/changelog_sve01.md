@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract the way_area for various park and garden features so that a map style can display the names of larger ones at lower zooms than smaller ones.
+Extract [man_made=milk_churn_stand](https://taginfo.openstreetmap.org/tags/man_made=milk_churn_stand#overview) objects.
 
 ## 18/11/2024
 Set minzoom for "natural=water" to 5-8 based on way_area.

@@ -3629,6 +3629,15 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Various tags are used for milk churn stands
+-- They're extracted as "historic".
+-- ----------------------------------------------------------------------------
+   if ((  passedt.man_made == "milk_churn_stand" ) or
+       (  passedt.memorial == "milk_churn_stand" )) then
+      passedt.historic = "milk_churn_stand"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Things that are both viewpoints or attractions and monuments or memorials 
 -- should render as the latter.  Some are handled further down too.
 -- Also handle some other combinations.
@@ -13805,6 +13814,7 @@ function render_historic_land1( passedt )
         ( passedt.historic == "memorialsculpture"        ) or
         ( passedt.historic == "memorialstatue"           ) or
         ( passedt.historic == "memorialstone"            ) or
+        ( passedt.historic == "milk_churn_stand"         ) or
         ( passedt.historic == "mill"                     ) or
         ( passedt.historic == "monument"                 ) or
         ( passedt.historic == "ship"                     ) or

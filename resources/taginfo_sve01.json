@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241118T228300Z",
+  "data_updated": "20241122T014400Z",
   "project": {
     "name": "SomeoneElse: Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1408,6 +1408,7 @@
     { "key": "historic", "value": "milestone", "description": "Extracted as milestone" },
     { "key": "historic", "value": "mill", "description": "Extracted as historic mill (dark satanic, not wind or water); centroid for name written seperately" },
     { "key": "historic", "value": "millstone", "description": "Extracted as nonspecific historic item" },
+    { "key": "historic", "value": "milk_churn_stand", "description": "Extracted as historic milk churn stand" },
     { "key": "historic", "value": "mine", "description": "Extracted as nonspecific historic item" },
     { "key": "historic", "value": "mine_adit", "description": "Extracted as nonspecific historic item" },
     { "key": "historic", "value": "mine_level", "description": "Extracted as nonspecific historic item" },
@@ -1703,6 +1704,7 @@
     { "key": "man_made", "value": "mast", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "maypole", "description": "Extracted as maypole" },
     { "key": "man_made", "value": "mile_post", "description": "Handled as barrier=milepost" },
+    { "key": "man_made", "value": "milk_churn_stand", "description": "Extracted as historic milk churn stand" },
     { "key": "man_made", "value": "mine", "description": "Extracted as historic or non-historic mineshaft" },
     { "key": "man_made", "value": "mine_shaft", "description": "Not a current value in OSM data.  Extracted as historic or non-historic mineshaft" },
     { "key": "man_made", "value": "mineshaft", "description": "Extracted as historic or non-historic mineshaft" },
@@ -1815,6 +1817,7 @@
     { "key": "memorial", "value": "grave", "description": "Extracted as memorial grave" },
     { "key": "memorial", "value": "graveyard", "description": "Extracted as memorial grave" },
     { "key": "memorial", "value": "mercat_cross", "description": "Extracted as memorial cross" },
+    { "key": "memorial", "value": "milk_churn_stand", "description": "Extracted as historic milk churn stand" },
     { "key": "memorial", "value": "obelisk", "description": "Extracted as memorial obelisk" },
     { "key": "memorial", "value": "pavement plaque", "description": "Extracted as memorial pavement plaque" },
     { "key": "memorial", "value": "pavement_plaque", "description": "Extracted as memorial pavement plaque" },
