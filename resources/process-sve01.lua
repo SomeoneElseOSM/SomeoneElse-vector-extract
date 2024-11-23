@@ -31,7 +31,8 @@ node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "b
               "entrance", "golf", "harbour", "historic", 
               "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
-              "military", "natural", "ncn_milepost", "pipeline", "pitch", "place", 
+              "military", "natural", "ncn_milepost", 
+              "office", "pipeline", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
               "sport", "tourism", "waterway", "whitewater", "zoo" }
 
@@ -10607,6 +10608,7 @@ function generic_before_function( passedt )
        ( passedt.amenity    == "office"            ) or
        ( passedt.office     == "private"           ) or
        ( passedt.office     == "research"          ) or
+       ( passedt.office     == "office"            ) or
        ( passedt.office     == "yes"               ) or
        ( passedt.commercial == "office"            )) then
       passedt.landuse = "unnamedcommercial"
