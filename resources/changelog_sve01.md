@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Extract locked linear gates in a similar way to unlocked ones.
 Extract linear lift gates in the same way.
+Fixed bug where some former amenities were missing from former pub logic.
 
 ## 22/11/2024
 Extract the way_area for various park and garden features so that a map style can display the names of larger ones at lower zooms than smaller ones.

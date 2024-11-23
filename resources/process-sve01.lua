@@ -400,6 +400,8 @@ function node_function()
     nodet.water = Find("water")
     nodet.aerialway = Find("aerialway")
     nodet.capital = Find("capital")
+    nodet.formerCamenity = Find("former:amenity")
+    nodet.former_amenity = Find("former_amenity")
 
     generic_before_function( nodet )
 
@@ -872,6 +874,8 @@ function way_function()
     wayt.water = Find("water")
     wayt.aerialway = Find("aerialway")
     wayt.capital = Find("capital")
+    wayt.formerCamenity = Find("former:amenity")
+    wayt.former_amenity = Find("former_amenity")
 
     generic_before_function( wayt )
 
@@ -1489,6 +1493,8 @@ function relation_function()
     relationt.type = Find("type")
     relationt.aerialway = Find("aerialway")
     relationt.capital = Find("capital")
+    relationt.formerCamenity = Find("former:amenity")
+    relationt.former_amenity = Find("former_amenity")
 
     generic_before_function( relationt )
 
