@@ -30,8 +30,8 @@ node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "b
               "canoe", "climbing", "craft", "disused:military", "emergency", 
               "entrance", "golf", "harbour", "historic", 
               "healthcare", "highway", "information", 
-              "landuse", "lcn_ref", "leisure", "man_made", 
-              "military", "natural", "ncn_milepost", "pitch", "place", 
+              "landuse", "lcn_ref", "leisure", "man_made", "marker", 
+              "military", "natural", "ncn_milepost", "pipeline", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
               "sport", "tourism", "waterway", "whitewater", "zoo" }
 
@@ -402,6 +402,7 @@ function node_function()
     nodet.capital = Find("capital")
     nodet.formerCamenity = Find("former:amenity")
     nodet.former_amenity = Find("former_amenity")
+    nodet.utility = Find("utility")
 
     generic_before_function( nodet )
 
@@ -876,6 +877,7 @@ function way_function()
     wayt.capital = Find("capital")
     wayt.formerCamenity = Find("former:amenity")
     wayt.former_amenity = Find("former_amenity")
+    wayt.utility = Find("utility")
 
     generic_before_function( wayt )
 
@@ -1495,6 +1497,7 @@ function relation_function()
     relationt.capital = Find("capital")
     relationt.formerCamenity = Find("former:amenity")
     relationt.former_amenity = Find("former_amenity")
+    relationt.utility = Find("utility")
 
     generic_before_function( relationt )
 
@@ -3333,12 +3336,18 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Aerial markers for pipelines etc.
 -- ----------------------------------------------------------------------------
-   if (( passedt.marker   == "aerial"          ) or
-       ( passedt.marker   == "pipeline"        ) or
-       ( passedt.marker   == "post"            ) or
-       ( passedt.man_made == "pipeline_marker" ) or
-       ( passedt.man_made == "marker"          ) or
-       ( passedt.pipeline == "marker"          )) then
+   if ((   passedt.marker   == "aerial"          ) or
+       (   passedt.marker   == "pipeline"        ) or
+       (   passedt.man_made == "marker"          ) or
+       (   passedt.man_made == "pipeline_marker" ) or
+       (   passedt.pipeline == "marker"          ) or
+       ((( passedt.marker   == "post"          )   or
+         ( passedt.marker   == "yes"           )   or
+         ( passedt.marker   == "pedestal"      )   or
+         ( passedt.marker   == "plate"         )   or
+         ( passedt.marker   == "pole"          ))  and
+        (  passedt.utility  ~= nil              )  and
+        (  passedt.utility  ~= "yes"            ))) then
       passedt.man_made = "markeraerial"
    end
 
@@ -12704,7 +12713,8 @@ function way_after_waterway( passedt )
                 if ( passedt.waterway == "ditch" ) then
                     MinZoom( 13 )
                 else
-                    if ( passedt.waterway == "weir" ) then
+                    if (( passedt.waterway == "weir"     ) or
+                        ( passedt.waterway == "pipeline" )) then
                         MinZoom( 14 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
