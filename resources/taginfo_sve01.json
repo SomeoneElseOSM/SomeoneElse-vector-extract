@@ -3577,7 +3577,7 @@
     { "key": "zero_waste", "value": "only", "description": "Detect 'eco' shops and supermarkets" },
     { "key": "zero_waste", "value": "yes", "description": "Detect 'eco' shops and supermarkets" },
     { "key": "zoo", "description": "Detect aviaries and zoo enclosures" },
-    { "key": "zoo", "value": "aviary", "description": "Extract aviaries within a zoo" }
-    { "key": "zoo", "value": "enclosure", "description": "Extract enclosures within a zoo" },
+    { "key": "zoo", "value": "aviary", "description": "Extract aviaries within a zoo" },
+    { "key": "zoo", "value": "enclosure", "description": "Extract enclosures within a zoo" }
   ]
 }
