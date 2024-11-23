@@ -12735,6 +12735,7 @@ function way_after_linearbarrier( passedt )
         (  passedt.barrier == "pitchline"   ) or
         (  passedt.barrier == "gate"        ) or
         (  passedt.barrier == "gate_locked" ) or
+        (  passedt.barrier == "lift_gate"   ) or
         (  passedt.barrier == "stile"       ) or
         (  passedt.barrier == "cattle_grid" ) or
         (  passedt.barrier == "ford"        ) or
