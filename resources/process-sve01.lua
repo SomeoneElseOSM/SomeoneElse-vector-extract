@@ -964,6 +964,9 @@ function update_table( passedt )
     passedt.vending = Find("vending")
     passedt.vending_machine = Find("vending_machine")
     passedt.verge = Find("verge")
+    passedt.vergeCboth = Find("verge:both")
+    passedt.vergeCleft = Find("verge:left")
+    passedt.vergeCright = Find("verge:right")
     passedt.visibility = Find("visibility")
     passedt.volcanoCstatus = Find("volcano:status")
     passedt.wall = Find("wall")
@@ -11969,11 +11972,17 @@ function append_edge_etc( passedt )
 -- ----------------------------------------------------------------------------
 -- If there is not a sidewalk but there is a verge, set "edge" to "verge"
 -- ----------------------------------------------------------------------------
-        if (( passedt.verge == "both"     ) or
-            ( passedt.verge == "left"     ) or
-            ( passedt.verge == "separate" ) or
-            ( passedt.verge == "right"    ) or
-            ( passedt.verge == "yes"      )) then
+        if (( passedt.verge       == "both"     ) or
+            ( passedt.verge       == "left"     ) or
+            ( passedt.verge       == "separate" ) or
+            ( passedt.verge       == "right"    ) or
+            ( passedt.verge       == "yes"      ) or
+            ( passedt.vergeCboth  == "separate" ) or
+            ( passedt.vergeCboth  == "yes"      ) or
+            ( passedt.vergeCleft  == "separate" ) or
+            ( passedt.vergeCleft  == "yes"      ) or
+            ( passedt.vergeCright == "separate" ) or
+            ( passedt.vergeCright == "yes"      )) then
             Attribute("edge", "verge")
         else
 -- ----------------------------------------------------------------------------

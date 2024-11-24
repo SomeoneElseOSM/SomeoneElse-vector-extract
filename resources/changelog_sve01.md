@@ -8,6 +8,7 @@ Fixed bug where some former amenities were missing from former pub logic.
 Added extract of pipelines at vector zoom 14.
 Show more utility aerial pipeline markers.
 Added `office=office` to the list of "nonspecific offices" that are handled.
+Use more verge tags to detect verges.
 
 ## 22/11/2024
 Extract the way_area for various park and garden features so that a map style can display the names of larger ones at lower zooms than smaller ones.
