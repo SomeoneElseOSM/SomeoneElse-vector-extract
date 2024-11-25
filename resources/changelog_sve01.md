@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 24/11/2024
 Extract locked linear gates in a similar way to unlocked ones.
 Extract linear lift gates in the same way.
 Fixed bug where some former amenities were missing from former pub logic.
