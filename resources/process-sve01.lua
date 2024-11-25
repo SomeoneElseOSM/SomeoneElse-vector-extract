@@ -944,6 +944,7 @@ function update_table( passedt )
     passedt.taxon = Find("taxon")
     passedt.telephone_kiosk = Find("telephone_kiosk")
     passedt.theatre = Find("theatre")
+    passedt.theatreCtype = Find("theatre:type")
     passedt.tidal = Find("tidal")
     passedt.timetable = Find("timetable")
     passedt.tomb = Find("tomb")
@@ -7360,9 +7361,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Extract concert hall theatres as concert halls
 -- ----------------------------------------------------------------------------
-   if ((( passedt.amenity == "theatre"      )  and
-        ( passedt.theatre == "concert_hall" )) or
-       (  passedt.amenity == "music_venue"   )) then
+   if (((  passedt.amenity      == "theatre"       )  and
+        (( passedt.theatre      == "concert_hall" )   or
+         ( passedt.theatreCtype == "concert_hall" ))) or
+       (   passedt.amenity == "music_venue"         )) then
       passedt.amenity = "concert_hall"
    end
 
