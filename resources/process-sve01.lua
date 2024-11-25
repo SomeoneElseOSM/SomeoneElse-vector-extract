@@ -8788,8 +8788,10 @@ function generic_before_function( passedt )
        ( passedt.shop    == "financial_services"  ) or
        ( passedt.office  == "financial_services"  ) or
        ( passedt.office  == "financial_advisor"   ) or
+       ( passedt.shop    == "financial_advisor"   ) or
        ( passedt.shop    == "financial_advisors"  ) or
        ( passedt.amenity == "financial_advice"    ) or
+       ( passedt.shop    == "financial_advice"    ) or
        ( passedt.amenity == "bureau_de_change"    ) or
        ( passedt.shop    == "gold_buyer"          )) then
       passedt.shop = "shopnonspecific"
@@ -9037,6 +9039,7 @@ function generic_before_function( passedt )
        ( passedt.shop   == "ceramics"                    ) or
        ( passedt.shop   == "windows"                     ) or
        ( passedt.craft  == "window_construction"         ) or
+       ( passedt.shop   == "window_construction"         ) or
        ( passedt.shop   == "frame"                       ) or
        ( passedt.shop   == "framing"                     ) or
        ( passedt.shop   == "picture_framing"             ) or
@@ -9328,6 +9331,13 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- amenity=veterinary goes through as is
+-- ----------------------------------------------------------------------------
+   if ( passedt.shop == "veterinary" ) then
+      passedt.amenity = "veterinary"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Animal boarding
 -- ----------------------------------------------------------------------------
    if (( passedt.amenity == "animal_boarding"         ) or
@@ -9522,6 +9532,7 @@ function generic_before_function( passedt )
        ( passedt.shop    == "shoe_repair;key_cutting"            ) or
        ( passedt.shop    == "locksmith;dry_cleaning;shoe_repair" ) or
        ( passedt.craft   == "key_cutter"                         ) or
+       ( passedt.shop    == "key_cutter"                         ) or
        ( passedt.craft   == "shoe_repair"                        ) or
        ( passedt.craft   == "key_cutter;shoe_repair"             )) then
       passedt.landuse = "unnamedcommercial"
