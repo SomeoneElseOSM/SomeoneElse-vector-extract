@@ -2981,6 +2981,49 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Detect some sport facilities that have been only partially tagged.
+-- For example, something with a name that is "sport=10pin" but isn't anything
+-- else must be a bowling alley.
+-- ----------------------------------------------------------------------------
+   if ((( passedt.sport           == "10pin"   )  or
+        ( passedt.sport           == "9pin"    )  or
+        ( passedt.sport           == "bowling" )) and
+       (( passedt.leisure         == nil       )  or
+        ( passedt.leisure         == ""        )) and
+       (( passedt.disusedCleisure == nil       )  or
+        ( passedt.disusedCleisure == ""        )) and
+       (( passedt.amenity         == nil       )  or
+        ( passedt.amenity         == ""        )) and
+       (( passedt.shop            == nil       )  or
+        ( passedt.shop            == ""        )) and
+       (( passedt.office          == nil       )  or
+        ( passedt.office          == ""        )) and
+       (( passedt.club            == nil       )  or
+        ( passedt.club            == ""        )) and
+       (  passedt.name            ~= nil        ) and
+       (  passedt.name            ~= ""         )) then
+      passedt.leisure = "bowling_alley"
+   end
+
+   if ((  passedt.sport           == "skiing"  ) and
+       (( passedt.leisure         == nil      )  or
+        ( passedt.leisure         == ""       )) and
+       (( passedt.disusedCleisure == nil      )  or
+        ( passedt.disusedCleisure == ""       )) and
+       (( passedt.amenity         == nil      )  or
+        ( passedt.amenity         == ""       )) and
+       (( passedt.shop            == nil      )  or
+        ( passedt.shop            == ""       )) and
+       (( passedt.office          == nil      )  or
+        ( passedt.office          == ""       )) and
+       (( passedt.club            == nil      )  or
+        ( passedt.club            == ""       )) and
+       (  passedt.name            ~= nil       ) and
+       (  passedt.name            ~= ""        )) then
+      passedt.leisure = "pitch"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Things that are both viewpoints or attractions and monuments or memorials 
 -- should render as the latter.  Some are handled further down too.
 -- Also handle some other combinations.

@@ -10,6 +10,7 @@ Show more utility aerial pipeline markers.
 Added `office=office` to the list of "nonspecific offices" that are handled.
 Use more verge tags to detect verges.
 Use `theatre:type` to detect concert halls.
+Use `sport` to detect bowling alleys and places for skiing that are not tagged as that but are not tagged as anything else.
 
 ## 22/11/2024
 Extract the way_area for various park and garden features so that a map style can display the names of larger ones at lower zooms than smaller ones.
