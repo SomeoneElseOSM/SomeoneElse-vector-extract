@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241123T122200Z",
+  "data_updated": "20241125T000200Z",
   "project": {
     "name": "SomeoneElse: Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3435,7 +3435,8 @@
     { "key": "tunnel", "value": "culvert", "description": "Detect tunnels" },
     { "key": "tunnel", "value": "flooded", "description": "Detect tunnels" },
     { "key": "tunnel", "value": "passage", "description": "Detect tunnels" },
-    { "key": "tunnel", "value": "ventilation_shaft", "description": "Detect tunnels" },
+    { "key": "tunnel", "value": "ventilation shaft", "description": "Detect ventilation shafts" },
+    { "key": "tunnel", "value": "ventilation_shaft", "description": "Detect ventilation shafts" },
     { "key": "tunnel", "value": "yes", "description": "Detect tunnels" },
     { "key": "tunnel:name", "description": "Used in place of name on tunnels" },
     { "key": "type", "description": "Used in relation type filtering" },
