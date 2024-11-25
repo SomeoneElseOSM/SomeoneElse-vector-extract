@@ -8833,7 +8833,8 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if (( passedt.shop    == "tailor"                  ) or
        ( passedt.craft   == "tailor"                  ) or
-       ( passedt.craft   == "dressmaker"              )) then
+       ( passedt.craft   == "dressmaker"              ) or
+       ( passedt.shop    == "dressmaker"              )) then
       passedt.shop = "clothes"
    end
 
@@ -9096,6 +9097,7 @@ function generic_before_function( passedt )
        ( passedt.shop   == "plumbing_supplies"           ) or
        ( passedt.craft  == "plumber"                     ) or
        ( passedt.craft  == "carpenter"                   ) or
+       ( passedt.shop   == "carpenter"                   ) or
        ( passedt.craft  == "decorator"                   ) or
        ( passedt.shop   == "bed"                         ) or
        ( passedt.shop   == "mattress"                    ) or

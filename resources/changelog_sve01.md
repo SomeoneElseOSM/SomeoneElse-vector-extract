@@ -16,6 +16,8 @@ Added `shop=veterinary` as a synonym for `amenity=veterinary`.
 Added `shop=key_cutter` as a synonym for `craft=key_cutter`.
 Added `shop=financial_advice` as a synonym for `amenity=financial_advice`.
 Added `shop=financial_advisor` as a synonym for `office=financial_advisor`.
+Added `shop=carpenter` as a synonym for `craft=carpenter`.
+Added `shop=dressmaker` as a synonym for `craft=dressmaker`.
 
 ## 22/11/2024
 Extract the way_area for various park and garden features so that a map style can display the names of larger ones at lower zooms than smaller ones.
