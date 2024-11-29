@@ -510,16 +510,20 @@ function relation_function()
          relationt.name = relationt.ref
       end
 
-      if ((( relationt.network == "iwn"         ) or
-           ( relationt.network == "nwn"         ) or
-           ( relationt.network == "rwn"         ) or
-           ( relationt.network == "lwn"         ) or
-           ( relationt.network == "lwn;lcn"     ) or
-           ( relationt.network == "lwn;lcn;lhn" )) and
-          (( relationt.name    ~= nil           )  or
-           ( relationt.colour  ~= nil           ))) then
-         if (( relationt.name   == nil ) and
-             ( relationt.colour ~= nil )) then
+      if (((  relationt.network == "iwn"          ) or
+           (  relationt.network == "nwn"          ) or
+           (  relationt.network == "rwn"          ) or
+           (  relationt.network == "lwn"          ) or
+           (  relationt.network == "lwn;lcn"      ) or
+           (  relationt.network == "lwn;lcn;lhn"  )) and
+          ((( relationt.name    ~= nil           )   and
+            ( relationt.name    ~= ""            ))  or
+           (( relationt.colour  ~= nil           )   and
+            ( relationt.colour  ~= ""            )))) then
+         if ((( relationt.name   == nil )  or
+              ( relationt.name   == ""  )) and
+             (( relationt.colour ~= nil )  and
+              ( relationt.colour ~= ""  ))) then
             relationt.name = relationt.colour
          end
 
@@ -534,7 +538,8 @@ function relation_function()
 -- ----------------------------------------------------------------------------
       if (((  relationt.network == "ncn"           )  or
            (  relationt.network == "rcn"           )) and
-          ((  relationt.state   == nil             )  or
+          ((( relationt.state   == nil            )   or
+            ( relationt.state   == ""             ))  or
            (( relationt.state   ~= "proposed"     )   and
             ( relationt.state   ~= "construction" )   and
             ( relationt.state   ~= "abandoned"    )))) then
@@ -545,19 +550,22 @@ function relation_function()
          end
 
          if (( relationt.name ~= nil                 ) and
+             ( relationt.name ~= ""                  ) and
              ( relationt.ref  == "NB"                ) and
              ( string.match( relationt.name, "Loop" ))) then
             relationt.ref = relationt.ref .. " (loop)"
          end
 
-         if ( relationt.ref ~= nil ) then
+         if (( relationt.ref ~= nil ) and
+             ( relationt.ref ~= ""  )) then
             relationt.name = relationt.ref
          end
 
          if (( relationt.network == "rcn"       )  and
              ( relationt.name    ~= "NB"        )  and
              ( relationt.name    ~= "NB (loop)" )) then
-            if ( relationt.name == nil ) then
+            if (( relationt.name == nil )  or
+                ( relationt.name == ""  )) then
                relationt.name = "(r)"
             else
                relationt.name = relationt.name .. " (r)"
@@ -576,7 +584,8 @@ function relation_function()
           ( relationt.network ~= "lcn" )) then
          relationt.highway = "ldpmtb"
 
-         if ( relationt.name == nil ) then
+         if (( relationt.name == nil ) or
+             ( relationt.name == ""  )) then
             relationt.highway = nil
          else
             relationt.name = relationt.name .. " (m)"
@@ -600,6 +609,7 @@ function relation_function()
           ( relationt.highway == "ldpmtb" ) or
           ( relationt.highway == "ldpnhn" )) then
          if ((  relationt.name        ~= nil     ) and
+             (  relationt.name        ~= ""      ) and
              (( relationt.nameCsigned == "no"   )  or
               ( relationt.nameCabsent == "yes"  )  or
               ( relationt.unsigned    == "yes"  )  or
@@ -610,6 +620,7 @@ function relation_function()
          end -- no name
 
          if ((  relationt.ref        ~= nil     ) and
+             (  relationt.ref        ~= ""      ) and
              (( relationt.refCsigned == "no"   )  or
               ( relationt.unsigned   == "yes"  ))) then
             relationt.ref = nil
