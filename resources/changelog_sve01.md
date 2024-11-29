@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Fix bug where the names of some regional cycleways were missing.
+Treat `government=customs` as a government office.
 
 ## 24/11/2024
 Extract locked linear gates in a similar way to unlocked ones.

@@ -790,6 +790,7 @@ function update_table( passedt )
     passedt.geological = Find("geological")
     passedt.geological = Find("geological")
     passedt.golf = Find("golf")
+    passedt.government = Find("government")
     passedt.guide_type = Find("guide_type")
     passedt.harbour = Find("harbour")
     passedt.hard_shoulder = Find("hard_shoulder")
@@ -10081,6 +10082,7 @@ function generic_before_function( passedt )
        (  passedt.name       == "Job Centre Plus"          ) or
        (  passedt.office     == "government"               ) or
        (  passedt.office     == "police"                   ) or
+       (  passedt.government == "customs"                  ) or
        (  passedt.government == "police"                   ) or
        (  passedt.amenity    == "public_building"          ) or
        (  passedt.office     == "administrative"           ) or
