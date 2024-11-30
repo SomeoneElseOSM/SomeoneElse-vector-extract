@@ -3149,6 +3149,8 @@ function generic_before_function( passedt )
          ( passedt.shop    ~= ""           ))  or
         (( passedt.amenity ~= nil          )   and
          ( passedt.amenity ~= ""           ))  or
+        (( passedt.highway ~= nil          )   and
+         ( passedt.highway ~= ""           ))  or
         (  passedt.leisure == "park"       ))) then
       passedt.tourism = nil
    end
