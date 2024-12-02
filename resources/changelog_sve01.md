@@ -1,10 +1,12 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 01/12/2024
 Fix bug where the names of some regional cycleways were missing.
 Treat `government=customs` as a government office.
 If a `tourism=attraction` is also a `highway`, show as `highway`.
+Write out boundary relations and call lua processing in the same way as routes.
+Write out national park names at the centroid only
 
 ## 24/11/2024
 Extract locked linear gates in a similar way to unlocked ones.

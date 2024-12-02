@@ -457,7 +457,8 @@ end -- way_function()
 -- Once done, relation_function() will be called for each one.
 -- ------------------------------------------------------------------------------
 function relation_scan_function()
-    if Find("type")=="route" then
+    if (( Find("type") == "route"    ) or
+        ( Find("type") == "boundary" )) then
         Accept()
     end
 end -- relation_scan_function()
@@ -649,9 +650,12 @@ function relation_function()
     wr_after_transportation( relationt )
 
 -- ----------------------------------------------------------------------------
--- No calls to e.g. generic_after_function here because we don't currently
--- have any relations that would make sense to that.
+-- Actually writing out most other nodes (and polygons) is done 
+-- in "generic_after_function"
+-- 
+-- Linear features should have been handled above.
 -- ----------------------------------------------------------------------------
+    generic_after_function( relationt )
 end  -- relation_function()
 
 function update_table( passedt )
@@ -1823,10 +1827,12 @@ function generic_before_function( passedt )
 -- yellow fill at all zoom levels (to contrast with the low-opacity green fill
 -- at low zoom levels of nature reserves).
 -- ----------------------------------------------------------------------------
-   if ((  passedt.designation   == "access_land"     )  and
-       (( passedt.boundary      == nil              )   or
-        ( passedt.boundary      == "protected_area" ))  and
-       (  passedt.highway       == nil               )) then
+   if ((   passedt.designation   == "access_land"      )  and
+       ((( passedt.boundary      == nil              )    or
+         ( passedt.boundary      == ""               ))   or
+        (  passedt.boundary      == "protected_area"  ))  and
+       ((  passedt.highway       == nil               )   or
+        (  passedt.highway       == ""                ))) then
       passedt.boundary = "access_land"
    end
 
@@ -14037,6 +14043,10 @@ end -- render_aeroway_land2()
 function render_boundary_land2( passedt )
     if ( passedt.boundary == "national_park" ) then
         Layer( "land2", true )
+        Attribute( "class", "boundary_" .. passedt.boundary )
+        MinZoom( 6 )
+
+        LayerAsCentroid( "land2" )
         Attribute( "class", "boundary_" .. passedt.boundary )
         append_name( passedt )
         MinZoom( 6 )
