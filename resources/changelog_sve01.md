@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Removed `surface=mud, sand` and `surface=sand, mud`, no longer in the data.
+
 ## 01/12/2024
 Fix bug where the names of some regional cycleways were missing.
 Treat `government=customs` as a government office.

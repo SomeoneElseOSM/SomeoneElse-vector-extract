@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241129T121900Z",
+  "data_updated": "20241209T104700Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3319,11 +3319,9 @@
     { "key": "surface", "value": "grass", "description": "Extract grass beer gardens in green" },
     { "key": "surface", "value": "gravel", "description": "Extract gravel residential an service roads as lower quality; show wetlands based on the surface that is set" },
     { "key": "surface", "value": "mud", "description": "Extract wetlands based on the surface that is set" },
-    { "key": "surface", "value": "mud, sand", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "pebblestone", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "rock", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "sand", "description": "Extract wetlands based on the surface that is set" },
-    { "key": "surface", "value": "sand, mud", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "scree", "description": "Extract scree if another natural feature is set" },
     { "key": "surface", "value": "shingle", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "unpaved", "description": "Extract gravel residential an service roads as lower quality" },

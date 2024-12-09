@@ -2603,13 +2603,11 @@ function generic_before_function( passedt )
        (( passedt.wetland == nil         ) or
         ( passedt.wetland == ""          ) or
         ( passedt.wetland == "tidalflat" ))) then
-      if (( passedt.surface == "mud"       ) or
-          ( passedt.surface == "mud, sand" )) then
+      if ( passedt.surface == "mud" ) then
          passedt.natural = "mud"
       end
 
       if (( passedt.surface == "sand"      ) or
-          ( passedt.surface == "sand, mud" ) or
           ( passedt.surface == "dirt/sand" )) then
          passedt.natural = "sand"
       end
