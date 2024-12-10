@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract dog parks into land1 so that they can be displayed separately (some are unnamed).
+
 ## 09/12/2024
 Removed `surface=mud, sand` and `surface=sand, mud`, no longer in the data.
 

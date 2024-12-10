@@ -3433,12 +3433,10 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
--- leisure=dog_park is used a few times.  Map to pitch to differentiate from
--- underlying park.
+-- Some things are rendered line pitch to differentiate from any underlying park.
 -- "cricket_nets" is an oddity.  See https://lists.openstreetmap.org/pipermail/tagging/2023-January/thread.html#66908 .
 -- ----------------------------------------------------------------------------
-   if (( passedt.leisure == "dog_park"           ) or
-       ( passedt.sport   == "cricket_nets"       ) or
+   if (( passedt.sport   == "cricket_nets"       ) or
        ( passedt.sport   == "cricket_nets;multi" ) or
        ( passedt.leisure == "practice_pitch"     )) then
       passedt.leisure = "pitch"
@@ -13432,6 +13430,7 @@ function render_leisure_land1( passedt )
         end
     else
         if ((  passedt.leisure == "common"            ) or
+            (  passedt.leisure == "dog_park"          ) or
             (  passedt.leisure == "park"              ) or
             (  passedt.leisure == "recreation_ground" ) or
             (  passedt.leisure == "garden"            ) or
