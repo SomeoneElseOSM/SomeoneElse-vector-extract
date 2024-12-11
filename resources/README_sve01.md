@@ -108,9 +108,9 @@ The value of the OSM "oneway" tag - typically "yes" or "-1".
 
 ## "land1" and "land2"
 
-There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas go.  Most go into "land1", except in the case of some overlays (e.g. military red hatching) which goes into "land2".  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into "land2".
+There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas and points go.  Most go into "land1", except in the case of some overlays (e.g. military red hatching) which goes into "land2".  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into "land2".
 
-Polygons for features are written at an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=ature_reserve") may vary based on way_area.
+For area, polygons for features are written at an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=ature_reserve") and may vary based on way_area.
 
 Those "landuse, leisure, etc." features that are often large will be written out twice - once as a polygon without a name, and once as a centroid with a name (if one exists).  Things considered "large" and written out in this way include:
 

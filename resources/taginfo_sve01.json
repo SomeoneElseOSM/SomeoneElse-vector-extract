@@ -1341,6 +1341,7 @@
     { "key": "highway", "value": "living_street_link", "description": "Not an expected value in OSM data.  extracted as living_street" },
     { "key": "highway", "value": "milestone", "description": "Extracted as milestone" },
     { "key": "highway", "value": "motorway", "description": "Extracted as motorway" },
+    { "key": "highway", "value": "motorway_junction", "description": "Extracted as highway_motorway_junction with name and ref" },
     { "key": "highway", "value": "motorway_link", "description": "Extracted as motorway" },
     { "key": "highway", "value": "path", "description": "Extracted as narrow path based on designation" },
     { "key": "highway", "value": "pedestrian", "description": "Extracted as pedestrian street" },

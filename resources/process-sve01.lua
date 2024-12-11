@@ -13131,15 +13131,22 @@ function render_highway_land1( passedt )
 
             MinZoom( 14 )
         else
-            if (( passedt.highway == "platform" ) and
-                ( passedt.is_closed             )) then
+            if ( passedt.highway == "motorway_junction" ) then
                 Layer( "land1", true )
                 Attribute( "class", "highway_" .. passedt.highway )
+                append_name( passedt )
                 append_ref_etc( passedt )
-                MinZoom( 14 )
             else
-                render_railway_land1( passedt )
-            end -- highway=platform 14
+                if (( passedt.highway == "platform" ) and
+                    ( passedt.is_closed             )) then
+                    Layer( "land1", true )
+                    Attribute( "class", "highway_" .. passedt.highway )
+                    append_ref_etc( passedt )
+                    MinZoom( 14 )
+                else
+                    render_railway_land1( passedt )
+                end -- highway=platform 14
+            end -- highway=motorway_junction 14
         end -- highway=board_realtime etc. 14
     end -- highway=pedestrian 12
 end -- render_highway_land1()
