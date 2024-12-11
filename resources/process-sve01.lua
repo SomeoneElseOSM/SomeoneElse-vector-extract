@@ -34,7 +34,7 @@ node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "b
               "military", "natural", "ncn_milepost", 
               "office", "pipeline", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
-              "sport", "tourism", "waterway", "whitewater", "zoo" }
+              "sport", "tourism", "tunnel", "waterway", "whitewater", "zoo" }
 
 -- Initialize Lua logic
 
