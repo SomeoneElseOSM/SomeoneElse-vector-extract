@@ -13955,6 +13955,10 @@ function render_landuse_land2( passedt )
             if ( passedt.landuse == "military" ) then
                 Layer( "land2", true )
                 Attribute( "class", "landuse_" .. passedt.landuse )
+                MinZoom( 9 )
+
+                LayerAsCentroid( "land2" )
+                Attribute( "class", "landuse_" .. passedt.landuse )
                 append_name( passedt )
                 MinZoom( 9 )
             else
