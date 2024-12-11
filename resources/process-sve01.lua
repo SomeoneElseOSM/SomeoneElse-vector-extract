@@ -13959,6 +13959,7 @@ function render_landuse_land2( passedt )
 
                 LayerAsCentroid( "land2" )
                 Attribute( "class", "landuse_" .. passedt.landuse )
+                AttributeNumeric( "way_area", math.floor( passedt.way_area ))
                 append_name( passedt )
                 MinZoom( 9 )
             else

@@ -7,7 +7,7 @@ Extract `highway=motorway_junction` into `land1` with `name` and `ref` at zoom 1
 Extract university, school names etc. at the centroid.
 Don't extract `barrier=ford` on ways with `highway` set - they will be extracted as highways.
 Some ventilation shafts with unusual tagging were missing; these have now been included.
-Extract `landuse=military` names at the centroid.
+Extract `landuse=military` names at the centroid, along with the polygon `way_area`.
 
 ## 09/12/2024
 Removed `surface=mud, sand` and `surface=sand, mud`, no longer in the data.
