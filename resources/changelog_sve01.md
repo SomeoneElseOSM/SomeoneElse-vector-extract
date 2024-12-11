@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 11/12/2024
 Extract dog parks into land1 so that they can be displayed separately (some are unnamed).
 Extract `highway=motorway_junction` into `land1` with `name` and `ref` at zoom 14.
 Extract university, school names etc. at the centroid.
