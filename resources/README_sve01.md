@@ -118,6 +118,7 @@ Those "landuse, leisure, etc." features that are often large will be written out
 * all zoom 14 "historic=" tags ("battlefield" etc. - here the area is written out as "landuse=historic" and the centroid as e.g. "historic=battlefield")
 * all zoom 10 "landuse=" tags ("forest", "farmland", etc.)
 * all zoom 13 "leisure=" tags ("nature_reserve", "park", etc.)
+* zoom 14 university, school, etc.
 
 Just the centroid is wrtten for:
 

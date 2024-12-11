@@ -12295,6 +12295,11 @@ function render_amenity_land1( passedt )
         ( passedt.amenity == "kindergarten"         )) then
         Layer( "land1", true )
         Attribute( "class", "amenity_" .. passedt.amenity )
+        MinZoom( 9 )
+
+        LayerAsCentroid( "land1" )
+        Attribute( "class", "amenity_" .. passedt.amenity )
+        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
         append_name( passedt )
         MinZoom( 9 )
     else
