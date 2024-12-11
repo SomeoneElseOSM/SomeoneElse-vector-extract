@@ -12151,20 +12151,22 @@ end -- way_after_waterway( passedt )
 -- https://www.openstreetmap.org/user/SomeoneElse/diary/401631
 -- ----------------------------------------------------------------------------
 function way_after_linearbarrier( passedt )
-    if ((  passedt.barrier == "wall"        ) or
-        (( passedt.barrier == "hedge"      )  and
-         ( not passedt.is_closed           )) or
-        (  passedt.barrier == "hedgeline"   ) or
-        (  passedt.barrier == "fence"       ) or
-        (  passedt.barrier == "kerb"        ) or
-        (  passedt.barrier == "pitchline"   ) or
-        (  passedt.barrier == "gate"        ) or
-        (  passedt.barrier == "gate_locked" ) or
-        (  passedt.barrier == "lift_gate"   ) or
-        (  passedt.barrier == "stile"       ) or
-        (  passedt.barrier == "cattle_grid" ) or
-        (  passedt.barrier == "ford"        ) or
-        (  passedt.barrier == "tree_row"    )) then
+    if ((   passedt.barrier == "wall"        ) or
+        ((  passedt.barrier == "hedge"      )  and
+         (  not passedt.is_closed           )) or
+        (   passedt.barrier == "hedgeline"   ) or
+        (   passedt.barrier == "fence"       ) or
+        (   passedt.barrier == "kerb"        ) or
+        (   passedt.barrier == "pitchline"   ) or
+        (   passedt.barrier == "gate"        ) or
+        (   passedt.barrier == "gate_locked" ) or
+        (   passedt.barrier == "lift_gate"   ) or
+        (   passedt.barrier == "stile"       ) or
+        (   passedt.barrier == "cattle_grid" ) or
+        ((  passedt.barrier == "ford"       )  and
+         (( passedt.highway == nil         )   or
+          ( passedt.highway == ""          ))) or
+        (   passedt.barrier == "tree_row"    )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
 	append_name( passedt )

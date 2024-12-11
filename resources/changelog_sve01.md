@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Extract dog parks into land1 so that they can be displayed separately (some are unnamed).
 Extract `highway=motorway_junction` into `land1` with `name` and `ref` at zoom 14.
 Extract university, school names etc. at centroid.
+Don't extract `barrier=ford` on ways with `highway` set - they will be extracted as highways.
 
 ## 09/12/2024
 Removed `surface=mud, sand` and `surface=sand, mud`, no longer in the data.
