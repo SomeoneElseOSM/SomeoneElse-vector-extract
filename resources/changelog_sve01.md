@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract some natural feature names as centroids.
+Extract way_area for `tourism=attraction`.
 
 ## 11/12/2024
 Extract dog parks into land1 so that they can be displayed separately (some are unnamed).

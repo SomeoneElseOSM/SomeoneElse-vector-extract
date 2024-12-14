@@ -13095,8 +13095,8 @@ end -- render_office_land1()
 -- highway=pedestrian and highway=platform are only written to land1 if they're
 -- closed areas.
 -- All closed highway=pedestrian and highway=platform are assumed to be areas, 
--- regardless of any area tag.  There are some "area=no" examples, but this seem
--- to be mistaggings.
+-- regardless of any area tag.  There are some "area=no" examples, but these
+-- seem to be mistaggings.
 -- Closed highway=pathnarrow and highway=service are assumed to be areas, 
 -- only if area=yes tag.
 -- ----------------------------------------------------------------------------
@@ -13110,6 +13110,7 @@ function render_highway_land1( passedt )
          (  passedt.is_closed                ))) then
         Layer( "land1", true )
         Attribute( "class", "highway_" .. passedt.highway )
+        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
         append_name( passedt )
         MinZoom( 12 )
     else
@@ -13798,6 +13799,7 @@ function render_tourism_land1( passedt )
     if ( passedt.tourism == "attraction" ) then
         Layer( "land1", true )
         Attribute( "class", "tourism_" .. passedt.tourism )
+        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
         append_name( passedt )
         MinZoom( 9 )
     else
