@@ -11804,6 +11804,7 @@ function wr_after_transportation( passedt )
             append_name( passedt )
             AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
             AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
+            MinZoom( 6 )
         else
 -- ----------------------------------------------------------------------------
 -- Ferry routes
@@ -11847,7 +11848,7 @@ function wr_after_transportation( passedt )
                     end -- aerialway=cable_car etc. 11
                 end -- aeroway=runway etc. 10
             end -- ferry routes 6
-        end -- linear railways
+        end -- linear railways 6
     end -- linear highways
 end -- wr_after_transportation( passedt )
 
