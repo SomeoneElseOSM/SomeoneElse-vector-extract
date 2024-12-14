@@ -13574,6 +13574,11 @@ function render_natural_land1( passedt )
             ( passedt.natural == "bigprompeak"  )) then
             Layer( "land1", true )
             Attribute( "class", "natural_" .. passedt.natural )
+            MinZoom( 8 )
+
+            LayerAsCentroid( "land1" )
+            Attribute( "class", "natural_" .. passedt.natural )
+            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
             append_name( passedt )
 
             if (( passedt.ele ~= nil ) and
