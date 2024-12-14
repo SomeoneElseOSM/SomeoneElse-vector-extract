@@ -10556,7 +10556,8 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Emergency phones
 -- ----------------------------------------------------------------------------
-   if ((  passedt.emergency == "phone"  ) and
+   if ((( passedt.emergency == "phone" )  or
+        ( passedt.railway   == "phone" )) and
        (( passedt.amenity   == nil     )  or
         ( passedt.amenity   == ""      ))) then
       passedt.amenity = "emergency_phone"

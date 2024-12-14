@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract railways from zoom 6.
+Extract `railway=phone` as `emergency=phone`.
 
 ## 13/12/2024
 Extract some natural feature names as centroids.
