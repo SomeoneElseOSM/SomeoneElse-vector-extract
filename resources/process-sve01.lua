@@ -5457,6 +5457,29 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Railway turntables.
+-- We ignore these if they're also mapped as buildings.
+-- We force "area=yes" on all to handle them as area features
+-- On whatever's left, we add landuse=railway to allow name display, if not 
+-- already set.
+-- The latter two of those are for compatibility with raster; there is vector
+-- handling at extract time to explicitly extract the correct features.
+-- ----------------------------------------------------------------------------
+   if ( passedt.railway == "turntable" ) then
+      if (( passedt.building ~= nil  )  and
+          ( passedt.building ~= ""   )  and
+          ( passedt.building ~= "no" )) then
+         passedt.railway = nil
+      else
+         passedt.area = "yes"
+
+         if ( passedt.landuse == nil ) then
+            passedt.landuse = "railway"
+         end
+      end
+   end
+
+-- ----------------------------------------------------------------------------
 -- Handle razed railways and old inclined_planes as dismantled.
 -- dismantled, abandoned are now handled separately to disused in roads.mss
 -- ----------------------------------------------------------------------------
@@ -13202,7 +13225,18 @@ function render_railway_land1( passedt )
                 append_name( passedt )
                 MinZoom( 14 )
             else
-                render_aerialway_land1( passedt )
+-- ----------------------------------------------------------------------------
+-- railway=turntable are a bit of a special case - they are all assumed to be
+-- area features, and so are written here.
+-- ----------------------------------------------------------------------------
+                if ( passedt.railway == "turntable" ) then
+                    Layer( "land1", true )
+                    Attribute( "class", "railway_" .. passedt.railway )
+                    append_name( passedt )
+                    MinZoom( 14 )
+                else
+                    render_aerialway_land1( passedt )
+                end -- railway=turntable 14
             end -- railway=platform 14
         end -- railway=halt 12
     end -- railway=station 11

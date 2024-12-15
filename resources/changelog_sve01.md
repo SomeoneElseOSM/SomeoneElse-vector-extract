@@ -8,6 +8,7 @@ Extract `railway=wash` as a roof if not a building already.
 Extract `railway=water_crane` as `historic=water_crane`.
 Extract `railway=crane` (which are all linear) as miniature railways in their own right.
 Extract a couple more historic railway features as "nonspecific".
+Extract railway turntables as circular polygons  with a name.
 
 ## 13/12/2024
 Extract some natural feature names as centroids.
