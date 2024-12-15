@@ -7408,11 +7408,14 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Render historic railway stations.
 -- ----------------------------------------------------------------------------
-   if ((( passedt.abandonedCrailway == "station"         )  or
-        ( passedt.disusedCrailway   == "station"         )  or
-        ( passedt.historicCrailway  == "station"         )  or
-        ( passedt.historic          == "railway_station" )) and
-       (  passedt.tourism           ~= "information"      )) then
+   if ((( passedt.abandonedCrailway == "station"             )  or
+        ( passedt.disusedCrailway   == "station"             )  or
+        ( passedt.historicCrailway  == "station"             )  or
+        ( passedt.historic          == "railway_station"     )  or
+        ( passedt.railway           == "dismantled_colliery" )  or
+        ( passedt.railway           == "colliery_site"       )) and
+       (  passedt.tourism           ~= "information"          ) and
+       (  passedt.name              ~= nil                    )) then
       passedt.historic = "nonspecific"
    end
 
