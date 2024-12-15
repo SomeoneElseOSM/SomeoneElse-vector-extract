@@ -5511,8 +5511,10 @@ function generic_before_function( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Goods Conveyors - render as miniature railway.
+-- Also "railway=crane" which are all linear structures.
 -- ----------------------------------------------------------------------------
-   if ( passedt.man_made == "goods_conveyor" ) then
+   if (( passedt.man_made == "goods_conveyor" ) or
+       ( passedt.railway  == "crane"          )) then
       passedt.railway = "miniature"
    end
 

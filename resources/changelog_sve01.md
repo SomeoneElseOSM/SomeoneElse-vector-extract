@@ -6,6 +6,7 @@ Extract railways from zoom 6.
 Extract `railway=phone` as `emergency=phone`.
 Extract `railway=wash` as a roof if not a building already.
 Extract `railway=water_crane` as `historic=water_crane`.
+Extract `railway=crane` (which are all linear) as miniature railways in their own right.
 
 ## 13/12/2024
 Extract some natural feature names as centroids.

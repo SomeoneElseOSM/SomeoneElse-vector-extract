@@ -2357,6 +2357,7 @@
     { "key": "railway", "description": "Detect railway tags and some obscure synonyms for which railway has also been used" },
     { "key": "railway", "value": "abandoned", "description": "Extracted as abandoned railway" },
     { "key": "railway", "value": "construction", "description": "Extract under construction railways" },
+    { "key": "railway", "value": "crane", "description": "Extract as miniature railway" },
     { "key": "railway", "value": "crossing", "description": "Extracted as level crossing" },
     { "key": "railway", "value": "dismantled", "description": "Extracted as dismantled railway" },
     { "key": "railway", "value": "disused", "description": "Extracted as disused railway" },
