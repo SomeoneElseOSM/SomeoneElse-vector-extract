@@ -13422,6 +13422,7 @@ function render_landuse_land1( passedt )
 
                 LayerAsCentroid( "land1" )
                 Attribute( "class", "landuse_" .. passedt.landuse )
+                AttributeNumeric( "way_area", math.floor( passedt.way_area ))
                 append_name( passedt )
                 MinZoom( 10 )
             else
@@ -13444,6 +13445,11 @@ function render_landuse_land1( passedt )
                         if ( passedt.landuse == "conservation" ) then
                             Layer( "land1", true )
                             Attribute( "class", "landuse_" .. passedt.landuse )
+                            MinZoom( 13 )
+
+                            LayerAsCentroid( "land1" )
+                            Attribute( "class", "landuse_" .. passedt.landuse )
+                            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
                             append_name( passedt )
                             MinZoom( 13 )
                         else
@@ -13495,6 +13501,7 @@ function render_leisure_land1( passedt )
             ( passedt.name ~= ""  )) then
             LayerAsCentroid( "land1" )
             Attribute( "class", "leisure_" .. passedt.leisure )
+            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
             Attribute( "name", passedt.name )
             MinZoom( minzoom )
         end
