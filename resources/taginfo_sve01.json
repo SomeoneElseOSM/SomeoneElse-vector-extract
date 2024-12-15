@@ -2385,6 +2385,7 @@
     { "key": "railway", "value": "traverser", "description": "Extract railway traversers as roofs" },
     { "key": "railway", "value": "turntable", "description": "Extract railway turntables" },
     { "key": "railway", "value": "ventilation_shaft", "description": "Extracted as ventilation shafts" },
+    { "key": "railway", "value": "wash", "description": "Extracted as roof" },
     { "key": "railway:historic", "description": "Detect abandoned railways" },
     { "key": "railway:historic", "value": "yes", "description": "Detect abandoned railways" },
     { "key": "railway:miniature", "description": "Miniature railway stations" },

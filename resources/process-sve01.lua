@@ -2156,6 +2156,7 @@ function generic_before_function( passedt )
        (    passedt.man_made         == "bunker_silo"     ) or
        (    passedt.amenity          == "feeding_place"   ) or
        (    passedt.railway          == "traverser"       ) or
+       (    passedt.railway          == "wash"            ) or
        (    passedt.building         == "canopy"          ) or
        (    passedt.building         == "car_port"        ) or
        (((( passedt.disusedCbuilding ~= nil            )    and
