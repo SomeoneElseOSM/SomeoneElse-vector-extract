@@ -14126,7 +14126,8 @@ function render_aeroway_land2( passedt )
 end -- render_aeroway_land2()
 
 function render_boundary_land2( passedt )
-    if ( passedt.boundary == "national_park" ) then
+    if (( passedt.boundary == "national_park" ) and
+        ( passedt.is_closed                   )) then
         Layer( "land2", true )
         Attribute( "class", "boundary_" .. passedt.boundary )
         MinZoom( 6 )

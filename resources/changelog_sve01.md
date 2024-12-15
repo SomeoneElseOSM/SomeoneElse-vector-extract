@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract way_area for nature_reserves etc.
+Check that national parks are closed before extracting them into `land2`.
 
 ## 14/12/2024
 Extract railways from zoom 6.
