@@ -27,7 +27,7 @@ require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
-              "canoe", "climbing", "craft", "disused:military", "emergency", 
+              "canoe", "climbing", "craft", "disused:military", "disused:railway", "emergency", 
               "entrance", "golf", "harbour", "historic", 
               "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
@@ -3122,6 +3122,7 @@ function generic_before_function( passedt )
         ( passedt.historic  == "tumulus"                   )  or
         ( passedt.historic  == "village"                   )  or
         ( passedt.historic  == "village_pump"              )  or
+        ( passedt.historic  == "water_crane"               )  or
         ( passedt.historic  == "water_pump"                )  or
         ( passedt.historic  == "wayside_cross"             )  or
         ( passedt.historic  == "wayside_shrine"            )  or
@@ -6230,6 +6231,17 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ( passedt.historic  == "village_pump" ) then
       passedt.historic = "water_pump"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Send railway=water_crane through as "historic"
+-- ----------------------------------------------------------------------------
+   if ((( passedt.railway          == "water_crane" ) or
+        ( passedt.disusedCrailway  == "water_crane" )) and
+       (( passedt.historic         == nil           )  or
+        ( passedt.historic         == ""            )  or
+        ( passedt.historic         == "yes"         ))) then
+      passedt.historic = "water_crane"
    end
 
 -- ----------------------------------------------------------------------------
@@ -13267,6 +13279,7 @@ function render_historic_land1( passedt )
         ( passedt.historic == "tank"                     ) or
         ( passedt.historic == "tomb"                     ) or
         ( passedt.historic == "warmemorial"              ) or
+        ( passedt.historic == "water_crane"              ) or
         ( passedt.historic == "water_pump"               ) or
         ( passedt.historic == "watermill"                ) or
         ( passedt.historic == "well"                     ) or
