@@ -13790,7 +13790,7 @@ end -- render_natural_land1()
 
 -- ----------------------------------------------------------------------------
 -- hedges are only written to this if they're closed hedge areas.
--- hedges around some other area type (e.g. "landuse=farmland") have already been
+-- hedges around some other area type (e.g. "landuse=farmland") have been
 -- changed to "hedgeline" above and will have been written out as linear
 -- barriers already
 -- ----------------------------------------------------------------------------
