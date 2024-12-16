@@ -410,6 +410,16 @@ function way_function()
     end
 
 -- ----------------------------------------------------------------------------
+-- Dam areas.  Extract as an explicit area feature.
+-- ----------------------------------------------------------------------------
+   if ((  wayt.waterway == "dam" ) and
+       (  wayt.is_closed         ) and
+       (( wayt.building == nil  )  or
+        ( wayt.building == ""   ))) then
+        wayt.waterway = "damarea"
+   end
+
+-- ----------------------------------------------------------------------------
 -- (end of the way-specific code)
 --
 -- Linear transportation layer
@@ -640,6 +650,16 @@ function relation_function()
    if (( relationt.type      == "multipolygon" ) and
        ( relationt.emergency == "water_rescue" )) then
       relationt.emergency = "lifeboat_station"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Dam areas.  Extract as an explicit area feature.
+-- ----------------------------------------------------------------------------
+   if ((  relationt.waterway == "dam" ) and
+       (  relationt.is_closed         ) and
+       (( relationt.building == nil  )  or
+        ( relationt.building == ""   ))) then
+        relationt.waterway = "damarea"
    end
 
 -- ----------------------------------------------------------------------------
@@ -13821,14 +13841,26 @@ function render_barrier_land1( passedt )
 end -- render_barrier_land1()
 
 function render_waterway_land1( passedt )
-    if ( passedt.waterway == "lock_gate" ) then
+    if ( passedt.waterway == "damarea" ) then
         Layer( "land1", true )
         Attribute( "class", "waterway_" .. passedt.waterway )
+        MinZoom( 10 )
+
+        LayerAsCentroid( "land1" )
+        Attribute( "class", "waterway_" .. passedt.waterway )
+        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
         append_name( passedt )
-        MinZoom( 14 )
+        MinZoom( 10 )
     else
-        render_power_land1( passedt )
-    end -- waterway=lock_gate 14
+        if ( passedt.waterway == "lock_gate" ) then
+            Layer( "land1", true )
+            Attribute( "class", "waterway_" .. passedt.waterway )
+            append_name( passedt )
+            MinZoom( 14 )
+        else
+            render_power_land1( passedt )
+        end -- waterway=lock_gate 14
+    end -- waterway=damarea 10
 end -- render_waterway_land1()
 
 function render_power_land1( passedt )
