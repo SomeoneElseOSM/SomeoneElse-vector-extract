@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased.
 Extract `highway=ford` for point fords.
+Changed the minzoom on `highway=motorway_junction` extraction to 10.
 
 ## 16/12/2024
 Extract dam area features as explicit area features (`waterway=damarea`) with a name at the centroid, which also has the feature way_area.

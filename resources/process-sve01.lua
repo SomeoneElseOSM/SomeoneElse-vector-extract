@@ -13213,7 +13213,7 @@ function render_highway_land1( passedt )
                     Attribute( "class", "highway_" .. passedt.highway )
                     append_name( passedt )
                     append_ref_etc( passedt )
-                    MinZoom( 14 )
+                    MinZoom( 10 )
                 else
                     if (( passedt.highway == "platform" ) and
                         ( passedt.is_closed             )) then
