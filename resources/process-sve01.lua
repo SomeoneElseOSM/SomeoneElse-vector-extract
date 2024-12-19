@@ -28,7 +28,7 @@ require "shared_lua"
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
               "canoe", "climbing", "craft", "disused:military", "disused:railway", "emergency", 
-              "entrance", "golf", "harbour", "historic", 
+              "entrance", "ford", "golf", "harbour", "historic", 
               "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
@@ -13177,48 +13177,56 @@ function render_highway_land1( passedt )
         append_name( passedt )
         MinZoom( 12 )
     else
-        if (( passedt.highway == "board_realtime"            ) or
-            ( passedt.highway == "bus_stop_nothing"          ) or
-            ( passedt.highway == "bus_stop_pole"             ) or
-            ( passedt.highway == "bus_stop_disused_pole"     ) or
-            ( passedt.highway == "bus_stop_timetable"        ) or
-            ( passedt.highway == "bus_stop_realtime"         ) or
-            ( passedt.highway == "bus_stop_speech_timetable" ) or
-            ( passedt.highway == "bus_stop_speech_realtime"  ) or
-            ( passedt.highway == "traffic_signals"           ) or
-            ( passedt.highway == "streetlamp_electric"       ) or
-            ( passedt.highway == "streetlamp_gas"            ) or
-            ( passedt.highway == "crossing"                  ) or
-            ( passedt.highway == "milestone"                 ) or
-            ( passedt.highway == "mini_roundabout"           )) then
+        if ( passedt.highway == "ford" ) then
             Layer( "land1", true )
             Attribute( "class", "highway_" .. passedt.highway )
             append_name( passedt )
-
-            if (( passedt.ele ~= nil ) and
-                ( passedt.ele ~= ""  )) then
-                Attribute( "ele", passedt.ele )
-            end
-
             MinZoom( 14 )
         else
-            if ( passedt.highway == "motorway_junction" ) then
+            if (( passedt.highway == "board_realtime"            ) or
+                ( passedt.highway == "bus_stop_nothing"          ) or
+                ( passedt.highway == "bus_stop_pole"             ) or
+                ( passedt.highway == "bus_stop_disused_pole"     ) or
+                ( passedt.highway == "bus_stop_timetable"        ) or
+                ( passedt.highway == "bus_stop_realtime"         ) or
+                ( passedt.highway == "bus_stop_speech_timetable" ) or
+                ( passedt.highway == "bus_stop_speech_realtime"  ) or
+                ( passedt.highway == "traffic_signals"           ) or
+                ( passedt.highway == "streetlamp_electric"       ) or
+                ( passedt.highway == "streetlamp_gas"            ) or
+                ( passedt.highway == "crossing"                  ) or
+                ( passedt.highway == "milestone"                 ) or
+                ( passedt.highway == "mini_roundabout"           )) then
                 Layer( "land1", true )
                 Attribute( "class", "highway_" .. passedt.highway )
                 append_name( passedt )
-                append_ref_etc( passedt )
+
+                if (( passedt.ele ~= nil ) and
+                    ( passedt.ele ~= ""  )) then
+                    Attribute( "ele", passedt.ele )
+                end
+
+                MinZoom( 14 )
             else
-                if (( passedt.highway == "platform" ) and
-                    ( passedt.is_closed             )) then
+                if ( passedt.highway == "motorway_junction" ) then
                     Layer( "land1", true )
                     Attribute( "class", "highway_" .. passedt.highway )
+                    append_name( passedt )
                     append_ref_etc( passedt )
                     MinZoom( 14 )
                 else
-                    render_railway_land1( passedt )
-                end -- highway=platform 14
-            end -- highway=motorway_junction 14
-        end -- highway=board_realtime etc. 14
+                    if (( passedt.highway == "platform" ) and
+                        ( passedt.is_closed             )) then
+                        Layer( "land1", true )
+                        Attribute( "class", "highway_" .. passedt.highway )
+                        append_ref_etc( passedt )
+                        MinZoom( 14 )
+                    else
+                        render_railway_land1( passedt )
+                    end -- highway=platform ref 14
+                end -- highway=motorway_junction name and ref  14
+            end -- highway=board_realtime etc. name and ele 14
+        end -- highway=ford name 14
     end -- highway=pedestrian 12
 end -- render_highway_land1()
 
@@ -13262,6 +13270,7 @@ function render_railway_land1( passedt )
     end -- railway=station 11
 end -- render_railway_land1()
 
+
 function render_aerialway_land1( passedt )
     if ( passedt.aerialway == "station" ) then
         Layer( "land1", true )
@@ -13272,6 +13281,7 @@ function render_aerialway_land1( passedt )
         render_historic_land1( passedt )
     end -- aerialway=station 12
 end -- render_aerialway_land1()
+
 
 function render_historic_land1( passedt )
 -- ----------------------------------------------------------------------------
