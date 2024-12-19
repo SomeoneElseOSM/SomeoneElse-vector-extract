@@ -442,11 +442,24 @@ function way_function()
 -- "generic_after_function", but we don't want that to have a go at showing
 -- linear ones as areas, so we remove those here.  We do want it to do points,
 -- which the "generic_after_function( nodet )" call above will do.
+--
+-- If something is a runway and is a closed way we can assume that what has
+-- been mapped is the outline of the area of the linear runway (because
+-- although "circular runways" are a concept -
+-- https://en.wikipedia.org/wiki/Endless_runway - they are not not a thing
+-- right now.  However, closed circular taxiways are very much a thing, and
+-- so we also check the "area" tag there.  Unless area=yes is explicitly set,
+-- we assume that a taxiway is linear.
 -- ----------------------------------------------------------------------------
     if ((  not wayt.is_closed              ) and
         (( wayt.aeroway == "grass_runway" )  or
          ( wayt.aeroway == "runway"       )  or
          ( wayt.aeroway == "taxiway"      ))) then
+        wayt.aeroway = nil
+    end
+
+    if (( wayt.aeroway == "taxiway"  ) and
+        ( wayt.area    ~= "yes"      )) then
         wayt.aeroway = nil
     end
 

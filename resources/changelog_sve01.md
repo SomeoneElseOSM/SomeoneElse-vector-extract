@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+If an `aeroway=taxiway` has not been explicitly declared as an area, assume it is linear.
+
 ## 18/12/2024
 Extract `highway=ford` for point fords.
 Changed the minzoom on `highway=motorway_junction` extraction to 10.
