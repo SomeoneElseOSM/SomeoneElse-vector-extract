@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 If an `aeroway=taxiway` has not been explicitly declared as an area, assume it is linear.
+Handle intermittent drains and ditches, sending them through as `intdrain` and `intditch` respectively.
 
 ## 18/12/2024
 Extract `highway=ford` for point fords.

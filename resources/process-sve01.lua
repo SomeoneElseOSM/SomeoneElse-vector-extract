@@ -5740,6 +5740,22 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
+-- Display intermittent drains as "intdrain"
+-- ----------------------------------------------------------------------------
+   if (( passedt.waterway     == "drain"  )  and
+       ( passedt.intermittent == "yes"    )) then
+      passedt.waterway = "intdrain"
+   end
+
+-- ----------------------------------------------------------------------------
+-- Display intermittent ditches as "intditch"
+-- ----------------------------------------------------------------------------
+   if (( passedt.waterway     == "ditch"  )  and
+       ( passedt.intermittent == "yes"    )) then
+      passedt.waterway = "intditch"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Display "location=underground" waterways as tunnels.
 --
 -- There are currently no "location=overground" waterways that are not
