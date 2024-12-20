@@ -391,7 +391,7 @@ function way_function()
 -- The assignment of local variables is done by the example code, I'm guessing
 -- for reasons of speed.
 -- ----------------------------------------------------------------------------
-    wayt.highway = fix_corridors( wayt.highway, wayt.layer, wayt.level )
+    fix_corridors_t( wayt )
 
 -- ----------------------------------------------------------------------------
 -- Consolidate some rare highway types into ones we can display.
@@ -635,7 +635,7 @@ function relation_function()
          if ((  relationt.name        ~= nil     ) and
              (  relationt.name        ~= ""      ) and
              (( relationt.nameCsigned == "no"   )  or
-              ( relationt.nameCabsent == "yes"  )  or
+              ( relationt["name:absent"] == "yes"  )  or
               ( relationt.unsigned    == "yes"  )  or
               ( relationt.unsigned    == "name" ))) then
             relationt.name = nil
@@ -693,19 +693,19 @@ end  -- relation_function()
 
 function update_table( passedt )
     passedt.LPG = Find("LPG")
-    passedt.abandonedCamenity = Find("abandoned:amenity")
-    passedt.abandonedCrailway = Find("abandoned:railway")
-    passedt.abandonedCwaterway = Find("abandoned:waterway")
+    passedt["abandoned:amenity"] = Find("abandoned:amenity")
+    passedt["abandoned:railway"] = Find("abandoned:railway")
+    passedt["abandoned:waterway"] = Find("abandoned:waterway")
     passedt.access = Find("access")
-    passedt.accessCbicycle = Find("access:bicycle")
-    passedt.accessCcovid19 = Find("access:covid19")
-    passedt.accessCfoot = Find("access:foot")
-    passedt.accessChorse = Find("access:horse")
+    passedt["access:bicycle"] = Find("access:bicycle")
+    passedt["access:covid19"] = Find("access:covid19")
+    passedt["access:foot"] = Find("access:foot")
+    passedt["access:horse"] = Find("access:horse")
     passedt.accommodation = Find("accommodation")
-    passedt.addrChousename = Find("addr:housename")
-    passedt.addrChousenumber = Find("addr:housenumber")
-    passedt.addrCunit = Find("addr:unit")
-    passedt.adminCref = Find("admin:ref")
+    passedt["addr:housename"] = Find("addr:housename")
+    passedt["addr:housenumber"] = Find("addr:housenumber")
+    passedt["addr:unit"] = Find("addr:unit")
+    passedt["admin:ref"] = Find("admin:ref")
     passedt.admin_ref = Find("admin_ref")
     passedt.advertising = Find("advertising")
     passedt.aerialway = Find("aerialway")
@@ -719,27 +719,27 @@ function update_table( passedt )
     passedt.animal = Find("animal")
     passedt.archaeological_site = Find("archaeological_site")
     passedt.area = Find("area")
-    passedt.areaChighway = Find("area:highway")
+    passedt["area:highway"] = Find("area:highway")
     passedt.attraction = Find("attraction")
     passedt.barrier = Find("barrier")
     passedt.basin = Find("basin")
     passedt.beer_garden = Find("beer_garden")
     passedt.bench = Find("bench")
     passedt.bicycle = Find("bicycle")
-    passedt.boardCtitle = Find("board:title")
+    passedt["board:title"] = Find("board:title")
     passedt.board_type = Find("board_type")
     passedt.booth = Find("booth")
     passedt.boundary = Find("boundary")
     passedt.brand = Find("brand")
     passedt.bridge = Find("bridge")
-    passedt.bridgeCname = Find("bridge:name")
-    passedt.bridgeCref = Find("bridge:ref")
+    passedt["bridge:name"] = Find("bridge:name")
+    passedt["bridge:ref"] = Find("bridge:ref")
     passedt.bridge_name = Find("bridge_name")
     passedt.bridge_ref = Find("bridge_ref")
     passedt.building = Find("building")
-    passedt.buildingCpart = Find("building:part")
-    passedt.buildingCruins = Find("building:ruins")
-    passedt.buildingCtype = Find("building:type")
+    passedt["building:part"] = Find("building:part")
+    passedt["building:ruins"] = Find("building:ruins")
+    passedt["building:type"] = Find("building:type")
     passedt.bulk_purchase = Find("bulk_purchase")
     passedt.bus_display_name = Find("bus_display_name")
     passedt.bus_speech_output_name = Find("bus_speech_output_name")
@@ -760,13 +760,13 @@ function update_table( passedt )
     passedt.crossing = Find("crossing")
     passedt.cuisine = Find("cuisine")
     passedt.cycleway = Find("cycleway")
-    passedt.danceCteaching = Find("dance:teaching")
+    passedt["dance:teaching"] = Find("dance:teaching")
     passedt.defensive_works = Find("defensive_works")
-    passedt.demolishedCamenity = Find("demolished:amenity")
+    passedt["demolished:amenity"] = Find("demolished:amenity")
     passedt.denomination = Find("denomination")
     passedt.departures_board = Find("departures_board")
     passedt.departures_boardCspeech_output = Find("departures_board:speech_output")
-    passedt.descriptionCfloor = Find("description:floor")
+    passedt["description:floor"] = Find("description:floor")
     passedt.designation = Find("designation")
     passedt.diplomatic = Find("diplomatic")
     passedt.direction_east = Find("direction_east")
@@ -780,12 +780,12 @@ function update_table( passedt )
     passedt.disused = Find("disused")
     passedt["disused:aeroway"] = Find("disused:aeroway")
     passedt["disused:amenity"] = Find("disused:amenity")
-    passedt.disusedCbuilding = Find("disused:building")
-    passedt.disusedChighway = Find("disused:highway")
+    passedt["disused:building"] = Find("disused:building")
+    passedt["disused:highway"] = Find("disused:highway")
     passedt["disused:landuse"] = Find("disused:landuse")
-    passedt.disusedCman_made = Find("disused:man_made")
-    passedt.disusedCmilitary = Find("disused:military")
-    passedt.disusedCpub = Find("disused:pub")
+    passedt["disused:man_made"] = Find("disused:man_made")
+    passedt["disused:military"] = Find("disused:military")
+    passedt["disused:pub"] = Find("disused:pub")
     passedt["disused:railway"] = Find("disused:railway")
     passedt["disused:shop"] = Find("disused:shop")
     passedt.disusedCtourism = Find("disused:tourism")
@@ -899,12 +899,12 @@ function update_table( passedt )
     passedt.motor_vehicle = Find("motor_vehicle")
     passedt.munro = Find("munro")
     passedt.name = Find("name")
-    passedt.nameCabsent = Find("name:absent")
-    passedt.nameCen = Find("name:en")
-    passedt.nameChistoric = Find("name:historic")
-    passedt.nameCleft = Find("name:left")
-    passedt.nameCright = Find("name:right")
-    passedt.nameCsigned = Find("name:signed")
+    passedt["name:absent"] = Find("name:absent")
+    passedt["name:en"] = Find("name:en")
+    passedt["name:historic"] = Find("name:historic")
+    passedt["name:left"] = Find("name:left")
+    passedt["name:right"] = Find("name:right")
+    passedt["name:signed"] = Find("name:signed")
     passedt.naptanCBusStopType = Find("naptan:BusStopType")
     passedt.naptanCindicator = Find("naptan:indicator")
     passedt.natural = Find("natural")
@@ -1066,30 +1066,30 @@ function generic_before_function( passedt )
 -- indoor=corridor as a closed way.  highway=corridor is not documented there
 -- but is used for corridors.  We'll only process layer or level 0 (or nil)
 -- ----------------------------------------------------------------------------
-   passedt.highway = fix_corridors( passedt.highway, passedt.layer, passedt.level )
+   fix_corridors_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- If there are different names on each side of the street, we create one name
 -- containing both.
 -- If "name" does not exist but "name:en" does, use that.
 -- ----------------------------------------------------------------------------
-   passedt.name = set_name_left_right_en( passedt.name, passedt.nameCleft, passedt.nameCright, passedt.nameCen )
+   set_name_left_right_en_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Move refs to consider as "official" to official_ref
 -- ----------------------------------------------------------------------------
-   passedt.official_ref = set_official_ref( passedt.official_ref, passedt.highway_authority_ref, passedt.highway_ref, passedt.admin_ref, passedt.adminCref, passedt.loc_ref, passedt.ref )
+   set_official_ref_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- "Sabristas" sometimes add dubious names to motorway junctions.  Don't show
 -- them if they're not signed.
 -- ----------------------------------------------------------------------------
-   passedt.name = suppress_unsigned_motorway_junctions( passedt.name, passedt.highway, passedt.nameCsigned, passedt.nameCabsent, passedt.unsigned )
+   passedt.name = suppress_unsigned_motorway_junctions( passedt.name, passedt.highway, passedt["name:signed"], passedt["name:absent"], passedt.unsigned )
 
 -- ----------------------------------------------------------------------------
 -- Move unsigned road refs to the name, in brackets.
 -- ----------------------------------------------------------------------------
-   t = { passedt.name, passedt.highway, passedt.nameCsigned, passedt.nameCabsent, passedt.official_ref, passedt.ref, passedt.refCsigned, passedt.unsigned }
+   t = { passedt.name, passedt.highway, passedt["name:signed"], passedt["name:absent"], passedt.official_ref, passedt.ref, passedt.refCsigned, passedt.unsigned }
    suppress_unsigned_road_refs( t )
 
    if ( t[1] ~= nil ) then
@@ -1101,11 +1101,11 @@ function generic_before_function( passedt )
    end
 
    if ( t[3] ~= nil ) then
-      passedt.nameCsigned = t[3]
+      passedt["name:signed"] = t[3]
    end
 
    if ( t[4] ~= nil ) then
-      passedt.nameCabsent = t[4]
+      passedt["name:absent"] = t[4]
    end
 
    if ( t[5] ~= nil ) then
@@ -1401,18 +1401,18 @@ function generic_before_function( passedt )
 -- processing, but may be used by the main style, as "foot", "bicycle" and 
 -- "horse" are all in as columns.
 -- ----------------------------------------------------------------------------
-   if (passedt.accessCfoot == "yes") then
-      passedt.accessCfoot = nil
+   if (passedt["access:foot"] == "yes") then
+      passedt["access:foot"] = nil
       passedt.foot = "yes"
    end
 
-   if (passedt.accessCbicycle == "yes") then
-      passedt.accessCbicycle = nil
+   if (passedt["access:bicycle"] == "yes") then
+      passedt["access:bicycle"] = nil
       passedt.bicycle = "yes"
    end
 
-   if (passedt.accessChorse == "yes") then
-      passedt.accessChorse = nil
+   if (passedt["access:horse"] == "yes") then
+      passedt["access:horse"] = nil
       passedt.horse = "yes"
    end
 
@@ -2128,8 +2128,8 @@ function generic_before_function( passedt )
        (    passedt.railway          == "wash"            ) or
        (    passedt.building         == "canopy"          ) or
        (    passedt.building         == "car_port"        ) or
-       (((( passedt.disusedCbuilding ~= nil            )    and
-          ( passedt.disusedCbuilding ~= ""             ))   or
+       (((( passedt["disused:building"] ~= nil            )    and
+          ( passedt["disused:building"] ~= ""             ))   or
          (  passedt.amenity          == "parcel_locker" )   or
          (  passedt.amenity          == "zooaviary"     )   or
          (  passedt.animal           == "horse_walker"  )   or
@@ -2137,7 +2137,7 @@ function generic_before_function( passedt )
          (  passedt.leisure          == "bandstand"     )) and
         ((  passedt.building         == nil             )  and
          (  passedt.building         == ""              ))) or
-       (    passedt.buildingCtype    == "canopy"          ) or
+       (    passedt["building:type"]    == "canopy"          ) or
        ((   passedt.covered          == "roof"           )  and
         ((  passedt.building         == nil             )   or
          (  passedt.building         == ""              ))  and
@@ -2146,7 +2146,7 @@ function generic_before_function( passedt )
         ((  passedt.tourism          == nil             )   or
          (  passedt.tourism          == ""              )))) then
       passedt.building      = "roof"
-      passedt.buildingCtype = nil
+      passedt["building:type"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -2165,16 +2165,16 @@ function generic_before_function( passedt )
       end
    end
 
-   if ((( passedt.disusedCman_made == "watermill")  or
-        ( passedt.disusedCman_made == "windmill" )) and
+   if ((( passedt["disused:man_made"] == "watermill")  or
+        ( passedt["disused:man_made"] == "windmill" )) and
        (( passedt.amenity          == nil        )  or
         ( passedt.amenity          == ""         )) and
        (( passedt.man_made         == nil        )  or
         ( passedt.man_made         == ""         )) and
        (( passedt.shop             == nil        )  or
         ( passedt.shop             == ""         ))) then
-      passedt.historic = passedt.disusedCman_made
-      passedt.disusedCman_made = nil
+      passedt.historic = passedt["disused:man_made"]
+      passedt["disused:man_made"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -2779,8 +2779,8 @@ function generic_before_function( passedt )
 		  	   else
                               if (( passedt["disused:amenity"]    == "telephone"        )  or
                                   ( passedt.removedCamenity    == "telephone"        )  or
-                                  ( passedt.abandonedCamenity  == "telephone"        )  or
-                                  ( passedt.demolishedCamenity == "telephone"        )  or
+                                  ( passedt["abandoned:amenity"]  == "telephone"        )  or
+                                  ( passedt["demolished:amenity"] == "telephone"        )  or
                                   ( passedt.razedCamenity      == "telephone"        )  or
                                   ( passedt.old_amenity        == "telephone"        )  or
                                   ( passedt.historicCamenity   == "telephone"        )  or
@@ -3242,7 +3242,7 @@ function generic_before_function( passedt )
          (  passedt.historic == "pillbox"                     )   or
          (  passedt.building == "pillbox"                     ))  and
         (   passedt.military == nil                            )) or
-       ((   passedt.disusedCmilitary == "bunker"               )  and
+       ((   passedt["disused:military"] == "bunker"               )  and
         ((  passedt.military         == nil                   )   or
          (  passedt.military         == ""                    ))) or
        (((  passedt.military         == "bunker"              )   or
@@ -3253,7 +3253,7 @@ function generic_before_function( passedt )
           ( passedt.historic         ~= "no"                 ))))) then
       passedt.historic = "bunker"
       passedt.disused = nil
-      passedt.disusedCmilitary = nil
+      passedt["disused:military"] = nil
       passedt.military = nil
       passedt.ruins = nil
       passedt.tourism  = nil
@@ -3833,10 +3833,10 @@ function generic_before_function( passedt )
       passedt.garden = "beer_garden"
    end
 
-   if ((  passedt.abandonedCamenity == "pub"             )   or
+   if ((  passedt["abandoned:amenity"] == "pub"             )   or
        (  passedt.amenityCdisused   == "pub"             )   or
        (  passedt.disused           == "pub"             )   or
-       (  passedt.disusedCpub       == "yes"             )   or
+       (  passedt["disused:pub"]       == "yes"             )   or
        (  passedt.former_amenity    == "former_pub"      )   or
        (  passedt.former_amenity    == "pub"             )   or
        (  passedt.former_amenity    == "old_pub"         )   or
@@ -3845,7 +3845,7 @@ function generic_before_function( passedt )
       passedt["disused:amenity"] = "pub"
       passedt.amenityCdisused = nil
       passedt.disused = nil
-      passedt.disusedCpub = nil
+      passedt["disused:pub"] = nil
       passedt.former_amenity = nil
       passedt.old_amenity = nil
    end
@@ -3871,7 +3871,7 @@ function generic_before_function( passedt )
       passedt["disused:amenity"] = "pub"
       passedt.amenityCdisused = nil
       passedt.disused = nil
-      passedt.disusedCpub = nil
+      passedt["disused:pub"] = nil
       passedt.former_amenity = nil
       passedt.old_amenity = nil
       passedt.amenity = nil
@@ -3960,8 +3960,8 @@ function generic_before_function( passedt )
 -- Wheelchair	      y, l, n or d
 -- Beer Garden	      g (beer garden), o (outside seating), d (don't know)
 -- ----------------------------------------------------------------------------
-   if ((( passedt.descriptionCfloor ~= nil                 )  and
-        ( passedt.descriptionCfloor ~= ""                  )) or
+   if ((( passedt["description:floor"] ~= nil                 )  and
+        ( passedt["description:floor"] ~= ""                  )) or
        (  passedt.floorCmaterial    == "brick"              ) or
        (  passedt.floorCmaterial    == "brick;concrete"     ) or
        (  passedt.floorCmaterial    == "concrete"           ) or
@@ -4011,7 +4011,7 @@ function generic_before_function( passedt )
    if ((  passedt.amenity               == "pub"        ) and
        (( passedt.opening_hoursCcovid19 == "off"       ) or
         ( passedt.opening_hoursCcovid19 == "closed"    ) or
-        ( passedt.accessCcovid19        == "no"        ))) then
+        ( passedt["access:covid19"]        == "no"        ))) then
       passedt.amenity = "pub_cddddddd"
       passedt.real_ale = nil
    end
@@ -5561,7 +5561,7 @@ function generic_before_function( passedt )
        (   passedt.historic           == "leat"            ) or
        (   passedt["disused:waterway"]   == "canal"           ) or
        (   passedt.disused            == "canal"           ) or
-       (   passedt.abandonedCwaterway == "canal"           ) or
+       (   passedt["abandoned:waterway"] == "canal"           ) or
        (   passedt.waterway           == "disused_canal"   ) or
        (   passedt.waterway           == "historic_canal"  ) or
        (   passedt.waterway           == "abandoned_canal" ) or
@@ -5588,9 +5588,9 @@ function generic_before_function( passedt )
    if ((  passedt.waterway      == "derelict_canal"  ) and
        (( passedt.name          == nil              )  or
         ( passedt.name          == ""               )) and
-       (  passedt.nameChistoric ~= nil               ) and
-       (  passedt.nameChistoric ~= ""                )) then
-      passedt.name = passedt.nameChistoric
+       (  passedt["name:historic"] ~= nil               ) and
+       (  passedt["name:historic"] ~= ""                )) then
+      passedt.name = passedt["name:historic"]
    end
 
    if ((  passedt.waterway      == "derelict_canal"  ) and
@@ -5812,7 +5812,7 @@ function generic_before_function( passedt )
          (   passedt.ruins           == "farm_auxiliary" )    or
          (   passedt.ruins           == "farmhouse"      )))  or
        (     passedt.ruinsCbuilding  == "yes"              )  or
-       (     passedt.buildingCruins  == "yes"              )  or
+       (     passedt["building:ruins"]  == "yes"              )  or
        (     passedt.ruinedCbuilding == "yes"              )  or
        (     passedt.building        == "collapsed"        )) then
       passedt.building = "ruins"
@@ -5872,9 +5872,9 @@ function generic_before_function( passedt )
 -- First make sure that we treat historic ones also tagged as man_made 
 -- as historic
 -- ----------------------------------------------------------------------------
-   if (((( passedt.disusedCman_made == "mine"       )  or
-         ( passedt.disusedCman_made == "mineshaft"  )  or
-         ( passedt.disusedCman_made == "mine_shaft" )) and
+   if (((( passedt["disused:man_made"] == "mine"       )  or
+         ( passedt["disused:man_made"] == "mineshaft"  )  or
+         ( passedt["disused:man_made"] == "mine_shaft" )) and
         (( passedt.man_made         == nil          )  or
          ( passedt.man_made         == ""           ))) or
        ((( passedt.man_made == "mine"               )  or
@@ -5889,7 +5889,7 @@ function generic_before_function( passedt )
          ( passedt.disused  == "yes"                )))) then
       passedt.historic = "mineshaft"
       passedt.man_made = nil
-      passedt.disusedCman_made = nil
+      passedt["disused:man_made"] = nil
       passedt.tourism  = nil
    end
 
@@ -6579,10 +6579,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If set, move bridge:name to bridge_name
 -- ----------------------------------------------------------------------------
-   if (( passedt.bridgeCname ~= nil ) and
-       ( passedt.bridgeCname ~= ""  )) then
-      passedt.bridge_name = passedt.bridgeCname
-      passedt.bridgeCname = nil
+   if (( passedt["bridge:name"] ~= nil ) and
+       ( passedt["bridge:name"] ~= ""  )) then
+      passedt.bridge_name = passedt["bridge:name"]
+      passedt["bridge:name"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -6597,10 +6597,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If set, move bridge:ref to bridge_ref
 -- ----------------------------------------------------------------------------
-   if (( passedt.bridgeCref ~= nil ) and
-       ( passedt.bridgeCref ~= ""  )) then
-      passedt.bridge_ref = passedt.bridgeCref
-      passedt.bridgeCref = nil
+   if (( passedt["bridge:ref"] ~= nil ) and
+       ( passedt["bridge:ref"] ~= ""  )) then
+      passedt.bridge_ref = passedt["bridge:ref"]
+      passedt["bridge:ref"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -7282,9 +7282,9 @@ function generic_before_function( passedt )
         ( passedt.tourism     == "militarysign"               ))  and
        (( passedt.name        == nil                          )   or
         ( passedt.name        == ""                           ))  and
-       (  passedt.boardCtitle ~= nil                           )  and
-       (  passedt.boardCtitle ~= ""                            )) then
-      passedt.name = passedt.boardCtitle
+       (  passedt["board:title"] ~= nil                           )  and
+       (  passedt["board:title"] ~= ""                            )) then
+      passedt.name = passedt["board:title"]
    end
 
    if (((  passedt.tourism     == "information"                       )  and
@@ -7416,7 +7416,7 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Render historic railway stations.
 -- ----------------------------------------------------------------------------
-   if ((( passedt.abandonedCrailway == "station"             )  or
+   if ((( passedt["abandoned:railway"] == "station"             )  or
         ( passedt["disused:railway"]   == "station"             )  or
         ( passedt.historicCrailway  == "station"             )  or
         ( passedt.historic          == "railway_station"     )  or
@@ -10533,7 +10533,7 @@ function generic_before_function( passedt )
          ( passedt.amenity        == ""                ))  and
         (( passedt.shop           == nil               )   or
          ( passedt.shop           == ""                ))  and
-        (  passedt.danceCteaching == "yes"              )) or
+        (  passedt["dance:teaching"] == "yes"              )) or
        ( passedt.name     == "Bingo Hall"               ) or
        ( passedt.name     == "Castle Bingo"             ) or
        ( passedt.name     == "Gala Bingo"               ) or
@@ -11082,7 +11082,7 @@ function generic_before_function( passedt )
 
    if (((  passedt.man_made      == "tower"            ) or
         (  passedt.building      == "tower"            ) or
-        (  passedt.buildingCpart == "yes"              )) and
+        (  passedt["building:part"] == "yes"              )) and
         ((  passedt.towerCtype   == "spire"            )  or
          (  passedt.towerCtype   == "steeple"          )  or
          (  passedt.towerCtype   == "minaret"          )  or
@@ -11188,12 +11188,12 @@ function generic_before_function( passedt )
 -- We also show bus stands as disused bus stops - they are somewhere where you
 -- might expect to be able to get on a bus, but cannot.
 -- ----------------------------------------------------------------------------
-   if ((( passedt.disusedChighway    == "bus_stop"  )  and
+   if ((( passedt["disused:highway"]    == "bus_stop"  )  and
         ( passedt.physically_present == "yes"       )) or
        (  passedt.highway            == "bus_stand"  ) or
        (  passedt.amenity            == "bus_stand"  )) then
       passedt.highway = "bus_stop_disused_pole"
-      passedt.disusedChighway = nil
+      passedt["disused:highway"] = nil
       passedt.amenity = nil
 
       if (( passedt.name ~= nil ) and
@@ -11466,7 +11466,7 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Show traffic islands as kerbs
 -- ----------------------------------------------------------------------------
-   if (( passedt.areaChighway == "traffic_island" )  or
+   if (( passedt["area:highway"] == "traffic_island" )  or
        ( passedt.landuse      == "traffic_island" )) then
       passedt.barrier = "kerb"
    end
@@ -11482,8 +11482,8 @@ function generic_before_function( passedt )
    if ((  passedt.building       ~= nil   ) and
        (  passedt.building       ~= ""    ) and
        (  passedt.building       ~= "no"  ) and
-       (( passedt.addrChousename == nil  )  or
-        ( passedt.addrChousename == ""   )) and
+       (( passedt["addr:housename"] == nil  )  or
+        ( passedt["addr:housename"] == ""   )) and
        (  passedt.name           ~= nil   ) and
        (  passedt.name           ~= ""    ) and
        (( passedt.aeroway        == nil  )  or
@@ -11520,7 +11520,7 @@ function generic_before_function( passedt )
         ( passedt.tourism        == ""   )) and
        (( passedt.waterway       == nil  )  or
         ( passedt.waterway       == ""   ))) then
-      passedt.addrChousename = passedt.name
+      passedt["addr:housename"] = passedt.name
       passedt.name  = nil
       passedt.place = nil
    end
@@ -11528,13 +11528,13 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- addr:unit
 -- ----------------------------------------------------------------------------
-   if (( passedt.addrCunit ~= nil ) and
-       ( passedt.addrCunit ~= ""  )) then
-      if (( passedt.addrChousenumber ~= nil ) and
-          ( passedt.addrChousenumber ~= ""  )) then
-         passedt.addrChousenumber = passedt.addrCunit .. ", " .. passedt.addrChousenumber
+   if (( passedt["addr:unit"] ~= nil ) and
+       ( passedt["addr:unit"] ~= ""  )) then
+      if (( passedt["addr:housenumber"] ~= nil ) and
+          ( passedt["addr:housenumber"] ~= ""  )) then
+         passedt["addr:housenumber"] = passedt["addr:unit"] .. ", " .. passedt["addr:housenumber"]
       else
-         passedt.addrChousenumber = passedt.addrCunit
+         passedt["addr:housenumber"] = passedt["addr:unit"]
       end
    end
 
@@ -11789,14 +11789,14 @@ function generic_after_building( passedt )
         Attribute( "class", "building_" .. passedt.building )
         append_name( passedt )
 
-        if (( passedt.addrChousenumber ~= nil )   and
-            ( passedt.addrChousenumber ~= ""  ))  then
-            Attribute( "housenumber", passedt.addrChousenumber )
+        if (( passedt["addr:housenumber"] ~= nil )   and
+            ( passedt["addr:housenumber"] ~= ""  ))  then
+            Attribute( "housenumber", passedt["addr:housenumber"] )
         end
 
-        if (( passedt.addrChousename ~= nil )   and
-            ( passedt.addrChousename ~= ""  ))  then
-            Attribute( "housename", passedt.addrChousename )
+        if (( passedt["addr:housename"] ~= nil )   and
+            ( passedt["addr:housename"] ~= ""  ))  then
+            Attribute( "housename", passedt["addr:housename"] )
         end
     end
 end -- generic_after_building()
