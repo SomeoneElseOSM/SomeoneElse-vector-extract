@@ -396,7 +396,7 @@ function way_function()
 -- ----------------------------------------------------------------------------
 -- Consolidate some rare highway types into ones we can display.
 -- ----------------------------------------------------------------------------
-    wayt.highway = process_golf_tracks( wayt.highway, wayt.golf )
+    process_golf_tracks_t( wayt )
 
 -- ----------------------------------------------------------------------------
 -- Remove landuse=military from non-closed ways
@@ -1084,45 +1084,12 @@ function generic_before_function( passedt )
 -- "Sabristas" sometimes add dubious names to motorway junctions.  Don't show
 -- them if they're not signed.
 -- ----------------------------------------------------------------------------
-   passedt.name = suppress_unsigned_motorway_junctions( passedt.name, passedt.highway, passedt["name:signed"], passedt["name:absent"], passedt.unsigned )
+   suppress_unsigned_motorway_junctions_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Move unsigned road refs to the name, in brackets.
 -- ----------------------------------------------------------------------------
-   t = { passedt.name, passedt.highway, passedt["name:signed"], passedt["name:absent"], passedt.official_ref, passedt.ref, passedt.refCsigned, passedt.unsigned }
-   suppress_unsigned_road_refs( t )
-
-   if ( t[1] ~= nil ) then
-      passedt.name = t[1]
-   end
-
-   if ( t[2] ~= nil ) then
-      passedt.highway = t[2]
-   end
-
-   if ( t[3] ~= nil ) then
-      passedt["name:signed"] = t[3]
-   end
-
-   if ( t[4] ~= nil ) then
-      passedt["name:absent"] = t[4]
-   end
-
-   if ( t[5] ~= nil ) then
-      passedt.official_ref = t[5]
-   end
-
-   if ( t[6] ~= nil ) then
-      passedt.ref = t[6]
-   end
-
-   if ( t[7] ~= nil ) then
-      passedt.refCsigned = t[7]
-   end
-
-   if ( t[8] ~= nil ) then
-      passedt.unsigned = t[8]
-   end
+   suppress_unsigned_road_refs_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Show natural=bracken as scrub
@@ -2505,7 +2472,7 @@ function generic_before_function( passedt )
 -- Handle place=quarter
 -- Handle natural=cape etc. as place=locality if no other place tag.
 -- ----------------------------------------------------------------------------
-   passedt.place = consolidate_place( passedt.place, passedt.natural )
+   consolidate_place_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Handle shoals, either as mud or reef
