@@ -34,7 +34,7 @@ node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "b
               "military", "natural", "ncn_milepost", 
               "office", "pipeline", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
-              "sport", "tourism", "tunnel", "waterway", "whitewater", "zoo" }
+              "sport", "tourism", "tunnel", "was:amenity", "waterway", "whitewater", "zoo" }
 
 -- Initialize Lua logic
 
@@ -749,8 +749,8 @@ function update_table( passedt )
     passedt.capital = Find("capital")
     passedt.castle_type = Find("castle_type")
     passedt.climbing = Find("climbing")
-    passedt.closedCamenity = Find("closed:amenity")
-    passedt.closedCshop = Find("closed:shop")
+    passedt["closed:amenity"] = Find("closed:amenity")
+    passedt["closed:shop"] = Find("closed:shop")
     passedt.club = Find("club")
     passedt.colour = Find("colour")
     passedt.company = Find("company")
@@ -778,18 +778,18 @@ function update_table( passedt )
     passedt.direction_southwest = Find("direction_southwest")
     passedt.direction_west = Find("direction_west")
     passedt.disused = Find("disused")
-    passedt.disusedCaeroway = Find("disused:aeroway")
+    passedt["disused:aeroway"] = Find("disused:aeroway")
     passedt["disused:amenity"] = Find("disused:amenity")
     passedt.disusedCbuilding = Find("disused:building")
     passedt.disusedChighway = Find("disused:highway")
-    passedt.disusedClanduse = Find("disused:landuse")
+    passedt["disused:landuse"] = Find("disused:landuse")
     passedt.disusedCman_made = Find("disused:man_made")
     passedt.disusedCmilitary = Find("disused:military")
     passedt.disusedCpub = Find("disused:pub")
-    passedt.disusedCrailway = Find("disused:railway")
-    passedt.disusedCshop = Find("disused:shop")
+    passedt["disused:railway"] = Find("disused:railway")
+    passedt["disused:shop"] = Find("disused:shop")
     passedt.disusedCtourism = Find("disused:tourism")
-    passedt.disusedCwaterway = Find("disused:waterway")
+    passedt["disused:waterway"] = Find("disused:waterway")
     passedt.dog_gate = Find("dog_gate")
     passedt.drinking_water = Find("drinking_water")
     passedt.ele = Find("ele")
@@ -1020,12 +1020,12 @@ function update_table( passedt )
     passedt.visibility = Find("visibility")
     passedt.volcanoCstatus = Find("volcano:status")
     passedt.wall = Find("wall")
-    passedt.wasCaeroway = Find("was:aeroway")
-    passedt.wasCamenity = Find("was:amenity")
-    passedt.wasClanduse = Find("was:landuse")
-    passedt.wasCrailway = Find("was:railway")
-    passedt.wasCshop = Find("was:shop")
-    passedt.wasCwaterway = Find("was:waterway")
+    passedt["was:aeroway"] = Find("was:aeroway")
+    passedt["was:amenity"] = Find("was:amenity")
+    passedt["was:landuse"] = Find("was:landuse")
+    passedt["was:railway"] = Find("was:railway")
+    passedt["was:shop"] = Find("was:shop")
+    passedt["was:waterway"] = Find("was:waterway")
     passedt.water = Find("water")
     passedt.watermillCdisused = Find("watermill:disused")
     passedt.waterway = Find("waterway")
@@ -1057,71 +1057,7 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Treat "was:" as "disused:"
 -- ----------------------------------------------------------------------------
-   if ((  passedt.wasCamenity     ~= nil  ) and
-       (  passedt.wasCamenity     ~= ""   ) and
-       (( passedt["disused:amenity"] == nil )  or
-        ( passedt["disused:amenity"] == ""  ))) then
-      passedt["disused:amenity"] = passedt.wasCamenity
-   end
-
-   if ((  passedt.wasCwaterway     ~= nil  ) and
-       (  passedt.wasCwaterway     ~= ""   ) and
-       (( passedt.disusedCwaterway == nil )  or
-        ( passedt.disusedCwaterway == ""  ))) then
-      passedt.disusedCwaterway = passedt.wasCwaterway
-   end
-
-   if ((  passedt.wasCrailway     ~= nil  ) and
-       (  passedt.wasCrailway     ~= ""   ) and
-       (( passedt.disusedCrailway == nil )  or
-        ( passedt.disusedCrailway == ""  ))) then
-      passedt.disusedCrailway = passedt.wasCrailway
-   end
-
-   if ((  passedt.wasCaeroway     ~= nil  ) and
-       (  passedt.wasCaeroway     ~= ""   ) and
-       (( passedt.disusedCaeroway == nil )  or
-        ( passedt.disusedCaeroway == ""  ))) then
-      passedt.disusedCaeroway = passedt.wasCaeroway
-   end
-
-   if ((  passedt.wasClanduse     ~= nil  ) and
-       (  passedt.wasClanduse     ~= ""   ) and
-       (( passedt.disusedClanduse == nil )  or
-        ( passedt.disusedClanduse == ""  ))) then
-      passedt.disusedClanduse = passedt.wasClanduse
-   end
-
-   if ((  passedt.wasCshop     ~= nil  ) and
-       (  passedt.wasCshop     ~= ""   ) and
-       (( passedt.disusedCshop == nil )  or
-        ( passedt.disusedCshop == ""  ))) then
-      passedt.disusedCshop = passedt.wasCshop
-   end
-
--- ----------------------------------------------------------------------------
--- Treat "closed:" as "disused:" in some cases too.
--- ----------------------------------------------------------------------------
-   if ((  passedt.closedCamenity  ~= nil  ) and
-       (  passedt.closedCamenity  ~= ""   ) and
-       (( passedt["disused:amenity"] == nil )  or
-        ( passedt["disused:amenity"] == ""  ))) then
-      passedt["disused:amenity"] = passedt.closedCamenity
-   end
-
-   if ((  passedt.closedCshop  ~= nil  ) and
-       (  passedt.closedCshop  ~= ""   ) and
-       (( passedt.disusedCshop == nil )  or
-        ( passedt.disusedCshop == ""  ))) then
-      passedt.disusedCshop = passedt.closedCshop
-   end
-
--- ----------------------------------------------------------------------------
--- Treat "status=abandoned" as "disused=yes"
--- ----------------------------------------------------------------------------
-   if ( passedt.status == "abandoned" ) then
-      passedt.disused = "yes"
-   end
+   treat_was_as_disused_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Before processing footways, turn certain corridors into footways
@@ -2849,7 +2785,7 @@ function generic_before_function( passedt )
                                   ( passedt.old_amenity        == "telephone"        )  or
                                   ( passedt.historicCamenity   == "telephone"        )  or
                                   ( passedt.disused            == "telephone"        )  or
-                                  ( passedt.wasCamenity        == "telephone"        )  or
+                                  ( passedt["was:amenity"]        == "telephone"        )  or
                                   ( passedt.oldCamenity        == "telephone"        )  or
                                   ( passedt.amenity            == "former_telephone" )  or
                                   ( passedt.historic           == "telephone"        )) then
@@ -5623,7 +5559,7 @@ function generic_before_function( passedt )
    if ((   passedt.historic           == "canal"           ) or
        (   passedt.historicCwaterway  == "canal"           ) or
        (   passedt.historic           == "leat"            ) or
-       (   passedt.disusedCwaterway   == "canal"           ) or
+       (   passedt["disused:waterway"]   == "canal"           ) or
        (   passedt.disused            == "canal"           ) or
        (   passedt.abandonedCwaterway == "canal"           ) or
        (   passedt.waterway           == "disused_canal"   ) or
@@ -6311,7 +6247,7 @@ function generic_before_function( passedt )
 -- Send railway=water_crane through as "historic"
 -- ----------------------------------------------------------------------------
    if ((( passedt.railway          == "water_crane" ) or
-        ( passedt.disusedCrailway  == "water_crane" )) and
+        ( passedt["disused:railway"]  == "water_crane" )) and
        (( passedt.historic         == nil           )  or
         ( passedt.historic         == ""            )  or
         ( passedt.historic         == "yes"         ))) then
@@ -6530,7 +6466,7 @@ function generic_before_function( passedt )
        (   passedt.historic == "tower_house"               ) or
        (   passedt.historic == "village"                   ) or
        (   passedt.historic == "workhouse"                 ) or
-       ((  passedt.disusedClanduse == "cemetery"          )  and
+       ((  passedt["disused:landuse"] == "cemetery"          )  and
         (( passedt.landuse         == nil                )   or
          ( passedt.landuse         == ""                 ))  and
         (( passedt.leisure         == nil                )   or
@@ -6539,7 +6475,7 @@ function generic_before_function( passedt )
          ( passedt.amenity         == ""                 )))) then
       passedt.historic = "nonspecific"
       passedt.tourism = nil
-      passedt.disusedClanduse = nil
+      passedt["disused:landuse"] = nil
 
       if ((( passedt.landuse == nil )  or
            ( passedt.landuse == ""  )) and
@@ -6730,7 +6666,7 @@ function generic_before_function( passedt )
    if (( passedt.railway == "platform" ) and
        ( passedt.disused == "yes"       )) then
       passedt.railway = nil
-      passedt.disusedCrailway = "platform"
+      passedt["disused:railway"] = "platform"
    end
 
 -- ----------------------------------------------------------------------------
@@ -7481,7 +7417,7 @@ function generic_before_function( passedt )
 -- Render historic railway stations.
 -- ----------------------------------------------------------------------------
    if ((( passedt.abandonedCrailway == "station"             )  or
-        ( passedt.disusedCrailway   == "station"             )  or
+        ( passedt["disused:railway"]   == "station"             )  or
         ( passedt.historicCrailway  == "station"             )  or
         ( passedt.historic          == "railway_station"     )  or
         ( passedt.railway           == "dismantled_colliery" )  or
@@ -10720,19 +10656,19 @@ function generic_before_function( passedt )
    if (( passedt.aeroway        == "aerodrome" ) and
        ( passedt.disused        == "yes"       )) then
       passedt.aeroway = nil
-      passedt.disusedCaeroway = "aerodrome"
+      passedt["disused:aeroway"] = "aerodrome"
    end
 
    if (( passedt.aeroway        == "runway" ) and
        ( passedt.disused        == "yes"       )) then
       passedt.aeroway = nil
-      passedt.disusedCaeroway = "runway"
+      passedt["disused:aeroway"] = "runway"
    end
 
    if (( passedt.aeroway        == "taxiway" ) and
        ( passedt.disused        == "yes"       )) then
       passedt.aeroway = nil
-      passedt.disusedCaeroway = "taxiway"
+      passedt["disused:aeroway"] = "taxiway"
    end
 
 -- ----------------------------------------------------------------------------
@@ -10741,7 +10677,7 @@ function generic_before_function( passedt )
 -- However, if there's a natural tag, that should take precendence, and 
 -- landuse is cleared.
 -- ----------------------------------------------------------------------------
-   if (((  passedt.disusedClanduse == "quarry"   )  and
+   if (((  passedt["disused:landuse"] == "quarry"   )  and
         (( passedt.landuse         == nil       )   or
          ( passedt.landuse         == ""        ))) or
        ((  passedt.historic        == "quarry"   )  and
@@ -11426,8 +11362,8 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Names for vacant shops
 -- ----------------------------------------------------------------------------
-   if ((((( passedt.disusedCshop    ~= nil        )    and
-          ( passedt.disusedCshop    ~= ""         ))   or
+   if ((((( passedt["disused:shop"]    ~= nil        )    and
+          ( passedt["disused:shop"]    ~= ""         ))   or
          (( passedt["disused:amenity"] ~= nil        )    and
           ( passedt["disused:amenity"] ~= ""         )))  and
          (  passedt["disused:amenity"] ~= "fountain"   )  and

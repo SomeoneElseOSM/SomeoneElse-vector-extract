@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Added "disused:amenity" to node keys so that these are processed into e.g. closed pubs.
+Added "disused:amenity" and "was:amenity" to node keys so that these are processed into e.g. closed pubs.
 
 ## 19/12/2024
 If an `aeroway=taxiway` has not been explicitly declared as an area, assume it is linear.
