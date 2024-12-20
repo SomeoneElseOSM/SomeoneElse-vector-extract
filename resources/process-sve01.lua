@@ -1052,7 +1052,7 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Invalid layer values - change them to something plausible.
 -- ----------------------------------------------------------------------------
-    passedt.layer = fix_invalid_layer_values( passedt.layer, passedt.bridge, passedt.embankment )
+    fix_invalid_layer_values_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Treat "was:" as "disused:"
