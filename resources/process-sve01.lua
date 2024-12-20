@@ -27,7 +27,7 @@ require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
-              "canoe", "climbing", "craft", "disused:military", "disused:railway", "emergency", 
+              "canoe", "climbing", "craft", "disused:amenity", "disused:military", "disused:railway", "emergency", 
               "entrance", "ford", "golf", "harbour", "historic", 
               "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
@@ -779,7 +779,7 @@ function update_table( passedt )
     passedt.direction_west = Find("direction_west")
     passedt.disused = Find("disused")
     passedt.disusedCaeroway = Find("disused:aeroway")
-    passedt.disusedCamenity = Find("disused:amenity")
+    passedt["disused:amenity"] = Find("disused:amenity")
     passedt.disusedCbuilding = Find("disused:building")
     passedt.disusedChighway = Find("disused:highway")
     passedt.disusedClanduse = Find("disused:landuse")
@@ -1059,9 +1059,9 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ((  passedt.wasCamenity     ~= nil  ) and
        (  passedt.wasCamenity     ~= ""   ) and
-       (( passedt.disusedCamenity == nil )  or
-        ( passedt.disusedCamenity == ""  ))) then
-      passedt.disusedCamenity = passedt.wasCamenity
+       (( passedt["disused:amenity"] == nil )  or
+        ( passedt["disused:amenity"] == ""  ))) then
+      passedt["disused:amenity"] = passedt.wasCamenity
    end
 
    if ((  passedt.wasCwaterway     ~= nil  ) and
@@ -1104,9 +1104,9 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ((  passedt.closedCamenity  ~= nil  ) and
        (  passedt.closedCamenity  ~= ""   ) and
-       (( passedt.disusedCamenity == nil )  or
-        ( passedt.disusedCamenity == ""  ))) then
-      passedt.disusedCamenity = passedt.closedCamenity
+       (( passedt["disused:amenity"] == nil )  or
+        ( passedt["disused:amenity"] == ""  ))) then
+      passedt["disused:amenity"] = passedt.closedCamenity
    end
 
    if ((  passedt.closedCshop  ~= nil  ) and
@@ -2769,7 +2769,7 @@ function generic_before_function( passedt )
        (  passedt.man_made        == "telephone_box"   )  or
        (  passedt.building        == "telephone_box"   )  or
        (  passedt.historic        == "telephone"       )  or
-       (  passedt.disusedCamenity == "telephone"       )  or
+       (  passedt["disused:amenity"] == "telephone"       )  or
        (  passedt.removedCamenity == "telephone"       )) then
       if ((( passedt.amenity   == "telephone"    )  or
            ( passedt.amenity   == "phone"        )) and
@@ -2810,38 +2810,38 @@ function generic_before_function( passedt )
       else
          if ( passedt.emergency == "defibrillator" ) then
              passedt.amenity   = "boothdefibrillator"
-             passedt.disusedCamenity = nil
+             passedt["disused:amenity"] = nil
              passedt.emergency = nil
          else
             if (( passedt.amenity == "public_bookcase" )  or
                 ( passedt.amenity == "library"         )) then
                passedt.amenity = "boothlibrary"
-               passedt.disusedCamenity = nil
+               passedt["disused:amenity"] = nil
             else
                if ( passedt.amenity == "bicycle_repair_station" ) then
                   passedt.amenity = "boothbicyclerepairstation"
-                  passedt.disusedCamenity = nil
+                  passedt["disused:amenity"] = nil
                else
                   if ( passedt.amenity == "atm" ) then
                      passedt.amenity = "boothatm"
-                     passedt.disusedCamenity = nil
+                     passedt["disused:amenity"] = nil
                   else
                      if ( passedt.tourism == "information" ) then
                         passedt.amenity = "boothinformation"
-                        passedt.disusedCamenity = nil
+                        passedt["disused:amenity"] = nil
                         passedt.tourism = nil
                      else
                         if ( passedt.tourism == "artwork" ) then
                            passedt.amenity = "boothartwork"
-                           passedt.disusedCamenity = nil
+                           passedt["disused:amenity"] = nil
                            passedt.tourism = nil
                         else
                            if ( passedt.tourism == "museum" ) then
                               passedt.amenity = "boothmuseum"
-                              passedt.disusedCamenity = nil
+                              passedt["disused:amenity"] = nil
                               passedt.tourism = nil
 		  	   else
-                              if (( passedt.disusedCamenity    == "telephone"        )  or
+                              if (( passedt["disused:amenity"]    == "telephone"        )  or
                                   ( passedt.removedCamenity    == "telephone"        )  or
                                   ( passedt.abandonedCamenity  == "telephone"        )  or
                                   ( passedt.demolishedCamenity == "telephone"        )  or
@@ -2854,7 +2854,7 @@ function generic_before_function( passedt )
                                   ( passedt.amenity            == "former_telephone" )  or
                                   ( passedt.historic           == "telephone"        )) then
                                  passedt.amenity         = "boothdisused"
-                                 passedt.disusedCamenity = nil
+                                 passedt["disused:amenity"] = nil
                                  passedt.historic        = nil
                               end
                            end
@@ -3906,7 +3906,7 @@ function generic_before_function( passedt )
        (  passedt.former_amenity    == "old_pub"         )   or
        (  passedt.formerCamenity    == "pub"             )   or
        (  passedt.old_amenity       == "pub"             )) then
-      passedt.disusedCamenity = "pub"
+      passedt["disused:amenity"] = "pub"
       passedt.amenityCdisused = nil
       passedt.disused = nil
       passedt.disusedCpub = nil
@@ -3919,7 +3919,7 @@ function generic_before_function( passedt )
         ( passedt.amenity  == ""    )) and
        (( passedt.shop     == nil   )  or
         ( passedt.shop     == ""    ))) then
-      passedt.disusedCamenity = "pub"
+      passedt["disused:amenity"] = "pub"
       passedt.historic = nil
    end
 
@@ -3932,7 +3932,7 @@ function generic_before_function( passedt )
         ( passedt.disused           == "yes"            ))   or
        (( passedt.amenity           == "pub"            )    and
         ( passedt.opening_hours     == "closed"         ))) then
-      passedt.disusedCamenity = "pub"
+      passedt["disused:amenity"] = "pub"
       passedt.amenityCdisused = nil
       passedt.disused = nil
       passedt.disusedCpub = nil
@@ -3941,7 +3941,7 @@ function generic_before_function( passedt )
       passedt.amenity = nil
    end
 
-   if ((   passedt.disusedCamenity   == "pub"     ) and
+   if ((   passedt["disused:amenity"]   == "pub"     ) and
        ((( passedt.tourism           ~= nil     )   and
          ( passedt.tourism           ~= ""      ))  or
         (( passedt.amenity           ~= nil     )   and
@@ -3954,7 +3954,7 @@ function generic_before_function( passedt )
          ( passedt.office            ~= ""      ))  or
         (( passedt.craft             ~= nil     )   and
          ( passedt.craft             ~= ""      )))) then
-      passedt.disusedCamenity = nil
+      passedt["disused:amenity"] = nil
    end
 
    if ((   passedt.real_ale  ~= nil    ) and
@@ -4422,7 +4422,7 @@ function generic_before_function( passedt )
 -- The many and varied taggings for former pubs should have been turned into
 -- disused:amenity=pub above, unless some other tag applies.
 -- ----------------------------------------------------------------------------
-   if ( passedt.disusedCamenity == "pub" ) then
+   if ( passedt["disused:amenity"] == "pub" ) then
       passedt.amenity = "pub_nddddddd"
                                                  -- no other attributes checked
    end
@@ -6233,7 +6233,7 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if (((  passedt.historic        == "grave_yard"  )  or
         (  passedt.historic        == "cemetery"    )  or
-        (  passedt.disusedCamenity == "grave_yard"  )  or
+        (  passedt["disused:amenity"] == "grave_yard"  )  or
         (( passedt.historic        == "ruins"      )   and
          ( passedt.ruins           == "grave_yard" ))) and
        (( passedt.amenity         == nil          )  or
@@ -10632,7 +10632,7 @@ function generic_before_function( passedt )
       end
 
       passedt.leisure = "leisurenonspecific"
-      passedt.disusedCamenity = nil
+      passedt["disused:amenity"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -10667,9 +10667,9 @@ function generic_before_function( passedt )
 -- A special case to check before the "vacant shops" check at the end - 
 -- potentially remove disusedCamenity=grave_yard
 -- ----------------------------------------------------------------------------
-   if (( passedt.disusedCamenity == "grave_yard" ) and
+   if (( passedt["disused:amenity"] == "grave_yard" ) and
        ( passedt.landuse         == "cemetery"   )) then
-      passedt.disusedCamenity = nil
+      passedt["disused:amenity"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -11428,10 +11428,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ((((( passedt.disusedCshop    ~= nil        )    and
           ( passedt.disusedCshop    ~= ""         ))   or
-         (( passedt.disusedCamenity ~= nil        )    and
-          ( passedt.disusedCamenity ~= ""         )))  and
-         (  passedt.disusedCamenity ~= "fountain"   )  and
-         (  passedt.disusedCamenity ~= "parking"    )  and
+         (( passedt["disused:amenity"] ~= nil        )    and
+          ( passedt["disused:amenity"] ~= ""         )))  and
+         (  passedt["disused:amenity"] ~= "fountain"   )  and
+         (  passedt["disused:amenity"] ~= "parking"    )  and
          (( passedt.shop            == nil         )   or
           ( passedt.shop            == ""          ))  and
          (( passedt.amenity         == nil         )   or
