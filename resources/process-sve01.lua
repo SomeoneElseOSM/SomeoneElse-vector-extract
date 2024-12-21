@@ -709,13 +709,13 @@ function update_table( passedt )
     passedt.admin_ref = Find("admin_ref")
     passedt.advertising = Find("advertising")
     passedt.aerialway = Find("aerialway")
-    passedt.aerodromeCtype = Find("aerodrome:type")
+    passedt["aerodrome:type"] = Find("aerodrome:type")
     passedt.aeroway = Find("aeroway")
     passedt.agrarian = Find("agrarian")
-    passedt.aircraftCmodel = Find("aircraft:model")
+    passedt["aircraft:model"] = Find("aircraft:model")
     passedt.airmark = Find("airmark")
     passedt.amenity = Find("amenity")
-    passedt.amenityCdisused = Find("amenity:disused")
+    passedt["amenity:disused"] = Find("amenity:disused")
     passedt.animal = Find("animal")
     passedt.archaeological_site = Find("archaeological_site")
     passedt.area = Find("area")
@@ -765,7 +765,7 @@ function update_table( passedt )
     passedt["demolished:amenity"] = Find("demolished:amenity")
     passedt.denomination = Find("denomination")
     passedt.departures_board = Find("departures_board")
-    passedt.departures_boardCspeech_output = Find("departures_board:speech_output")
+    passedt["departures_board:speech_output"] = Find("departures_board:speech_output")
     passedt["description:floor"] = Find("description:floor")
     passedt.designation = Find("designation")
     passedt.diplomatic = Find("diplomatic")
@@ -788,7 +788,7 @@ function update_table( passedt )
     passedt["disused:pub"] = Find("disused:pub")
     passedt["disused:railway"] = Find("disused:railway")
     passedt["disused:shop"] = Find("disused:shop")
-    passedt.disusedCtourism = Find("disused:tourism")
+    passedt["disused:tourism"] = Find("disused:tourism")
     passedt["disused:waterway"] = Find("disused:waterway")
     passedt.dog_gate = Find("dog_gate")
     passedt.drinking_water = Find("drinking_water")
@@ -804,26 +804,26 @@ function update_table( passedt )
     passedt.fence_type = Find("fence_type")
     passedt.flag = Find("flag")
     passedt.flood_prone = Find("flood_prone")
-    passedt.floorCmaterial = Find("floor:material")
+    passedt["floor:material"] = Find("floor:material")
     passedt.flow_control = Find("flow_control")
     passedt.food = Find("food")
-    passedt.foodCeggs = Find("food:eggs")
+    passedt["food:eggs"] = Find("food:eggs")
     passedt.foot = Find("foot")
-    passedt.footCphysical = Find("foot:physical")
+    passedt["foot:physical"] = Find("foot:physical")
     passedt.footway = Find("footway")
     passedt.ford = Find("ford")
-    passedt.formerCamenity = Find("former:amenity")
+    passedt["former:amenity"] = Find("former:amenity")
     passedt.former_amenity = Find("former_amenity")
     passedt.fortification_type = Find("fortification_type")
-    passedt.fuelCH2 = Find("fuel:H2")
-    passedt.fuelCLH2 = Find("fuel:LH2")
-    passedt.fuelCdiesel = Find("fuel:diesel")
-    passedt.fuelCelectricity = Find("fuel:electricity")
-    passedt.fuelClpg = Find("fuel:lpg")
+    passedt["fuel:H2"] = Find("fuel:H2")
+    passedt["fuel:LH2"] = Find("fuel:LH2")
+    passedt["fuel:diesel"] = Find("fuel:diesel")
+    passedt["fuel:electricity"] = Find("fuel:electricity")
+    passedt["fuel:lpg"] = Find("fuel:lpg")
     passedt.gambling = Find("gambling")
     passedt.gate = Find("gate")
-    passedt.generatorCmethod = Find("generator:method")
-    passedt.generatorCsource = Find("generator:source")
+    passedt["generator:method"] = Find("generator:method")
+    passedt["generator:source"] = Find("generator:source")
     passedt.geological = Find("geological")
     passedt.geological = Find("geological")
     passedt.golf = Find("golf")
@@ -835,17 +835,17 @@ function update_table( passedt )
     passedt.hazard_prone = Find("hazard_prone")
     passedt.hazard_type = Find("hazard_type")
     passedt.healthcare = Find("healthcare")
-    passedt.healthcareCspeciality = Find("healthcare:speciality")
+    passedt["healthcare:speciality"] = Find("healthcare:speciality")
     passedt.height = Find("height")
     passedt.highway = Find("highway")
     passedt.highway_authority_ref = Find("highway_authority_ref")
     passedt.highway_ref = Find("highway_ref")
     passedt.historic = Find("historic")
-    passedt.historicCamenity = Find("historic:amenity")
-    passedt.historicCcivilisation = Find("historic:civilisation")
-    passedt.historicCname = Find("historic:name")
-    passedt.historicCrailway = Find("historic:railway")
-    passedt.historicCwaterway = Find("historic:waterway")
+    passedt["historic:amenity"] = Find("historic:amenity")
+    passedt["historic:civilization"] = Find("historic:civilization")
+    passedt["historic:name"] = Find("historic:name")
+    passedt["historic:railway"] = Find("historic:railway")
+    passedt["historic:waterway"] = Find("historic:waterway")
     passedt.horse = Find("horse")
     passedt.hunting_stand = Find("hunting_stand")
     passedt.iata = Find("iata")
@@ -857,9 +857,9 @@ function update_table( passedt )
     passedt.inscription = Find("inscription")
     passedt.intermittent = Find("intermittent")
     passedt.is_sidepath = Find("is_sidepath")
-    passedt.is_sidepathCof = Find("is_sidepath:of")
-    passedt.is_sidepathCofCname = Find("is_sidepath:of:name")
-    passedt.is_sidepathCofCref = Find("is_sidepath:of:ref")
+    passedt["is_sidepath:of"] = Find("is_sidepath:of")
+    passedt["is_sidepath:of:name"] = Find("is_sidepath:of:name")
+    passedt["is_sidepath:of:ref"] = Find("is_sidepath:of:ref")
     passedt.junction = Find("junction")
     passedt.ladder = Find("ladder")
     passedt.lamp_type = Find("lamp_type")
@@ -883,19 +883,18 @@ function update_table( passedt )
     passedt.meadow = Find("meadow")
     passedt.megalith_type = Find("megalith_type")
     passedt.memorial = Find("memorial")
-    passedt.memorialCtype = Find("memorial:type")
+    passedt["memorial:type"] = Find("memorial:type")
     passedt.microbrewery = Find("microbrewery")
     passedt.micropub = Find("micropub")
     passedt.military = Find("military")
-    passedt.monitoringCair_quality = Find("monitoring:air_quality")
-    passedt.monitoringCrainfall = Find("monitoring:rainfall")
-    passedt.monitoringCseismic_activity = Find("monitoring:seismic_activity")
-    passedt.monitoringCsky_brightness = Find("monitoring:sky_brightness")
-    passedt.monitoringCwater_flow = Find("monitoring:water_flow")
-    passedt.monitoringCwater_level = Find("monitoring:water_level")
-    passedt.monitoringCwater_level = Find("monitoring:water_level")
-    passedt.monitoringCwater_velocity = Find("monitoring:water_velocity")
-    passedt.monitoringCweather = Find("monitoring:weather")
+    passedt["monitoring:air_quality"] = Find("monitoring:air_quality")
+    passedt["monitoring:rainfall"] = Find("monitoring:rainfall")
+    passedt["monitoring:seismic_activity"] = Find("monitoring:seismic_activity")
+    passedt["monitoring:sky_brightness"] = Find("monitoring:sky_brightness")
+    passedt["monitoring:water_flow"] = Find("monitoring:water_flow")
+    passedt["monitoring:water_level"] = Find("monitoring:water_level")
+    passedt["monitoring:water_velocity"] = Find("monitoring:water_velocity")
+    passedt["monitoring:weather"] = Find("monitoring:weather")
     passedt.motor_vehicle = Find("motor_vehicle")
     passedt.munro = Find("munro")
     passedt.name = Find("name")
@@ -905,8 +904,8 @@ function update_table( passedt )
     passedt["name:left"] = Find("name:left")
     passedt["name:right"] = Find("name:right")
     passedt["name:signed"] = Find("name:signed")
-    passedt.naptanCBusStopType = Find("naptan:BusStopType")
-    passedt.naptanCindicator = Find("naptan:indicator")
+    passedt["naptan:BusStopType"] = Find("naptan:BusStopType")
+    passedt["naptan:Indicator"] = Find("naptan:Indicator")
     passedt.natural = Find("natural")
     passedt.ncn_milepost = Find("ncn_milepost")
     passedt.network = Find("network")
@@ -914,28 +913,28 @@ function update_table( passedt )
     passedt.obstacle = Find("obstacle")
     passedt.office = Find("office")
     passedt.official_ref = Find("official_ref")
-    passedt.oldCamenity = Find("old:amenity")
+    passedt["old:amenity"] = Find("old:amenity")
     passedt.old_amenity = Find("old_amenity")
     passedt.old_name = Find("old_name")
     passedt.oneway = Find("oneway")
     passedt.opening_hours = Find("opening_hours")
-    passedt.opening_hoursCcovid19 = Find("opening_hours:covid19")
+    passedt["opening_hours:covid19"] = Find("opening_hours:covid19")
     passedt.operator = Find("operator")
-    passedt.operatorCtype = Find("operator:type")
+    passedt["operator:type"] = Find("operator:type")
     passedt.outdoor_seating = Find("outdoor_seating")
     passedt.outlet = Find("outlet")
     passedt.overgrown = Find("overgrown")
     passedt.parking = Find("parking")
     passedt.passenger_information_display = Find("passenger_information_display")
-    passedt.passenger_information_displayCspeech_output = Find("passenger_information_display:speech_output")
-    passedt.paymentChonesty_box = Find("payment:honesty_box")
+    passedt["passenger_information_display:speech_output"] = Find("passenger_information_display:speech_output")
+    passedt["payment:honesty_box"] = Find("payment:honesty_box")
     passedt.peak = Find("peak")
     passedt.physically_present = Find("physically_present")
     passedt.pipeline = Find("pipeline")
     passedt.pitch = Find("pitch")
     passedt.place = Find("place")
     passedt.place_of_worship = Find("place_of_worship")
-    passedt.plantCsource = Find("plant:source")
+    passedt["plant:source"] = Find("plant:source")
     passedt.playground = Find("playground")
     passedt.pole = Find("pole")
     passedt.power = Find("power")
@@ -948,38 +947,38 @@ function update_table( passedt )
     passedt.pub = Find("pub")
     passedt.public_transport = Find("public_transport")
     passedt.railway = Find("railway")
-    passedt.railwayChistoric = Find("railway:historic")
-    passedt.railwayCminiature = Find("railway:miniature")
-    passedt.railwayCpreserved = Find("railway:preserved")
-    passedt.razedCamenity = Find("razed:amenity")
+    passedt["railway:historic"] = Find("railway:historic")
+    passedt["railway:miniature"] = Find("railway:miniature")
+    passedt["railway:preserved"] = Find("railway:preserved")
+    passedt["razed:amenity"] = Find("razed:amenity")
     passedt.real_ale = Find("real_ale")
     passedt.recycling_type = Find("recycling_type")
     passedt.reef = Find("reef")
     passedt.ref = Find("ref")
-    passedt.refCsigned = Find("ref:signed")
+    passedt["ref:signed"] = Find("ref:signed")
     passedt.religion = Find("religion")
-    passedt.removedCamenity = Find("removed:amenity")
+    passedt["removed:amenity"] = Find("removed:amenity")
     passedt.rescue_equipment = Find("rescue_equipment")
     passedt.reusable_packaging = Find("reusable_packaging")
     passedt.route = Find("route")
-    passedt.ruinedCbuilding = Find("ruined:building")
+    passedt["ruined:building"] = Find("ruined:building")
     passedt.ruins = Find("ruins")
-    passedt.ruinsCbuilding = Find("ruins:building")
-    passedt.ruinsCman_made = Find("ruins:man_made")
-    passedt.ruinsCtourism = Find("ruins:tourism")
+    passedt["ruins:building"] = Find("ruins:building")
+    passedt["ruins:man_made"] = Find("ruins:man_made")
+    passedt["ruins:tourism"] = Find("ruins:tourism")
     passedt.sac_scale = Find("sac_scale")
     passedt.school = Find("school")
     passedt.scramble = Find("scramble")
-    passedt.seamarkCrescue_stationCcategory = Find("seamark:rescue_station:category")
-    passedt.seamarkCtype = Find("seamark:type")
+    passedt["seamark:rescue_station:category"] = Find("seamark:rescue_station:category")
+    passedt["seamark:type"] = Find("seamark:type")
     passedt.segregated = Find("segregated")
     passedt.service = Find("service")
     passedt.shop = Find("shop")
     passedt.shoulder = Find("shoulder")
     passedt.sidewalk = Find("sidewalk")
-    passedt.sidewalkCboth = Find("sidewalk:both")
-    passedt.sidewalkCleft = Find("sidewalk:left")
-    passedt.sidewalkCright = Find("sidewalk:right")
+    passedt["sidewalk:both"] = Find("sidewalk:both")
+    passedt["sidewalk:left"] = Find("sidewalk:left")
+    passedt["sidewalk:right"] = Find("sidewalk:right")
     passedt.site_type = Find("site_type")
     passedt.small_electric_vehicle = Find("small_electric_vehicle")
     passedt.social_facility = Find("social_facility")
@@ -993,18 +992,18 @@ function update_table( passedt )
     passedt.taxon = Find("taxon")
     passedt.telephone_kiosk = Find("telephone_kiosk")
     passedt.theatre = Find("theatre")
-    passedt.theatreCtype = Find("theatre:type")
+    passedt["theatre:type"] = Find("theatre:type")
     passedt.tidal = Find("tidal")
     passedt.timetable = Find("timetable")
     passedt.tomb = Find("tomb")
     passedt.tourism = Find("tourism")
-    passedt.towerCconstruction = Find("tower:type")
-    passedt.towerCtype = Find("tower:type")
+    passedt["tower:construction"] = Find("tower:type")
+    passedt["tower:type"] = Find("tower:type")
     passedt.tpuk_ref = Find("tpuk_ref")
     passedt.trade = Find("trade")
     passedt.trail_visibility = Find("trail_visibility")
     passedt.tunnel = Find("tunnel")
-    passedt.tunnelCname = Find("tunnel:name")
+    passedt["tunnel:name"] = Find("tunnel:name")
     passedt.tunnel_name = Find("tunnel_name")
     passedt.type = Find("type")
     passedt.underground = Find("underground")
@@ -1014,11 +1013,11 @@ function update_table( passedt )
     passedt.vending = Find("vending")
     passedt.vending_machine = Find("vending_machine")
     passedt.verge = Find("verge")
-    passedt.vergeCboth = Find("verge:both")
-    passedt.vergeCleft = Find("verge:left")
-    passedt.vergeCright = Find("verge:right")
+    passedt["verge:both"] = Find("verge:both")
+    passedt["verge:left"] = Find("verge:left")
+    passedt["verge:right"] = Find("verge:right")
     passedt.visibility = Find("visibility")
-    passedt.volcanoCstatus = Find("volcano:status")
+    passedt["volcano:status"] = Find("volcano:status")
     passedt.wall = Find("wall")
     passedt["was:aeroway"] = Find("was:aeroway")
     passedt["was:amenity"] = Find("was:amenity")
@@ -1027,17 +1026,17 @@ function update_table( passedt )
     passedt["was:shop"] = Find("was:shop")
     passedt["was:waterway"] = Find("was:waterway")
     passedt.water = Find("water")
-    passedt.watermillCdisused = Find("watermill:disused")
+    passedt["watermill:disused"] = Find("watermill:disused")
     passedt.waterway = Find("waterway")
-    passedt.waterwayCabandoned = Find("waterway:abandoned")
-    passedt.waterwayChistoric = Find("waterway:historic")
-    passedt.weatherCradar = Find("weather:radar")
+    passedt["waterway:abandoned"] = Find("waterway:abandoned")
+    passedt["waterway:historic"] = Find("waterway:historic")
+    passedt["weather:radar"] = Find("weather:radar")
     passedt.website = Find("website")
     passedt.wetland = Find("wetland")
     passedt.wheelchair = Find("wheelchair")
     passedt.whitewater = Find("whitewater")
     passedt.width = Find("width")
-    passedt.windmillCdisused = Find("windmill:disused")
+    passedt["windmill:disused"] = Find("windmill:disused")
     passedt.zero_waste = Find("zero_waste")
     passedt.zoo = Find("zoo")
 end  -- function update_table( passedt )
@@ -1097,155 +1096,6 @@ function generic_before_function( passedt )
    consolidate_lua_01_t( passedt )
 
 -- ----------------------------------------------------------------------------
--- Rights of way for people on foot are designated as:
--- England and Wales: public_footpath
--- Scotland: core_path (ish - more general acess rights exist)
--- Northern Ireland: public_footpath or PROW (actually "footpath" in law)
--- ----------------------------------------------------------------------------
-   if (( passedt.designation == "public_footpath"                        ) or
-       ( passedt.designation == "core_path"                              ) or 
-       ( passedt.designation == "footpath"                               ) or 
-       ( passedt.designation == "public_footway"                         ) or 
-       ( passedt.designation == "public_footpath;permissive_bridleway"   ) or 
-       ( passedt.designation == "public_footpath;public_cycleway"        ) or
-       ( passedt.designation == "PROW"                                   ) or
-       ( passedt.designation == "access_land"                            )) then
-      if (( passedt.highway == "intpathnarrow" ) or
-          ( passedt.highway == "pathnarrow"    )) then
-         if (( passedt.trail_visibility == "bad"          )  or
-             ( passedt.trail_visibility == "intermediate" )) then
-            passedt.highway = "intfootwaynarrow"
-         else
-            passedt.highway = "footwaynarrow"
-         end
-      else
-         if (( passedt.highway == "steps"        ) or
-             ( passedt.highway == "footwaysteps" )) then
-            passedt.highway = "footwaysteps"
-         else
-            if (( passedt.highway == "service"     ) or 
-                ( passedt.highway == "road"        ) or
-                ( passedt.highway == "track"       ) or
-                ( passedt.highway == "intpathwide" ) or
-                ( passedt.highway == "pathwide"    )) then
-               if (( passedt.trail_visibility == "bad"          )  or
-                   ( passedt.trail_visibility == "intermediate" )) then
-                  passedt.highway = "intfootwaywide"
-               else
-                  passedt.highway = "footwaywide"
-               end
-            end
-         end
-      end
-
-      append_prow_ref( passedt )
-   end
-
--- ----------------------------------------------------------------------------
--- If something is still "track" by this point change it to pathwide.
--- ----------------------------------------------------------------------------
-   if ( passedt.highway == "track" ) then
-      if (( passedt.trail_visibility == "bad"          )  or
-          ( passedt.trail_visibility == "intermediate" )) then
-         passedt.highway = "intpathwide"
-      else
-         passedt.highway = "pathwide"
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- Treat access=permit as access=no (which is what we have set "private" to 
--- above).
--- ----------------------------------------------------------------------------
-   if (( passedt.access  == "permit"       ) or
-       ( passedt.access  == "agricultural" ) or
-       ( passedt.access  == "forestry"     ) or
-       ( passedt.access  == "delivery"     ) or
-       ( passedt.access  == "military"     )) then
-      passedt.access = "no"
-   end
-
-   if ( passedt.access  == "customers" ) then
-      passedt.access = "destination"
-   end
-
--- ----------------------------------------------------------------------------
--- Don't make driveways with a designation disappear.
--- ----------------------------------------------------------------------------
-   if ((    passedt.service     == "driveway"                     ) and
-       ((   passedt.designation == "public_footpath"             )  or
-        (   passedt.designation == "public_bridleway"            )  or
-        (   passedt.designation == "restricted_byway"            )  or
-        (   passedt.designation == "byway_open_to_all_traffic"   )  or
-        (   passedt.designation == "unclassified_county_road"    )  or
-        (   passedt.designation == "unclassified_country_road"   )  or
-        (   passedt.designation == "unclassified_highway"        ))) then
-      passedt.service = nil
-   end
-
--- ----------------------------------------------------------------------------
--- If motor_vehicle=no is set on a BOAT, it's probably a TRO, so display as
--- an RBY instead
--- ----------------------------------------------------------------------------
-   if (( passedt.highway       == "boatwide"    )  and
-       ( passedt.motor_vehicle == "no"          )) then
-      passedt.highway = "rbywide"
-   end
-
-   if (( passedt.highway       == "boatnarrow"  )  and
-       ( passedt.motor_vehicle == "no"          )) then
-      passedt.highway = "rbynarrow"
-   end
-
--- ----------------------------------------------------------------------------
--- Try and detect genuinely closed public footpaths, bridleways (not just those
--- closed to motor traffic etc.).  Examples with "access=no/private" are
--- picked up below; we need to make sure that those that do not get an
--- access=private tag first.
--- ----------------------------------------------------------------------------
-   if ((( passedt.access      == nil                         )   or
-        ( passedt.access      == ""                          ))  and
-       (( passedt.designation == "public_footpath"           )   or
-        ( passedt.designation == "public_bridleway"          )   or
-        ( passedt.designation == "restricted_byway"          )   or
-        ( passedt.designation == "byway_open_to_all_traffic" )   or
-        ( passedt.designation == "unclassified_county_road"  )   or
-        ( passedt.designation == "unclassified_country_road" )   or
-        ( passedt.designation == "unclassified_highway"      ))  and
-       (  passedt.foot        == "no"                         )) then
-      passedt.access  = "no"
-   end
-
--- ----------------------------------------------------------------------------
--- The extra information "and"ed with "public_footpath" below checks that
--- "It's access=private and designation=public_footpath, and ordinarily we'd
--- just remove the access=private tag as you ought to be able to walk there,
--- unless there isn't foot=yes/designated to say you can, or there is an 
--- explicit foot=no".
--- ----------------------------------------------------------------------------
-   if (((   passedt.access      == "no"                          )  or
-        (   passedt.access      == "destination"                 )) and
-       (((( passedt.designation == "public_footpath"           )    or
-          ( passedt.designation == "public_bridleway"          )    or
-          ( passedt.designation == "restricted_byway"          )    or
-          ( passedt.designation == "byway_open_to_all_traffic" )    or
-          ( passedt.designation == "unclassified_county_road"  )    or
-          ( passedt.designation == "unclassified_country_road" )    or
-          ( passedt.designation == "unclassified_highway"      ))   and
-         (  passedt.foot        ~= nil                          )   and
-         (  passedt.foot        ~= ""                           )   and
-         (  passedt.foot        ~= "no"                         ))  or
-        ((( passedt.highway     == "pathnarrow"                )    or
-          ( passedt.highway     == "pathwide"                  )    or
-          ( passedt.highway     == "intpathnarrow"             )    or
-          ( passedt.highway     == "intpathwide"               )    or
-          ( passedt.highway     == "service"                   ))   and
-         (( passedt.foot        == "permissive"                )    or
-          ( passedt.foot        == "yes"                       ))))) then
-      passedt.access  = nil
-   end
-
--- ----------------------------------------------------------------------------
 -- Send driveways through to the vector rendering code as 
 -- a specific highway type (raster does not do this)
 -- ----------------------------------------------------------------------------
@@ -1255,150 +1105,9 @@ function generic_before_function( passedt )
    end
 
 -- ----------------------------------------------------------------------------
--- Render national parks and AONBs as such no matter how they are tagged.
---
--- Any with "boundary=national_park" set already will be included and won't
--- be affected by this.  Most national parks and AONBs in UK have 
--- "protect_class=5", but also have one of the "designation" values below.
--- Many smaller nature reserves have other values for designation and are
--- ignored here.
---
--- Previously this section also had "protect_class=2" because IE ones had that 
--- and not "boundary"="national_park", but that situation seems to have changed.
+-- Consolidate more values for extraction / display
 -- ----------------------------------------------------------------------------
-   if ((   passedt.boundary      == "protected_area"                      ) and
-       ((  passedt.designation   == "national_park"                      )  or 
-        (  passedt.designation   == "area_of_outstanding_natural_beauty" )  or
-        (  passedt.designation   == "national_scenic_area"               ))) then
-      passedt.boundary = "national_park"
-      passedt.protect_class = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Access land is shown with a high-zoom yellow border (to contrast with the 
--- high-zoom green border of nature reserves) and with a low-opacity 
--- yellow fill at all zoom levels (to contrast with the low-opacity green fill
--- at low zoom levels of nature reserves).
--- ----------------------------------------------------------------------------
-   if ((   passedt.designation   == "access_land"      )  and
-       ((( passedt.boundary      == nil              )    or
-         ( passedt.boundary      == ""               ))   or
-        (  passedt.boundary      == "protected_area"  ))  and
-       ((  passedt.highway       == nil               )   or
-        (  passedt.highway       == ""                ))) then
-      passedt.boundary = "access_land"
-   end
-
--- ----------------------------------------------------------------------------
--- Render certain protect classes and designations of protected areas as 
--- nature_reserve:
--- protect_class==1   "... strictly set aside to protect ... " (all sorts)
--- protect_class==4   "Habitat/Species Management Area"
---
--- There are a few instances of "leisure" being set to something else already
--- ("common", "park", "golf_course", "dog_park").  We leave that if so.
---
--- This selection does not currently include:
--- protect_class==98  "intercontinental treaties..." (e.g. world heritage)
--- ----------------------------------------------------------------------------
-   if (((  passedt.boundary      == "protected_area"            )   and
-        (( passedt.protect_class == "1"                        )    or
-         ( passedt.protect_class == "2"                        )    or
-         ( passedt.protect_class == "4"                        )    or
-         ( passedt.designation   == "national_nature_reserve"  )    or
-         ( passedt.designation   == "local_nature_reserve"     )    or
-         ( passedt.designation   == "Nature Reserve"           )    or
-         ( passedt.designation   == "Marine Conservation Zone" ))) and
-       (   passedt.leisure       == nil                          )) then
-      passedt.leisure = "nature_reserve"
-   end
-
--- ----------------------------------------------------------------------------
--- Show grass schoolyards as green
--- ----------------------------------------------------------------------------
-   if (( passedt.leisure == "schoolyard" ) and
-       ( passedt.surface == "grass"      )) then
-      passedt.landuse = "grass"
-      passedt.leisure = nil
-      passedt.surface = nil
-   end
-
--- ----------------------------------------------------------------------------
--- "Nature reserve" doesn't say anything about what's inside; but one UK OSMer 
--- changed "landuse" to "surface" (changeset 98859964).  This undoes that.
--- ----------------------------------------------------------------------------
-   if (( passedt.leisure == "nature_reserve" ) and
-       ( passedt.surface == "grass"          )) then
-      passedt.landuse = "grass"
-      passedt.surface = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Treat landcover=grass as landuse=grass
--- Also landuse=college_court, flowerbed
--- ----------------------------------------------------------------------------
-   if (( passedt.landcover == "grass"         ) or
-       ( passedt.landuse   == "college_court" ) or
-       ( passedt.landuse   == "flowerbed"     )) then
-      passedt.landcover = nil
-      passedt.landuse = "grass"
-   end
-
--- ----------------------------------------------------------------------------
--- Treat natural=grass as landuse=grass 
--- if there is no other more appropriate tag
--- ----------------------------------------------------------------------------
-   if (( passedt.natural  == "grass"  ) and
-       ((( passedt.landuse == nil    )  or
-         ( passedt.landuse == ""     )) and
-        (( passedt.leisure == nil    )  or
-         ( passedt.leisure == ""     )) and
-        (( passedt.aeroway == nil    )  or
-         ( passedt.aeroway == ""     )))) then
-      passedt.landuse = "grass"
-   end
-
--- ----------------------------------------------------------------------------
--- Treat natural=garden and natural=plants as leisure=garden
--- if there is no other more appropriate tag.
--- The "barrier" check is to avoid linear barriers with this tag as well 
--- becoming area ones unexpectedly
--- ----------------------------------------------------------------------------
-   if ((( passedt.natural == "garden"     )   or
-        ( passedt.natural == "plants"     )   or
-        ( passedt.natural == "flower_bed" ))  and
-       (( passedt.landuse == nil          )   and
-        ( passedt.leisure == nil          )   and
-        ( passedt.barrier == nil          ))) then
-      passedt.leisure = "garden"
-   end
-
--- ----------------------------------------------------------------------------
--- Render various synonyms for leisure=common.
--- ----------------------------------------------------------------------------
-   if (( passedt.landuse          == "common"   ) or
-       ( passedt.leisure          == "common"   ) or
-       ( passedt.designation      == "common"   ) or
-       ( passedt.amenity          == "common"   ) or
-       ( passedt.protection_title == "common"   )) then
-      passedt.leisure = "common"
-      passedt.landuse = nil
-      passedt.amenity = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Render quiet lanes as living streets.
--- This is done because it's a difference I don't want to draw attention to -
--- they aren't "different enough to make them render differently".
--- ----------------------------------------------------------------------------
-   if ((( passedt.highway     == "tertiary"                          )  or
-        ( passedt.highway     == "unclassified"                      )  or
-        ( passedt.highway     == "residential"                       )) and
-       (( passedt.designation == "quiet_lane"                        )  or
-        ( passedt.designation == "quiet_lane;unclassified_highway"   )  or
-        ( passedt.designation == "unclassified_highway;quiet_lane"   ))) then
-      passedt.highway = "living_street"
-   end
+   consolidate_lua_02_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- Here the raster code has "Use unclassified_sidewalk to indicate sidewalk"
@@ -1406,1543 +1115,9 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 
 -- ----------------------------------------------------------------------------
--- Render narrow tertiary roads as unclassified
+-- Consolidate more values for extraction / display
 -- ----------------------------------------------------------------------------
-   if ((  passedt.highway    == "tertiary"  )  and
-       (( passedt.oneway     == nil        )   or
-        ( passedt.oneway     == ""         ))  and
-       (( passedt.junction   == nil        )   or
-        ( passedt.junction   == ""         ))  and
-       ((( tonumber(passedt.width)    or 4 ) <=  3 ) or
-        (( tonumber(passedt.maxwidth) or 4 ) <=  3 ))) then
-      passedt.highway = "unclassified"
-   end
-
--- ----------------------------------------------------------------------------
--- Render bus guideways as "a sort of railway" rather than in their own
--- highway layer.
--- ----------------------------------------------------------------------------
-   if (passedt.highway == "bus_guideway") then
-      passedt.highway = nil
-      passedt.railway = "bus_guideway"
-   end
-
--- ----------------------------------------------------------------------------
--- Render bus-only service roads tagged as "highway=busway" as service roads.
--- ----------------------------------------------------------------------------
-   if ( passedt.highway == "busway" ) then
-      passedt.highway = "service"
-   end
-
--- ----------------------------------------------------------------------------
--- Bridge types - only some types (including "yes") are selected
--- ----------------------------------------------------------------------------
-   if (( passedt.bridge == "aqueduct"           ) or
-       ( passedt.bridge == "bailey"             ) or
-       ( passedt.bridge == "boardwalk"          ) or
-       ( passedt.bridge == "building_passage"   ) or
-       ( passedt.bridge == "cantilever"         ) or
-       ( passedt.bridge == "chain"              ) or
-       ( passedt.bridge == "covered"            ) or
-       ( passedt.bridge == "foot"               ) or
-       ( passedt.bridge == "footbridge"         ) or
-       ( passedt.bridge == "gangway"            ) or
-       ( passedt.bridge == "low_water_crossing" ) or
-       ( passedt.bridge == "movable"            ) or
-       ( passedt.bridge == "pier"               ) or
-       ( passedt.bridge == "plank"              ) or
-       ( passedt.bridge == "plank_bridge"       ) or
-       ( passedt.bridge == "pontoon"            ) or
-       ( passedt.bridge == "rope"               ) or
-       ( passedt.bridge == "swing"              ) or
-       ( passedt.bridge == "trestle"            ) or
-       ( passedt.bridge == "undefined"          ) or
-       ( passedt.bridge == "viaduct"            )) then
-      passedt.bridge = "yes"
-   end
-
--- ----------------------------------------------------------------------------
--- Remove some combinations of bridge
--- ----------------------------------------------------------------------------
-   if ((  passedt.bridge  == "yes"          ) and
-       (( passedt.barrier == "cattle_grid" )  or
-        ( passedt.barrier == "stile"       ))) then
-      passedt.barrier = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Tunnel values - render as "yes" if appropriate.
--- ----------------------------------------------------------------------------
-   if (( passedt.tunnel == "culvert"             ) or
-       ( passedt.tunnel == "covered"             ) or
-       ( passedt.tunnel == "avalanche_protector" ) or
-       ( passedt.tunnel == "passage"             ) or
-       ( passedt.tunnel == "1"                   ) or
-       ( passedt.tunnel == "cave"                ) or
-       ( passedt.tunnel == "flooded"             ) or
-       ( passedt.tunnel == "building_passage"    )) then
-      passedt.tunnel = "yes"
-   end
-
--- ----------------------------------------------------------------------------
--- Covered values - render as "yes" if appropriate.
--- ----------------------------------------------------------------------------
-   if (( passedt.covered == "arcade"           ) or
-       ( passedt.covered == "covered"          ) or
-       ( passedt.covered == "colonnade"        ) or
-       ( passedt.covered == "building_passage" ) or
-       ( passedt.covered == "building_arcade"  ) or
-       ( passedt.covered == "roof"             ) or
-       ( passedt.covered == "portico"          )) then
-      passedt.covered = "yes"
-   end
-
--- ----------------------------------------------------------------------------
--- Alleged petrol stations that only do fuel:electricity are probably 
--- actually charging stations.
---
--- The combination of "amenity=fuel, electricity, no diesel" is as good as
--- we can make  it without guessing based on brand.  "fuel, electricity,
--- some sort of petrol, no diesel" is not a thing in the UK/IE data currently.
--- Similarly, electric waterway=fuel are charging stations.
---
--- Show vending machines that sell petrol as fuel.
--- One UK/IE example, on an airfield, and "UL91" finds it.
---
--- Show aeroway=fuel as amenity=fuel.  All so far in UK/IE are 
--- general aviation.
---
--- Show waterway=fuel with a "fuel pump on a boat" icon.
---
--- Once we've got those out of the way, detect amenity=fuel that also sell
--- electricity, hydrogen and LPG.
--- ----------------------------------------------------------------------------
-   if (( passedt.amenity          == "fuel" ) and
-       ( passedt.fuelCelectricity == "yes"  )  and
-       ( passedt.fuelCdiesel      == nil    )) then
-      passedt.amenity = "charging_station"
-   end
-
-   if (( passedt.waterway         == "fuel" ) and
-       ( passedt.fuelCelectricity == "yes"  )) then
-      passedt.amenity = "charging_station"
-      passedt.waterway = nil
-   end
-
-   if (( passedt.amenity == "vending_machine" ) and
-       ( passedt.vending == "fuel"            )  and
-       ( passedt.fuel    == "UL91"            )) then
-      passedt.amenity = "fuel"
-   end
-
-   if ( passedt.aeroway == "fuel" ) then
-      passedt.aeroway = nil
-      passedt.amenity = "fuel"
-   end
-
-   if ( passedt.waterway == "fuel" ) then
-      passedt.amenity = "fuel_w"
-      passedt.waterway = nil
-   end
-
-   if (( passedt.amenity          == "fuel" ) and
-       ( passedt.fuelCelectricity == "yes"  )  and
-       ( passedt.fuelCdiesel      == "yes"  )) then
-      passedt.amenity = "fuel_e"
-   end
-
-   if ((  passedt.amenity  == "fuel"  ) and
-       (( passedt.fuelCH2  == "yes"  )  or
-        ( passedt.fuelCLH2 == "yes"  ))) then
-      passedt.amenity = "fuel_h"
-   end
-
-   if ((  passedt.amenity  == "fuel"  ) and
-       (( passedt.LPG      == "yes"  )  or
-        ( passedt.fuel     == "lpg"  )  or
-        ( passedt.fuelClpg == "yes"  ))) then
-      passedt.amenity = "fuel_l"
-   end
-
--- ----------------------------------------------------------------------------
--- Aviaries in UK / IE seem to be always within a zoo or larger attraction, 
--- and not "zoos" in their own right.
--- ----------------------------------------------------------------------------
-   if ((  passedt.zoo     == "aviary"  )  and
-       (( passedt.amenity == nil      )   or
-        ( passedt.amenity == ""       ))) then
-      passedt.amenity = "zooaviary"
-      passedt.tourism = nil
-      passedt.zoo = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Some zoos are mistagged with extra "animal=attraction" or "zoo=enclosure" 
--- tags, so remove those.
--- ----------------------------------------------------------------------------
-   if ((( passedt.attraction == "animal"    )  or
-        ( passedt.zoo        == "enclosure" )) and
-       (  passedt.tourism == "zoo"           )) then
-      passedt.attraction = nil
-      passedt.zoo = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Retag any remaining animal attractions or zoo enclosures for rendering.
--- ----------------------------------------------------------------------------
-   if ((( passedt.attraction == "animal"    )  or
-        ( passedt.zoo        == "enclosure" )) and
-       (( passedt.amenity    == nil         )  or
-        ( passedt.amenity    == ""          ))) then
-      passedt.amenity = "zooenclosure"
-      passedt.attraction = nil
-      passedt.zoo = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Bridge structures - display as building=roof.
--- Also farmyard "bunker silos" and canopies, and natural arches.
--- Also railway traversers and more.
--- ----------------------------------------------------------------------------
-   if ((    passedt.man_made         == "bridge"          ) or
-       (    passedt.natural          == "arch"            ) or
-       (    passedt.man_made         == "bunker_silo"     ) or
-       (    passedt.amenity          == "feeding_place"   ) or
-       (    passedt.railway          == "traverser"       ) or
-       (    passedt.railway          == "wash"            ) or
-       (    passedt.building         == "canopy"          ) or
-       (    passedt.building         == "car_port"        ) or
-       (((( passedt["disused:building"] ~= nil            )    and
-          ( passedt["disused:building"] ~= ""             ))   or
-         (  passedt.amenity          == "parcel_locker" )   or
-         (  passedt.amenity          == "zooaviary"     )   or
-         (  passedt.animal           == "horse_walker"  )   or
-         (  passedt.leisure          == "bleachers"     )   or
-         (  passedt.leisure          == "bandstand"     )) and
-        ((  passedt.building         == nil             )  and
-         (  passedt.building         == ""              ))) or
-       (    passedt["building:type"]    == "canopy"          ) or
-       ((   passedt.covered          == "roof"           )  and
-        ((  passedt.building         == nil             )   or
-         (  passedt.building         == ""              ))  and
-        ((  passedt.highway          == nil             )   or
-         (  passedt.highway          == ""              ))  and
-        ((  passedt.tourism          == nil             )   or
-         (  passedt.tourism          == ""              )))) then
-      passedt.building      = "roof"
-      passedt["building:type"] = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Ensure that allegedly operational windmills are treated as such and not as
--- "historic".
--- ----------------------------------------------------------------------------
-   if (( passedt.man_made == "watermill") or
-       ( passedt.man_made == "windmill" )) then
-      if (( passedt.disused           == "yes"  ) or
-          ( passedt.watermillCdisused == "yes"  ) or
-          ( passedt.windmillCdisused  == "yes"  )) then
-         passedt.historic = passedt.man_made
-         passedt.man_made = nil
-      else
-         passedt.historic = nil
-      end
-   end
-
-   if ((( passedt["disused:man_made"] == "watermill")  or
-        ( passedt["disused:man_made"] == "windmill" )) and
-       (( passedt.amenity          == nil        )  or
-        ( passedt.amenity          == ""         )) and
-       (( passedt.man_made         == nil        )  or
-        ( passedt.man_made         == ""         )) and
-       (( passedt.shop             == nil        )  or
-        ( passedt.shop             == ""         ))) then
-      passedt.historic = passedt["disused:man_made"]
-      passedt["disused:man_made"] = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Render (windmill buildings and former windmills) that are not something 
--- else as historic windmills.
--- ----------------------------------------------------------------------------
-   if ((  passedt.historic == "ruins"      ) and
-       (( passedt.ruins    == "watermill" )  or
-        ( passedt.ruins    == "windmill"  ))) then
-      passedt.historic = passedt.ruins
-      passedt.ruins = "yes"
-   end
-
-   if (((   passedt.building == "watermill"        )  or
-        (   passedt.building == "former_watermill" )) and
-       (((  passedt.amenity  == nil                )  or
-         (  passedt.amenity  == ""                 )) and
-        ((  passedt.man_made == nil                )  or
-         (  passedt.man_made == ""                 )) and
-        ((  passedt.historic == nil                )  or
-         (  passedt.historic == ""                 )  or
-         (  passedt.historic == "restoration"      )  or
-         (  passedt.historic == "heritage"         )  or
-         (  passedt.historic == "industrial"       )  or
-         (  passedt.historic == "tower"            )))) then
-      passedt.historic = "watermill"
-   end
-
-   if (((   passedt.building == "windmill"        )  or
-        (   passedt.building == "former_windmill" )) and
-       (((  passedt.amenity  == nil               )  or
-         (  passedt.amenity  == ""                )) and
-        ((  passedt.man_made == nil               )  or
-         (  passedt.man_made == ""                )) and
-        ((  passedt.historic == nil               )  or
-         (  passedt.historic == ""                )  or
-         (  passedt.historic == "restoration"     )  or
-         (  passedt.historic == "heritage"        )  or
-         (  passedt.historic == "industrial"      )  or
-         (  passedt.historic == "tower"           )))) then
-      passedt.historic = "windmill"
-   end
-
--- ----------------------------------------------------------------------------
--- Render ruined mills and mines etc. that are not something else as historic.
--- Items in this list are assumed to be not operational, so the "man_made" 
--- tag is cleared.
--- ----------------------------------------------------------------------------
-   if (( passedt.historic  == "ruins"        ) and
-       (( passedt.ruins    == "lime_kiln"   )  or
-        ( passedt.ruins    == "manor"       )  or
-        ( passedt.ruins    == "mill"        )  or
-        ( passedt.ruins    == "mine"        )  or
-        ( passedt.ruins    == "round_tower" )  or
-        ( passedt.ruins    == "village"     )  or
-        ( passedt.ruins    == "well"        ))) then
-      passedt.historic = passedt.ruins
-      passedt.ruins = "yes"
-      passedt.man_made = nil
-   end
-
--- ----------------------------------------------------------------------------
--- We can assume that any allegedly non-historic ice_houses are actually 
--- historic.  Any coexisting historic keys will just be stuff like "building".
--- ----------------------------------------------------------------------------
-   if ( passedt.man_made == "ice_house" ) then
-      passedt.historic = "ice_house"
-      passedt.man_made = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Sound mirrors
--- ----------------------------------------------------------------------------
-   if ( passedt.man_made == "sound mirror" ) then
-
-      if ( passedt.historic == "ruins" ) then
-         passedt.ruins = "yes"
-      end
-
-      passedt.historic = "sound_mirror"
-      passedt.man_made = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Specific defensive_works not mapped as something else
--- ----------------------------------------------------------------------------
-   if ((  passedt.defensive_works == "battery"  ) and
-       (( passedt.barrier         == nil       )  or
-        ( passedt.barrier         == ""        )) and
-       (( passedt.building        == nil       )  or
-        ( passedt.building        == ""        )) and
-       (( passedt.historic        == nil       )  or
-        ( passedt.historic        == ""        )) and
-       (( passedt.landuse         == nil       )  or
-        ( passedt.landuse         == ""        )) and
-       (( passedt.man_made        == nil       )  or
-        ( passedt.man_made        == ""        )) and
-       (( passedt.place           == nil       )  or
-        ( passedt.place           == ""        ))) then
-      passedt.historic = "battery"
-      passedt.defensive_works = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Remove name from footway=sidewalk (we expect it to be rendered via the
--- road that this is a sidewalk for), or "is_sidepath=yes" etc.
--- ----------------------------------------------------------------------------
-   if (((  passedt.footway             == "sidewalk" )  or
-        (  passedt.cycleway            == "sidewalk" )  or
-        (  passedt.is_sidepath         == "yes"      )  or
-        (( passedt.is_sidepathCof      ~= nil       )   and
-         ( passedt.is_sidepathCof      ~= ""        ))  or
-        (( passedt.is_sidepathCofCname ~= nil       )   and
-         ( passedt.is_sidepathCofCname ~= ""        ))  or
-        (( passedt.is_sidepathCofCref  ~= nil       )   and
-         ( passedt.is_sidepathCofCref  ~= ""        ))) and
-       ( passedt.name                ~= nil           ) and
-       ( passedt.name                ~= ""            )) then
-      passedt.name = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Waste transfer stations
--- First, try and identify mistagged ones.
--- ----------------------------------------------------------------------------
-   if (( passedt.amenity == "waste_transfer_station" ) and
-       ( passedt.recycling_type == "centre"          )) then
-      passedt.amenity = "recyclingcentre"
-      passedt.landuse = "industrial"
-   end
-
--- ----------------------------------------------------------------------------
--- Next, treat "real" waste transfer stations as industrial.  We remove the 
--- amenity tag here because there's no icon for amenity=waste_transfer_station;
--- an amenity tag would see it treated as landuse=unnamedcommercial with the
--- amenity tag bringing the name (which it won't here).  The "industrial" tag
--- forces it through the brand/operator logic.
--- ----------------------------------------------------------------------------
-   if ( passedt.amenity == "waste_transfer_station" ) then
-      passedt.amenity = nil
-      passedt.landuse = "industrial"
-      passedt.industrial = "waste_transfer_station"
-   end
-
--- ----------------------------------------------------------------------------
--- Recycling bins and recycling centres.
--- Recycling bins are only shown from z19.  Recycling centres are shown from
--- z16 and have a characteristic icon.  Any object without recycling_type, or
--- with a different value, is assumed to be a bin, apart from one rogue
--- "scrap_yard".
--- ----------------------------------------------------------------------------
-   if (( passedt.amenity == "recycling"         ) and
-       ( passedt.recycling_type == "scrap_yard" )) then
-         passedt.amenity = "scrapyard"
-   end
-
-   if ( passedt.amenity == "recycling" ) then
-      if ( passedt.recycling_type == "centre" ) then
-         passedt.amenity = "recyclingcentre"
-         passedt.landuse = "industrial"
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- Mistaggings for wastewater_plant
--- ----------------------------------------------------------------------------
-   if (( passedt.man_made   == "sewage_works"      ) or
-       ( passedt.man_made   == "wastewater_works"  )) then
-      passedt.man_made = "wastewater_plant"
-   end
-
--- ----------------------------------------------------------------------------
--- Outfalls, sewage and otherwise.  We process "man_made=outfall", but also
--- catch outlets not tagged with that.
--- ----------------------------------------------------------------------------
-   if (( passedt.outlet ~= nil  ) and
-       ( passedt.outlet ~= ""   ) and
-       ( passedt.outlet ~= "no" )) then
-      passedt.man_made = "outfall"
-   end
-
--- ----------------------------------------------------------------------------
--- Electricity substations
--- ----------------------------------------------------------------------------
-   if (( passedt.power == "substation"  )  or
-       ( passedt.power == "sub_station" )) then
-      passedt.power   = nil
-
-      if (( passedt.building == nil  ) or
-          ( passedt.building == ""   ) or
-          ( passedt.building == "no" )) then
-         passedt.landuse = "industrial"
-      else
-         passedt.building = "yes"
-         passedt.landuse = "industrialbuilding"
-      end
-
-      if (( passedt.name == nil ) or
-          ( passedt.name == ""  )) then
-         passedt.name = "(el.sub.)"
-      else
-         passedt.name = passedt.name .. " (el.sub.)"
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- Pretend add landuse=industrial to some industrial sub-types to force 
--- name rendering.  Similarly, some commercial and leisure.
--- man_made=works drops the man_made tag to avoid duplicate labelling.
--- "parking=depot" is a special case - drop the parking tag there too.
--- ----------------------------------------------------------------------------
-   if ( passedt.man_made   == "wastewater_plant" ) then
-      passedt.man_made = nil
-      passedt.landuse = "industrial"
-      if (( passedt.name == nil ) or
-          ( passedt.name == ""  )) then
-         passedt.name = "(sewage)"
-      else
-         passedt.name = passedt.name .. " (sewage)"
-      end
-   end
-
-   if (( passedt.amenity    == "bus_depot"              ) or
-       ( passedt.amenity    == "depot"                  ) or
-       ( passedt.amenity    == "fuel_depot"             ) or
-       ( passedt.amenity    == "scrapyard"              ) or 
-       ( passedt.craft      == "bakery"                 ) or
-       ( passedt.craft      == "distillery"             ) or
-       ( passedt.craft      == "sawmill"                ) or
-       ( passedt.industrial == "auto_wrecker"           ) or 
-       ( passedt.industrial == "automotive_industry"    ) or
-       ( passedt.industrial == "bakery"                 ) or
-       ( passedt.industrial == "brewery"                ) or 
-       ( passedt.industrial == "bus_depot"              ) or
-       ( passedt.industrial == "chemical"               ) or
-       ( passedt.industrial == "concrete_plant"         ) or
-       ( passedt.industrial == "construction"           ) or
-       ( passedt.industrial == "depot"                  ) or 
-       ( passedt.industrial == "distillery"             ) or 
-       ( passedt.industrial == "electrical"             ) or
-       ( passedt.industrial == "engineering"            ) or
-       ( passedt.industrial == "factory"                ) or 
-       ( passedt.industrial == "furniture"              ) or
-       ( passedt.industrial == "gas"                    ) or
-       ( passedt.industrial == "haulage"                ) or
-       ( passedt.industrial == "machine_shop"           ) or
-       ( passedt.industrial == "machinery"              ) or
-       ( passedt.industrial == "metal_finishing"        ) or
-       ( passedt.industrial == "mobile_equipment"       ) or
-       ( passedt.industrial == "oil"                    ) or
-       ( passedt.industrial == "packaging"              ) or
-       ( passedt.industrial == "sawmill"                ) or
-       ( passedt.industrial == "scaffolding"            ) or
-       ( passedt.industrial == "scrap_yard"             ) or 
-       ( passedt.industrial == "shop_fitters"           ) or
-       ( passedt.industrial == "warehouse"              ) or
-       ( passedt.industrial == "waste_handling"         ) or
-       ( passedt.industrial == "woodworking"            ) or
-       ( passedt.industrial == "yard"                   ) or 
-       ( passedt.industrial == "yes"                    ) or 
-       ( passedt.landuse    == "depot"                  ) or
-       ( passedt.man_made   == "gas_station"            ) or
-       ( passedt.man_made   == "gas_works"              ) or
-       ( passedt.man_made   == "petroleum_well"         ) or 
-       ( passedt.man_made   == "pumping_station"        ) or
-       ( passedt.man_made   == "water_treatment"        ) or
-       ( passedt.man_made   == "water_works"            ) or
-       ( passedt.power      == "plant"                  )) then
-      passedt.landuse = "industrial"
-   end
-
--- ----------------------------------------------------------------------------
--- Sometimes covered reservoirs are "basically buildings", sometimes they have
--- e.g. landuse=grass set.  If the latter, don't show them as buildings.
--- The name will still appear via landuse.
--- ----------------------------------------------------------------------------
-   if ((  passedt.man_made   == "reservoir_covered"  ) and
-       (( passedt.landuse    == nil                 )  or
-        ( passedt.landuse    == ""                  ))) then
-      passedt.building = "roof"
-      passedt.landuse  = "industrialbuilding"
-   end
-
-   if (( passedt.building   == "industrial"             ) or
-       ( passedt.building   == "depot"                  ) or 
-       ( passedt.building   == "warehouse"              ) or
-       ( passedt.building   == "works"                  ) or
-       ( passedt.building   == "manufacture"            )) then
-      passedt.landuse = "industrialbuilding"
-   end
-
-   if ( passedt.man_made   == "works" ) then
-      passedt.man_made = nil
-
-      if (( passedt.building == nil  ) or
-          ( passedt.building == ""   ) or
-          ( passedt.building == "no" )) then
-         passedt.landuse = "industrial"
-      else
-         passedt.building = "yes"
-         passedt.landuse = "industrialbuilding"
-      end
-   end
-
-   if ( passedt.man_made   == "water_tower" ) then
-      if ( passedt.building == "no" ) then
-         passedt.landuse = "industrial"
-      else
-         passedt.building = "yes"
-         passedt.landuse = "industrialbuilding"
-      end
-   end
-
-   if ( passedt.parking   == "depot" ) then
-      passedt.parking = nil
-      passedt.landuse = "industrial"
-   end
-
--- ----------------------------------------------------------------------------
--- Handle spoil heaps as landfill
--- ----------------------------------------------------------------------------
-   if ( passedt.man_made == "spoil_heap" ) then
-      passedt.landuse = "landfill"
-   end
-
--- ----------------------------------------------------------------------------
--- Handle place=islet as place=island
--- Handle place=quarter
--- Handle natural=cape etc. as place=locality if no other place tag.
--- ----------------------------------------------------------------------------
-   consolidate_place_t( passedt )
-
--- ----------------------------------------------------------------------------
--- Handle shoals, either as mud or reef
--- ----------------------------------------------------------------------------
-   if ( passedt.natural == "shoal" ) then
-      if ( passedt.surface == "mud" ) then
-         passedt.natural = "mud"
-         passedt.surface = nil
-      else
-         passedt.natural = "reef"
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- Show sandy reefs as more sandy than rocky reefs
--- ----------------------------------------------------------------------------
-   if (( passedt.natural == "reef" ) and
-       ( passedt.reef    == "sand" )) then
-         passedt.natural = "reefsand"
-   end
-
--- ----------------------------------------------------------------------------
--- Convert "natural=saltmarsh" into something we can handle below
--- ----------------------------------------------------------------------------
-   if ( passedt.natural == "saltmarsh" ) then
-      if ( passedt.wetland == "tidalflat" ) then
-         passedt.tidal = "yes"
-      else
-         passedt.tidal = "no"
-      end
-
-      passedt.natural = "wetland"
-      passedt.wetland = "saltmarsh"
-   end
-
--- ----------------------------------------------------------------------------
--- Detect wetland not tagged with "natural=wetland".
--- Other combinations include
--- natural=water, natural=scrub, landuse=meadow, leisure=nature_reserve,
--- leisure=park, and no natural, landuse or leisure tags.
--- In many cases we don't set natural=wetland, but in some we do.
--- ----------------------------------------------------------------------------
-   if ((  passedt.wetland == "wet_meadow"  ) and
-       (( passedt.natural == nil          )  or
-        ( passedt.natural == ""           )  or
-        ( passedt.natural == "grassland"  )) and
-       (( passedt.leisure == nil          )  or
-        ( passedt.leisure == ""           ))  and
-       (( passedt.landuse == nil          )  or
-        ( passedt.landuse == ""           )  or
-        ( passedt.landuse == "meadow"     ))) then
-      passedt.natural = "wetland"
-   end
-
--- ----------------------------------------------------------------------------
--- Detect wetland also tagged with "surface" tags.
--- The wetland types that we're interested in below are:
--- (nil), tidalflat, mud, wet_meadow, saltmarsh, reedbed
--- Of these, for (nil) and tidalflat, the surface should take precedence.
--- For others, we fall through to 'if "natural" is still "wetland"' nelow, and
--- if "wetland" doesn't match one of those, it'll go through as 
--- "generic wetland", which is an overlay for whatever's underneath.
--- ----------------------------------------------------------------------------
-   if ((  passedt.natural == "wetland"    ) and
-       (( passedt.wetland == nil         ) or
-        ( passedt.wetland == ""          ) or
-        ( passedt.wetland == "tidalflat" ))) then
-      if ( passedt.surface == "mud" ) then
-         passedt.natural = "mud"
-      end
-
-      if (( passedt.surface == "sand"      ) or
-          ( passedt.surface == "dirt/sand" )) then
-         passedt.natural = "sand"
-      end
-
-      if (( passedt.surface == "shingle"     ) or
-          ( passedt.surface == "gravel"      ) or
-          ( passedt.surface == "fine_gravel" ) or
-          ( passedt.surface == "pebblestone" )) then
-         passedt.natural = "shingle"
-      end
-
-      if (( passedt.surface == "rock"      ) or
-          ( passedt.surface == "bare_rock" ) or
-          ( passedt.surface == "concrete"  )) then
-         passedt.natural = "bare_rock"
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- Also, if "natural" is still "wetland", what "wetland" values should be 
--- handled as some other tag?
--- ----------------------------------------------------------------------------
-   if ( passedt.natural == "wetland" ) then
-      if (( passedt.wetland == "tidalflat" ) or
-          ( passedt.wetland == "mud"       )) then
-         passedt.natural = "mud"
-         passedt.tidal = "yes"
-      end
-
-      if ( passedt.wetland == "wet_meadow" ) then
-         passedt.landuse = "wetmeadow"
-         passedt.natural = nil
-      end
-
-      if ( passedt.wetland == "saltmarsh" ) then
-         passedt.landuse = "saltmarsh"
-         passedt.natural = nil
-      end
-
-      if ( passedt.wetland == "reedbed" ) then
-         passedt.landuse = "reedbed"
-         passedt.natural = nil
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- Render tidal mud with more blue
--- ----------------------------------------------------------------------------
-   if ((  passedt.natural   == "mud"        ) and
-       (( passedt.tidal     == "yes"       ) or
-        ( passedt.wetland   == "tidalflat" ))) then
-      passedt.natural = "tidal_mud"
-   end
-
--- ----------------------------------------------------------------------------
--- Handle various sorts of milestones.
--- ----------------------------------------------------------------------------
-   if (( passedt.highway  == "milestone" )  or
-       ( passedt.historic == "milestone" )  or
-       ( passedt.historic == "milepost"  )  or
-       ( passedt.waterway == "milestone" )  or
-       ( passedt.railway  == "milestone" )  or
-       ( passedt.man_made == "mile_post" )) then
-      passedt.highway = "milestone"
-
-      append_inscription( passedt )
-      append_directions( passedt )
-   end
-
--- ----------------------------------------------------------------------------
--- Aerial markers for pipelines etc.
--- ----------------------------------------------------------------------------
-   if ((   passedt.marker   == "aerial"          ) or
-       (   passedt.marker   == "pipeline"        ) or
-       (   passedt.man_made == "marker"          ) or
-       (   passedt.man_made == "pipeline_marker" ) or
-       (   passedt.pipeline == "marker"          ) or
-       ((( passedt.marker   == "post"          )   or
-         ( passedt.marker   == "yes"           )   or
-         ( passedt.marker   == "pedestal"      )   or
-         ( passedt.marker   == "plate"         )   or
-         ( passedt.marker   == "pole"          ))  and
-        (  passedt.utility  ~= nil              )  and
-        (  passedt.utility  ~= "yes"            ))) then
-      passedt.man_made = "markeraerial"
-   end
-
--- ----------------------------------------------------------------------------
--- Boundary stones.  If they're already tagged as tourism=attraction, remove
--- that tag.
--- Note that "marker=stone" (for "non boundary stones") are handled elsewhere.
--- For March Stones see https://en.wikipedia.org/wiki/March_Stones_of_Aberdeen
--- ----------------------------------------------------------------------------
-   if (( passedt.historic    == "boundary_stone"  )  or
-       ( passedt.historic    == "boundary_marker" )  or
-       ( passedt.man_made    == "boundary_marker" )  or
-       ( passedt.marker      == "boundary_stone"  )  or
-       ( passedt.boundary    == "marker"          )  or
-       ( passedt.designation == "March Stone"     )) then
-      passedt.man_made = "boundary_stone"
-      passedt.tourism  = nil
-
-      append_inscription( passedt )
-   end
-
--- ----------------------------------------------------------------------------
--- Former telephone boxes
--- ----------------------------------------------------------------------------
-   if ((( passedt.covered         == "booth"          )   and
-        ( passedt.booth           ~= "K1"             )   and
-        ( passedt.booth           ~= "KX100"          )   and
-        ( passedt.booth           ~= "KX200"          )   and
-        ( passedt.booth           ~= "KX300"          )   and
-        ( passedt.booth           ~= "KXPlus"         )   and
-        ( passedt.booth           ~= "KX410"          )   and
-        ( passedt.booth           ~= "KX420"          )   and
-        ( passedt.booth           ~= "KX520"          )   and
-        ( passedt.booth           ~= "oakham"         )   and
-        ( passedt.booth           ~= "ST6"            ))  or
-       (  passedt.booth           == "K2"              )  or
-       (  passedt.booth           == "K4 Post Office"  )  or
-       (  passedt.booth           == "K6"              )  or
-       (  passedt.booth           == "K8"              )  or
-       (  passedt.telephone_kiosk == "K6"              )  or
-       (  passedt.man_made        == "telephone_box"   )  or
-       (  passedt.building        == "telephone_box"   )  or
-       (  passedt.historic        == "telephone"       )  or
-       (  passedt["disused:amenity"] == "telephone"       )  or
-       (  passedt.removedCamenity == "telephone"       )) then
-      if ((( passedt.amenity   == "telephone"    )  or
-           ( passedt.amenity   == "phone"        )) and
-          (  passedt.emergency ~= "defibrillator" ) and
-          (  passedt.emergency ~= "phone"         ) and
-          (  passedt.tourism   ~= "information"   ) and
-          (  passedt.tourism   ~= "artwork"       ) and
-          (  passedt.tourism   ~= "museum"        )) then
-	 if ( passedt.colour == "black" ) then
-            passedt.amenity = "boothtelephoneblack"
-	 else
-	    if (( passedt.colour == "white" ) or
-	        ( passedt.colour == "cream" )) then
-               passedt.amenity = "boothtelephonewhite"
-	    else
-    	       if ( passedt.colour == "blue" ) then
-                  passedt.amenity = "boothtelephoneblue"
-	       else
-    	          if ( passedt.colour == "green" ) then
-                     passedt.amenity = "boothtelephonegreen"
-		  else
-    	             if ( passedt.colour == "grey" ) then
-                        passedt.amenity = "boothtelephonegrey"
-		     else
-    	                if ( passedt.colour == "gold" ) then
-                           passedt.amenity = "boothtelephonegold"
-			else
-                           passedt.amenity = "boothtelephonered"
-			end
-		     end
-		  end
-	       end
-	    end
-	 end
-	    
-         passedt.tourism = nil
-         passedt.emergency = nil
-      else
-         if ( passedt.emergency == "defibrillator" ) then
-             passedt.amenity   = "boothdefibrillator"
-             passedt["disused:amenity"] = nil
-             passedt.emergency = nil
-         else
-            if (( passedt.amenity == "public_bookcase" )  or
-                ( passedt.amenity == "library"         )) then
-               passedt.amenity = "boothlibrary"
-               passedt["disused:amenity"] = nil
-            else
-               if ( passedt.amenity == "bicycle_repair_station" ) then
-                  passedt.amenity = "boothbicyclerepairstation"
-                  passedt["disused:amenity"] = nil
-               else
-                  if ( passedt.amenity == "atm" ) then
-                     passedt.amenity = "boothatm"
-                     passedt["disused:amenity"] = nil
-                  else
-                     if ( passedt.tourism == "information" ) then
-                        passedt.amenity = "boothinformation"
-                        passedt["disused:amenity"] = nil
-                        passedt.tourism = nil
-                     else
-                        if ( passedt.tourism == "artwork" ) then
-                           passedt.amenity = "boothartwork"
-                           passedt["disused:amenity"] = nil
-                           passedt.tourism = nil
-                        else
-                           if ( passedt.tourism == "museum" ) then
-                              passedt.amenity = "boothmuseum"
-                              passedt["disused:amenity"] = nil
-                              passedt.tourism = nil
-		  	   else
-                              if (( passedt["disused:amenity"]    == "telephone"        )  or
-                                  ( passedt.removedCamenity    == "telephone"        )  or
-                                  ( passedt["abandoned:amenity"]  == "telephone"        )  or
-                                  ( passedt["demolished:amenity"] == "telephone"        )  or
-                                  ( passedt.razedCamenity      == "telephone"        )  or
-                                  ( passedt.old_amenity        == "telephone"        )  or
-                                  ( passedt.historicCamenity   == "telephone"        )  or
-                                  ( passedt.disused            == "telephone"        )  or
-                                  ( passedt["was:amenity"]        == "telephone"        )  or
-                                  ( passedt.oldCamenity        == "telephone"        )  or
-                                  ( passedt.amenity            == "former_telephone" )  or
-                                  ( passedt.historic           == "telephone"        )) then
-                                 passedt.amenity         = "boothdisused"
-                                 passedt["disused:amenity"] = nil
-                                 passedt.historic        = nil
-                              end
-                           end
-			end
-                     end
-                  end
-               end
-            end
-         end
-      end
-   end
-   
--- ----------------------------------------------------------------------------
--- "business" and "company" are used as an alternative to "office" and 
--- "industrial" by some people.  Wherever someone has used a more 
--- frequently-used tag we defer to that.
--- ----------------------------------------------------------------------------
-   if ((( passedt.business   ~= nil  )  and
-        ( passedt.business   ~= ""   )) and
-       (( passedt.office     == nil  )  or
-        ( passedt.office     == ""   )) and
-       (( passedt.shop       == nil  )  or
-        ( passedt.shop       == ""   ))) then
-      passedt.office = "yes"
-      passedt.business = nil
-   end
-
-   if ((( passedt.company   ~= nil  )  and
-        ( passedt.company   ~= ""   )) and
-       (( passedt.man_made  == nil  )  or
-        ( passedt.man_made  == ""   )) and
-       (( passedt.office    == nil  )  or
-        ( passedt.office    == ""   )) and
-       (( passedt.shop      == nil  )  or
-        ( passedt.shop      == ""   ))) then
-      passedt.office = "yes"
-      passedt.company = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Remove generic offices if shop is set.
--- ----------------------------------------------------------------------------
-   if ((  passedt.shop   ~= nil        )  and
-       (  passedt.shop   ~= ""         )  and
-       (  passedt.shop   ~= "no"       )  and
-       (  passedt.shop   ~= "vacant"   )  and
-       (( passedt.office == "company" )   or
-        ( passedt.office == "vacant"  )   or
-        ( passedt.office == "yes"     ))) then
-      passedt.office = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Mappings to shop=car
--- ----------------------------------------------------------------------------
-   if (( passedt.shop    == "car;car_repair"  )  or
-       ( passedt.shop    == "car_showroom"    )  or
-       ( passedt.shop    == "vehicle"         )) then
-      passedt.shop = "car"
-   end
-
--- ----------------------------------------------------------------------------
--- Mappings to shop=bicycle
--- ----------------------------------------------------------------------------
-   if ( passedt.shop == "bicycle_repair"   ) then
-      passedt.shop = "bicycle"
-   end
-
--- ----------------------------------------------------------------------------
--- Map craft=car_repair etc. to shop=car_repair
--- ----------------------------------------------------------------------------
-   if (( passedt.craft   == "car_repair"         )  or
-       ( passedt.craft   == "coachbuilder"       )  or
-       ( passedt.shop    == "car_service"        )  or
-       ( passedt.amenity == "vehicle_inspection" )  or
-       ( passedt.shop    == "car_bodyshop"       )  or
-       ( passedt.shop    == "vehicle_inspection" )  or
-       ( passedt.shop    == "mechanic"           )  or
-       ( passedt.shop    == "car_repair;car"     )  or
-       ( passedt.shop    == "car_repair;tyres"   )  or
-       ( passedt.shop    == "vehicle_repair"     )) then
-      passedt.shop    = "car_repair"
-      passedt.amenity = nil
-      passedt.craft   = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Map various diplomatic things to embassy.
--- Pedants may claim that some of these aren't legally embassies, and they'd
--- be correct, but I use the same icon for all of these currently.
--- ----------------------------------------------------------------------------
-   if (((  passedt.diplomatic == "embassy"            )  and
-        (( passedt.embassy    == nil                 )   or
-         ( passedt.embassy    == ""                  )   or
-         ( passedt.embassy    == "yes"               )   or
-         ( passedt.embassy    == "high_commission"   )   or
-         ( passedt.embassy    == "nunciature"        )   or
-         ( passedt.embassy    == "delegation"        ))) or
-       ((  passedt.diplomatic == "consulate"          )  and
-        (( passedt.consulate  == nil                 )   or
-         ( passedt.consulate  == ""                  )   or
-         ( passedt.consulate  == "consulate_general" )   or
-         ( passedt.consulate  == "yes"               ))) or
-       ( passedt.diplomatic == "embassy;consulate"     ) or
-       ( passedt.diplomatic == "embassy;mission"       ) or
-       ( passedt.diplomatic == "consulate;embassy"     )) then
-      passedt.amenity    = "embassy"
-      passedt.diplomatic = nil
-      passedt.office     = nil
-   end
-
-   if (((  passedt.diplomatic == "embassy"              )  and
-        (( passedt.embassy    == "residence"           )   or
-         ( passedt.embassy    == "branch_embassy"      )   or
-         ( passedt.embassy    == "mission"             ))) or
-       ((  passedt.diplomatic == "consulate"            )  and
-        (( passedt.consulate  == "consular_office"     )   or
-         ( passedt.consulate  == "residence"           )   or
-         ( passedt.consulate  == "consular_agency"     ))) or
-       (   passedt.diplomatic == "permanent_mission"     ) or
-       (   passedt.diplomatic == "trade_delegation"      ) or
-       (   passedt.diplomatic == "liaison"               ) or
-       (   passedt.diplomatic == "non_diplomatic"        ) or
-       (   passedt.diplomatic == "mission"               ) or
-       (   passedt.diplomatic == "trade_mission"         )) then
-      if ( passedt.amenity == "embassy" ) then
-         passedt.amenity = nil
-      end
-
-      passedt.diplomatic = nil
-
--- ----------------------------------------------------------------------------
--- "office" is set to something that will definitely display here, just in case
--- it was set to some value that would not.
--- ----------------------------------------------------------------------------
-      passedt.office = "yes"
-   end
-
--- ----------------------------------------------------------------------------
--- Don't show extinct volcanos as volcanos, just as peaks.
--- That's still iffy in some cases (e.g. Rockall), but better than nothing.
--- ----------------------------------------------------------------------------
-   if ((  passedt.natural        == "volcano" ) and
-       (  passedt.volcanoCstatus == "extinct" )) then
-      passedt.natural = "peak"
-   end
-
--- ----------------------------------------------------------------------------
--- Things that are both localities and peaks or hills 
--- should render as the latter.
--- Also, some other combinations (most amenities, some man_made, etc.)
--- Note that "hill" is handled by the rendering code as similar to "peak" but
--- only at higher zooms.  See 19/03/2023 in changelog.html .
--- ----------------------------------------------------------------------------
-   if ((   passedt.place    == "locality"       ) and
-       ((  passedt.natural  == "peak"          )  or
-        (  passedt.natural  == "hill"          )  or
-        (( passedt.amenity  ~= nil            )   and
-         ( passedt.amenity  ~= ""             ))  or
-        (( passedt.man_made ~= nil            )   and
-         ( passedt.man_made ~= ""             ))  or
-        (( passedt.historic ~= nil            )   and
-         ( passedt.historic ~= ""             )))) then
-      passedt.place = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Various tags are used for milk churn stands
--- They're extracted as "historic".
--- ----------------------------------------------------------------------------
-   if ((  passedt.man_made == "milk_churn_stand" ) or
-       (  passedt.memorial == "milk_churn_stand" )) then
-      passedt.historic = "milk_churn_stand"
-   end
-
--- ----------------------------------------------------------------------------
--- Detect some sport facilities that have been only partially tagged.
--- For example, something with a name that is "sport=10pin" but isn't anything
--- else must be a bowling alley.
--- ----------------------------------------------------------------------------
-   if ((( passedt.sport           == "10pin"   )  or
-        ( passedt.sport           == "9pin"    )  or
-        ( passedt.sport           == "bowling" )) and
-       (( passedt.leisure         == nil       )  or
-        ( passedt.leisure         == ""        )) and
-       (( passedt.disusedCleisure == nil       )  or
-        ( passedt.disusedCleisure == ""        )) and
-       (( passedt.amenity         == nil       )  or
-        ( passedt.amenity         == ""        )) and
-       (( passedt.shop            == nil       )  or
-        ( passedt.shop            == ""        )) and
-       (( passedt.office          == nil       )  or
-        ( passedt.office          == ""        )) and
-       (( passedt.club            == nil       )  or
-        ( passedt.club            == ""        )) and
-       (  passedt.name            ~= nil        ) and
-       (  passedt.name            ~= ""         )) then
-      passedt.leisure = "bowling_alley"
-   end
-
-   if ((  passedt.sport           == "skiing"  ) and
-       (( passedt.leisure         == nil      )  or
-        ( passedt.leisure         == ""       )) and
-       (( passedt.disusedCleisure == nil      )  or
-        ( passedt.disusedCleisure == ""       )) and
-       (( passedt.amenity         == nil      )  or
-        ( passedt.amenity         == ""       )) and
-       (( passedt.shop            == nil      )  or
-        ( passedt.shop            == ""       )) and
-       (( passedt.office          == nil      )  or
-        ( passedt.office          == ""       )) and
-       (( passedt.club            == nil      )  or
-        ( passedt.club            == ""       )) and
-       (  passedt.name            ~= nil       ) and
-       (  passedt.name            ~= ""        )) then
-      passedt.leisure = "pitch"
-   end
-
--- ----------------------------------------------------------------------------
--- Things that are both viewpoints or attractions and monuments or memorials 
--- should render as the latter.  Some are handled further down too.
--- Also handle some other combinations.
--- ----------------------------------------------------------------------------
-   if ((( passedt.tourism   == "viewpoint"                 )  or
-        ( passedt.tourism   == "attraction"                )) and
-       (( passedt.historic  == "abbey"                     )  or
-        ( passedt.historic  == "aircraft"                  )  or
-        ( passedt.historic  == "almshouse"                 )  or
-        ( passedt.historic  == "anchor"                    )  or
-        ( passedt.historic  == "archaeological_site"       )  or
-        ( passedt.historic  == "bakery"                    )  or
-        ( passedt.historic  == "barrow"                    )  or
-        ( passedt.historic  == "baths"                     )  or
-        ( passedt.historic  == "battlefield"               )  or
-        ( passedt.historic  == "battery"                   )  or
-        ( passedt.historic  == "bullaun_stone"             )  or
-        ( passedt.historic  == "boundary_stone"            )  or
-        ( passedt.historic  == "building"                  )  or
-        ( passedt.historic  == "bridge_site"               )  or
-        ( passedt.historic  == "bunker"                    )  or
-        ( passedt.historic  == "camp"                      )  or
-        ( passedt.historic  == "cannon"                    )  or
-        ( passedt.historic  == "castle"                    )  or
-        ( passedt.historic  == "chapel"                    )  or
-        ( passedt.historic  == "church"                    )  or
-        ( passedt.historic  == "city_gate"                 )  or
-        ( passedt.historic  == "citywalls"                 )  or
-        ( passedt.historic  == "chlochan"                  )  or
-        ( passedt.historic  == "cross"                     )  or
-        ( passedt.historic  == "deserted_medieval_village" )  or
-        ( passedt.historic  == "drinking_fountain"         )  or
-        ( passedt.historic  == "folly"                     )  or
-        ( passedt.historic  == "fort"                      )  or
-        ( passedt.historic  == "fortification"             )  or
-        ( passedt.historic  == "gate"                      )  or
-        ( passedt.historic  == "grinding_mill"             )  or
-        ( passedt.historic  == "hall"                      )  or
-        ( passedt.historic  == "high_cross"                )  or
-        ( passedt.historic  == "house"                     )  or
-        ( passedt.historic  == "ice_house"                 )  or
-        ( passedt.historic  == "jail"                      )  or
-        ( passedt.historic  == "locomotive"                )  or
-        ( passedt.historic  == "locomotive"                )  or
-        ( passedt.historic  == "martello_tower"            )  or
-        ( passedt.historic  == "martello_tower;bunker"     )  or
-        ( passedt.historic  == "maypole"                   )  or
-        ( passedt.historic  == "memorial"                  )  or
-        ( passedt.historic  == "mill"                      )  or
-        ( passedt.historic  == "millstone"                 )  or
-        ( passedt.historic  == "mine"                      )  or
-        ( passedt.historic  == "monastery"                 )  or
-        ( passedt.historic  == "monastic_grange"           )  or
-        ( passedt.historic  == "monument"                  )  or
-        ( passedt.historic  == "mound"                     )  or
-	( passedt.historic  == "naval_mine"                )  or
-        ( passedt.historic  == "oratory"                   )  or
-        ( passedt.historic  == "pillory"                   )  or
-        ( passedt.historic  == "place_of_worship"          )  or
-        ( passedt.historic  == "police_call_box"           )  or
-        ( passedt.historic  == "prison"                    )  or
-        ( passedt.historic  == "residence"                 )  or
-        ( passedt.historic  == "roundhouse"                )  or
-        ( passedt.historic  == "ruins"                     )  or
-        ( passedt.historic  == "sawmill"                   )  or
-        ( passedt.historic  == "shelter"                   )  or
-        ( passedt.historic  == "ship"                      )  or
-        ( passedt.historic  == "smithy"                    )  or
-        ( passedt.historic  == "sound_mirror"              )  or
-        ( passedt.historic  == "standing_stone"            )  or
-        ( passedt.historic  == "statue"                    )  or
-        ( passedt.historic  == "stocks"                    )  or
-        ( passedt.historic  == "stone"                     )  or
-        ( passedt.historic  == "tank"                      )  or
-        ( passedt.historic  == "theatre"                   )  or
-        ( passedt.historic  == "tomb"                      )  or
-        ( passedt.historic  == "tower"                     )  or
-        ( passedt.historic  == "tower_house"               )  or
-        ( passedt.historic  == "tumulus"                   )  or
-        ( passedt.historic  == "village"                   )  or
-        ( passedt.historic  == "village_pump"              )  or
-        ( passedt.historic  == "water_crane"               )  or
-        ( passedt.historic  == "water_pump"                )  or
-        ( passedt.historic  == "wayside_cross"             )  or
-        ( passedt.historic  == "wayside_shrine"            )  or
-        ( passedt.historic  == "well"                      )  or
-        ( passedt.historic  == "watermill"                 )  or
-        ( passedt.historic  == "windmill"                  )  or
-        ( passedt.historic  == "workhouse"                 )  or
-        ( passedt.historic  == "wreck"                     )  or
-        ( passedt.historic  == "yes"                       )  or
-        ( passedt.natural   == "beach"                     )  or
-        ( passedt.natural   == "cave_entrance"             )  or
-        ( passedt.natural   == "cliff"                     )  or
-        ( passedt.natural   == "grassland"                 )  or
-        ( passedt.natural   == "heath"                     )  or
-        ( passedt.natural   == "sand"                      )  or
-        ( passedt.natural   == "scrub"                     )  or
-        ( passedt.natural   == "spring"                    )  or
-        ( passedt.natural   == "tree"                      )  or
-        ( passedt.natural   == "water"                     )  or
-        ( passedt.natural   == "wood"                      )  or
-        ( passedt.leisure   == "garden"                    )  or
-        ( passedt.leisure   == "nature_reserve"            )  or
-        ( passedt.leisure   == "park"                      )  or
-        ( passedt.leisure   == "sports_centre"             ))) then
-      passedt.tourism = nil
-   end
-
-   if ((   passedt.tourism == "attraction"   ) and
-       ((( passedt.shop    ~= nil          )   and
-         ( passedt.shop    ~= ""           ))  or
-        (( passedt.amenity ~= nil          )   and
-         ( passedt.amenity ~= ""           ))  or
-        (( passedt.highway ~= nil          )   and
-         ( passedt.highway ~= ""           ))  or
-        (  passedt.leisure == "park"       ))) then
-      passedt.tourism = nil
-   end
-
--- ----------------------------------------------------------------------------
--- There's a bit of "tagging for the renderer" going on with some large museums
--- ----------------------------------------------------------------------------
-   if ((  passedt.tourism == "museum"          ) and 
-       (( passedt.leisure == "garden"         )  or
-        ( passedt.leisure == "nature_reserve" )  or
-        ( passedt.leisure == "park"           ))) then
-      passedt.leisure = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Detect unusual taggings of hills
--- ----------------------------------------------------------------------------
-   if (( passedt.natural == "peak" ) and
-       ( passedt.peak    == "hill" )) then
-      passedt.natural = "hill"
-   end
-
--- ----------------------------------------------------------------------------
--- Holy wells might be natural=spring or something else.
--- Make sure that we set "amenity" to something other than "place_of_worship"
--- The one existing "holy_well" is actually a spring.
--- ----------------------------------------------------------------------------
-   if (( passedt.amenity == "holy_well" ) and
-       ( passedt.natural == "spring"    )) then
-      passedt.amenity = "holy_spring"
-      passedt.natural = nil
-   end
-
-   if ( passedt.place_of_worship == "holy_well" ) then
-      passedt.man_made = nil
-      if ( passedt.natural == "spring" ) then
-         passedt.amenity = "holy_spring"
-         passedt.natural = nil
-      else
-         passedt.amenity = "holy_well"
-         passedt.natural = nil
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- Springs - lose a historic tag, if set.
--- ----------------------------------------------------------------------------
-   if (( passedt.natural == "spring" ) and
-       ( passedt.historic ~= nil     ) and
-       ( passedt.historic ~= ""      )) then
-      passedt.historic = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Inverse springs - where water seeps below ground
--- We already show "dry" sinkholes; show these in the same way.
--- ----------------------------------------------------------------------------
-   if ( passedt.waterway == "cave_of_debouchement" ) then
-      passedt.natural = "sinkhole"
-   end
-
--- ----------------------------------------------------------------------------
--- Boatyards
--- ----------------------------------------------------------------------------
-   if (( passedt.waterway   == "boatyard" ) or
-       ( passedt.industrial == "boatyard" )) then
-      passedt.amenity = "boatyard"
-      passedt.waterway = nil
-      passedt.industrial = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Beer gardens etc.
--- ----------------------------------------------------------------------------
-   if (( passedt.amenity == "beer_garden" ) or
-       ( passedt.leisure == "beer_garden" )) then
-      passedt.amenity = nil
-      passedt.leisure = "garden"
-      passedt.garden = "beer_garden"
-   end
-
--- ----------------------------------------------------------------------------
--- Render biergartens as gardens, which is all they likely are.
--- Remove the symbol from unnamed ones - they're likely just pub beer gardens.
--- ----------------------------------------------------------------------------
-   if (  passedt.amenity == "biergarten" ) then
-      if (( passedt.name == nil           )   or
-          ( passedt.name == ""            )   or
-          ( passedt.name == "Beer Garden" )) then
-         passedt.amenity = nil
-      end
-
-      passedt.landuse = "unnamedgrass"
-   end
-
--- ----------------------------------------------------------------------------
--- Treat natural=meadow as a synonym for landuse=meadow, if no other landuse
--- ----------------------------------------------------------------------------
-   if (( passedt.natural == "meadow" ) and
-       ( passedt.landuse == nil      )) then
-      passedt.landuse = "meadow"
-   end
-
--- ----------------------------------------------------------------------------
--- "historic=bunker" and "historic=ruins;ruins=bunker"
--- This is set here to prevent unnamedcommercial being set just below.
--- 3 selections make up our "historic" bunkers, "or"ed together.
--- The first "or" includes "building=pillbox" because they are all historic.
--- In the "disused" check we also include "building=bunker".
--- ----------------------------------------------------------------------------
-   if ((((  passedt.historic == "bunker"                      )   or
-         (( passedt.historic == "ruins"                      )    and
-          ( passedt.ruins    == "bunker"                     ))   or
-         (  passedt.historic == "pillbox"                     )   or
-         (  passedt.building == "pillbox"                     ))  and
-        (   passedt.military == nil                            )) or
-       ((   passedt["disused:military"] == "bunker"               )  and
-        ((  passedt.military         == nil                   )   or
-         (  passedt.military         == ""                    ))) or
-       (((  passedt.military         == "bunker"              )   or
-         (  passedt.building         == "bunker"              ))  and
-        ((  passedt.disused          == "yes"                 )   or
-         (( passedt.historic         ~= nil                  )   and
-          ( passedt.historic         ~= ""                   )   and
-          ( passedt.historic         ~= "no"                 ))))) then
-      passedt.historic = "bunker"
-      passedt.disused = nil
-      passedt["disused:military"] = nil
-      passedt.military = nil
-      passedt.ruins = nil
-      passedt.tourism  = nil
-
-      if ((( passedt.landuse == nil )  or
-           ( passedt.landuse == ""  )) and
-          (( passedt.leisure == nil )  or
-           ( passedt.leisure == ""  )) and
-          (( passedt.natural == nil )  or
-           ( passedt.natural == ""  ))) then
-         passedt.landuse = "historic"
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- highway=services is translated to commercial landuse - any overlaid parking
--- can then be seen.
---
--- highway=rest_area is translated lower down to amenity=parking.
--- ----------------------------------------------------------------------------
-   if (  passedt.highway == "services" ) then
-      passedt.highway = nil
-      passedt.landuse = "commercial"
-   end
-
--- ----------------------------------------------------------------------------
--- Things without icons - add "commercial" landuse to include a name 
--- (if one exists) too.
--- ----------------------------------------------------------------------------
-   if (( passedt.landuse      == "churchyard"               ) or
-       ( passedt.landuse      == "religious"                ) or
-       ( passedt.leisure      == "racetrack"                ) or
-       ( passedt.landuse      == "aquaculture"              ) or
-       ( passedt.landuse      == "fishfarm"                 ) or
-       ( passedt.industrial   == "fish_farm"                ) or
-       ( passedt.seamarkCtype == "marine_farm"              )) then
-      passedt.landuse = "commercial"
-   end
-
--- ----------------------------------------------------------------------------
--- Shop groups - just treat as retail landuse.
--- ----------------------------------------------------------------------------
-   if (( passedt.shop    == "mall"            ) or
-       ( passedt.amenity == "marketplace"     ) or
-       ( passedt.shop    == "market"          ) or
-       ( passedt.amenity == "market"          ) or
-       ( passedt.amenity == "food_court"      ) or
-       ( passedt.shop    == "shopping_centre" )) then
-      passedt.landuse = "retail"
-   end
-
--- ----------------------------------------------------------------------------
--- Scout camps etc.
--- ----------------------------------------------------------------------------
-   if (( passedt.amenity   == "scout_camp"     ) or
-       ( passedt.landuse   == "scout_camp"     ) or	
-       ( passedt.leisure   == "fishing"        ) or
-       ( passedt.leisure   == "outdoor_centre" )) then
-      passedt.leisure = "park"
-   end
-
--- ----------------------------------------------------------------------------
--- Some people tag beach resorts as beaches - remove "beach_resort" there.
--- ----------------------------------------------------------------------------
-   if (( passedt.leisure == "beach_resort" ) and
-       ( passedt.natural == "beach"        )) then
-      passedt.leisure = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Remove tourism=attraction from rock features that are rendered as rock(s)
--- ----------------------------------------------------------------------------
-   if ((  passedt.tourism   == "attraction"     ) and
-       (( passedt.natural   == "bare_rock"     ) or
-        ( passedt.natural   == "boulder"       ) or
-        ( passedt.natural   == "rock"          ) or
-        ( passedt.natural   == "rocks"         ) or
-        ( passedt.natural   == "stone"         ) or
-        ( passedt.natural   == "stones"        ) or
-        ( passedt.climbing  == "boulder"       ))) then
-      passedt.tourism = nil
-   end
-
--- ----------------------------------------------------------------------------
--- There is at least one closed "natural=couloir" with "surface=scree".
--- ----------------------------------------------------------------------------
-   if (( passedt.natural ~= nil     ) and
-       ( passedt.natural ~= ""      ) and
-       ( passedt.surface == "scree" )) then
-      passedt.natural = "scree"
-   end
-
--- ----------------------------------------------------------------------------
--- Render tidal beaches with more blue
--- ----------------------------------------------------------------------------
-   if ((  passedt.natural   == "beach"      ) and
-       (( passedt.tidal     == "yes"       )  or
-        ( passedt.wetland   == "tidalflat" ))) then
-      passedt.natural = "tidal_beach"
-   end
-
--- ----------------------------------------------------------------------------
--- Render tidal scree with more blue
--- ----------------------------------------------------------------------------
-   if (( passedt.natural   == "scree" ) and
-       ( passedt.tidal     == "yes"   )) then
-      passedt.natural = "tidal_scree"
-   end
-
--- ----------------------------------------------------------------------------
--- Render tidal shingle with more blue
--- ----------------------------------------------------------------------------
-   if (( passedt.natural   == "shingle" ) and
-       ( passedt.tidal     == "yes"     )) then
-      passedt.natural = "tidal_shingle"
-   end
-
--- ----------------------------------------------------------------------------
--- Change natural=rocks on non-nodes to natural=bare_rock
--- ----------------------------------------------------------------------------
-   if (( passedt.natural   == "rocks"  ) or
-       ( passedt.natural   == "stones" )) then
-      passedt.natural = "bare_rock"
-   end
-
--- ----------------------------------------------------------------------------
--- Render tidal rocks with more blue
--- ----------------------------------------------------------------------------
-   if ((  passedt.natural   == "bare_rock"  ) and
-       (( passedt.tidal     == "yes"       )  or
-        ( passedt.wetland   == "tidalflat" ))) then
-      passedt.natural = "tidal_rock"
-   end
-
--- ----------------------------------------------------------------------------
--- Boulders - are they climbing boulders or not?
--- If yes, let them get detected as "climbing pitches" ("amenity=pitch_climbing") 
--- or non-pitch climbing features ("natural=climbing")
--- ----------------------------------------------------------------------------
-   if ((  passedt.natural    == "boulder"          ) or
-       (( passedt.natural    == "stone"           )  and
-        ( passedt.geological == "glacial_erratic" ))) then
-      if (( passedt.sport    ~= "climbing"            ) and
-          ( passedt.sport    ~= "climbing;bouldering" ) and
-          ( passedt.climbing ~= "boulder"             )) then
-         passedt.natural = "rock"
-      end
-   end
-
--- ----------------------------------------------------------------------------
--- Some things are rendered line pitch to differentiate from any underlying park.
--- "cricket_nets" is an oddity.  See https://lists.openstreetmap.org/pipermail/tagging/2023-January/thread.html#66908 .
--- ----------------------------------------------------------------------------
-   if (( passedt.sport   == "cricket_nets"       ) or
-       ( passedt.sport   == "cricket_nets;multi" ) or
-       ( passedt.leisure == "practice_pitch"     )) then
-      passedt.leisure = "pitch"
-   end
-
--- ----------------------------------------------------------------------------
--- Show skate parks etc. (that aren't skate shops, or some other leisure 
--- already) as pitches.
--- ----------------------------------------------------------------------------
-   if ((( passedt.sport    == "skateboard"     )  or
-        ( passedt.sport    == "skateboard;bmx" )) and
-       (( passedt.shop     == nil              )  or
-        ( passedt.shop     == ""               )) and
-       (( passedt.leisure  == nil              )  or
-        ( passedt.leisure  == ""               ))) then
-      passedt.leisure = "pitch"
-   end
-
--- ----------------------------------------------------------------------------
--- Map leisure=wildlife_hide to bird_hide etc.  Many times it will be.
--- ----------------------------------------------------------------------------
-   if (( passedt.leisure      == "wildlife_hide" ) or
-       ( passedt.amenity      == "wildlife_hide" ) or
-       ( passedt.man_made     == "wildlife_hide" ) or
-       ( passedt.amenity      == "bird_hide"     )) then
-      passedt.leisure  = "bird_hide"
-      passedt.amenity  = nil
-      passedt.man_made = nil
-   end
-
-   if ((( passedt.amenity       == "hunting_stand" )   and
-        ( passedt.hunting_stand == "grouse_butt"   ))  or
-       ( passedt.man_made       == "grouse_butt"    )) then
-      passedt.leisure = "grouse_butt"
-      passedt.amenity = nil
-      passedt.man_made = nil
-   end
-
-   if ( passedt.amenity == "hunting_stand" ) then
-      passedt.leisure = "hunting_stand"
-      passedt.amenity = nil
-   end
-
--- ----------------------------------------------------------------------------
--- Treat harbour=yes as landuse=harbour, if not already landuse.
--- ----------------------------------------------------------------------------
-   if ((  passedt.harbour == "yes"  ) and
-       (( passedt.landuse == nil   )  or
-        ( passedt.landuse == ""    ))) then
-      passedt.landuse = "harbour"
-   end
+   consolidate_lua_03_t( passedt )
 
 -- ----------------------------------------------------------------------------
 -- landuse=field is rarely used.  I tried unsuccessfully to change the colour 
@@ -3318,16 +1493,16 @@ function generic_before_function( passedt )
    end
 
    if ((  passedt["abandoned:amenity"] == "pub"             )   or
-       (  passedt.amenityCdisused   == "pub"             )   or
+       (  passedt["amenity:disused"]   == "pub"             )   or
        (  passedt.disused           == "pub"             )   or
        (  passedt["disused:pub"]       == "yes"             )   or
        (  passedt.former_amenity    == "former_pub"      )   or
        (  passedt.former_amenity    == "pub"             )   or
        (  passedt.former_amenity    == "old_pub"         )   or
-       (  passedt.formerCamenity    == "pub"             )   or
+       (  passedt["former:amenity"]    == "pub"             )   or
        (  passedt.old_amenity       == "pub"             )) then
       passedt["disused:amenity"] = "pub"
-      passedt.amenityCdisused = nil
+      passedt["amenity:disused"] = nil
       passedt.disused = nil
       passedt["disused:pub"] = nil
       passedt.former_amenity = nil
@@ -3353,7 +1528,7 @@ function generic_before_function( passedt )
        (( passedt.amenity           == "pub"            )    and
         ( passedt.opening_hours     == "closed"         ))) then
       passedt["disused:amenity"] = "pub"
-      passedt.amenityCdisused = nil
+      passedt["amenity:disused"] = nil
       passedt.disused = nil
       passedt["disused:pub"] = nil
       passedt.former_amenity = nil
@@ -3446,29 +1621,29 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ((( passedt["description:floor"] ~= nil                 )  and
         ( passedt["description:floor"] ~= ""                  )) or
-       (  passedt.floorCmaterial    == "brick"              ) or
-       (  passedt.floorCmaterial    == "brick;concrete"     ) or
-       (  passedt.floorCmaterial    == "concrete"           ) or
-       (  passedt.floorCmaterial    == "grubby carpet"      ) or
-       (  passedt.floorCmaterial    == "lino"               ) or
-       (  passedt.floorCmaterial    == "lino;carpet"        ) or
-       (  passedt.floorCmaterial    == "lino;rough_wood"    ) or
-       (  passedt.floorCmaterial    == "lino;tiles;stone"   ) or
-       (  passedt.floorCmaterial    == "paving_stones"      ) or
-       (  passedt.floorCmaterial    == "rough_carpet"       ) or
-       (  passedt.floorCmaterial    == "rough_wood"         ) or
-       (  passedt.floorCmaterial    == "rough_wood;carpet"  ) or
-       (  passedt.floorCmaterial    == "rough_wood;lino"    ) or
-       (  passedt.floorCmaterial    == "rough_wood;stone"   ) or
-       (  passedt.floorCmaterial    == "rough_wood;tiles"   ) or
-       (  passedt.floorCmaterial    == "slate"              ) or
-       (  passedt.floorCmaterial    == "slate;carpet"       ) or
-       (  passedt.floorCmaterial    == "stone"              ) or
-       (  passedt.floorCmaterial    == "stone;carpet"       ) or
-       (  passedt.floorCmaterial    == "stone;rough_carpet" ) or
-       (  passedt.floorCmaterial    == "stone;rough_wood"   ) or
-       (  passedt.floorCmaterial    == "tiles"              ) or
-       (  passedt.floorCmaterial    == "tiles;rough_wood"   )) then
+       (  passedt["floor:material"]    == "brick"              ) or
+       (  passedt["floor:material"]    == "brick;concrete"     ) or
+       (  passedt["floor:material"]    == "concrete"           ) or
+       (  passedt["floor:material"]    == "grubby carpet"      ) or
+       (  passedt["floor:material"]    == "lino"               ) or
+       (  passedt["floor:material"]    == "lino;carpet"        ) or
+       (  passedt["floor:material"]    == "lino;rough_wood"    ) or
+       (  passedt["floor:material"]    == "lino;tiles;stone"   ) or
+       (  passedt["floor:material"]    == "paving_stones"      ) or
+       (  passedt["floor:material"]    == "rough_carpet"       ) or
+       (  passedt["floor:material"]    == "rough_wood"         ) or
+       (  passedt["floor:material"]    == "rough_wood;carpet"  ) or
+       (  passedt["floor:material"]    == "rough_wood;lino"    ) or
+       (  passedt["floor:material"]    == "rough_wood;stone"   ) or
+       (  passedt["floor:material"]    == "rough_wood;tiles"   ) or
+       (  passedt["floor:material"]    == "slate"              ) or
+       (  passedt["floor:material"]    == "slate;carpet"       ) or
+       (  passedt["floor:material"]    == "stone"              ) or
+       (  passedt["floor:material"]    == "stone;carpet"       ) or
+       (  passedt["floor:material"]    == "stone;rough_carpet" ) or
+       (  passedt["floor:material"]    == "stone;rough_wood"   ) or
+       (  passedt["floor:material"]    == "tiles"              ) or
+       (  passedt["floor:material"]    == "tiles;rough_wood"   )) then
       passedt.noncarpeted = "yes"
    end
 
@@ -3493,8 +1668,8 @@ function generic_before_function( passedt )
 -- Next, "closed due to covid" pubs
 -- ----------------------------------------------------------------------------
    if ((  passedt.amenity               == "pub"        ) and
-       (( passedt.opening_hoursCcovid19 == "off"       ) or
-        ( passedt.opening_hoursCcovid19 == "closed"    ) or
+       (( passedt["opening_hours:covid19"] == "off"       ) or
+        ( passedt["opening_hours:covid19"] == "closed"    ) or
         ( passedt["access:covid19"]        == "no"        ))) then
       passedt.amenity = "pub_cddddddd"
       passedt.real_ale = nil
@@ -4161,7 +2336,7 @@ function generic_before_function( passedt )
    end
 
    if (((   passedt.healthcare            == "dentist"    )  or
-        ((  passedt.healthcareCspeciality == "dentistry" )   and
+        ((  passedt["healthcare:speciality"] == "dentistry" )   and
          (( passedt.healthcare            == "yes"      )    or
           ( passedt.healthcare            == "centre"   )    or
           ( passedt.healthcare            == "clinic"   )))) and
@@ -4183,15 +2358,15 @@ function generic_before_function( passedt )
 -- Things that _are_ something else get (e.g. community centres) get left as
 -- that something else.
 -- ----------------------------------------------------------------------------
-   if ((( passedt.healthcare            == "vaccination_centre" )  or
-        ( passedt.healthcare            == "sample_collection"  )  or
-        ( passedt.healthcareCspeciality == "vaccination"        )) and
-       (( passedt.amenity               == nil                  )  or
-        ( passedt.amenity               == ""                   )) and
-       (( passedt.leisure               == nil                  )  or
-        ( passedt.leisure               == ""                   )) and
-       (( passedt.shop                  == nil                  )  or
-        ( passedt.shop                  == ""                   ))) then
+   if ((( passedt.healthcare               == "vaccination_centre" )  or
+        ( passedt.healthcare               == "sample_collection"  )  or
+        ( passedt["healthcare:speciality"] == "vaccination"        )) and
+       (( passedt.amenity                  == nil                  )  or
+        ( passedt.amenity                  == ""                   )) and
+       (( passedt.leisure                  == nil                  )  or
+        ( passedt.leisure                  == ""                   )) and
+       (( passedt.shop                     == nil                  )  or
+        ( passedt.shop                     == ""                   ))) then
       passedt.amenity = "clinic"
    end
 
@@ -4295,12 +2470,12 @@ function generic_before_function( passedt )
         ( passedt.name                == ""      ))  and
        ((( passedt.produce             ~= nil    )   and
          ( passedt.produce             ~= ""     ))  or
-        (  passedt.paymentChonesty_box == "yes"   ))) then
+        (  passedt["payment:honesty_box"] == "yes"   ))) then
       passedt.amenity = "vending_machine"
 
       if (( passedt.produce == nil ) or
           ( passedt.produce == ""  )) then
-         if ( passedt.foodCeggs == "yes" )  then
+         if ( passedt["food:eggs"] == "yes" )  then
             passedt.produce = "eggs"
          else
             passedt.produce = "farm shop honesty box"
@@ -4936,7 +3111,7 @@ function generic_before_function( passedt )
 -- Handle razed railways and old inclined_planes as dismantled.
 -- dismantled, abandoned are now handled separately to disused in roads.mss
 -- ----------------------------------------------------------------------------
-   if ((( passedt.railwayChistoric == "rail"           )  or
+   if ((( passedt["railway:historic"] == "rail"           )  or
         ( passedt.historic         == "inclined_plane" )  or
         ( passedt.historic         == "tramway"        )) and
        (( passedt.building         == nil              )  or
@@ -4967,7 +3142,7 @@ function generic_before_function( passedt )
 -- instead of railway=preserved (which has the advantage of still allowing
 -- e.g. narrow_gauge in addition to rail).
 -- ----------------------------------------------------------------------------
-   if ( passedt.railwayCpreserved == "yes" ) then
+   if ( passedt["railway:preserved"] == "yes" ) then
       passedt.railway = "preserved"
    end
 
@@ -5040,27 +3215,27 @@ function generic_before_function( passedt )
 -- Also treat historic=moat in the same way, unless it has an area=yes tag.
 -- Most closed ways for historic=moat appear to be linear ways, not areas.
 -- ----------------------------------------------------------------------------
-   if ((   passedt.historic           == "canal"           ) or
-       (   passedt.historicCwaterway  == "canal"           ) or
-       (   passedt.historic           == "leat"            ) or
+   if ((   passedt.historic              == "canal"           ) or
+       (   passedt["historic:waterway"]  == "canal"           ) or
+       (   passedt.historic              == "leat"            ) or
        (   passedt["disused:waterway"]   == "canal"           ) or
-       (   passedt.disused            == "canal"           ) or
+       (   passedt.disused               == "canal"           ) or
        (   passedt["abandoned:waterway"] == "canal"           ) or
-       (   passedt.waterway           == "disused_canal"   ) or
-       (   passedt.waterway           == "historic_canal"  ) or
-       (   passedt.waterway           == "abandoned_canal" ) or
-       (   passedt.waterway           == "former_canal"    ) or
-       (   passedt.waterwayChistoric  == "canal"           ) or
-       (   passedt.waterwayCabandoned == "canal"           ) or
-       (   passedt.abandoned          == "waterway=canal"  ) or
-       ((  passedt.historic           == "moat"           )  and
-        (( passedt.natural            == nil             )   or
-         ( passedt.natural            == ""              ))  and
-        (( passedt.man_made           == nil             )   or
-         ( passedt.man_made           == ""              ))  and
-        (( passedt.waterway           == nil             )   or
-         ( passedt.waterway           == ""              ))  and
-        (  passedt.area               ~= "yes"            ))) then
+       (   passedt.waterway              == "disused_canal"   ) or
+       (   passedt.waterway              == "historic_canal"  ) or
+       (   passedt.waterway              == "abandoned_canal" ) or
+       (   passedt.waterway              == "former_canal"    ) or
+       (   passedt["waterway:historic"]  == "canal"           ) or
+       (   passedt["waterway:abandoned"] == "canal"           ) or
+       (   passedt.abandoned             == "waterway=canal"  ) or
+       ((  passedt.historic              == "moat"           )  and
+        (( passedt.natural               == nil             )   or
+         ( passedt.natural               == ""              ))  and
+        (( passedt.man_made              == nil             )   or
+         ( passedt.man_made              == ""              ))  and
+        (( passedt.waterway              == nil             )   or
+         ( passedt.waterway              == ""              ))  and
+        (  passedt.area                  ~= "yes"            ))) then
       passedt.waterway = "derelict_canal"
       passedt.historic = nil
       passedt.area     = "no"
@@ -5080,9 +3255,9 @@ function generic_before_function( passedt )
    if ((  passedt.waterway      == "derelict_canal"  ) and
        (( passedt.name          == nil              )  or
         ( passedt.name          == ""               )) and
-       (  passedt.historicCname ~= nil               ) and
-       (  passedt.historicCname ~= ""                )) then
-      passedt.name = passedt.historicCname
+       (  passedt["historic:name"] ~= nil               ) and
+       (  passedt["historic:name"] ~= ""                )) then
+      passedt.name = passedt["historic:name"]
    end
    
 -- ----------------------------------------------------------------------------
@@ -5208,9 +3383,9 @@ function generic_before_function( passedt )
 -- Also note that some seamarks
 -- ----------------------------------------------------------------------------
    if (( passedt.man_made     == "pipeline"           ) or
-       ( passedt.seamarkCtype == "pipeline_submarine" )) then
+       ( passedt["seamark:type"] == "pipeline_submarine" )) then
       passedt.man_made     = nil
-      passedt.seamarkCtype = nil
+      passedt["seamark:type"] = nil
       passedt.waterway     = "pipeline"
    end
 
@@ -5295,9 +3470,9 @@ function generic_before_function( passedt )
          (   passedt.ruins           == "hut"            )    or
          (   passedt.ruins           == "farm_auxiliary" )    or
          (   passedt.ruins           == "farmhouse"      )))  or
-       (     passedt.ruinsCbuilding  == "yes"              )  or
+       (     passedt["ruins:building"]  == "yes"              )  or
        (     passedt["building:ruins"]  == "yes"              )  or
-       (     passedt.ruinedCbuilding == "yes"              )  or
+       (     passedt["ruined:building"] == "yes"              )  or
        (     passedt.building        == "collapsed"        )) then
       passedt.building = "ruins"
    end
@@ -5433,11 +3608,11 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Catch other archaeological fortifications.
 -- ----------------------------------------------------------------------------
-   if ((  passedt.historic              == "fort"           ) and
-       (( passedt.fortification_type    == "broch"         )  or
-        ( passedt.historicCcivilization == "prehistoric"   )  or
-        ( passedt.historicCcivilization == "iron_age"      )  or
-        ( passedt.historicCcivilization == "ancient_roman" ))) then
+   if ((  passedt.historic                 == "fort"           ) and
+       (( passedt.fortification_type       == "broch"         )  or
+        ( passedt["historic:civilization"] == "prehistoric"   )  or
+        ( passedt["historic:civilization"] == "iron_age"      )  or
+        ( passedt["historic:civilization"] == "ancient_roman" ))) then
       passedt.historic            = "archaeological_site"
       passedt.archaeological_site = "fortification"
    end
@@ -5501,7 +3676,7 @@ function generic_before_function( passedt )
       passedt.historic = "martello_tower"
       passedt.fortification_type = nil
       passedt.man_made = nil
-      passedt.towerCtype = nil
+      passedt["tower:type"] = nil
 
       if ((( passedt.landuse == nil )  or
            ( passedt.landuse == ""  )) and
@@ -5680,18 +3855,18 @@ function generic_before_function( passedt )
       passedt.man_made = nil
 
       if ((  passedt.historic  == "round_tower"  ) or
-          ( passedt.towerCtype == "round_tower"  ) or
-          ( passedt.towerCtype == "shot_tower"   )) then
+          ( passedt["tower:type"] == "round_tower"  ) or
+          ( passedt["tower:type"] == "shot_tower"   )) then
          passedt.historic = "historicroundtower"
       else
-         if ( passedt.towerCtype == "defensive" ) then
+         if ( passedt["tower:type"] == "defensive" ) then
             passedt.historic = "historicdefensivetower"
          else
-            if (( passedt.towerCtype == "observation" ) or
-                ( passedt.towerCtype == "watchtower"  )) then
+            if (( passedt["tower:type"] == "observation" ) or
+                ( passedt["tower:type"] == "watchtower"  )) then
                passedt.historic = "historicobservationtower"
             else
-               if ( passedt.towerCtype == "bell_tower" ) then
+               if ( passedt["tower:type"] == "bell_tower" ) then
                   passedt.historic = "historicchurchtower"
                else
                   passedt.historic = "historicsquaretower"
@@ -5715,9 +3890,9 @@ function generic_before_function( passedt )
 -- shape.
 -- ----------------------------------------------------------------------------
    if (( passedt.historic       == "lime_kiln" ) or
-       ( passedt.ruinsCman_made == "kiln"      )) then
+       ( passedt["ruins:man_made"] == "kiln"      )) then
       passedt.historic       = "kiln"
-      passedt.ruinsCman_made = nil
+      passedt["ruins:man_made"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -5745,9 +3920,9 @@ function generic_before_function( passedt )
    if ((  passedt.historic == "aircraft" )  and
        (( passedt.name     == nil        )  or
         ( passedt.name     == ""         ))) then
-      if (( passedt.aircraftCmodel ~= nil ) and
-          ( passedt.aircraftCmodel ~= ""  )) then
-         passedt.name = passedt.aircraftCmodel
+      if (( passedt["aircraft:model"] ~= nil ) and
+          ( passedt["aircraft:model"] ~= ""  )) then
+         passedt.name = passedt["aircraft:model"]
       end
 
       if (( passedt.ref ~= nil ) and
@@ -6120,10 +4295,10 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- If set, move tunnel:name to tunnel_name
 -- ----------------------------------------------------------------------------
-   if (( passedt.tunnelCname ~= nil ) and
-       ( passedt.tunnelCname ~= ""  )) then
-      passedt.tunnel_name = passedt.tunnelCname
-      passedt.tunnelCname = nil
+   if (( passedt["tunnel:name"] ~= nil ) and
+       ( passedt["tunnel:name"] ~= ""  )) then
+      passedt.tunnel_name = passedt["tunnel:name"]
+      passedt["tunnel:name"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -6269,21 +4444,21 @@ function generic_before_function( passedt )
    if ((  passedt.man_made         == "tower"         ) and
        (  passedt.power            == "generator"     ) and
        (( passedt.power_source     == "wind"         )  or
-        ( passedt.generatorCsource == "wind"         )  or
-        ( passedt.generatorCmethod == "wind_turbine" )  or
-        ( passedt.plantCsource     == "wind"         )  or
-        ( passedt.generatorCmethod == "wind"         ))) then
+        ( passedt["generator:source"] == "wind"         )  or
+        ( passedt["generator:method"] == "wind_turbine" )  or
+        ( passedt["plant:source"]     == "wind"         )  or
+        ( passedt["generator:method"] == "wind"         ))) then
       passedt.man_made = nil
    end
 
    if ((( passedt.man_made == nil        )  or
         ( passedt.man_made == ""         )) and
        (  passedt.power    == "generator" )) then
-      if (( passedt.power_source     == "wind"         )  or
-          ( passedt.generatorCsource == "wind"         )  or
-          ( passedt.generatorCmethod == "wind_turbine" )  or
-          ( passedt.plantCsource     == "wind"         )  or
-          ( passedt.generatorCmethod == "wind"         )) then
+      if (( passedt.power_source        == "wind"         )  or
+          ( passedt["generator:source"] == "wind"         )  or
+          ( passedt["generator:method"] == "wind_turbine" )  or
+          ( passedt["plant:source"]     == "wind"         )  or
+          ( passedt["generator:method"] == "wind"         )) then
          passedt.man_made = "power_wind"
       else
          passedt.man_made = "power"
@@ -6293,8 +4468,8 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Change solar panels to "roof"
 -- ----------------------------------------------------------------------------
-   if (( passedt.power            == "generator"    ) and
-       ( passedt.generatorCmethod == "photovoltaic" )) then
+   if (( passedt.power               == "generator"    ) and
+       ( passedt["generator:method"] == "photovoltaic" )) then
       passedt.power    = nil
       passedt.building = "roof"
    end
@@ -6314,8 +4489,8 @@ function generic_before_function( passedt )
        ( passedt.man_made   == "ventilation_shaft" ) or
        ( passedt.building   == "vent_shaft"        ) or
        ( passedt.man_made   == "vent_shaft"        ) or
-       ( passedt.towerCtype == "vent"              ) or
-       ( passedt.towerCtype == "ventilation_shaft" )) then
+       ( passedt["tower:type"] == "vent"              ) or
+       ( passedt["tower:type"] == "ventilation_shaft" )) then
       passedt.man_made = "ventilation_shaft"
 
       if (( passedt.building == nil ) or
@@ -6339,21 +4514,21 @@ function generic_before_function( passedt )
 -- Water monitoring stations
 -- ----------------------------------------------------------------------------
    if ((  passedt.man_made                  == "monitoring_station"  ) and
-       (( passedt.monitoringCwater_level    == "yes"                )  or
-        ( passedt.monitoringCwater_flow     == "yes"                )  or
-        ( passedt.monitoringCwater_velocity == "yes"                ))) then
+       (( passedt["monitoring:water_level"]    == "yes"                )  or
+        ( passedt["monitoring:water_flow"]     == "yes"                )  or
+        ( passedt["monitoring:water_velocity"] == "yes"                ))) then
       passedt.man_made = "monitoringwater"
    end
 
 -- ----------------------------------------------------------------------------
 -- Weather monitoring stations
 -- ----------------------------------------------------------------------------
-   if ((  passedt.man_made               == "monitoring_station" ) and
-       (  passedt.monitoringCweather     == "yes"                ) and
-       (( passedt.weatherCradar          == nil                 )  or
-        ( passedt.weatherCradar          == ""                  )) and
-       (( passedt.monitoringCwater_level == nil                 )  or
-        ( passedt.monitoringCwater_level == ""                  ))) then
+   if ((  passedt.man_made                  == "monitoring_station" ) and
+       (  passedt["monitoring:weather"]     == "yes"                ) and
+       (( passedt["weather:radar"]          == nil                 )  or
+        ( passedt["weather:radar"]          == ""                  )) and
+       (( passedt["monitoring:water_level"] == nil                 )  or
+        ( passedt["monitoring:water_level"] == ""                  ))) then
       passedt.man_made = "monitoringweather"
    end
 
@@ -6361,11 +4536,11 @@ function generic_before_function( passedt )
 -- Rainfall monitoring stations
 -- ----------------------------------------------------------------------------
    if ((  passedt.man_made               == "monitoring_station" ) and
-       (  passedt.monitoringCrainfall    == "yes"                ) and
-       (( passedt.monitoringCweather     == nil                 )  or
-        ( passedt.monitoringCweather     == ""                  )) and
-       (( passedt.monitoringCwater_level == nil                 )  or
-        ( passedt.monitoringCwater_level == ""                  ))) then
+       (  passedt["monitoring:rainfall"]    == "yes"                ) and
+       (( passedt["monitoring:weather"]     == nil                 )  or
+        ( passedt["monitoring:weather"]     == ""                  )) and
+       (( passedt["monitoring:water_level"] == nil                 )  or
+        ( passedt["monitoring:water_level"] == ""                  ))) then
       passedt.man_made = "monitoringrainfall"
    end
 
@@ -6373,7 +4548,7 @@ function generic_before_function( passedt )
 -- Earthquake monitoring stations
 -- ----------------------------------------------------------------------------
    if (( passedt.man_made                     == "monitoring_station" ) and
-       ( passedt.monitoringCseismic_activity  == "yes"                )) then
+       ( passedt["monitoring:seismic_activity"]  == "yes"                )) then
       passedt.man_made = "monitoringearthquake"
    end
 
@@ -6381,17 +4556,17 @@ function generic_before_function( passedt )
 -- Sky brightness monitoring stations
 -- ----------------------------------------------------------------------------
    if (( passedt.man_made                   == "monitoring_station" ) and
-       ( passedt.monitoringCsky_brightness  == "yes"                )) then
+       ( passedt["monitoring:sky_brightness"]  == "yes"                )) then
       passedt.man_made = "monitoringsky"
    end
 
 -- ----------------------------------------------------------------------------
 -- Air quality monitoring stations
 -- ----------------------------------------------------------------------------
-   if ((  passedt.man_made               == "monitoring_station" ) and
-       (  passedt.monitoringCair_quality == "yes"                ) and
-       (( passedt.monitoringCweather     == nil                 )  or
-        ( passedt.monitoringCweather     == ""                  ))) then
+   if ((  passedt.man_made                  == "monitoring_station" ) and
+       (  passedt["monitoring:air_quality"] == "yes"                ) and
+       (( passedt["monitoring:weather"]     == nil                 )  or
+        ( passedt["monitoring:weather"]     == ""                  ))) then
       passedt.man_made = nil
       passedt.landuse = "industrial"
       if (( passedt.name == nil ) or
@@ -6448,10 +4623,10 @@ function generic_before_function( passedt )
         (( passedt.usage             == "tourism"   )    or
          ( passedt.station           == "miniature" )    or
          ( passedt.tourism           == "yes"       )))  or
-       (   passedt.railwayCminiature == "station"     )) then
+       (   passedt["railway:miniature"] == "station"     )) then
       passedt.amenity = "tourismstation"
       passedt.railway = nil
-      passedt.railwayCminiature = nil
+      passedt["railway:miniature"] = nil
    end
 
 -- ----------------------------------------------------------------------------
@@ -6692,13 +4867,13 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Some information boards don't have a "tourism" tag
 -- ----------------------------------------------------------------------------
-   if ((  passedt.information     == "board"  ) and
-       (( passedt.disusedCtourism == nil     )  or
-        ( passedt.disusedCtourism == ""      )) and
-       (( passedt.ruinsCtourism   == nil     )  or
-        ( passedt.ruinsCtourism   == ""      )) and
-       (( passedt.historic        == nil     )  or
-        ( passedt.historic        == ""      ))) then
+   if ((  passedt.information        == "board"  ) and
+       (( passedt["disused:tourism"] == nil     )  or
+        ( passedt["disused:tourism"] == ""      )) and
+       (( passedt["ruins:tourism"]   == nil     )  or
+        ( passedt["ruins:tourism"]   == ""      )) and
+       (( passedt.historic           == nil     )  or
+        ( passedt.historic           == ""      ))) then
       if ( passedt.board_type == "public_transport" ) then
          passedt.tourism = "informationpublictransport"
       else
@@ -6753,7 +4928,7 @@ function generic_before_function( passedt )
        (  passedt.emergency   == "beach_safety_sign"  )  or
        (( passedt.tourism     == "information"       )   and
         ( passedt.information == "sign"              ))) then
-      if ( passedt.operatorCtype == "military" ) then
+      if ( passedt["operator:type"] == "military" ) then
          passedt.tourism = "militarysign"
       else
          passedt.tourism = "informationsign"
@@ -6902,7 +5077,7 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ((( passedt["abandoned:railway"] == "station"             )  or
         ( passedt["disused:railway"]   == "station"             )  or
-        ( passedt.historicCrailway  == "station"             )  or
+        ( passedt["historic:railway"]  == "station"             )  or
         ( passedt.historic          == "railway_station"     )  or
         ( passedt.railway           == "dismantled_colliery" )  or
         ( passedt.railway           == "colliery_site"       )) and
@@ -6930,9 +5105,9 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- Extract concert hall theatres as concert halls
 -- ----------------------------------------------------------------------------
-   if (((  passedt.amenity      == "theatre"       )  and
-        (( passedt.theatre      == "concert_hall" )   or
-         ( passedt.theatreCtype == "concert_hall" ))) or
+   if (((  passedt.amenity         == "theatre"       )  and
+        (( passedt.theatre         == "concert_hall" )   or
+         ( passedt["theatre:type"] == "concert_hall" ))) or
        (   passedt.amenity == "music_venue"         )) then
       passedt.amenity = "concert_hall"
    end
@@ -7335,7 +5510,7 @@ function generic_before_function( passedt )
    if ((  passedt.historic      == "memorial"     ) and
        (( passedt.memorial      == "plaque"      )  or
         ( passedt.memorial      == "blue_plaque" )  or
-        ( passedt.memorialCtype == "plaque"      ))) then
+        ( passedt["memorial:type"] == "plaque"      ))) then
       passedt.historic = "memorialplaque"
    end
 
@@ -7347,7 +5522,7 @@ function generic_before_function( passedt )
 
    if ((  passedt.historic      == "memorial"  ) and
        (( passedt.memorial      == "statue"   )  or
-        ( passedt.memorialCtype == "statue"   ))) then
+        ( passedt["memorial:type"] == "statue"   ))) then
       passedt.historic = "memorialstatue"
    end
 
@@ -7428,13 +5603,13 @@ function generic_before_function( passedt )
       passedt.place = nil
       passedt.tourism = nil
 
-      if ((( passedt.landuse               == nil      )   or
-           ( passedt.landuse               == ""       ))  and
-          (( passedt.leisure               == nil      )   or
-           ( passedt.leisure               == ""       ))  and
-          (( passedt.natural               == nil      )   or
-           ( passedt.natural               == ""       ))  and
-          (  passedt.historicCcivilization ~= "modern"  )) then
+      if ((( passedt.landuse                  == nil      )   or
+           ( passedt.landuse                  == ""       ))  and
+          (( passedt.leisure                  == nil      )   or
+           ( passedt.leisure                  == ""       ))  and
+          (( passedt.natural                  == nil      )   or
+           ( passedt.natural                  == ""       ))  and
+          (  passedt["historic:civilization"] ~= "modern"  )) then
          passedt.landuse = "historic"
       end
 
@@ -7652,7 +5827,7 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
    if ((  passedt.historic      == "memorial"  ) and
        (( passedt.memorial      == "plate"    )  or
-        ( passedt.memorialCtype == "plate"    ))) then
+        ( passedt["memorial:type"] == "plate"    ))) then
       passedt.historic = "memorialplate"
    end
 
@@ -7681,7 +5856,7 @@ function generic_before_function( passedt )
        (   passedt.landmark      == "obelisk"     ) or
        ((  passedt.historic      == "memorial"   ) and
         (( passedt.memorial      == "obelisk"   )  or
-         ( passedt.memorialCtype == "obelisk"   )))) then
+         ( passedt["memorial:type"] == "obelisk"   )))) then
       passedt.historic = "memorialobelisk"
    end
 
@@ -9548,7 +7723,7 @@ function generic_before_function( passedt )
          passedt.emergency = "lifeboat_station"
       else
          if (( passedt.building                         == "ship"                ) or
-             ( passedt.seamarkCrescue_stationCcategory  == "lifeboat_on_mooring" )) then
+             ( passedt["seamark:rescue_station:category"]  == "lifeboat_on_mooring" )) then
             passedt.amenity   = "lifeboat"
             passedt.emergency = nil
          else
@@ -9567,13 +7742,13 @@ function generic_before_function( passedt )
 -- See below for the similar but different tag "emergency=water_rescue_station"
 -- which seems to be used on buildings, huts, etc. (not lifeboats).
 -- ----------------------------------------------------------------------------
-   if ((  passedt.seamarkCrescue_stationCcategory == "lifeboat_on_mooring"  ) and
+   if ((  passedt["seamark:rescue_station:category"] == "lifeboat_on_mooring"  ) and
        (( passedt.amenity                         == nil                   )  or
         ( passedt.amenity                         == ""                    ))) then
       passedt.amenity  = "lifeboat"
    end
 
-   if ((  passedt.seamarkCtype == "coastguard_station"  ) and
+   if ((  passedt["seamark:type"] == "coastguard_station"  ) and
        (( passedt.amenity      == nil                  )  or
         ( passedt.amenity      == ""                   ))) then
       passedt.amenity  = "coast_guard"
@@ -10392,7 +8567,7 @@ function generic_before_function( passedt )
    if ( passedt.aeroway == "aerodrome" ) then
       if ((  passedt.iata           ~= nil          ) and
           (  passedt.iata           ~= ""           ) and
-          (  passedt.aerodromeCtype ~= "military"   ) and
+          (  passedt["aerodrome:type"] ~= "military"   ) and
           (( passedt.military       == nil         )  or
            ( passedt.military       == ""          ))) then
          passedt.aeroway = "large_aerodrome"
@@ -10404,7 +8579,7 @@ function generic_before_function( passedt )
             passedt.name = passedt.name .. " (" .. passedt.iata .. ")"
          end
       else
-         if ((  passedt.aerodromeCtype == "military"   ) or
+         if ((  passedt["aerodrome:type"] == "military"   ) or
              (( passedt.military       ~= nil         )  and
               ( passedt.military       ~= ""          ))) then
             passedt.aeroway = "military_aerodrome"
@@ -10454,8 +8629,8 @@ function generic_before_function( passedt )
 -- often just "for the renderer").
 -- ----------------------------------------------------------------------------
    if ((  passedt.man_made   == "tower"    ) and
-       (( passedt.towerCtype == "cooling" )  or
-        ( passedt.towerCtype == "chimney" ))) then
+       (( passedt["tower:type"] == "cooling" )  or
+        ( passedt["tower:type"] == "chimney" ))) then
       if (( tonumber(passedt.height) or 0 ) >  100 ) then
          passedt.man_made = "bigchimney"
       else
@@ -10465,22 +8640,22 @@ function generic_before_function( passedt )
    end
 
    if (( passedt.man_made   == "tower"    ) and
-       ( passedt.towerCtype == "lighting" )) then
+       ( passedt["tower:type"] == "lighting" )) then
       passedt.man_made = "illuminationtower"
       passedt.tourism = nil
    end
 
    if ((   passedt.man_made           == "tower"       ) and
-       ((  passedt.towerCtype         == "defensive"  )  or
-        ((( passedt.towerCtype         == nil        )   or
-          ( passedt.towerCtype         == ""         ))   and
-         ( passedt.towerCconstruction == "stone"     )))) then
+       ((  passedt["tower:type"]         == "defensive"  )  or
+        ((( passedt["tower:type"]         == nil        )   or
+          ( passedt["tower:type"]         == ""         ))   and
+         ( passedt["tower:construction"] == "stone"     )))) then
       passedt.man_made = "defensivetower"
       passedt.tourism = nil
    end
 
    if (( passedt.man_made   == "tower"       ) and
-       ( passedt.towerCtype == "observation" )) then
+       ( passedt["tower:type"] == "observation" )) then
       if (( tonumber(passedt.height) or 0 ) >  100 ) then
          passedt.man_made = "bigobservationtower"
       else
@@ -10493,7 +8668,7 @@ function generic_before_function( passedt )
 -- Clock towers
 -- ----------------------------------------------------------------------------
    if (((  passedt.man_made   == "tower"        )  and
-        (( passedt.towerCtype == "clock"       )   or
+        (( passedt["tower:type"] == "clock"       )   or
          ( passedt.building   == "clock_tower" )   or
          ( passedt.amenity    == "clock"       ))) or
        ((  passedt.amenity    == "clock"        )  and
@@ -10516,7 +8691,7 @@ function generic_before_function( passedt )
 -- Aircraft control towers
 -- ----------------------------------------------------------------------------
    if (((  passedt.man_made   == "tower"             )   and
-        (( passedt.towerCtype == "aircraft_control" )    or
+        (( passedt["tower:type"] == "aircraft_control" )    or
          ( passedt.service    == "aircraft_control" )))  or
        (   passedt.aeroway    == "control_tower"      )) then
       passedt.man_made = "aircraftcontroltower"
@@ -10526,8 +8701,8 @@ function generic_before_function( passedt )
 
    if ((( passedt.man_made   == "tower"              )   or
         ( passedt.man_made   == "monitoring_station" ))  and
-       (( passedt.towerCtype == "radar"              )   or
-        ( passedt.towerCtype == "weather_radar"      ))) then
+       (( passedt["tower:type"] == "radar"              )   or
+        ( passedt["tower:type"] == "weather_radar"      ))) then
       passedt.man_made = "radartower"
       passedt.building = "yes"
       passedt.tourism = nil
@@ -10536,26 +8711,26 @@ function generic_before_function( passedt )
 -- ----------------------------------------------------------------------------
 -- All the domes in the UK are radomes.
 -- ----------------------------------------------------------------------------
-   if (( passedt.man_made            == "tower"   ) and
-       (( passedt.towerCconstruction == "dome"   )  or
-        ( passedt.towerCconstruction == "dish"   ))) then
+   if (( passedt.man_made               == "tower"   ) and
+       (( passedt["tower:construction"] == "dome"   )  or
+        ( passedt["tower:construction"] == "dish"   ))) then
       passedt.man_made = "radartower"
       passedt.building = "yes"
       passedt.tourism = nil
    end
 
    if (( passedt.man_made   == "tower"                ) and
-       ( passedt.towerCtype == "firefighter_training" )) then
+       ( passedt["tower:type"] == "firefighter_training" )) then
       passedt.man_made = "squaretower"
       passedt.building = "yes"
       passedt.tourism = nil
    end
 
    if ((((  passedt.man_made    == "tower"             )  and
-         (( passedt.towerCtype  == "church"           )   or
-          ( passedt.towerCtype  == "square"           )   or
-          ( passedt.towerCtype  == "campanile"        )   or
-          ( passedt.towerCtype  == "bell_tower"       ))) or
+         (( passedt["tower:type"]  == "church"           )   or
+          ( passedt["tower:type"]  == "square"           )   or
+          ( passedt["tower:type"]  == "campanile"        )   or
+          ( passedt["tower:type"]  == "bell_tower"       ))) or
         (   passedt.man_made    == "campanile"          )) and
        (((  passedt.amenity     == nil                 )   or
          (  passedt.amenity     == ""                  ))  or
@@ -10567,10 +8742,10 @@ function generic_before_function( passedt )
    if (((  passedt.man_made      == "tower"            ) or
         (  passedt.building      == "tower"            ) or
         (  passedt["building:part"] == "yes"              )) and
-        ((  passedt.towerCtype   == "spire"            )  or
-         (  passedt.towerCtype   == "steeple"          )  or
-         (  passedt.towerCtype   == "minaret"          )  or
-         (  passedt.towerCtype   == "round"            )) and
+        ((  passedt["tower:type"]   == "spire"            )  or
+         (  passedt["tower:type"]   == "steeple"          )  or
+         (  passedt["tower:type"]   == "minaret"          )  or
+         (  passedt["tower:type"]   == "round"            )) and
        ((  passedt.amenity       == nil                 )  or
         (  passedt.amenity       == ""                  )  or
         (  passedt.amenity       ~= "place_of_worship"  ))) then
@@ -10701,10 +8876,10 @@ function generic_before_function( passedt )
 -- We remove overly long ones.
 -- Similarly, long "ref" values.
 -- ----------------------------------------------------------------------------
-   if (( passedt.naptanCIndicator ~= nil           ) and
-       ( passedt.naptanCIndicator ~= ""            ) and
-       ( string.len( passedt.naptanCIndicator) > 3 )) then
-      passedt.naptanCIndicator = nil
+   if (( passedt["naptan:Indicator"] ~= nil           ) and
+       ( passedt["naptan:Indicator"] ~= ""            ) and
+       ( string.len( passedt["naptan:Indicator"]) > 3 )) then
+      passedt["naptan:Indicator"] = nil
    end
 
    if (( passedt.highway == "bus_stop" ) and
@@ -10738,31 +8913,31 @@ function generic_before_function( passedt )
           ( passedt.name == ""  )) then
          if (( passedt.ref == nil ) or
              ( passedt.ref == ""  )) then
-            if (( passedt.naptanCIndicator ~= nil )  and
-                ( passedt.naptanCIndicator ~= ""  )) then
-               passedt.name = passedt.naptanCIndicator
+            if (( passedt["naptan:Indicator"] ~= nil )  and
+                ( passedt["naptan:Indicator"] ~= ""  )) then
+               passedt.name = passedt["naptan:Indicator"]
             end
          else -- ref not nil
-            if (( passedt.naptanCIndicator == nil ) or
-                ( passedt.naptanCIndicator == ""  )) then
+            if (( passedt["naptan:Indicator"] == nil ) or
+                ( passedt["naptan:Indicator"] == ""  )) then
                passedt.name = passedt.ref
             else
-               passedt.name = passedt.ref .. " " .. passedt.naptanCIndicator
+               passedt.name = passedt.ref .. " " .. passedt["naptan:Indicator"]
             end
          end
       else -- name not nil
          if (( passedt.ref == nil ) or
              ( passedt.ref == ""  )) then
-            if (( passedt.naptanCIndicator ~= nil )  and
-                ( passedt.naptanCIndicator ~= ""  )) then
-               passedt.name = passedt.name .. " " .. passedt.naptanCIndicator
+            if (( passedt["naptan:Indicator"] ~= nil )  and
+                ( passedt["naptan:Indicator"] ~= ""  )) then
+               passedt.name = passedt.name .. " " .. passedt["naptan:Indicator"]
             end
          else -- neither name nor ref nil
-            if (( passedt.naptanCIndicator == nil )  or
-                ( passedt.naptanCIndicator == ""  )) then
+            if (( passedt["naptan:Indicator"] == nil )  or
+                ( passedt["naptan:Indicator"] == ""  )) then
                passedt.name = passedt.name .. " " .. passedt.ref
             else -- naptanCIndicator not nil
-               passedt.name = passedt.name .. " " .. passedt.ref .. " " .. passedt.naptanCIndicator
+               passedt.name = passedt.name .. " " .. passedt.ref .. " " .. passedt["naptan:Indicator"]
             end
          end
       end
@@ -10810,8 +8985,8 @@ function generic_before_function( passedt )
           ( passedt.departures_board              == "multiline"                    ) or
           ( passedt.departures_board              == "realtime_multiline;timetable" ) or
           ( passedt.passenger_information_display == "realtime"                     )) then
-         if (( passedt.departures_boardCspeech_output              == "yes" ) or
-             ( passedt.passenger_information_displayCspeech_output == "yes" )) then
+         if (( passedt["departures_board:speech_output"]              == "yes" ) or
+             ( passedt["passenger_information_display:speech_output"] == "yes" )) then
             passedt.highway = "bus_stop_speech_realtime"
          else
             passedt.highway = "bus_stop_realtime"
@@ -10824,8 +8999,8 @@ function generic_before_function( passedt )
              ( passedt.departures_board              == "yes"              ) or
              ( passedt.passenger_information_display == "timetable"        ) or
              ( passedt.passenger_information_display == "yes"              )) then
-            if (( passedt.departures_boardCspeech_output              == "yes" ) or
-                ( passedt.passenger_information_displayCspeech_output == "yes" )) then
+            if (( passedt["departures_board:speech_output"]              == "yes" ) or
+                ( passedt["passenger_information_display:speech_output"] == "yes" )) then
                passedt.highway = "bus_stop_speech_timetable"
             else
                passedt.highway = "bus_stop_timetable"
@@ -10834,7 +9009,7 @@ function generic_before_function( passedt )
             if (( passedt.flag               == "no"  ) or
                 ( passedt.pole               == "no"  ) or
                 ( passedt.physically_present == "no"  ) or
-                ( passedt.naptanCBusStopType == "CUS" )) then
+                ( passedt["naptan:BusStopType"] == "CUS" )) then
                passedt.highway = "bus_stop_nothing"
             else
                passedt.highway = "bus_stop_pole"
@@ -11530,14 +9705,14 @@ function append_edge_etc( passedt )
         ( passedt.sidewalk == "right"           ) or 
         ( passedt.sidewalk == "shared"          ) or 
         ( passedt.sidewalk == "yes"             ) or
-        ( passedt.sidewalkCboth == "separate"   ) or 
-        ( passedt.sidewalkCboth == "yes"        ) or
-        ( passedt.sidewalkCleft == "segregated" ) or
-        ( passedt.sidewalkCleft == "separate"   ) or 
-        ( passedt.sidewalkCleft == "yes"        ) or
-        ( passedt.sidewalkCright == "segregated" ) or 
-        ( passedt.sidewalkCright == "separate"  ) or 
-        ( passedt.sidewalkCright == "yes"       ) or
+        ( passedt["sidewalk:both"] == "separate"   ) or 
+        ( passedt["sidewalk:both"] == "yes"        ) or
+        ( passedt["sidewalk:left"] == "segregated" ) or
+        ( passedt["sidewalk:left"] == "separate"   ) or 
+        ( passedt["sidewalk:left"] == "yes"        ) or
+        ( passedt["sidewalk:right"] == "segregated" ) or 
+        ( passedt["sidewalk:right"] == "separate"  ) or 
+        ( passedt["sidewalk:right"] == "yes"       ) or
         ( passedt.footway  == "separate"        ) or 
         ( passedt.footway  == "yes"             ) or
         ( passedt.shoulder == "both"            ) or
@@ -11564,12 +9739,12 @@ function append_edge_etc( passedt )
             ( passedt.verge       == "separate" ) or
             ( passedt.verge       == "right"    ) or
             ( passedt.verge       == "yes"      ) or
-            ( passedt.vergeCboth  == "separate" ) or
-            ( passedt.vergeCboth  == "yes"      ) or
-            ( passedt.vergeCleft  == "separate" ) or
-            ( passedt.vergeCleft  == "yes"      ) or
-            ( passedt.vergeCright == "separate" ) or
-            ( passedt.vergeCright == "yes"      )) then
+            ( passedt["verge:both"]  == "separate" ) or
+            ( passedt["verge:both"]  == "yes"      ) or
+            ( passedt["verge:left"]  == "separate" ) or
+            ( passedt["verge:left"]  == "yes"      ) or
+            ( passedt["verge:right"] == "separate" ) or
+            ( passedt["verge:right"] == "yes"      )) then
             Attribute("edge", "verge")
         else
 -- ----------------------------------------------------------------------------
