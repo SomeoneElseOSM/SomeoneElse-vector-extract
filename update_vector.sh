@@ -28,11 +28,17 @@
 # github.
 #
 local_filesystem_user=ajtown
+#
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-extract
 sudo -u ${local_filesystem_user} git pull
 #
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display
 sudo -u ${local_filesystem_user} git pull
+#
+# Run Tilemaker
+#
+mkdir -p /usr/local/share/lua/5.3/
+cp /home/${local_filesystem_user}/src/SomeoneElse-style/shared_lua.lua /usr/local/share/lua/5.3/
 #
 sudo -u ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/sve_extract.sh /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/config-sve01.json /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/process-sve01.lua /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles  -27.57,34.5,40.17,71.64 nocoast   europe britain-and-ireland
 #
