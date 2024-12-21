@@ -1,8 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 20/12/2024
 Added "disused:amenity" and "was:amenity" to node keys so that these are processed into e.g. closed pubs.
+Most generic lua processing is now shared between raster and vector.
+Send `man_made=bridge` through to the rendering code as `building=bridge_area` to allow the vector code to display it better (no display change in raster).
 
 ## 19/12/2024
 If an `aeroway=taxiway` has not been explicitly declared as an area, assume it is linear.
