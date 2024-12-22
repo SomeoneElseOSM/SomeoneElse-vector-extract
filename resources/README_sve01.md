@@ -132,7 +132,11 @@ Values are written as e.g. "landuse_farmland" with the OSM tag as part of the ke
 
 ### name
 
-The value of the OSM name tag, after any name processing logic to (perhaps) append operator etc.
+The value of the OSM `name` tag, after any name processing logic to (perhaps) append operator etc.
+
+### access
+
+The value of the OSM `access` tag is included for `amenity=bicycle_rental`, `amenity=scooter_rental`, `amenity=bicycle_parking`, `amenity=motorcycle_parking` and the `_pay` versions of the latter two.
 
 ### ele
 

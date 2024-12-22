@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased.
+Some amenities (`bicycle_rental` etc.) are extracted with an access value as well.
+
 ## 20/12/2024
 Added "disused:amenity" and "was:amenity" to node keys so that these are processed into e.g. closed pubs.
 Most generic lua processing is now shared between raster and vector.

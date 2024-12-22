@@ -1784,12 +1784,6 @@ function render_amenity_land1( passedt )
                 ( passedt.amenity == "car_sharing"                ) or
                 ( passedt.amenity == "taxi"                       ) or
                 ( passedt.amenity == "taxi_office"                ) or
-                ( passedt.amenity == "bicycle_rental"             ) or
-                ( passedt.amenity == "scooter_rental"             ) or
-                ( passedt.amenity == "bicycle_parking"            ) or
-                ( passedt.amenity == "bicycle_parking_pay"        ) or
-                ( passedt.amenity == "motorcycle_parking"         ) or
-                ( passedt.amenity == "motorcycle_parking_pay"     ) or
                 ( passedt.amenity == "bus_station"                ) or
                 ( passedt.amenity == "ferry_terminal"             ) or
                 ( passedt.amenity == "entrancemain"               ) or
@@ -2321,7 +2315,28 @@ function render_amenity_land1( passedt )
                 append_name( passedt )
                 MinZoom( 14 )
             else
-                render_shop_land1( passedt )
+-- ----------------------------------------------------------------------------
+-- Some amenities are extracted with an access value as well.
+-- ----------------------------------------------------------------------------
+                if (( passedt.amenity == "bicycle_rental"             ) or
+                    ( passedt.amenity == "scooter_rental"             ) or
+                    ( passedt.amenity == "bicycle_parking"            ) or
+                    ( passedt.amenity == "bicycle_parking_pay"        ) or
+                    ( passedt.amenity == "motorcycle_parking"         ) or
+                    ( passedt.amenity == "motorcycle_parking_pay"     )) then
+                    Layer( "land1", true )
+                    Attribute( "class", "amenity_" .. passedt.amenity )
+
+                    if (( passedt.access ~= nil ) and
+                        ( passedt.access ~= ""  )) then
+                        Attribute( "access", "amenity_" .. passedt.access )
+                    end
+
+                    append_name( passedt )
+                    MinZoom( 14 )
+                else
+                    render_shop_land1( passedt )
+                end -- amenity=bicycle_rental etc. 14
             end -- amenity=shelter etc. 14
         end -- amenity=holy_well etc. 1e
     end -- amenity=parking etc. 9
