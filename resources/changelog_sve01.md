@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased.
 Some amenities (`bicycle_rental` etc.) are extracted with an access value as well.
+Detect `tower:type=ventilation` as a ventilation shaft.
 
 ## 20/12/2024
 Added "disused:amenity" and "was:amenity" to node keys so that these are processed into e.g. closed pubs.
