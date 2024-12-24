@@ -1746,7 +1746,7 @@ function render_amenity_land1( passedt )
 
         if (( passedt.access ~= nil ) and
             ( passedt.access ~= ""  )) then
-            Attribute( "access", "amenity_" .. passedt.access )
+            Attribute( "access", passedt.access )
         end
 
         MinZoom( 9 )
@@ -2347,7 +2347,7 @@ function render_amenity_land1( passedt )
 
                         if (( passedt.access ~= nil ) and
                             ( passedt.access ~= ""  )) then
-                            Attribute( "access", "amenity_" .. passedt.access )
+                            Attribute( "access", passedt.access )
                         end
 
                         append_name( passedt )
