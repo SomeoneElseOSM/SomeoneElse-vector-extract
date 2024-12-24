@@ -3302,9 +3302,11 @@ function render_tourism_land1( passedt )
         append_name( passedt )
         MinZoom( 9 )
     else
-        if (( passedt.tourism == "camp_site"    ) or
-            ( passedt.tourism == "caravan_site" ) or
-            ( passedt.tourism == "picnic_site"  ) or
+-- ----------------------------------------------------------------------------
+-- Some zoom 12 tourist things tend to be just points, so we don't extract the
+-- centroid separately ...
+-- ----------------------------------------------------------------------------
+        if (( passedt.tourism == "picnic_site"  ) or
             ( passedt.tourism == "theme_park"   ) or
             ( passedt.tourism == "alpine_hut"   )) then
             Layer( "land1", true )
@@ -3312,59 +3314,100 @@ function render_tourism_land1( passedt )
             append_name( passedt )
             MinZoom( 12 )
         else
-            if (( passedt.tourism == "viewpoint"                  ) or
-                ( passedt.tourism == "information"                ) or
-                ( passedt.tourism == "informationncndudgeon"      ) or
-                ( passedt.tourism == "informationncnmccoll"       ) or
-                ( passedt.tourism == "informationncnmills"        ) or
-                ( passedt.tourism == "informationncnrowe"         ) or
-                ( passedt.tourism == "informationncnunknown"      ) or
-                ( passedt.tourism == "informationpnfs"            ) or
-                ( passedt.tourism == "informationoffice"          ) or
-                ( passedt.tourism == "informationboard"           ) or
-                ( passedt.tourism == "informationear"             ) or
-                ( passedt.tourism == "informationplaque"          ) or
-                ( passedt.tourism == "informationpublictransport" ) or
-                ( passedt.tourism == "informationroutemarker"     ) or
-                ( passedt.tourism == "informationsign"            ) or
-                ( passedt.tourism == "informationmarker"          ) or
-                ( passedt.tourism == "militarysign"               ) or
-                ( passedt.tourism == "chalet"                     ) or
-                ( passedt.tourism == "museum"                     ) or
-                ( passedt.tourism == "aquarium"                   ) or
-                ( passedt.tourism == "zoo"                        ) or
-                ( passedt.tourism == "advertising_column"         ) or
-                ( passedt.tourism == "artwork"                    ) or
-                ( passedt.tourism == "singlechalet"               ) or
-                ( passedt.tourism == "motel"                      ) or
-                ( passedt.tourism == "hotel"                      ) or
-                ( passedt.tourism == "hostel"                     ) or
-                ( passedt.tourism == "bed_and_breakfast"          ) or
-                ( passedt.tourism == "guest_house"                ) or
-                ( passedt.tourism == "tourism_guest_dynd"         ) or
-                ( passedt.tourism == "tourism_guest_nydn"         ) or
-                ( passedt.tourism == "tourism_guest_nynn"         ) or
-                ( passedt.tourism == "tourism_guest_yddd"         ) or
-                ( passedt.tourism == "tourism_guest_ynnn"         ) or
-                ( passedt.tourism == "tourism_guest_ynyn"         ) or
-                ( passedt.tourism == "tourism_guest_yynd"         ) or
-                ( passedt.tourism == "tourism_guest_yyyn"         ) or
-                ( passedt.tourism == "tourism_guest_yyyy"         ) or
-                ( passedt.tourism == "camp_pitch"                 )) then
+-- ----------------------------------------------------------------------------
+-- ... but some can be large areas, so to do extract the centroid separately ...
+-- -----------------------------------------------------------------------------
+            if (( passedt.tourism == "camp_site"    ) or
+                ( passedt.tourism == "caravan_site" )) then
                 Layer( "land1", true )
                 Attribute( "class", "tourism_" .. passedt.tourism )
                 append_name( passedt )
+                MinZoom( 12 )
 
-                if (( passedt.ele ~= nil ) and
-                    ( passedt.ele ~= ""  )) then
-                     Attribute( "ele", passedt.ele )
-                end
-
-                MinZoom( 14 )
+                LayerAsCentroid( "land1" )
+                Attribute( "class", "tourism_" .. passedt.tourism )
+                AttributeNumeric( "way_area", math.floor( passedt.way_area ))
+                append_name( passedt )
+                MinZoom( 12 )
             else
-                render_aeroway_land1( passedt )
-            end -- tourism=viewpoint
-        end -- tourism=camp_site etc. 12
+-- ----------------------------------------------------------------------------
+-- Most zoom 14 tourist things tend to be just points, so we don't extract the
+-- centroid separately ...
+-- ----------------------------------------------------------------------------
+                if (( passedt.tourism == "viewpoint"                  ) or
+                    ( passedt.tourism == "information"                ) or
+                    ( passedt.tourism == "informationncndudgeon"      ) or
+                    ( passedt.tourism == "informationncnmccoll"       ) or
+                    ( passedt.tourism == "informationncnmills"        ) or
+                    ( passedt.tourism == "informationncnrowe"         ) or
+                    ( passedt.tourism == "informationncnunknown"      ) or
+                    ( passedt.tourism == "informationpnfs"            ) or
+                    ( passedt.tourism == "informationoffice"          ) or
+                    ( passedt.tourism == "informationboard"           ) or
+                    ( passedt.tourism == "informationear"             ) or
+                    ( passedt.tourism == "informationplaque"          ) or
+                    ( passedt.tourism == "informationpublictransport" ) or
+                    ( passedt.tourism == "informationroutemarker"     ) or
+                    ( passedt.tourism == "informationsign"            ) or
+                    ( passedt.tourism == "informationmarker"          ) or
+                    ( passedt.tourism == "militarysign"               ) or
+                    ( passedt.tourism == "chalet"                     ) or
+                    ( passedt.tourism == "museum"                     ) or
+                    ( passedt.tourism == "aquarium"                   ) or
+                    ( passedt.tourism == "zoo"                        ) or
+                    ( passedt.tourism == "advertising_column"         ) or
+                    ( passedt.tourism == "artwork"                    ) or
+                    ( passedt.tourism == "singlechalet"               ) or
+                    ( passedt.tourism == "hostel"                     ) or
+                    ( passedt.tourism == "bed_and_breakfast"          ) or
+                    ( passedt.tourism == "guest_house"                ) or
+                    ( passedt.tourism == "tourism_guest_dynd"         ) or
+                    ( passedt.tourism == "tourism_guest_nydn"         ) or
+                    ( passedt.tourism == "tourism_guest_nynn"         ) or
+                    ( passedt.tourism == "tourism_guest_yddd"         ) or
+                    ( passedt.tourism == "tourism_guest_ynnn"         ) or
+                    ( passedt.tourism == "tourism_guest_ynyn"         ) or
+                    ( passedt.tourism == "tourism_guest_yynd"         ) or
+                    ( passedt.tourism == "tourism_guest_yyyn"         ) or
+                    ( passedt.tourism == "tourism_guest_yyyy"         ) or
+                    ( passedt.tourism == "camp_pitch"                 )) then
+                    Layer( "land1", true )
+                    Attribute( "class", "tourism_" .. passedt.tourism )
+                    append_name( passedt )
+
+                    if (( passedt.ele ~= nil ) and
+                        ( passedt.ele ~= ""  )) then
+                         Attribute( "ele", passedt.ele )
+                    end
+
+                    MinZoom( 14 )
+                else
+-- ----------------------------------------------------------------------------
+-- ... but some can be large areas, so to do extract the centroid separately ...
+-- ----------------------------------------------------------------------------
+                    if (( passedt.tourism == "motel"                      ) or
+                        ( passedt.tourism == "hotel"                      )) then
+                        Layer( "land1", true )
+                        Attribute( "class", "tourism_" .. passedt.tourism )
+                        MinZoom( 14 )
+
+                        LayerAsCentroid( "land1" )
+                        Attribute( "class", "tourism_" .. passedt.tourism )
+                        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
+                        append_name( passedt )
+
+                        if (( passedt.ele ~= nil ) and
+                            ( passedt.ele ~= ""  )) then
+                             Attribute( "ele", passedt.ele )
+                        end
+
+                        MinZoom( 14 )
+                    else
+                        render_aeroway_land1( passedt )
+                    end -- tourism=hotel etc. 14
+                 end -- tourism=viewpoint etc. 14
+            end -- tourism=camp_site etc. 12
+       end -- tourism=picnic_site etc. 12
     end -- tourism=zoo 9
 end -- render_tourism_land1()
 
