@@ -1,11 +1,13 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Tidy access values for various parking objects in lua to either "yes" or "no".
+
 ## 23/12/2024
 Some amenities (`bicycle_rental` etc.) are extracted with an access value as well.
 Detect `tower:type=ventilation` as a ventilation shaft.
 Extract names of some features (parking areas etc.) at centroid only.
-Tidy access values for various parking objects in lua to either "yes" or "no".
 
 ## 20/12/2024
 Added "disused:amenity" and "was:amenity" to node keys so that these are processed into e.g. closed pubs.
