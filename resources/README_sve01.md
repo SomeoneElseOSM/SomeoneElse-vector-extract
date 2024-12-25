@@ -137,6 +137,7 @@ A number of "landuse, leisure, etc." features that may be either large or small 
 
 from "land2:
 
+* zoom 0-12 `boundary=administrative` (zoom based on admin level: 2->0, 3,4->7, 5,6,7->8, 8,9,10->10, 11->12).
 * zoom 6 `landuse=military`
 8 zoom 6 `boundary=national_park`
 * zoom 12 `aeroway=aerodrome` and `aeroway=large_aerodrome`.
@@ -181,6 +182,10 @@ The value of the OSM `name` tag, after any name processing logic to (perhaps) ap
 ### access
 
 The value of the OSM `access` tag is included for `amenity=bicycle_rental`, `amenity=scooter_rental`, `amenity=bicycle_parking`, `amenity=motorcycle_parking` and also the `_pay` versions of the latter two.
+
+### admin_level
+
+Written out for `boundary=administrative` only.
 
 ### ele
 

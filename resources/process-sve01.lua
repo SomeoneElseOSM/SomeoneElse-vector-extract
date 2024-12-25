@@ -706,6 +706,7 @@ function update_table( passedt )
     passedt["addr:housenumber"] = Find("addr:housenumber")
     passedt["addr:unit"] = Find("addr:unit")
     passedt["admin:ref"] = Find("admin:ref")
+    passedt.admin_level = Find("admin_level")
     passedt.admin_ref = Find("admin_ref")
     passedt.advertising = Find("advertising")
     passedt.aerialway = Find("aerialway")
@@ -3182,13 +3183,82 @@ function render_aeroway_land2( passedt )
 end -- render_aeroway_land2()
 
 function render_boundary_land2( passedt )
-    if (( passedt.boundary == "national_park" ) and
-        ( passedt.is_closed                   )) then
-        write_polygon_and_centroid( "land2", passedt, "boundary_", passedt.boundary, 6 )
+    if (( passedt.boundary == "administrative" ) and
+        ( passedt.is_closed                    )) then
+-- ----------------------------------------------------------------------------
+-- For admin areas, set minzoom based on admin_level.
+-- Usage of admin_level in UK and IE is currently as follows:
+--     	     	    exported at minzoom
+-- 0    	    n/a
+-- 1    	    n/a
+-- 2    	    0
+-- 3    	    7		Irish Statistical Regions 
+--                              (and elsewhere for disputed)
+-- 4    	    7		UK States, Irish Statistical Regions
+-- 5    	    8		UK/IE authorities
+-- 6    	    8		Some statistical, some UK counties
+-- 7    	    8		Irish admin areas
+-- 8    	    10		Metopolitan Districts
+-- 9    	    10		Irish EDs, UK "community boards"?
+-- 10   	    10		Parishes 
+--                              (size chosen based on Muker, a large parish)
+-- 11   	    12		District Councils, Unparished areas
+-- township  	    n/a		Historic around Dublin
+-- urban_district   n/a		Historic around Dublin
+-- Urban District   n/a		Historic around Dublin
+-- ----------------------------------------------------------------------------
+        if ( passedt.admin_level == "2" ) then
+            minzoom = 0
+        else
+            if (( passedt.admin_level == "3" ) or
+                ( passedt.admin_level == "4" )) then
+                minzoom = 7
+            else
+                if (( passedt.admin_level == "5" ) or
+                    ( passedt.admin_level == "6" ) or
+                    ( passedt.admin_level == "7" )) then
+                    minzoom = 8
+                else
+                    if (( passedt.admin_level == "8"  ) or
+                        ( passedt.admin_level == "9"  ) or
+                        ( passedt.admin_level == "10" )) then
+                        minzoom = 10
+                    else
+                        if ( passedt.admin_level == "11" ) then
+                            minzoom = 12
+                        else
+-- ----------------------------------------------------------------------------
+-- We want to ignore all other values and do that by setting minzoom = 15 here.
+-- ----------------------------------------------------------------------------
+                            minzoom = 15
+                        end
+                    end
+                end
+            end
+        end
+
+        if ( minzoom < 15 ) then
+            Layer( "land2", true )
+            Attribute( "class", "boundary_" .. passedt.boundary )
+            Attribute( "admin_level", "boundary_" .. passedt.admin_level )
+            MinZoom( minzoom )
+
+            LayerAsCentroid( "land2" )
+            Attribute( "class", "boundary_" .. passedt.boundary )
+            Attribute( "admin_level", passedt.admin_level )
+            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
+            append_name( passedt )
+            MinZoom( minzoom )
+        end
+    else
+        if (( passedt.boundary == "national_park" ) and
+            ( passedt.is_closed                   )) then
+            write_polygon_and_centroid( "land2", passedt, "boundary_", passedt.boundary, 6 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-    end -- boundary=national_park 6
+        end -- boundary=national_park 6
+    end -- administrative 0-12
 end -- render_boundary_land2()
 
 
