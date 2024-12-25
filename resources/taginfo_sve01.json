@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241224T101300Z",
+  "data_updated": "20241225T200000Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2496,7 +2496,9 @@
     { "key": "segregated", "value": "yes", "description": "Decide if a road has a sidewalk" },
     { "key": "service", "description": "Service roads and aircraft control towers" },
     { "key": "service", "value": "aircraft_control", "description": "Detect aircraft control towers" },
-    { "key": "service", "value": "driveway", "description": "Make service roads with a designation the more important of the two classes of service roads" },
+    { "key": "service", "value": "driveway", "description": "Unless a `designation` is set, classify as one the less important of the two classes of service roads" },
+    { "key": "service", "value": "drive-through", "description": "Unless a `designation` is set, classify as one the less important of the two classes of service roads" },
+    { "key": "service", "value": "parking_aisle", "description": "Unless a `designation` is set, classify as one the less important of the two classes of service roads" },
     { "key": "shelter_type", "description": "Suppress some shelters for public transport or animal field shelters" },
     { "key": "shelter_type", "value": "animal_shelter", "description": "Suppress some shelter types" },
     { "key": "shelter_type", "value": "bicycle_parking", "description": "Suppress some shelter types" },

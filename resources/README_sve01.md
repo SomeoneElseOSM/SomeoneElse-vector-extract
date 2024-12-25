@@ -49,7 +49,7 @@ This is for linear road, rail, air and water transport.
 Values are written as e.g. "motorway" without the OSM tag (here "highway") as part of the key.  Many of these tag values are a result of previous lua processing (see note above).  For roads, this is derived from the OSM value for "highway" and the designation, so `highway=bridlewaysteps` will in OSM likely be a `highway=steps` with `designation=public_bridleway`.  Values after the initial lua processing wre written out to vector tiles as follows:
 
 * motorway, trunk, primary, secondary, tertiary, unclassified and residential and links are handled as normal.
-* service _without_ designation: "important" ones are handled as normal ("service"); "less important" as "driveway".
+* service _without_ designation: "important" ones are handled as normal ("service"); "less important" ("parking_aisle","drive-through","driveway") as "driveway".
 * service _with_ designation are handled as per the designation below.
 * unpaved - these are unclassified roads that are unpaved; intended to be shown visually different from paved ones.
 * ucrwide, ucrnarrow - unclassified country road intended to be shown visually between unpaved and BOAT.

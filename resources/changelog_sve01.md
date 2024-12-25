@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Tidy access values for various parking objects in lua to either "yes" or "no".
 Consolidated centroid processing (no functional change).
 Added more detail to README.
+Use `driveway` (designed to be less prominent than a regular service road) for `parking_aisle` and `drive-though` as well as `driveway`.
 
 ## 23/12/2024
 Some amenities (`bicycle_rental` etc.) are extracted with an access value as well.

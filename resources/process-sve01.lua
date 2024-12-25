@@ -1099,8 +1099,10 @@ function generic_before_function( passedt )
 -- Send driveways through to the vector rendering code as 
 -- a specific highway type (raster does not do this)
 -- ----------------------------------------------------------------------------
-   if (( passedt.highway == "service"  ) and
-       ( passedt.service == "driveway" )) then
+   if ((  passedt.highway == "service"        ) and
+       (( passedt.service == "driveway"      )  or
+        ( passedt.service == "drive-through" )  or
+        ( passedt.service == "parking_aisle" ))) then
       passedt.highway  = "driveway"
    end
 
