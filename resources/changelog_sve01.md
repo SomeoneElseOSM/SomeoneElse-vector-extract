@@ -3,6 +3,8 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Tidy access values for various parking objects in lua to either "yes" or "no".
+Consolidated centroid processing (no functional change).
+Added more detail to README.
 
 ## 23/12/2024
 Some amenities (`bicycle_rental` etc.) are extracted with an access value as well.

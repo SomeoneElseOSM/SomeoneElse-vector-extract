@@ -1699,9 +1699,19 @@ function generic_after_land1( passedt )
     if (( passedt.natural == "water"             ) or
         ( passedt.natural == "intermittentwater" ) or
         ( passedt.natural == "glacier"           )) then
-        Layer( "land1", true )
-        Attribute( "class", "natural_" .. passedt.natural )
-
+-- ----------------------------------------------------------------------------
+-- These features range in size from the huge polygons to single nodes.
+-- The largest ones are included in relatively low zoom level tiles, but it
+-- makes no sense to do that for all.  We therefore set a "minzoom" based on
+-- way_area (note that way_area will be 0 for nodes).
+--
+-- We then write both a polygon (if one exists) and a point for the name, and
+-- include the way area of the polygon in the attributes of the point so that
+-- the rendering code can decide when to display the name.  Typically it'll be
+-- a few zoom levels higher than the lowest zoom tile to which the feature is
+-- written, so that the fill and the outline of the feature appears first, and
+-- then the name.
+-- ----------------------------------------------------------------------------
         if ( passedt.way_area > 31700000 ) then
             minzoom = 5
         else
@@ -1716,13 +1726,7 @@ function generic_after_land1( passedt )
             end
         end
 
-        MinZoom( minzoom )
-
-        LayerAsCentroid( "land1" )
-        Attribute( "class", "natural_" .. passedt.natural )
-        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-        append_name( passedt )
-        MinZoom( minzoom )
+        write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, minzoom )
     else
         render_amenity_land1( passedt )
     end
@@ -1733,6 +1737,10 @@ function render_amenity_land1( passedt )
         ( passedt.amenity == "parking_pay"          ) or
         ( passedt.amenity == "parking_freedisabled" ) or
         ( passedt.amenity == "parking_paydisabled"  )) then
+-- ----------------------------------------------------------------------------
+-- This is slightly different to the normal "write_polygon_and_centroid" code
+-- because we write an "access" value out to the centroid afterwards.
+-- ----------------------------------------------------------------------------
         if ( math.floor( passedt.way_area ) > 0 ) then
             Layer( "land1", true )
             Attribute( "class", "amenity_" .. passedt.amenity )
@@ -1756,15 +1764,7 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "school"               ) or
             ( passedt.amenity == "hospital"             ) or
             ( passedt.amenity == "kindergarten"         )) then
-            Layer( "land1", true )
-            Attribute( "class", "amenity_" .. passedt.amenity )
-            MinZoom( 9 )
-
-            LayerAsCentroid( "land1" )
-            Attribute( "class", "amenity_" .. passedt.amenity )
-            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-            append_name( passedt )
-            MinZoom( 9 )
+            write_polygon_and_centroid( "land1", passedt, "amenity_", passedt.amenity, 9 )
         else
             if (( passedt.amenity == "holy_spring"                ) or
                 ( passedt.amenity == "holy_well"                  ) or
@@ -2770,12 +2770,18 @@ function render_historic_land1( passedt )
         ( passedt.historic == "wreck"                    ) or
         ( passedt.historic == "mineshaft"                ) or
         ( passedt.historic == "nonspecific"              )) then
+-- ----------------------------------------------------------------------------
+-- This is slightly different to the normal "write_polygon_and_centroid" code
+-- because we write landuse as "landuse_historic" 
+-- not "historic_" .. passedt.historic .
+-- ----------------------------------------------------------------------------
         Layer( "land1", true )
         Attribute( "class", "landuse_historic" )
         MinZoom( 14 )
 
         LayerAsCentroid( "land1" )
         Attribute( "class", "historic_" .. passedt.historic )
+        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
         append_name( passedt )
         MinZoom( 14 )
     else
@@ -2793,14 +2799,7 @@ function render_landuse_land1( passedt )
 -- ----------------------------------------------------------------------------
     if (( passedt.landuse == "forest"          ) or
         ( passedt.landuse == "farmland"        )) then
-        Layer( "land1", true )
-        Attribute( "class", "landuse_" .. passedt.landuse )
-        MinZoom( 8 )
-
-        LayerAsCentroid( "land1" )
-        Attribute( "class", "landuse_" .. passedt.landuse )
-        append_name( passedt )
-        MinZoom( 8 )
+        write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 8 )
     else
         if (( passedt.landuse == "grass"                     ) or
             ( passedt.landuse == "residential"               ) or
@@ -2828,9 +2827,19 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "christiancemetery"         ) or
             ( passedt.landuse == "jewishcemetery"            ) or
             ( passedt.landuse == "othercemetery"             )) then
-            Layer( "land1", true )
-            Attribute( "class", "landuse_" .. passedt.landuse )
-
+-- ----------------------------------------------------------------------------
+-- These features range in size from the huge polygons to single nodes.
+-- The largest ones are included in relatively low zoom level tiles, but it
+-- makes no sense to do that for all.  We therefore set a "minzoom" based on
+-- way_area (note that way_area will be 0 for nodes).
+--
+-- We then write both a polygon (if one exists) and a point for the name, and
+-- include the way area of the polygon in the attributes of the point so that
+-- the rendering code can decide when to display the name.  Typically it'll be
+-- a few zoom levels higher than the lowest zoom tile to which the feature is
+-- written, so that the fill and the outline of the feature appears first, and
+-- then the name.
+-- ----------------------------------------------------------------------------
             if ( passedt.way_area > 141284 ) then
                 minzoom = 9
             else
@@ -2849,26 +2858,12 @@ function render_landuse_land1( passedt )
                 end
             end
 
-            MinZoom( minzoom )
-
-            LayerAsCentroid( "land1" )
-            Attribute( "class", "landuse_" .. passedt.landuse )
-            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-            append_name( passedt )
-            MinZoom( minzoom )
+            write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, minzoom )
         else
             if (( passedt.landuse == "village_green"          ) or
                 ( passedt.landuse == "quarry"                 ) or
                 ( passedt.landuse == "historicquarry"         )) then
-                Layer( "land1", true )
-                Attribute( "class", "landuse_" .. passedt.landuse )
-                MinZoom( 10 )
-
-                LayerAsCentroid( "land1" )
-                Attribute( "class", "landuse_" .. passedt.landuse )
-                AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-                append_name( passedt )
-                MinZoom( 10 )
+                write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 10 )
             else
 -- ----------------------------------------------------------------------------
 -- These are considered by the code "not large" landuse areas and get the name
@@ -2887,15 +2882,7 @@ function render_landuse_land1( passedt )
                         MinZoom( 12 )
                     else
                         if ( passedt.landuse == "conservation" ) then
-                            Layer( "land1", true )
-                            Attribute( "class", "landuse_" .. passedt.landuse )
-                            MinZoom( 13 )
-
-                            LayerAsCentroid( "land1" )
-                            Attribute( "class", "landuse_" .. passedt.landuse )
-                            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-                            append_name( passedt )
-                            MinZoom( 13 )
+                            write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 13 )
                         else
                             if ( passedt.landuse == "industrialbuilding" ) then
                                 Layer( "land1", true )
@@ -2914,17 +2901,20 @@ function render_landuse_land1( passedt )
 end -- render_landuse_land1()
 
 function render_leisure_land1( passedt )
--- ----------------------------------------------------------------------------
--- For large landuse areas we write the polygon out without the name, and then
--- the name on just the centroid.
--- 
--- The same display code can interpret "both features" without having to read
--- it from a separate layer.
--- ----------------------------------------------------------------------------
     if ( passedt.leisure == "nature_reserve" ) then
-        Layer( "land1", true )
-        Attribute( "class", "leisure_" .. passedt.leisure )
-
+-- ----------------------------------------------------------------------------
+-- These features range in size from the huge polygons to single nodes.
+-- The largest ones are included in relatively low zoom level tiles, but it
+-- makes no sense to do that for all.  We therefore set a "minzoom" based on
+-- way_area (note that way_area will be 0 for nodes).
+--
+-- We then write both a polygon (if one exists) and a point for the name, and
+-- include the way area of the polygon in the attributes of the point so that
+-- the rendering code can decide when to display the name.  Typically it'll be
+-- a few zoom levels higher than the lowest zoom tile to which the feature is
+-- written, so that the fill and the outline of the feature appears first, and
+-- then the name.
+-- ----------------------------------------------------------------------------
         if ( passedt.way_area > 282314432 ) then
             minzoom = 6
         else
@@ -2939,16 +2929,7 @@ function render_leisure_land1( passedt )
             end
         end
 
-        MinZoom( minzoom )
-
-        if (( passedt.name ~= nil ) and
-            ( passedt.name ~= ""  )) then
-            LayerAsCentroid( "land1" )
-            Attribute( "class", "leisure_" .. passedt.leisure )
-            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-            Attribute( "name", passedt.name )
-            MinZoom( minzoom )
-        end
+        write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, minzoom )
     else
         if ((  passedt.leisure == "common"            ) or
             (  passedt.leisure == "dog_park"          ) or
@@ -2963,9 +2944,19 @@ function render_leisure_land1( passedt )
             (( passedt.leisure == "track"            )  and
              ( passedt.area    ~= "no"               )  and
              ( passedt.is_closed                     ))) then
-            Layer( "land1", true )
-            Attribute( "class", "leisure_" .. passedt.leisure )
-
+-- ----------------------------------------------------------------------------
+-- These features range in size from the huge polygons to single nodes.
+-- The largest ones are included in relatively low zoom level tiles, but it
+-- makes no sense to do that for all.  We therefore set a "minzoom" based on
+-- way_area (note that way_area will be 0 for nodes).
+--
+-- We then write both a polygon (if one exists) and a point for the name, and
+-- include the way area of the polygon in the attributes of the point so that
+-- the rendering code can decide when to display the name.  Typically it'll be
+-- a few zoom levels higher than the lowest zoom tile to which the feature is
+-- written, so that the fill and the outline of the feature appears first, and
+-- then the name.
+-- ----------------------------------------------------------------------------
             if ( passedt.way_area > 141284 ) then
                 minzoom = 9
             else
@@ -2984,51 +2975,24 @@ function render_leisure_land1( passedt )
                 end
             end
 
-            MinZoom( minzoom )
-
-            LayerAsCentroid( "land1" )
-            Attribute( "class", "leisure_" .. passedt.leisure )
-            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-            append_name( passedt )
-            MinZoom( minzoom )
+            write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, minzoom )
         else
             if (( passedt.leisure == "playground" ) or
                 ( passedt.leisure == "schoolyard" )) then
-                Layer( "land1", true )
-                Attribute( "class", "leisure_" .. passedt.leisure )
-                MinZoom( 12 )
-
-                LayerAsCentroid( "land1" )
-                Attribute( "class", "leisure_" .. passedt.leisure )
-                append_name( passedt )
-                MinZoom( 12 )
+                write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 12 )
             else
                 if ( passedt.leisure == "swimming_pool" ) then
-                    Layer( "land1", true )
-                    Attribute( "class", "leisure_" .. passedt.leisure )
-                    MinZoom( 13 )
-
-                    LayerAsCentroid( "land1" )
-                    Attribute( "class", "leisure_" .. passedt.leisure )
-                    append_name( passedt )
-                    MinZoom( 13 )
+                    write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 13 )
                 else
 -- ----------------------------------------------------------------------------
--- Actually, we don't expect leisure=leisurenonspecific will have a fill at 
--- all, but write out a polygon just in case.
+-- Although you might not expect leisure=leisurenonspecific to have a fill at 
+-- all, a polygon is written out just in case.  The example svwd01 rendering
+-- does not show a fill or an outline for these features.
+-- An example is https://www.openstreetmap.org/way/954878523 - there the 
+-- surface=grass (written out to "land2") is shown as green.
 -- ----------------------------------------------------------------------------
                     if ( passedt.leisure == "leisurenonspecific" ) then
-                        Layer( "land1", true )
-                        Attribute( "class", "leisure_" .. passedt.leisure )
-                        MinZoom( 14 )
-
-                        if (( passedt.name ~= nil ) and
-                            ( passedt.name ~= ""  )) then
-                            LayerAsCentroid( "land1" )
-                            Attribute( "class", "leisure_" .. passedt.leisure )
-                            Attribute( "name", passedt.name )
-                            MinZoom( 14 )
-                        end
+                        write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 14 )
                     else
 -- ----------------------------------------------------------------------------
 -- These are considered by the code "not large" landuse areas and get the name
@@ -3117,9 +3081,19 @@ function render_natural_land1( passedt )
                 ( passedt.natural == "heath"         ) or
                 ( passedt.natural == "grassland"     ) or
                 ( passedt.natural == "scrub"         )) then
-                Layer( "land1", true )
-                Attribute( "class", "natural_" .. passedt.natural )
-
+-- ----------------------------------------------------------------------------
+-- These features range in size from the huge polygons to single nodes.
+-- The largest ones are included in relatively low zoom level tiles, but it
+-- makes no sense to do that for all.  We therefore set a "minzoom" based on
+-- way_area (note that way_area will be 0 for nodes).
+--
+-- We then write both a polygon (if one exists) and a point for the name, and
+-- include the way area of the polygon in the attributes of the point so that
+-- the rendering code can decide when to display the name.  Typically it'll be
+-- a few zoom levels higher than the lowest zoom tile to which the feature is
+-- written, so that the fill and the outline of the feature appears first, and
+-- then the name.
+-- ----------------------------------------------------------------------------
                 if ( passedt.way_area > 141284 ) then
                     minzoom = 9
                 else
@@ -3138,12 +3112,7 @@ function render_natural_land1( passedt )
                     end
                 end
 
-                MinZoom( minzoom )
-
-                LayerAsCentroid( "land1" )
-                Attribute( "class", "natural_" .. passedt.natural )
-                Attribute( "name", passedt.name )
-                MinZoom( minzoom )
+                write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, minzoom )
             else
                 if ( passedt.natural == "bigpeak" ) then
                     Layer( "land1", true )
@@ -3178,17 +3147,7 @@ function render_natural_land1( passedt )
                         if (( passedt.natural == "wetland"  ) or
                             ( passedt.natural == "reef"     ) or
                             ( passedt.natural == "reefsand" )) then
-                            Layer( "land1", true )
-                            Attribute( "class", "natural_" .. passedt.natural )
-                            MinZoom( 12 )
-
-                            if (( passedt.name ~= nil ) and
-                                ( passedt.name ~= ""  )) then
-                                LayerAsCentroid( "land1" )
-                                Attribute( "class", "natural_" .. passedt.natural )
-                                Attribute( "name", passedt.name )
-                                MinZoom( 12 )
-                            end
+                            write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, 12 )
                         else
                             if ( passedt.natural == "hill" ) then
                                 Layer( "land1", true )
@@ -3266,15 +3225,7 @@ end -- render_barrier_land1()
 
 function render_waterway_land1( passedt )
     if ( passedt.waterway == "damarea" ) then
-        Layer( "land1", true )
-        Attribute( "class", "waterway_" .. passedt.waterway )
-        MinZoom( 10 )
-
-        LayerAsCentroid( "land1" )
-        Attribute( "class", "waterway_" .. passedt.waterway )
-        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-        append_name( passedt )
-        MinZoom( 10 )
+        write_polygon_and_centroid( "land1", passedt, "waterway_", passedt.waterway, 10 )
     else
         if ( passedt.waterway == "lock_gate" ) then
             Layer( "land1", true )
@@ -3338,16 +3289,7 @@ function render_tourism_land1( passedt )
 -- -----------------------------------------------------------------------------
             if (( passedt.tourism == "camp_site"    ) or
                 ( passedt.tourism == "caravan_site" )) then
-                Layer( "land1", true )
-                Attribute( "class", "tourism_" .. passedt.tourism )
-                append_name( passedt )
-                MinZoom( 12 )
-
-                LayerAsCentroid( "land1" )
-                Attribute( "class", "tourism_" .. passedt.tourism )
-                AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-                append_name( passedt )
-                MinZoom( 12 )
+                write_polygon_and_centroid( "land1", passedt, "tourism_", passedt.tourism, 12 )
             else
 -- ----------------------------------------------------------------------------
 -- Most zoom 14 tourist things tend to be just points, so we don't extract the
@@ -3406,21 +3348,7 @@ function render_tourism_land1( passedt )
 -- ----------------------------------------------------------------------------
                     if (( passedt.tourism == "motel"                      ) or
                         ( passedt.tourism == "hotel"                      )) then
-                        Layer( "land1", true )
-                        Attribute( "class", "tourism_" .. passedt.tourism )
-                        MinZoom( 14 )
-
-                        LayerAsCentroid( "land1" )
-                        Attribute( "class", "tourism_" .. passedt.tourism )
-                        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-                        append_name( passedt )
-
-                        if (( passedt.ele ~= nil ) and
-                            ( passedt.ele ~= ""  )) then
-                             Attribute( "ele", passedt.ele )
-                        end
-
-                        MinZoom( 14 )
+			write_polygon_and_centroid( "land1", passedt, "tourism_", passedt.tourism, 14 )
                     else
                         render_aeroway_land1( passedt )
                     end -- tourism=hotel etc. 14
@@ -3521,15 +3449,7 @@ function render_landuse_land2( passedt )
 -- it from a separate layer.
 -- ----------------------------------------------------------------------------
             if ( passedt.landuse == "military" ) then
-                Layer( "land2", true )
-                Attribute( "class", "landuse_" .. passedt.landuse )
-                MinZoom( 9 )
-
-                LayerAsCentroid( "land2" )
-                Attribute( "class", "landuse_" .. passedt.landuse )
-                AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-                append_name( passedt )
-                MinZoom( 9 )
+                write_polygon_and_centroid( "land2", passedt, "landuse_", passedt.landuse, 6 )
             else
                 if (( passedt.landuse == "unnamedquarry"          ) or
                     ( passedt.landuse == "unnamedhistoricquarry"  )) then
@@ -3611,14 +3531,7 @@ function render_aeroway_land2( passedt )
 -- ----------------------------------------------------------------------------
     if (( passedt.aeroway == "aerodrome"       ) or
         ( passedt.aeroway == "large_aerodrome" )) then
-        Layer( "land2", true )
-        Attribute( "class", "aeroway_" .. passedt.aeroway )
-        MinZoom( 12 )
-
-        LayerAsCentroid( "land2" )
-        Attribute( "class", "aeroway_" .. passedt.aeroway )
-        append_name( passedt )
-        MinZoom( 12 )
+        write_polygon_and_centroid( "land2", passedt, "aeroway_", passedt.aeroway, 12 )
     else
         render_boundary_land2( passedt )
     end -- aeroway=aerodrome 12
@@ -3627,14 +3540,7 @@ end -- render_aeroway_land2()
 function render_boundary_land2( passedt )
     if (( passedt.boundary == "national_park" ) and
         ( passedt.is_closed                   )) then
-        Layer( "land2", true )
-        Attribute( "class", "boundary_" .. passedt.boundary )
-        MinZoom( 6 )
-
-        LayerAsCentroid( "land2" )
-        Attribute( "class", "boundary_" .. passedt.boundary )
-        append_name( passedt )
-        MinZoom( 6 )
+        write_polygon_and_centroid( "land2", passedt, "boundary_", passedt.boundary, 6 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
@@ -3731,6 +3637,21 @@ function generic_after_place( passedt )
         end -- capital
     end -- country
 end -- generic_after_place()
+
+function write_polygon_and_centroid( passed_layer, passedt, passed_prefix, passed_value, passed_zoom )
+    if ( passedt.way_area > 0 ) then
+        Layer( passed_layer, true )
+        Attribute( "class", passed_prefix .. passed_value )
+        MinZoom( passed_zoom )
+    end
+
+    LayerAsCentroid( passed_layer )
+    Attribute( "class", passed_prefix .. passed_value )
+    AttributeNumeric( "way_area", math.floor( passedt.way_area ))
+    append_name( passedt )
+    MinZoom( passed_zoom )
+end -- write_polygon_and_centroid( passed_layer, passedt, passed_prefix, passed_value, passed_zoom )
+
 
 function append_name( passedt )
     if (( passedt.name ~= nil )   and
