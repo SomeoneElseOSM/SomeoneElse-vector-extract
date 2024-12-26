@@ -29,7 +29,7 @@ Set to "ocean".
 
 ## "place"
 
-More important places are written to lower numbered layers: country, state to all layers, capital at 3, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13, anything else at 14.
+More important places are written to lower numbered layers: country, state to all layers, capital at 3, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13.  Other values are ignored.  Only OSM nodes are processed for the "place" layer; there's too much randomness in OSM way and relation place data to use that.
 
 ### class
 

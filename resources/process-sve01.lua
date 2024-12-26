@@ -167,6 +167,27 @@ function node_function()
    end
 
 -- ------------------------------------------------------------------------------
+-- The "place" layer is node-specific.
+-- It'd be nice to be able to process relations, ways and nodes, knowing that 
+-- there would be only one OSM feature per real-world element, but unfortunately
+-- this is not the case.
+--
+-- * Lots of places (from "city" downwards) have both relations, and occasionally
+--   ways, and nodes.
+-- * Lots of places only have nodes.
+-- * Many fewer places only have relations or ways.
+--   Example https://www.openstreetmap.org/way/243794759
+-- * Where a real-world place has an OSM relation and a node, the names sometimes
+--   do not match (Galway).
+-- * Where a real-world place has an OSM relation and a node, the place values
+--   sometimes do not match (Appledore).
+--
+-- The least-worst approach is therefore to only write out the "place" layer
+-- based on nodes.
+-- ------------------------------------------------------------------------------
+    n_after_place( nodet )
+
+-- ------------------------------------------------------------------------------
 -- (end of the node-specific code)
 --
 -- Actually writing out nodes (and polygons) is done in "generic_after_function"
@@ -1194,7 +1215,6 @@ function generic_after_function( passedt )
     
     generic_after_land1( passedt )
     generic_after_land2( passedt )
-    generic_after_place( passedt )
 end -- generic_after_function()
 
 -- ----------------------------------------------------------------------------
@@ -3294,7 +3314,7 @@ function generic_after_poi( passedt )
     end -- amenity
 end -- generic_after_poi()
 
-function generic_after_place( passedt )
+function n_after_place( passedt )
     if (( passedt.place == "country" ) or
         ( passedt.place == "state"   )) then
         LayerAsCentroid( "place" )
@@ -3350,7 +3370,7 @@ function generic_after_place( passedt )
             end -- city
         end -- capital
     end -- country
-end -- generic_after_place()
+end -- n_after_place()
 
 function write_polygon_and_centroid( passed_layer, passedt, passed_prefix, passed_value, passed_zoom )
     if ( passedt.way_area > 0 ) then

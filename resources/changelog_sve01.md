@@ -7,6 +7,7 @@ Consolidated centroid processing (no functional change).
 Added more detail to README.
 Use `driveway` (designed to be less prominent than a regular service road) for `parking_aisle` and `drive-though` as well as `driveway`.
 Export `boundary=administative` together with the `name` and `admin_level`.
+Changed the `place` layer export to use nodes only.
 
 ## 23/12/2024
 Some amenities (`bicycle_rental` etc.) are extracted with an access value as well.
