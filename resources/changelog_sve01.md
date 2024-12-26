@@ -1,6 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Ensure that tourist accommodation in historic watermills and windmills is correctly shown as tourist accommodation.
+If a watermill or windmill is a museum or a historic building, assume that it is also a historic mill.
+
 ## 26/12/2024
 Tidy access values for various parking objects in lua to either "yes" or "no".
 Consolidated centroid processing (no functional change).
