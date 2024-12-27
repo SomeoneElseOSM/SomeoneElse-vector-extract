@@ -33,7 +33,7 @@ More important places are written to lower numbered layers: country, state to al
 
 ### class
 
-Usually the place value (e.g. "city"). Set to "capital" (regardless of the place value) if it is a capital.
+Usually the `place` value (e.g. `city`). Set to `capital` (regardless of the place value) if it is a capital.
 
 ### name
 
@@ -46,32 +46,32 @@ This is for linear road, rail, air and water transport.
 
 ### class
 
-Values are written as e.g. "motorway" without the OSM tag (here "highway") as part of the key.  Many of these tag values are a result of previous lua processing (see note above).  For roads, this is derived from the OSM value for "highway" and the designation, so `highway=bridlewaysteps` will in OSM likely be a `highway=steps` with `designation=public_bridleway`.  Values after the initial lua processing wre written out to vector tiles as follows:
+Values are written as e.g. `motorway` without the OSM tag (here `highway`) as part of the key.  Many of these tag values are a result of previous lua processing (see note above).  For roads, this is derived from the OSM value for `highway` and the designation, so `highway=bridlewaysteps` will in OSM likely be a `highway=steps` with `designation=public_bridleway`.  Values after the initial lua processing wre written out to vector tiles as follows:
 
 * motorway, trunk, primary, secondary, tertiary, unclassified and residential and links are handled as normal.
-* service _without_ designation: "important" ones are handled as normal ("service"); "less important" ("parking_aisle","drive-through","driveway") as "driveway".
-* service _with_ designation are handled as per the designation below.
+* service _without_ designation: "important" ones are handled as normal (`service`); "less important" (`parking_aisle`,`drive-through`,`driveway`) as `driveway`.
+* service _with_ `designation` are handled as per the designation below.
 * unpaved - these are unclassified roads that are unpaved; intended to be shown visually different from paved ones.
 * ucrwide, ucrnarrow - unclassified country road intended to be shown visually between unpaved and BOAT.
 * boatwide, boatnarrow - Byway Open to All Traffic; wide (>=2m) or narrow.
 * rbywide, rbynarrow - Restricted Byway; wide or narrow.
 * bridlewaywide, bridlewaynarrow - Public Bridleway; wide or narrow.
 * bridlewaysteps - Public Bridleway; but steps.
-* footwaywide, footwaynarrow - Public Footpath; wide (typically "service" or "track" in OSM) or narrow (typically "footway" or "path").
+* footwaywide, footwaynarrow - Public Footpath; wide (typically `service` or `track` in OSM) or narrow (typically `footway` or `path`).
 * footwaysteps - Public Footpath; but steps.
 * pathwide, pathnarrow - no designation; wide or narrow.
 * steps - no designation; steps.
 
 The MinZoom on each of these is broadly appropriate to the road type, varying from 3 for motorways to 12 to paths.
 
-Genuine highway areas are handled via "land1", not here.  For some highway types that are closed ways, "area" needs to be checked to choose which layer something should be processed as:
+Genuine highway areas are handled via "land1", not here.  For some highway types that are closed ways, `area` needs to be checked to choose which layer something should be processed as:
 
-* "highway=pedestrian" ways are assumed to be areas if closed unless "area=no" is set.
-* "highway=leisuretrack" and "highway=gallop" (which is what "leisure=track" will be processed into based on "sport" tags") are assumed to be linear unless "area=no" is set.
+* `highway=pedestrian` ways are assumed to be areas if closed unless `area=no` is set.
+* `highway=leisuretrack` and `highway=gallop` (which is what `leisure=track` will be processed into based on `sport` tags) are assumed to be linear unless `area=no` is set.
 
-Closed "barrier=hedge" are assumed to be linear if there is some other area tag on the object (e.g. "landuse=farmland"), otherwise areas.
+Closed `barrier=hedge` are assumed to be linear if there is some other area tag on the object (e.g. `landuse=farmland`), otherwise areas.
 
-Numerous other tags (e.g. "man_made=pier") may be linear or occur on areas; other than the exceptions noted above this is usually based on whether the way is closed or not.
+Numerous other tags (e.g. `man_made=pier`) may be linear or occur on areas; other than the exceptions noted above this is usually based on whether the way is closed or not.
 
 ### name
 
@@ -87,7 +87,7 @@ The length of the OSM ref tag, designed to make choice of e.g. road shield backg
 
 ### edge
 
-This will be "sidewalk", "verge", "ford" or unset.  Designed to be used to influence the rendering on major road types.
+This will be `sidewalk`, `verge`, ford` or unset.  Designed to be used to influence the rendering on major road types.
 
 ### bridge
 
@@ -101,11 +101,11 @@ The `bridge` and `tunnel` tags can coexist and a map style consuming this schema
 
 ### access
 
-Set to "no" if "access=no", "destination" if "access=destination", where "access" has been derived from "foot" if set and appropriate.  This schema tries to give a pedestrian-centric view of access-rights.  Note that the access logic here differs from that used for parking features (for cars, bicycles and motorcycles) in "land1".  See the "land1" layer below for that.
+Set to `no` if `access=no`, `destination` if `access=destination`, where `access` has been derived from `foot` if set and appropriate.  This schema tries to give a pedestrian-centric view of access-rights.  Note that the access logic here differs from that used for parking features (for cars, bicycles and motorcycles) in "land1".  See the "land1" layer below for that.
 
 ### oneway
 
-The value of any OSM "oneway" tag - typically "yes" or "-1".
+The value of any OSM `oneway` tag - typically `yes` or `-1`.
 
 
 ## "land1" and "land2"
@@ -114,7 +114,7 @@ There are two "landuse / landcover" layers into which all sorts of landuse, leis
 
 Features are written at an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=nature_reserve") and that zoom level may vary based on way_area.
 
-A number of "landuse, leisure, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
+A number of "`landuse`, `leisure`, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
 
 .  Things considered "large" and written out in this way include (from "land1"):
 
@@ -131,9 +131,9 @@ A number of "landuse, leisure, etc." features that may be either large or small 
 * zoom 10 `waterway=damarea`
 * zoom 12 `natural` tags `wetland`, `reef`, `reefsand`.
 * zoom 12 `tourism` tags `camp_site`, `caravan_site` and `theme_park`.
-* all zoom 14 "historic=" tags ("battlefield" etc. - here the area is written out as "landuse=historic" and the centroid as e.g. "historic=battlefield")
+* all zoom 14 `historic=` tags (`battlefield` etc. - here the area is written out as `landuse=historic` and the centroid as e.g. `historic=battlefield`)
 * zoom 14 `tourism` tags `hotel` and `motel`.
-* all zoom 13 "leisure=" tags ("nature_reserve", "park", etc.)
+* all zoom 13 `leisure=` tags (`nature_reserve`, `park`, etc.)
 
 from "land2:
 
@@ -153,7 +153,7 @@ Features written out just once, as a point or polygon, with a name if one exists
 * zoom 11 `landuse=garages`
 * zoom 12 `railway=halt`, railway=tram_stop` and `aerialway=station`.
 * zoom 12 `man_made=bigchimney`
-* zoom 12 some `highway` street areas, usually after explicit checks on "is_closed" and the `area` tag.
+* zoom 12 some `highway` street areas, usually after explicit checks on `is_closed` and the `area` tag.
 * zoom 12 `landuse=vineyard`
 * zoom 12 `natural=hill`
 * zoom 12 `tourism=theme_park`
@@ -165,16 +165,16 @@ Features written out just once, as a point or polygon, with a name if one exists
 * zoom 14 most remaining `man_made` features such as `chimney` etc.
 * zoom 14 `office` tags `craftbrewery`, `craftcider` and `nonspecific`.
 * zoom 14 many `highway` tags such as the various bus stop tags etc.
-* zoom 14 `highway` and `railway` platform areas, usually after explicit checks on "is_closed" and the `area` tag.  Also railway turntables.
+* zoom 14 `highway` and `railway` platform areas, usually after explicit checks on `is_closed` and the `area` tag.  Also railway turntables.
 * zoom 14 `landuse=industrialbuilding`
 * zoom 14 `leisure` tags `bandstand`, `bleachers`, `fitness_station`, `picnic_table`, `slipway`, `bird_hide`, `hunting_stand` and `grouse_butt`.
 * zoom 14 `natural` tags `cave_entrance`, `sinkhole`, `climbing`, `rock`, `tree`, `shrub`.
 
 ### class
 
-This is based on the OSM tag, processed to create some derived values such as "landuse=farmgrass" for both agricultural meadows and farmland that is pasture, paddock, etc.
+This is based on the OSM tag, processed to create some derived values such as `landuse=farmgrass` for both agricultural meadows and farmland that is pasture, paddock, etc.
 
-Values are written as e.g. "landuse_farmland" with the OSM tag as part of the key.
+Values are written as e.g. `landuse_farmland` with the OSM tag as part of the key.
 
 ### name
 
@@ -206,7 +206,7 @@ The OSM value for "waterway" after processing based on "intermittent" etc.
 
 ### name
 
-the value of the OSM name tag, after any postprocessing e.g. for "operator".
+the value of the OSM name tag, after any postprocessing e.g. for `operator`.
 
 ### bridge
 
@@ -216,7 +216,7 @@ A boolean value set to true if a bridge.
 
 A boolean value set to true if a tunnel.
 
-"bridge" and "tunnel" tags can coexist and a map style consuming this schema needs to deal with that.
+`bridge` and `tunnel` tags can coexist and a map style consuming this schema needs to deal with that.
 
 
 ## "linearbarrier"
@@ -225,7 +225,7 @@ All features here are linear.  Point or polygon features will go in "land1" or "
 
 ### class
 
-Generally speaking, the OSM value for "barrier".
+Generally speaking, the OSM value for `barrier`.
 
 ### name
 
@@ -236,32 +236,32 @@ The value of the OSM name tag
 
 ### class
 
-Stored as the processed OSM tag and value, such as "building_roof"
+Stored as the processed OSM tag and value, such as `building_roof`
 
 ### name
 
-the value of the OSM "name" tag, after any postprocessing e.g. for "operator".
+the value of the OSM `name` tag, after any postprocessing e.g. for `operator`.
 
 ### housenumber
 
-the value of the OSM "addr:housenumber" tag, after postprocessing.
+the value of the OSM `addr:housenumber` tag, after postprocessing.
 
 ### housename
 
-the value of the OSM "addr:housename" tag, after postprocessing.
+the value of the OSM `addr:housename` tag, after postprocessing.
 
 
 ## "poi"
 
-Not written by default - this is an optional catch-all that can output everything not handled by "land1" processing.  Uncomment out "generic_after_poi( passedt )" to produce this layer, which contains all unhandled "amenity", "shop" and "tourism" features.
+Not written by default - this is an optional catch-all that can output everything not handled by "land1" processing.  Uncomment out `generic_after_poi( passedt )` to produce this layer, which contains all unhandled `amenity`, `shop` and `tourism` features.
 
 ### class
 
-Stored as the OSM tag and value, such as "amenity_wibble", where "wibble" is not an amenity value already expected by the "land1" layer.
+Stored as the OSM tag and value, such as `amenity_wibble`, where `wibble` is not an amenity value already expected by the "land1" layer.
 
 ### name
 
-the value of the OSM name tag, after any postprocessing e.g. for "operator".
+the value of the OSM name tag, after any postprocessing e.g. for `operator`.
 
 
 For individual source tag values used see [here](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags)
