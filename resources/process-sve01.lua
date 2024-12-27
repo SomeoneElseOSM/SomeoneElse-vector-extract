@@ -2442,10 +2442,15 @@ function render_historic_land1( passedt )
 -- This is slightly different to the normal "write_polygon_and_centroid" code
 -- because we write landuse as "landuse_historic" 
 -- not "historic_" .. passedt.historic .
+--
+-- Also, as well as points, we also may see linear "archaeological sites"
+-- coming through here. We only write a polygon features for actual polygons.
 -- ----------------------------------------------------------------------------
-        Layer( "land1", true )
-        Attribute( "class", "landuse_historic" )
-        MinZoom( 14 )
+        if ( passedt.way_area > 0 ) then
+            Layer( "land1", true )
+            Attribute( "class", "landuse_historic" )
+            MinZoom( 14 )
+        end
 
         LayerAsCentroid( "land1" )
         Attribute( "class", "historic_" .. passedt.historic )

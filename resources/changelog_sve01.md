@@ -9,6 +9,7 @@ Moved `tourism=theme_park` to the list of objects for which object names are wri
 Updated README to improve formatting only.
 Added `outlet` to the list of keys that are processed.
 Extract buildings from vector zoom 11, which matches raster zoom 12.
+Only write polygons for historic features that are actually polygons.
 
 ## 26/12/2024
 Tidy access values for various parking objects in lua to either "yes" or "no".
