@@ -142,6 +142,8 @@ from "land2:
 * zoom 6 `landuse=military`
 * zoom 6 `boundary=national_park`, `boundary=access_land`.
 * zoom 12 `aeroway=aerodrome` and `aeroway=large_aerodrome`.
+* zoom 13 `leisure=harbour`.
+* zoom 13 `leisure=marina`.
 
 Features written out just once, as a point or polygon, with a name if one exists, include:
 

@@ -3131,10 +3131,7 @@ function render_landuse_land2( passedt )
                     MinZoom( 10 )
                 else
                     if ( passedt.landuse == "harbour" ) then
-                        Layer( "land2", true )
-                        Attribute( "class", "landuse_" .. passedt.landuse )
-                        append_name( passedt )
-                        MinZoom( 13 )
+                        write_polygon_and_centroid( "land2", passedt, "landuse_", passedt.landuse, 13 )
                     else
                         render_leisure_land2( passedt )
                     end -- landuse=harbour 13
@@ -3151,10 +3148,7 @@ function render_leisure_land2( passedt )
         MinZoom( 9 )
     else
         if ( passedt.leisure == "marina" ) then
-            Layer( "land2", true )
-            Attribute( "class", "leisure_" .. passedt.leisure )
-            append_name( passedt )
-            MinZoom( 13 )
+            write_polygon_and_centroid( "land2", passedt, "leisure_", passedt.leisure, 13 )
         else
             render_natural_land2( passedt )
         end -- leisure=marina 13
