@@ -1222,8 +1222,18 @@ end -- generic_after_function()
 -- building layer
 -- ----------------------------------------------------------------------------
 function generic_after_building( passedt )
-    if (( passedt.building ~= nil ) and
-        ( passedt.building ~= ""  )) then
+    if (( passedt.building ~= nil           ) and
+        ( passedt.building ~= ""            ) and
+        ( passedt.building ~= "base"        ) and
+        ( passedt.building ~= "decking"     ) and
+        ( passedt.building ~= "destroyed"   ) and
+        ( passedt.building ~= "foundations" ) and
+        ( passedt.building ~= "no"          ) and
+        ( passedt.building ~= "patio"       ) and
+        ( passedt.building ~= "plot"        ) and
+        ( passedt.building ~= "proposed"    ) and
+        ( passedt.building ~= "razed"       ) and
+        ( passedt.building ~= "window"      )) then
         Layer("building", true)
         Attribute( "class", "building_" .. passedt.building )
         append_name( passedt )

@@ -255,7 +255,9 @@ The value of the OSM name tag; appended for most features.
 
 ## "building"
 
-All nodes, ways and relations with non-nil and non-blank `building` tags will be written out here from zoom 11.
+All nodes, ways and relations with `building` tags that imply "is actually a building" will be written out here from zoom 11.  Many "not quite a building" values will have been consolidated into `roof`; `man_made=bridge` will be in `bridge_area`.  Data consumers can special-case `roof` and `bridge_area`, and may also want to show e.g. `building=church` differently; they'll then need to use a catch-all for `building` values that excludes what they have special-cased.
+
+non-nil and non-blank 
 
 ### class
 
