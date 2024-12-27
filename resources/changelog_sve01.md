@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 27/12/2024
 Ensure that tourist accommodation in historic watermills and windmills is correctly shown as tourist accommodation.
 If a watermill or windmill is a museum or a historic building, assume that it is also a historic mill.
 Use `tower` in addition to `tower:type` to classify various towers.
