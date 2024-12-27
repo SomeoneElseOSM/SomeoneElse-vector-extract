@@ -2040,6 +2040,14 @@ function render_amenity_land1( passedt )
 end -- render_amenity_land1()
 
 function render_shop_land1( passedt )
+-- ----------------------------------------------------------------------------
+-- We write both a polygon (if one exists) and a point for the name here, and
+-- include the way area of the polygon in the attributes of the point so that
+-- the rendering code can decide when to display the name.  Typically it'll be
+-- a few zoom levels higher than the lowest zoom tile to which the feature is
+-- written, so that the fill and the outline of the feature appears first, and
+-- then the name.
+-- ----------------------------------------------------------------------------
     if (( passedt.shop == "supermarket"        ) or
         ( passedt.shop == "department_store"   ) or
         ( passedt.shop == "ecosupermarket"     ) or
@@ -2108,10 +2116,7 @@ function render_shop_land1( passedt )
         ( passedt.shop == "tattoo"             ) or
         ( passedt.shop == "toys"               ) or
         ( passedt.shop == "travel_agent"       )) then
-        Layer( "land1", true )
-        Attribute( "class", "shop_" .. passedt.shop )
-        append_name( passedt )
-        MinZoom( 14 )
+        write_polygon_and_centroid( "land1", passedt, "shop_", passedt.shop, 14 )
     else
         if ( passedt.shop == "vacant" ) then
             Layer( "land1", true )

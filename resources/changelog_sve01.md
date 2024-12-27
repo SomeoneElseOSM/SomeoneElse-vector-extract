@@ -14,6 +14,7 @@ Extract closed areas of access land as `boundary=access_land` from zoom 6.
 Fixed a bug whereby unsigned relations could escape into the vector tiles.
 Extract names of marinas and harbours at centroid only.
 Don't create buildings for more `building` objects where the value implies "not a building" (such as "no").
+Extract names of most shops at centroid only.
 
 ## 26/12/2024
 Tidy access values for various parking objects in lua to either "yes" or "no".

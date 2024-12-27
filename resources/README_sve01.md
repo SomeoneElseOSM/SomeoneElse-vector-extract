@@ -135,6 +135,7 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 * all zoom 14 `historic=` tags (`battlefield` etc. - here the area is written out as `landuse=historic` and the centroid as e.g. `historic=battlefield`)
 * zoom 14 `tourism` tags `hotel` and `motel`.
 * zoom 14 `leisure` tag `leisurenonspecific`.
+* zoom 14 many `shop` tags (the vast majority with a usage of at least tens in UK/IE, and some others).
 
 from "land2:
 
@@ -166,7 +167,6 @@ Features written out just once, as a point or polygon, with a name if one exists
 * zoom 13 `natural=bay` and `natural=spring`
 * zoom 13 `leisure` tag `swimming_pool`.
 * zoom 14 many `amenity` tags such as the various tags for bars, cafes, pitches, pubs and many more.
-* zoom 14 many `shop` tags (the vast majority with a usage of at least tens in UK/IE, and some others).
 * zoom 14 most remaining `man_made` features such as `chimney` etc.
 * zoom 14 `office` tags `craftbrewery`, `craftcider` and `nonspecific`.
 * zoom 14 many `highway` tags such as the various bus stop tags etc.
