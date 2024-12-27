@@ -3279,8 +3279,9 @@ function render_boundary_land2( passedt )
             MinZoom( minzoom )
         end
     else
-        if (( passedt.boundary == "national_park" ) and
-            ( passedt.is_closed                   )) then
+        if ((( passedt.boundary == "national_park" )  or
+             ( passedt.boundary == "access_land"   )) and
+            (  passedt.is_closed                    )) then
             write_polygon_and_centroid( "land2", passedt, "boundary_", passedt.boundary, 6 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
