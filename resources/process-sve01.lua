@@ -32,7 +32,7 @@ node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "b
               "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
-              "office", "pipeline", "pitch", "place", 
+              "office", "outlet", "pipeline", "pitch", "place", 
               "place_of_worship", "playground", "power", "railway", "shop", 
               "sport", "tourism", "tunnel", "was:amenity", "waterway", "whitewater", "zoo" }
 

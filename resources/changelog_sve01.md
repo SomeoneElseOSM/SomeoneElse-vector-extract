@@ -7,6 +7,7 @@ If a watermill or windmill is a museum or a historic building, assume that it is
 Use `tower` in addition to `tower:type` to classify various towers.
 Moved `tourism=theme_park` to the list of objects for which object names are written separately for the centroid.
 Updated README to improve formatting only.
+Added `outlet` to the list of keys that are processed.
 
 ## 26/12/2024
 Tidy access values for various parking objects in lua to either "yes" or "no".
