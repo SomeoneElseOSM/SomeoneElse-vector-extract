@@ -653,23 +653,23 @@ function relation_function()
           ( relationt.highway == "ldpncn" ) or
           ( relationt.highway == "ldpmtb" ) or
           ( relationt.highway == "ldpnhn" )) then
-         if ((  relationt.name        ~= nil     ) and
-             (  relationt.name        ~= ""      ) and
-             (( relationt.nameCsigned == "no"   )  or
+         if ((  relationt.name           ~= nil     ) and
+             (  relationt.name           ~= ""      ) and
+             (( relationt["name:signed"] == "no"   )  or
               ( relationt["name:absent"] == "yes"  )  or
-              ( relationt.unsigned    == "yes"  )  or
-              ( relationt.unsigned    == "name" ))) then
+              ( relationt.unsigned       == "yes"  )  or
+              ( relationt.unsigned       == "name" ))) then
             relationt.name = nil
-            relationt.nameCsigned = nil
+            relationt["name:signed"] = nil
             relationt.highway = nil
          end -- no name
 
-         if ((  relationt.ref        ~= nil     ) and
-             (  relationt.ref        ~= ""      ) and
-             (( relationt.refCsigned == "no"   )  or
-              ( relationt.unsigned   == "yes"  ))) then
+         if ((  relationt.ref           ~= nil     ) and
+             (  relationt.ref           ~= ""      ) and
+             (( relationt["ref:signed"] == "no"   )  or
+              ( relationt.unsigned      == "yes"  ))) then
             relationt.ref = nil
-            relationt.refCsigned = nil
+            relationt["ref:signed"] = nil
             relationt.unsigned = nil
             relationt.highway = nil
          end -- no ref
