@@ -18,6 +18,7 @@ The keys and values present in the data at the time when it is written out to ve
 
 The `name` values written to features to several layers may incorporate `operator` and `brand` as appropriate, and may be suppressed or written out in brackets if a feature has been tagged as being unsigned.
 
+
 ## "water"
 
 This layer is for background sea map tiles.  See https://github.com/systemed/tilemaker/blob/master/docs/RUNNING.md#creating-a-map-with-varying-detail .
@@ -196,6 +197,7 @@ Either the value of the OSM ele tag, or for some features used to pass a "more d
 
 Set to the results of "Area()" for certain types of closed polygons as described above.  Values here are roughly 2.9 times the equivalent raster way_area values.
 
+
 ## "waterway"
 
 This is for linear waterways.
@@ -204,9 +206,14 @@ This is for linear waterways.
 
 The OSM value for "waterway" after processing based on "intermittent" etc.
 
+* zoom 11 `waterway=river`, `waterway=canal`, `waterway=derelict_canal`.
+* zoom 12 `waterway=stream`, `waterway=drain`, `waterway=intriver`., `waterway=intstream`.
+* zoom 13 `waterway=ditch`
+* zoom 14 `waterway=weir`, `waterway=pipeline`
+
 ### name
 
-the value of the OSM name tag, after any postprocessing e.g. for `operator`.
+the value of the OSM name tag.
 
 ### bridge
 
@@ -225,14 +232,26 @@ All features here are linear.  Point or polygon features will go in "land1" or "
 
 ### class
 
-Generally speaking, the OSM value for `barrier`.
+Generally speaking, this will be the OSM value for `barrier`.  Exceptions include various rarer tags mapped through to e.g. `gate`.
+
+* zoom 10 `natural=valley`.
+* zoom 11 `man_made=breakwater`, `man_made=groyne`, `man_made=pier`.
+* zoom 12 `natural=cliff`.
+* zoom 12 `waterway=dam`.
+* zoom 13 `barrier=wall`, `barrier=hedge` (non-closed only), `barrier=hedgeline`, `barrier=fence`, `barrier=kerb`, `barrier=pitchline`, `barrier=gate`, `barrier=gate_locked`, `barrier=lift_gate`, `barrier=stile`, `barrier=cattle_grid`, `barrier=ford` (if not associated with a `highway`), `barrier=tree_row`.
+* zoom 13 `man_made=cutline`, `man_made=levee`.
+* zoom 13 `historic=citywalls`, `historic=castle_walls`.
+* zoom 14 `man_made=embankment`.
+* zoom 14 `power=line`, `power=minor_line`.
 
 ### name
 
-The value of the OSM name tag
+The value of the OSM name tag; appended for most features.
 
 
 ## "building"
+
+All nodes, ways and relations with non-nil and non-blank `building` tags will be written out here.
 
 ### class
 
