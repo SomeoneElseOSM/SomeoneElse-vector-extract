@@ -2943,7 +2943,6 @@ function render_tourism_land1( passedt )
 -- centroid separately ...
 -- ----------------------------------------------------------------------------
         if (( passedt.tourism == "picnic_site"  ) or
-            ( passedt.tourism == "theme_park"   ) or
             ( passedt.tourism == "alpine_hut"   )) then
             Layer( "land1", true )
             Attribute( "class", "tourism_" .. passedt.tourism )
@@ -2954,7 +2953,8 @@ function render_tourism_land1( passedt )
 -- ... but some can be large areas, so to do extract the centroid separately ...
 -- -----------------------------------------------------------------------------
             if (( passedt.tourism == "camp_site"    ) or
-                ( passedt.tourism == "caravan_site" )) then
+                ( passedt.tourism == "caravan_site" ) or
+                ( passedt.tourism == "theme_park"   )) then
                 write_polygon_and_centroid( "land1", passedt, "tourism_", passedt.tourism, 12 )
             else
 -- ----------------------------------------------------------------------------

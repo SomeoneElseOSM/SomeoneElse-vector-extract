@@ -130,7 +130,7 @@ A number of "landuse, leisure, etc." features that may be either large or small 
 * zoom 10 `landuse` tags `village_green`, `quarry`, `historicquarry`.
 * zoom 10 `waterway=damarea`
 * zoom 12 `natural` tags `wetland`, `reef`, `reefsand`.
-* zoom 12 `tourism` tags `camp_site` and `caravan_site`.
+* zoom 12 `tourism` tags `camp_site`, `caravan_site` and `theme_park`.
 * all zoom 14 "historic=" tags ("battlefield" etc. - here the area is written out as "landuse=historic" and the centroid as e.g. "historic=battlefield")
 * zoom 14 `tourism` tags `hotel` and `motel`.
 * all zoom 13 "leisure=" tags ("nature_reserve", "park", etc.)
@@ -156,6 +156,7 @@ Features written out just once, as a point or polygon, with a name if one exists
 * zoom 12 some `highway` street areas, usually after explicit checks on "is_closed" and the `area` tag.
 * zoom 12 `landuse=vineyard`
 * zoom 12 `natural=hill`
+* zoom 12 `tourism=theme_park`
 * zoom 13 `amenity` tags `holy_spring`, `holy_well`, `watering_place`.
 * zoom 13 `man_made=bigobservationtower`
 * zoom 13 `natural=bay` and `natural=spring`
