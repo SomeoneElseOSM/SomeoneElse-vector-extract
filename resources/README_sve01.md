@@ -251,7 +251,7 @@ The value of the OSM name tag; appended for most features.
 
 ## "building"
 
-All nodes, ways and relations with non-nil and non-blank `building` tags will be written out here.
+All nodes, ways and relations with non-nil and non-blank `building` tags will be written out here from zoom 11.
 
 ### class
 
@@ -272,7 +272,7 @@ the value of the OSM `addr:housename` tag, after postprocessing.
 
 ## "poi"
 
-Not written by default - this is an optional catch-all that can output everything not handled by "land1" processing.  Uncomment out `generic_after_poi( passedt )` to produce this layer, which contains all unhandled `amenity`, `shop` and `tourism` features.
+Not written by default - this is an optional catch-all that can output everything not handled by "land1" processing.  Uncomment out the call to `generic_after_poi( passedt )` to produce this layer, which contains all unhandled `amenity`, `shop` and `tourism` features.
 
 ### class
 
@@ -284,6 +284,5 @@ the value of the OSM name tag, after any postprocessing e.g. for `operator`.
 
 
 For individual source tag values used see [here](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags)
-
 
 

@@ -1237,6 +1237,8 @@ function generic_after_building( passedt )
             ( passedt["addr:housename"] ~= ""  ))  then
             Attribute( "housename", passedt["addr:housename"] )
         end
+
+        MinZoom( 11 )
     end
 end -- generic_after_building()
 
