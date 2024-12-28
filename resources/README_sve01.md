@@ -3,7 +3,7 @@
 "sve01" is a schema for use with [Tilemaker](https://github.com/systemed/tilemaker) that is used to create 
 mbtiles that can be displayed with the svwd01 style [here](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/README.md).
 
-As with the parent style, releases are simply datestamped.  As written this corresponds to release 20241110.
+As with the parent style, releases are simply datestamped.  As written the most recent releases was "20241226"; this README corresponds with the latest version of the committed code (some time after that).
 
 This only describes the schema and the data extraction that supports that schema.  See also the [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/resources/README_svwd01.md) for an example display style, and also the main project [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/README.md) for the top=level scripts.
 

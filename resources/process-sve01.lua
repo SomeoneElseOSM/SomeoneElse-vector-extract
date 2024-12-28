@@ -522,6 +522,27 @@ function relation_function()
     end
 
     update_table( relationt )
+
+-- ------------------------------------------------------------------------------
+-- In "relation_scan_function()" we've tried to accept route and boundary 
+-- relations only.  However, I've noticed that "type=site" relations with some
+-- sort of geometry also come through.  An example is:
+-- https://www.openstreetmap.org/relation/18135701
+-- relations such as this can be suppressed here by doing something like:
+--
+--    if ( relationt.type ~= "site" ) then
+--        rf_2( relationt )
+--    end
+--
+-- See https://taginfo.openstreetmap.org/relations for a list of types in use.
+-- However, having site relations with a geometry being processed as
+-- multipolygons is something of an unexpected feature rather than a bug, so
+-- these are not suppressed here.
+-- ------------------------------------------------------------------------------
+    rf_2( relationt )
+end -- relation_function()
+
+function rf_2( relationt )
     generic_before_function( relationt )
 
 -- ----------------------------------------------------------------------------
@@ -736,7 +757,7 @@ function relation_function()
 -- Linear features should have been handled above.
 -- ----------------------------------------------------------------------------
     generic_after_function( relationt )
-end  -- relation_function()
+end  -- rf_2()
 
 function update_table( passedt )
     passedt.LPG = Find("LPG")
