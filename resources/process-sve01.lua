@@ -704,6 +704,32 @@ function relation_function()
     wr_after_transportation( relationt )
 
 -- ----------------------------------------------------------------------------
+-- After dealing with linear aeroways we need to deal with area ones in
+-- "generic_after_function", but we don't want that to have a go at showing
+-- linear ones as areas, so we remove those here.  We do want it to do points,
+-- which the "generic_after_function( nodet )" call above will do.
+--
+-- If something is a runway and is a closed relation we can assume that what has
+-- been mapped is the outline of the area of the linear runway (because
+-- although "circular runways" are a concept -
+-- https://en.wikipedia.org/wiki/Endless_runway - they are not not a thing
+-- right now.  However, closed circular taxiways are very much a thing, and
+-- so we also check the "area" tag there.  Unless area=yes is explicitly set,
+-- we assume that a taxiway is linear.
+-- ----------------------------------------------------------------------------
+    if ((  not relationt.is_closed              ) and
+        (( relationt.aeroway == "grass_runway" )  or
+         ( relationt.aeroway == "runway"       )  or
+         ( relationt.aeroway == "taxiway"      ))) then
+        relationt.aeroway = nil
+    end
+
+    if (( relationt.aeroway == "taxiway"  ) and
+        ( relationt.area    ~= "yes"      )) then
+        relationt.aeroway = nil
+    end
+
+-- ----------------------------------------------------------------------------
 -- Actually writing out most other nodes (and polygons) is done 
 -- in "generic_after_function"
 -- 
@@ -1294,11 +1320,25 @@ function wr_after_transportation( passedt )
                 MinZoom( 6 )
             else
 -- ----------------------------------------------------------------------------
--- aeroways
+-- linear aeroways
+--
+-- If something is a runway and is a closed way we can assume that what has
+-- been mapped is the outline of the area of the linear runway (because
+-- although "circular runways" are a concept -
+-- https://en.wikipedia.org/wiki/Endless_runway - they are not not a thing
+-- right now.  However, closed circular taxiways are very much a thing, and
+-- so we also check the "area" tag there.  Unless area=yes is explicitly set,
+-- we assume that a taxiway is linear.
+--
+-- After linear aeroways have been handled here we return to the calling 
+-- function for ways or relations which then calls e.g. 
+-- "generic_after_function( wayt )" to write out areas.
 -- ----------------------------------------------------------------------------
-                if (( passedt.aeroway == "runway"       ) or
-                    ( passedt.aeroway == "grass_runway" ) or
-                    ( passedt.aeroway == "taxiway"      )) then
+                if (((( passedt.aeroway == "runway"       )   or
+                      ( passedt.aeroway == "grass_runway" ))  and
+                     (  not passedt.is_closed              )) or
+                    ((  passedt.aeroway == "taxiway"      )   and
+                     (  passedt.area    ~= "yes"          ))) then
                     Layer("transportation", false)
                     Attribute( "class", passedt.aeroway )
                     append_name( passedt )
@@ -3047,24 +3087,41 @@ function render_tourism_land1( passedt )
 end -- render_tourism_land1()
 
 function render_aeroway_land1( passedt )
+-- ----------------------------------------------------------------------------
+-- Area aeroways
+--
+-- If something is a runway and is a closed way we can assume that what has
+-- been mapped is the outline of the area of the linear runway (because
+-- although "circular runways" are a concept -
+-- https://en.wikipedia.org/wiki/Endless_runway - they are not not a thing
+-- right now.  However, closed circular taxiways are very much a thing, and
+-- so we also check the "area" tag there.  Unless area=yes is explicitly set,
+-- we assume that a taxiway is linear.
+--
+-- Linear (not closed) runways and non-area taxiways have been processed 
+-- already in the transportation layer.  The ones that we have left to process
+-- here we know are really areas.
+-- ----------------------------------------------------------------------------
     if (( passedt.aeroway == "grass_runway" ) or
         ( passedt.aeroway == "runway"       )) then
-        Layer( "land1", true )
-        Attribute( "class", "aeroway_" .. passedt.aeroway )
-        append_name( passedt )
-        MinZoom( 10 )
+        write_polygon_and_centroid( "land1", passedt, "aeroway_", passedt.aeroway, 10 )
     else
         if (( passedt.aeroway == "apron"   ) or
             ( passedt.aeroway == "taxiway" )) then
-            Layer( "land1", true )
-            Attribute( "class", "aeroway_" .. passedt.aeroway )
-            append_name( passedt )
-            MinZoom( 12 )
+            write_polygon_and_centroid( "land1", passedt, "aeroway_", passedt.aeroway, 12 )
         else
             if (( passedt.aeroway == "helipad" ) or
                 ( passedt.aeroway == "gate"    )) then
-                Layer( "land1", true )
+                if ( passedt.way_area > 0 ) then
+                    Layer( "land1", true )
+                    Attribute( "class", "aeroway_" .. passedt.aeroway )
+                    MinZoom( 14 )
+                end
+
+                LayerAsCentroid( "land1" )
                 Attribute( "class", "aeroway_" .. passedt.aeroway )
+                AttributeNumeric( "way_area", math.floor( passedt.way_area ))
+                append_name( passedt )
 
                 if (( passedt.ref ~= nil ) and
                     ( passedt.ref ~= ""  )) then

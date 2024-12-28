@@ -129,10 +129,13 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 * zoom 9-13 various `leisure` tags `common`, `dog_park`, `park`, `recreation_ground`, `garden`, `golfgreen`, `golf_course`, `sports_centre`, `stadium`, `pitch`, and closed examples of `track`.
 * zoom 9-13 various `natural` tags `beach`, `tidal_beach`, `mud`, `tidal_mud`, `bare_rock`, `tidal_rock`, `sand`, `tidal_sand`, `scree`, `tidal_scree`, `shingle`, `tidal_shingle`, `heath`, `grassland`, `scrub`.
 * zoom 10 `landuse` tags `village_green`, `quarry`, `historicquarry`.
+* zoom 10 point and area `aeroway` tags `runway` and `grass_runway`.
 * zoom 10 `waterway=damarea`
 * zoom 12 `natural` tags `wetland`, `reef`, `reefsand`.
+* zoom 12 point and area `aeroway` tags `apron` and `taxiway`.
 * zoom 12 `tourism` tags `camp_site`, `caravan_site` and `theme_park`.
 * all zoom 14 `historic=` tags (`battlefield` etc. - here the area is written out as `landuse=historic` and the centroid as e.g. `historic=battlefield`)
+* zoom 14 point and area `aeroway` tags `helipad` and `gate`.
 * zoom 14 `tourism` tags `hotel` and `motel`.
 * zoom 14 `leisure` tag `leisurenonspecific`.
 * zoom 14 many `shop` tags (the vast majority with a usage of at least tens in UK/IE, and some others).
