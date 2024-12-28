@@ -123,6 +123,7 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 * zoom 6-9 `leisure=nature_reserve`.
 * zoom 8 `landuse` tags `forest`, `farmland`.
 * zoom 8 `natural` tags `wood`, `broadleaved`, `needleleaved`, `mixedleaved`, `bigprompeak`.
+* zoom 8 Various power features extracted as `man_made=power`, `man_made=power_water` and `man_made=power_wind`.
 * zoom 9 various parking `amenity` tags (`parking`, `parking_pay`, `parking_freedisabled`, `parking_paydisabled`)
 * zoom 9 `amenity` tags `university`, `college`, `school`, `hospital`, `kindergarten`.
 * zoom 9 `tourism` tag `attraction`.  Consumers need to take care with this because in "land1" this shouldn't be allowed to obliterate smaller "land1" objects mapped.  Rendering a fill with a low maxzoom is one option.

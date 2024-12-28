@@ -1709,7 +1709,17 @@ function way_after_linearbarrier( passedt )
         (   passedt.barrier == "tree_row"    )) then
         Layer( "linearbarrier", false )
         Attribute( "class", "barrier_" .. passedt.barrier )
-	append_name( passedt )
+
+-- ----------------------------------------------------------------------------
+-- If something that we're expecting to be a linear barrier is a closed way, 
+-- then it is very likely that this is not the name of the barrier, but 
+-- instead the name of an area feature sharing the same nodes.
+-- We therefore suppress names on closed linear barriers.
+-- ----------------------------------------------------------------------------
+        if ( not passedt.is_closed ) then
+	    append_name( passedt )
+        end
+
         MinZoom( 13 )
     else
         if ((  passedt.man_made == "breakwater" ) or
@@ -2230,81 +2240,84 @@ function render_man_made_land1( passedt )
                 append_name( passedt )
                 MinZoom( 13 )
             else
+                if (( passedt.man_made == "power"       ) or
+                    ( passedt.man_made == "power_water" ) or
+                    ( passedt.man_made == "power_wind"  )) then
+                    write_polygon_and_centroid( "land1", passedt, "man_made_", passedt.man_made, 8 )
+                else
 -- ----------------------------------------------------------------------------
 -- These are all extracted at zoom 14 but may not get displayed until 
 -- higher zoom levels.
 -- ----------------------------------------------------------------------------
-                if (( passedt.man_made == "chimney"                  ) or
-                    ( passedt.man_made == "lighthouse"               ) or
-                    ( passedt.man_made == "mast"                     ) or
-                    ( passedt.man_made == "power_wind"               ) or
-                    ( passedt.man_made == "ventilation_shaft"        ) or
-                    ( passedt.man_made == "water_tower"              ) or
-                    ( passedt.man_made == "windsock"                 ) or
-                    ( passedt.man_made == "cross"                    ) or
-                    ( passedt.man_made == "flagpole"                 ) or
-                    ( passedt.man_made == "maypole"                  ) or
-                    ( passedt.man_made == "aircraftcontroltower"     ) or
-                    ( passedt.man_made == "churchspire"              ) or
-                    ( passedt.man_made == "churchtower"              ) or
-                    ( passedt.man_made == "clockpedestal"            ) or
-                    ( passedt.man_made == "clocktower"               ) or
-                    ( passedt.man_made == "defensivetower"           ) or
-                    ( passedt.man_made == "footwear_decontamination" ) or
-                    ( passedt.man_made == "illuminationtower"        ) or
-                    ( passedt.man_made == "militarybunker"           ) or
-                    ( passedt.man_made == "mineshaft"                ) or
-                    ( passedt.man_made == "monitoringearthquake"     ) or
-                    ( passedt.man_made == "monitoringrainfall"       ) or
-                    ( passedt.man_made == "monitoringky"             ) or
-                    ( passedt.man_made == "monitoringwater"          ) or
-                    ( passedt.man_made == "monitoringweather"        ) or
-                    ( passedt.man_made == "mounting_block"           ) or
-                    ( passedt.man_made == "observationtower"         ) or
-                    ( passedt.man_made == "radartower"               ) or
-                    ( passedt.man_made == "squaretower"              ) or
-                    ( passedt.man_made == "watermill"                ) or
-                    ( passedt.man_made == "windmill"                 ) or
-                    ( passedt.man_made == "survey_point"             ) or
-                    ( passedt.man_made == "water_well"               ) or
-                    ( passedt.man_made == "cairn"                    ) or
-                    ( passedt.man_made == "flagpole_red"             ) or
-                    ( passedt.man_made == "sluice_gate"              ) or
-                    ( passedt.man_made == "boundary_stone"           ) or
-                    ( passedt.man_made == "power"                    ) or
-                    ( passedt.man_made == "power_wind"               ) or
-                    ( passedt.man_made == "golfballwasher"           ) or
-                    ( passedt.man_made == "outfall"                  )) then
-                    Layer( "land1", true )
-                    Attribute( "class", "man_made_" .. passedt.man_made )
-		    append_name( passedt )
-
-                    if (( passedt.ele ~= nil ) and
-                        ( passedt.ele ~= ""  )) then
-                        Attribute( "ele", passedt.ele )
-                    end
-
-                    MinZoom( 14 )
-                else
--- ----------------------------------------------------------------------------
--- man_made == "markeraerial" and "lcn_ref" get written through with "ref"
--- in the name, but are still extracted at zoom 14.
--- ----------------------------------------------------------------------------
-                    if (( passedt.man_made == "markeraerial" ) or
-                        ( passedt.man_made == "lcn_ref"      )) then
+                    if (( passedt.man_made == "chimney"                  ) or
+                        ( passedt.man_made == "lighthouse"               ) or
+                        ( passedt.man_made == "mast"                     ) or
+                        ( passedt.man_made == "ventilation_shaft"        ) or
+                        ( passedt.man_made == "water_tower"              ) or
+                        ( passedt.man_made == "windsock"                 ) or
+                        ( passedt.man_made == "cross"                    ) or
+                        ( passedt.man_made == "flagpole"                 ) or
+                        ( passedt.man_made == "maypole"                  ) or
+                        ( passedt.man_made == "aircraftcontroltower"     ) or
+                        ( passedt.man_made == "churchspire"              ) or
+                        ( passedt.man_made == "churchtower"              ) or
+                        ( passedt.man_made == "clockpedestal"            ) or
+                        ( passedt.man_made == "clocktower"               ) or
+                        ( passedt.man_made == "defensivetower"           ) or
+                        ( passedt.man_made == "footwear_decontamination" ) or
+                        ( passedt.man_made == "illuminationtower"        ) or
+                        ( passedt.man_made == "militarybunker"           ) or
+                        ( passedt.man_made == "mineshaft"                ) or
+                        ( passedt.man_made == "monitoringearthquake"     ) or
+                        ( passedt.man_made == "monitoringrainfall"       ) or
+                        ( passedt.man_made == "monitoringky"             ) or
+                        ( passedt.man_made == "monitoringwater"          ) or
+                        ( passedt.man_made == "monitoringweather"        ) or
+                        ( passedt.man_made == "mounting_block"           ) or
+                        ( passedt.man_made == "observationtower"         ) or
+                        ( passedt.man_made == "radartower"               ) or
+                        ( passedt.man_made == "squaretower"              ) or
+                        ( passedt.man_made == "watermill"                ) or
+                        ( passedt.man_made == "windmill"                 ) or
+                        ( passedt.man_made == "survey_point"             ) or
+                        ( passedt.man_made == "water_well"               ) or
+                        ( passedt.man_made == "cairn"                    ) or
+                        ( passedt.man_made == "flagpole_red"             ) or
+                        ( passedt.man_made == "sluice_gate"              ) or
+                        ( passedt.man_made == "boundary_stone"           ) or
+                        ( passedt.man_made == "golfballwasher"           ) or
+                        ( passedt.man_made == "outfall"                  )) then
                         Layer( "land1", true )
                         Attribute( "class", "man_made_" .. passedt.man_made )
+                        append_name( passedt )
 
-                        if (( passedt.ref ~= nil ) and
-                            ( passedt.ref ~= ""  )) then
-                            Attribute( "name", passedt.ref )
+                        if (( passedt.ele ~= nil ) and
+                            ( passedt.ele ~= ""  )) then
+                            Attribute( "ele", passedt.ele )
                         end
 
                         MinZoom( 14 )
                     else
-                        render_office_land1( passedt )
-                    end -- man_made=markeraerial etc. 14
-                end -- man_made=chimney etc. 14
+-- ----------------------------------------------------------------------------
+-- man_made == "markeraerial" and "lcn_ref" get written through with "ref"
+-- in the name, but are still extracted at zoom 14.
+-- ----------------------------------------------------------------------------
+                        if (( passedt.man_made == "markeraerial" ) or
+                            ( passedt.man_made == "lcn_ref"      )) then
+                            Layer( "land1", true )
+                            Attribute( "class", "man_made_" .. passedt.man_made )
+
+                            if (( passedt.ref ~= nil ) and
+                                ( passedt.ref ~= ""  )) then
+                                Attribute( "name", passedt.ref )
+                            end
+
+                            MinZoom( 14 )
+                        else
+                            render_office_land1( passedt )
+                        end -- man_made=markeraerial etc. 14
+                    end -- man_made=chimney etc. 14
+                end -- man_made=power 14
             end -- man_made=bigobservationtower 13
         end -- man_made=bigchimney 12
     end -- man_made=bigmast 11
@@ -3001,16 +3014,10 @@ end -- render_waterway_land1()
 function render_power_land1( passedt )
     if (( passedt.power == "station"   ) or
         ( passedt.power == "generator" )) then
-        Layer( "land1", true )
-        Attribute( "class", "power_" .. passedt.power )
-        append_name( passedt )
-        MinZoom( 9 )
+        write_polygon_and_centroid( "land1", passedt, "power_", passedt.power, 9 )
     else
         if ( passedt.power == "substation" ) then
-            Layer( "land1", true )
-            Attribute( "class", "power_" .. passedt.power )
-            append_name( passedt )
-            MinZoom( 12 )
+            write_polygon_and_centroid( "land1", passedt, "power_", passedt.power, 12 )
         else
             if (( passedt.power == "tower" ) or
                 ( passedt.power == "pole"  )) then
