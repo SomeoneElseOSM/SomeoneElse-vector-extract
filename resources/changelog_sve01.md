@@ -4,6 +4,8 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Fixed bug whereby some area aeroways were also handled as circular linear ones.
 Extract both the name (on a centroid) and area for various area aeroway features.
+Extract both the name (on a centroid) and area for more tourism features.
+Extract both the name (on a centroid) and area for more `amenity=ferry_terminal`.
 
 ## 27/12/2024
 Ensure that tourist accommodation in historic watermills and windmills is correctly shown as tourist accommodation.

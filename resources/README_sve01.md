@@ -124,7 +124,8 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 * zoom 8 `landuse` tags `forest`, `farmland`.
 * zoom 8 `natural` tags `wood`, `broadleaved`, `needleleaved`, `mixedleaved`, `bigprompeak`.
 * zoom 9 various parking `amenity` tags (`parking`, `parking_pay`, `parking_freedisabled`, `parking_paydisabled`)
-* zoom 9 `university`, `college`, `school`, `hospital`, `kindergarten`.
+* zoom 9 `amenity` tags `university`, `college`, `school`, `hospital`, `kindergarten`.
+* zoom 9 `tourism` tag `attraction`.  Consumers need to take care with this because in "land1" this shouldn't be allowed to obliterate smaller "land1" objects mapped.  Rendering a fill with a low maxzoom is one option.
 * zoom 9-13 various `landuse` tags: `grass`, `residential`, `meadow`, `wetmeadow`, `farmyard`, `farmgrass`, `recreation_ground`, `retail`, `industrial`, `railway`, `commercial`, `brownfield`, `greenfield`, `construction`, `landfill`, `historic`, `orchard`, `meadowtransitional`, `meadowwildflower`, `meadowperpetual`, `saltmarsh`, `reedbed`, `allotments`, `christiancemetery`, `jewishcemetery`, `othercemetery`.
 * zoom 9-13 various `leisure` tags `common`, `dog_park`, `park`, `recreation_ground`, `garden`, `golfgreen`, `golf_course`, `sports_centre`, `stadium`, `pitch`, and closed examples of `track`.
 * zoom 9-13 various `natural` tags `beach`, `tidal_beach`, `mud`, `tidal_mud`, `bare_rock`, `tidal_rock`, `sand`, `tidal_sand`, `scree`, `tidal_scree`, `shingle`, `tidal_shingle`, `heath`, `grassland`, `scrub`.
@@ -136,7 +137,8 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 * zoom 12 `tourism` tags `camp_site`, `caravan_site` and `theme_park`.
 * all zoom 14 `historic=` tags (`battlefield` etc. - here the area is written out as `landuse=historic` and the centroid as e.g. `historic=battlefield`)
 * zoom 14 point and area `aeroway` tags `helipad` and `gate`.
-* zoom 14 `tourism` tags `hotel` and `motel`.
+* zoom 14 `tourism` tags `hotel`, `motel`, `museum`, `chalet`.
+* zoom 14 `amenity` tag `ferry_terminal`.
 * zoom 14 `leisure` tag `leisurenonspecific`.
 * zoom 14 many `shop` tags (the vast majority with a usage of at least tens in UK/IE, and some others).
 

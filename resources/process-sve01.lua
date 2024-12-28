@@ -1850,230 +1850,241 @@ function render_amenity_land1( passedt )
                 append_name( passedt )
                 MinZoom( 13 )
             else
-                if (( passedt.amenity == "shelter"                    ) or
-                    ( passedt.amenity == "atm"                        ) or
-                    ( passedt.amenity == "bank"                       ) or
-                    ( passedt.amenity == "bank_l"                     ) or
-                    ( passedt.amenity == "bank_n"                     ) or
-                    ( passedt.amenity == "bank_y"                     ) or
-                    ( passedt.amenity == "bar"                        ) or
-                    ( passedt.amenity == "bar_ddd"                    ) or
-                    ( passedt.amenity == "bar_dld"                    ) or
-                    ( passedt.amenity == "bar_dnd"                    ) or
-                    ( passedt.amenity == "bar_dyd"                    ) or
-                    ( passedt.amenity == "bar_ydd"                    ) or
-                    ( passedt.amenity == "bar_yld"                    ) or
-                    ( passedt.amenity == "bar_ynd"                    ) or
-                    ( passedt.amenity == "bar_yyd"                    ) or
-                    ( passedt.amenity == "bar_ddy"                    ) or
-                    ( passedt.amenity == "bar_dly"                    ) or
-                    ( passedt.amenity == "bar_dny"                    ) or
-                    ( passedt.amenity == "bar_dyy"                    ) or
-                    ( passedt.amenity == "bar_ydy"                    ) or
-                    ( passedt.amenity == "bar_yly"                    ) or
-                    ( passedt.amenity == "bar_yny"                    ) or
-                    ( passedt.amenity == "bar_yyy"                    ) or
-                    ( passedt.amenity == "nightclub"                  ) or
-                    ( passedt.amenity == "concert_hall"               ) or
-                    ( passedt.amenity == "car_sharing"                ) or
-                    ( passedt.amenity == "taxi"                       ) or
-                    ( passedt.amenity == "taxi_office"                ) or
-                    ( passedt.amenity == "bus_station"                ) or
-                    ( passedt.amenity == "ferry_terminal"             ) or
-                    ( passedt.amenity == "entrancemain"               ) or
-                    ( passedt.amenity == "cafe_ddd"                   ) or
-                    ( passedt.amenity == "cafe_dld"                   ) or
-                    ( passedt.amenity == "cafe_dnd"                   ) or
-                    ( passedt.amenity == "cafe_dyd"                   ) or
-                    ( passedt.amenity == "cafe_ydd"                   ) or
-                    ( passedt.amenity == "cafe_yld"                   ) or
-                    ( passedt.amenity == "cafe_ynd"                   ) or
-                    ( passedt.amenity == "cafe_yyd"                   ) or
-                    ( passedt.amenity == "cafe_ddy"                   ) or
-                    ( passedt.amenity == "cafe_dly"                   ) or
-                    ( passedt.amenity == "cafe_dny"                   ) or
-                    ( passedt.amenity == "cafe_dyy"                   ) or
-                    ( passedt.amenity == "cafe_ydy"                   ) or
-                    ( passedt.amenity == "cafe_yly"                   ) or
-                    ( passedt.amenity == "cafe_yny"                   ) or
-                    ( passedt.amenity == "cafe_yyy"                   ) or
-                    ( passedt.amenity == "cinema"                     ) or
-                    ( passedt.amenity == "fire_station"               ) or
-                    ( passedt.amenity == "lifeboat"                   ) or
-                    ( passedt.amenity == "fuel"                       ) or
-                    ( passedt.amenity == "fuel_e"                     ) or
-                    ( passedt.amenity == "fuel_h"                     ) or
-                    ( passedt.amenity == "fuel_l"                     ) or
-                    ( passedt.amenity == "fuel_w"                     ) or
-                    ( passedt.amenity == "charging_station"           ) or
-                    ( passedt.amenity == "embassy"                    ) or
-                    ( passedt.amenity == "library"                    ) or
-                    ( passedt.amenity == "courthouse"                 ) or
-                    ( passedt.amenity == "monastery"                  ) or
-                    ( passedt.amenity == "zooaviary"                  ) or
-                    ( passedt.amenity == "zooenclosure"               ) or
-                    ( passedt.amenity == "vending_machine"            ) or
-                    ( passedt.amenity == "vending_excrement"          ) or
-                    ( passedt.amenity == "bottle_return"              ) or
-                    ( passedt.amenity == "waste_basket"               ) or
-                    ( passedt.amenity == "waste_disposal"             ) or
-                    ( passedt.amenity == "grit_bin"                   ) or
-                    ( passedt.amenity == "left_luggage"               ) or
-                    ( passedt.amenity == "parcel_locker"              ) or
-                    ( passedt.amenity == "bench"                      ) or
-                    ( passedt.amenity == "playground_swing"           ) or
-                    ( passedt.amenity == "playground_structure"       ) or
-                    ( passedt.amenity == "playground_climbingframe"   ) or
-                    ( passedt.amenity == "playground_slide"           ) or
-                    ( passedt.amenity == "playground_springy"         ) or
-                    ( passedt.amenity == "playground_zipwire"         ) or
-                    ( passedt.amenity == "playground_seesaw"          ) or
-                    ( passedt.amenity == "playground_roundabout"      ) or
-                    ( passedt.amenity == "pitch_tabletennis"          ) or
-                    ( passedt.amenity == "pitch_soccer"               ) or
-                    ( passedt.amenity == "pitch_basketball"           ) or
-                    ( passedt.amenity == "pitch_cricket"              ) or
-                    ( passedt.amenity == "pitch_skateboard"           ) or
-                    ( passedt.amenity == "pitch_climbing"             ) or
-                    ( passedt.amenity == "pitch_rugby"                ) or
-                    ( passedt.amenity == "pitch_chess"                ) or
-                    ( passedt.amenity == "pitch_tennis"               ) or
-                    ( passedt.amenity == "pitch_athletics"            ) or
-                    ( passedt.amenity == "pitch_boules"               ) or
-                    ( passedt.amenity == "pitch_bowls"                ) or
-                    ( passedt.amenity == "pitch_croquet"              ) or
-                    ( passedt.amenity == "pitch_cycling"              ) or
-                    ( passedt.amenity == "pitch_equestrian"           ) or
-                    ( passedt.amenity == "pitch_gaa"                  ) or
-                    ( passedt.amenity == "pitch_hockey"               ) or
-                    ( passedt.amenity == "pitch_multi"                ) or
-                    ( passedt.amenity == "pitch_netball"              ) or
-                    ( passedt.amenity == "pitch_polo"                 ) or
-                    ( passedt.amenity == "pitch_shooting"             ) or
-                    ( passedt.amenity == "pitch_baseball"             ) or
-                    ( passedt.amenity == "doctors"                    ) or
-                    ( passedt.amenity == "dentist"                    ) or
-                    ( passedt.amenity == "pharmacy"                   ) or
-                    ( passedt.amenity == "pharmacy_l"                 ) or
-                    ( passedt.amenity == "pharmacy_n"                 ) or
-                    ( passedt.amenity == "pharmacy_y"                 ) or
-                    ( passedt.amenity == "ambulance_station"          ) or
-                    ( passedt.amenity == "mountain_rescue"            ) or
-                    ( passedt.amenity == "mountain_rescue_box"        ) or
-                    ( passedt.amenity == "place_of_worship_christian" ) or
-                    ( passedt.amenity == "place_of_worship_muslim"    ) or
-                    ( passedt.amenity == "place_of_worship_sikh"      ) or
-                    ( passedt.amenity == "place_of_worship_jewish"    ) or
-                    ( passedt.amenity == "place_of_worship_hindu"     ) or
-                    ( passedt.amenity == "place_of_worship_buddhist"  ) or
-                    ( passedt.amenity == "place_of_worship_shinto"    ) or
-                    ( passedt.amenity == "place_of_worship_taoist"    ) or
-                    ( passedt.amenity == "place_of_worship_other"     ) or
-                    ( passedt.amenity == "police"                     ) or
-                    ( passedt.amenity == "post_box"                   ) or
-                    ( passedt.amenity == "post_office"                ) or
-                    ( passedt.amenity == "biergarten"                 ) or
-                    ( passedt.amenity == "boatyard"                   ) or
-                    ( passedt.amenity == "tourismstation"             ) or
-                    ( passedt.amenity == "recycling"                  ) or
-                    ( passedt.amenity == "recyclingcentre"            ) or
-                    ( passedt.amenity == "restaurant"                 ) or
-                    ( passedt.amenity == "restaccomm"                 ) or
-                    ( passedt.amenity == "fast_food"                  ) or
-                    ( passedt.amenity == "fast_food_burger"           ) or
-                    ( passedt.amenity == "fast_food_chicken"          ) or
-                    ( passedt.amenity == "fast_food_chinese"          ) or
-                    ( passedt.amenity == "fast_food_coffee"           ) or
-                    ( passedt.amenity == "fast_food_fish_and_chips"   ) or
-                    ( passedt.amenity == "fast_food_ice_cream"        ) or
-                    ( passedt.amenity == "fast_food_indian"           ) or
-                    ( passedt.amenity == "fast_food_kebab"            ) or
-                    ( passedt.amenity == "fast_food_pie"              ) or
-                    ( passedt.amenity == "fast_food_pizza"            ) or
-                    ( passedt.amenity == "fast_food_sandwich"         ) or
-                    ( passedt.amenity == "telephone"                  ) or
-                    ( passedt.amenity == "boothtelephonered"          ) or
-                    ( passedt.amenity == "boothtelephoneblack"        ) or
-                    ( passedt.amenity == "boothtelephonewhite"        ) or
-                    ( passedt.amenity == "boothtelephoneblue"         ) or
-                    ( passedt.amenity == "boothtelephonegreen"        ) or
-                    ( passedt.amenity == "boothtelephonegrey"         ) or
-                    ( passedt.amenity == "boothtelephonegold"         ) or
-                    ( passedt.amenity == "boothdefibrillator"         ) or
-                    ( passedt.amenity == "boothlibrary"               ) or
-                    ( passedt.amenity == "boothbicyclerepairstation"  ) or
-                    ( passedt.amenity == "boothatm"                   ) or
-                    ( passedt.amenity == "boothinformation"           ) or
-                    ( passedt.amenity == "boothartwork"               ) or
-                    ( passedt.amenity == "boothmuseum"                ) or
-                    ( passedt.amenity == "boothdisused"               ) or
-                    ( passedt.amenity == "public_bookcase"            ) or
-                    ( passedt.amenity == "bicycle_repair_station"     ) or
-                    ( passedt.amenity == "sundial"                    ) or
-                    ( passedt.amenity == "shopmobility"               ) or
-                    ( passedt.amenity == "emergency_phone"            ) or
-                    ( passedt.amenity == "theatre"                    ) or
-                    ( passedt.amenity == "toilets"                    ) or
-                    ( passedt.amenity == "toilets_free_m"             ) or
-                    ( passedt.amenity == "toilets_free_w"             ) or
-                    ( passedt.amenity == "toilets_pay"                ) or
-                    ( passedt.amenity == "toilets_pay_m"              ) or
-                    ( passedt.amenity == "toilets_pay_w"              ) or
-                    ( passedt.amenity == "shower"                     ) or
-                    ( passedt.amenity == "shower_free_m"              ) or
-                    ( passedt.amenity == "shower_free_w"              ) or
-                    ( passedt.amenity == "shower_pay"                 ) or
-                    ( passedt.amenity == "shower_pay_m"               ) or
-                    ( passedt.amenity == "shower_pay_w"               ) or
-                    ( passedt.amenity == "musical_instrument"         ) or
-                    ( passedt.amenity == "drinking_water"             ) or
-                    ( passedt.amenity == "nondrinking_water"          ) or
-                    ( passedt.amenity == "fountain"                   ) or
-                    ( passedt.amenity == "prison"                     ) or
-                    ( passedt.amenity == "veterinary"                 ) or
-                    ( passedt.amenity == "animal_boarding"            ) or
-                    ( passedt.amenity == "animal_shelter"             ) or
-                    ( passedt.amenity == "car_wash"                   ) or
-                    ( passedt.amenity == "car_rental"                 ) or
-                    ( passedt.amenity == "compressed_air"             ) or
-                    ( passedt.amenity == "defibrillator"              ) or
-                    ( passedt.amenity == "life_ring"                  ) or 
-                    ( passedt.amenity == "fire_extinguisher"          ) or
-                    ( passedt.amenity == "fire_hydrant"               ) or
-                    ( passedt.amenity == "bbq"                        ) or
-                    ( passedt.amenity == "waterway_access_point"      ) or
-                    ( passedt.amenity == "pub"                        ) or
-                    (( passedt.amenity  ~= nil                       )  and
-                     ( passedt.amenity  ~= ""                        )  and
-                     ( string.match( passedt.amenity, "pub_"        )))) then
-                    Layer( "land1", true )
-                    Attribute( "class", "amenity_" .. passedt.amenity )
-                    append_name( passedt )
-                    MinZoom( 14 )
+-- ----------------------------------------------------------------------------
+-- We write both a polygon (if one exists) and a point for the name here, and
+-- include the way area of the polygon in the attributes of the point so that
+-- the rendering code can decide when to display the name.  Typically it'll be
+-- a few zoom levels higher than the lowest zoom tile to which the feature is
+-- written, so that the fill and the outline of the feature appears first, and
+-- then the name.
+-- ----------------------------------------------------------------------------
+                if ( passedt.amenity == "ferry_terminal"             ) then
+                    write_polygon_and_centroid( "land1", passedt, "amenity_", passedt.amenity, 14 )
                 else
--- ----------------------------------------------------------------------------
--- Some amenities are extracted with an access value as well.
--- ----------------------------------------------------------------------------
-                    if (( passedt.amenity == "bicycle_rental"             ) or
-                        ( passedt.amenity == "scooter_rental"             ) or
-                        ( passedt.amenity == "bicycle_parking"            ) or
-                        ( passedt.amenity == "bicycle_parking_pay"        ) or
-                        ( passedt.amenity == "motorcycle_parking"         ) or
-                        ( passedt.amenity == "motorcycle_parking_pay"     )) then
+                    if (( passedt.amenity == "shelter"                    ) or
+                        ( passedt.amenity == "atm"                        ) or
+                        ( passedt.amenity == "bank"                       ) or
+                        ( passedt.amenity == "bank_l"                     ) or
+                        ( passedt.amenity == "bank_n"                     ) or
+                        ( passedt.amenity == "bank_y"                     ) or
+                        ( passedt.amenity == "bar"                        ) or
+                        ( passedt.amenity == "bar_ddd"                    ) or
+                        ( passedt.amenity == "bar_dld"                    ) or
+                        ( passedt.amenity == "bar_dnd"                    ) or
+                        ( passedt.amenity == "bar_dyd"                    ) or
+                        ( passedt.amenity == "bar_ydd"                    ) or
+                        ( passedt.amenity == "bar_yld"                    ) or
+                        ( passedt.amenity == "bar_ynd"                    ) or
+                        ( passedt.amenity == "bar_yyd"                    ) or
+                        ( passedt.amenity == "bar_ddy"                    ) or
+                        ( passedt.amenity == "bar_dly"                    ) or
+                        ( passedt.amenity == "bar_dny"                    ) or
+                        ( passedt.amenity == "bar_dyy"                    ) or
+                        ( passedt.amenity == "bar_ydy"                    ) or
+                        ( passedt.amenity == "bar_yly"                    ) or
+                        ( passedt.amenity == "bar_yny"                    ) or
+                        ( passedt.amenity == "bar_yyy"                    ) or
+                        ( passedt.amenity == "nightclub"                  ) or
+                        ( passedt.amenity == "concert_hall"               ) or
+                        ( passedt.amenity == "car_sharing"                ) or
+                        ( passedt.amenity == "taxi"                       ) or
+                        ( passedt.amenity == "taxi_office"                ) or
+                        ( passedt.amenity == "bus_station"                ) or
+                        ( passedt.amenity == "entrancemain"               ) or
+                        ( passedt.amenity == "cafe_ddd"                   ) or
+                        ( passedt.amenity == "cafe_dld"                   ) or
+                        ( passedt.amenity == "cafe_dnd"                   ) or
+                        ( passedt.amenity == "cafe_dyd"                   ) or
+                        ( passedt.amenity == "cafe_ydd"                   ) or
+                        ( passedt.amenity == "cafe_yld"                   ) or
+                        ( passedt.amenity == "cafe_ynd"                   ) or
+                        ( passedt.amenity == "cafe_yyd"                   ) or
+                        ( passedt.amenity == "cafe_ddy"                   ) or
+                        ( passedt.amenity == "cafe_dly"                   ) or
+                        ( passedt.amenity == "cafe_dny"                   ) or
+                        ( passedt.amenity == "cafe_dyy"                   ) or
+                        ( passedt.amenity == "cafe_ydy"                   ) or
+                        ( passedt.amenity == "cafe_yly"                   ) or
+                        ( passedt.amenity == "cafe_yny"                   ) or
+                        ( passedt.amenity == "cafe_yyy"                   ) or
+                        ( passedt.amenity == "cinema"                     ) or
+                        ( passedt.amenity == "fire_station"               ) or
+                        ( passedt.amenity == "lifeboat"                   ) or
+                        ( passedt.amenity == "fuel"                       ) or
+                        ( passedt.amenity == "fuel_e"                     ) or
+                        ( passedt.amenity == "fuel_h"                     ) or
+                        ( passedt.amenity == "fuel_l"                     ) or
+                        ( passedt.amenity == "fuel_w"                     ) or
+                        ( passedt.amenity == "charging_station"           ) or
+                        ( passedt.amenity == "embassy"                    ) or
+                        ( passedt.amenity == "library"                    ) or
+                        ( passedt.amenity == "courthouse"                 ) or
+                        ( passedt.amenity == "monastery"                  ) or
+                        ( passedt.amenity == "zooaviary"                  ) or
+                        ( passedt.amenity == "zooenclosure"               ) or
+                        ( passedt.amenity == "vending_machine"            ) or
+                        ( passedt.amenity == "vending_excrement"          ) or
+                        ( passedt.amenity == "bottle_return"              ) or
+                        ( passedt.amenity == "waste_basket"               ) or
+                        ( passedt.amenity == "waste_disposal"             ) or
+                        ( passedt.amenity == "grit_bin"                   ) or
+                        ( passedt.amenity == "left_luggage"               ) or
+                        ( passedt.amenity == "parcel_locker"              ) or
+                        ( passedt.amenity == "bench"                      ) or
+                        ( passedt.amenity == "playground_swing"           ) or
+                        ( passedt.amenity == "playground_structure"       ) or
+                        ( passedt.amenity == "playground_climbingframe"   ) or
+                        ( passedt.amenity == "playground_slide"           ) or
+                        ( passedt.amenity == "playground_springy"         ) or
+                        ( passedt.amenity == "playground_zipwire"         ) or
+                        ( passedt.amenity == "playground_seesaw"          ) or
+                        ( passedt.amenity == "playground_roundabout"      ) or
+                        ( passedt.amenity == "pitch_tabletennis"          ) or
+                        ( passedt.amenity == "pitch_soccer"               ) or
+                        ( passedt.amenity == "pitch_basketball"           ) or
+                        ( passedt.amenity == "pitch_cricket"              ) or
+                        ( passedt.amenity == "pitch_skateboard"           ) or
+                        ( passedt.amenity == "pitch_climbing"             ) or
+                        ( passedt.amenity == "pitch_rugby"                ) or
+                        ( passedt.amenity == "pitch_chess"                ) or
+                        ( passedt.amenity == "pitch_tennis"               ) or
+                        ( passedt.amenity == "pitch_athletics"            ) or
+                        ( passedt.amenity == "pitch_boules"               ) or
+                        ( passedt.amenity == "pitch_bowls"                ) or
+                        ( passedt.amenity == "pitch_croquet"              ) or
+                        ( passedt.amenity == "pitch_cycling"              ) or
+                        ( passedt.amenity == "pitch_equestrian"           ) or
+                        ( passedt.amenity == "pitch_gaa"                  ) or
+                        ( passedt.amenity == "pitch_hockey"               ) or
+                        ( passedt.amenity == "pitch_multi"                ) or
+                        ( passedt.amenity == "pitch_netball"              ) or
+                        ( passedt.amenity == "pitch_polo"                 ) or
+                        ( passedt.amenity == "pitch_shooting"             ) or
+                        ( passedt.amenity == "pitch_baseball"             ) or
+                        ( passedt.amenity == "doctors"                    ) or
+                        ( passedt.amenity == "dentist"                    ) or
+                        ( passedt.amenity == "pharmacy"                   ) or
+                        ( passedt.amenity == "pharmacy_l"                 ) or
+                        ( passedt.amenity == "pharmacy_n"                 ) or
+                        ( passedt.amenity == "pharmacy_y"                 ) or
+                        ( passedt.amenity == "ambulance_station"          ) or
+                        ( passedt.amenity == "mountain_rescue"            ) or
+                        ( passedt.amenity == "mountain_rescue_box"        ) or
+                        ( passedt.amenity == "place_of_worship_christian" ) or
+                        ( passedt.amenity == "place_of_worship_muslim"    ) or
+                        ( passedt.amenity == "place_of_worship_sikh"      ) or
+                        ( passedt.amenity == "place_of_worship_jewish"    ) or
+                        ( passedt.amenity == "place_of_worship_hindu"     ) or
+                        ( passedt.amenity == "place_of_worship_buddhist"  ) or
+                        ( passedt.amenity == "place_of_worship_shinto"    ) or
+                        ( passedt.amenity == "place_of_worship_taoist"    ) or
+                        ( passedt.amenity == "place_of_worship_other"     ) or
+                        ( passedt.amenity == "police"                     ) or
+                        ( passedt.amenity == "post_box"                   ) or
+                        ( passedt.amenity == "post_office"                ) or
+                        ( passedt.amenity == "biergarten"                 ) or
+                        ( passedt.amenity == "boatyard"                   ) or
+                        ( passedt.amenity == "tourismstation"             ) or
+                        ( passedt.amenity == "recycling"                  ) or
+                        ( passedt.amenity == "recyclingcentre"            ) or
+                        ( passedt.amenity == "restaurant"                 ) or
+                        ( passedt.amenity == "restaccomm"                 ) or
+                        ( passedt.amenity == "fast_food"                  ) or
+                        ( passedt.amenity == "fast_food_burger"           ) or
+                        ( passedt.amenity == "fast_food_chicken"          ) or
+                        ( passedt.amenity == "fast_food_chinese"          ) or
+                        ( passedt.amenity == "fast_food_coffee"           ) or
+                        ( passedt.amenity == "fast_food_fish_and_chips"   ) or
+                        ( passedt.amenity == "fast_food_ice_cream"        ) or
+                        ( passedt.amenity == "fast_food_indian"           ) or
+                        ( passedt.amenity == "fast_food_kebab"            ) or
+                        ( passedt.amenity == "fast_food_pie"              ) or
+                        ( passedt.amenity == "fast_food_pizza"            ) or
+                        ( passedt.amenity == "fast_food_sandwich"         ) or
+                        ( passedt.amenity == "telephone"                  ) or
+                        ( passedt.amenity == "boothtelephonered"          ) or
+                        ( passedt.amenity == "boothtelephoneblack"        ) or
+                        ( passedt.amenity == "boothtelephonewhite"        ) or
+                        ( passedt.amenity == "boothtelephoneblue"         ) or
+                        ( passedt.amenity == "boothtelephonegreen"        ) or
+                        ( passedt.amenity == "boothtelephonegrey"         ) or
+                        ( passedt.amenity == "boothtelephonegold"         ) or
+                        ( passedt.amenity == "boothdefibrillator"         ) or
+                        ( passedt.amenity == "boothlibrary"               ) or
+                        ( passedt.amenity == "boothbicyclerepairstation"  ) or
+                        ( passedt.amenity == "boothatm"                   ) or
+                        ( passedt.amenity == "boothinformation"           ) or
+                        ( passedt.amenity == "boothartwork"               ) or
+                        ( passedt.amenity == "boothmuseum"                ) or
+                        ( passedt.amenity == "boothdisused"               ) or
+                        ( passedt.amenity == "public_bookcase"            ) or
+                        ( passedt.amenity == "bicycle_repair_station"     ) or
+                        ( passedt.amenity == "sundial"                    ) or
+                        ( passedt.amenity == "shopmobility"               ) or
+                        ( passedt.amenity == "emergency_phone"            ) or
+                        ( passedt.amenity == "theatre"                    ) or
+                        ( passedt.amenity == "toilets"                    ) or
+                        ( passedt.amenity == "toilets_free_m"             ) or
+                        ( passedt.amenity == "toilets_free_w"             ) or
+                        ( passedt.amenity == "toilets_pay"                ) or
+                        ( passedt.amenity == "toilets_pay_m"              ) or
+                        ( passedt.amenity == "toilets_pay_w"              ) or
+                        ( passedt.amenity == "shower"                     ) or
+                        ( passedt.amenity == "shower_free_m"              ) or
+                        ( passedt.amenity == "shower_free_w"              ) or
+                        ( passedt.amenity == "shower_pay"                 ) or
+                        ( passedt.amenity == "shower_pay_m"               ) or
+                        ( passedt.amenity == "shower_pay_w"               ) or
+                        ( passedt.amenity == "musical_instrument"         ) or
+                        ( passedt.amenity == "drinking_water"             ) or
+                        ( passedt.amenity == "nondrinking_water"          ) or
+                        ( passedt.amenity == "fountain"                   ) or
+                        ( passedt.amenity == "prison"                     ) or
+                        ( passedt.amenity == "veterinary"                 ) or
+                        ( passedt.amenity == "animal_boarding"            ) or
+                        ( passedt.amenity == "animal_shelter"             ) or
+                        ( passedt.amenity == "car_wash"                   ) or
+                        ( passedt.amenity == "car_rental"                 ) or
+                        ( passedt.amenity == "compressed_air"             ) or
+                        ( passedt.amenity == "defibrillator"              ) or
+                        ( passedt.amenity == "life_ring"                  ) or 
+                        ( passedt.amenity == "fire_extinguisher"          ) or
+                        ( passedt.amenity == "fire_hydrant"               ) or
+                        ( passedt.amenity == "bbq"                        ) or
+                        ( passedt.amenity == "waterway_access_point"      ) or
+                        ( passedt.amenity == "pub"                        ) or
+                        (( passedt.amenity  ~= nil                       )  and
+                         ( passedt.amenity  ~= ""                        )  and
+                         ( string.match( passedt.amenity, "pub_"        )))) then
                         Layer( "land1", true )
                         Attribute( "class", "amenity_" .. passedt.amenity )
-
-                        if (( passedt.access ~= nil ) and
-                            ( passedt.access ~= ""  )) then
-                            Attribute( "access", passedt.access )
-                        end
-
                         append_name( passedt )
                         MinZoom( 14 )
                     else
-                        render_shop_land1( passedt )
-                    end -- amenity=bicycle_rental etc. 14
-                end -- amenity=shelter etc. 14
+-- ----------------------------------------------------------------------------
+-- Some amenities are extracted with an access value as well.
+-- ----------------------------------------------------------------------------
+                        if (( passedt.amenity == "bicycle_rental"             ) or
+                            ( passedt.amenity == "scooter_rental"             ) or
+                            ( passedt.amenity == "bicycle_parking"            ) or
+                            ( passedt.amenity == "bicycle_parking_pay"        ) or
+                            ( passedt.amenity == "motorcycle_parking"         ) or
+                            ( passedt.amenity == "motorcycle_parking_pay"     )) then
+                            Layer( "land1", true )
+                            Attribute( "class", "amenity_" .. passedt.amenity )
+
+                            if (( passedt.access ~= nil ) and
+                                ( passedt.access ~= ""  )) then
+                                Attribute( "access", passedt.access )
+                            end
+
+                            append_name( passedt )
+                            MinZoom( 14 )
+                        else
+                            render_shop_land1( passedt )
+                        end -- amenity=bicycle_rental etc. 14
+                    end -- amenity=shelter etc. 14
+                end -- amenity=ferry_terminal 14
             end -- amenity=holy_well etc. 1e
         end -- amenity=university etc. 9
     end -- amenity=parking etc. 9
@@ -2994,11 +3005,7 @@ end -- render_power_land1()
 
 function render_tourism_land1( passedt )
     if ( passedt.tourism == "attraction" ) then
-        Layer( "land1", true )
-        Attribute( "class", "tourism_" .. passedt.tourism )
-        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-        append_name( passedt )
-        MinZoom( 9 )
+        write_polygon_and_centroid( "land1", passedt, "tourism_", passedt.tourism, 9 )
     else
 -- ----------------------------------------------------------------------------
 -- Some zoom 12 tourist things tend to be just points, so we don't extract the
@@ -3040,10 +3047,6 @@ function render_tourism_land1( passedt )
                     ( passedt.tourism == "informationsign"            ) or
                     ( passedt.tourism == "informationmarker"          ) or
                     ( passedt.tourism == "militarysign"               ) or
-                    ( passedt.tourism == "chalet"                     ) or
-                    ( passedt.tourism == "museum"                     ) or
-                    ( passedt.tourism == "aquarium"                   ) or
-                    ( passedt.tourism == "zoo"                        ) or
                     ( passedt.tourism == "advertising_column"         ) or
                     ( passedt.tourism == "artwork"                    ) or
                     ( passedt.tourism == "singlechalet"               ) or
@@ -3075,7 +3078,11 @@ function render_tourism_land1( passedt )
 -- ... but some can be large areas, so to do extract the centroid separately ...
 -- ----------------------------------------------------------------------------
                     if (( passedt.tourism == "motel"                      ) or
-                        ( passedt.tourism == "hotel"                      )) then
+                        ( passedt.tourism == "hotel"                      ) or
+                        ( passedt.tourism == "chalet"                     ) or
+                        ( passedt.tourism == "museum"                     ) or
+                        ( passedt.tourism == "aquarium"                   ) or
+                        ( passedt.tourism == "zoo"                        )) then
 			write_polygon_and_centroid( "land1", passedt, "tourism_", passedt.tourism, 14 )
                     else
                         render_aeroway_land1( passedt )
