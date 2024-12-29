@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 28/12/2024
 Fixed bug whereby some area aeroways were also handled as circular linear ones.
 Extract both the name (on a centroid) and area for various area aeroway features.
 Extract both the name (on a centroid) and area for more tourism features.
