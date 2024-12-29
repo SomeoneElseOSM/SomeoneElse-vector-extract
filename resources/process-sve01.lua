@@ -2765,7 +2765,8 @@ function render_leisure_land1( passedt )
 -- An example is https://www.openstreetmap.org/way/954878523 - there the 
 -- surface=grass (written out to "land2") is shown as green.
 -- ----------------------------------------------------------------------------
-                    if ( passedt.leisure == "leisurenonspecific" ) then
+                    if (( passedt.leisure == "leisurenonspecific" ) or
+                        ( passedt.leisure == "hunting_stand"      )) then
                         write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 14 )
                     else
 -- ----------------------------------------------------------------------------
@@ -2778,7 +2779,6 @@ function render_leisure_land1( passedt )
                             ( passedt.leisure == "picnic_table"       ) or
                             ( passedt.leisure == "slipway"            ) or
                             ( passedt.leisure == "bird_hide"          ) or
-                            ( passedt.leisure == "hunting_stand"      ) or
                             ( passedt.leisure == "grouse_butt"        )) then
                             Layer( "land1", true )
                             Attribute( "class", "leisure_" .. passedt.leisure )
