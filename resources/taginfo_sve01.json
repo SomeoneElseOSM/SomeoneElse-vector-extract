@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20241227T093601Z",
+  "data_updated": "20241229T192901Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1279,6 +1279,7 @@
     { "key": "hard_shoulder", "value": "yes", "description": "Decide if a road has a sidewalk" },
     { "key": "hazard", "description": "A couple of specific hazards - hogweed and shooting ranges" },
     { "key": "hazard", "value": "plant", "description": "Detect hogweed" },
+    { "key": "hazard", "value": "shooting", "description": "Detect shooting ranges" },
     { "key": "hazard", "value": "shooting_range", "description": "Detect shooting ranges" },
     { "key": "hazard", "value": "toxic_plant", "description": "Detect hogweed" },
     { "key": "hazard_prone", "description": "Extract flood-prone areas as very intermittent water" },
@@ -1773,6 +1774,8 @@
     { "key": "leisure", "value": "sailing_club", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "sauna", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "schoolyard", "description": "Written into 'land1' or 'land2' at minzoom 12; centroid for name written seperately" },
+    { "key": "leisure", "value": "shooting_ground", "description": "Detect shooting ranges" },
+    { "key": "leisure", "value": "shooting_range", "description": "Detect shooting ranges" },
     { "key": "leisure", "value": "showground", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "slipway", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "social_club", "description": "Leisure amenities extracted" },

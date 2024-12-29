@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Extract both the name (on a centroid) and area for more wood features.
 Extract both the name (on a centroid) and area for deserts.
 Extract both the name (on a centroid) and area for military barracks.
+Support a couple more synynyms for civilian shooting ranges.
 
 ## 28/12/2024
 Fixed bug whereby some area aeroways were also handled as circular linear ones.
