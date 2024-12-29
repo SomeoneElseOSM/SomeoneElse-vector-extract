@@ -9,6 +9,7 @@ Extract both the name (on a centroid) and area for more `amenity=ferry_terminal`
 If a barrier is a closed way, suppress the name - the name probably belongs to an area that the barrier shares nodes with.
 Extract both the name (on a centroid) and area for various power features.
 Detect marine water-based power stations (wave power etc.) and exclude from regular "industrial" power stations.
+Handle differently-sized `natural=bay` in the same way as `natural=water`.
 
 ## 27/12/2024
 Ensure that tourist accommodation in historic watermills and windmills is correctly shown as tourist accommodation.

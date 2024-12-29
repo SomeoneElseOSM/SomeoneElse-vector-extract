@@ -1805,7 +1805,8 @@ end -- generic_linearbarrier_power()
 function generic_after_land1( passedt )
     if (( passedt.natural == "water"             ) or
         ( passedt.natural == "intermittentwater" ) or
-        ( passedt.natural == "glacier"           )) then
+        ( passedt.natural == "glacier"           ) or
+        ( passedt.natural == "bay"               )) then
 -- ----------------------------------------------------------------------------
 -- These features range in size from the huge polygons to single nodes.
 -- The largest ones are included in relatively low zoom level tiles, but it
@@ -2934,8 +2935,7 @@ function render_natural_land1( passedt )
 
                                 MinZoom( 12 )
                             else
-                                if (( passedt.natural == "bay"    ) or
-                                    ( passedt.natural == "spring" )) then
+                                if ( passedt.natural == "spring" ) then
                                     Layer( "land1", true )
                                     Attribute( "class", "natural_" .. passedt.natural )
                                     append_name( passedt )

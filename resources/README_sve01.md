@@ -119,7 +119,7 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 
 .  Things considered "large" and written out in this way include (from "land1"):
 
-* zoom 5+ to 8+ `natural=water`, `natural=intermittentwater`, `natural=glacier`.
+* zoom 5+ to 8+ `natural=water`, `natural=intermittentwater`, `natural=glacier`, `natural=bay`.
 * zoom 6-9 `leisure=nature_reserve`.
 * zoom 8 `landuse` tags `forest`, `farmland`.
 * zoom 8 `natural` tags `wood`, `broadleaved`, `needleleaved`, `mixedleaved`, `bigprompeak`.
@@ -170,7 +170,7 @@ Features written out just once, as a point or polygon, with a name if one exists
 * zoom 12 `leisure` tags `playground`, `schoolyard`.
 * zoom 13 `amenity` tags `holy_spring`, `holy_well`, `watering_place`.
 * zoom 13 `man_made=bigobservationtower`
-* zoom 13 `natural=bay` and `natural=spring`
+* zoom 13 `natural=spring`
 * zoom 13 `leisure` tag `swimming_pool`.
 * zoom 14 many `amenity` tags such as the various tags for bars, cafes, pitches, pubs and many more.
 * zoom 14 most remaining `man_made` features such as `chimney` etc.
