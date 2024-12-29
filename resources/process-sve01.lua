@@ -2807,10 +2807,7 @@ end -- render_military_land1()
 
 function render_natural_land1( passedt )
     if ( passedt.natural == "desert" ) then
-        Layer( "land1", true )
-        Attribute( "class", "natural_" .. passedt.natural )
-        append_name( passedt )
-        MinZoom( 7 )
+        write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, 7 )
     else
         if ( passedt.natural == "bigprompeak" ) then
             Layer( "land1", true )

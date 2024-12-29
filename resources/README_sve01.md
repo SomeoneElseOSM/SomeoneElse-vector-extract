@@ -121,8 +121,9 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 
 * zoom 5+ to 8+ `natural=water`, `natural=intermittentwater`, `natural=glacier`, `natural=bay`.
 * zoom 6-9 `leisure=nature_reserve`.
+* zoom 7 `natural=desert`
 * zoom 8 `landuse` tags `forest`, `farmland`.
-* zoom 8 `natural` tags `wood`, `broadleaved`, `needleleaved`, `mixedleaved`, `bigprompeak`.
+* zoom 8 `natural` tags `wood`, `broadleaved`, `needleleaved`, `mixedleaved`.
 * zoom 8 Various power features extracted as `man_made=power`, `man_made=power_water` and `man_made=power_wind`.
 * zoom 9 various parking `amenity` tags (`parking`, `parking_pay`, `parking_freedisabled`, `parking_paydisabled`)
 * zoom 9 `amenity` tags `university`, `college`, `school`, `hospital`, `kindergarten`.
@@ -154,7 +155,7 @@ from "land2:
 
 Features written out just once, as a point or polygon, with a name if one exists, include:
 
-* zoom 7 `natural=desert`
+* zoom 8 `natural-bigprompeak`.
 * zoom 9 `military=barracks`
 * zoom 9 `natural=bigpeak`
 * zoom 10 `natural=peak`, `natural=saddle`, `natural=volcano`.
