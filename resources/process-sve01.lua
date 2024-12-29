@@ -2796,10 +2796,7 @@ end -- render_leisure_land1()
 
 function render_military_land1( passedt )
     if ( passedt.military == "barracks" ) then
-        Layer( "land1", true )
-        Attribute( "class", "military_" .. passedt.military )
-        append_name( passedt )
-        MinZoom( 9 )
+        write_polygon_and_centroid( "land1", passedt, "military_", passedt.military, 9 )
     else
         render_natural_land1( passedt )
     end
