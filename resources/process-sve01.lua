@@ -2812,18 +2812,9 @@ function render_natural_land1( passedt )
         append_name( passedt )
         MinZoom( 7 )
     else
-        if (( passedt.natural == "wood"         ) or
-            ( passedt.natural == "broadleaved"  ) or
-            ( passedt.natural == "needleleaved" ) or
-            ( passedt.natural == "mixedleaved"  ) or
-            ( passedt.natural == "bigprompeak"  )) then
+        if ( passedt.natural == "bigprompeak" ) then
             Layer( "land1", true )
             Attribute( "class", "natural_" .. passedt.natural )
-            MinZoom( 8 )
-
-            LayerAsCentroid( "land1" )
-            Attribute( "class", "natural_" .. passedt.natural )
-            AttributeNumeric( "way_area", math.floor( passedt.way_area ))
             append_name( passedt )
 
             if (( passedt.ele ~= nil ) and
@@ -2833,6 +2824,12 @@ function render_natural_land1( passedt )
 
             MinZoom( 8 )
         else
+            if (( passedt.natural == "wood"         ) or
+                ( passedt.natural == "broadleaved"  ) or
+                ( passedt.natural == "needleleaved" ) or
+                ( passedt.natural == "mixedleaved"  )) then
+                write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, 8 )
+            else
 -- ----------------------------------------------------------------------------
 -- For large landuse areas we write the polygon out without the name, and then
 -- the name on just the centroid.
@@ -2840,21 +2837,21 @@ function render_natural_land1( passedt )
 -- The same display code can interpret "both features" without having to read
 -- it from a separate layer.
 -- ----------------------------------------------------------------------------
-            if (( passedt.natural == "beach"         ) or
-                ( passedt.natural == "tidal_beach"   ) or
-                ( passedt.natural == "mud"           ) or
-                ( passedt.natural == "tidal_mud"     ) or
-                ( passedt.natural == "bare_rock"     ) or
-                ( passedt.natural == "tidal_rock"    ) or
-                ( passedt.natural == "sand"          ) or
-                ( passedt.natural == "tidal_sand"    ) or
-                ( passedt.natural == "scree"         ) or
-                ( passedt.natural == "tidal_scree"   ) or
-                ( passedt.natural == "shingle"       ) or
-                ( passedt.natural == "tidal_shingle" ) or
-                ( passedt.natural == "heath"         ) or
-                ( passedt.natural == "grassland"     ) or
-                ( passedt.natural == "scrub"         )) then
+                if (( passedt.natural == "beach"         ) or
+                    ( passedt.natural == "tidal_beach"   ) or
+                    ( passedt.natural == "mud"           ) or
+                    ( passedt.natural == "tidal_mud"     ) or
+                    ( passedt.natural == "bare_rock"     ) or
+                    ( passedt.natural == "tidal_rock"    ) or
+                    ( passedt.natural == "sand"          ) or
+                    ( passedt.natural == "tidal_sand"    ) or
+                    ( passedt.natural == "scree"         ) or
+                    ( passedt.natural == "tidal_scree"   ) or
+                    ( passedt.natural == "shingle"       ) or
+                    ( passedt.natural == "tidal_shingle" ) or
+                    ( passedt.natural == "heath"         ) or
+                    ( passedt.natural == "grassland"     ) or
+                    ( passedt.natural == "scrub"         )) then
 -- ----------------------------------------------------------------------------
 -- These features range in size from the huge polygons to single nodes.
 -- The largest ones are included in relatively low zoom level tiles, but it
@@ -2868,99 +2865,100 @@ function render_natural_land1( passedt )
 -- written, so that the fill and the outline of the feature appears first, and
 -- then the name.
 -- ----------------------------------------------------------------------------
-                if ( passedt.way_area > 141284 ) then
-                    minzoom = 9
-                else
-                    if ( passedt.way_area > 71668 ) then
-                        minzoom = 10
+                    if ( passedt.way_area > 141284 ) then
+                        minzoom = 9
                     else
-                        if ( passedt.way_area > 12853 ) then
-                            minzoom = 11
+                        if ( passedt.way_area > 71668 ) then
+                            minzoom = 10
                         else
-                            if ( passedt.way_area > 2584 ) then
-                                minzoom = 12
+                            if ( passedt.way_area > 12853 ) then
+                                minzoom = 11
                             else
-                                minzoom = 13
+                                if ( passedt.way_area > 2584 ) then
+                                    minzoom = 12
+                                else
+                                    minzoom = 13
+                                end
                             end
                         end
                     end
-                end
 
-                write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, minzoom )
-            else
-                if ( passedt.natural == "bigpeak" ) then
-                    Layer( "land1", true )
-                    Attribute( "class", "natural_" .. passedt.natural )
-                    append_name( passedt )
-
-                    if (( passedt.ele ~= nil ) and
-                        ( passedt.ele ~= ""  )) then
-                         Attribute( "ele", passedt.ele )
-                    end
-
-                    MinZoom( 9 )
+                    write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, minzoom )
                 else
-                    if (( passedt.natural == "peak"    ) or
-                        ( passedt.natural == "saddle"  ) or
-                        ( passedt.natural == "volcano" )) then
+                    if ( passedt.natural == "bigpeak" ) then
                         Layer( "land1", true )
                         Attribute( "class", "natural_" .. passedt.natural )
                         append_name( passedt )
 
                         if (( passedt.ele ~= nil ) and
                             ( passedt.ele ~= ""  )) then
-                            Attribute( "ele", passedt.ele )
+                             Attribute( "ele", passedt.ele )
                         end
 
-                        MinZoom( 10 )
+                        MinZoom( 9 )
                     else
+                        if (( passedt.natural == "peak"    ) or
+                            ( passedt.natural == "saddle"  ) or
+                            ( passedt.natural == "volcano" )) then
+                            Layer( "land1", true )
+                            Attribute( "class", "natural_" .. passedt.natural )
+                            append_name( passedt )
+
+                            if (( passedt.ele ~= nil ) and
+                                ( passedt.ele ~= ""  )) then
+                                Attribute( "ele", passedt.ele )
+                            end
+
+                            MinZoom( 10 )
+                        else
 -- ----------------------------------------------------------------------------
 -- For large landuse areas we write the polygon out without the name, and then
 -- the name on just the centroid.
 -- ----------------------------------------------------------------------------
-                        if (( passedt.natural == "wetland"  ) or
-                            ( passedt.natural == "reef"     ) or
-                            ( passedt.natural == "reefsand" )) then
-                            write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, 12 )
-                        else
-                            if ( passedt.natural == "hill" ) then
-                                Layer( "land1", true )
-                                Attribute( "class", "natural_" .. passedt.natural )
-                                append_name( passedt )
-
-                                if (( passedt.ele ~= nil ) and
-                                    ( passedt.ele ~= ""  )) then
-                                    Attribute( "ele", passedt.ele )
-                                end
-
-                                MinZoom( 12 )
+                            if (( passedt.natural == "wetland"  ) or
+                                ( passedt.natural == "reef"     ) or
+                                ( passedt.natural == "reefsand" )) then
+                                write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, 12 )
                             else
-                                if ( passedt.natural == "spring" ) then
+                                if ( passedt.natural == "hill" ) then
                                     Layer( "land1", true )
                                     Attribute( "class", "natural_" .. passedt.natural )
                                     append_name( passedt )
-                                    MinZoom( 13 )
+
+                                    if (( passedt.ele ~= nil ) and
+                                        ( passedt.ele ~= ""  )) then
+                                        Attribute( "ele", passedt.ele )
+                                    end
+
+                                    MinZoom( 12 )
                                 else
-                                    if (( passedt.natural == "cave_entrance" ) or
-                                        ( passedt.natural == "sinkhole"      ) or
-                                        ( passedt.natural == "climbing"      ) or
-                                        ( passedt.natural == "rock"          ) or
-                                        ( passedt.natural == "tree"          ) or
-                                        ( passedt.natural == "shrub"         )) then
+                                    if ( passedt.natural == "spring" ) then
                                         Layer( "land1", true )
                                         Attribute( "class", "natural_" .. passedt.natural )
                                         append_name( passedt )
-                                        MinZoom( 14 )
+                                        MinZoom( 13 )
                                     else
-                                        render_barrier_land1( passedt )
-                                    end -- cave_entrance etc. 14
-                                end -- bay etc. 13
-                            end -- hill 12
-                        end -- wetland etc. 12
-                    end -- peak etc. 10
-                end -- bigpeak 10
-            end -- beach etc. 9
-        end -- wood 8
+                                        if (( passedt.natural == "cave_entrance" ) or
+                                            ( passedt.natural == "sinkhole"      ) or
+                                            ( passedt.natural == "climbing"      ) or
+                                            ( passedt.natural == "rock"          ) or
+                                            ( passedt.natural == "tree"          ) or
+                                            ( passedt.natural == "shrub"         )) then
+                                            Layer( "land1", true )
+                                            Attribute( "class", "natural_" .. passedt.natural )
+                                            append_name( passedt )
+                                            MinZoom( 14 )
+                                        else
+                                            render_barrier_land1( passedt )
+                                        end -- cave_entrance etc. 14
+                                    end -- bay etc. 13
+                                end -- hill 12
+                            end -- wetland etc. 12
+                        end -- peak etc. 10
+                    end -- bigpeak 10
+                end -- beach etc. 9
+            end -- wood etc. 8
+        end -- bigprompeak 8
     end -- desert 7
 end -- render_natural_land1()
 
