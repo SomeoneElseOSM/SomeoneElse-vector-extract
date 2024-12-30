@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 29/12/2024
 Extract both the name (on a centroid) and area for more wood features.
 Extract both the name (on a centroid) and area for deserts.
 Extract both the name (on a centroid) and area for military barracks.
