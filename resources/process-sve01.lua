@@ -1735,10 +1735,10 @@ function way_after_linearbarrier( passedt )
 
         MinZoom( 13 )
     else
-        if ((  passedt.man_made == "breakwater" ) or
-            (  passedt.man_made == "groyne"     ) or
-            (( passedt.man_made == "pier"      )  and
-             ( not passedt.is_closed           ))) then
+        if ((( passedt.man_made == "pier"        )   or
+             ( passedt.man_made == "breakwater"  ) or
+             ( passedt.man_made == "groyne"      ))  and
+            (  not passedt.is_closed              )) then
             Layer( "linearbarrier", false )
             Attribute( "class", "man_made_" .. passedt.man_made )
 	    append_name( passedt )
@@ -2234,9 +2234,11 @@ end -- render_shop_land1()
 -- man_made=pier is only written to land1 if it is a closed area.
 -- ----------------------------------------------------------------------------
 function render_man_made_land1( passedt )
-    if ((  passedt.man_made == "bigmast"  ) or
-        (( passedt.man_made == "pier"    )  and
-         ( passedt.is_closed             ))) then
+    if ((   passedt.man_made == "bigmast"      ) or
+        ((( passedt.man_made == "pier"       )   or
+          ( passedt.man_made == "breakwater" )   or
+          ( passedt.man_made == "groyne"     ))  and
+         (  passedt.is_closed                 ))) then
         Layer( "land1", true )
         Attribute( "class", "man_made_" .. passedt.man_made )
         append_name( passedt )

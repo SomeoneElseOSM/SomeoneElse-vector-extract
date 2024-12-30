@@ -10,6 +10,7 @@ Extract both the name (on a centroid) and area for `leisure=hunting_stand` (some
 Extract linear slipways into `transportation` as `leisure=slipway`.
 Extract both the name (on a centroid) and area for orchards, vineyards and pedestrian areas.
 Extract both the name (on a centroid) and area for breweries and nonspecific offices.
+Handle breakwaters as per groynes.
 
 ## 28/12/2024
 Fixed bug whereby some area aeroways were also handled as circular linear ones.
