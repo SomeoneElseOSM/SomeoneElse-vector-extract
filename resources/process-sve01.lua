@@ -2663,10 +2663,7 @@ function render_landuse_land1( passedt )
                     MinZoom( 11 )
                 else
                     if ( passedt.landuse == "vineyard" ) then
-                        Layer( "land1", true )
-                        Attribute( "class", "landuse_" .. passedt.landuse )
-                        append_name( passedt )
-                        MinZoom( 12 )
+                        write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 12 )
                     else
                         if ( passedt.landuse == "conservation" ) then
                             write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 13 )
