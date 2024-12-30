@@ -2367,11 +2367,7 @@ function render_highway_land1( passedt )
           ( passedt.highway == "pathnarrow" ))  and
          (  passedt.area    == "yes"         )  and
          (  passedt.is_closed                ))) then
-        Layer( "land1", true )
-        Attribute( "class", "highway_" .. passedt.highway )
-        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
-        append_name( passedt )
-        MinZoom( 12 )
+        write_polygon_and_centroid( "land1", passedt, "highway_", passedt.highway, 12 )
     else
         if ( passedt.highway == "ford" ) then
             Layer( "land1", true )

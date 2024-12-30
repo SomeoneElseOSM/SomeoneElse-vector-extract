@@ -8,7 +8,7 @@ Extract both the name (on a centroid) and area for military barracks.
 Support a couple more synynyms for civilian shooting ranges.
 Extract both the name (on a centroid) and area for `leisure=hunting_stand` (sometimes used on shooting grounds in error).
 Extract linear slipways into `transportation` as `leisure=slipway`.
-Extract both the name (on a centroid) and area for orchards and vineyards.
+Extract both the name (on a centroid) and area for orchards, vineyards and pedestrian areas.
 
 ## 28/12/2024
 Fixed bug whereby some area aeroways were also handled as circular linear ones.
