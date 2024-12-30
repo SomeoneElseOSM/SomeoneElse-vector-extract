@@ -2341,10 +2341,7 @@ function render_office_land1( passedt )
     if (( passedt.office == "craftbrewery" ) or
         ( passedt.office == "craftcider"   ) or
         ( passedt.office == "nonspecific"  )) then
-        Layer( "land1", true )
-        Attribute( "class", "office_" .. passedt.office )
-        append_name( passedt )
-        MinZoom( 14 )
+        write_polygon_and_centroid( "land1", passedt, "office_", passedt.office, 14 )
     else
         render_highway_land1( passedt )
     end -- office=craftbrewery etc. 16
