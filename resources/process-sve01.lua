@@ -1381,9 +1381,22 @@ function wr_after_transportation( passedt )
                         Attribute( "class", passedt.aerialway )
                         append_name( passedt )
                         MinZoom( 11 )
+                    else
+-- ----------------------------------------------------------------------------
+-- On raster, linear slipways are written out as miniature railways
+-- Here we write out non-closed slipways to the transportation layer.
+-- point and area slipways are also written to "land1" below.
+-- ----------------------------------------------------------------------------
+                        if (( passedt.leisure == "slipway" ) and
+                            ( not passedt.is_closed        )) then
+                            Layer("transportation", false)
+                            Attribute( "class", passedt.leisure )
+                            append_name( passedt )
+                            MinZoom( 13 )
 -- ----------------------------------------------------------------------------
 -- No else here yet
 -- ----------------------------------------------------------------------------
+                        end -- leisure=slipway 6
                     end -- aerialway=cable_car etc. 11
                 end -- aeroway=runway etc. 10
             end -- ferry routes 6
