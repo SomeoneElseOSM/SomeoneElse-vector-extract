@@ -260,14 +260,9 @@ function way_function()
 
 -- ----------------------------------------------------------------------------
 -- Treat a linear "door" and some other linear barriers as "gate"
---
--- A "lock_gate" mapped as a node gets its own "locks" layer in 
--- water-features.mss (for historical reasons that no longer make sense).
--- There's no explicit node or generic code for lock_gate.
 -- ----------------------------------------------------------------------------
    if (( wayt.barrier  == "door"       ) or
-       ( wayt.barrier  == "swing_gate" ) or
-       ( wayt.waterway == "lock_gate"  )) then
+       ( wayt.barrier  == "swing_gate" )) then
       wayt.barrier  = "gate"
       wayt.waterway = nil
    end
@@ -1651,10 +1646,18 @@ end -- append_edge_etc( passedt )
 
 -- ----------------------------------------------------------------------------
 -- linear waterway layer
+--
+-- Most non-nil/non-blank waterway values are included here.
+-- "lock_gate" and "sluice_gate" are written to "linearbarrier".
 -- ----------------------------------------------------------------------------
 function way_after_waterway( passedt )
-    if (( passedt.waterway ~= nil ) and
-        ( passedt.waterway ~= ""  )) then
+    if (( passedt.waterway ~= nil                ) and
+        ( passedt.waterway ~= ""                 ) and
+        ( passedt.waterway ~= "lock_gate"        ) and
+        ( passedt.waterway ~= "sluice_gate"      ) and
+        ( passedt.waterway ~= "waterfall"        ) and
+        ( passedt.waterway ~= "weir"             ) and
+        ( passedt.waterway ~= "floating_barrier" )) then
         Layer("waterway", false)
         Attribute("class", passedt.waterway)
         Attribute( "name", Find( "name" ) )
@@ -1675,13 +1678,12 @@ function way_after_waterway( passedt )
                 if ( passedt.waterway == "ditch" ) then
                     MinZoom( 13 )
                 else
-                    if (( passedt.waterway == "weir"     ) or
-                        ( passedt.waterway == "pipeline" )) then
+                    if ( passedt.waterway == "pipeline" ) then
                         MinZoom( 14 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-                    end -- weir
+                    end -- pipeline
                 end  -- ditch
             end -- stream etc.
         end -- river etc.
@@ -1763,7 +1765,27 @@ function way_after_linearbarrier( passedt )
 	                append_name( passedt )
                         MinZoom( 12 )
                     else
-                         generic_linearbarrier_historic( passedt )
+-- ----------------------------------------------------------------------------
+-- We write _linear_ lock_gate and sluice_gate here, but then clear the tags
+-- so that they do not also get put into the "land1" layer.
+-- point and (multi)polygon lock_gate and sluice_gate are handled in "land1".
+-- ----------------------------------------------------------------------------
+                        if (( passedt.waterway == "lock_gate"        ) or
+                            ( passedt.waterway == "sluice_gate"      ) or
+                            ( passedt.waterway == "waterfall"        ) or
+                            ( passedt.waterway == "weir"             ) or
+                            ( passedt.waterway == "floating_barrier" )) then
+                            if ( not passedt.is_closed ) then
+                                Layer( "linearbarrier", false )
+                                Attribute( "class", "waterway_" .. passedt.waterway )
+                                append_name( passedt )
+                                MinZoom( 14 )
+
+                                passedt.waterway = nil
+                            end
+                        else
+                             generic_linearbarrier_historic( passedt )
+                        end -- waterway=lock_gate etc. 12
                     end -- waterway=dam 12
                 end -- man_made=embankment 13
             end -- man_made=cutline 13
@@ -2299,7 +2321,6 @@ function render_man_made_land1( passedt )
                         ( passedt.man_made == "water_well"               ) or
                         ( passedt.man_made == "cairn"                    ) or
                         ( passedt.man_made == "flagpole_red"             ) or
-                        ( passedt.man_made == "sluice_gate"              ) or
                         ( passedt.man_made == "boundary_stone"           ) or
                         ( passedt.man_made == "golfballwasher"           ) or
                         ( passedt.man_made == "outfall"                  )) then
@@ -2997,7 +3018,16 @@ function render_waterway_land1( passedt )
     if ( passedt.waterway == "damarea" ) then
         write_polygon_and_centroid( "land1", passedt, "waterway_", passedt.waterway, 10 )
     else
-        if ( passedt.waterway == "lock_gate" ) then
+-- ----------------------------------------------------------------------------
+-- The only lock_gate and sluice_gate we should get here are points and 
+-- closed ways.  Non-closed ways will have been written to "linearbarrier"
+-- above.
+-- ----------------------------------------------------------------------------
+        if (( passedt.waterway == "lock_gate"        )  or
+            ( passedt.waterway == "sluice_gate"      )  or
+            ( passedt.waterway == "waterfall"        )  or
+            ( passedt.waterway == "weir"             )  or
+            ( passedt.waterway == "floating_barrier" )) then
             Layer( "land1", true )
             Attribute( "class", "waterway_" .. passedt.waterway )
             append_name( passedt )

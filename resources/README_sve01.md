@@ -181,6 +181,7 @@ Features written out just once, as a point or polygon, with a name if one exists
 * zoom 14 `landuse=industrialbuilding`
 * zoom 14 `leisure` tags `bandstand`, `bleachers`, `fitness_station`, `picnic_table`, `slipway`, `bird_hide`, `hunting_stand` and `grouse_butt`.
 * zoom 14 `natural` tags `cave_entrance`, `sinkhole`, `climbing`, `rock`, `tree`, `shrub`.
+* zoom 14 point and (multi)polygon `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, `waterway=floating_barrier`.
 
 ### class
 
@@ -254,6 +255,7 @@ Generally speaking, this will be the OSM value for `barrier`.  Exceptions includ
 * zoom 13 `historic=citywalls`, `historic=castle_walls`.
 * zoom 14 `man_made=embankment`.
 * zoom 14 `power=line`, `power=minor_line`.
+* zoom 14 linear `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, `waterway=floating_barrier`.
 
 ### name
 
