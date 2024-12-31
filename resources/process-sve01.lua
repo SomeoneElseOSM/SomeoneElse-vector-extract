@@ -2935,9 +2935,10 @@ function render_natural_land1( passedt )
 -- For large landuse areas we write the polygon out without the name, and then
 -- the name on just the centroid.
 -- ----------------------------------------------------------------------------
-                            if (( passedt.natural == "wetland"  ) or
-                                ( passedt.natural == "reef"     ) or
-                                ( passedt.natural == "reefsand" )) then
+                            if (( passedt.natural == "wetland"              ) or
+                                ( passedt.natural == "intermittentwetland"  ) or
+                                ( passedt.natural == "reef"                 ) or
+                                ( passedt.natural == "reefsand"             )) then
                                 write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, 12 )
                             else
                                 if ( passedt.natural == "hill" ) then

@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 After moving the sluice gate / waterfall / weir / floating barrier consolidation from the shared lua to the raster-only code, the vector code was modified to extract linear `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, and `waterway=floating_barrier` to `linearbarrier` and point and (multi)polygon ones to `land1`.
+Extract `natural=intermittentwetland` for intermittent wetland areas.
 
 ## 29/12/2024
 Extract both the name (on a centroid) and area for more wood features.
