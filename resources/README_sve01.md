@@ -30,7 +30,9 @@ Set to "ocean".
 
 ## "place"
 
-More important places are written to lower numbered layers: country, state to all layers, capital at 3, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13.  Other values are ignored.  Only OSM nodes are processed for the "place" layer; there's too much randomness in OSM way and relation place data to use that.
+More important regular place nodes are written to lower numbered layers: country, state to all layers, capital at 3, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13.  Other values are ignored.  Only OSM nodes are processed for the "place" layer; there's too much randomness in OSM way and relation place data to use that.
+
+Islands and islets are written as `place=island`, at a zoom level based on way_area. `way_area` is also written for islands, to allow higher zoom level display decisions to be made.
 
 ### class
 
@@ -40,6 +42,9 @@ Usually the `place` value (e.g. `city`). Set to `capital` (regardless of the pla
 
 The value of the OSM name tag.
 
+### way_area
+
+Written for islands only.
 
 ## "transportation"
 

@@ -480,6 +480,12 @@ function way_function()
     end
 
 -- ----------------------------------------------------------------------------
+-- The only way and relation places that we're interested in are islands.
+-- Islets have been changed to islands in the shared.
+-- ----------------------------------------------------------------------------
+    wr_after_place( wayt )
+
+-- ----------------------------------------------------------------------------
 -- Actually writing out most other nodes (and polygons) is done 
 -- in "generic_after_function"
 -- 
@@ -744,6 +750,12 @@ function rf_2( relationt )
         ( relationt.area    ~= "yes"      )) then
         relationt.aeroway = nil
     end
+
+-- ----------------------------------------------------------------------------
+-- The only way and relation places that we're interested in are islands.
+-- Islets have been changed to islands in the shared.
+-- ----------------------------------------------------------------------------
+    wr_after_place( relationt )
 
 -- ----------------------------------------------------------------------------
 -- Actually writing out most other nodes (and polygons) is done 
@@ -3509,6 +3521,67 @@ function n_after_place( passedt )
         end -- capital
     end -- country
 end -- n_after_place()
+
+-- ----------------------------------------------------------------------------
+-- The only way and relation places that we're interested in are islands.
+-- Islets have been changed to islands in the shared.
+-- ----------------------------------------------------------------------------
+function wr_after_place( passedt )
+
+    if (( passedt.place == "island" ) and
+        ( passedt.is_closed         )) then
+        if ( passedt.way_area > 800000000 ) then
+            minzoom = 4                     -- Isle of Wight
+        else
+            if ( passedt.way_area > 50000000 ) then
+                minzoom = 5                 -- Isle of Sheppey
+            else
+                if ( passedt.way_area > 20000000 ) then
+                    minzoom = 6             -- Tresco
+                else
+                    if ( passedt.way_area > 6000000 ) then
+                        minzoom = 7         -- Brownsea Island
+                    else
+                        if ( passedt.way_area > 800000 ) then
+                            minzoom = 8
+                        else
+                            if ( passedt.way_area > 200000 ) then
+                                minzoom = 9
+                            else
+                                if ( passedt.way_area > 100000 ) then
+                                    minzoom = 10
+                                else
+                                    if ( passedt.way_area > 50000 ) then
+                                        minzoom = 11
+                                    else
+                                        if ( passedt.way_area > 10000 ) then
+                                            minzoom = 12
+                                        else
+                                            if ( passedt.way_area > 10000 ) then
+                                                minzoom = 13
+                                            else
+                                                if ( passedt.way_area > 2000 ) then
+                                                    minzoom = 14
+                                                end -- 14
+                                            end -- 13
+                                        end -- 12
+                                    end -- 11
+                                end -- 10
+                            end -- 9
+                        end -- 8
+                    end -- 7
+                end -- 6
+            end -- 5
+        end -- 4
+
+        LayerAsCentroid( "place" )
+        append_name( passedt )
+        Attribute( "class", passedt.place )
+        AttributeNumeric( "way_area", math.floor( passedt.way_area ))
+        append_name( passedt )
+        MinZoom( minzoom )
+    end
+end -- wr_after_place()
 
 function write_polygon_and_centroid( passed_layer, passedt, passed_prefix, passed_value, passed_zoom )
     if ( passedt.way_area > 0 ) then

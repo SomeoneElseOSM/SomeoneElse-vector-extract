@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract `place=island` from zoom 4 upwards, based on the way_area.
+
 ## 30/12/2024
 After moving the sluice gate / waterfall / weir / floating barrier consolidation from the shared lua to the raster-only code, the vector code was modified to extract linear `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, and `waterway=floating_barrier` to `linearbarrier` and point and (multi)polygon ones to `land1`.
 Extract `natural=intermittentwetland` for intermittent wetland areas.
