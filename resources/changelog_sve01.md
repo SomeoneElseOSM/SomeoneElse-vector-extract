@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+(via shared lua) extract an `orchard` landuse for plant nurseries, so that an orchard fill can be displayed.
+
 ## 01/01/2025
 Extract `place=island` from zoom 4 upwards, based on the way_area, up to 14.
 
