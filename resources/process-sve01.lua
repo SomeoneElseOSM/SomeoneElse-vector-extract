@@ -3560,9 +3560,10 @@ function wr_after_place( passedt )
                                             if ( passedt.way_area > 10000 ) then
                                                 minzoom = 13
                                             else
-                                                if ( passedt.way_area > 2000 ) then
-                                                    minzoom = 14
-                                                end -- 14
+-- ----------------------------------------------------------------------------
+-- The next check would be 2000, but 14 is the catch-all minzoom
+-- ----------------------------------------------------------------------------
+                                                minzoom = 14
                                             end -- 13
                                         end -- 12
                                     end -- 11
