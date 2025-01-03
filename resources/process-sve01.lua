@@ -188,6 +188,43 @@ function node_function()
     n_after_place( nodet )
 
 -- ------------------------------------------------------------------------------
+-- If the node is a guidepost or route marker, let's try and process the
+-- relations that it is part of.
+-- ------------------------------------------------------------------------------
+   if ((( nodet.tourism        == "informationmarker"      )  or
+        ( nodet.tourism        == "informationroutemarker" )) and
+       (( nodet.guidepost_type == "route_marker;PROW"      )  or 
+        ( nodet.guidepost_type == "route_marker"           )  or 
+        ( nodet.guidepost_type == "route"                  ))) then
+
+      nodet.nwnrelationlist = ""
+
+      while true do
+         local relation_id = NextRelation()
+
+         if ( not relation_id ) then 
+            break 
+         end
+
+         local relation_name = FindInRelation( "name" )
+         local relation_network = FindInRelation( "network" )
+
+         if ((  relation_network == "iwn"          ) or
+             (  relation_network == "nwn"          ) or
+             (  relation_network == "rwn"          ) or
+             (  relation_network == "lwn"          ) or
+             (  relation_network == "lwn;lcn"      ) or
+             (  relation_network == "lwn;lcn;lhn"  )) then
+            if ( nodet.nwnrelationlist == "" ) then
+               nodet.nwnrelationlist = relation_name
+            else
+               nodet.nwnrelationlist = nodet.nwnrelationlist .. ", " .. relation_name
+            end
+         end
+      end
+   end
+
+-- ------------------------------------------------------------------------------
 -- (end of the node-specific code)
 --
 -- Actually writing out nodes (and polygons) is done in "generic_after_function"
@@ -905,6 +942,7 @@ function update_table( passedt )
     passedt.golf = Find("golf")
     passedt.government = Find("government")
     passedt.guide_type = Find("guide_type")
+    passedt.guidepost_type = Find("guidepost_type")
     passedt.harbour = Find("harbour")
     passedt.hard_shoulder = Find("hard_shoulder")
     passedt.hazard = Find("hazard")
@@ -3138,6 +3176,11 @@ function render_tourism_land1( passedt )
                     if (( passedt.ele ~= nil ) and
                         ( passedt.ele ~= ""  )) then
                          Attribute( "ele", passedt.ele )
+                    end
+
+                    if (( passedt.nwnrelationlist ~= nil ) and
+                        ( passedt.nwnrelationlist ~= ""  )) then
+                         Attribute( "nwnrelationlist", passedt.nwnrelationlist )
                     end
 
                     MinZoom( 14 )
