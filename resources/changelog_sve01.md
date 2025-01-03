@@ -1,9 +1,12 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Also create `ncnrelationlist`, containing the refs of all cycling relations that node is a member of.
+
 ## 03/01/2025
 (via shared lua) Extract an `orchard` landuse for plant nurseries, so that an orchard fill can be displayed.
-For `informationmarker` and `informationroutemarker`, where `guidepost_type` inficates that a guidepost is a marker of a route relation, create an `nwnrelationlist` containing all relations that node is a member of.  Also set a `nhnrelatation_in_list` flag if one of the relations is a horse relation.
+For `informationmarker` and `informationroutemarker`, where a guidepost is a marker of a walking or horse route relation, create an `nwnrelationlist` containing the names all relations that the node is a member of.  Also set a `nhnrelatation_in_list` flag if one of the relations is a horse relation.
 
 ## 01/01/2025
 Extract `place=island` from zoom 4 upwards, based on the way_area, up to 14.

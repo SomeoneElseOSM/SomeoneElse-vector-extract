@@ -196,6 +196,7 @@ function node_function()
 
       nodet.nwnrelationlist = ""
       nodet.nhnrelation_in_list = false
+      nodet.ncnrelationlist = ""
 
       while true do
          local relation_id, relation_role = NextRelation()
@@ -205,10 +206,12 @@ function node_function()
          end
 
          local relation_name = FindInRelation( "name" )
+         local relation_ref = FindInRelation( "ref" )
          local relation_network = FindInRelation( "network" )
 
          if ( relation_role == "marker_brackets" ) then
             relation_name = "(" .. relation_name .. ")"
+            relation_ref = "(" .. relation_ref .. ")"
          end
 
          if ((  relation_network == "iwn"          ) or
@@ -233,6 +236,15 @@ function node_function()
                nodet.nwnrelationlist = relation_name
             else
                nodet.nwnrelationlist = nodet.nwnrelationlist .. ", " .. relation_name
+            end
+         end
+
+         if ((  relation_network == "ncn"  ) or
+             (  relation_network == "rcn"  )) then
+            if ( nodet.ncnrelationlist == "" ) then
+               nodet.ncnrelationlist = relation_ref
+            else
+               nodet.ncnrelationlist = nodet.ncnrelationlist .. ", " .. relation_ref
             end
          end
       end
@@ -3199,6 +3211,11 @@ function render_tourism_land1( passedt )
 
                     if ( passedt.nhnrelation_in_list ) then
                         AttributeBoolean( "nhnrelation_in_list", passedt.nhnrelation_in_list )
+                    end
+
+                    if (( passedt.ncnrelationlist ~= nil ) and
+                        ( passedt.ncnrelationlist ~= ""  )) then
+                         Attribute( "ncnrelationlist", passedt.ncnrelationlist )
                     end
 
                     MinZoom( 14 )
