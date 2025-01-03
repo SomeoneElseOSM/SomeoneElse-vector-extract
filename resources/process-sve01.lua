@@ -191,16 +191,14 @@ function node_function()
 -- If the node is a guidepost or route marker, let's try and process the
 -- relations that it is part of.
 -- ------------------------------------------------------------------------------
-   if ((( nodet.tourism        == "informationmarker"      )  or
-        ( nodet.tourism        == "informationroutemarker" )) and
-       (( nodet.guidepost_type == "route_marker;PROW"      )  or 
-        ( nodet.guidepost_type == "route_marker"           )  or 
-        ( nodet.guidepost_type == "route"                  ))) then
+   if (( nodet.tourism        == "informationmarker"      )  or
+       ( nodet.tourism        == "informationroutemarker" )) then
 
       nodet.nwnrelationlist = ""
+      nodet.nhnrelation_in_list = false
 
       while true do
-         local relation_id = NextRelation()
+         local relation_id, relation_role = NextRelation()
 
          if ( not relation_id ) then 
             break 
@@ -209,12 +207,28 @@ function node_function()
          local relation_name = FindInRelation( "name" )
          local relation_network = FindInRelation( "network" )
 
+         if ( relation_role == "marker_brackets" ) then
+            relation_name = "(" .. relation_name .. ")"
+         end
+
          if ((  relation_network == "iwn"          ) or
              (  relation_network == "nwn"          ) or
              (  relation_network == "rwn"          ) or
              (  relation_network == "lwn"          ) or
              (  relation_network == "lwn;lcn"      ) or
              (  relation_network == "lwn;lcn;lhn"  )) then
+            if ( nodet.nwnrelationlist == "" ) then
+               nodet.nwnrelationlist = relation_name
+            else
+               nodet.nwnrelationlist = nodet.nwnrelationlist .. ", " .. relation_name
+            end
+         end
+
+         if ((  relation_network == "nhn"          ) or
+             (  relation_network == "rhn"          ) or
+             (  relation_network == "ncn;nhn;nwn"  )) then
+            nodet.nhnrelation_in_list = true
+
             if ( nodet.nwnrelationlist == "" ) then
                nodet.nwnrelationlist = relation_name
             else
@@ -3181,6 +3195,10 @@ function render_tourism_land1( passedt )
                     if (( passedt.nwnrelationlist ~= nil ) and
                         ( passedt.nwnrelationlist ~= ""  )) then
                          Attribute( "nwnrelationlist", passedt.nwnrelationlist )
+                    end
+
+                    if ( passedt.nhnrelation_in_list ) then
+                        AttributeBoolean( "nhnrelation_in_list", passedt.nhnrelation_in_list )
                     end
 
                     MinZoom( 14 )
