@@ -1124,6 +1124,7 @@ function update_table( passedt )
     passedt.outlet = Find("outlet")
     passedt.overgrown = Find("overgrown")
     passedt.parking = Find("parking")
+    passedt.parking_space = Find("parking_space")
     passedt.passenger_information_display = Find("passenger_information_display")
     passedt["passenger_information_display:speech_output"] = Find("passenger_information_display:speech_output")
     passedt["payment:honesty_box"] = Find("payment:honesty_box")
@@ -2017,7 +2018,7 @@ function render_amenity_land1( passedt )
         ( passedt.amenity == "parking_paydisabled"  )) then
 -- ----------------------------------------------------------------------------
 -- This is slightly different to the normal "write_polygon_and_centroid" code
--- because we write an "access" value out to the centroid afterwards.
+-- because we write "access" and "parking_space" out to the centroid afterwards
 -- ----------------------------------------------------------------------------
         if ( math.floor( passedt.way_area ) > 0 ) then
             Layer( "land1", true )
@@ -2033,6 +2034,11 @@ function render_amenity_land1( passedt )
         if (( passedt.access ~= nil ) and
             ( passedt.access ~= ""  )) then
             Attribute( "access", passedt.access )
+        end
+
+        if (( passedt.parking_space ~= nil ) and
+            ( passedt.parking_space ~= ""  )) then
+            Attribute( "parking_space", passedt.parking_space )
         end
 
         MinZoom( 9 )
