@@ -3,6 +3,11 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Handle `industrialbuilding` as per `industrial`; write out name and way_area at centroid.
+Handle route relation membership for other node tags, including artworks and NCN mileposts.
+Special-case some "sensibly named and important" LCNs, both for relation display and relation membershop display.  Unfortunately many LCNs are just wishlists and can't be included more generally.
+Use `ref` on IWNs when appending to a relation list.
+Use `name` on LCNs when appending to a relation list.
+Exclude empty names/refs when creating a list of relations.
 
 ## 04/01/2025
 Also create `ncnrelationlist`, containing the refs of all cycling relations that node is a member of.

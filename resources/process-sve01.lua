@@ -188,12 +188,21 @@ function node_function()
     n_after_place( nodet )
 
 -- ------------------------------------------------------------------------------
--- If the node is a guidepost or route marker, let's try and process the
--- relations that it is part of.
+-- If the node is an artwork, guidepost, route marker, ncn milepost or an
+-- explicit lcn_ref, let's try and process the relations that it is part of.
+-- This doesn't just look for e.g. "guidepost_type"; any relation membership of
+-- a matching network type will be processed.
 -- ------------------------------------------------------------------------------
-   if (( nodet.tourism        == "informationmarker"      )  or
-       ( nodet.tourism        == "informationroutemarker" )) then
-
+   if (( nodet.tourism  == "artwork"                ) or
+       ( nodet.tourism  == "informationmarker"      ) or
+       ( nodet.tourism  == "informationroutemarker" ) or
+       ( nodet.tourism  == "informationncndudgeon"  ) or
+       ( nodet.tourism  == "informationncnmccoll"   ) or
+       ( nodet.tourism  == "informationncnmills"    ) or
+       ( nodet.tourism  == "informationncnrowe"     ) or
+       ( nodet.tourism  == "informationncnunknown"  ) or
+       ( nodet.tourism  == "informationroutemarker" ) or
+       ( nodet.man_made == "lcn_ref"                )) then
       nodet.nwnrelationlist = ""
       nodet.nhnrelation_in_list = false
       nodet.ncnrelationlist = ""
@@ -209,17 +218,46 @@ function node_function()
          local relation_ref = FindInRelation( "ref" )
          local relation_network = FindInRelation( "network" )
 
+-- ------------------------------------------------------------------------------
+-- We use ref rather than name on iwns here ...
+-- ------------------------------------------------------------------------------
+         if (( relation_network == "iwn" ) and
+             ( relation_ref     ~= nil   )) then
+            relation_name = relation_ref
+         end
+
+-- ------------------------------------------------------------------------------
+-- ... and we use name rather than ref on the "special cased" lcns below.
+-- ------------------------------------------------------------------------------
+         if (( relation_network == "lcn" ) and
+             ( relation_name    ~= nil   )) then
+            relation_ref = relation_name
+         end
+
+-- ------------------------------------------------------------------------------
+-- Some markers have a role that indicates that they are not on the relation, so
+-- we put brackets around the name.
+-- Currently no other roles listed at 
+-- https://taginfo.openstreetmap.org/relations/route#roles
+-- are special-cased.
+-- ------------------------------------------------------------------------------
          if ( relation_role == "marker_brackets" ) then
             relation_name = "(" .. relation_name .. ")"
             relation_ref = "(" .. relation_ref .. ")"
          end
 
-         if ((  relation_network == "iwn"          ) or
-             (  relation_network == "nwn"          ) or
-             (  relation_network == "rwn"          ) or
-             (  relation_network == "lwn"          ) or
-             (  relation_network == "lwn;lcn"      ) or
-             (  relation_network == "lwn;lcn;lhn"  )) then
+-- ------------------------------------------------------------------------------
+-- Create a list of walking route relations that this node is a member of...
+-- ------------------------------------------------------------------------------
+         if ((( relation_network == "iwn"          ) or
+              ( relation_network == "nwn"          ) or
+              ( relation_network == "rwn"          ) or
+              ( relation_network == "lwn"          ) or
+              ( relation_network == "lwn;lcn"      ) or
+              ( relation_network == "lwn;lcn;lhn"  )) and
+             (  relation_name    ~= nil             ) and
+             (  relation_name    ~= ""              ) and
+             (  relation_name    ~= "()"            )) then
             if ( nodet.nwnrelationlist == "" ) then
                nodet.nwnrelationlist = relation_name
             else
@@ -227,9 +265,13 @@ function node_function()
             end
          end
 
-         if ((  relation_network == "nhn"          ) or
-             (  relation_network == "rhn"          ) or
-             (  relation_network == "ncn;nhn;nwn"  )) then
+-- ------------------------------------------------------------------------------
+-- Append any horse route relations, and set a flag so that it can be displayed
+-- in a different colour
+-- ------------------------------------------------------------------------------
+         if (( relation_network == "nhn"         ) or
+             ( relation_network == "rhn"         ) or
+             ( relation_network == "ncn;nhn;nwn" )) then
             nodet.nhnrelation_in_list = true
 
             if ( nodet.nwnrelationlist == "" ) then
@@ -239,8 +281,21 @@ function node_function()
             end
          end
 
-         if ((  relation_network == "ncn"  ) or
-             (  relation_network == "rcn"  )) then
+-- ----------------------------------------------------------------------------
+-- Similarly for cycle networks.
+-- Most LCNs are ignored, but we special-case a couple worth-including.
+-- Unlike with relation display, we don't exclude obviously silly refs, as
+-- these are not expected to appear on guideposts.
+-- We use "ref" rather than "name" for these.
+-- ----------------------------------------------------------------------------
+         if (((   relation_network == "ncn"                   ) or
+              (   relation_network == "rcn"                   ) or
+              ((  relation_network == "lcn"                 )  and
+               (( relation_name    == "Solar System Route" )   or
+                ( relation_name    == "Orbital Route"      )))) and
+             (    relation_ref     ~= nil                     ) and
+             (    relation_ref     ~= ""                      ) and
+             (    relation_ref     ~= "()"                    )) then
             if ( nodet.ncnrelationlist == "" ) then
                nodet.ncnrelationlist = relation_ref
             else
@@ -662,17 +717,21 @@ function rf_2( relationt )
 
 -- ----------------------------------------------------------------------------
 -- Cycle networks
+-- Most LCNs are ignored, but we special-case a couple worth-including.
 -- We exclude some obviously silly refs.
 -- We use "ref" rather than "name".
 -- We handle loops on the National Byway and append (r) on other RCNs.
 -- ----------------------------------------------------------------------------
-      if (((  relationt.network == "ncn"           )  or
-           (  relationt.network == "rcn"           )) and
-          ((( relationt.state   == nil            )   or
-            ( relationt.state   == ""             ))  or
-           (( relationt.state   ~= "proposed"     )   and
-            ( relationt.state   ~= "construction" )   and
-            ( relationt.state   ~= "abandoned"    )))) then
+      if (((   relationt.network == "ncn"                  )  or
+           (   relationt.network == "rcn"                  )  or
+           ((  relationt.network == "lcn"                 )   and
+            (( relationt.name    == "Solar System Route" )    or
+             ( relationt.name    == "Orbital Route"      )))) and
+          (((  relationt.state   == nil                   )   or
+            (  relationt.state   == ""                    ))  or
+           ((  relationt.state   ~= "proposed"            )   and
+            (  relationt.state   ~= "construction"        )   and
+            (  relationt.state   ~= "abandoned"           )))) then
          relationt.highway = "ldpncn"
 
          if ( relationt.ref == "N/A" ) then
@@ -2423,6 +2482,11 @@ function render_man_made_land1( passedt )
                             if (( passedt.ref ~= nil ) and
                                 ( passedt.ref ~= ""  )) then
                                 Attribute( "name", passedt.ref )
+                            end
+
+                            if (( passedt.ncnrelationlist ~= nil ) and
+                                ( passedt.ncnrelationlist ~= ""  )) then
+                                Attribute( "ncnrelationlist", passedt.ncnrelationlist )
                             end
 
                             MinZoom( 14 )
