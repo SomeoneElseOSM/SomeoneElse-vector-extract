@@ -2761,10 +2761,7 @@ function render_landuse_land1( passedt )
                             write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 13 )
                         else
                             if ( passedt.landuse == "industrialbuilding" ) then
-                                Layer( "land1", true )
-                                Attribute( "class", "landuse_" .. passedt.landuse )
-                                append_name( passedt )
-                                MinZoom( 14 )
+                                write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 14 )
                             else
                                 render_leisure_land1( passedt )
                             end -- landuse=industrialbuilding

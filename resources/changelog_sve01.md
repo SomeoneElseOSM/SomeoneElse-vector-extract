@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Handle `industrialbuilding` as per `industrial`; write out name and way_area at centroid.
+
 ## 04/01/2025
 Also create `ncnrelationlist`, containing the refs of all cycling relations that node is a member of.
 

@@ -146,6 +146,7 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 * zoom 14 point and area `aeroway` tags `helipad` and `gate`.
 * zoom 14 `tourism` tags `hotel`, `motel`, `museum`, `chalet`.
 * zoom 14 `amenity` tag `ferry_terminal`.
+* zoom 14 `landuse` tag `industrialbuilding`.
 * zoom 14 `leisure` tag `leisurenonspecific`.
 * zoom 14 many `shop` tags (the vast majority with a usage of at least tens in UK/IE, and some others).
 
@@ -183,7 +184,6 @@ Features written out just once, as a point or polygon, with a name if one exists
 * zoom 14 `office` tags `craftbrewery`, `craftcider` and `nonspecific`.
 * zoom 14 many `highway` tags such as the various bus stop tags etc.
 * zoom 14 `highway` and `railway` platform areas, usually after explicit checks on `is_closed` and the `area` tag.  Also railway turntables.
-* zoom 14 `landuse=industrialbuilding`
 * zoom 14 `leisure` tags `bandstand`, `bleachers`, `fitness_station`, `picnic_table`, `slipway`, `bird_hide`, `hunting_stand` and `grouse_butt`.
 * zoom 14 `natural` tags `cave_entrance`, `sinkhole`, `climbing`, `rock`, `tree`, `shrub`.
 * zoom 14 point and (multi)polygon `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, `waterway=floating_barrier`.
