@@ -8,6 +8,7 @@ Special-case some "sensibly named and important" LCNs, both for relation display
 Use `ref` on IWNs when appending to a relation list.
 Use `name` on LCNs when appending to a relation list.
 Exclude empty names/refs when creating a list of relations.
+Also extract `parking_space`, because the vector code now interprets that directly.
 
 ## 04/01/2025
 Also create `ncnrelationlist`, containing the refs of all cycling relations that node is a member of.
