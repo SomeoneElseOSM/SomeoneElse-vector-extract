@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 05/01/2025
 Handle `industrialbuilding` as per `industrial`; write out name and way_area at centroid.
 Handle route relation membership for other node tags, including artworks and NCN mileposts.
 Special-case some "sensibly named and important" LCNs, both for relation display and relation membershop display.  Unfortunately many LCNs are just wishlists and can't be included more generally.
