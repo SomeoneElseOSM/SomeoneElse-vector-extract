@@ -17,6 +17,7 @@
 		"include_ids": false,
 		"name": "SVE01",
 		"version": "0.1",
+		"high_resolution": true,
 		"description": "SVE01 - based on schema for web maps https://github.com/SomeoneElseOSM/SomeoneElse-style",
 		"compress": "gzip",
 		"metadata": {
