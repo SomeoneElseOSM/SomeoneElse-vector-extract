@@ -2580,7 +2580,14 @@ function render_highway_land1( passedt )
                         append_ref_etc( passedt )
                         MinZoom( 14 )
                     else
-                        render_railway_land1( passedt )
+                        if ( passedt.highway == "turning_circle" ) then
+                            Layer( "land1", true )
+                            Attribute( "class", "highway_" .. passedt.highway )
+                            append_name( passedt )
+                            MinZoom( 12 )
+                        else
+                            render_railway_land1( passedt )
+                        end -- highway=turning_circle ref 12
                     end -- highway=platform ref 14
                 end -- highway=motorway_junction name and ref  14
             end -- highway=board_realtime etc. name and ele 14

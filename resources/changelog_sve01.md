@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Removed `natural=col` from taginfo and shared code, no longer in the data.
 Added `"high_resolution": true` it increase resolution of z14 tiles, as suggested by https://github.com/systemed/tilemaker/discussions/792#discussioncomment-11773710
+Extract `highway=turning_circle` from zoom 12.
 
 ## 05/01/2025
 Handle `industrialbuilding` as per `industrial`; write out name and way_area at centroid.

@@ -171,6 +171,7 @@ Features written out just once, as a point or polygon, with a name if one exists
 * zoom 12 `railway=halt`, railway=tram_stop` and `aerialway=station`.
 * zoom 12 `man_made=bigchimney`
 * zoom 12 some `highway` street areas, usually after explicit checks on `is_closed` and the `area` tag.
+* zoom 12 `highway=turning_circle`
 * zoom 12 `landuse=vineyard`
 * zoom 12 `natural=hill`
 * zoom 12 `tourism=theme_park`
