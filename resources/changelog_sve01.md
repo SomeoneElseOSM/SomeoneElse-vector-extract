@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 12/01/2025
 Removed `natural=col` from taginfo and shared code, no longer in the data.
 Added `"high_resolution": true` it increase resolution of z14 tiles, as suggested by https://github.com/systemed/tilemaker/discussions/792#discussioncomment-11773710
 Extract `highway=turning_circle` from zoom 12.
