@@ -14,6 +14,8 @@ There are two files:
 
 The main lua processing logic logic used here is actually shared with the equivalent [raster maps](https://github.com/SomeoneElseOSM/SomeoneElse-style/blob/master/style.lua), and is also similar to that used for [mkgmap maps](https://github.com/SomeoneElseOSM/mkgmap_style_ajt/blob/master/transform_03.lua) as well.
 
+Note that the "config-sve01.json" has the "high_resolution" parameter set to "true", so that parameter must also be in any "config-coastline.json" if generated tiles are merged with coastline tiles, otherwise there will be patches of grey in the sea.
+
 The keys and values present in the data at the time when it is written out to vector tiles will differ significantly from the original OSM keys.  As an example, "function wr_after_highway( passedt )", which writes highway information to vector tiles will be passed `highway` values such as `gallop`, which has been calculated based on the various OSM tags and values on the way.  The [taginfo](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags) entry for this project references actual OSM tags and values, but the tags and values listed below (e.g. `highway=gallop`) are after the initial lua processing.
 
 The `name` values written to features to several layers may incorporate `operator` and `brand` as appropriate, and may be suppressed or written out in brackets if a feature has been tagged as being unsigned.
