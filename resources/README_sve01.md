@@ -56,6 +56,8 @@ This is for linear road, rail, air and water transport.
 
 Values are written as e.g. `motorway` without the OSM tag (here `highway`) as part of the key.  Many of these tag values are a result of previous lua processing (see note above).  For roads, this is derived from the OSM value for `highway` and the designation, so `highway=bridlewaysteps` will in OSM likely be a `highway=steps` with `designation=public_bridleway`.  Values after the initial lua processing wre written out to vector tiles as follows:
 
+Highways:
+
 * motorway, trunk, primary, secondary, tertiary, unclassified and residential and links are handled as normal.
 * service _without_ designation: "important" ones are handled as normal (`service`); "less important" (`parking_aisle`,`drive-through`,`driveway`) as `driveway`.
 * service _with_ `designation` are handled as per the designation below.
@@ -77,9 +79,25 @@ Genuine highway areas are handled via "land1", not here.  For some highway types
 * `highway=pedestrian` ways are assumed to be areas if closed unless `area=no` is set.
 * `highway=leisuretrack` and `highway=gallop` (which is what `leisure=track` will be processed into based on `sport` tags) are assumed to be linear unless `area=no` is set.
 
-Closed `barrier=hedge` are assumed to be linear if there is some other area tag on the object (e.g. `landuse=farmland`), otherwise areas.
+Railways:
 
-Numerous other tags (e.g. `man_made=pier`) may be linear or occur on areas; other than the exceptions noted above this is usually based on whether the way is closed or not.
+All non-nil, non-blank `railway` values are written out to `transportation` with `name`, `bridge` and `tunnel`.
+
+Ferry routes:
+
+All `route=ferry` are written out to `transportation` with a `name`.
+
+Linear Aeroways:
+
+Linear `runway`, `grass_runway` and `taxiway` are written out to `transportation` with a `name`.  Runways must be not closed to be thought of as linear; taxiways may be closed but must not have an explicit `area` tag.
+
+Linear aerialways:
+
+The usual OSM selection of aerialways are written out to `transportation` with a `name`.
+
+Linear slipways:
+
+Non-closed `leisure=slipway` are written out to `transportation` with a `name`.
 
 ### name
 
@@ -99,7 +117,7 @@ This will be `sidewalk`, `verge`, ford` or unset.  Designed to be used to influe
 
 ### bridge
 
-A boolean value set to true if a bridge.
+Set to the value of the bridge on the highway or railway, which will be "levee" for embankments, "yes" for all genuine bridges and blank for ones that are neither.
 
 ### tunnel
 
@@ -237,7 +255,7 @@ the value of the OSM name tag.
 
 ### bridge
 
-A boolean value set to true if a bridge.
+Set to the value of the bridge on the waterway, which will be "levee" for embankments, "yes" for all genuine bridges and blank for ones that are neither.
 
 ### tunnel
 
@@ -264,6 +282,10 @@ Generally speaking, this will be the OSM value for `barrier`.  Exceptions includ
 * zoom 14 `man_made=embankment`.
 * zoom 14 `power=line`, `power=minor_line`.
 * zoom 14 linear `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, `waterway=floating_barrier`.
+
+Numerous other tags (e.g. `man_made=pier`) may be linear or occur on areas; other than the exceptions noted elsewhere this is usually based on whether the way is closed or not.
+
+Closed `barrier=hedge` are assumed to be linear if there is some other area tag on the object (e.g. `landuse=farmland`), otherwise areas.
 
 ### name
 

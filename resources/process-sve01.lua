@@ -1460,7 +1460,7 @@ function wr_after_transportation( passedt )
             Layer("transportation", false)
             Attribute( "class", passedt.railway )
             append_name( passedt )
-            AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
+            Attribute( "bridge", passedt.bridge )
             AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
             MinZoom( 6 )
         else
@@ -1758,7 +1758,7 @@ function append_edge_etc( passedt )
 -- ----------------------------------------------------------------------------
 -- In addition to sidewalks and verges, is it a bridge or a tunnel?
 -- ----------------------------------------------------------------------------
-    AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
+    Attribute( "bridge", passedt.bridge )
     AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
 
 -- ----------------------------------------------------------------------------
@@ -1799,7 +1799,7 @@ function way_after_waterway( passedt )
         Layer("waterway", false)
         Attribute("class", passedt.waterway)
         Attribute( "name", Find( "name" ) )
-        AttributeBoolean( "bridge", ( passedt.bridge == "yes" ) )
+        Attribute( "bridge", passedt.bridge )
         AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
 
         if (( passedt.waterway == "river"          ) or
