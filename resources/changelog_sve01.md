@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Show more `unclassified` `surface` values as `unpaved`.
+
 ## 16/01/2025
 The `bridge` value is now a string not a boolean, containing `yes`, `levee` or blank.
 
