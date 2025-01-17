@@ -58,18 +58,18 @@ Values are written as e.g. `motorway` without the OSM tag (here `highway`) as pa
 
 Highways:
 
-* motorway, trunk, primary, secondary, tertiary, unclassified and residential and links are handled as normal.
+* motorway, trunk, primary, secondary, tertiary, unclassified, residential, living_street (and links) are handled as normal.
 * service _without_ designation: "important" ones are handled as normal (`service`); "less important" (`parking_aisle`,`drive-through`,`driveway`) as `driveway`.
 * service _with_ `designation` are handled as per the designation below.
 * unpaved - these are unclassified roads that are unpaved; intended to be shown visually different from paved ones.
 * ucrwide, ucrnarrow - unclassified country road intended to be shown visually between unpaved and BOAT.
 * boatwide, boatnarrow - Byway Open to All Traffic; wide (>=2m) or narrow.
 * rbywide, rbynarrow - Restricted Byway; wide or narrow.
-* bridlewaywide, bridlewaynarrow - Public Bridleway; wide or narrow.
+* bridlewaywide, bridlewaynarrow, intbridlewaywide, intbridlewaynarrow - Public Bridleway; wide or narrow.
 * bridlewaysteps - Public Bridleway; but steps.
-* footwaywide, footwaynarrow - Public Footpath; wide (typically `service` or `track` in OSM) or narrow (typically `footway` or `path`).
+* footwaywide, footwaynarrow, intfootwaywide, intfootwaynarrow - Public Footpath; wide (typically `service` or `track` in OSM) or narrow (typically `footway` or `path`).
 * footwaysteps - Public Footpath; but steps.
-* pathwide, pathnarrow - no designation; wide or narrow.
+* pathwide, pathnarrow, intpathwide, intpathnarrow - no designation; wide or narrow.
 * steps - no designation; steps.
 
 The MinZoom on each of these is broadly appropriate to the road type, varying from 3 for motorways to 12 to paths.
