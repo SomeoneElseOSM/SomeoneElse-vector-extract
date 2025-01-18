@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Show more `unclassified` `surface` values as `unpaved`.
 Don't show `bridge=low_water_crossing` on a `waterway` as a `bridge`.
 If a `waterway` is allegedly both a `bridge` and a `tunnel`, assume it is not really a bridge.
+Also extract the `operator` value for LDPs.
 
 ## 16/01/2025
 The `bridge` value is now a string not a boolean, containing `yes`, `levee` or blank.

@@ -133,6 +133,9 @@ Set to `no` if `access=no`, `destination` if `access=destination`, where `access
 
 The value of any OSM `oneway` tag - typically `yes` or `-1`.
 
+### operator
+
+The value of `operator` is written out for LDPs.
 
 ## "land1" and "land2"
 

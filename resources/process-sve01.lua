@@ -1640,10 +1640,6 @@ function wr_after_highway( passedt )
                             ( passedt.highway == "badpathnarrow"      ) or
                             ( passedt.highway == "badpathsteps"       ) or
                             ( passedt.highway == "construction"       ) or
-                            ( passedt.highway == "ldpmtb"             ) or
-                            ( passedt.highway == "ldpncn"             ) or
-                            ( passedt.highway == "ldpnhn"             ) or
-                            ( passedt.highway == "ldpnwn"             ) or
                             ( passedt.highway == "raceway"            )) then
                             Layer("transportation", false)
                             Attribute( "class", passedt.highway )
@@ -1652,37 +1648,58 @@ function wr_after_highway( passedt )
                             append_edge_etc( passedt )
                             MinZoom( 12 )
                         else
-                            if ((  passedt.highway == "pedestrian"  ) and
-                                (( not passedt.is_closed           )  or
-                                 ( passedt.area    == "no"         ))) then
+-- ----------------------------------------------------------------------------
+-- For LDPs we also write out the operator in case a map style wants to use
+-- and operator-specific shield.
+-- ----------------------------------------------------------------------------
+                            if (( passedt.highway == "ldpmtb"             ) or
+                                ( passedt.highway == "ldpncn"             ) or
+                                ( passedt.highway == "ldpnhn"             ) or
+                                ( passedt.highway == "ldpnwn"             )) then
                                 Layer("transportation", false)
                                 Attribute( "class", passedt.highway )
                                 append_name( passedt )
                                 append_ref_etc( passedt )
-                                append_edge_etc( passedt )
+
+                                if (( passedt.operator ~= nil )   and
+                                    ( passedt.operator ~= ""  ))  then
+                                    Attribute( "operator", passedt.operator )
+                                end
+
                                 MinZoom( 12 )
                             else
-                                if ((( passedt.highway == "leisuretrack" )  or
-                                     ( passedt.highway == "gallop"       )) and
-                                    (( passedt.area == "no"              )  or
-                                     ( not passedt.is_closed             ))) then
+                                if ((  passedt.highway == "pedestrian"  ) and
+                                    (( not passedt.is_closed           )  or
+                                     ( passedt.area    == "no"         ))) then
                                     Layer("transportation", false)
                                     Attribute( "class", passedt.highway )
                                     append_name( passedt )
+                                    append_ref_etc( passedt )
                                     append_edge_etc( passedt )
                                     MinZoom( 12 )
                                 else
-                                    if (( passedt.highway == "platform" ) and
-                                        ( not passedt.is_closed         )) then
+                                    if ((( passedt.highway == "leisuretrack" )  or
+                                         ( passedt.highway == "gallop"       )) and
+                                        (( passedt.area == "no"              )  or
+                                         ( not passedt.is_closed             ))) then
                                         Layer("transportation", false)
                                         Attribute( "class", passedt.highway )
                                         append_name( passedt )
-                                        MinZoom( 14 )
+                                        append_edge_etc( passedt )
+                                        MinZoom( 12 )
+                                    else
+                                        if (( passedt.highway == "platform" ) and
+                                            ( not passedt.is_closed         )) then
+                                            Layer("transportation", false)
+                                            Attribute( "class", passedt.highway )
+                                            append_name( passedt )
+                                            MinZoom( 14 )
 -- ----------------------------------------------------------------------------
 -- No other linear highways to consider
 -- ----------------------------------------------------------------------------
-                                    end -- linear platform 14
-                                end -- linear gallop / leisuretrack 12
+                                        end -- linear platform 14
+                                    end -- linear gallop / leisuretrack 12
+                                end -- LDPs etc. 12
                             end -- linear pedestrian 12
                         end -- unpaved etc. 12
                     end -- tertiary etc. 9
