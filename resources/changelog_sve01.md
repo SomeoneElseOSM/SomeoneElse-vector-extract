@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 18/01/2025
 Show more `unclassified` `surface` values as `unpaved`.
 Don't show `bridge=low_water_crossing` on a `waterway` as a `bridge`.
 If a `waterway` is allegedly both a `bridge` and a `tunnel`, assume it is not really a bridge.
