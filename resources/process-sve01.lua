@@ -713,6 +713,78 @@ function rf_2( relationt )
          end
 
          relationt.highway = "ldpnwn"
+
+-- ----------------------------------------------------------------------------
+-- Where a NWN does have a known operator and doesn't have a ref, have a go at
+-- constructing a ref.
+--
+-- In the case of "Glyndŵr's Way / Llwybr Glyndŵr" and 
+-- "Pembrokeshire Coast Path / Llwybr Arfordir Penfro" the code may enounter
+-- either language version depending on what is extracted and where the
+-- centroid ends up, so handle both language possibilities.
+--
+-- There are three "Peddars Way" varients with the same name that mostly
+-- follow the same route.  We only add shields for one.
+-- ----------------------------------------------------------------------------
+         if ((( relationt.operator == "National Trails" )  or 
+              ( relationt.operator == "Natural England" )) and
+             (( relationt.ref      == nil               )  or
+              ( relationt.ref      == ""                ))) then
+            if ( relationt.name == "Cleveland Way" ) then
+               relationt.ref = "CW"
+            end
+
+            if ( relationt.name == "Glyndŵr's Way" ) then
+               relationt.ref = "GW"
+            end
+
+            if ( relationt.name == "Llwybr Glyndŵr" ) then
+               relationt.ref = "LG"
+            end
+
+            if ( relationt.name == "Hadrian's Wall Path" ) then
+               relationt.ref = "HW"
+            end
+
+            if (( relationt.name == "North Downs Way (Western)"         ) or
+                ( relationt.name == "North Downs Way (Eastern)"         ) or
+                ( relationt.name == "North Downs Way (Canterbury loop)" )) then
+               relationt.ref = "NDW"
+            end
+
+            if ( relationt.name == "Peddars Way" ) then
+               relationt.ref = "PW"
+            end
+
+            if ( relationt.name == "Pembrokeshire Coast Path" ) then
+               relationt.ref = "PCP"
+            end
+
+            if ( relationt.name == "Llwybr Arfordir Penfro" ) then
+               relationt.ref = "LAP"
+            end
+
+            if (( relationt.name == "Pennine Way (Edale to Crowden)"                      ) or
+                ( relationt.name == "Pennine Way (Crowden to Standedge)"                  ) or
+                ( relationt.name == "Pennine Way (Standedge to Warland Reservoir)"        ) or
+                ( relationt.name == "Pennine Way"                                         ) or
+                ( relationt.name == "Pennine Way (Malham to Horton in Ribblesdale)"       ) or
+                ( relationt.name == "Pennine Way (Horton in Ribblesdale to Hawes)"        ) or
+                ( relationt.name == "Pennine Way (Hawes to Tan Hill)"                     ) or
+                ( relationt.name == "Pennine Way (Tan Hill to Middleton in Teesdale)"     ) or
+                ( relationt.name == "Pennine Way (Middleton in Teesdale to Kirk Yetholm)" )) then
+               relationt.ref = "PW"
+            end
+
+            if ( relationt.name == "South Downs Way" ) then
+               relationt.ref = "SDW"
+            end
+
+            if ( relationt.name == "Yorkshire Wolds Way" ) then
+               relationt.ref = "YWW"
+            end
+         end -- National Trails without ref
+
       end  -- walking
 
 -- ----------------------------------------------------------------------------
