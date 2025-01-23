@@ -1,13 +1,15 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 23/01/2025
+Added `whitewater=put_in_out` as a variety of waterway access point.
+
 ## 18/01/2025
 Show more `unclassified` `surface` values as `unpaved`.
 Don't show `bridge=low_water_crossing` on a `waterway` as a `bridge`.
 If a `waterway` is allegedly both a `bridge` and a `tunnel`, assume it is not really a bridge.
 Also extract the `operator` value for LDPs.
 Where a NWN does have a known operator and doesn't have a ref, have a go at constructing a ref.
-
 
 ## 16/01/2025
 The `bridge` value is now a string not a boolean, containing `yes`, `levee` or blank.

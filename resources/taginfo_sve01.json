@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250103T181801Z",
+  "data_updated": "20250123T225201Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3637,6 +3637,7 @@
     { "key": "whitewater", "description": "Detect waterway access points" },
     { "key": "whitewater", "value": "put_in", "description": "Extracted as a waterway access point" },
     { "key": "whitewater", "value": "put_in;egress", "description": "Extracted as a waterway access point" },
+    { "key": "whitewater", "value": "put_in_out", "description": "Shown as a waterway access point" },
     { "key": "width", "description": "Depending on context, go down a road class. Also changes path to track and vice versa." },
     { "key": "windmill:disused", "description": "Detect disused windmills" },
     { "key": "windmill:disused", "value": "yes", "description": "Detect disused windmills" },
