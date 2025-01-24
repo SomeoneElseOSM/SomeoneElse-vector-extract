@@ -2321,6 +2321,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "sundial"                    ) or
                         ( passedt.amenity == "shopmobility"               ) or
                         ( passedt.amenity == "emergency_phone"            ) or
+                        ( passedt.amenity == "emergency_access_point"     ) or
                         ( passedt.amenity == "theatre"                    ) or
                         ( passedt.amenity == "toilets"                    ) or
                         ( passedt.amenity == "toilets_free_m"             ) or

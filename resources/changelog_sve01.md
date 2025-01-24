@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## 23/01/2025
 Added `whitewater=put_in_out` as a variety of waterway access point.
+Extract `emergency=access_point` and `highway=emergency_access_point` as `amenity=emergency_access_point` with `name` as `ref`.
 
 ## 18/01/2025
 Show more `unclassified` `surface` values as `unpaved`.
