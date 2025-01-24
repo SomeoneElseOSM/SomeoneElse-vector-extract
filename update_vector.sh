@@ -35,7 +35,8 @@ sudo -u ${local_filesystem_user} git pull
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display
 sudo -u ${local_filesystem_user} git pull
 #
-# Run Tilemaker
+#
+# Run Tilemaker to create the vector tiles
 #
 mkdir -p /usr/local/share/lua/5.3/
 cp /home/${local_filesystem_user}/src/SomeoneElse-style/shared_lua.lua /usr/local/share/lua/5.3/
@@ -44,7 +45,19 @@ sudo -u ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-
 #
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/sve_into_apache.sh sve01 sve01 /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles   http://map.atownsend.org.uk /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/default-ssl.conf
 #
+#
+# Create the svwd06 style for Android Native
+#
+cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json | sed "s/viewport/map/" > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json 
+chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json 
+#
+#
+# Load the svwd01 style into apache
+#
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+#
+# Updated the documentartion
 #
 pandoc -s -f markdown -t html -H /home/${local_filesystem_user}/src/SomeoneElse-map/vector_header.html --metadata title="About this map" /home/${local_filesystem_user}/src/SomeoneElse-map/vector.md > /var/www/html/maps/map/vector.html
 #
