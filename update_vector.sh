@@ -46,7 +46,7 @@ sudo -u ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/sve_into_apache.sh sve01 sve01 /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles   http://map.atownsend.org.uk /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/default-ssl.conf
 #
 #
-# Create the svwd06 style for Android Native
+# Create the svwd06 style for Android Native from svwd01
 #
 cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json | sed "s/viewport/map/" > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json 
 chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json 
@@ -56,8 +56,12 @@ chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-ve
 #
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
 #
+# Load the svwd06 style into apache
 #
-# Updated the documentartion
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd06 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+#
+# Update the documentation
 #
 pandoc -s -f markdown -t html -H /home/${local_filesystem_user}/src/SomeoneElse-map/vector_header.html --metadata title="About this map" /home/${local_filesystem_user}/src/SomeoneElse-map/vector.md > /var/www/html/maps/map/vector.html
 #
