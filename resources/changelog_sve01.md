@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract housenumbers not attached to buildings.
+
 ## 23/01/2025
 Added `whitewater=put_in_out` as a variety of waterway access point.
 Extract `emergency=access_point` and `highway=emergency_access_point` as `amenity=emergency_access_point` with `name` as `ref`.

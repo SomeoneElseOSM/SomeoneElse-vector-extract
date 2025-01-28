@@ -26,7 +26,7 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
+node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
               "canoe", "climbing", "craft", "disused:amenity", "disused:military", "disused:railway", "emergency", 
               "entrance", "ford", "golf", "harbour", "historic", 
               "healthcare", "highway", "information", 
@@ -3448,18 +3448,36 @@ function render_aeroway_land1( passedt )
                 end
 
                 MinZoom( 14 )
--- ------------------------------------------------------------------------------
---            else
--- At this point we've done all thing "landuse" processing for things that might 
--- be in the "land1" layer, including displaying names and/or icons for them.
--- The call to "generic_after_poi()" below displays things that should also have
--- a name and/or an icon, but don't have an area fill or outline.
---                generic_after_poi( passedt )
--- ------------------------------------------------------------------------------
+            else
+                render_address_land1( passedt )
             end -- aeroway=helipad etc. 14
         end -- aeroway=apron 12
     end -- aeroway=grass_runway etc. 10
 end -- render_aeroway_land1()
+
+-- ------------------------------------------------------------------------------
+-- This is called last, and it won't get called if something else is found that's
+-- worth writing to "land1" earlier.
+-- ------------------------------------------------------------------------------
+function render_address_land1( passedt )
+    if ((  passedt["addr:housenumber"] ~= nil  ) and
+        (  passedt["addr:housenumber"] ~= ""   ) and
+        (( passedt.building            == nil )  or
+         ( passedt.building            == ""  ))) then
+        LayerAsCentroid( "land1" )
+        Attribute( "class", "housenumber" )
+        Attribute( "housenumber", passedt["addr:housenumber"] )
+        MinZoom( 11 )
+-- ------------------------------------------------------------------------------
+--    else
+-- At this point we've done all "landuse" processing for things that might 
+-- be in the "land1" layer, including displaying names and/or icons for them.
+-- The call to "generic_after_poi()" below can be uncommented to add a
+-- "catch all" layer.
+--        generic_after_poi( passedt )
+-- ------------------------------------------------------------------------------
+    end -- addr:housenumber
+end -- function render_address_land1( passedt )
 
 -- ----------------------------------------------------------------------------
 -- land2 layer

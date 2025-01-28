@@ -162,6 +162,7 @@ A number of "`landuse`, `leisure`, etc." features that may be either large or sm
 * zoom 10 `landuse` tags `village_green`, `quarry`, `historicquarry`.
 * zoom 10 point and area `aeroway` tags `runway` and `grass_runway`.
 * zoom 10 `waterway=damarea`
+* zoom 11 `addr:housenumber` tags not attached to buildings (as `housenumber`)
 * zoom 12 `natural` tags `wetland`, `reef`, `reefsand`.
 * zoom 12 point and area `aeroway` tags `apron` and `taxiway`.
 * zoom 12 `tourism` tags `camp_site`, `caravan_site` and `theme_park`.
