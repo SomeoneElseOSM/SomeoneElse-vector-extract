@@ -973,6 +973,7 @@ function update_table( passedt )
     passedt.accommodation = Find("accommodation")
     passedt["addr:housename"] = Find("addr:housename")
     passedt["addr:housenumber"] = Find("addr:housenumber")
+    passedt["addr:interpolation"] = Find("addr:interpolation")
     passedt["addr:unit"] = Find("addr:unit")
     passedt["admin:ref"] = Find("admin:ref")
     passedt.admin_level = Find("admin_level")
@@ -1920,7 +1921,7 @@ end -- way_after_waterway( passedt )
 
 -- ----------------------------------------------------------------------------
 -- linearbarrier layer
--- This layer includes barriers (fences, walls) and other barrier-like features
+-- This layer includes barriers (fences, walls) and other linear features
 -- (cutlines, valleys) that aren't in another linear layer such as 
 -- transportation or waterway.
 --
@@ -2052,6 +2053,18 @@ function generic_linearbarrier_power( passedt )
         Layer( "linearbarrier", false )
         Attribute( "class", "power_" .. passedt.power )
         MinZoom( 14 )
+    else
+        if (( passedt["addr:interpolation"] ~= nil ) and
+            ( passedt["addr:interpolation"] ~= ""  ) and
+            ( not passedt.is_closed                )) then
+            Layer( "linearbarrier", false )
+            Attribute( "class", "interpolation" )
+            MinZoom( 14 )
+-- ----------------------------------------------------------------------------
+--      else
+-- No else yet
+-- ----------------------------------------------------------------------------
+        end -- addr:interpolation
     end -- power=line etc.
 end -- generic_linearbarrier_power()
 

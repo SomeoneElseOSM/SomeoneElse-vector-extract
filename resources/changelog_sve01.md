@@ -1,8 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 28/01/2025
 Extract housenumbers not attached to buildings.
+Extract address interpolation lines.
 
 ## 23/01/2025
 Added `whitewater=put_in_out` as a variety of waterway access point.
