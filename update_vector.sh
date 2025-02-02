@@ -33,6 +33,7 @@ cd /home/${local_filesystem_user}/src/SomeoneElse-vector-extract
 sudo -u ${local_filesystem_user} git pull
 #
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display
+sudo -u ${local_filesystem_user} git checkout resources/svwd06_style.json
 sudo -u ${local_filesystem_user} git pull
 #
 #
