@@ -3602,13 +3602,16 @@ function render_natural_land2( passedt )
             Attribute( "class", "natural_" .. passedt.natural )
             MinZoom( 9 )
         else
-            if ( passedt.natural == "unnamedwetland"     ) then
+            if (( passedt.natural == "unnamedwetland"    ) or
+                ( passedt.natural == "unnamedswamp"      ) or
+                ( passedt.natural == "unnamedbog"        ) or
+                ( passedt.natural == "unnamedstring_bog" )) then
                 Layer( "land2", true )
                 Attribute( "class", "natural_" .. passedt.natural )
                 MinZoom( 12 )
             else
                 render_aeroway_land2( passedt )
-            end -- natural=unnamedwetland
+            end -- natural=unnamedwetland etc. 12
         end -- natural=unnamedheath 9
     end -- natural=unnamedheath 8
 end -- render_natural_land2()

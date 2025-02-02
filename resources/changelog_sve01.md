@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## 02/02/2025
 Extract `wetland=swamp`, `wetland=bog` and `wetland=string_bog` to be passed through as individual `natural` values.
+Added some more values (e.g. `swamp`) to the unnamed extract code.
 
 ## 28/01/2025
 Extract housenumbers not attached to buildings.
