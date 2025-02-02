@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250124T010301",
+  "data_updated": "20250202T114301",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3605,9 +3605,12 @@
     { "key": "waterway:historic", "description": "Handle disused version of tag" },
     { "key": "waterway:historic", "value": "canal", "description": "Disused canals are extracted as derelict canals" },
     { "key": "wetland", "description": "Modify wetland landuse value in 'land1' or 'land2'" },
+    { "key": "wetland", "value": "bog", "description": "Extract different sorts of wetlands" },
     { "key": "wetland", "value": "mud", "description": "Modify wetland landuse to mud or tidal mud" },
     { "key": "wetland", "value": "reedbed", "description": "Modify wetland landuse to reedbed" },
     { "key": "wetland", "value": "saltmarsh", "description": "Modify wetland landuse to saltmarsh" },
+    { "key": "wetland", "value": "string_bog", "description": "Extract different sorts of wetlands" },
+    { "key": "wetland", "value": "swamp", "description": "Extract different sorts of wetlands" },
     { "key": "wetland", "value": "tidalflat", "description": "Modify wetland landuse to mud or tidal mud" },
     { "key": "wetland", "value": "wet_meadow", "description": "Modify wetland landuse to wet_meadow" },
     { "key": "wheelchair", "description": "Extract the wheelchair-friendliness of pubs" },

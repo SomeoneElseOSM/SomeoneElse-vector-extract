@@ -3192,6 +3192,9 @@ function render_natural_land1( passedt )
 -- ----------------------------------------------------------------------------
                             if (( passedt.natural == "wetland"              ) or
                                 ( passedt.natural == "intermittentwetland"  ) or
+                                ( passedt.natural == "swamp"                ) or
+                                ( passedt.natural == "bog"                  ) or
+                                ( passedt.natural == "string_bog"           ) or
                                 ( passedt.natural == "reef"                 ) or
                                 ( passedt.natural == "reefsand"             )) then
                                 write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, 12 )

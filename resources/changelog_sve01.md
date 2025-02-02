@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 02/02/2025
+Extract `wetland=swamp`, `wetland=bog` and `wetland=string_bog` to be passed through as individual `natural` values.
+
 ## 28/01/2025
 Extract housenumbers not attached to buildings.
 Extract address interpolation lines.
