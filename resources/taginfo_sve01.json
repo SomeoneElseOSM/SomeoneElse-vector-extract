@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250202T114301",
+  "data_updated": "20250204T125001",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1325,7 +1325,6 @@
     { "key": "healthcare", "value": "occupational_therapist", "description": "Extract as nonspecific healthcare" },
     { "key": "healthcare", "value": "ocular_prosthetics", "description": "Extract as nonspecific healthcare" },
     { "key": "healthcare", "value": "optometrist", "description": "Extract as optician" },
-    { "key": "healthcare", "value": "osteopath", "description": "Extract as nonspecific healthcare" },
     { "key": "healthcare", "value": "pharmacy", "description": "Extract as pharmacy" },
     { "key": "healthcare", "value": "physiotherapist", "description": "Extract as nonspecific healthcare" },
     { "key": "healthcare", "value": "physiotherapist;podiatrist", "description": "Extract as nonspecific healthcare" },
@@ -2208,6 +2207,7 @@
     { "key": "office", "value": "office", "description": "Most offices extracted" },
     { "key": "office", "value": "optician", "description": "Most offices extracted" },
     { "key": "office", "value": "organization", "description": "Most offices extracted" },
+    { "key": "office", "value": "osteopath", "description": "Extract as nonspecific healthcare" },
     { "key": "office", "value": "parcel", "description": "Most offices extracted" },
     { "key": "office", "value": "photography", "description": "Most offices extracted" },
     { "key": "office", "value": "police", "description": "Most offices extracted" },
