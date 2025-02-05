@@ -249,6 +249,8 @@
     { "key": "amenity", "value": "library", "description": "Libraries: If in an old phone box, display as such" },
     { "key": "amenity", "value": "lifeboat", "description": "Lifeboats" },
     { "key": "amenity", "value": "lifeboat_station", "description": "Synonym for office=nonspecific" },
+    { "key": "amenity", "value": "lost_property", "description": "Extracted as an office" },
+    { "key": "amenity", "value": "lost_property_office", "description": "Extracted as an office" },
     { "key": "amenity", "value": "lottery", "description": "Extracted as gambling shop" },
     { "key": "amenity", "value": "lounger", "description": "Loungers are extracted as benches" },
     { "key": "amenity", "value": "luggage_locker", "description": "Synonym for left_luggage" },
