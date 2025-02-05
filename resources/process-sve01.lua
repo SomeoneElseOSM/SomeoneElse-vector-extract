@@ -3386,6 +3386,11 @@ function render_tourism_land1( passedt )
                          Attribute( "ele", passedt.ele )
                     end
 
+                    if (( passedt.ref ~= nil ) and
+                        ( passedt.ref ~= ""  )) then
+                         Attribute( "ref", passedt.ref )
+                    end
+
                     if (( passedt.nwnrelationlist ~= nil ) and
                         ( passedt.nwnrelationlist ~= ""  )) then
                          Attribute( "nwnrelationlist", passedt.nwnrelationlist )

@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Added `amenity=lost_property` and `amenity=lost_property_office` as offices.
+Extract `ref` along with various `tourism` tags including `informationpnfs`.
 
 ## 02/02/2025
 Extract `wetland=swamp`, `wetland=bog` and `wetland=string_bog` to be passed through as individual `natural` values.
