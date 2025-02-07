@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Fixed bugs that were suppressing the display of palaeolontological sites.
+
 ## 05/02/2025
 Added `amenity=lost_property` and `amenity=lost_property_office` as offices.
 Extract `ref` along with various `tourism` tags including `informationpnfs`.

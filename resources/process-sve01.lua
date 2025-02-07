@@ -28,7 +28,7 @@ require "shared_lua"
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
               "canoe", "climbing", "craft", "disused:amenity", "disused:military", "disused:railway", "emergency", 
-              "entrance", "ford", "golf", "harbour", "historic", 
+              "entrance", "ford", "geological", "golf", "harbour", "historic", 
               "healthcare", "highway", "information", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
