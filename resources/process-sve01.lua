@@ -2441,7 +2441,7 @@ function render_shop_land1( passedt )
         ( passedt.shop == "e-cigarette"        ) or
         ( passedt.shop == "ecoconv"            ) or
         ( passedt.shop == "ecogreengrocer"     ) or
-        ( passedt.shop == "ecohealth"          ) or
+        ( passedt.shop == "ecohealth_food"     ) or
         ( passedt.shop == "electrical"         ) or
         ( passedt.shop == "electronics"        ) or
         ( passedt.shop == "estate_agent"       ) or
