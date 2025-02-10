@@ -72,7 +72,7 @@ function node_function()
 -- This is here rather than in "generic" because "generic" is called after this
 -- There is a similar section in way-only.
 -- ----------------------------------------------------------------------------
-   if (( nodet.ford == "Tidal_Causeway" ) or
+   if (( nodet.ford == "tidal_causeway" ) or
        ( nodet.ford == "ford"           ) or 
        ( nodet.ford == "intermittent"   ) or
        ( nodet.ford == "seasonal"       ) or
@@ -345,7 +345,7 @@ function way_function()
 -- This is here rather than in "generic" because "generic" is called after this
 -- There is a similar section in way-only.
 -- ----------------------------------------------------------------------------
-   if (( wayt.ford == "Tidal_Causeway" ) or
+   if (( wayt.ford == "tidal_causeway" ) or
        ( wayt.ford == "ford"           ) or 
        ( wayt.ford == "intermittent"   ) or
        ( wayt.ford == "seasonal"       ) or

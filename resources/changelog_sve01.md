@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Fixed bugs that were suppressing the display of palaeolontological sites.
 Fixed bugs that were suppressing the display of eco health food shops.
+`ford=Tidal_Causeway` has been renamed to the more normal `ford=tidal_causeway`.
 
 ## 05/02/2025
 Added `amenity=lost_property` and `amenity=lost_property_office` as offices.

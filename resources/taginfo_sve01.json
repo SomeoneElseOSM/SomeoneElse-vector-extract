@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250204T125001",
+  "data_updated": "20250210T135101Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1203,13 +1203,13 @@
     { "key": "footway", "value": "sidewalk", "description": "Detect sidewalks so that name can be removed" },
     { "key": "footway", "value": "yes", "description": "Decide if a road has a sidewalk" },
     { "key": "ford", "description": "Fords on nodes" },
-    { "key": "ford", "value": "Tidal_Causeway", "description": "Treated as ford=yes" },
     { "key": "ford", "value": "ford", "description": "Treated as ford=yes" },
     { "key": "ford", "value": "intermittent", "description": "Treated as ford=yes" },
     { "key": "ford", "value": "seasonal", "description": "Treated as ford=yes" },
     { "key": "ford", "value": "stepping_stones", "description": "On nodes, extracted as their own value, on ways extracted as long ford" },
     { "key": "ford", "value": "stream", "description": "Treated as ford=yes" },
     { "key": "ford", "value": "tidal", "description": "Treated as ford=yes" },
+    { "key": "ford", "value": "tidal_causeway", "description": "Treated as ford=yes" },
     { "key": "ford", "value": "yes", "description": "Fords on nodes (own value) and ways (long ford)" },
     { "key": "former:amenity", "description": "Detect former pubs" },
     { "key": "former:amenity", "value": "pub", "description": "Extracted as disused pub with old name" },
