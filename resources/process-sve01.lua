@@ -33,7 +33,7 @@ node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenit
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
               "office", "outlet", "pipeline", "pitch", "place", 
-              "place_of_worship", "playground", "power", "railway", "shop", 
+              "place_of_worship", "playground", "police", "power", "railway", "shop", 
               "sport", "tourism", "tunnel", "was:amenity", "waterway", "whitewater", "zoo" }
 
 -- Initialize Lua logic
@@ -1212,6 +1212,7 @@ function update_table( passedt )
     passedt["plant:source"] = Find("plant:source")
     passedt.playground = Find("playground")
     passedt.pole = Find("pole")
+    passedt.police = Find("police")
     passedt.power = Find("power")
     passedt.power_source = Find("power_source")
     passedt.produce = Find("produce")

@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Fixed bugs that were suppressing the display of palaeolontological sites.
 Fixed bugs that were suppressing the display of eco health food shops.
 `ford=Tidal_Causeway` has been renamed to the more normal `ford=tidal_causeway`.
+Handle `police=checkpoint` as other checkpoints.  Added `police=offices` as other government offices.  Also `police=car_pound`, `police=detention`, `police=range`, `police=training_area`, `police=traffic_police`, `police=storage`, `police=dog_unit`, `police=horse`.
 
 ## 05/02/2025
 Added `amenity=lost_property` and `amenity=lost_property_office` as offices.
