@@ -36,6 +36,8 @@ More important regular place nodes are written to lower numbered layers: country
 
 Islands and islets are written as `place=island`, at a zoom level based on way_area. `way_area` is also written for islands, to allow higher zoom level display decisions to be made.
 
+`place=sea` is extracted at zoom level 5.
+
 ### class
 
 Usually the `place` value (e.g. `city`). Set to `capital` (regardless of the place value) if it is a capital.

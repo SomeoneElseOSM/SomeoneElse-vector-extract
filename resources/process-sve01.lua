@@ -2112,9 +2112,18 @@ function generic_after_land1( passedt )
 
         write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, minzoom )
     else
-        render_amenity_land1( passedt )
+        render_place_land1( passedt )
     end
 end -- generic_after_land1()
+
+function render_place_land1( passedt )
+    if ( passedt.place == "sea" ) then
+        minzoom = 5
+        write_polygon_and_centroid( "land1", passedt, "place_", passedt.place, minzoom )
+    else
+        render_amenity_land1( passedt )
+    end
+end -- generic_place_land1()
 
 function render_amenity_land1( passedt )
     if (( passedt.amenity == "parking"              ) or

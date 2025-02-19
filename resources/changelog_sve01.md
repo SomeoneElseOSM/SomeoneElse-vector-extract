@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract `place=sea` at zoom level 8.
+
 ## 16/02/2025
 Fixed bugs that were suppressing the display of palaeolontological sites.
 Fixed bugs that were suppressing the display of eco health food shops.

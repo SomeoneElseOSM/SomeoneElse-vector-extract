@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250210T135101Z",
+  "data_updated": "20250219T013501Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2321,6 +2321,7 @@
     { "key": "place", "value": "locality", "description": "Extracted as locality at minzoom 13" },
     { "key": "place", "value": "neighbourhood", "description": "Extracted as neighbourhood at minzoom 13" },
     { "key": "place", "value": "quarter", "description": "Extracted as place=neighbourhood" },
+    { "key": "place", "value": "sea", "description": "Extracted as sea at minzoom 8" },
     { "key": "place", "value": "state", "description": "Extracted as state at minzoom 5" },
     { "key": "place", "value": "suburb", "description": "Extracted as suburb at minzoom 11" },
     { "key": "place", "value": "town", "description": "Extracted as town at minzoom 8" },
