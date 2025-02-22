@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract `place=sea` at zoom level 8.
+Extract node and polygon `man_made=crane`.
 
 ## 16/02/2025
 Fixed bugs that were suppressing the display of palaeolontological sites.

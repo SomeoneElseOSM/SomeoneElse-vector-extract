@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250219T013501Z",
+  "data_updated": "20250222T005801Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1836,6 +1836,7 @@
     { "key": "man_made", "value": "communications_mast", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "communications_tower", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "concrete_post", "description": "Handled as barrier=post" },
+    { "key": "man_made", "value": "crane", "description": "Extracted as crane" },
     { "key": "man_made", "value": "cross", "description": "Extracted as cross" },
     { "key": "man_made", "value": "dyke", "description": "Used to detect embankments, which may have highways on them or not" },
     { "key": "man_made", "value": "filter_bed", "description": "Most man-made items are extracted" },
