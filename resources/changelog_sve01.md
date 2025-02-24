@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Extract linear `man_made=crane` as `railway=miniature`.
+
+## 24/02/2025
 Extract `place=sea` at zoom level 8.
 Extract node and polygon `man_made=crane`.
 Removed `information=noticeboard`, no longer in the data.
