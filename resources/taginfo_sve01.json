@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250223T221401Z",
+  "data_updated": "20250226T005901Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1691,7 +1691,7 @@
     { "key": "landuse", "value": "garages", "description": "Written into 'land1' or 'land2' at minzoom 11" },
     { "key": "landuse", "value": "grass", "description": "Written into 'land1' or 'land2' at minzoom 9; centroid for name written seperately" },
     { "key": "landuse", "value": "grave_yard", "description": "Synonym for amenity=grave_yard" },
-    { "key": "landuse", "value": "greenfield", "description": "Written into 'land1' or 'land2' at minzoom 9 as synonym for construction; centroid for name written seperately" },
+    { "key": "landuse", "value": "greenfield", "description": "Written into 'land1' or 'land2' at minzoom 9 as grassy farmland; centroid for name written seperately" },
     { "key": "landuse", "value": "greenhouse_horticulture", "description": "All sorts of landuse" },
     { "key": "landuse", "value": "harbour", "description": "All sorts of landuse" },
     { "key": "landuse", "value": "historic", "description": "Written into 'land1' or 'land2' at minzoom 9; centroid for name written seperately" },

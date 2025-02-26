@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract linear `man_made=crane` as `railway=miniature`.
+Treat `greenfield` as `farmgrass` rather than `construction`.
 
 ## 24/02/2025
 Extract `place=sea` at zoom level 8.
