@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Moved "island size extract at zoom" logic from "svwd01" style to the "sve01" extract code for zooms between 6 and 13.  Higher zoom levels are extracted at zoom level 14, and the decision to display is in the style .json.
+
+## 02/03/2025
 Extract linear `man_made=crane` as `railway=miniature`.
 Treat `greenfield` as `farmgrass` rather than `construction`.
 

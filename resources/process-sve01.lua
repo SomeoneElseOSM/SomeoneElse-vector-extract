@@ -3821,56 +3821,50 @@ end -- n_after_place()
 
 -- ----------------------------------------------------------------------------
 -- The only way and relation places that we're interested in are islands.
--- Islets have been changed to islands in the shared.
+-- Islets have been changed to islands in the shared lua.
+-- way_area checks are here for islands to be displayed at zooms 6 to 13,
+-- and in the svwd01 style file for zooms 14-18.
 -- ----------------------------------------------------------------------------
 function wr_after_place( passedt )
 
     if (( passedt.place == "island" ) and
         ( passedt.is_closed         )) then
-        if ( passedt.way_area > 800000000 ) then
-            minzoom = 4                     -- Isle of Wight
+        if ( passedt.way_area > 100000000000 ) then
+            minzoom = 6
         else
-            if ( passedt.way_area > 50000000 ) then
-                minzoom = 5                 -- Isle of Sheppey
+            if ( passedt.way_area > 800000000 ) then
+                minzoom = 7
             else
-                if ( passedt.way_area > 20000000 ) then
-                    minzoom = 6             -- Tresco
+                if ( passedt.way_area > 50000000 ) then
+                    minzoom = 8
                 else
-                    if ( passedt.way_area > 6000000 ) then
-                        minzoom = 7         -- Brownsea Island
+                    if ( passedt.way_area > 20000000 ) then
+                        minzoom = 9
                     else
-                        if ( passedt.way_area > 800000 ) then
-                            minzoom = 8
+                        if ( passedt.way_area > 6000000 ) then
+                            minzoom = 10
                         else
-                            if ( passedt.way_area > 200000 ) then
-                                minzoom = 9
+                            if ( passedt.way_area > 800000 ) then
+                                minzoom = 11
                             else
-                                if ( passedt.way_area > 100000 ) then
-                                    minzoom = 10
+                                if ( passedt.way_area > 200000 ) then
+                                    minzoom = 12
                                 else
-                                    if ( passedt.way_area > 50000 ) then
-                                        minzoom = 11
+                                    if ( passedt.way_area > 100000 ) then
+                                        minzoom = 13
                                     else
-                                        if ( passedt.way_area > 10000 ) then
-                                            minzoom = 12
-                                        else
-                                            if ( passedt.way_area > 10000 ) then
-                                                minzoom = 13
-                                            else
 -- ----------------------------------------------------------------------------
--- The next check would be 2000, but 14 is the catch-all minzoom
+-- The next check would be 50000, but 14 is the catch-all minzoom
 -- ----------------------------------------------------------------------------
-                                                minzoom = 14
-                                            end -- 13
-                                        end -- 12
-                                    end -- 11
-                                end -- 10
-                            end -- 9
-                        end -- 8
-                    end -- 7
-                end -- 6
-            end -- 5
-        end -- 4
+                                        minzoom = 14
+                                    end -- 13
+                                end -- 12
+                            end -- 11
+                        end -- 10
+                    end -- 9
+                end -- 8
+            end -- 7
+        end -- 6
 
         LayerAsCentroid( "place" )
         append_name( passedt )
