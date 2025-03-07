@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Moved "water area size extract at zoom" logic from "svwd01" style to the "sve01" extract code and adjusted zoom levels to make zoom 8 and 9 tiles smaller.
+
 ## 07/03/2025
 Moved "island size extract at zoom" logic from "svwd01" style to the "sve01" extract code for zooms between 6 and 13.  Higher zoom levels are extracted at zoom level 14, and the decision to display is in the style .json.
 Also similarly handled the extract for `landuse=recreation_ground`, `landuse=conservation`, `landuse=village_grean` and `leisure=nature_reseerve`.

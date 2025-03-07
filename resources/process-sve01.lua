@@ -2096,21 +2096,58 @@ function generic_after_land1( passedt )
 -- written, so that the fill and the outline of the feature appears first, and
 -- then the name.
 -- ----------------------------------------------------------------------------
-        if ( passedt.way_area > 31700000 ) then
-            minzoom = 5
+        if ( passedt.way_area > 90000000 ) then
+            fill_minzoom = 5                                     -- Lough Neagh, Lower Lough Erne
+            name_minzoom = 8
         else
-            if ( passedt.way_area > 18135601 ) then
-                minzoom = 6
+            if ( passedt.way_area > 50000000 ) then
+                fill_minzoom = 6                                 -- Lough Sheelin #8/53.804/-7.323
+                name_minzoom = 9
             else
-                if ( passedt.way_area > 14763745 ) then
-                    minzoom = 7
+                if ( passedt.way_area > 10000000 ) then          -- Chew Valley Lake
+                    fill_minzoom = 7
+                    name_minzoom = 10
                 else
-                    minzoom = 8
-                end
-            end
-        end
+                    if ( passedt.way_area > 3000000 ) then       -- Talybont Reservoir #11/51.8704/-3.3012
+                        fill_minzoom = 8
+                        name_minzoom = 11
+                    else
+                        if ( passedt.way_area > 274914 ) then
+                            fill_minzoom = 9
+                            name_minzoom = 12
+                        else
+                            if ( passedt.way_area > 68728 ) then
+                                fill_minzoom = 10
+                                name_minzoom = 13
+                            else
+                                if ( passedt.way_area > 24000 ) then
+                                    fill_minzoom = 11
+                                    name_minzoom = 14
+                                else
+                                    if ( passedt.way_area > 9000 ) then
+                                        fill_minzoom = 12
+                                        name_minzoom = 14
+                                    else
+                                        if ( passedt.way_area > 800 ) then
+                                            fill_minzoom = 13
+                                            name_minzoom = 14
+                                        else
+-- ----------------------------------------------------------------------------
+-- 14 is the catch-all minzoom
+-- ----------------------------------------------------------------------------
+                                            fill_minzoom = 14
+                                            name_minzoom = 14
+                                        end -- fill_minzoom 13
+                                    end -- fill_minzoom 12
+                                end -- fill_minzoom 11
+                            end -- fill_minzoom 10
+                        end -- fill_minzoom 9
+                    end -- fill_minzoom 8
+                end -- fill_minzoom 7
+            end -- fill_minzoom 6
+        end -- fill_minzoom 5
 
-        write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, minzoom )
+        write_polygon_and_centroid_2( "land1", passedt, "natural_", passedt.natural, fill_minzoom, name_minzoom )
     else
         render_place_land1( passedt )
     end
@@ -3910,6 +3947,21 @@ function write_polygon_and_centroid( passed_layer, passedt, passed_prefix, passe
     append_name( passedt )
     MinZoom( passed_zoom )
 end -- write_polygon_and_centroid( passed_layer, passedt, passed_prefix, passed_value, passed_zoom )
+
+
+function write_polygon_and_centroid_2( passed_layer, passedt, passed_prefix, passed_value, passed_fill_zoom, passed_name_zoom )
+    if ( passedt.way_area > 0 ) then
+        Layer( passed_layer, true )
+        Attribute( "class", passed_prefix .. passed_value )
+        MinZoom( passed_fill_zoom )
+    end
+
+    LayerAsCentroid( passed_layer )
+    Attribute( "class", passed_prefix .. passed_value )
+    AttributeNumeric( "way_area", math.floor( passedt.way_area ))
+    append_name( passedt )
+    MinZoom( passed_name_zoom )
+end -- write_polygon_and_centroid_2( passed_layer, passedt, passed_prefix, passed_value, passed_zoom )
 
 
 function append_name( passedt )
