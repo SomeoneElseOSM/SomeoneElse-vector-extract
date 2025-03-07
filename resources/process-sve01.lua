@@ -3235,7 +3235,53 @@ function render_natural_land1( passedt )
                 ( passedt.natural == "broadleaved"  ) or
                 ( passedt.natural == "needleleaved" ) or
                 ( passedt.natural == "mixedleaved"  )) then
-                write_polygon_and_centroid( "land1", passedt, "natural_", passedt.natural, 8 )
+                if ( passedt.way_area > 8000000 ) then
+                    fill_minzoom = 8                              -- King's Wood		13/51.21985/0.91403
+                    name_minzoom = 10
+                else
+                    if ( passedt.way_area > 2000000 ) then
+                        fill_minzoom = 8                          -- West Blean Wood   		14/51.33448/1.10809
+                        name_minzoom = 11
+                    else
+                        if ( passedt.way_area > 800000 ) then
+                            fill_minzoom = 9                      -- Berkhamsted Common		15/51.79368/-0.57034
+                            name_minzoom = 12
+                        else
+                            if ( passedt.way_area > 100000 ) then
+                                fill_minzoom = 10                 -- Bradfield Wood		17/51.557134/-2.144329
+                                name_minzoom = 13
+                            else
+                                if ( passedt.way_area > 40000 ) then
+                                    fill_minzoom = 10              -- Redmires Plantation	17/53.367318/-1.598139
+                                    name_minzoom = 14
+                                else
+                                    if ( passedt.way_area > 20000 ) then
+                                        fill_minzoom = 11          -- Beighton's Gorse		18/53.026468/-0.614906
+                                        name_minzoom = 14
+                                    else
+                                        if ( passedt.way_area > 10000 ) then
+                                            fill_minzoom = 12      -- The Tump   		18/51.496265/-2.664766
+                                            name_minzoom = 14
+                                        else
+                                            if ( passedt.way_area > 5000 ) then
+                                                fill_minzoom = 13  -- Belgium Plantation	18/52.892373/-0.720480
+                                                name_minzoom = 14
+                                            else
+-- ----------------------------------------------------------------------------
+-- 14 is the catch-all minzoom
+-- ----------------------------------------------------------------------------
+                                                fill_minzoom = 14
+                                                name_minzoom = 14
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+
+                write_polygon_and_centroid_2( "land1", passedt, "natural_", passedt.natural, fill_minzoom, name_minzoom )
             else
 -- ----------------------------------------------------------------------------
 -- For large landuse areas we write the polygon out without the name, and then
