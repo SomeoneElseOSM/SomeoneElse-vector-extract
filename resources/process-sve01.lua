@@ -2910,31 +2910,61 @@ function render_landuse_land1( passedt )
         ( passedt.landuse == "farmland"        )) then
         write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 8 )
     else
-        if (( passedt.landuse == "grass"                     ) or
-            ( passedt.landuse == "residential"               ) or
-            ( passedt.landuse == "meadow"                    ) or
-            ( passedt.landuse == "wetmeadow"                 ) or
-            ( passedt.landuse == "farmyard"                  ) or
-            ( passedt.landuse == "farmgrass"                 ) or
-            ( passedt.landuse == "retail"                    ) or
-            ( passedt.landuse == "industrial"                ) or
-            ( passedt.landuse == "railway"                   ) or
-            ( passedt.landuse == "commercial"                ) or
-            ( passedt.landuse == "brownfield"                ) or
-            ( passedt.landuse == "greenfield"                ) or
-            ( passedt.landuse == "construction"              ) or
-            ( passedt.landuse == "landfill"                  ) or
-            ( passedt.landuse == "historic"                  ) or
-            ( passedt.landuse == "orchard"                   ) or
-            ( passedt.landuse == "meadowtransitional"        ) or
-            ( passedt.landuse == "meadowwildflower"          ) or
-            ( passedt.landuse == "meadowperpetual"           ) or
-            ( passedt.landuse == "saltmarsh"                 ) or
-            ( passedt.landuse == "reedbed"                   ) or
-            ( passedt.landuse == "allotments"                ) or
-            ( passedt.landuse == "christiancemetery"         ) or
-            ( passedt.landuse == "jewishcemetery"            ) or
-            ( passedt.landuse == "othercemetery"             )) then
+        if (( passedt.landuse == "industrial"                ) or
+            ( passedt.landuse == "railway"                   )) then
+            if ( passedt.way_area > 800000 ) then
+                fill_minzoom = 9
+                name_minzoom = 11
+            else
+                if ( passedt.way_area > 141284 ) then
+                    fill_minzoom = 9
+                    name_minzoom = 12
+                else
+                    if ( passedt.way_area > 71668 ) then
+                        fill_minzoom = 10
+                        name_minzoom = 13
+                    else
+                        if ( passedt.way_area > 12853 ) then
+                            fill_minzoom = 11
+                            name_minzoom = 14
+                        else
+                            if ( passedt.way_area > 2584 ) then
+                                fill_minzoom = 12
+                                name_minzoom = 14
+                            else
+                                fill_minzoom = 13
+                                name_minzoom = 14
+                            end
+                        end
+                    end
+                end
+            end
+
+            write_polygon_and_centroid_2( "land1", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
+        else
+            if (( passedt.landuse == "grass"                     ) or
+                ( passedt.landuse == "residential"               ) or
+                ( passedt.landuse == "meadow"                    ) or
+                ( passedt.landuse == "wetmeadow"                 ) or
+                ( passedt.landuse == "farmyard"                  ) or
+                ( passedt.landuse == "farmgrass"                 ) or
+                ( passedt.landuse == "retail"                    ) or
+                ( passedt.landuse == "commercial"                ) or
+                ( passedt.landuse == "brownfield"                ) or
+                ( passedt.landuse == "greenfield"                ) or
+                ( passedt.landuse == "construction"              ) or
+                ( passedt.landuse == "landfill"                  ) or
+                ( passedt.landuse == "historic"                  ) or
+                ( passedt.landuse == "orchard"                   ) or
+                ( passedt.landuse == "meadowtransitional"        ) or
+                ( passedt.landuse == "meadowwildflower"          ) or
+                ( passedt.landuse == "meadowperpetual"           ) or
+                ( passedt.landuse == "saltmarsh"                 ) or
+                ( passedt.landuse == "reedbed"                   ) or
+                ( passedt.landuse == "allotments"                ) or
+                ( passedt.landuse == "christiancemetery"         ) or
+                ( passedt.landuse == "jewishcemetery"            ) or
+                ( passedt.landuse == "othercemetery"             )) then
 -- ----------------------------------------------------------------------------
 -- These features range in size from the huge polygons to single nodes.
 -- The largest ones are included in relatively low zoom level tiles, but it
@@ -2948,76 +2978,77 @@ function render_landuse_land1( passedt )
 -- written, so that the fill and the outline of the feature appears first, and
 -- then the name.
 -- ----------------------------------------------------------------------------
-            if ( passedt.way_area > 141284 ) then
-                minzoom = 9
-            else
-                if ( passedt.way_area > 71668 ) then
-                    minzoom = 10
+                if ( passedt.way_area > 141284 ) then
+                    minzoom = 9
                 else
-                    if ( passedt.way_area > 12853 ) then
-                        minzoom = 11
+                    if ( passedt.way_area > 71668 ) then
+                        minzoom = 10
                     else
-                        if ( passedt.way_area > 2584 ) then
-                            minzoom = 12
+                        if ( passedt.way_area > 12853 ) then
+                            minzoom = 11
                         else
-                            minzoom = 13
-                        end
-                    end
-                end
-            end
-
-            write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, minzoom )
-        else
-            if (( passedt.landuse == "recreation_ground"         ) or
-                ( passedt.landuse == "conservation"              ) or
-                ( passedt.landuse == "village_green"             )) then
-                if ( passedt.way_area > 4000000000 ) then
-                    minzoom = 6
-                else
-                    if ( passedt.way_area > 800000 ) then
-                        minzoom = 11
-                    else
-                        if ( passedt.way_area > 141284 ) then
-                            minzoom = 12
-                        else
-                            if ( passedt.way_area > 71668 ) then
-                                minzoom = 13
+                            if ( passedt.way_area > 2584 ) then
+                                minzoom = 12
                             else
-                                minzoom = 14
+                                minzoom = 13
                             end
                         end
                     end
                 end
-
+    
                 write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, minzoom )
             else
-                if (( passedt.landuse == "quarry"                 ) or
-                    ( passedt.landuse == "historicquarry"         )) then
-                    write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 10 )
+                if (( passedt.landuse == "recreation_ground"         ) or
+                    ( passedt.landuse == "conservation"              ) or
+                    ( passedt.landuse == "village_green"             )) then
+                    if ( passedt.way_area > 4000000000 ) then
+                        minzoom = 6
+                    else
+                        if ( passedt.way_area > 800000 ) then
+                            minzoom = 11
+                        else
+                            if ( passedt.way_area > 141284 ) then
+                                minzoom = 12
+                            else
+                                if ( passedt.way_area > 71668 ) then
+                                    minzoom = 13
+                                else
+                                    minzoom = 14
+                                end
+                            end
+                        end
+                    end
+
+                    write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, minzoom )
                 else
+                    if (( passedt.landuse == "quarry"                 ) or
+                        ( passedt.landuse == "historicquarry"         )) then
+                        write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 10 )
+                    else
 -- ----------------------------------------------------------------------------
 -- These are considered by the code "not large" landuse areas and get the name
 -- written as part of the name feature.
 -- ----------------------------------------------------------------------------
-                    if ( passedt.landuse == "garages" ) then
-                        Layer( "land1", true )
-                        Attribute( "class", "landuse_" .. passedt.landuse )
-                        append_name( passedt )
-                        MinZoom( 11 )
-                    else
-                        if ( passedt.landuse == "vineyard" ) then
-                            write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 12 )
+                        if ( passedt.landuse == "garages" ) then
+                            Layer( "land1", true )
+                            Attribute( "class", "landuse_" .. passedt.landuse )
+                            append_name( passedt )
+                            MinZoom( 11 )
                         else
-                            if ( passedt.landuse == "industrialbuilding" ) then
-                                write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 14 )
+                            if ( passedt.landuse == "vineyard" ) then
+                                write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 12 )
                             else
-                                render_leisure_land1( passedt )
-                            end -- landuse=industrialbuilding
-                        end -- landuse=vineyard 12
-                    end -- landuse=garages 11
-                end -- landuse=quarry 10
-            end -- landuse=recreation_ground 6-14
-        end -- landuse=grass etc. 9
+                                if ( passedt.landuse == "industrialbuilding" ) then
+                                    write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 14 )
+                                else
+                                    render_leisure_land1( passedt )
+                                end -- landuse=industrialbuilding
+                            end -- landuse=vineyard 12
+                        end -- landuse=garages 11
+                    end -- landuse=quarry 10
+                end -- landuse=recreation_ground 6-14
+            end -- landuse=grass etc. 9
+        end -- landuse=industrial 9-13
     end -- landuse=forest 8
 end -- render_landuse_land1()
 
