@@ -3715,7 +3715,53 @@ function render_landuse_land2( passedt )
 -- it from a separate layer.
 -- ----------------------------------------------------------------------------
             if ( passedt.landuse == "military" ) then
-                write_polygon_and_centroid( "land2", passedt, "landuse_", passedt.landuse, 6 )
+                if ( passedt.way_area > 150000000 ) then
+                    fill_minzoom = 7                                     -- MoD Shoeburyness  #11/51.5830/0.9635
+                    name_minzoom = 7
+                else
+                    if ( passedt.way_area > 50000000 ) then
+                        fill_minzoom = 7                                 -- Warcop Training Area  #12/54.5946/-2.3219
+                        name_minzoom = 8
+                    else
+                        if ( passedt.way_area > 25000000 ) then          -- RAF Holbeach Air Weapons Range  #12/52.8831/0.1589
+                            fill_minzoom = 8
+                            name_minzoom = 9
+                        else
+                            if ( passedt.way_area > 12000000 ) then      -- Barden Moor  #13/54.37313/-1.77059
+                                fill_minzoom = 9
+                                name_minzoom = 10
+                            else
+                                if ( passedt.way_area > 600000 ) then    -- DSDA Kineton  #13/52.15108/-1.47155
+                                    fill_minzoom = 10                    -- RAF Digby #15/53.09978/-0.44352
+                                    name_minzoom = 11
+                                else
+                                    if ( passedt.way_area > 300000 ) then   -- RAF Fylingdales  #15/54.35919/-0.66785
+                                        fill_minzoom = 10
+                                        name_minzoom = 12
+                                    else
+                                        if ( passedt.way_area > 60000 ) then   -- GCHQ Scarborough  #17/54.267006/-0.446328
+                                            fill_minzoom = 11
+                                            name_minzoom = 13
+                                        else
+                                            if ( passedt.way_area > 6000 ) then   -- Tunbridge Wells TA Centre  #18/51.148519/0.260879
+                                                fill_minzoom = 13
+                                                name_minzoom = 14
+                                            else
+-- ----------------------------------------------------------------------------
+-- 14 is the catch-all minzoom
+-- ----------------------------------------------------------------------------
+                                                fill_minzoom = 14
+                                                name_minzoom = 14
+                                            end -- fill_minzoom 13
+                                        end -- fill_minzoom 12
+                                    end -- fill_minzoom 11
+                                end -- fill_minzoom 10
+                            end -- fill_minzoom 9
+                        end -- fill_minzoom 8
+                    end -- fill_minzoom 7, 8
+                end -- fill_minzoom 7, 7
+
+                write_polygon_and_centroid_2( "land2", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
             else
                 if (( passedt.landuse == "unnamedquarry"          ) or
                     ( passedt.landuse == "unnamedhistoricquarry"  )) then
