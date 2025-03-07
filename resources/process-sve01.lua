@@ -2879,7 +2879,6 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "wetmeadow"                 ) or
             ( passedt.landuse == "farmyard"                  ) or
             ( passedt.landuse == "farmgrass"                 ) or
-            ( passedt.landuse == "recreation_ground"         ) or
             ( passedt.landuse == "retail"                    ) or
             ( passedt.landuse == "industrial"                ) or
             ( passedt.landuse == "railway"                   ) or
@@ -2932,36 +2931,55 @@ function render_landuse_land1( passedt )
 
             write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, minzoom )
         else
-            if (( passedt.landuse == "village_green"          ) or
-                ( passedt.landuse == "quarry"                 ) or
-                ( passedt.landuse == "historicquarry"         )) then
-                write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 10 )
+            if (( passedt.landuse == "recreation_ground"         ) or
+                ( passedt.landuse == "conservation"              ) or
+                ( passedt.landuse == "village_green"             )) then
+                if ( passedt.way_area > 4000000000 ) then
+                    minzoom = 6
+                else
+                    if ( passedt.way_area > 800000 ) then
+                        minzoom = 11
+                    else
+                        if ( passedt.way_area > 141284 ) then
+                            minzoom = 12
+                        else
+                            if ( passedt.way_area > 71668 ) then
+                                minzoom = 13
+                            else
+                                minzoom = 14
+                            end
+                        end
+                    end
+                end
+
+                write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, minzoom )
             else
+                if (( passedt.landuse == "quarry"                 ) or
+                    ( passedt.landuse == "historicquarry"         )) then
+                    write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 10 )
+                else
 -- ----------------------------------------------------------------------------
 -- These are considered by the code "not large" landuse areas and get the name
 -- written as part of the name feature.
 -- ----------------------------------------------------------------------------
-                if ( passedt.landuse == "garages" ) then
-                    Layer( "land1", true )
-                    Attribute( "class", "landuse_" .. passedt.landuse )
-                    append_name( passedt )
-                    MinZoom( 11 )
-                else
-                    if ( passedt.landuse == "vineyard" ) then
-                        write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 12 )
+                    if ( passedt.landuse == "garages" ) then
+                        Layer( "land1", true )
+                        Attribute( "class", "landuse_" .. passedt.landuse )
+                        append_name( passedt )
+                        MinZoom( 11 )
                     else
-                        if ( passedt.landuse == "conservation" ) then
-                            write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 13 )
+                        if ( passedt.landuse == "vineyard" ) then
+                            write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 12 )
                         else
                             if ( passedt.landuse == "industrialbuilding" ) then
                                 write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 14 )
                             else
                                 render_leisure_land1( passedt )
                             end -- landuse=industrialbuilding
-                        end -- landuse=conservation 13
-                    end -- landuse=vineyard 12
-                end -- landuse=garages 11
-            end -- landuse=quarry 10
+                        end -- landuse=vineyard 12
+                    end -- landuse=garages 11
+                end -- landuse=quarry 10
+            end -- landuse=recreation_ground 6-14
         end -- landuse=grass etc. 9
     end -- landuse=forest 8
 end -- render_landuse_land1()
@@ -2981,16 +2999,20 @@ function render_leisure_land1( passedt )
 -- written, so that the fill and the outline of the feature appears first, and
 -- then the name.
 -- ----------------------------------------------------------------------------
-        if ( passedt.way_area > 282314432 ) then
+        if ( passedt.way_area > 4000000000 ) then
             minzoom = 6
         else
-            if ( passedt.way_area > 9514089 ) then
-                minzoom = 7
+            if ( passedt.way_area > 800000 ) then
+                minzoom = 11
             else
-                if ( passedt.way_area > 1357096 ) then
-                    minzoom = 8
+                if ( passedt.way_area > 141284 ) then
+                    minzoom = 12
                 else
-                    minzoom = 9
+                    if ( passedt.way_area > 71668 ) then
+                        minzoom = 13
+                    else
+                        minzoom = 14
+                    end
                 end
             end
         end
