@@ -2908,7 +2908,58 @@ function render_landuse_land1( passedt )
 -- ----------------------------------------------------------------------------
     if (( passedt.landuse == "forest"          ) or
         ( passedt.landuse == "farmland"        )) then
-        write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 8 )
+        if ( passedt.way_area > 16000000 ) then
+            fill_minzoom = 7
+            name_minzoom = 9
+        else
+            if ( passedt.way_area > 8000000 ) then
+                fill_minzoom = 8
+                name_minzoom = 10
+            else
+                if ( passedt.way_area > 2000000 ) then
+                    fill_minzoom = 8
+                    name_minzoom = 11
+                else
+                    if ( passedt.way_area > 800000 ) then
+                        fill_minzoom = 9
+                        name_minzoom = 12
+                    else
+                        if ( passedt.way_area > 100000 ) then
+                            fill_minzoom = 10
+                            name_minzoom = 13
+                        else
+                            if ( passedt.way_area > 40000 ) then
+                                fill_minzoom = 10
+                                name_minzoom = 14
+                            else
+                                if ( passedt.way_area > 20000 ) then
+                                    fill_minzoom = 11
+                                    name_minzoom = 14
+                                else
+                                    if ( passedt.way_area > 10000 ) then
+                                        fill_minzoom = 12
+                                        name_minzoom = 14
+                                    else
+                                        if ( passedt.way_area > 5000 ) then
+                                            fill_minzoom = 13
+                                            name_minzoom = 14
+                                        else
+-- ----------------------------------------------------------------------------
+-- 14 is the catch-all minzoom
+-- ----------------------------------------------------------------------------
+                                            fill_minzoom = 14
+                                            name_minzoom = 14
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+        write_polygon_and_centroid_2( "land1", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
     else
         if (( passedt.landuse == "industrial"                ) or
             ( passedt.landuse == "railway"                   )) then
