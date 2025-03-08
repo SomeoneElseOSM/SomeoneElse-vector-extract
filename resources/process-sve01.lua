@@ -2965,6 +2965,11 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "railway"                   ) or
             ( passedt.landuse == "commercial"                ) or
             ( passedt.landuse == "residential"               ) or
+            ( passedt.landuse == "meadow"                    ) or
+            ( passedt.landuse == "meadowtransitional"        ) or
+            ( passedt.landuse == "meadowwildflower"          ) or
+            ( passedt.landuse == "wetmeadow"                 ) or
+            ( passedt.landuse == "meadowperpetual"           ) or
             ( passedt.landuse == "grass"                     )) then
             if ( passedt.way_area > 800000 ) then
                 fill_minzoom = 9
@@ -2996,9 +3001,7 @@ function render_landuse_land1( passedt )
 
             write_polygon_and_centroid_2( "land1", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
         else
-            if (( passedt.landuse == "meadow"                    ) or
-                ( passedt.landuse == "wetmeadow"                 ) or
-                ( passedt.landuse == "farmyard"                  ) or
+            if (( passedt.landuse == "farmyard"                  ) or
                 ( passedt.landuse == "farmgrass"                 ) or
                 ( passedt.landuse == "retail"                    ) or
                 ( passedt.landuse == "brownfield"                ) or
@@ -3007,9 +3010,6 @@ function render_landuse_land1( passedt )
                 ( passedt.landuse == "landfill"                  ) or
                 ( passedt.landuse == "historic"                  ) or
                 ( passedt.landuse == "orchard"                   ) or
-                ( passedt.landuse == "meadowtransitional"        ) or
-                ( passedt.landuse == "meadowwildflower"          ) or
-                ( passedt.landuse == "meadowperpetual"           ) or
                 ( passedt.landuse == "saltmarsh"                 ) or
                 ( passedt.landuse == "reedbed"                   ) or
                 ( passedt.landuse == "allotments"                ) or
@@ -3798,15 +3798,15 @@ function render_landuse_land2( passedt )
                             fill_minzoom = 8
                             name_minzoom = 9
                         else
-                            if ( passedt.way_area > 12000000 ) then      -- Barden Moor  #13/54.37313/-1.77059
-                                fill_minzoom = 9
+                            if ( passedt.way_area > 2100000 ) then       -- Barden Moor  #13/54.37313/-1.77059
+                                fill_minzoom = 9                         -- Linton on Ouse  #11/54.0191/-1.1459
                                 name_minzoom = 10
                             else
-                                if ( passedt.way_area > 600000 ) then    -- DSDA Kineton  #13/52.15108/-1.47155
-                                    fill_minzoom = 10                    -- RAF Digby #15/53.09978/-0.44352
+                                if ( passedt.way_area > 600000 ) then    -- RAF Digby #15/53.09978/-0.44352
+                                    fill_minzoom = 10
                                     name_minzoom = 11
                                 else
-                                    if ( passedt.way_area > 300000 ) then   -- RAF Fylingdales  #15/54.35919/-0.66785
+                                    if ( passedt.way_area > 300000 ) then  -- RAF Fylingdales  #15/54.35919/-0.66785
                                         fill_minzoom = 10
                                         name_minzoom = 12
                                     else
