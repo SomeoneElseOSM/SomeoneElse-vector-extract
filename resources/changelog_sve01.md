@@ -1,8 +1,8 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
-Farmland, forest, grass, meadow and residential in the `land1` layer (which is most of it) is now extracted at a range of zoom levels between 8 and 14, with names extracted between 10 and 14.
+## 08/03/2025
+Farmland, farmgrass, farmyard, forest, grass, meadow and residential in the `land1` layer (which is most of it) is now extracted at a range of zoom levels between 8 and 14, with names extracted between 10 and 14.
 Reduced the threshold for military extraction at zoom 9.
 
 ## 07/03/2025

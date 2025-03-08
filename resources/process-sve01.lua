@@ -2970,6 +2970,8 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "meadowwildflower"          ) or
             ( passedt.landuse == "wetmeadow"                 ) or
             ( passedt.landuse == "meadowperpetual"           ) or
+            ( passedt.landuse == "farmyard"                  ) or
+            ( passedt.landuse == "farmgrass"                 ) or
             ( passedt.landuse == "grass"                     )) then
             if ( passedt.way_area > 800000 ) then
                 fill_minzoom = 9
@@ -3001,9 +3003,7 @@ function render_landuse_land1( passedt )
 
             write_polygon_and_centroid_2( "land1", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
         else
-            if (( passedt.landuse == "farmyard"                  ) or
-                ( passedt.landuse == "farmgrass"                 ) or
-                ( passedt.landuse == "retail"                    ) or
+            if (( passedt.landuse == "retail"                    ) or
                 ( passedt.landuse == "brownfield"                ) or
                 ( passedt.landuse == "greenfield"                ) or
                 ( passedt.landuse == "construction"              ) or
@@ -3103,7 +3103,7 @@ function render_landuse_land1( passedt )
                         end -- landuse=garages 11
                     end -- landuse=quarry 10
                 end -- landuse=recreation_ground 6-14
-            end -- landuse=grass etc. 9
+            end -- old everything at 9
         end -- landuse=industrial etc. 9-13
     end -- landuse=forest 8
 end -- render_landuse_land1()
