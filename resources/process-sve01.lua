@@ -2964,7 +2964,8 @@ function render_landuse_land1( passedt )
         if (( passedt.landuse == "industrial"                ) or
             ( passedt.landuse == "railway"                   ) or
             ( passedt.landuse == "commercial"                ) or
-            ( passedt.landuse == "residential"               )) then
+            ( passedt.landuse == "residential"               ) or
+            ( passedt.landuse == "grass"                     )) then
             if ( passedt.way_area > 800000 ) then
                 fill_minzoom = 9
                 name_minzoom = 11
@@ -2995,8 +2996,7 @@ function render_landuse_land1( passedt )
 
             write_polygon_and_centroid_2( "land1", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
         else
-            if (( passedt.landuse == "grass"                     ) or
-                ( passedt.landuse == "meadow"                    ) or
+            if (( passedt.landuse == "meadow"                    ) or
                 ( passedt.landuse == "wetmeadow"                 ) or
                 ( passedt.landuse == "farmyard"                  ) or
                 ( passedt.landuse == "farmgrass"                 ) or
