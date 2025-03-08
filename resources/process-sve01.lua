@@ -2885,7 +2885,30 @@ function render_historic_land1( passedt )
         if ( passedt.way_area > 0 ) then
             Layer( "land1", true )
             Attribute( "class", "landuse_historic" )
-            MinZoom( 14 )
+
+            if ( passedt.way_area > 800000 ) then
+                minzoom = 9
+            else
+                if ( passedt.way_area > 141284 ) then
+                    minzoom = 9
+                else
+                    if ( passedt.way_area > 71668 ) then
+                        minzoom = 10
+                    else
+                        if ( passedt.way_area > 12853 ) then
+                            minzoom = 11
+                        else
+                            if ( passedt.way_area > 2584 ) then
+                                minzoom = 12
+                            else
+                                minzoom = 13
+                            end
+                        end
+                    end
+                end
+            end
+
+            MinZoom( minzoom )
         end
 
         LayerAsCentroid( "land1" )
@@ -2965,6 +2988,7 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "railway"                   ) or
             ( passedt.landuse == "commercial"                ) or
             ( passedt.landuse == "residential"               ) or
+            ( passedt.landuse == "historic"                  ) or
             ( passedt.landuse == "meadow"                    ) or
             ( passedt.landuse == "meadowtransitional"        ) or
             ( passedt.landuse == "meadowwildflower"          ) or
@@ -3008,7 +3032,6 @@ function render_landuse_land1( passedt )
                 ( passedt.landuse == "greenfield"                ) or
                 ( passedt.landuse == "construction"              ) or
                 ( passedt.landuse == "landfill"                  ) or
-                ( passedt.landuse == "historic"                  ) or
                 ( passedt.landuse == "orchard"                   ) or
                 ( passedt.landuse == "saltmarsh"                 ) or
                 ( passedt.landuse == "reedbed"                   ) or
