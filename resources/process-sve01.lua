@@ -3191,19 +3191,54 @@ function render_leisure_land1( passedt )
 
         write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, minzoom )
     else
-        if ((  passedt.leisure == "common"            ) or
-            (  passedt.leisure == "dog_park"          ) or
-            (  passedt.leisure == "park"              ) or
-            (  passedt.leisure == "recreation_ground" ) or
+        if ((  passedt.leisure == "park"              ) or
+            (  passedt.leisure == "common"            ) or
             (  passedt.leisure == "garden"            ) or
-            (  passedt.leisure == "golfgreen"         ) or
-            (  passedt.leisure == "golf_course"       ) or
-            (  passedt.leisure == "sports_centre"     ) or
-            (  passedt.leisure == "stadium"           ) or
-            (  passedt.leisure == "pitch"             ) or
-            (( passedt.leisure == "track"            )  and
-             ( passedt.area    ~= "no"               )  and
-             ( passedt.is_closed                     ))) then
+            (  passedt.leisure == "golfgreen"         )) then
+            if ( passedt.way_area > 1600000 ) then
+                fill_minzoom = 8
+                name_minzoom = 10
+            else
+                if ( passedt.way_area > 800000 ) then
+                    fill_minzoom = 9
+                    name_minzoom = 11
+                else
+                    if ( passedt.way_area > 141284 ) then
+                        fill_minzoom = 9
+                        name_minzoom = 12
+                    else
+                        if ( passedt.way_area > 71668 ) then
+                            fill_minzoom = 10
+                            name_minzoom = 13
+                        else
+                            if ( passedt.way_area > 12853 ) then
+                                fill_minzoom = 11
+                                name_minzoom = 14
+                            else
+                                if ( passedt.way_area > 2584 ) then
+                                    fill_minzoom = 12
+                                    name_minzoom = 14 -- shown at 15 via style .json
+                                else
+                                    fill_minzoom = 13
+                                    name_minzoom = 14 -- shown at 16 via style .json
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+
+            write_polygon_and_centroid_2( "land1", passedt, "leisure_", passedt.leisure, fill_minzoom, name_minzoom )
+        else
+            if ((  passedt.leisure == "dog_park"          ) or
+                (  passedt.leisure == "recreation_ground" ) or
+                (  passedt.leisure == "golf_course"       ) or
+                (  passedt.leisure == "sports_centre"     ) or
+                (  passedt.leisure == "stadium"           ) or
+                (  passedt.leisure == "pitch"             ) or
+                (( passedt.leisure == "track"            )  and
+                 ( passedt.area    ~= "no"               )  and
+                 ( passedt.is_closed                     ))) then
 -- ----------------------------------------------------------------------------
 -- These features range in size from the huge polygons to single nodes.
 -- The largest ones are included in relatively low zoom level tiles, but it
@@ -3217,33 +3252,33 @@ function render_leisure_land1( passedt )
 -- written, so that the fill and the outline of the feature appears first, and
 -- then the name.
 -- ----------------------------------------------------------------------------
-            if ( passedt.way_area > 141284 ) then
-                minzoom = 9
-            else
-                if ( passedt.way_area > 71668 ) then
-                    minzoom = 10
+                if ( passedt.way_area > 141284 ) then
+                    minzoom = 9
                 else
-                    if ( passedt.way_area > 12853 ) then
-                        minzoom = 11
+                    if ( passedt.way_area > 71668 ) then
+                        minzoom = 10
                     else
-                        if ( passedt.way_area > 2584 ) then
-                            minzoom = 12
+                        if ( passedt.way_area > 12853 ) then
+                            minzoom = 11
                         else
-                            minzoom = 13
+                            if ( passedt.way_area > 2584 ) then
+                                minzoom = 12
+                            else
+                                minzoom = 13
+                            end
                         end
                     end
                 end
-            end
 
-            write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, minzoom )
-        else
-            if (( passedt.leisure == "playground" ) or
-                ( passedt.leisure == "schoolyard" )) then
-                write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 12 )
+                write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, minzoom )
             else
-                if ( passedt.leisure == "swimming_pool" ) then
-                    write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 13 )
+                if (( passedt.leisure == "playground" ) or
+                    ( passedt.leisure == "schoolyard" )) then
+                    write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 12 )
                 else
+                    if ( passedt.leisure == "swimming_pool" ) then
+                        write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 13 )
+                    else
 -- ----------------------------------------------------------------------------
 -- Although you might not expect leisure=leisurenonspecific to have a fill at 
 -- all, a polygon is written out just in case.  The example svwd01 rendering
@@ -3251,32 +3286,33 @@ function render_leisure_land1( passedt )
 -- An example is https://www.openstreetmap.org/way/954878523 - there the 
 -- surface=grass (written out to "land2") is shown as green.
 -- ----------------------------------------------------------------------------
-                    if (( passedt.leisure == "leisurenonspecific" ) or
-                        ( passedt.leisure == "hunting_stand"      )) then
-                        write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 14 )
-                    else
+                        if (( passedt.leisure == "leisurenonspecific" ) or
+                            ( passedt.leisure == "hunting_stand"      )) then
+                            write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, 14 )
+                        else
 -- ----------------------------------------------------------------------------
 -- These are considered by the code "not large" landuse areas and get the name
 -- written as part of the name feature.
 -- ----------------------------------------------------------------------------
-                        if (( passedt.leisure == "bandstand"          ) or
-                            ( passedt.leisure == "bleachers"          ) or
-                            ( passedt.leisure == "fitness_station"    ) or
-                            ( passedt.leisure == "picnic_table"       ) or
-                            ( passedt.leisure == "slipway"            ) or
-                            ( passedt.leisure == "bird_hide"          ) or
-                            ( passedt.leisure == "grouse_butt"        )) then
-                            Layer( "land1", true )
-                            Attribute( "class", "leisure_" .. passedt.leisure )
-                            append_name( passedt )
-                            MinZoom( 14 )
-                        else
-                            render_military_land1( passedt )
-                        end -- leisure=bandstand etc. 14
-                    end -- leisure=leisurenonspecific 14
-                end -- leisure=swimming_pool etc. 13
-            end -- leisure=playground etc.  12
-        end -- leisure=common etc. 9
+                            if (( passedt.leisure == "bandstand"          ) or
+                                ( passedt.leisure == "bleachers"          ) or
+                                ( passedt.leisure == "fitness_station"    ) or
+                                ( passedt.leisure == "picnic_table"       ) or
+                                ( passedt.leisure == "slipway"            ) or
+                                ( passedt.leisure == "bird_hide"          ) or
+                                ( passedt.leisure == "grouse_butt"        )) then
+                                Layer( "land1", true )
+                                Attribute( "class", "leisure_" .. passedt.leisure )
+                                append_name( passedt )
+                                MinZoom( 14 )
+                            else
+                                render_military_land1( passedt )
+                            end -- leisure=bandstand etc. 14
+                        end -- leisure=leisurenonspecific 14
+                    end -- leisure=swimming_pool etc. 13
+                end -- leisure=playground etc.  12
+            end -- leisure=dog_park etc. 9-13
+        end -- leisure=park etc. 9-13
     end -- leisure=nature_reserve 6
 end -- render_leisure_land1()
 
@@ -3824,7 +3860,30 @@ function render_landuse_land2( passedt )
             ( passedt.landuse == "unnamedothercemetery"      )) then
             Layer( "land2", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
-            MinZoom( 9 )
+
+            if ( passedt.way_area > 800000 ) then
+                minzoom = 9
+            else
+                if ( passedt.way_area > 141284 ) then
+                    minzoom = 9
+                else
+                    if ( passedt.way_area > 71668 ) then
+                        minzoom = 10
+                    else
+                        if ( passedt.way_area > 12853 ) then
+                            minzoom = 11
+                        else
+                            if ( passedt.way_area > 2584 ) then
+                                minzoom = 12
+                            else
+                                minzoom = 13
+                            end
+                        end
+                    end
+                end
+            end
+
+            MinZoom( minzoom )
         else
 -- ----------------------------------------------------------------------------
 -- For large landuse areas we write the polygon out without the name, and then
