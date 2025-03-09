@@ -2602,7 +2602,41 @@ function render_man_made_land1( passedt )
                 if (( passedt.man_made == "power"       ) or
                     ( passedt.man_made == "power_water" ) or
                     ( passedt.man_made == "power_wind"  )) then
-                    write_polygon_and_centroid( "land1", passedt, "man_made_", passedt.man_made, 8 )
+
+                    if ( passedt.way_area > 1500000 ) then
+                        fill_minzoom = 9
+                        name_minzoom = 11
+                    else
+                        if ( passedt.way_area > 600000 ) then
+                            fill_minzoom = 9
+                            name_minzoom = 12
+                        else
+                            if ( passedt.way_area > 160000 ) then
+                                fill_minzoom = 10
+                                name_minzoom = 13
+                            else
+                                if ( passedt.way_area > 40000 ) then
+                                    fill_minzoom = 11
+                                    name_minzoom = 14  -- the style .json will handle this
+                                else
+                                    if ( passedt.way_area > 19000 ) then
+                                        fill_minzoom = 12
+                                        name_minzoom = 14
+                                    else
+                                        if ( passedt.way_area > 750 ) then
+                                            fill_minzoom = 13
+                                            name_minzoom = 14
+                                        else
+                                            fill_minzoom = 14
+                                            name_minzoom = 14
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+
+                    write_polygon_and_centroid_2( "land1", passedt, "man_made_", passedt.man_made, fill_minzoom, name_minzoom )
                 else
 -- ----------------------------------------------------------------------------
 -- These are all extracted at zoom 14 but may not get displayed until 
