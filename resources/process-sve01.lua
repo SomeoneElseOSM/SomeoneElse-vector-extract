@@ -3016,6 +3016,10 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "railway"                   ) or
             ( passedt.landuse == "commercial"                ) or
             ( passedt.landuse == "residential"               ) or
+            ( passedt.landuse == "retail"                    ) or
+            ( passedt.landuse == "construction"              ) or
+            ( passedt.landuse == "brownfield"                ) or
+            ( passedt.landuse == "landfill"                  ) or
             ( passedt.landuse == "historic"                  ) or
             ( passedt.landuse == "meadow"                    ) or
             ( passedt.landuse == "meadowtransitional"        ) or
@@ -3055,11 +3059,7 @@ function render_landuse_land1( passedt )
 
             write_polygon_and_centroid_2( "land1", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
         else
-            if (( passedt.landuse == "retail"                    ) or
-                ( passedt.landuse == "brownfield"                ) or
-                ( passedt.landuse == "greenfield"                ) or
-                ( passedt.landuse == "construction"              ) or
-                ( passedt.landuse == "landfill"                  ) or
+            if (( passedt.landuse == "greenfield"                ) or
                 ( passedt.landuse == "orchard"                   ) or
                 ( passedt.landuse == "saltmarsh"                 ) or
                 ( passedt.landuse == "reedbed"                   ) or
