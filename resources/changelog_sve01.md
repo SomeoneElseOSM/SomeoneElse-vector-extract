@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased.
+## 09/03/2025
 Historic now extracted at a range of zoom levels also based on way_area.
 Education and hospitals in the `land1` layer are now extracted at a range of zoom levels between 8 and 14, with names extracted between 10 and 14.  Also retail, construction, brownfield, landfill, orchard, vineyard.
 
