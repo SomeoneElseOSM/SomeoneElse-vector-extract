@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased.
 Historic now extracted at a range of zoom levels also based on way_area.
+Education and hospitals in the `land1` layer are now extracted at a range of zoom levels between 8 and 14, with names extracted between 10 and 14.
 
 ## 08/03/2025
 Farmland, farmgrass, farmyard, forest, grass, meadow and residential in the `land1` layer (which is most of it) is now extracted at a range of zoom levels between 8 and 14, with names extracted between 10 and 14.

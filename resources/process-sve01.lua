@@ -2199,7 +2199,35 @@ function render_amenity_land1( passedt )
             ( passedt.amenity == "school"               ) or
             ( passedt.amenity == "hospital"             ) or
             ( passedt.amenity == "kindergarten"         )) then
-            write_polygon_and_centroid( "land1", passedt, "amenity_", passedt.amenity, 9 )
+            if ( passedt.way_area > 800000 ) then
+                fill_minzoom = 9
+                name_minzoom = 11
+            else
+                if ( passedt.way_area > 141284 ) then
+                    fill_minzoom = 9
+                    name_minzoom = 12
+                else
+                    if ( passedt.way_area > 71668 ) then
+                        fill_minzoom = 10
+                        name_minzoom = 13
+                    else
+                        if ( passedt.way_area > 12853 ) then
+                            fill_minzoom = 11
+                            name_minzoom = 14
+                        else
+                            if ( passedt.way_area > 2584 ) then
+                                fill_minzoom = 12
+                                name_minzoom = 14
+                            else
+                                fill_minzoom = 13
+                                name_minzoom = 14
+                            end
+                        end
+                    end
+                end
+            end
+
+            write_polygon_and_centroid_2( "land1", passedt, "amenity_", passedt.amenity, fill_minzoom, name_minzoom )
         else
             if (( passedt.amenity == "holy_spring"                ) or
                 ( passedt.amenity == "holy_well"                  ) or
