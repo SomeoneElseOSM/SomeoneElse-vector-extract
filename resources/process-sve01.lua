@@ -3028,7 +3028,13 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "meadowperpetual"           ) or
             ( passedt.landuse == "farmyard"                  ) or
             ( passedt.landuse == "farmgrass"                 ) or
-            ( passedt.landuse == "grass"                     )) then
+            ( passedt.landuse == "grass"                     ) or
+            ( passedt.landuse == "christiancemetery"         ) or
+            ( passedt.landuse == "jewishcemetery"            ) or
+            ( passedt.landuse == "othercemetery"             ) or
+            ( passedt.landuse == "orchard"                   ) or
+            ( passedt.landuse == "vineyard"                  ) or
+            ( passedt.landuse == "allotments"                )) then
             if ( passedt.way_area > 800000 ) then
                 fill_minzoom = 9
                 name_minzoom = 11
@@ -3060,13 +3066,8 @@ function render_landuse_land1( passedt )
             write_polygon_and_centroid_2( "land1", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
         else
             if (( passedt.landuse == "greenfield"                ) or
-                ( passedt.landuse == "orchard"                   ) or
                 ( passedt.landuse == "saltmarsh"                 ) or
-                ( passedt.landuse == "reedbed"                   ) or
-                ( passedt.landuse == "allotments"                ) or
-                ( passedt.landuse == "christiancemetery"         ) or
-                ( passedt.landuse == "jewishcemetery"            ) or
-                ( passedt.landuse == "othercemetery"             )) then
+                ( passedt.landuse == "reedbed"                   )) then
 -- ----------------------------------------------------------------------------
 -- These features range in size from the huge polygons to single nodes.
 -- The largest ones are included in relatively low zoom level tiles, but it
@@ -3142,15 +3143,11 @@ function render_landuse_land1( passedt )
                             append_name( passedt )
                             MinZoom( 11 )
                         else
-                            if ( passedt.landuse == "vineyard" ) then
-                                write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 12 )
+                            if ( passedt.landuse == "industrialbuilding" ) then
+                                write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 14 )
                             else
-                                if ( passedt.landuse == "industrialbuilding" ) then
-                                    write_polygon_and_centroid( "land1", passedt, "landuse_", passedt.landuse, 14 )
-                                else
-                                    render_leisure_land1( passedt )
-                                end -- landuse=industrialbuilding
-                            end -- landuse=vineyard 12
+                                render_leisure_land1( passedt )
+                            end -- landuse=industrialbuilding
                         end -- landuse=garages 11
                     end -- landuse=quarry 10
                 end -- landuse=recreation_ground 6-14
