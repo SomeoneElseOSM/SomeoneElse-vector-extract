@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Mud, scree, heath, scrube etc. are now extracted at a wider range of zoom levels,
+
 ## 09/03/2025
 Parks etc. are now extracted at a range of zoom levels also based on way_area.
 Lots of power infrastructure is now extracted at a range of zoom levels also based on way_area.
