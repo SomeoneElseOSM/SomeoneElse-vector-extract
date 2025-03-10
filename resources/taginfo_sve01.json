@@ -2924,7 +2924,6 @@
     { "key": "shop", "value": "linen", "description": "Various shops extracted" },
     { "key": "shop", "value": "linens", "description": "Various shops extracted" },
     { "key": "shop", "value": "livestock", "description": "Various shops extracted" },
-    { "key": "shop", "value": "loan_shark", "description": "Various shops extracted" },
     { "key": "shop", "value": "locksmith", "description": "Various shops extracted" },
     { "key": "shop", "value": "locksmith;dry_cleaning;shoe_repair", "description": "Not a current value in OSM data.  Extracted as shoe_repair_etc" },
     { "key": "shop", "value": "lottery", "description": "Various shops extracted" },

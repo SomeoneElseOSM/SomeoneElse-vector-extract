@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Mud, scree, heath, scrube etc. are now extracted at a wider range of zoom levels,
+Removed `shop=loan_shark`.  No longer in the data.
 
 ## 09/03/2025
 Parks etc. are now extracted at a range of zoom levels also based on way_area.
