@@ -6,6 +6,7 @@ Mud, scree, heath, scrube etc. are now extracted at a wider range of zoom levels
 Removed `shop=loan_shark`.  No longer in the data.
 Removed `crossing=light_controlled`.  No longer in the data.
 Removed `landmark=windsock`.  No longer in the data.
+Added `shop=e-cigarette;convenience` as a synonym for `e-cigarette`, and various other similar synonyms.
 
 ## 09/03/2025
 Parks etc. are now extracted at a range of zoom levels also based on way_area.
