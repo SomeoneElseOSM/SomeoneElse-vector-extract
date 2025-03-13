@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Shorten some brand names if another name exists.
+Suppress overly long (> 40 characters) brands and operators.
 
 ## 13/03/2025
 Mud, scree, heath, scrub etc. are now extracted at a wider range of zoom levels,
