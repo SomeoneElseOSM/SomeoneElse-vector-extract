@@ -2,8 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Shorten some brand names if another name exists.
+Shorten some brand names, usually if another name exists.
 Suppress overly long (> 40 characters) brands and operators.
+Shorten some names, where a rare longer version is used in place of a common shorter one.
 
 ## 13/03/2025
 Mud, scree, heath, scrub etc. are now extracted at a wider range of zoom levels,
