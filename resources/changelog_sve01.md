@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 More National Trail name consolidation and shields, including South West Coast Path.
+Also consolidate some some RWN section names.
 
 ## 16/03/2025
 Shorten some brand names, usually if another name exists.

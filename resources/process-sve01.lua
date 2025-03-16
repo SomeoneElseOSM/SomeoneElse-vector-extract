@@ -727,6 +727,13 @@ function rf_2( relationt )
 -- ----------------------------------------------------------------------------
          fix_silly_nt_names_t( relationt )
 
+-- ----------------------------------------------------------------------------
+-- Some "regional" trails are also split into portions and given silly names
+-- such as "Trans-Pennine Trail (Warrington to Ashton-upon-Mersey)".
+-- We remove the silly part of the name, also in code shared with raster.
+-- ----------------------------------------------------------------------------
+         fix_silly_rwn_names_t( relationt )
+
       end  -- walking
 
 -- ----------------------------------------------------------------------------
