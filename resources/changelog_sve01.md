@@ -1,10 +1,11 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 16/03/2025
 Shorten some brand names, usually if another name exists.
 Suppress overly long (> 40 characters) brands and operators.
 Shorten some names, where a rare longer version is used in place of a common shorter one.
+Consolidate some National Trail names so that "names" like "King Charles III England Coast Path: East: Shotley Gate to Felixstowe Ferry" are shown instead as just "England Coast Path".
 
 ## 13/03/2025
 Mud, scree, heath, scrub etc. are now extracted at a wider range of zoom levels,

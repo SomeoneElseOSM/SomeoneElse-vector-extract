@@ -728,8 +728,8 @@ function rf_2( relationt )
 -- ----------------------------------------------------------------------------
          if ((( relationt.operator == "National Trails" )  or 
               ( relationt.operator == "Natural England" )) and
-             (( relationt.ref      == nil               )  or
-              ( relationt.ref      == ""                ))) then
+             (  relationt.name     ~= nil                ) and
+             (  relationt.name     ~= ""                 )) then
             if ( relationt.name == "Cleveland Way" ) then
                relationt.ref = "CW"
             end
@@ -746,10 +746,9 @@ function rf_2( relationt )
                relationt.ref = "HW"
             end
 
-            if (( relationt.name == "North Downs Way (Western)"         ) or
-                ( relationt.name == "North Downs Way (Eastern)"         ) or
-                ( relationt.name == "North Downs Way (Canterbury loop)" )) then
+            if ( string.match( relationt.name, "^North Downs Way" )) then
                relationt.ref = "NDW"
+               relationt.name = "North Downs Way"
             end
 
             if ( relationt.name == "Peddars Way" ) then
@@ -764,16 +763,9 @@ function rf_2( relationt )
                relationt.ref = "LAP"
             end
 
-            if (( relationt.name == "Pennine Way (Edale to Crowden)"                      ) or
-                ( relationt.name == "Pennine Way (Crowden to Standedge)"                  ) or
-                ( relationt.name == "Pennine Way (Standedge to Warland Reservoir)"        ) or
-                ( relationt.name == "Pennine Way"                                         ) or
-                ( relationt.name == "Pennine Way (Malham to Horton in Ribblesdale)"       ) or
-                ( relationt.name == "Pennine Way (Horton in Ribblesdale to Hawes)"        ) or
-                ( relationt.name == "Pennine Way (Hawes to Tan Hill)"                     ) or
-                ( relationt.name == "Pennine Way (Tan Hill to Middleton in Teesdale)"     ) or
-                ( relationt.name == "Pennine Way (Middleton in Teesdale to Kirk Yetholm)" )) then
+            if ( string.match( relationt.name, "^Pennine Way" )) then
                relationt.ref = "PW"
+               relationt.name = "Pennine Way"
             end
 
             if ( relationt.name == "South Downs Way" ) then
@@ -783,7 +775,14 @@ function rf_2( relationt )
             if ( relationt.name == "Yorkshire Wolds Way" ) then
                relationt.ref = "YWW"
             end
-         end -- National Trails without ref
+
+            if (( string.match( relationt.name, "^England Coast Path"                  )) or
+                ( string.match( relationt.name, "^England Coastal Path"                )) or
+                ( string.match( relationt.name, "^King Charles III England Coast Path" ))) then
+               relationt.ref = "ECP"
+               relationt.name = "England Coast Path"
+            end
+         end -- National Trails
 
       end  -- walking
 
