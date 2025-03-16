@@ -715,16 +715,13 @@ function rf_2( relationt )
          relationt.highway = "ldpnwn"
 
 -- ----------------------------------------------------------------------------
--- Where a NWN does have a known operator and doesn't have a ref, have a go at
--- constructing a ref.
---
--- In the case of "Glyndŵr's Way / Llwybr Glyndŵr" and 
--- "Pembrokeshire Coast Path / Llwybr Arfordir Penfro" the code may enounter
--- either language version depending on what is extracted and where the
--- centroid ends up, so handle both language possibilities.
---
--- There are three "Peddars Way" varients with the same name that mostly
--- follow the same route.  We only add shields for one.
+-- For the English/Welsh National trails:
+-- These have a known operator, and there are a limited number of them.
+-- * We add a "ref" here designed to be shown withing a black and white 
+--   "shield".
+-- * We also consolidate names so that "names" like "King Charles III
+--   England  Coast Path: Folkestone to Ramsgate" get changed to just 
+--   "England Coast Path"
 -- ----------------------------------------------------------------------------
          if ((( relationt.operator == "National Trails" )  or 
               ( relationt.operator == "Natural England" )) and
@@ -734,6 +731,21 @@ function rf_2( relationt )
                relationt.ref = "CW"
             end
 
+            if ( string.match( relationt.name, "^Coast to Coast" )) then
+               relationt.ref = "C2C"
+               relationt.name = "Coast to Coast"
+            end
+
+-- ----------------------------------------------------------------------------
+-- No need to do the Cotswold Way - it has sensible name and ref already.
+-- ----------------------------------------------------------------------------
+
+-- ----------------------------------------------------------------------------
+-- In the case of "Glyndŵr's Way / Llwybr Glyndŵr" and 
+-- "Pembrokeshire Coast Path / Llwybr Arfordir Penfro" the code may enounter
+-- either language version depending on what is extracted and where the
+-- centroid ends up, so handle both language possibilities.
+-- ----------------------------------------------------------------------------
             if ( relationt.name == "Glyndŵr's Way" ) then
                relationt.ref = "GW"
             end
@@ -751,9 +763,22 @@ function rf_2( relationt )
                relationt.name = "North Downs Way"
             end
 
+-- ----------------------------------------------------------------------------
+-- No need to do the Offa's Dyke Path - it has sensible name and ref already.
+-- ----------------------------------------------------------------------------
+
+-- ----------------------------------------------------------------------------
+-- There are three "Peddars Way" variants with the same name that mostly
+-- follow the same route.  We only add shields for the walking one.
+-- ----------------------------------------------------------------------------
             if ( relationt.name == "Peddars Way" ) then
                relationt.ref = "PW"
             end
+
+-- ----------------------------------------------------------------------------
+-- No need to do the Norfolk Coast Path (which forms one National Trail with 
+-- the Peddars Way) - it has sensible name and ref already.
+-- ----------------------------------------------------------------------------
 
             if ( relationt.name == "Pembrokeshire Coast Path" ) then
                relationt.ref = "PCP"
@@ -763,13 +788,28 @@ function rf_2( relationt )
                relationt.ref = "LAP"
             end
 
+-- ----------------------------------------------------------------------------
+-- The Pennine Bridleway is "network=ncn;nhn;nwn" and "route=horse;mtb;hiking"
+-- so is handled below
+-- ----------------------------------------------------------------------------
+
             if ( string.match( relationt.name, "^Pennine Way" )) then
                relationt.ref = "PW"
                relationt.name = "Pennine Way"
             end
 
+-- ----------------------------------------------------------------------------
+-- There are three "South Downs Way" variants - two walking routes (one is a 
+-- partial "inland" one) and a cycle one.
+-- Only one walking route is missing a ref.
+-- ----------------------------------------------------------------------------
             if ( relationt.name == "South Downs Way" ) then
                relationt.ref = "SDW"
+            end
+
+            if ( string.match( relationt.name, "^South West Coast Path" )) then
+               relationt.ref = "SWCP"
+               relationt.name = "South West Coast Path"
             end
 
             if ( relationt.name == "Yorkshire Wolds Way" ) then
@@ -854,6 +894,9 @@ function rf_2( relationt )
 
 -- ----------------------------------------------------------------------------
 -- Horse networks
+--
+-- One English/Welsh National Trail is in this category, the Pennine Bridleway,
+-- That already has sensible name and ref so we do not need to add those here.
 -- ----------------------------------------------------------------------------
       if (( relationt.network == "nhn"         ) or
           ( relationt.network == "rhn"         )  or

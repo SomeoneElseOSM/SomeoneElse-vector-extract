@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+More National Trail name consolidation and shields, including South West Coast Path.
+
 ## 16/03/2025
 Shorten some brand names, usually if another name exists.
 Suppress overly long (> 40 characters) brands and operators.
