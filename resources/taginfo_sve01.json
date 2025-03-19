@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250316T123201Z",
+  "data_updated": "20250319T134301Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1677,9 +1677,8 @@
     { "key": "landcover", "description": "In most cases, obscure synonym for landuse" },
     { "key": "landcover", "value": "grass", "description": "An obscure synonym for landuse=grass" },
     { "key": "landcover", "value": "trees", "description": "An obscure synonym for natural=wood" },
-    { "key": "landmark", "description": "Beacons and obelisks" },
+    { "key": "landmark", "description": "Beacons" },
     { "key": "landmark", "value": "beacon", "description": "Extracted as historic nonspecific" },
-    { "key": "landmark", "value": "obelisk", "description": "Extracted as obelisk" },
     { "key": "landuse", "description": "Various 'landuse' values written into 'land1' (mostly named) and 'land2' (mostly unnamed) layers" },
     { "key": "landuse", "value": "allotments", "description": "Written into 'land1' or 'land2' at minzoom 9; centroid for name written seperately" },
     { "key": "landuse", "value": "animal_keeping", "description": "Extracted as 'farmgrass'" },

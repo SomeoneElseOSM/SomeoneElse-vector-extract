@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Removed `landmark=obelisk`.  No longer in the data.
+
 ## 17/03/2025
 More National Trail name consolidation and shields, including South West Coast Path.
 Also consolidate some some RWN section names.
