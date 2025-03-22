@@ -1374,6 +1374,7 @@
     { "key": "highway", "value": "corridor", "description": "Extracted as narrow path based on designation" },
     { "key": "highway", "value": "crossing", "description": "Extracted as crossing" },
     { "key": "highway", "value": "cycleway", "description": "Extracted as narrow path based on designation" },
+    { "key": "highway", "value": "elevator", "description": "Extracted as elevator" },
     { "key": "highway", "value": "emergency_bay", "description": "Extracted as private parking" },
     { "key": "highway", "value": "emergency_access_point", "description": "Extracted as emergency access point" },
     { "key": "highway", "value": "escape", "description": "Extracted as access=destination service road" },

@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Extract `highway=elevator` nodes and ways, with a name if present.
+
+## 22/03/2025
 Removed `landmark=obelisk`.  No longer in the data.
 Use `animal=yes` to detect `farmgrass`.
 

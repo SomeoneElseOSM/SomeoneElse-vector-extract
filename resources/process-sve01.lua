@@ -2716,6 +2716,7 @@ function render_highway_land1( passedt )
                 ( passedt.highway == "bus_stop_realtime"         ) or
                 ( passedt.highway == "bus_stop_speech_timetable" ) or
                 ( passedt.highway == "bus_stop_speech_realtime"  ) or
+                ( passedt.highway == "elevator"                  ) or
                 ( passedt.highway == "traffic_signals"           ) or
                 ( passedt.highway == "streetlamp_electric"       ) or
                 ( passedt.highway == "streetlamp_gas"            ) or
