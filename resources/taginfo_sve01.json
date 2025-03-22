@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250319T134301Z",
+  "data_updated": "20250322T181801Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -382,6 +382,7 @@
     { "key": "animal", "value": "sheep", "description": "Detect meadows as agricultural" },
     { "key": "animal", "value": "shelter", "description": "Extracted as animal shop, name incorporates brand" },
     { "key": "animal", "value": "wellness", "description": "Extracted as animal shop, name incorporates brand" },
+    { "key": "animal", "value": "yes", "description": "Detect meadows as agricultural" },
     { "key": "archaeological_site", "description": "Extract different archaeological sites differently" },
     { "key": "archaeological_site", "value": "castle", "description": "Not an expected value in OSM data.  Extract castle with a unique value; centroid for name written seperately" },
     { "key": "archaeological_site", "value": "crannog", "description": "Extract crannog with a unique value; centroid for name written seperately" },

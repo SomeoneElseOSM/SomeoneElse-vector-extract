@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Removed `landmark=obelisk`.  No longer in the data.
+Use `animal=yes` to detect `farmgrass`.
 
 ## 17/03/2025
 More National Trail name consolidation and shields, including South West Coast Path.
