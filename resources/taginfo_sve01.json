@@ -3419,6 +3419,8 @@
     { "key": "status", "value": "abandoned", "description": "Handle as a synonym for 'disused=yes'" },
     { "key": "status", "value": "locked", "description": "Detect locked gates" },
     { "key": "stone_type", "description": "Potentially used to identify standing and Ogham stones" },
+    { "key": "substance", "description": "Detect non-pipeline pipelines" },
+    { "key": "substance", "value": "gas_topology", "description": "Detect non-pipeline pipelines" },
     { "key": "support", "description": "Clock towers and pedestal clocks" },
     { "key": "support", "value": "column", "description": "Detect clock towers and pedestal clocks" },
     { "key": "support", "value": "pedestal", "description": "Detect clock towers and pedestal clocks" },
