@@ -1405,6 +1405,7 @@
     { "key": "highway", "value": "street_lamp", "description": "Extracted as street lamp (gas or electric, depending on other tags)" },
     { "key": "highway", "value": "tertiary", "description": "Extracted as tertiary" },
     { "key": "highway", "value": "tertiary_link", "description": "Extracted as tertiary" },
+    { "key": "highway", "value": "toll_booth", "description": "Shown as a toll gantry" },
     { "key": "highway", "value": "track", "description": "Extracted as wide path based on designation" },
     { "key": "highway", "value": "traffic_signals", "description": "Extracted as traffic signals" },
     { "key": "highway", "value": "trailhead", "description": "Extracted as route marker" },

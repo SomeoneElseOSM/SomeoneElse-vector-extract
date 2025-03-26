@@ -3600,6 +3600,7 @@ function render_barrier_land1( passedt )
         (  passedt.barrier == "bollard"         ) or
         (  passedt.barrier == "lift_gate"       ) or
         (  passedt.barrier == "toll_booth"      ) or
+        (  passedt.barrier == "toll_gantry"     ) or
         (  passedt.barrier == "door"            ) or
         (( passedt.barrier == "hedge"          )  and
          ( passedt.is_closed                   ))) then

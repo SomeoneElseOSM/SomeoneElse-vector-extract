@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Suppress `substance=gas_topology`.  Not really a pipeline.
+Extract `highway=toll_gantry` as `barrier=toll_gantry`.
 
 ## 23/03/2025
 Extract `highway=elevator` nodes and ways, with a name if present.
