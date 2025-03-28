@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250326T213801Z",
+  "data_updated": "20250328T105001Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1260,8 +1260,7 @@
     { "key": "gambling", "value": "bingo", "description": "Detect bingo halls" },
     { "key": "garden", "description": "Detect beer gardens" },
     { "key": "garden", "value": "beer_garden", "description": "Detect beer gardens" },
-    { "key": "gate", "description": "Detect kissing gates, and locked gates" },
-    { "key": "gate", "value": "kissing", "description": "Detect kissing gates" },
+    { "key": "gate", "description": "Detect locked gates" },
     { "key": "gate", "value": "locked", "description": "Detect locked gates and show them with a different value" },
     { "key": "generator:method", "description": "Detect wind turbines" },
     { "key": "generator:method", "value": "photovoltaic", "description": "Detect solar panels" },
