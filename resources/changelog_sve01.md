@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Consolidate more RWN section names.
 Removed `gate=kissing`.  No longer in the data.
+Append "£" to toll roads and paths as if it was an official ref.
 
 ## 26/03/2025
 Suppress `substance=gas_topology`.  Not really a pipeline.
