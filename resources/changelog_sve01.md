@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Consolidate more RWN section names.
+
+## 26/03/2025
 Suppress `substance=gas_topology`.  Not really a pipeline.
 Extract `highway=toll_gantry` as `barrier=toll_gantry`.
 
