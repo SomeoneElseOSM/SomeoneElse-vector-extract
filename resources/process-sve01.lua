@@ -2402,6 +2402,12 @@ function render_amenity_land1( passedt )
                         Layer( "land1", true )
                         Attribute( "class", "amenity_" .. passedt.amenity )
                         append_name( passedt )
+
+                        if (( passedt.ele ~= nil ) and
+                            ( passedt.ele ~= ""  )) then
+                            Attribute( "ele", passedt.ele )
+                        end
+
                         MinZoom( 14 )
                     else
 -- ----------------------------------------------------------------------------

@@ -1,10 +1,11 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 28/03/2025
 Consolidate more RWN section names.
 Removed `gate=kissing`.  No longer in the data.
 Append "£" to toll roads and paths as if it was an official ref.
+Extract the `website` along with the `name` on `amenity=charging_station`.
 
 ## 26/03/2025
 Suppress `substance=gas_topology`.  Not really a pipeline.
