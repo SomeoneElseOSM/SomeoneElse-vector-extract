@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250328T105001Z",
+  "data_updated": "20250330T111501Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1641,7 +1641,6 @@
     { "key": "information", "value": "interpretation", "description": "Extracted as information board" },
     { "key": "information", "value": "interpretive_board", "description": "Extracted as information board" },
     { "key": "information", "value": "kiosk", "description": "Extracted as information office" },
-    { "key": "information", "value": "leaflet_board", "description": "Extracted as information board" },
     { "key": "information", "value": "leaflets", "description": "Extracted as information board" },
     { "key": "information", "value": "map and posters", "description": "Extracted as information board" },
     { "key": "information", "value": "map", "description": "Extracted as information board" },
