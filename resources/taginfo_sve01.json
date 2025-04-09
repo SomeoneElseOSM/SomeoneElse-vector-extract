@@ -3303,7 +3303,6 @@
     { "key": "sport", "value": "athletics", "description": "Extract 'athletics' value on sports pitches" },
     { "key": "sport", "value": "athletics;soccer", "description": "Extract 'athletics' value on sports pitches" },
     { "key": "sport", "value": "baseball", "description": "Extract 'baseball' value on sports pitches" },
-    { "key": "sport", "value": "baseball;american_football;ice_hockey;basketball", "description": "Extract 'baseball' value on sports pitches" },
     { "key": "sport", "value": "baseball;cricket", "description": "Extract 'baseball' value on sports pitches" },
     { "key": "sport", "value": "baseball;lacrosse;multi", "description": "Extract 'baseball' value on sports pitches" },
     { "key": "sport", "value": "baseball;soccer", "description": "Extract 'baseball' value on sports pitches" },
