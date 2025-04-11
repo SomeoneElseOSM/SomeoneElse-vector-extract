@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250330T111501Z",
+  "data_updated": "20250411T103501Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3558,7 +3558,7 @@
     { "key": "trail_visibility", "value": "medium", "description": "Processed as synonym for 'intermediate'.  Make intermediate etc. trails different" },
     { "key": "trail_visibility", "value": "nil", "description": "Processed as synonym for 'no'.  Make intermediate etc. trails different" },
     { "key": "trail_visibility", "value": "no", "description": "Make intermediate etc. trails different" },
-    { "key": "trail_visibility", "value": "none", "description": "Processed as synonym for 'no'.  Make intermediate etc. trails different" },
+    { "key": "trail_visibility", "value": "none", "description": "Not a current value in OSM data. Processed as synonym for 'no'.  Make intermediate etc. trails different" },
     { "key": "trail_visibility", "value": "poor", "description": "Processed as synonym for 'bad'.  Make intermediate etc. trails different" },
     { "key": "trail_visibility", "value": "very_bad", "description": "Processed as synonym for 'horrible'.  Make intermediate etc. trails different" },
     { "key": "training", "description": "Detect training" },
