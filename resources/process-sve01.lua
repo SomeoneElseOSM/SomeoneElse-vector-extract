@@ -214,7 +214,18 @@ function node_function()
             break 
          end
 
-         local relation_name = FindInRelation( "name" )
+-- ------------------------------------------------------------------------------
+-- We're processing a relation in the list that this node is a member of, but
+-- it might have a silly name.  We have a couple of "fix_silly_..." functions to
+-- change known examples of those to sensible versions, so create a lua table 
+-- with the information they need to be able to do that.
+-- ------------------------------------------------------------------------------
+         local relation_namet = {}
+         relation_namet.name = FindInRelation( "name" )
+         relation_namet.operator = FindInRelation( "operator" )
+         fix_silly_nt_names_t( relation_namet )
+         fix_silly_rwn_names_t( relation_namet )
+
          local relation_ref = FindInRelation( "ref" )
          local relation_network = FindInRelation( "network" )
 
@@ -223,15 +234,15 @@ function node_function()
 -- ------------------------------------------------------------------------------
          if (( relation_network == "iwn" ) and
              ( relation_ref     ~= nil   )) then
-            relation_name = relation_ref
+            relation_namet.name = relation_ref
          end
 
 -- ------------------------------------------------------------------------------
 -- ... and we use name rather than ref on the "special cased" lcns below.
 -- ------------------------------------------------------------------------------
          if (( relation_network == "lcn" ) and
-             ( relation_name    ~= nil   )) then
-            relation_ref = relation_name
+             ( relation_namet.name    ~= nil   )) then
+            relation_ref = relation_namet.name
          end
 
 -- ------------------------------------------------------------------------------
@@ -242,7 +253,7 @@ function node_function()
 -- are special-cased.
 -- ------------------------------------------------------------------------------
          if ( relation_role == "marker_brackets" ) then
-            relation_name = "(" .. relation_name .. ")"
+            relation_namet.name = "(" .. relation_namet.name .. ")"
             relation_ref = "(" .. relation_ref .. ")"
          end
 
@@ -255,13 +266,13 @@ function node_function()
               ( relation_network == "lwn"          ) or
               ( relation_network == "lwn;lcn"      ) or
               ( relation_network == "lwn;lcn;lhn"  )) and
-             (  relation_name    ~= nil             ) and
-             (  relation_name    ~= ""              ) and
-             (  relation_name    ~= "()"            )) then
+             (  relation_namet.name    ~= nil             ) and
+             (  relation_namet.name    ~= ""              ) and
+             (  relation_namet.name    ~= "()"            )) then
             if ( nodet.nwnrelationlist == "" ) then
-               nodet.nwnrelationlist = relation_name
+               nodet.nwnrelationlist = relation_namet.name
             else
-               nodet.nwnrelationlist = nodet.nwnrelationlist .. ", " .. relation_name
+               nodet.nwnrelationlist = nodet.nwnrelationlist .. ", " .. relation_namet.name
             end
          end
 
@@ -275,9 +286,9 @@ function node_function()
             nodet.nhnrelation_in_list = true
 
             if ( nodet.nwnrelationlist == "" ) then
-               nodet.nwnrelationlist = relation_name
+               nodet.nwnrelationlist = relation_namet.name
             else
-               nodet.nwnrelationlist = nodet.nwnrelationlist .. ", " .. relation_name
+               nodet.nwnrelationlist = nodet.nwnrelationlist .. ", " .. relation_namet.name
             end
          end
 
@@ -291,8 +302,8 @@ function node_function()
          if (((   relation_network == "ncn"                   ) or
               (   relation_network == "rcn"                   ) or
               ((  relation_network == "lcn"                 )  and
-               (( relation_name    == "Solar System Route" )   or
-                ( relation_name    == "Orbital Route"      )))) and
+               (( relation_namet.name    == "Solar System Route" )   or
+                ( relation_namet.name    == "Orbital Route"      )))) and
              (    relation_ref     ~= nil                     ) and
              (    relation_ref     ~= ""                      ) and
              (    relation_ref     ~= "()"                    )) then
