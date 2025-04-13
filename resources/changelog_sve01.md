@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Changed the pub floor logic to only look at the first entry in semicolon-separated list.  Added "glued gravel" as a noncarpeted floor material.
+
 ## 12/04/2025
 Expand "silly name processing" to also handle silly names on relations that a node is part of, which are available for display with the node as e.g. "nwnrelationlist".
 

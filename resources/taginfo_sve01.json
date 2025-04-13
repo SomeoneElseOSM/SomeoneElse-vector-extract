@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250411T103501Z",
+  "data_updated": "20250413T120101Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1179,6 +1179,7 @@
     { "key": "floor:material", "value": "brick", "description": "Detect noncarpeted pub floors" },
     { "key": "floor:material", "value": "brick;concrete", "description": "Detect noncarpeted pub floors" },
     { "key": "floor:material", "value": "concrete", "description": "Detect noncarpeted pub floors" },
+    { "key": "floor:material", "value": "glued gravel", "description": "Detect non-nice-carpeted pub floors" },
     { "key": "floor:material", "value": "grubby carpet", "description": "Detect non-nice-carpeted pub floors" },
     { "key": "floor:material", "value": "lino", "description": "Detect noncarpeted pub floors" },
     { "key": "floor:material", "value": "lino;carpet", "description": "Detect noncarpeted pub floors" },
