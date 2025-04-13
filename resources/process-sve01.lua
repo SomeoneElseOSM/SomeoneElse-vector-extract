@@ -1222,7 +1222,13 @@ function update_table( passedt )
     passedt.small_electric_vehicle = Find("small_electric_vehicle")
     passedt.social_facility = Find("social_facility")
     passedt.species = Find("species")
+
+-- ------------------------------------------------------------------------------
+-- Semicolons and characters after them are removed from the "sport" value here.
+-- ------------------------------------------------------------------------------
     passedt.sport = Find("sport")
+    passedt.sport = trim_after_semicolon( passedt.sport )
+
     passedt.station = Find("station")
     passedt.status = Find("status")
     passedt.substance = Find("substance")

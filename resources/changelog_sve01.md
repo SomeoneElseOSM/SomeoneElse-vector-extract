@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Changed the pub floor logic to only look at the first entry in semicolon-separated list.  Added "glued gravel" as a noncarpeted floor material.
+The first pre-semicolon value for "sport" is now used, which has a minor impact on combinations such as "multi;soccer;basketball" which previously used the first non-multi value.
 
 ## 12/04/2025
 Expand "silly name processing" to also handle silly names on relations that a node is part of, which are available for display with the node as e.g. "nwnrelationlist".
