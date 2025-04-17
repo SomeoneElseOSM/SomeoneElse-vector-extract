@@ -1032,6 +1032,7 @@ function update_table( passedt )
     passedt.emergency = Find("emergency")
     passedt.entrance = Find("entrance")
     passedt.est_width = Find("est_width")
+    passedt.expressway = Find("expressway")
     passedt.farmland = Find("farmland")
     passedt.fee = Find("fee")
     passedt.female = Find("female")
@@ -1131,6 +1132,7 @@ function update_table( passedt )
     passedt["monitoring:water_level"] = Find("monitoring:water_level")
     passedt["monitoring:water_velocity"] = Find("monitoring:water_velocity")
     passedt["monitoring:weather"] = Find("monitoring:weather")
+    passedt.motorroad = Find("motorroad")
     passedt.motor_vehicle = Find("motor_vehicle")
     passedt.munro = Find("munro")
     passedt.name = Find("name")
@@ -1214,6 +1216,9 @@ function update_table( passedt )
     passedt.service = Find("service")
     passedt.shop = Find("shop")
     passedt.shoulder = Find("shoulder")
+    passedt["shoulder:both"] = Find("shoulder:both")
+    passedt["shoulder:left"] = Find("shoulder:left")
+    passedt["shoulder:right"] = Find("shoulder:right")
     passedt.sidewalk = Find("sidewalk")
     passedt["sidewalk:both"] = Find("sidewalk:both")
     passedt["sidewalk:left"] = Find("sidewalk:left")
@@ -1760,37 +1765,42 @@ function append_edge_etc( passedt )
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
 -- ----------------------------------------------------------------------------
-    if (( passedt.sidewalk == "both"            ) or 
-        ( passedt.sidewalk == "left"            ) or 
-        ( passedt.sidewalk == "mapped"          ) or 
-        ( passedt.sidewalk == "separate"        ) or 
-        ( passedt.sidewalk == "right"           ) or 
-        ( passedt.sidewalk == "shared"          ) or 
-        ( passedt.sidewalk == "yes"             ) or
-        ( passedt["sidewalk:both"] == "separate"   ) or 
-        ( passedt["sidewalk:both"] == "yes"        ) or
-        ( passedt["sidewalk:left"] == "segregated" ) or
-        ( passedt["sidewalk:left"] == "separate"   ) or 
-        ( passedt["sidewalk:left"] == "yes"        ) or
-        ( passedt["sidewalk:right"] == "segregated" ) or 
-        ( passedt["sidewalk:right"] == "separate"  ) or 
-        ( passedt["sidewalk:right"] == "yes"       ) or
-        ( passedt.footway  == "separate"        ) or 
-        ( passedt.footway  == "yes"             ) or
-        ( passedt.shoulder == "both"            ) or
-        ( passedt.shoulder == "left"            ) or 
-        ( passedt.shoulder == "right"           ) or 
-        ( passedt.shoulder == "yes"             ) or
-        ( passedt.hard_shoulder == "yes"        ) or
-        ( passedt.cycleway == "track"           ) or
-        ( passedt.cycleway == "opposite_track"  ) or
-        ( passedt.cycleway == "yes"             ) or
-        ( passedt.cycleway == "separate"        ) or
-        ( passedt.cycleway == "sidewalk"        ) or
-        ( passedt.cycleway == "sidepath"        ) or
-        ( passedt.cycleway == "segregated"      ) or
-        ( passedt.segregated == "yes"           ) or
-        ( passedt.segregated == "right"         )) then
+    if ((   passedt.sidewalk == "both"                ) or 
+        (   passedt.sidewalk == "left"                ) or 
+        (   passedt.sidewalk == "mapped"              ) or 
+        (   passedt.sidewalk == "separate"            ) or 
+        (   passedt.sidewalk == "right"               ) or 
+        (   passedt.sidewalk == "shared"              ) or 
+        (   passedt.sidewalk == "yes"                 ) or
+        (   passedt["sidewalk:both"] == "separate"    ) or 
+        (   passedt["sidewalk:both"] == "yes"         ) or
+        (   passedt["sidewalk:left"] == "segregated"  ) or
+        (   passedt["sidewalk:left"] == "separate"    ) or 
+        (   passedt["sidewalk:left"] == "yes"         ) or
+        (   passedt["sidewalk:right"] == "segregated" ) or 
+        (   passedt["sidewalk:right"] == "separate"   ) or 
+        (   passedt["sidewalk:right"] == "yes"        ) or
+        (   passedt.footway  == "separate"            ) or 
+        (   passedt.footway  == "yes"                 ) or
+        ((( passedt.shoulder == "both"              )   or
+          ( passedt.shoulder == "left"              )   or 
+          ( passedt.shoulder == "right"             )   or 
+          ( passedt.shoulder == "yes"               )   or
+          ( passedt["shoulder:both"] == "yes"       )   or
+          ( passedt["shoulder:left"] == "yes"       )   or
+          ( passedt["shoulder:right"] == "yes"      )   or
+          ( passedt.hard_shoulder == "yes"          ))  and
+         (  passedt.expressway ~= "yes"              )  and
+         (  passedt.motorroad  ~= "yes"              )) or
+        (   passedt.cycleway == "track"               ) or
+        (   passedt.cycleway == "opposite_track"      ) or
+        (   passedt.cycleway == "yes"                 ) or
+        (   passedt.cycleway == "separate"            ) or
+        (   passedt.cycleway == "sidewalk"            ) or
+        (   passedt.cycleway == "sidepath"            ) or
+        (   passedt.cycleway == "segregated"          ) or
+        (   passedt.segregated == "yes"               ) or
+        (   passedt.segregated == "right"             )) then
         Attribute("edge", "sidewalk")
     else
 -- ----------------------------------------------------------------------------
