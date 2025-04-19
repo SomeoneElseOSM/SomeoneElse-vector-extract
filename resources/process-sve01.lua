@@ -1455,16 +1455,18 @@ end -- generic_after_function()
 function generic_after_building( passedt )
     if (( passedt.building ~= nil           ) and
         ( passedt.building ~= ""            ) and
-        ( passedt.building ~= "base"        ) and
-        ( passedt.building ~= "decking"     ) and
-        ( passedt.building ~= "destroyed"   ) and
-        ( passedt.building ~= "foundations" ) and
         ( passedt.building ~= "no"          ) and
+        ( passedt.building ~= "foundations" ) and
+        ( passedt.building ~= "demolished"  ) and
+        ( passedt.building ~= "window"      ) and
+        ( passedt.building ~= "proposed"    ) and
+        ( passedt.building ~= "sheepfold"   ) and
+        ( passedt.building ~= "destroyed"   ) and
+        ( passedt.building ~= "dismantled"  ) and
+        ( passedt.building ~= "base"        ) and
         ( passedt.building ~= "patio"       ) and
         ( passedt.building ~= "plot"        ) and
-        ( passedt.building ~= "proposed"    ) and
-        ( passedt.building ~= "razed"       ) and
-        ( passedt.building ~= "window"      )) then
+        ( passedt.building ~= "razed"       )) then
         Layer("building", true)
         Attribute( "class", "building_" .. passedt.building )
         append_name( passedt )

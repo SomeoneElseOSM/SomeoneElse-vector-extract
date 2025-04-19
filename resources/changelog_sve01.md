@@ -2,6 +2,10 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Show more "not quite buildings" as such, including `construction`.
+Don't show "not buildings" as such, including `demolished`.
+
+## 17/04/2025
 Check `shoulder:both`, `shoulder:left`, and `shoulder:right` along with `shoulder`.
 Check `expressway` and `motorroad` along with `shoulder` etc.
 
