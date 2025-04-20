@@ -565,6 +565,17 @@ function way_function()
    end
 
 -- ----------------------------------------------------------------------------
+-- barrier=hedge hedges.  If there is no area key set (i.e. "area=yes" was not
+-- explicitly set) assume that area=no.  Earlier in the shared lua, we've set
+-- linear hedges around other areas (e.g. meadows) as "hedgeline".
+-- ----------------------------------------------------------------------------
+   if ((  wayt.barrier == "hedge"  ) and
+       (( wayt.area    == nil     )  or
+        ( wayt.area    == ""      ))) then
+      wayt.area = "no"
+   end
+
+-- ----------------------------------------------------------------------------
 -- (end of the way-specific code)
 --
 -- Linear transportation layer
@@ -1921,7 +1932,8 @@ end -- way_after_waterway( passedt )
 function way_after_linearbarrier( passedt )
     if ((   passedt.barrier == "wall"        ) or
         ((  passedt.barrier == "hedge"      )  and
-         (  not passedt.is_closed           )) or
+         (( not passedt.is_closed          )   or
+          ( passedt.area    == "no"        ))) or
         (   passedt.barrier == "hedgeline"   ) or
         (   passedt.barrier == "fence"       ) or
         (   passedt.barrier == "kerb"        ) or
@@ -3640,7 +3652,8 @@ function render_barrier_land1( passedt )
         (  passedt.barrier == "toll_gantry"     ) or
         (  passedt.barrier == "door"            ) or
         (( passedt.barrier == "hedge"          )  and
-         ( passedt.is_closed                   ))) then
+         ( passedt.is_closed                   )  and
+         ( passedt.area    == "yes"            ))) then
         Layer( "land1", true )
         Attribute( "class", "barrier_" .. passedt.barrier )
         append_name( passedt )

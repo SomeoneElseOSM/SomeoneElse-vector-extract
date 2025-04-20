@@ -1,10 +1,11 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 20/04/2025
 Show more "not quite buildings" as such, including `construction`.
 Don't show "not buildings" as such, including `demolished`.
 Don't show underground buildings as buildings.
+Close loophole that allowed some closed linear hedges to incorrectly appear as areas.
 
 ## 17/04/2025
 Check `shoulder:both`, `shoulder:left`, and `shoulder:right` along with `shoulder`.
