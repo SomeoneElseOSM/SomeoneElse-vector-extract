@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Make displayed name of a Teesdale Way alt route more sensible.
+
 ## 20/04/2025
 Show more "not quite buildings" as such, including `construction`.
 Don't show "not buildings" as such, including `demolished`.
