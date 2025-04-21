@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Make displayed name of a Teesdale Way alt route more sensible.
+Check `railway` before processing `railway:preserved=yes` so that only preserved rails are handled as such.
 
 ## 20/04/2025
 Show more "not quite buildings" as such, including `construction`.
