@@ -1509,6 +1509,19 @@ function wr_after_transportation( passedt )
         ( passedt.highway ~= ""    ) and
         ( passedt.area    ~= "yes" )) then
         wr_after_highway( passedt )
+
+-- ----------------------------------------------------------------------------
+-- Something that is a railway might also be a tram?
+-- ----------------------------------------------------------------------------
+        if (( passedt.railway == "tram" ) and
+            ( passedt.area    ~= "yes"  )) then
+            Layer("transportation", false)
+            Attribute( "class", passedt.railway )
+            append_name( passedt )
+            Attribute( "bridge", passedt.bridge )
+            AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
+            MinZoom( 6 )
+        end
     else
 -- ----------------------------------------------------------------------------
 -- not a highway

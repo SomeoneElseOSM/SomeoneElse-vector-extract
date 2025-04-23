@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+If something is both a road and tram, show both.
+
+## 22/04/2025
 Make displayed name of a Teesdale Way alt route more sensible.
 Check `railway` before processing `railway:preserved=yes` so that only preserved rails are handled as such.
 
