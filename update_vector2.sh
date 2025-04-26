@@ -391,7 +391,7 @@ cp /home/${local_filesystem_user}/src/SomeoneElse-style/shared_lua.lua /usr/loca
 # The "nocoast" version is the default in the script because that does not rely on a previously-generated file.
 #
 echo "No coastline tiles will be used"
-if sudo -u ${local_filesystem_user} tilemaker --bbox -27.57,34.5,40.17,71.64  --input langs_${file_extension1}_merged.pbf     --output /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles --config /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/config-sve01.json --process /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/process-sve01.lua 
+if nice -n 15 sudo -u ${local_filesystem_user} tilemaker --bbox -27.57,34.5,40.17,71.64  --input langs_${file_extension1}_merged.pbf     --output /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles --config /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/config-sve01.json --process /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/process-sve01.lua 
 #
 # coast version
 # sudo cp /home/${local_filesystem_user}/data/coastline.mbtiles /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles
