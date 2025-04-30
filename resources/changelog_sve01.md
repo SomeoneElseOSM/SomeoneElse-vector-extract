@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 30/04/2025
+Handle shooting grounds better - show both the danger hatching and the pitch.
+
 ## 26/04/2025
 If something is both a road and tram, show both.
 

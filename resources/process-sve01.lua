@@ -4025,6 +4025,12 @@ function render_landuse_land2( passedt )
                 end -- fill_minzoom 7, 7
 
                 write_polygon_and_centroid_2( "land2", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
+
+-- ----------------------------------------------------------------------------
+-- We've just written "landuse=military" out to land2, but as that's just an
+-- outline and hatching, we can also look for a leisure fill.
+-- ----------------------------------------------------------------------------
+                render_leisure_land2( passedt )
             else
                 if (( passedt.landuse == "unnamedquarry"          ) or
                     ( passedt.landuse == "unnamedhistoricquarry"  )) then
