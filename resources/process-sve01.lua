@@ -26,7 +26,8 @@
 require "shared_lua"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", "barrier", 
+node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
+              "barrier", "boundary", 
               "canoe", "climbing", "craft", "disused:amenity", "disused:military", "disused:railway", "emergency", 
               "entrance", "ford", "geological", "golf", "harbour", "historic", 
               "healthcare", "highway", "information", 
@@ -1455,7 +1456,7 @@ function generic_after_function( passedt )
 -- "leisure=nature_reserve" and "land2" could be "natural=wood".
 -- ----------------------------------------------------------------------------
     generic_after_building( passedt )
-    
+
     generic_after_land1( passedt )
     generic_after_land2( passedt )
 end -- generic_after_function()

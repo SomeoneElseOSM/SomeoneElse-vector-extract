@@ -1,6 +1,11 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 02/05/2025
+Add `disused:amenity` to the list of generic keys so that unnamed former pubs are shown as such.
+Add more "nature reserve designations".
+Fix bug whereby some "nature reserve designations" were not shown correctly on vector.
+
 ## 30/04/2025
 Handle shooting grounds better - show both the danger hatching and the pitch.
 
