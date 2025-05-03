@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Removed `power=sub_station` and `amenity=escape_game`.  No longer in the data.
+
 ## 02/05/2025
 Add `disused:amenity` to the list of generic keys so that unnamed former pubs are shown as such.
 Add more "nature reserve designations".
