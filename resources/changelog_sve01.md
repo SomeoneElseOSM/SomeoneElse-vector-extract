@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Removed `power=sub_station` and `amenity=escape_game`.  No longer in the data.
+Extract PROW fingerposts as a different value.
 
 ## 02/05/2025
 Add `disused:amenity` to the list of generic keys so that unnamed former pubs are shown as such.

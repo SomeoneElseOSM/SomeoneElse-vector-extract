@@ -196,6 +196,7 @@ function node_function()
 -- ------------------------------------------------------------------------------
    if (( nodet.tourism  == "artwork"                ) or
        ( nodet.tourism  == "informationmarker"      ) or
+       ( nodet.tourism  == "informationprowmarker"  ) or
        ( nodet.tourism  == "informationroutemarker" ) or
        ( nodet.tourism  == "informationncndudgeon"  ) or
        ( nodet.tourism  == "informationncnmccoll"   ) or
@@ -3764,6 +3765,7 @@ function render_tourism_land1( passedt )
                     ( passedt.tourism == "informationroutemarker"     ) or
                     ( passedt.tourism == "informationsign"            ) or
                     ( passedt.tourism == "informationmarker"          ) or
+                    ( passedt.tourism == "informationprowmarker"      ) or
                     ( passedt.tourism == "militarysign"               ) or
                     ( passedt.tourism == "advertising_column"         ) or
                     ( passedt.tourism == "artwork"                    ) or
