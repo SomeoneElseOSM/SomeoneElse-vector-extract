@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Treat `access=emergency` and `services=emergency_access` as "no access".
+
 ## 09/05/2025
 Removed `power=sub_station` and `amenity=escape_game`.  No longer in the data.
 Extract PROW fingerposts as a different value.

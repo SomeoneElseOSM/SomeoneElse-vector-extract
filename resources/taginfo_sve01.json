@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250509T130401Z",
+  "data_updated": "20250510T211301Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -28,6 +28,7 @@
     { "key": "access", "value": "designated", "description": "Removed when considering access rules" },
     { "key": "access", "value": "destination", "description": "Extracted as 'access' value in 'transportation' later" },
     { "key": "access", "value": "boat", "description": "One of several 'yes' values" },
+    { "key": "access", "value": "emergency", "description": "Treated the same as 'no'" },
     { "key": "access", "value": "fee", "description": "One of several 'yes' values" },
     { "key": "access", "value": "foot", "description": "One of several 'yes' values" },
     { "key": "access", "value": "forestry", "description": "Treated the same as 'no'" },
@@ -2612,6 +2613,7 @@
     { "key": "service", "value": "aircraft_control", "description": "Detect aircraft control towers" },
     { "key": "service", "value": "driveway", "description": "Unless a `designation` is set, classify as one the less important of the two classes of service roads" },
     { "key": "service", "value": "drive-through", "description": "Unless a `designation` is set, classify as one the less important of the two classes of service roads" },
+    { "key": "service", "value": "emergency_access", "description": "Treated as private if no other foot access tag" },
     { "key": "service", "value": "parking_aisle", "description": "Unless a `designation` is set, classify as one the less important of the two classes of service roads" },
     { "key": "shelter_type", "description": "Suppress some shelters for public transport or animal field shelters" },
     { "key": "shelter_type", "value": "animal_shelter", "description": "Suppress some shelter types" },
