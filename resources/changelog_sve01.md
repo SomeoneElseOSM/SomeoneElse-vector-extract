@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Treat `access=emergency` and `services=emergency_access` as "no access".
 Fix bug where memorial benches were not shown as such.
 Removed `shop=e-cigarette;confectionery;cbd`.  No longer in the data.
+Fix bug where `display` was never obtained so sundials were never detected.
 
 ## 09/05/2025
 Removed `power=sub_station` and `amenity=escape_game`.  No longer in the data.
