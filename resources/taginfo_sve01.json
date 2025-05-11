@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250510T211301Z",
+  "data_updated": "20250511T114701Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2657,7 +2657,7 @@
     { "key": "shop", "value": "auctioneer", "description": "Various shops extracted" },
     { "key": "shop", "value": "audio_video", "description": "Various shops extracted" },
     { "key": "shop", "value": "audiologist", "description": "Extract as nonspecific healthcare" },
-    { "key": "shop", "value": "automotive", "description": "Various shops extracted" },
+    { "key": "shop", "value": "automotive", "description": "Not a current value in OSM data.  Treated as a synonym for 'car_parts'" },
     { "key": "shop", "value": "baby", "description": "Various shops extracted" },
     { "key": "shop", "value": "baby_goods", "description": "Various shops extracted" },
     { "key": "shop", "value": "bag", "description": "Various shops extracted" },
@@ -2823,7 +2823,6 @@
     { "key": "shop", "value": "e-cigarette;beverages", "description": "Extracted as an e-cigarette shop" },
     { "key": "shop", "value": "e-cigarette;convenience", "description": "Extracted as an e-cigarette shop" },
     { "key": "shop", "value": "e-cigarette;computer;mobile_phone", "description": "Extracted as an e-cigarette shop" },
-    { "key": "shop", "value": "e-cigarette;confectionery;cbd", "description": "Extracted as an e-cigarette shop" },
     { "key": "shop", "value": "e-cigarette;mobile_phone", "description": "Extracted as an e-cigarette shop" },
     { "key": "shop", "value": "eco_refill", "description": "Extracted as a grocer so that it can be displayed separately" },
     { "key": "shop", "value": "education", "description": "Various shops extracted" },
