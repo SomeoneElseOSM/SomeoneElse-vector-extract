@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 11/05/2025
 Treat `access=emergency` and `services=emergency_access` as "no access".
 Fix bug where memorial benches were not shown as such.
 Removed `shop=e-cigarette;confectionery;cbd`.  No longer in the data.
