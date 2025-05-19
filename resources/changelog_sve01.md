@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Treat `amenity=fast_food; cuisine==frozen_yogurt` as `cuisine=ice_cream`.
 Treat `amenity=fast_food; cuisine==filipino` as `cuisine=chinese`.
 Treat `amenity=fast_food; cuisine==friture` as `cuisine=fish_and_chips`.
+Extract linear rivers at vector zoom 10.
 
 ## 11/05/2025
 Treat `access=emergency` and `services=emergency_access` as "no access".

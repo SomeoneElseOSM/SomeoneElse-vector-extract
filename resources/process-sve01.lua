@@ -1904,29 +1904,32 @@ function way_after_waterway( passedt )
         Attribute( "bridge", passedt.bridge )
         AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
 
-        if (( passedt.waterway == "river"          ) or
-            ( passedt.waterway == "canal"          ) or
-            ( passedt.waterway == "derelict_canal" )) then
-            MinZoom( 11 )
+        if ( passedt.waterway == "river" ) then
+            MinZoom( 10 )
         else
-            if (( passedt.waterway == "stream"   ) or
-                ( passedt.waterway == "drain"    ) or
-                ( passedt.waterway == "intriver" ) or
-                ( passedt.waterway == "intstream" )) then
-                MinZoom( 12 )
+            if (( passedt.waterway == "canal"          ) or
+                ( passedt.waterway == "derelict_canal" )) then
+                MinZoom( 11 )
             else
-                if ( passedt.waterway == "ditch" ) then
-                    MinZoom( 13 )
+                if (( passedt.waterway == "stream"   ) or
+                    ( passedt.waterway == "drain"    ) or
+                    ( passedt.waterway == "intriver" ) or
+                    ( passedt.waterway == "intstream" )) then
+                    MinZoom( 12 )
                 else
-                    if ( passedt.waterway == "pipeline" ) then
-                        MinZoom( 14 )
+                    if ( passedt.waterway == "ditch" ) then
+                        MinZoom( 13 )
+                    else
+                        if ( passedt.waterway == "pipeline" ) then
+                            MinZoom( 14 )
 -- ------------------------------------------------------------------------------
 -- No "else" here yet
 -- ------------------------------------------------------------------------------
-                    end -- pipeline
-                end  -- ditch
-            end -- stream etc.
-        end -- river etc.
+                        end -- pipeline
+                    end  -- ditch
+                end -- stream etc.
+            end -- canal etc.
+        end -- river
     end -- linear waterways
 
 end -- way_after_waterway( passedt )
