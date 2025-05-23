@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 23/05/2025
 Treat `amenity=fast_food; cuisine==frozen_yogurt` as `cuisine=ice_cream`.
 Treat `amenity=fast_food; cuisine==filipino` as `cuisine=chinese`.
 Treat `amenity=fast_food; cuisine==friture` as `cuisine=fish_and_chips`.
