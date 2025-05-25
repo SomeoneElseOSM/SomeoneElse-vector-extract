@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 25/05/2025
+Revisit `basin` values to decide which are wet all the time and which merely `flood_prone`.  `intermittent` is still considered.
+
 ## 23/05/2025
 Treat `amenity=fast_food; cuisine==frozen_yogurt` as `cuisine=ice_cream`.
 Treat `amenity=fast_food; cuisine==filipino` as `cuisine=chinese`.
