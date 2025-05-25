@@ -2770,7 +2770,6 @@
     { "key": "shop", "value": "clocks", "description": "Various shops extracted" },
     { "key": "shop", "value": "clothes", "description": "Various shops extracted" },
     { "key": "shop", "value": "clothes_hire", "description": "Various shops extracted" },
-    { "key": "shop", "value": "clothing", "description": "Various shops extracted" },
     { "key": "shop", "value": "clothing_alterations", "description": "Various shops extracted" },
     { "key": "shop", "value": "coal_merchant", "description": "Various shops extracted" },
     { "key": "shop", "value": "cobbler", "description": "Extracted as shoe repair etc. shop" },

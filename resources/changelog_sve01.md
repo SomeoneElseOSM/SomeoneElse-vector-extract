@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Removed `shop=clothing`.  No longer in the data
+
 ## 25/05/2025
 Revisit `basin` values to decide which are wet all the time and which merely `flood_prone`.  `intermittent` is still considered.
 
