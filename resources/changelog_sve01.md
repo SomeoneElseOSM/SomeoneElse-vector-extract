@@ -3,6 +3,8 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Removed `shop=clothing`.  No longer in the data
+Handle `military=range_marker` as something that can be displayed as military-coloured marker posts.
+Handle military information boards as military signs.
 
 ## 25/05/2025
 Revisit `basin` values to decide which are wet all the time and which merely `flood_prone`.  `intermittent` is still considered.
