@@ -203,7 +203,8 @@ function node_function()
        ( nodet.tourism  == "informationncnmills"    ) or
        ( nodet.tourism  == "informationncnrowe"     ) or
        ( nodet.tourism  == "informationncnunknown"  ) or
-       ( nodet.tourism  == "informationroutemarker" ) or
+       ( nodet.tourism  == "informationartwork"     ) or
+       ( nodet.tourism  == "informationstele"       ) or
        ( nodet.man_made == "lcn_ref"                )) then
       nodet.nwnrelationlist = ""
       nodet.nhnrelation_in_list = false
@@ -3792,6 +3793,8 @@ function render_tourism_land1( passedt )
                     ( passedt.tourism == "informationsign"            ) or
                     ( passedt.tourism == "informationmarker"          ) or
                     ( passedt.tourism == "informationprowmarker"      ) or
+                    ( passedt.tourism == "informationstele"           ) or
+                    ( passedt.tourism == "informationartwork"         ) or
                     ( passedt.tourism == "militarysign"               ) or
                     ( passedt.tourism == "advertising_column"         ) or
                     ( passedt.tourism == "artwork"                    ) or
