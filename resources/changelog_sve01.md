@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Treat `information=information_office` as `information=office`.
+
 ## 26/05/2025
 Removed `shop=clothing`.  No longer in the data
 Handle `military=range_marker` as something that can be displayed as military-coloured marker posts.

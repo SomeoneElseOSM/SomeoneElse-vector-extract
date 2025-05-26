@@ -1669,6 +1669,7 @@
     { "key": "information", "value": "hikingmap", "description": "Extracted as information board" },
     { "key": "information", "value": "hospital map", "description": "Extracted as information board" },
     { "key": "information", "value": "information_board", "description": "Extracted as information board" },
+    { "key": "information", "value": "information_office", "description": "Extracted as information office" },
     { "key": "information", "value": "interpretation", "description": "Extracted as information board" },
     { "key": "information", "value": "interpretive_board", "description": "Extracted as information board" },
     { "key": "information", "value": "kiosk", "description": "Extracted as information office" },
