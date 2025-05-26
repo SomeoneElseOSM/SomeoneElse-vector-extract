@@ -1015,6 +1015,7 @@ function update_table( passedt )
     passedt["departures_board:speech_output"] = Find("departures_board:speech_output")
     passedt["description:floor"] = Find("description:floor")
     passedt.designation = Find("designation")
+    passedt.diameter_crown = Find("diameter_crown")
     passedt.diplomatic = Find("diplomatic")
     passedt.direction_east = Find("direction_east")
     passedt.direction_north = Find("direction_north")
@@ -3633,6 +3634,26 @@ function render_natural_land1( passedt )
                                                 Layer( "land1", true )
                                                 Attribute( "class", "natural_" .. passedt.natural )
                                                 append_name( passedt )
+
+-- ----------------------------------------------------------------------------
+-- Alas it doesn't seem possible to use the _actual_ diameter_crown value in
+-- the style .json, so just write a value 10m, 20m or 30m through for > 10.
+-- ----------------------------------------------------------------------------
+                                                if (( passedt.diameter_crown ~= nil ) and
+                                                    ( passedt.diameter_crown ~= ""  )) then
+                                                    if (( tonumber(passedt.diameter_crown) or 0 ) > 30 ) then
+                                                        Attribute( "crown", "30m" )
+                                                    else
+                                                        if (( tonumber(passedt.diameter_crown) or 0 ) > 20 ) then
+                                                            Attribute( "crown", "20m" )
+                                                        else
+                                                            if (( tonumber(passedt.diameter_crown) or 0 ) > 10 ) then
+                                                                Attribute( "crown", "10m" )
+                                                            end
+                                                        end
+                                                    end
+                                                end
+
                                                 MinZoom( 14 )
                                             else
                                                 render_barrier_land1( passedt )

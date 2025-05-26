@@ -1,11 +1,12 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 26/05/2025
 Removed `shop=clothing`.  No longer in the data
 Handle `military=range_marker` as something that can be displayed as military-coloured marker posts.
 Handle military information boards as military signs.
 Round `ele` values on the features where it is shown (peaks, cairns, etc.).
+Use the `diameter_crown` value to write a `crown` attribute for large trees of "10m", "20m", "30m".
 
 ## 25/05/2025
 Revisit `basin` values to decide which are wet all the time and which merely `flood_prone`.  `intermittent` is still considered.

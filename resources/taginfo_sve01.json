@@ -1074,6 +1074,7 @@
     { "key": "designation", "value": "unclassified_road", "description": "Extracted as public highway" },
     { "key": "designation", "value": "unknown_byway", "description": "Not a current value in OSM data.  extracted as restricted byway" },
     { "key": "designation", "value": "unmade_road", "description": "Extracted as public highway" },
+    { "key": "diameter_crown", "description": "Used to indicate trees >10m, 20m and 30m" },
     { "key": "diplomatic", "description": "Extracted as either embassy or office" },
     { "key": "diplomatic", "value": "consulate", "description": "Extracted as embassy or office depending on subtag" },
     { "key": "diplomatic", "value": "consulate;embassy", "description": "Extracted as embassy" },
