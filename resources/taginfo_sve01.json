@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250525T134701Z",
+  "data_updated": "20250527T231601Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1307,7 +1307,7 @@
     { "key": "golf", "value": "fairway", "description": "Extracted as garden" },
     { "key": "golf", "value": "green", "description": "Extracted as golf green" },
     { "key": "golf", "value": "path", "description": "Extracted as path" },
-    { "key": "golf", "value": "pin", "description": "Extracted as nonspecific leisure" },
+    { "key": "golf", "value": "pin", "description": "Extracted as golf pin" },
     { "key": "golf", "value": "practice", "description": "Extracted as garden" },
     { "key": "golf", "value": "rough", "description": "Extracted as scrub" },
     { "key": "golf", "value": "tee", "description": "Extracted as garden" },
