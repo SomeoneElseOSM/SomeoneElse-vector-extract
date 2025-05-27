@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 27/05/2025
+Use a characteristic icon for `golf=pin` rather than  generic leisure one.
+
 ## 26/05/2025
 Removed `shop=clothing`.  No longer in the data
 Handle `military=range_marker` as something that can be displayed as military-coloured marker posts.
