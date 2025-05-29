@@ -496,7 +496,7 @@
     { "key": "barrier", "value": "wood_fence", "description": "Extracted as a fence" },
     { "key": "barrier", "value": "yes", "description": "Unknown non-linear barriers extracted as bollard; linear as fence" },
     { "key": "basin", "description": "Extracted as either permanent water or flood prone based on value" },
-    { "key": "basin", "value": "aereation", "description": "Extracted as permanent water" },
+    { "key": "basin", "value": "aeration", "description": "Extracted as permanent water" },
     { "key": "basin", "value": "detention", "description": "Extracted as flood-prone" },
     { "key": "basin", "value": "evaporation", "description": "Extracted as permanent water" },
     { "key": "basin", "value": "infiltration", "description": "Extracted as flood-prone" },
