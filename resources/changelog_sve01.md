@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 31/05/2025
+Use the `restaurant` tag on a pub to tell that it serves food.
+
 ## 27/05/2025
 Use a characteristic icon for `golf=pin` rather than  generic leisure one.
 
