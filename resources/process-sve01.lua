@@ -2394,6 +2394,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "recyclingcentre"            ) or
                         ( passedt.amenity == "restaurant"                 ) or
                         ( passedt.amenity == "restaccomm"                 ) or
+                        ( passedt.amenity == "restaurant_indian"          ) or
                         ( passedt.amenity == "fast_food"                  ) or
                         ( passedt.amenity == "fast_food_burger"           ) or
                         ( passedt.amenity == "fast_food_chicken"          ) or
