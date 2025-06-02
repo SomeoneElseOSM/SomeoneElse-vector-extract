@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Extract Indian, Chinese, Italian, Fish and Chips and Burger resturants as a separate `amenity` so that a unique icon can be used.
+Extract Indian, Chinese, Italian, Fish and Chips, Burger, Coffee Shop and Sandwich resturants as a separate `amenity` so that a unique icon can be used.
 
 ## 01/06/2025
 Extract Indian resturants as a separate `amenity` so that a unique icon can be used.
