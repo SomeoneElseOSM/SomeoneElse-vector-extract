@@ -3,6 +3,8 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract British fast food and Regional, Mexican and Greek fast food and restaurants as a separate `amenity` so that a unique icon can be used.
+Extract `accomodation` (a misspelling of `accommodation`).
+Ensure that all restaurants with a non-no `accommodation` values are treated as having accommodation.
 
 ## 04/06/2025
 Extract Indian, Chinese, Italian, Fish and Chips, Burger, Coffee Shop, Sandwich, Chicken, Kebab and British resturants as a separate `amenity` so that a unique icon can be used.
