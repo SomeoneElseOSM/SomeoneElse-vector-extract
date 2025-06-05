@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Extract British fast food and Regional, Mexican and Greek fast food and restaurants as a separate `amenity` so that a unique icon can be used.
+Extract British fast food and Regional, Mexican, Greek and French fast food and restaurants as a separate `amenity` so that a unique icon can be used.
 Extract `accomodation` (a misspelling of `accommodation`).
 Ensure that all restaurants with a non-no `accommodation` values are treated as having accommodation.
 
