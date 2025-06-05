@@ -2404,6 +2404,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "restaurant_chicken"         ) or
                         ( passedt.amenity == "restaurant_kebab"           ) or
                         ( passedt.amenity == "restaurant_british"         ) or
+                        ( passedt.amenity == "restaurant_regional"        ) or
                         ( passedt.amenity == "fast_food"                  ) or
                         ( passedt.amenity == "fast_food_burger"           ) or
                         ( passedt.amenity == "fast_food_chicken"          ) or
@@ -2416,6 +2417,8 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "fast_food_pie"              ) or
                         ( passedt.amenity == "fast_food_pizza"            ) or
                         ( passedt.amenity == "fast_food_sandwich"         ) or
+                        ( passedt.amenity == "fast_food_british"          ) or
+                        ( passedt.amenity == "fast_food_regional"         ) or
                         ( passedt.amenity == "telephone"                  ) or
                         ( passedt.amenity == "boothtelephonered"          ) or
                         ( passedt.amenity == "boothtelephoneblack"        ) or
