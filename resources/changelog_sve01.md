@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract ice cream restaurants as a separate `amenity` so that a unique icon can be used.
+
 ## 07/06/2025
 Extract British fast food and Regional, Mexican, Greek, French and seafood fast food and restaurants as a separate `amenity` so that a unique icon can be used.
 Extract `accomodation` (a misspelling of `accommodation`).
