@@ -2437,6 +2437,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "fast_food_lebanese"         ) or
                         ( passedt.amenity == "fast_food_dessert"          ) or
                         ( passedt.amenity == "fast_food_spanish"          ) or
+                        ( passedt.amenity == "fast_food_donut"            ) or
                         ( passedt.amenity == "telephone"                  ) or
                         ( passedt.amenity == "boothtelephonered"          ) or
                         ( passedt.amenity == "boothtelephoneblack"        ) or
