@@ -3,7 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract ice cream restaurants as a separate `amenity` so that a unique icon can be used.
-Extract Caribbean fast food and restaurants as a separate `amenity` so that a unique icon can be used.
+Extract Caribbean and Lebanese fast food and restaurants as a separate `amenity` so that a unique icon can be used.
 
 ## 07/06/2025
 Extract British fast food and Regional, Mexican, Greek, French and seafood fast food and restaurants as a separate `amenity` so that a unique icon can be used.
