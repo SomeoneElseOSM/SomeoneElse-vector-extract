@@ -2413,6 +2413,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "restaurant_ice_cream"       ) or
                         ( passedt.amenity == "restaurant_caribbean"       ) or
                         ( passedt.amenity == "restaurant_lebanese"        ) or
+                        ( passedt.amenity == "restaurant_dessert"         ) or
                         ( passedt.amenity == "fast_food"                  ) or
                         ( passedt.amenity == "fast_food_burger"           ) or
                         ( passedt.amenity == "fast_food_chicken"          ) or
@@ -2433,6 +2434,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "fast_food_seafood"          ) or
                         ( passedt.amenity == "fast_food_caribbean"        ) or
                         ( passedt.amenity == "fast_food_lebanese"         ) or
+                        ( passedt.amenity == "fast_food_dessert"          ) or
                         ( passedt.amenity == "telephone"                  ) or
                         ( passedt.amenity == "boothtelephonered"          ) or
                         ( passedt.amenity == "boothtelephoneblack"        ) or
