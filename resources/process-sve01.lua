@@ -3667,29 +3667,13 @@ function render_natural_land1( passedt )
                                                 ( passedt.natural == "climbing"      ) or
                                                 ( passedt.natural == "rock"          ) or
                                                 ( passedt.natural == "tree"          ) or
+                                                ( passedt.natural == "tree_10m"      ) or
+                                                ( passedt.natural == "tree_20m"      ) or
+                                                ( passedt.natural == "tree_30m"      ) or
                                                 ( passedt.natural == "shrub"         )) then
                                                 Layer( "land1", true )
                                                 Attribute( "class", "natural_" .. passedt.natural )
                                                 append_name( passedt )
-
--- ----------------------------------------------------------------------------
--- Alas it doesn't seem possible to use the _actual_ diameter_crown value in
--- the style .json, so just write a value 10m, 20m or 30m through for > 10.
--- ----------------------------------------------------------------------------
-                                                if (( passedt.diameter_crown ~= nil ) and
-                                                    ( passedt.diameter_crown ~= ""  )) then
-                                                    if (( tonumber(passedt.diameter_crown) or 0 ) > 30 ) then
-                                                        Attribute( "crown", "30m" )
-                                                    else
-                                                        if (( tonumber(passedt.diameter_crown) or 0 ) > 20 ) then
-                                                            Attribute( "crown", "20m" )
-                                                        else
-                                                            if (( tonumber(passedt.diameter_crown) or 0 ) > 10 ) then
-                                                                Attribute( "crown", "10m" )
-                                                            end
-                                                        end
-                                                    end
-                                                end
 
                                                 MinZoom( 14 )
                                             else
