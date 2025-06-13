@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Fix bug where `frozen_yogurt` was assigned incorrectly to both `dessert` and `ice_cream`.
+
 ## 09/06/2025
 Fix a bug in the way that the "munro" tag was handled in Scotland (to assume prominence where none is given in the data).
 
