@@ -2435,7 +2435,10 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "fast_food_indian"           ) or
                         ( passedt.amenity == "fast_food_kebab"            ) or
                         ( passedt.amenity == "fast_food_pie"              ) or
-                        ( passedt.amenity == "fast_food_pizza"            ) or
+                        ( passedt.amenity == "fast_food_pizza_y"          ) or
+                        ( passedt.amenity == "fast_food_pizza_l"          ) or
+                        ( passedt.amenity == "fast_food_pizza_n"          ) or
+                        ( passedt.amenity == "fast_food_pizza_d"          ) or
                         ( passedt.amenity == "fast_food_sandwich"         ) or
                         ( passedt.amenity == "fast_food_british"          ) or
                         ( passedt.amenity == "fast_food_regional"         ) or
