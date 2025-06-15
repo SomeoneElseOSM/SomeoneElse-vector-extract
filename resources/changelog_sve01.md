@@ -4,7 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Fix bug where `frozen_yogurt` was assigned incorrectly to both `dessert` and `ice_cream`.
 Trim cuisine values before the first semicolon, so that more semicolon combination combinations are handled.
-Extract `wheelchair` info for `amenity=fast_food` with no `cuisine` and `cuisine=fish_and_chips`, `chinese`, `pizza`, `sandwich`.
+Extract `wheelchair` info for `amenity=fast_food` with no `cuisine` and `cuisine=fish_and_chips`, `chinese`, `pizza`, `sandwich`, `burger`.
 
 ## 09/06/2025
 Fix a bug in the way that the "munro" tag was handled in Scotland (to assume prominence where none is given in the data).
