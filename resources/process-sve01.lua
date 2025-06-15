@@ -427,7 +427,6 @@ function way_function()
        ( wayt.barrier == "steps"           ) or
        ( wayt.barrier == "step"            ) or
        ( wayt.barrier == "hoarding"        ) or
-       ( wayt.barrier == "hand_rail_fence" ) or
        ( wayt.barrier == "horse_stile"     ) or
        ( wayt.barrier == "chain"           ) or
        ( wayt.barrier == "stile"           ) or
