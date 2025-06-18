@@ -2423,7 +2423,10 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "fast_food_burger_l"         ) or
                         ( passedt.amenity == "fast_food_burger_n"         ) or
                         ( passedt.amenity == "fast_food_burger_d"         ) or
-                        ( passedt.amenity == "fast_food_chicken"          ) or
+                        ( passedt.amenity == "fast_food_chicken_y"        ) or
+                        ( passedt.amenity == "fast_food_chicken_l"        ) or
+                        ( passedt.amenity == "fast_food_chicken_n"        ) or
+                        ( passedt.amenity == "fast_food_chicken_d"        ) or
                         ( passedt.amenity == "fast_food_chinese_y"        ) or
                         ( passedt.amenity == "fast_food_chinese_l"        ) or
                         ( passedt.amenity == "fast_food_chinese_n"        ) or
