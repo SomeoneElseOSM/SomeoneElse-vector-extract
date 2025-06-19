@@ -1,10 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 19/06/2025
 Fix bug where `frozen_yogurt` was assigned incorrectly to both `dessert` and `ice_cream`.
 Trim cuisine values before the first semicolon, so that more semicolon combination combinations are handled.
-Extract `wheelchair` info for `amenity=fast_food` with no `cuisine` and `cuisine=fish_and_chips`, `chinese`, `pizza`, `sandwich`, `burger`, `chicken`.
+Extract `wheelchair` info for `amenity=fast_food` with no `cuisine` and `cuisine=fish_and_chips`, `chinese`, `pizza`, `sandwich`, `burger`, `chicken`, `indian`.
 Removed `barrier=hand_rail_fence`.  No longer in the data.
 
 ## 09/06/2025
