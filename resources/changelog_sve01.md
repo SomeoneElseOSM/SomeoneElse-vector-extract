@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Extract `wheelchair` info for `amenity=restaurant` with no `cuisine`, and `cuisine=indian`.
+Extract `wheelchair` info for `amenity=restaurant` with no `cuisine`, `cuisine=indian` and `cuisine=chinese`.
 
 ## 19/06/2025
 Fix bug where `frozen_yogurt` was assigned incorrectly to both `dessert` and `ice_cream`.
