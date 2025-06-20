@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Extract `wheelchair` info for `amenity=restaurant` with no `cuisine`, `cuisine=indian`, `cuisine=chinese`, `cuisine=italian`, `cuisine=fish_and_chips` and `cuisine=burger`.
+Extract `wheelchair` info for `amenity=restaurant` with no `cuisine`, `cuisine=indian`, `cuisine=chinese`, `cuisine=italian`, `cuisine=fish_and_chips`, `cuisine=burger` and `cuisine=coffee_shop` and synonyms.
 
 ## 19/06/2025
 Fix bug where `frozen_yogurt` was assigned incorrectly to both `dessert` and `ice_cream`.
