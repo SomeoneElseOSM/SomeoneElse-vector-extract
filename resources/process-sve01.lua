@@ -2429,7 +2429,10 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "restaurant_chicken_l"        ) or
                         ( passedt.amenity == "restaurant_chicken_n"        ) or
                         ( passedt.amenity == "restaurant_chicken_d"        ) or
-                        ( passedt.amenity == "restaurant_kebab"            ) or
+                        ( passedt.amenity == "restaurant_kebab_y"          ) or
+                        ( passedt.amenity == "restaurant_kebab_l"          ) or
+                        ( passedt.amenity == "restaurant_kebab_n"          ) or
+                        ( passedt.amenity == "restaurant_kebab_d"          ) or
                         ( passedt.amenity == "restaurant_british"          ) or
                         ( passedt.amenity == "restaurant_regional"         ) or
                         ( passedt.amenity == "restaurant_mexican"          ) or
