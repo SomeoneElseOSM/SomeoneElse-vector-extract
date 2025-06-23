@@ -2437,7 +2437,10 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "restaurant_regional"         ) or
                         ( passedt.amenity == "restaurant_mexican"          ) or
                         ( passedt.amenity == "restaurant_greek"            ) or
-                        ( passedt.amenity == "restaurant_french"           ) or
+                        ( passedt.amenity == "restaurant_french_y"         ) or
+                        ( passedt.amenity == "restaurant_french_l"         ) or
+                        ( passedt.amenity == "restaurant_french_n"         ) or
+                        ( passedt.amenity == "restaurant_french_d"         ) or
                         ( passedt.amenity == "restaurant_seafood"          ) or
                         ( passedt.amenity == "restaurant_ice_cream"        ) or
                         ( passedt.amenity == "restaurant_caribbean"        ) or
