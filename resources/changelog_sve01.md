@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract `wheelchair` info for `amenity=fast_food` with `cuisine=kebab` and synonyms.
+Extract `wheelchair` info for `amenity=restaurant` with `cuisine=british` and synonyms.
 
 ## 23/06/2025
 Extract `wheelchair` info for `amenity=restaurant` with no `cuisine`, `cuisine=indian`, `cuisine=chinese`, `cuisine=italian`, `cuisine=fish_and_chips`, `cuisine=burger`, `cuisine=coffee_shop`, `cuisine=sandwich`, `cuisine=chicken`, `cuisine=kebab` and `cuisine=french` and synonyms.
