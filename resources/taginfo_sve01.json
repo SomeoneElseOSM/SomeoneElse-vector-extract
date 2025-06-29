@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250608T120401Z",
+  "data_updated": "20250629T145901Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -439,7 +439,6 @@
     { "key": "barrier", "value": "guard_rail", "description": "Extracted as a fence" },
     { "key": "barrier", "value": "haha", "description": "Extracted as wall" },
     { "key": "barrier", "value": "hampshire_gate", "description": "Extracted as a gate or locked gate if locked" },
-    { "key": "barrier", "value": "hand_rail_fence", "description": "Extracted as fence" },
     { "key": "barrier", "value": "hedge", "description": "Extracted as a green line" },
     { "key": "barrier", "value": "hoarding", "description": "Nodes extracted as bollard; ways as fence" },
     { "key": "barrier", "value": "horse_barrier", "description": "Extracted as a cycle_barrier" },
