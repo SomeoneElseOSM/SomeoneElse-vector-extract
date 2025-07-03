@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Extract `wheelchair` info for `amenity=fast_food` with `cuisine=kebab` and synonyms.
+Extract `wheelchair` info for `amenity=fast_food` with `cuisine=kebab`, `cuisine=mexican` and synonyms.
 Extract `wheelchair` info for `amenity=restaurant` with `cuisine=british`, `cuisine=regional`, `cuisine=mexican` and synonyms.
 
 ## 23/06/2025

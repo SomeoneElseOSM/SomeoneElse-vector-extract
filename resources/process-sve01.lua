@@ -2498,7 +2498,10 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "fast_food_sandwich_d"        ) or
                         ( passedt.amenity == "fast_food_british"           ) or
                         ( passedt.amenity == "fast_food_regional"          ) or
-                        ( passedt.amenity == "fast_food_mexican"           ) or
+                        ( passedt.amenity == "fast_food_mexican_y"         ) or
+                        ( passedt.amenity == "fast_food_mexican_l"         ) or
+                        ( passedt.amenity == "fast_food_mexican_n"         ) or
+                        ( passedt.amenity == "fast_food_mexican_d"         ) or
                         ( passedt.amenity == "fast_food_greek"             ) or
                         ( passedt.amenity == "fast_food_french"            ) or
                         ( passedt.amenity == "fast_food_seafood"           ) or
