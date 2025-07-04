@@ -2297,6 +2297,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "bus_station"                 ) or
                         ( passedt.amenity == "entrancemain"                ) or
                         ( passedt.amenity == "bubble_tea"                  ) or
+                        ( passedt.amenity == "cafe_indian"                 ) or
                         ( passedt.amenity == "cafe_ddd"                    ) or
                         ( passedt.amenity == "cafe_dld"                    ) or
                         ( passedt.amenity == "cafe_dnd"                    ) or
