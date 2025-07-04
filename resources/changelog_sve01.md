@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract `cafe=bubble_tea` separately and e.g. `fish_and_chips` as restaurants.
+
 ## 03/07/2025
 Extract `wheelchair` info for `amenity=fast_food` with `cuisine=kebab`, `cuisine=mexican` and synonyms.
 Extract `wheelchair` info for `amenity=restaurant` with `cuisine=british`, `cuisine=regional`, `cuisine=mexican`, `cuisine=seafood` and synonyms.
