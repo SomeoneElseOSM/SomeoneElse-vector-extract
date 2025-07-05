@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract `cafe=bubble_tea` separately and e.g. `fish_and_chips` as restaurants.
+Process various crossing tags to decide if a crossing should be extracted.
 
 ## 03/07/2025
 Extract `wheelchair` info for `amenity=fast_food` with `cuisine=kebab`, `cuisine=mexican` and synonyms.
