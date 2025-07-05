@@ -3951,6 +3951,7 @@ function render_tourism_land1( passedt )
                         ( passedt.tourism == "hotel"                      ) or
                         ( passedt.tourism == "chalet"                     ) or
                         ( passedt.tourism == "museum"                     ) or
+                        ( passedt.tourism == "gallery"                    ) or
                         ( passedt.tourism == "aquarium"                   ) or
                         ( passedt.tourism == "zoo"                        )) then
 			write_polygon_and_centroid( "land1", passedt, "tourism_", passedt.tourism, 14 )

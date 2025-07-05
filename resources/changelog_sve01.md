@@ -5,6 +5,8 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Extract cafes with `cuisine=bubble_tea` and `cuisine=indian` separately and e.g. `fish_and_chips` as restaurants.
 Process various crossing tags to decide if a crossing should be extracted.
 Removed `LPG=yes`.  No longer in the data.
+Include galleries with artworks in former telephone box uses.
+Extract noncommercial art galleries with a unique museum-like icon.
 
 ## 03/07/2025
 Extract `wheelchair` info for `amenity=fast_food` with `cuisine=kebab`, `cuisine=mexican` and synonyms.
