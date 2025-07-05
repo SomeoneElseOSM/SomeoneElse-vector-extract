@@ -2,8 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Extract `cafe=bubble_tea` separately and e.g. `fish_and_chips` as restaurants.
+Extract cafes with `cuisine=bubble_tea` and `cuisine=indian` separately and e.g. `fish_and_chips` as restaurants.
 Process various crossing tags to decide if a crossing should be extracted.
+Removed `LPG=yes`.  No longer in the data.
 
 ## 03/07/2025
 Extract `wheelchair` info for `amenity=fast_food` with `cuisine=kebab`, `cuisine=mexican` and synonyms.
