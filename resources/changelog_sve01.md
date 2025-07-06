@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 06/07/2025
 Extract cafes with `cuisine=bubble_tea` and `cuisine=indian` separately and e.g. `fish_and_chips` as restaurants.
 Process various crossing tags to decide if a crossing should be extracted.
 Removed `LPG=yes`.  No longer in the data.
