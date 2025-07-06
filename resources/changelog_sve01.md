@@ -9,6 +9,7 @@ Include galleries with artworks in former telephone box uses.
 Extract noncommercial art galleries with a unique museum-like icon.
 Handle more semicolon values.  Apart from some special cases, shops with semicolon values just use the first part.
 Change squiggly brackets at the start of appended bridge refs to round brackets.
+Detect Core Paths in Scotland which only have "Core Path..." set in the `ref`.
 
 ## 03/07/2025
 Extract `wheelchair` info for `amenity=fast_food` with `cuisine=kebab`, `cuisine=mexican` and synonyms.
