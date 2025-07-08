@@ -622,8 +622,9 @@ function way_function()
     end
 
 -- ----------------------------------------------------------------------------
--- The only way and relation places that we're interested in are islands.
--- Islets have been changed to islands in the shared.
+-- The only way and relation places that we're interested in are islands
+-- and localities.
+-- Islets have been changed to islands in the shared lua.
 -- ----------------------------------------------------------------------------
     wr_after_place( wayt )
 
@@ -922,8 +923,9 @@ function rf_2( relationt )
     end
 
 -- ----------------------------------------------------------------------------
--- The only way and relation places that we're interested in are islands.
--- Islets have been changed to islands in the shared.
+-- The only way and relation places that we're interested in are
+-- islands and localities.
+-- Islets have been changed to islands in the shared lua.
 -- ----------------------------------------------------------------------------
     wr_after_place( relationt )
 
@@ -4401,7 +4403,6 @@ function n_after_place( passedt )
                         MinZoom( 11 )
                     else
                         if (( passedt.place == "hamlet"            ) or
-                            ( passedt.place == "locality"          ) or
                             ( passedt.place == "neighbourhood"     ) or
                             ( passedt.place == "isolated_dwelling" ) or
                             ( passedt.place == "farm"              )) then
@@ -4409,10 +4410,20 @@ function n_after_place( passedt )
                             append_name( passedt )
                             Attribute( "class", passedt.place )
                             MinZoom( 13 )
+                        else
+-- ------------------------------------------------------------------------------
+-- Node localities are written here.  See wr_after_place for ways and relations.
+-- ------------------------------------------------------------------------------
+                            if ( passedt.place == "locality" ) then
+                                LayerAsCentroid( "place" )
+                                append_name( passedt )
+                                Attribute( "class", passedt.place )
+                                MinZoom( 14 )
 -- ------------------------------------------------------------------------------
 -- There is no catch-all on place - 
 -- we only extract what we expect to want to process.
 -- ------------------------------------------------------------------------------
+                            end -- locality
                         end -- hamlet
                     end -- suburb
                 end -- town
@@ -4422,15 +4433,16 @@ function n_after_place( passedt )
 end -- n_after_place()
 
 -- ----------------------------------------------------------------------------
--- The only way and relation places that we're interested in are islands.
+-- The only way and relation places that we're interested in are 
+-- islands and localities.
 -- Islets have been changed to islands in the shared lua.
 -- way_area checks are here for islands to be displayed at zooms 6 to 13,
 -- and in the svwd01 style file for zooms 14-18.
 -- ----------------------------------------------------------------------------
 function wr_after_place( passedt )
-
-    if (( passedt.place == "island" ) and
-        ( passedt.is_closed         )) then
+    if ((( passedt.place == "island"   ) or
+         ( passedt.place == "locality" )) and
+        ( passedt.is_closed             )) then
         if ( passedt.way_area > 100000000000 ) then
             minzoom = 6
         else

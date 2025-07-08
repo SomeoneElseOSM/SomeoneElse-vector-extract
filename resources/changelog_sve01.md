@@ -1,6 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 09/07/2025
+Extract way and relation `place=locality` at the same zoom levels as `place=island`.  This includes things like large peninsulas.
+Node `place=locality` are extracted at zoom 14 (one zoom level higher than e.g. `hamlet`).
+
 ## 06/07/2025
 Extract cafes with `cuisine=bubble_tea` and `cuisine=indian` separately and e.g. `fish_and_chips` as restaurants.
 Process various crossing tags to decide if a crossing should be extracted.
