@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250705T101501Z",
+  "data_updated": "20250710T095601Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2267,6 +2267,7 @@
     { "key": "natural", "value": "hedge", "description": "Extracted as a green line, like barrier=hedge" },
     { "key": "natural", "value": "hill", "description": "Like peak, but extracted from higher zoom" },
     { "key": "natural", "value": "meadow", "description": "Treated as a synonym for landuse=meadow" },
+    { "key": "natural", "value": "moor", "description": "Treated in the same way as place=locality" },
     { "key": "natural", "value": "mud", "description": "Written into 'land1' or 'land2' (differently if tidal) at minzoom 9; centroid for name written separately" },
     { "key": "natural", "value": "peak", "description": "Various natural features extracted" },
     { "key": "natural", "value": "peninsula", "description": "Extracted as a synonym of natural=cape, as place=locality" },

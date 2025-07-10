@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Treat `natural=moor` as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
+
 ## 09/07/2025
 Extract way and relation `place=locality` at the same zoom levels as `place=island`.  This includes things like large peninsulas.
 Node `place=locality` are extracted at zoom 14 (one zoom level higher than e.g. `hamlet`).
