@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Treat `natural=moor` as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
 Remove brands with semicolons in them as it's likely "brands sold here" not "brands of here".
+Use `sqkm` on localities to generate a pseudo-way_area, as a proof of concept solution to problems such as https://community.openstreetmap.org/t/looking-for-the-pacific-ocean/128699 .
 
 ## 09/07/2025
 Extract way and relation `place=locality` at the same zoom levels as `place=island`.  This includes things like large peninsulas.

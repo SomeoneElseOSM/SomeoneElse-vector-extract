@@ -1259,6 +1259,7 @@ function update_table( passedt )
     passedt.sport = Find("sport")
     passedt.sport = trim_after_semicolon( passedt.sport )
 
+    passedt.sqkm = Find("sqkm")
     passedt.station = Find("station")
     passedt.status = Find("status")
     passedt.substance = Find("substance")
@@ -4415,10 +4416,57 @@ function n_after_place( passedt )
 -- Node localities are written here.  See wr_after_place for ways and relations.
 -- ------------------------------------------------------------------------------
                             if ( passedt.place == "locality" ) then
+                                if (( tonumber(passedt.sqkm) or 0 ) == 0 ) then
+                                    passedt.sqkm = 0
+                                end
+
+                                if ( passedt.sqkm > 1400000 ) then
+                                    minzoom = 6
+                                else
+                                    if ( passedt.sqkm > 10000 ) then
+                                        minzoom = 7
+                                    else
+                                        if ( passedt.sqkm > 700 ) then
+                                            minzoom = 8
+                                        else
+                                            if ( passedt.sqkm > 280 ) then
+                                                minzoom = 9
+                                            else
+                                                if ( passedt.sqkm > 80 ) then
+                                                    minzoom = 10
+                                                else
+                                                    if ( passedt.sqkm > 10 ) then
+                                                        minzoom = 11
+                                                    else
+                                                        if ( passedt.sqkm > 0.4 ) then
+                                                            minzoom = 12
+                                                        else
+                                                            if ( passedt.sqkm > 0.2 ) then
+                                                                minzoom = 13
+                                                            else
+-- ----------------------------------------------------------------------------
+-- The next check would be 0.05, but 14 is the catch-all minzoom
+-- ----------------------------------------------------------------------------
+                                                                minzoom = 14
+                                                            end -- 13
+                                                        end -- 12
+                                                    end -- 11
+                                                end -- 10
+                                            end -- 9
+                                        end -- 8
+                                    end -- 7
+                                end -- 6
+
                                 LayerAsCentroid( "place" )
                                 append_name( passedt )
                                 Attribute( "class", passedt.place )
-                                MinZoom( 14 )
+-- ------------------------------------------------------------------------------
+-- The pretend "way_area" written for this node is actually slightly less than
+-- the true value of sqkm.  This is to slightly de-emphasise nodes with sqkm
+-- over genuine areas, by about 1 zoom level.
+-- ------------------------------------------------------------------------------
+                                AttributeNumeric( "way_area", math.floor( passedt.sqkm * 80000 ))
+                                MinZoom( minzoom )
 -- ------------------------------------------------------------------------------
 -- There is no catch-all on place - 
 -- we only extract what we expect to want to process.

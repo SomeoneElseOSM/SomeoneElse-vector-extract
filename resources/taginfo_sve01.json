@@ -3547,6 +3547,7 @@
     { "key": "sport", "value": "tennis;squash", "description": "Extract 'tennis' value on sports pitches" },
     { "key": "sport", "value": "yoga", "description": "Used to classify and clarify other tags" },
     { "key": "sport", "value": "yoga;pilates", "description": "Used to classify and clarify other tags" },
+    { "key": "sqkm", "description": "Use to determine the extract zoom level of nodes that map to `place=locality`" },
     { "key": "state", "description": "Used on some cycle ways in place of lifecycle tags" },
     { "key": "state", "value": "abandoned", "description": "Used on some cycle ways in place of lifecycle tags" },
     { "key": "state", "value": "construction", "description": "Used on some cycle ways in place of lifecycle tags" },
