@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Treat `natural=moor` and `natural=strait` as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
+Treat `natural=moor`, `natural=strait` and `natural=mountain_range` as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
 Remove brands with semicolons in them as it's likely "brands sold here" not "brands of here".
 Use `sqkm` on localities to generate a pseudo-way_area, as a proof of concept solution to problems such as https://community.openstreetmap.org/t/looking-for-the-pacific-ocean/128699 .
 Treat `natural=shake_hole` et al as synonyms for `sinkhole`.
