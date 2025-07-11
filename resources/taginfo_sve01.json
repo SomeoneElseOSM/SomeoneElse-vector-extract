@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250710T095601Z",
+  "data_updated": "20250711T091201Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2296,6 +2296,7 @@
     { "key": "natural", "value": "spring", "description": "Various natural features extracted" },
     { "key": "natural", "value": "stone", "description": "Various natural features extracted" },
     { "key": "natural", "value": "stones", "description": "Ways are extracted as natural=bare_rock, nodes as boulders" },
+    { "key": "natural", "value": "strait", "description": "Treated as place=locality" },
     { "key": "natural", "value": "tidal_beach", "description": "Extracted as a dark blue on yellow pattern, with a name" },
     { "key": "natural", "value": "tree", "description": "Extracted as a dark green splodge" },
     { "key": "natural", "value": "tree_group", "description": "Various natural features extracted" },
