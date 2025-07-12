@@ -4364,10 +4364,10 @@ function n_after_place( passedt )
                         else
 -- ------------------------------------------------------------------------------
 -- Node localities are written here.  See wr_after_place for ways and relations.
--- set_sqkm_minzoom sets "minzoom" within the table which is used just below.
+-- set_sqkm_name_minzoom sets "minzoom" within the table which is used just below.
 -- ------------------------------------------------------------------------------
                             if ( passedt.place == "locality" ) then
-                                set_sqkm_minzoom( passedt )
+                                set_sqkm_name_minzoom( passedt )
                                 LayerAsCentroid( "place" )
                                 append_name( passedt )
                                 Attribute( "class", passedt.place )
@@ -4377,7 +4377,7 @@ function n_after_place( passedt )
 -- over genuine areas, by about 1 zoom level.
 -- ------------------------------------------------------------------------------
                                 AttributeNumeric( "way_area", math.floor( passedt.sqkm * 80000 ))
-                                MinZoom( passedt.minzoom )
+                                MinZoom( passedt.name_minzoom )
 -- ------------------------------------------------------------------------------
 -- There is no catch-all on place - 
 -- we only extract what we expect to want to process.
@@ -4495,48 +4495,6 @@ function append_ref_etc( passedt )
 end -- function append_ref_etc( passedt )
 
 
-function set_sqkm_minzoom( passedt )
-    passedt.sqkm = ( tonumber(passedt.sqkm) or 0 )
-
-    if ( passedt.sqkm > 1400000 ) then
-        passedt.minzoom = 6
-    else
-        if ( passedt.sqkm > 10000 ) then
-            passedt.minzoom = 7
-        else
-            if ( passedt.sqkm > 700 ) then
-                passedt.minzoom = 8
-            else
-                if ( passedt.sqkm > 280 ) then
-                    passedt.minzoom = 9
-                else
-                    if ( passedt.sqkm > 80 ) then
-                        passedt.minzoom = 10
-                    else
-                        if ( passedt.sqkm > 10 ) then
-                            passedt.minzoom = 11
-                        else
-                            if ( passedt.sqkm > 0.4 ) then
-                                passedt.minzoom = 12
-                            else
-                                if ( passedt.sqkm > 0.2 ) then
-                                    passedt.minzoom = 13
-                                else
--- ----------------------------------------------------------------------------
--- The next check would be 0.05, but 14 is the catch-all minzoom
--- ----------------------------------------------------------------------------
-                                    passedt.minzoom = 14
-                                end -- 13
-                            end -- 12
-                        end -- 11
-                    end -- 10
-                end -- 9
-            end -- 8
-        end -- 7
-    end -- 6
-end -- set_sqkm_minzoom( passedt )
-
-
 function set_way_area_name_and_fill_minzoom( passedt )
     if ( passedt.way_area > 20000000000 ) then
         passedt.fill_minzoom = 2                                 -- North Sea
@@ -4579,10 +4537,12 @@ function set_way_area_name_and_fill_minzoom( passedt )
                                             passedt.name_minzoom = 14
                                         else
 -- ----------------------------------------------------------------------------
--- 14 is the catch-all minzoom
+-- 14 is the catch-all minzoom for "fill".  
+-- If there is a "sqkm" value set, use that to determine name_minzoom.
+-- It will end up at 14 if there isn't.
 -- ----------------------------------------------------------------------------
                                             passedt.fill_minzoom = 14
-                                            passedt.name_minzoom = 14
+                                            set_sqkm_name_minzoom( passedt )
                                         end -- passedt.fill_minzoom 13
                                     end -- passedt.fill_minzoom 12
                                 end -- passedt.fill_minzoom 11
@@ -4594,3 +4554,51 @@ function set_way_area_name_and_fill_minzoom( passedt )
         end -- passedt.fill_minzoom 5
     end -- passedt.fill_minzoom 2
 end -- set_way_area_name_and_fill_minzoom( passedt )
+
+
+function set_sqkm_name_minzoom( passedt )
+    passedt.sqkm = ( tonumber(passedt.sqkm) or 0 )
+
+    if ( passedt.sqkm > 200000 ) then
+        passedt.name_minzoom = 5
+    else
+        if ( passedt.sqkm > 100000 ) then
+            passedt.name_minzoom = 6
+        else
+            if ( passedt.sqkm > 10000 ) then
+                passedt.name_minzoom = 7
+            else
+                if ( passedt.sqkm > 700 ) then
+                    passedt.name_minzoom = 8
+                else
+                    if ( passedt.sqkm > 280 ) then
+                        passedt.name_minzoom = 9
+                    else
+                        if ( passedt.sqkm > 80 ) then
+                            passedt.name_minzoom = 10
+                        else
+                            if ( passedt.sqkm > 10 ) then
+                                passedt.name_minzoom = 11
+                            else
+                                if ( passedt.sqkm > 0.4 ) then
+                                    passedt.name_minzoom = 12
+                                else
+                                    if ( passedt.sqkm > 0.2 ) then
+                                        passedt.name_minzoom = 13
+                                    else
+-- ----------------------------------------------------------------------------
+-- The next check would be 0.05, but 14 is the catch-all name_minzoom
+-- ----------------------------------------------------------------------------
+                                        passedt.name_minzoom = 14
+                                    end -- 13
+                                end -- 12
+                            end -- 11
+                        end -- 10
+                    end -- 9
+                end -- 8
+            end -- 7
+        end -- 6
+    end -- 5
+end -- set_sqkm_name_minzoom( passedt )
+
+

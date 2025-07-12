@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Treat `place=ocean` as `place=sea`.
 Extract `place=sea` based on the size of the feature.
+If a `place=sea` is a node but has `sqkm` set, use that to set minzoom.
 
 ## 12/07/2025
 Treat `natural=moor`, `natural=strait`, `natural=mountain_range` and `natural=landform` as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
