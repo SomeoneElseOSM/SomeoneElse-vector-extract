@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250711T091201Z",
+  "data_updated": "20250712T161001Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2517,9 +2517,10 @@
     { "key": "place", "value": "isolated_dwelling", "description": "Treated as isolated_dwelling at minzoom 13" },
     { "key": "place", "value": "locality", "description": "Treated as locality at minzoom 13" },
     { "key": "place", "value": "neighbourhood", "description": "Treated as neighbourhood at minzoom 13" },
+    { "key": "place", "value": "ocean", "description": "Treated as sea" },
     { "key": "place", "value": "quarter", "description": "Treated as place=neighbourhood" },
     { "key": "place", "value": "region", "description": "Treated as `place=locality` if not a boundary" },
-    { "key": "place", "value": "sea", "description": "Treated as sea at minzoom 8" },
+    { "key": "place", "value": "sea", "description": "Treated as sea at minzoom 2 or above depending on area" },
     { "key": "place", "value": "state", "description": "Treated as state at minzoom 5" },
     { "key": "place", "value": "suburb", "description": "Treated as suburb at minzoom 11" },
     { "key": "place", "value": "town", "description": "Treated as town at minzoom 8" },

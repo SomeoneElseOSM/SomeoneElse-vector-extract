@@ -2123,58 +2123,8 @@ function generic_after_land1( passedt )
 -- written, so that the fill and the outline of the feature appears first, and
 -- then the name.
 -- ----------------------------------------------------------------------------
-        if ( passedt.way_area > 90000000 ) then
-            fill_minzoom = 5                                     -- Lough Neagh, Lower Lough Erne
-            name_minzoom = 8
-        else
-            if ( passedt.way_area > 50000000 ) then
-                fill_minzoom = 6                                 -- Lough Sheelin #8/53.804/-7.323
-                name_minzoom = 9
-            else
-                if ( passedt.way_area > 10000000 ) then          -- Chew Valley Lake
-                    fill_minzoom = 7
-                    name_minzoom = 10
-                else
-                    if ( passedt.way_area > 3000000 ) then       -- Talybont Reservoir #11/51.8704/-3.3012
-                        fill_minzoom = 8
-                        name_minzoom = 11
-                    else
-                        if ( passedt.way_area > 274914 ) then
-                            fill_minzoom = 9
-                            name_minzoom = 12
-                        else
-                            if ( passedt.way_area > 68728 ) then
-                                fill_minzoom = 10
-                                name_minzoom = 13
-                            else
-                                if ( passedt.way_area > 24000 ) then
-                                    fill_minzoom = 11
-                                    name_minzoom = 14
-                                else
-                                    if ( passedt.way_area > 9000 ) then
-                                        fill_minzoom = 12
-                                        name_minzoom = 14
-                                    else
-                                        if ( passedt.way_area > 800 ) then
-                                            fill_minzoom = 13
-                                            name_minzoom = 14
-                                        else
--- ----------------------------------------------------------------------------
--- 14 is the catch-all minzoom
--- ----------------------------------------------------------------------------
-                                            fill_minzoom = 14
-                                            name_minzoom = 14
-                                        end -- fill_minzoom 13
-                                    end -- fill_minzoom 12
-                                end -- fill_minzoom 11
-                            end -- fill_minzoom 10
-                        end -- fill_minzoom 9
-                    end -- fill_minzoom 8
-                end -- fill_minzoom 7
-            end -- fill_minzoom 6
-        end -- fill_minzoom 5
-
-        write_polygon_and_centroid_2( "land1", passedt, "natural_", passedt.natural, fill_minzoom, name_minzoom )
+        set_way_area_name_and_fill_minzoom( passedt )
+        write_polygon_and_centroid_2( "land1", passedt, "natural_", passedt.natural, passedt.fill_minzoom, passedt.name_minzoom )
     else
         render_place_land1( passedt )
     end
@@ -2182,8 +2132,8 @@ end -- generic_after_land1()
 
 function render_place_land1( passedt )
     if ( passedt.place == "sea" ) then
-        minzoom = 5
-        write_polygon_and_centroid( "land1", passedt, "place_", passedt.place, minzoom )
+        set_way_area_name_and_fill_minzoom( passedt )
+        write_polygon_and_centroid_2( "land1", passedt, "place_", passedt.place, passedt.fill_minzoom, passedt.name_minzoom )
     else
         render_amenity_land1( passedt )
     end
@@ -4414,47 +4364,10 @@ function n_after_place( passedt )
                         else
 -- ------------------------------------------------------------------------------
 -- Node localities are written here.  See wr_after_place for ways and relations.
+-- set_sqkm_minzoom sets "minzoom" within the table which is used just below.
 -- ------------------------------------------------------------------------------
                             if ( passedt.place == "locality" ) then
-                                passedt.sqkm = ( tonumber(passedt.sqkm) or 0 )
-
-                                if ( passedt.sqkm > 1400000 ) then
-                                    minzoom = 6
-                                else
-                                    if ( passedt.sqkm > 10000 ) then
-                                        minzoom = 7
-                                    else
-                                        if ( passedt.sqkm > 700 ) then
-                                            minzoom = 8
-                                        else
-                                            if ( passedt.sqkm > 280 ) then
-                                                minzoom = 9
-                                            else
-                                                if ( passedt.sqkm > 80 ) then
-                                                    minzoom = 10
-                                                else
-                                                    if ( passedt.sqkm > 10 ) then
-                                                        minzoom = 11
-                                                    else
-                                                        if ( passedt.sqkm > 0.4 ) then
-                                                            minzoom = 12
-                                                        else
-                                                            if ( passedt.sqkm > 0.2 ) then
-                                                                minzoom = 13
-                                                            else
--- ----------------------------------------------------------------------------
--- The next check would be 0.05, but 14 is the catch-all minzoom
--- ----------------------------------------------------------------------------
-                                                                minzoom = 14
-                                                            end -- 13
-                                                        end -- 12
-                                                    end -- 11
-                                                end -- 10
-                                            end -- 9
-                                        end -- 8
-                                    end -- 7
-                                end -- 6
-
+                                set_sqkm_minzoom( passedt )
                                 LayerAsCentroid( "place" )
                                 append_name( passedt )
                                 Attribute( "class", passedt.place )
@@ -4464,7 +4377,7 @@ function n_after_place( passedt )
 -- over genuine areas, by about 1 zoom level.
 -- ------------------------------------------------------------------------------
                                 AttributeNumeric( "way_area", math.floor( passedt.sqkm * 80000 ))
-                                MinZoom( minzoom )
+                                MinZoom( passedt.minzoom )
 -- ------------------------------------------------------------------------------
 -- There is no catch-all on place - 
 -- we only extract what we expect to want to process.
@@ -4582,3 +4495,102 @@ function append_ref_etc( passedt )
 end -- function append_ref_etc( passedt )
 
 
+function set_sqkm_minzoom( passedt )
+    passedt.sqkm = ( tonumber(passedt.sqkm) or 0 )
+
+    if ( passedt.sqkm > 1400000 ) then
+        passedt.minzoom = 6
+    else
+        if ( passedt.sqkm > 10000 ) then
+            passedt.minzoom = 7
+        else
+            if ( passedt.sqkm > 700 ) then
+                passedt.minzoom = 8
+            else
+                if ( passedt.sqkm > 280 ) then
+                    passedt.minzoom = 9
+                else
+                    if ( passedt.sqkm > 80 ) then
+                        passedt.minzoom = 10
+                    else
+                        if ( passedt.sqkm > 10 ) then
+                            passedt.minzoom = 11
+                        else
+                            if ( passedt.sqkm > 0.4 ) then
+                                passedt.minzoom = 12
+                            else
+                                if ( passedt.sqkm > 0.2 ) then
+                                    passedt.minzoom = 13
+                                else
+-- ----------------------------------------------------------------------------
+-- The next check would be 0.05, but 14 is the catch-all minzoom
+-- ----------------------------------------------------------------------------
+                                    passedt.minzoom = 14
+                                end -- 13
+                            end -- 12
+                        end -- 11
+                    end -- 10
+                end -- 9
+            end -- 8
+        end -- 7
+    end -- 6
+end -- set_sqkm_minzoom( passedt )
+
+
+function set_way_area_name_and_fill_minzoom( passedt )
+    if ( passedt.way_area > 20000000000 ) then
+        passedt.fill_minzoom = 2                                 -- North Sea
+        passedt.name_minzoom = 2
+    else
+        if ( passedt.way_area > 90000000 ) then
+            passedt.fill_minzoom = 5                             -- Lough Neagh, Lower Lough Erne
+            passedt.name_minzoom = 8
+        else
+            if ( passedt.way_area > 50000000 ) then
+                passedt.fill_minzoom = 6                         -- Lough Sheelin #8/53.804/-7.323
+                passedt.name_minzoom = 9
+            else
+                if ( passedt.way_area > 10000000 ) then          -- Chew Valley Lake
+                    passedt.fill_minzoom = 7
+                    passedt.name_minzoom = 10
+                else
+                    if ( passedt.way_area > 3000000 ) then       -- Talybont Reservoir #11/51.8704/-3.3012
+                        passedt.fill_minzoom = 8
+                        passedt.name_minzoom = 11
+                    else
+                        if ( passedt.way_area > 274914 ) then
+                            passedt.fill_minzoom = 9
+                            passedt.name_minzoom = 12
+                        else
+                            if ( passedt.way_area > 68728 ) then
+                                passedt.fill_minzoom = 10
+                                passedt.name_minzoom = 13
+                            else
+                                if ( passedt.way_area > 24000 ) then
+                                    passedt.fill_minzoom = 11
+                                    passedt.name_minzoom = 14
+                                else
+                                    if ( passedt.way_area > 9000 ) then
+                                        passedt.fill_minzoom = 12
+                                        passedt.name_minzoom = 14
+                                    else
+                                        if ( passedt.way_area > 800 ) then
+                                            passedt.fill_minzoom = 13
+                                            passedt.name_minzoom = 14
+                                        else
+-- ----------------------------------------------------------------------------
+-- 14 is the catch-all minzoom
+-- ----------------------------------------------------------------------------
+                                            passedt.fill_minzoom = 14
+                                            passedt.name_minzoom = 14
+                                        end -- passedt.fill_minzoom 13
+                                    end -- passedt.fill_minzoom 12
+                                end -- passedt.fill_minzoom 11
+                            end -- passedt.fill_minzoom 10
+                        end -- passedt.fill_minzoom 9
+                    end -- passedt.fill_minzoom 8
+                end -- passedt.fill_minzoom 7
+            end -- passedt.fill_minzoom 6
+        end -- passedt.fill_minzoom 5
+    end -- passedt.fill_minzoom 2
+end -- set_way_area_name_and_fill_minzoom( passedt )
