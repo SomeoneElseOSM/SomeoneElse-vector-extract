@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 12/07/2025
 Treat `natural=moor`, `natural=strait`, `natural=mountain_range` and `natural=landform` as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
 Remove brands with semicolons in them as it's likely "brands sold here" not "brands of here".
 Use `sqkm` on localities to generate a pseudo-way_area, as a proof of concept solution to problems such as https://community.openstreetmap.org/t/looking-for-the-pacific-ocean/128699 .
