@@ -4416,9 +4416,7 @@ function n_after_place( passedt )
 -- Node localities are written here.  See wr_after_place for ways and relations.
 -- ------------------------------------------------------------------------------
                             if ( passedt.place == "locality" ) then
-                                if (( tonumber(passedt.sqkm) or 0 ) == 0 ) then
-                                    passedt.sqkm = 0
-                                end
+                                passedt.sqkm = ( tonumber(passedt.sqkm) or 0 )
 
                                 if ( passedt.sqkm > 1400000 ) then
                                     minzoom = 6
