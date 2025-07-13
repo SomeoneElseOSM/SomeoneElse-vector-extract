@@ -3,6 +3,8 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Treat `natural=cliff`, `natural=ridge` and `natural=arch` nodes as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
+Treat linear `natural=strait` and `natural=mountain_range` as a linear `natural=valley`.
+Treat linear `natural=gully` as a linear `natural=valley` - a linear name is shown.  Node and area `natural=gully` are treated as `place=locality`.
 
 ## 13/07/2025
 Treat `place=ocean` as `place=sea`.

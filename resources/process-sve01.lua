@@ -158,11 +158,14 @@ function node_function()
 -- A natural=cliff et al node can't be drawn as a linear cliff, but we can
 -- treat it as a locality.
 -- ----------------------------------------------------------------------------
-   if ((( nodet.natural == "cliff" )  or
-        ( nodet.natural == "ridge" )  or
-        ( nodet.natural == "arch"  )) and
-       (( nodet.place   == nil     )  or
-        ( nodet.place   == ""      ))) then
+   if ((( nodet.natural == "cliff"          )  or
+        ( nodet.natural == "ridge"          )  or
+        ( nodet.natural == "arch"           )  or
+        ( nodet.natural == "strait"         )  or
+        ( nodet.natural == "mountain_range" )  or
+        ( nodet.natural == "gully"          )) and
+       (( nodet.place   == nil              )  or
+        ( nodet.place   == ""               ))) then
       nodet.place   = "locality"
       nodet.natural = nil
    end
@@ -590,6 +593,24 @@ function way_function()
         ( wayt.area    == ""      ))) then
       wayt.area = "no"
    end
+
+-- ----------------------------------------------------------------------------
+-- A natural=strait way is handled as a locality if it is closed and a valley
+-- if it is not.
+-- ----------------------------------------------------------------------------
+   if ((( wayt.natural == "strait"         )  or
+        ( wayt.natural == "mountain_range" )  or
+        ( wayt.natural == "gully"          )) and
+       (( wayt.place   == nil              )  or
+        ( wayt.place   == ""               ))) then
+      if ( wayt.is_closed ) then
+         wayt.place   = "locality"
+         wayt.natural = nil
+      else
+         wayt.natural = "valley"
+      end
+   end
+
 
 -- ----------------------------------------------------------------------------
 -- (end of the way-specific code)
