@@ -155,6 +155,19 @@ function node_function()
    end
 
 -- ----------------------------------------------------------------------------
+-- A natural=cliff et al node can't be drawn as a linear cliff, but we can
+-- treat it as a locality.
+-- ----------------------------------------------------------------------------
+   if ((( nodet.natural == "cliff" )  or
+        ( nodet.natural == "ridge" )  or
+        ( nodet.natural == "arch"  )) and
+       (( nodet.place   == nil     )  or
+        ( nodet.place   == ""      ))) then
+      nodet.place   = "locality"
+      nodet.natural = nil
+   end
+
+-- ----------------------------------------------------------------------------
 -- If lcn_ref exists (for example as a location in a local cycling network),
 -- render it via a "man_made" tag if there's no other tags on that node.
 -- ----------------------------------------------------------------------------
@@ -168,10 +181,11 @@ function node_function()
    end
 
 -- ------------------------------------------------------------------------------
--- The "place" layer is node-specific.
--- It'd be nice to be able to process relations, ways and nodes, knowing that 
--- there would be only one OSM feature per real-world element, but unfortunately
--- this is not the case.
+-- The "place" layer is mostly node-specific (islands and area localities are
+-- a thing - see "wr_after_place( wayt )" below).
+-- For the rest, it'd be nice to be able to process relations, ways and nodes,
+-- knowing that there would be only one OSM feature per real-world element, but
+-- unfortunately this is not the case.
 --
 -- * Lots of places (from "city" downwards) have both relations, and occasionally
 --   ways, and nodes.

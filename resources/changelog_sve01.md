@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Treat `natural=cliff`, `natural=ridge` and `natural=arch` nodes as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
+
 ## 13/07/2025
 Treat `place=ocean` as `place=sea`.
 Extract `place=sea` based on the size of the feature.
