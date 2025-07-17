@@ -595,6 +595,19 @@ function way_function()
    end
 
 -- ----------------------------------------------------------------------------
+-- linear place=locality are a special case - we treat them as named linear
+-- features and use natural=valley to show the name.
+-- ----------------------------------------------------------------------------
+   if ((  wayt.place == "locality"        ) and
+       (( wayt.natural   == nil          )  or
+        ( wayt.natural   == ""           ))) then
+      if ( not wayt.is_closed ) then
+         wayt.natural = "valley"
+         wayt.place = nil
+      end
+   end
+
+-- ----------------------------------------------------------------------------
 -- A natural=strait way is handled as a locality if it is closed and a valley
 -- if it is not.
 -- ----------------------------------------------------------------------------
