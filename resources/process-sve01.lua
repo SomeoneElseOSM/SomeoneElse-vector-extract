@@ -4515,6 +4515,7 @@ function write_polygon_and_centroid_2( passed_layer, passedt, passed_prefix, pas
     if ( passedt.way_area > 0 ) then
         Layer( passed_layer, true )
         Attribute( "class", passed_prefix .. passed_value )
+        AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
         MinZoom( passed_fill_zoom )
     end
 
