@@ -7,6 +7,7 @@ Treat linear `natural=strait` and `natural=mountain_range` as a linear `natural=
 Treat linear `natural=gully` as a linear `natural=valley` - a linear name is shown.  Node and area `natural=gully` are treated as `place=locality`.
 Treat linear `place=locality` as a linear `natural=valley` - a linear name is shown.  
 Extract `tunnel` as a boolean on `natural=water` areas.
+Treat area `highway=raceway` as area `leisure=track`.
 
 ## 13/07/2025
 Treat `place=ocean` as `place=sea`.
