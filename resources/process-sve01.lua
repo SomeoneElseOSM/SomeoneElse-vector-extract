@@ -23,7 +23,7 @@
 -- cp /home/${local_filesystem_user}/src/SomeoneElse-style/shared_lua.lua -
 --      /usr/local/share/lua/5.3/
 -- ----------------------------------------------------------------------------
-require "shared_lua"
+require "shared_lua_vector"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 

@@ -386,7 +386,7 @@ fi
 # Run Tilemaker
 #
 mkdir -p /usr/local/share/lua/5.3/
-cp /home/${local_filesystem_user}/src/SomeoneElse-style/shared_lua.lua /usr/local/share/lua/5.3/
+cp /home/${local_filesystem_user}/src/SomeoneElse-style/shared_lua.lua /usr/local/share/lua/5.3/shared_lua_vector.lua
 #
 # The "nocoast" version is the default in the script because that does not rely on a previously-generated file.
 #
