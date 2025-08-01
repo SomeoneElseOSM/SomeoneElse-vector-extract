@@ -183,6 +183,14 @@ function node_function()
       nodet.lcn_ref = nil
    end
 
+-- ----------------------------------------------------------------------------
+-- We treat node islands as just localities.
+-- ----------------------------------------------------------------------------
+   if (( nodet.place == "island" )  or
+       ( nodet.place == "islet"  )) then
+      nodet.place = "locality"
+   end
+
 -- ------------------------------------------------------------------------------
 -- The "place" layer is mostly node-specific (islands and area localities are
 -- a thing - see "wr_after_place( wayt )" below).

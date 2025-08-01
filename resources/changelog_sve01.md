@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Re-added `shop=amusement` as a synonym for `amusements`.
+Treat `place=island` nodes as `place=locality`.
 
 ## 21/07/2025
 Treat `natural=cliff`, `natural=ridge` and `natural=arch` nodes as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.

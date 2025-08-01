@@ -34,9 +34,9 @@ Set to "ocean".
 
 More important regular place nodes are written to lower numbered layers: `country`, `state` to all layers, `capital` at 3, `city` at 5, `town` at 8, `suburb`, `village` at 11, `hamlet`, `neighbourhood`, `isolated_dwelling`, `farm` at 13.  Only OSM nodes are processed for these place as there is too much randomness and duplication in OSM way and relation place data to use ways or relations.
 
-"node", "way" and "relation" 'locality' values are also written; at a zoom level that depends on size.  Size is determined either by the `way_area` of the way or multipolygon relation, or the size as defined by `sqkm` of a node.
+Way and multipolygon relation islands and islets are written as `place=island`, at a zoom level based on `way_area`. The `way_area` is also written out to allow zoom level display decisions to be made beyond zoom level 15.  Node islands and islets are written as `place=locality`, handled as described below.
 
-Way and multipolygon relation islands and islets are written as `place=island`, at a zoom level based on `way_area`. The `way_area` is also written out to allow zoom level display decisions to be made beyond zoom level 15.
+Node, way and multipolygon relation 'locality' values are also written; at a zoom level that depends on size.  Size is determined either by the `way_area` of the way or multipolygon relation, or the size as defined by `sqkm` of a node.
 
 `place=sea` is written to `land1` (see below).  Other `place` values are ignored.
 
