@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Re-added `shop=amusement` as a synonym for `amusements`.
+
 ## 21/07/2025
 Treat `natural=cliff`, `natural=ridge` and `natural=arch` nodes as a geographic place like `cape`, `peninsula` etc. - all treated like `place=locality`.
 Treat linear `natural=strait` and `natural=mountain_range` as a linear `natural=valley`.

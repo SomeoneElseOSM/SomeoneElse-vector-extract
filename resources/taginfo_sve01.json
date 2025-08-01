@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250801T104501Z",
+  "data_updated": "20250801T124001Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2795,6 +2795,7 @@
     { "key": "shop", "value": "alteration", "description": "Various shops extracted" },
     { "key": "shop", "value": "alternative_health", "description": "Various shops extracted" },
     { "key": "shop", "value": "alternative_medicine", "description": "Various shops extracted" },
+    { "key": "shop", "value": "amusement", "description": "Various shops shown" },
     { "key": "shop", "value": "amusements", "description": "Various shops extracted" },
     { "key": "shop", "value": "angling", "description": "Various shops extracted" },
     { "key": "shop", "value": "animal_feed", "description": "Various shops extracted" },
