@@ -3,7 +3,7 @@
 "sve01" is a schema for use with [Tilemaker](https://github.com/systemed/tilemaker) that is used to create 
 mbtiles that can be displayed with the svwd01 style [here](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/README.md).
 
-As with the parent style, releases are simply datestamped.  As written the most recent releases was "20241226"; this README corresponds with the latest version of the committed code (some time after that).
+As with the parent style, releases are simply datestamped.  At the time of updating this README, the most recent release was "20250706".  Roughly one "release" per month is made; this README corresponds with the latest version of the committed code at that time.
 
 This only describes the schema and the data extraction that supports that schema.  See also the [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/resources/README_svwd01.md) for an example display style, and also the main project [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/README.md) for the top=level scripts.
 
@@ -32,15 +32,17 @@ Set to "ocean".
 
 ## "place"
 
-More important regular place nodes are written to lower numbered layers: country, state to all layers, capital at 3, city at 5, town at 8, suburb, village at 11, hamlet, locality, neighbourhood, isolated_dwelling, farm at 13.  Other values are ignored.  Only OSM nodes are processed for the "place" layer; there's too much randomness in OSM way and relation place data to use that.
+More important regular place nodes are written to lower numbered layers: `country`, `state` to all layers, `capital` at 3, `city` at 5, `town` at 8, `suburb`, `village` at 11, `hamlet`, `neighbourhood`, `isolated_dwelling`, `farm` at 13.  Only OSM nodes are processed for these place as there is too much randomness and duplication in OSM way and relation place data to use ways or relations.
 
-Islands and islets are written as `place=island`, at a zoom level based on way_area. `way_area` is also written for islands, to allow higher zoom level display decisions to be made.
+"node", "way" and "relation 'locality' values are also written; at a zoom level that depends on size.  Size is determined either by the 'way_area' of the way or multipolygon relation, or the size as defined by `sqkm` of a node.
 
-`place=sea` is extracted at zoom level 5.
+Way and multipolygon relation Islands and islets are written as `place=island`, at a zoom level based on way_area. The `way_area` is also written out to allow zoom level display decisions to be made beyond zoom level 15.
+
+`place=sea` is written to `land1` (see below).  Other `place` values are ignored.
 
 ### class
 
-Usually the `place` value (e.g. `city`). Set to `capital` (regardless of the place value) if it is a capital.
+This is usually the `place` value (e.g. `city`). It is set to `capital` (regardless of the `place` value) if it is a capital.
 
 ### name
 
@@ -48,7 +50,7 @@ The value of the OSM name tag.
 
 ### way_area
 
-Written for islands only.
+Written for `locality` and 'island` only.  This is either an actual `way_area` value or a pretend one based on `sqkm` for nodes.
 
 ## "transportation"
 
@@ -146,6 +148,8 @@ There are two "landuse / landcover" layers into which all sorts of landuse, leis
 Features are written at an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=nature_reserve") and that zoom level may vary based on way_area.
 
 A number of "`landuse`, `leisure`, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
+
+`place=sea` is extracted at zoom level 5.
 
 .  Things considered "large" and written out in this way include (from "land1"):
 
