@@ -234,13 +234,42 @@ The value of any OSM `oneway` tag - typically `yes` or `-1`.
 
 The value of `operator` is written out for LDPs.
 
+## "waterway"
+
+This is for linear waterways.
+
+### class
+
+The OSM value for "waterway" after processing based on "intermittent" etc.
+
+* zoom 10 `waterway=river`
+* zoom 11 `waterway=canal`, `waterway=derelict_canal`.
+* zoom 12 `waterway=stream`, `waterway=drain`, `waterway=intriver`., `waterway=intstream`.
+* zoom 13 `waterway=ditch`
+* zoom 14 `waterway=pipeline`
+
+### name
+
+the value of the OSM name tag.
+
+### bridge
+
+Set to the value of the bridge on the waterway, which will be "levee" for embankments, "yes" for all genuine bridges and blank for ones that are neither.
+
+### tunnel
+
+A boolean value set to true if a tunnel.
+
+`bridge` and `tunnel` tags can coexist and a map style consuming this schema needs to deal with that.
+
+
 ## "land1" and "land2"
 
 There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas and points go.  Most go into "land1", except in the case of some overlays (e.g. military red hatching) which goes into "land2".  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into "land2".
 
-Features are written at an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=nature_reserve") and that zoom level may vary based on way_area.
+Features are written from an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=nature_reserve") and that zoom level in many cases will vary based on `way_area` or a proxy for that (`sqkm`).
 
-A number of "`landuse`, `leisure`, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
+A number of area "`landuse`, `leisure`, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
 
 `place=sea` is extracted at zoom level 5.
 
@@ -337,34 +366,6 @@ Either the value of the OSM ele tag, or for some features used to pass a "more d
 ### way_area
 
 Set to the results of "Area()" for certain types of closed polygons as described above.  Values here are roughly 2.9 times the equivalent raster way_area values.
-
-
-## "waterway"
-
-This is for linear waterways.
-
-### class
-
-The OSM value for "waterway" after processing based on "intermittent" etc.
-
-* zoom 11 `waterway=river`, `waterway=canal`, `waterway=derelict_canal`.
-* zoom 12 `waterway=stream`, `waterway=drain`, `waterway=intriver`., `waterway=intstream`.
-* zoom 13 `waterway=ditch`
-* zoom 14 `waterway=weir`, `waterway=pipeline`
-
-### name
-
-the value of the OSM name tag.
-
-### bridge
-
-Set to the value of the bridge on the waterway, which will be "levee" for embankments, "yes" for all genuine bridges and blank for ones that are neither.
-
-### tunnel
-
-A boolean value set to true if a tunnel.
-
-`bridge` and `tunnel` tags can coexist and a map style consuming this schema needs to deal with that.
 
 
 ## "linearbarrier"
