@@ -269,13 +269,115 @@ There are two "landuse / landcover" layers into which all sorts of landuse, leis
 
 Features are written from an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=nature_reserve") and that zoom level in many cases will vary based on `way_area` or a proxy for that (`sqkm`).
 
-A number of area "`landuse`, `leisure`, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
+Most area "`landuse`, `leisure`, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
 
-`place=sea` is extracted at zoom level 5.
+### `natural` and `place` water features in `land1`.
 
-.  Things considered "large" and written out in this way include (from "land1"):
+This includes `natural=water`, `natural=intermittentwater`, `natural=glacier`, `natural=bay` and `place=sea`.
 
-* zoom 5+ to 8+ `natural=water`, `natural=intermittentwater`, `natural=glacier`, `natural=bay`.
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 20000000000) the "fill minzoom" and "name minzoom" are both vector zoom 2.  The catch-all for the smallest ones is 14 for both, which is the highest vector zoom level created by this schema, although map styles can choose to display features or names whenever they like after that.
+
+With the area feature, as well as `class`, `tunnel` is written as a boolean attribute.
+
+With the point feature, as well as `class`, `way_area` and `name` are written.
+
+### `amenity` parking features in `land1`.
+
+This includes `amenity=parking`, `amenity=parking_pay`, `amenity=parking_freedisabled`, `amenity=parking_paydisabled`, 
+
+These are written as a area feature at vector zoom 9 and an also as a point feature, also at vector zoom 9.  It includes both regular `amenity=parking` and also `amenity=parking_space` and highway=emergency_bay`
+
+Other tags that will change `amenity=parking` to e.g. `amenity=parking_pay` include:
+
+* `fee`.  If set to a non-free value `parking_space=parking_pay` is set as an attribute.
+* `parking_space=disabled`
+
+An additional attribute `access` is also set - this is the regular `access` tag from OSM.
+
+### `amenity` education and hospital features in `land1`.
+
+This includes `amenity=university`, `amenity=college`, `amenity=school`, `amenity=hospital` and `amenity=kindergarten`.
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 800000) the "fill minzoom" is 9 and the "name minzoom" is vector zoom 11.  The catch-all for the smallest ones is 13 for fill and 14 for name.
+
+In addition to the normal OSM tags, `amenity=hospital` can be set based on `healthcare=hospital`.
+
+### `amenity` `holy_spring`, `holy_well` and `watering_place` features in `land1`.
+
+These are written as a point feature at vector zoom 13.
+
+In addition to the regular OSM tags, `holy_spring` can be set based on `place_of_worship=holy_well` on a `natural=spring`.
+
+### `amenity=ferry_terminal` in `land1`.
+
+These are written as a point feature at vector zoom 14.
+
+### Other zoom 14 amenities in `land1`.
+
+This includes:
+
+`shelter`, `atm`, `bank`, `bank_l`, `bank_n`, `bank_y`, `bar`, `bar_ddd`, `bar_dld`, `bar_dnd`, `bar_dyd`, `bar_ydd`, `bar_yld`, `bar_ynd`, `bar_yyd`, `bar_ddy`, `bar_dly`, `bar_dny`, `bar_dyy`, `bar_ydy`, `bar_yly`, `bar_yny`, `bar_yyy`, `nightclub`, `concert_hall`, `car_sharing`, `taxi`, `taxi_office`, `bus_station`, `entrancemain`, `bubble_tea`, `cafe_indian`, `cafe_ddd`, `cafe_dld`, `cafe_dnd`, `cafe_dyd`, `cafe_ydd`, `cafe_yld`, `cafe_ynd`, `cafe_yyd`, `cafe_ddy`, `cafe_dly`, `cafe_dny`, `cafe_dyy`, `cafe_ydy`, `cafe_yly`, `cafe_yny`, `cafe_yyy`, `cinema`, `fire_station`, `lifeboat`, `fuel`, `fuel_e`, `fuel_h`, `fuel_l`, `fuel_w`, `charging_station`, `embassy`, `library`, `courthouse`, `monastery`, `zooaviary`, `zooenclosure`, `vending_machine`, `vending_excrement`, `bottle_return`, `waste_basket`, `waste_disposal`, `grit_bin`, `left_luggage`, `parcel_locker`, `bench`, `playground_swing`, `playground_structure`, `playground_climbingframe`, `playground_slide`, `playground_springy`, `playground_zipwire`, `playground_seesaw`, `playground_roundabout`, `pitch_tabletennis`, `pitch_soccer`, `pitch_basketball`, `pitch_cricket`, `pitch_skateboard`, `pitch_climbing`, `pitch_rugby`, `pitch_chess`, `pitch_tennis`, `pitch_athletics`, `pitch_boules`, `pitch_bowls`, `pitch_croquet`, `pitch_cycling`, `pitch_equestrian`, `pitch_gaa`, `pitch_hockey`, `pitch_multi`, `pitch_netball`, `pitch_polo`, `pitch_shooting`, `pitch_baseball`, `doctors`, `dentist`, `pharmacy`, `pharmacy_l`, `pharmacy_n`, `pharmacy_y`, `ambulance_station`, `mountain_rescue`, `mountain_rescue_box`, `place_of_worship_christian`, `place_of_worship_muslim`, `place_of_worship_sikh`, `place_of_worship_jewish`, `place_of_worship_hindu`, `place_of_worship_buddhist`, `place_of_worship_shinto`, `place_of_worship_taoist`, `place_of_worship_other`, `police`, `post_box`, `post_office`, `biergarten`, `boatyard`, `tourismstation`, `recycling`, `recyclingcentre`, `restaurant_y`, `restaurant_l`, `restaurant_n`, `restaurant_d`, `restaccomm`, `restaurant_indian_y`, `restaurant_indian_l`, `restaurant_indian_n`, `restaurant_indian_d`, `restaurant_chinese_y`, `restaurant_chinese_l`, `restaurant_chinese_n`, `restaurant_chinese_d`, `restaurant_italian_y`, `restaurant_italian_l`, `restaurant_italian_n`, `restaurant_italian_d`, `restaurant_fish_and_chips_y`, `restaurant_fish_and_chips_l`, `restaurant_fish_and_chips_n`, `restaurant_fish_and_chips_d`, `restaurant_burger_y`, `restaurant_burger_l`, `restaurant_burger_n`, `restaurant_burger_d`, `restaurant_coffee_y`, `restaurant_coffee_l`, `restaurant_coffee_n`, `restaurant_coffee_d`, `restaurant_sandwich_y`, `restaurant_sandwich_l`, `restaurant_sandwich_n`, `restaurant_sandwich_d`, `restaurant_chicken_y`, `restaurant_chicken_l`, `restaurant_chicken_n`, `restaurant_chicken_d`, `restaurant_kebab_y`, `restaurant_kebab_l`, `restaurant_kebab_n`, `restaurant_kebab_d`, `restaurant_british_y`, `restaurant_british_l`, `restaurant_british_n`, `restaurant_british_d`, `restaurant_regional_y`, `restaurant_regional_l`, `restaurant_regional_n`, `restaurant_regional_d`, `restaurant_mexican_y`, `restaurant_mexican_l`, `restaurant_mexican_n`, `restaurant_mexican_d`, `restaurant_greek`, `restaurant_french_y`, `restaurant_french_l`, `restaurant_french_n`, `restaurant_french_d`, `restaurant_seafood_y`, `restaurant_seafood_l`, `restaurant_seafood_n`, `restaurant_seafood_d`, `restaurant_ice_cream`, `restaurant_caribbean`, `restaurant_lebanese`, `restaurant_dessert`, `restaurant_spanish`, `restaurant_african`, `fast_food_y`, `fast_food_l`, `fast_food_n`, `fast_food_d`, `fast_food_burger_y`, `fast_food_burger_l`, `fast_food_burger_n`, `fast_food_burger_d`, `fast_food_chicken_y`, `fast_food_chicken_l`, `fast_food_chicken_n`, `fast_food_chicken_d`, `fast_food_chinese_y`, `fast_food_chinese_l`, `fast_food_chinese_n`, `fast_food_chinese_d`, `fast_food_coffee`, `fast_food_fish_and_chips_y`, `fast_food_fish_and_chips_l`, `fast_food_fish_and_chips_n`, `fast_food_fish_and_chips_d`, `fast_food_ice_cream`, `fast_food_indian_y`, `fast_food_indian_l`, `fast_food_indian_n`, `fast_food_indian_d`, `fast_food_kebab_y`, `fast_food_kebab_l`, `fast_food_kebab_n`, `fast_food_kebab_d`, `fast_food_pie`, `fast_food_pizza_y`, `fast_food_pizza_l`, `fast_food_pizza_n`, `fast_food_pizza_d`, `fast_food_sandwich_y`, `fast_food_sandwich_l`, `fast_food_sandwich_n`, `fast_food_sandwich_d`, `fast_food_british`, `fast_food_regional`, `fast_food_mexican_y`, `fast_food_mexican_l`, `fast_food_mexican_n`, `fast_food_mexican_d`, `fast_food_greek`, `fast_food_french`, `fast_food_seafood`, `fast_food_caribbean`, `fast_food_lebanese`, `fast_food_dessert`, `fast_food_spanish`, `fast_food_donut`, `fast_food_african`, `telephone`, `boothtelephonered`, `boothtelephoneblack`, `boothtelephonewhite`, `boothtelephoneblue`, `boothtelephonegreen`, `boothtelephonegrey`, `boothtelephonegold`, `boothdefibrillator`, `boothlibrary`, `boothbicyclerepairstation`, `boothatm`, `boothinformation`, `boothartwork`, `boothmuseum`, `boothdisused`, `public_bookcase`, `bicycle_repair_station`, `sundial`, `shopmobility`, `emergency_phone`, `emergency_access_point`, `theatre`, `toilets`, `toilets_free_m`, `toilets_free_w`, `toilets_pay`, `toilets_pay_m`, `toilets_pay_w`, `shower`, `shower_free_m`, `shower_free_w`, `shower_pay`, `shower_pay_m`, `shower_pay_w`, `musical_instrument`, `drinking_water`, `nondrinking_water`, `fountain`, `prison`, `veterinary`, `animal_boarding`, `animal_shelter`, `car_wash`, `car_rental`, `compressed_air`, `defibrillator`, `life_ring`, `fire_extinguisher`, `fire_hydrant`, `bbq`, `waterway_access_point` and all `pub` derivates.
+
+Where there are variations from regular OSM keys, these are based on other OSM tags.  Appended characters include:
+
+* `bank`, `pharmacy` and non-cuisine restaurants and fast food: a flag for `wheelchair=limited`, `no` or `yes`
+* restaurants and fast food with a `cuisine`: a name for the cuisine and then a flag for `wheelchair=limited`, `no` or `yes`
+* `bar` and `cafe`: flags for `accommodation` ("don't know" or `yes`), `wheelchair` ("don't know", `no`, `limited`, `yes`), `outdoor_seating` ("don't know", `yes`)
+* `fuel`: "e" for electricity, "h" for hydrogen, "l" for LPG, "w" for waterway fuel, 
+* `toilets` and `shower`: `free` or `pay`, then "m" for men and "w" for women.
+
+For pubs, a series of up to 8 flags is appended.  For each flag, "d" means "don't know", "y" means "yes" and "n" no. These flags and any other values are:
+
+* live or dead pub?  y or n, or c (closed due to covid)
+* real ale  y, n or d (don't know)
+* food  y or d
+* noncarpeted floor  y or d, based on a non-blank `description:floor` or certain `floor:material` such as `lino`
+* microbrewery  y, n or d
+* micropub  y, n or d
+* accommodaton  y, n or d
+* wheelchair: y, l, n or d
+* beer garden: g (beer garden), o (outside seating), d (don't know)
+
+Other computed values include 
+
+* `playground_swing` etc. based on `playground=swing` and a consolidation of similar values.
+* `place_of_worship_shinto` based on the `religion` of an `amenity=place_of_worship`
+* `boothtelephonered` and `boothmuseum`: Usage of current and former telephone boxes, based on other tags.
+* `drinking_water` and `nondrinking_water`.  Various "water available" amenities are included in these, and tags such as `drinking_water` decide between which.
+
+For these amenities one area feature is written at vector zoom 14 with `name` and `ele` also written out as attributes.
+
+### Zoom 14 amenities with access values in `land1`.
+
+This includes 
+`bicycle_rental`, `scooter_rental`, `bicycle_parking`, `bicycle_parking_pay`, `motorcycle_parking`, and `motorcycle_parking_pay`
+
+For these amenities one area feature is written at vector zoom 14 with `name` and `ele` also written out as attributes.
+
+Other tags that will change `amenity=bicycle_parking` to e.g. `amenity=bicycle_parking_pay` are as expected:
+
+* `fee`
+
+An additional attribute `access` is also set - this is the regular `access` tag from OSM.
+
+### Zoom 14 shops in `land1`.
+
+These are written as a area feature at vector zoom 14 and also as a point feature at vector zoom 14
+
+These include:
+
+`supermarket`, `department_store`, `ecosupermarket`, `alcohol`, `antiques`, `art`, `bakery`, `beauty`, `bicycle`, `bookmaker`, `books`, `butcher`, `car`, `car_parts`, `car_repair`, `catalogue`, `charity`, `clothes`, `coffee`, `computer`, `confectionery`, `convenience`, `copyshop`, `deli`, `discount`, `doityourself`, `e-cigarette`, `ecoconv`, `ecogreengrocer`, `ecohealth_food`, `electrical`, `electronics`, `estate_agent`, `farm`, `florist`, `funeral_directors`, `furniture`, `garden_centre`, `gift`, `greengrocer`, `hairdresser`, `health_food`, `healthnonspecific`, `homeware`, `jewellery`, `laundry`, `locksmith`, `mobile_phone`, `motorcycle`, `music`, `musical_instrument`, `optician`, `outdoor`, `pawnbroker`, `pet`, `pet_food`, `pet_grooming`, `photo`, `seafood`, `shoe_repair_etc`, `shoes`, `shopnonspecific`, `sports`, `stationery`, `storage_rental`, `tattoo`, `toys` and `travel_agent`.
+
+There is considerable consolidation of raw OSM tags into these values.  In addition, other tags such as `zero_waste` and `bulk_purchase` can be used to change e.g. `greengrocer` into `ecogreengrocer`.  A very large number of less common shop values are written through as `shopnonspecific`.
+
+`shop=vacant` is written as a area feature at vector zoom 14.  `ref` is written with a name containing "vacant:".
+
+(older notes)
+
 * zoom 6-9 `leisure=nature_reserve`.
 * zoom 7 `natural=desert`
 * zoom 8 `landuse` tags `forest`, `farmland`.
