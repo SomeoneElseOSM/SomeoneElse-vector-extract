@@ -70,7 +70,7 @@ Various linear transportation objects are written here.  This includes these hig
 
 Other `highway` values are calculated from a combination of OSM tags, such as `highway`, `surface`, `designation` (a number of UK legal classifications), `width` among others.  These are all written out at vector zoom 12:
 
-* `unpaved`.  Used for `unclassified` highways with an unpaved `surface` values such as `gravel`.
+* `unpaved`.  Used for `unclassified` highways with an unpaved `surface` (values such as `gravel`).
 * `ucrwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "unclassified county roads" or similar.
 * `ucrnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "unclassified county roads" or similar.
 * `boatwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "byway open to all traffic" or similar.
@@ -103,6 +103,34 @@ Other `highway` values are calculated from a combination of OSM tags, such as `h
 * `gallop`.  Used open or closed linear `leisure=track` with a horse `sport`.
 * `leisuretrack`.  Used open or closed linear `leisure=track` with a non-motor, non-horse or no `sport`.
 
+For the full list of `designation` values handled see [taginfo](https://taginfo.openstreetmap.org/keys/designation#projects).  Values in use in [England and Wales, Scotland](https://taginfo.geofabrik.de/europe:great-britain/keys/designation#values), and [Northern Ireland](https://taginfo.geofabrik.de/europe:ireland-and-northern-ireland/keys/designation#values) are included, as are semicolon-separated values.  Access modifiers are also processed, so a `motor_vehicle=no` (perhaps as a result of a TRO) on a `designation=byway_open_to_all_traffic` will result in it being seen as a `restricted_byway`.
+
+A `highway=tertiary`, `highway=unclassified` or `highway=residential` with `designation=quiet_lane` (and some semicolon derivatives) is handled as `highway=living_street`.
+
+`highway=tertiary` with a `width` <= 3 are treated as `highway=unclassified`.
+
+Various other tags are used to complement `trail_visibility` so that consumers can classify paths into "obvious", "less obvious" and "not obvious at all":
+
+* `visibility` is used to set `trail_visibility` if that is not already set.
+* 'overgrown=yes` is used to set `trail_visibility=intermediate`.
+* 'obstacle=vegetation` is used to set `trail_visibility=intermediate`.
+* 'foot:physical=no` is used to set `trail_visibility=bad`.
+* a `bridge` on an otherwise `trail_visibility=bad` is handled as `intermediate`.
+* a `designation` on an otherwise `trail_visibility=bad` highway is handled as `intermediate`.
+* a `sac_scale` of `demanding_alpine_hiking` or `difficult_alpine_hiking` is handled as `bad`.
+
+The resulting `trail_visibility` is used to change an object from e.g. `pathwide` to `intpathwide` or `badpathwide`.
+
+Other things that can get included in the list above can include:
+
+* Ground-level `highway=corridor`, which will be classified based on other tags,
+* `golf=track` and `golf=cartpath`, which in the absence of `width` are assumed to be >= 2m wide.
+* `golf=path`, which in the absence of `width` are assumed to be < 2m wide.
+* `highway=scramble`, which will be classified based on other tags.  If `sac_scale` is unsert `demanding_alpine_hiking` is assumed.
+* `ladder=yes` in the absence of a `highway` value.
+* `highway=escape` is treated as `highway=service` with `access=destination`.
+* `surface=grass` on an `aeroway=taxiway` causes it be be set as `highway=pathwide`
+
 Various sorts of long distance paths are also written out at vector zoom 12.  These include:
 
 * `ldpnwn`.  Used for signed `iwn`, `nwn`, `rwn` and `lwn` networks
@@ -114,30 +142,36 @@ Linear highway platforms are written out at vector zoom 14.
 
 Highways are also checked to see if they are also `railway=tram`.  If that is also present it is written out at vector zoom 6.
 
-Attributes of highways also written out if set include:
+See below for attributes of highways also written out if set include:
 
-* `name`
-* `ref`, and `ref_len` (the length of the `ref` can used to decide how long a "shield" to display a ref on top of).
-* `edge=sidewalk`.  Set if one of many "sidewalk-indicating" tags such as `sidewalk:left=yes` is set.
-* `edge=verge`.  Set if one of several "verge-indicating" tags is set.
-* `edge=ford`.  Set if `ford=yes`.
-* `bridge`. Set if `bridge` is set to a `bridge` value that indicates a bridge.
-* `tunnel` (boolean) Set if `tunnel=yes`; in turn set as a result of many common `tunnel` values.
-* `access`.  Set to `no` or `destination` if appropriate.
-* `oneway`. Set if `oneway` is set to non-nil value.
+As well as highways, the value of `railway` is wrtten out for non-area `railway` objects from vector zoom 6.  Non-linear `railway` objects are written to `land` not here.  Some other changes are made:
 
-As well as highways, the value of `railway` is wrtten out for non-area `railway` objects from vector zoom 6.  The following attributes are also added:
+* `highway=bus_guideway` and `highway=busway` are handled as `railway=bus_guideway`.  
+* `historic=inclined_plane` and `historic=tramway` are handled as `railway=abandoned`.
+* `railway=razed` is handled as `railway=dismantled`.  
+* `railway=proposed` is handled as `railway=construction`.  
+* if `railway:preserved=yes` and `railway=rail` are set together, `railway=preserved` is set.
+* if `railway=preserved` and `tunnel=yes` are set together, `railway=rail` is set.
+* if `railway=miniature` or `railway=narrow_gauge` and `tunnel=yes` are set together, `railway=light_rail` is set.
+* `man_made=goods_conveyor` is handled as `railway=miniature`.  
+* if `railway=platform` and either `location=underground` or `underground=yes` are set together, `railway` is unset.
 
-* `bridge`. Set if `bridge` is set to a `bridge` value that indicates a bridge.
-* `tunnel` (boolean) Set if `tunnel=yes`; in turn set as a result of many common `tunnel` values.
+Of the attributes listed below, `bridge` and `tunnel` will be written for railway.
+
+The `name` on railway platforms can be set from `ref` if no name is previously set.
 
 `route=ferry` is written out from vector zoom 6.
 
-The following `aeroway` values are written out from vector zoom 10::
+The following linear `aeroway` values are written out from vector zoom 10:
 
 * `runway`
 * `grass_runway`
 * `taxiway`.  Non-area ones only written.
+
+These other values are taken into account:
+
+* `disused=yes` on an `aeroway=runway` or `aeroway=taxiway` causes it be be set as `disused:aeroway` (which isn't written out)
+* `surface=grass` on an `aeroway=runway` causes it be be set as `aeroway=grass_runway`
 
 The following `aerialway` values are written from vector zoom 11:
 
@@ -160,11 +194,15 @@ Genuine highway areas are handled via "land1", not here.  For some highway types
 
 ### name
 
-The value of the OSM name tag, after postprocessing to e.g. put in brackets if unsigned.
+The value of the OSM `name` tag, after postprocessing to e.g. put in brackets if unsigned.
+
+For long distance paths, there is some consolidation of `name` values based on partial name and operator.
 
 ### ref
 
 The value of the OSM ref tag, after postprocessing to e.g. put in brackets if unsigned.
+
+For long distance paths, there is some consolidation of `ref` values based on partial name (in either English or Welsh) and operator.
 
 ### ref_len
 
@@ -172,7 +210,7 @@ The length of the OSM ref tag, designed to make choice of e.g. road shield backg
 
 ### edge
 
-This will be `sidewalk`, `verge`, ford` or unset.  Designed to be used to influence the rendering on major road types.
+This will be `sidewalk`, `verge`, ford` or unset.  Designed to be used to influence the rendering on major road types.  `sidewalk` is set if one of many "sidewalk-indicating" tags such as `sidewalk:left=yes` is set; similarly `verge` and `ford` (for long fords on roads).
 
 ### bridge
 
@@ -186,7 +224,7 @@ The `bridge` and `tunnel` tags can coexist and a map style consuming this schema
 
 ### access
 
-Set to `no` if `access=no`, `destination` if `access=destination`, where `access` has been derived from `foot` if set and appropriate.  This schema tries to give a pedestrian-centric view of access-rights.  Note that the access logic here differs from that used for parking features (for cars, bicycles and motorcycles) in "land1".  See the "land1" layer below for that.
+Set to `no` if `access=private` or `access=no`, `destination` if `access=destination`, where `access` has been derived from `foot` if set and appropriate.  This schema tries to give a pedestrian-centric view of access-rights.  Note that the access logic here differs from that used for parking features (for cars, bicycles and motorcycles) in `land1`.  See the `land1` layer below for that.
 
 ### oneway
 
