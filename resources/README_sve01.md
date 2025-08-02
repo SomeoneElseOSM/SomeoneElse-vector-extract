@@ -112,9 +112,9 @@ A `highway=tertiary`, `highway=unclassified` or `highway=residential` with `desi
 Various other tags are used to complement `trail_visibility` so that consumers can classify paths into "obvious", "less obvious" and "not obvious at all":
 
 * `visibility` is used to set `trail_visibility` if that is not already set.
-* 'overgrown=yes` is used to set `trail_visibility=intermediate`.
-* 'obstacle=vegetation` is used to set `trail_visibility=intermediate`.
-* 'foot:physical=no` is used to set `trail_visibility=bad`.
+* `overgrown=yes` is used to set `trail_visibility=intermediate`.
+* `obstacle=vegetation` is used to set `trail_visibility=intermediate`.
+* `foot:physical=no` is used to set `trail_visibility=bad`.
 * a `bridge` on an otherwise `trail_visibility=bad` is handled as `intermediate`.
 * a `designation` on an otherwise `trail_visibility=bad` highway is handled as `intermediate`.
 * a `sac_scale` of `demanding_alpine_hiking` or `difficult_alpine_hiking` is handled as `bad`.
