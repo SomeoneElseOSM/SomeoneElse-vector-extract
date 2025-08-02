@@ -60,54 +60,107 @@ This is for linear road, rail, air and water transport.
 
 ### class
 
-Values are written as e.g. `motorway` without the OSM tag (here `highway`) as part of the key.  Many of these tag values are a result of previous lua processing (see note above).  For roads, this is derived from the OSM value for `highway` and the designation, so `highway=bridlewaysteps` will in OSM likely be a `highway=steps` with `designation=public_bridleway`.  Values after the initial lua processing wre written out to vector tiles as follows:
+Various linear transportation objects are written here.  This includes these highways:
 
-Highways:
+* `highway=motorway` and `motorway_link` at vector zoom 3.
+* `highway=trunk` and `trunk_link` at vector zoom 6.
+* `highway=primary` and `primary_link` at vector zoom 7.
+* `highway=secondary` and `secondary_link` at vector zoom 8.
+* `highway=tertiary` and `tertiary_link`, `highway=unclassified` and `unclassified_link`, `highway=residential` and `residential_link` and `highway=living_street` and `living_street_link` at vector zoom 9.
 
-* motorway, trunk, primary, secondary, tertiary, unclassified, residential, living_street (and links) are handled as normal.
-* service _without_ designation: "important" ones are handled as normal (`service`); "less important" (`parking_aisle`,`drive-through`,`driveway`) as `driveway`.
-* service _with_ `designation` are handled as per the designation below.
-* unpaved - these are unclassified roads that are unpaved; intended to be shown visually different from paved ones.
-* ucrwide, ucrnarrow - unclassified country road intended to be shown visually between unpaved and BOAT.
-* boatwide, boatnarrow - Byway Open to All Traffic; wide (>=2m) or narrow.
-* rbywide, rbynarrow - Restricted Byway; wide or narrow.
-* bridlewaywide, bridlewaynarrow, intbridlewaywide, intbridlewaynarrow - Public Bridleway; wide or narrow.
-* bridlewaysteps - Public Bridleway; but steps.
-* footwaywide, footwaynarrow, intfootwaywide, intfootwaynarrow - Public Footpath; wide (typically `service` or `track` in OSM) or narrow (typically `footway` or `path`).
-* footwaysteps - Public Footpath; but steps.
-* pathwide, pathnarrow, intpathwide, intpathnarrow - no designation; wide or narrow.
-* steps - no designation; steps.
+Other `highway` values are calculated from a combination of OSM tags, such as `highway`, `surface`, `designation` (a number of UK legal classifications), `width` among others.  These are all written out at vector zoom 12:
 
-The MinZoom on each of these is broadly appropriate to the road type, varying from 3 for motorways to 12 to paths.
+* `unpaved`.  Used for `unclassified` highways with an unpaved `surface` values such as `gravel`.
+* `ucrwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "unclassified county roads" or similar.
+* `ucrnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "unclassified county roads" or similar.
+* `boatwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "byway open to all traffic" or similar.
+* `boatnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "byway open to all traffic" or similar.
+* `rbywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "restricted byway" or similar.
+* `rbynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "restricted byway" or similar.
+* `bridlewaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public bridleway" or similar.
+* `bridlewaynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "public bridleway" or similar.
+* `bridlewaysteps`.  Used steps with a designation of "public bridleway" or similar.  It's legal but not always practical to ride a horse or a bicycle here.
+* `intbridlewaywide`.  Like `bridlewaywide`, but with `intermediate` or `bad` `trail_visibility`.
+* `intbridlewaynarrow`.  Like `bridlewaynarrow`, but with `intermediate` or `bad` `trail_visibility`.
+* `footwaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public footpath" or similar.
+* `footwaynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "public footpath" or similar.
+* `footwaysteps`.  Used steps with a designation of "public footpath" or similar.  
+* `intfootwaywide`.  Like `footwaywide`, but with `intermediate` or `bad` `trail_visibility`.
+* `intfootwaynarrow`.  Like `footwaynarrow`, but with `intermediate` or `bad` `trail_visibility`.
+* `service`.  Used for "important" service roads without a designation
+* `driveway`.  Used for "less important" service roads without a designation and with `service=driveway`, `parking_aisle`, or `drive_through`.
+* `steps`.  Used for `steps` without a designation
+* `road`.  Used for `highway=road`.
+* `pathwide`.  Used for tracks or paths >= 2m wide without a designation.
+* `pathnarrow`.  Used for tracks or paths < 2m wide without a designation.
+* `intpathwide`.  Like `pathwide`, but with `intermediate` `trail_visibility`.
+* `intpathnarrow`.  Like `pathnarrow`, but with `intermediate` `trail_visibility`.
+* `badpathwide`.  Like `pathwide`, but with `bad` `trail_visibility`.
+* `badpathnarrow`.  Like `pathnarrow`, but with `bad` `trail_visibility`.
+* `construction`.  Used for `highway=construction`.
+* `pedestrian`.  Used for `highway=pedestrian` which are open or closed linear ways (not areas).
+* `raceway`.  Used for `highway=raceway` and open or closed linear `leisure=track` with a motor `sport`.
+* `gallop`.  Used open or closed linear `leisure=track` with a horse `sport`.
+* `leisuretrack`.  Used open or closed linear `leisure=track` with a non-motor, non-horse or no `sport`.
+
+Various sorts of long distance paths are also written out at vector zoom 12.  These include:
+
+* `ldpnwn`.  Used for signed `iwn`, `nwn`, `rwn` and `lwn` networks
+* `ldpnhn`.  Used for signed `nhn` and `rhn` networks.  Also includes some semicolon-value networks incorporating '*hn'.
+* `ldpncn`.  Used for signed `ncn`, `rcn` and selected `lcn` networks
+* `ldpmtb`.  Used for MTB routes that are not `ncn`, `rcn` or `lcn`.
+
+Linear highway platforms are written out at vector zoom 14.  
+
+Highways are also checked to see if they are also `railway=tram`.  If that is also present it is written out at vector zoom 6.
+
+Attributes of highways also written out if set include:
+
+* `name`
+* `ref`, and `ref_len` (the length of the `ref` can used to decide how long a "shield" to display a ref on top of).
+* `edge=sidewalk`.  Set if one of many "sidewalk-indicating" tags such as `sidewalk:left=yes` is set.
+* `edge=verge`.  Set if one of several "verge-indicating" tags is set.
+* `edge=ford`.  Set if `ford=yes`.
+* `bridge`. Set if `bridge` is set to a `bridge` value that indicates a bridge.
+* `tunnel` (boolean) Set if `tunnel=yes`; in turn set as a result of many common `tunnel` values.
+* `access`.  Set to `no` or `destination` if appropriate.
+* `oneway`. Set if `oneway` is set to non-nil value.
+
+As well as highways, the value of `railway` is wrtten out for non-area `railway` objects from vector zoom 6.  The following attributes are also added:
+
+* `bridge`. Set if `bridge` is set to a `bridge` value that indicates a bridge.
+* `tunnel` (boolean) Set if `tunnel=yes`; in turn set as a result of many common `tunnel` values.
+
+`route=ferry` is written out from vector zoom 6.
+
+The following `aeroway` values are written out from vector zoom 10::
+
+* `runway`
+* `grass_runway`
+* `taxiway`.  Non-area ones only written.
+
+The following `aerialway` values are written from vector zoom 11:
+
+* `cable_car`
+* `gondola`
+* `goods`
+* `chair_lift`
+* `drag_lift`
+* `t-bar`
+* `j-bar`
+* `platter`
+* `rope_tow`
+
+`leisure=slipway` is written out as from vector zoom 13.
 
 Genuine highway areas are handled via "land1", not here.  For some highway types that are closed ways, `area` needs to be checked to choose which layer something should be processed as:
 
-* `highway=pedestrian` ways are assumed to be areas if closed unless `area=no` is set.
+* `highway=pedestrian` ways are assumed to be areas if closed unless `area=no` or `oneway` is set.
 * `highway=leisuretrack` and `highway=gallop` (which is what `leisure=track` will be processed into based on `sport` tags) are assumed to be linear unless `area=no` is set.
-
-Railways:
-
-All non-nil, non-blank `railway` values are written out to `transportation` with `name`, `bridge` and `tunnel`.
-
-Ferry routes:
-
-All `route=ferry` are written out to `transportation` with a `name`.
-
-Linear Aeroways:
-
-Linear `runway`, `grass_runway` and `taxiway` are written out to `transportation` with a `name`.  Runways must be not closed to be thought of as linear; taxiways may be closed but must not have an explicit `area` tag.
-
-Linear aerialways:
-
-The usual OSM selection of aerialways are written out to `transportation` with a `name`.
-
-Linear slipways:
-
-Non-closed `leisure=slipway` are written out to `transportation` with a `name`.
 
 ### name
 
-The value of the OSM name tag, after the postprocessing described above to e.g. put in brackets if unsigned.
+The value of the OSM name tag, after postprocessing to e.g. put in brackets if unsigned.
 
 ### ref
 
