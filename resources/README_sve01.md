@@ -345,8 +345,8 @@ For pubs, a series of up to 8 flags is appended.  For each flag, "d" means "don'
 Other computed values include 
 
 * `playground_swing` etc. based on `playground=swing` and a consolidation of similar values.
-* `place_of_worship_shinto` based on the `religion` of an `amenity=place_of_worship`
-* `boothtelephonered` and `boothmuseum`: Usage of current and former telephone boxes, based on other tags.
+* `place_of_worship_shinto` etc. based on the `religion` of an `amenity=place_of_worship`
+* `boothtelephonered` and `boothmuseum` etc.: Usage of current and former telephone boxes, based on other tags.
 * `drinking_water` and `nondrinking_water`.  Various "water available" amenities are included in these, and tags such as `drinking_water` decide between which.
 
 For these amenities one area feature is written at vector zoom 14 with `name` and `ele` also written out as attributes.
