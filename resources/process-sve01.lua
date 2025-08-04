@@ -191,6 +191,13 @@ function node_function()
       nodet.place = "locality"
    end
 
+-- ----------------------------------------------------------------------------
+-- All node highway=platform are actually highway=bus_stop
+-- ----------------------------------------------------------------------------
+   if ( nodet.highway == "platform" ) then
+      nodet.highway = "bus_stop_pole"
+   end
+
 -- ------------------------------------------------------------------------------
 -- The "place" layer is mostly node-specific (islands and area localities are
 -- a thing - see "wr_after_place( wayt )" below).

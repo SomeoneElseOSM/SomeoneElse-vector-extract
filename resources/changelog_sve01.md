@@ -2,7 +2,8 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-(vector) Ensure that bus stops that have also been tagged as platforms are correctly treated as bus stops.
+Ensure that bus stops that have also been tagged as platforms are correctly treated as bus stops.
+Node bus platforms are all mistagged bus stops.
 
 ## 01/08/2025
 Re-added `shop=amusement` as a synonym for `amusements`.
