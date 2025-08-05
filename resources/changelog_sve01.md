@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Ensure that bus stops that have also been tagged as platforms are correctly treated as bus stops.
 Node bus platforms are all mistagged bus stops.
+Changed "parking=e-scooter" to "parking=e_scooter" following a change to all the values in OSM.
 
 ## 01/08/2025
 Re-added `shop=amusement` as a synonym for `amusements`.
