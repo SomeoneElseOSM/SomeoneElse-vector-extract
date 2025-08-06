@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 06/08/2025
 Ensure that bus stops that have also been tagged as platforms are correctly treated as bus stops.
 Node bus platforms are all mistagged bus stops.
 Changed "parking=e-scooter" to "parking=e_scooter" following a change to all the values in OSM.
