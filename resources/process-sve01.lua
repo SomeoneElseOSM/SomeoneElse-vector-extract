@@ -639,6 +639,18 @@ function way_function()
       end
    end
 
+-- ----------------------------------------------------------------------------
+-- Non-closed parking area ways may actually really be something else.
+-- ----------------------------------------------------------------------------
+   if (( wayt.amenity == "parking" ) and
+       ( wayt.highway == "service" )) then
+      if ( wayt.is_closed ) then
+         wayt.highway = nil
+      else
+         wayt.amenity = nil
+         wayt.landuse = nil
+      end
+   end
 
 -- ----------------------------------------------------------------------------
 -- (end of the way-specific code)

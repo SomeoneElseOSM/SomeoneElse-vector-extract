@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250801T124001Z",
+  "data_updated": "20250806T134501Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -198,7 +198,7 @@
     { "key": "amenity", "value": "education_centre", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "electronics_repair", "description": "Synonym for shop=electronics" },
     { "key": "amenity", "value": "embassy", "description": "Synonym for diplomatic=embassy" },
-    { "key": "amenity", "value": "escooter_parking", "description": "Synonym for 'amenity=scooter_rental'.  Extracted, name incorporates brand" },
+    { "key": "amenity", "value": "escooter_parking", "description": "Not a current value in OSM data.  Synonym for 'amenity=scooter_rental'.  Extracted, name incorporates brand" },
     { "key": "amenity", "value": "escooter_rental", "description": "Synonym for 'amenity=scooter_rental'.  Extracted, name incorporates brand" },
     { "key": "amenity", "value": "estate_agent", "description": "Synonym for shop=estate_agent" },
     { "key": "amenity", "value": "events_venue", "description": "Extracted as leisure=nonspecific" },
