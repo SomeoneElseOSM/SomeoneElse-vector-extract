@@ -473,7 +473,7 @@ Most `office` values are written through as area features at vector zoom 14 as `
 
 Only point and area features are included here; linear features are in `transportation`.
 
-`highway=pedestrian` and are only written to land1 if they're closed areas.  All closed 1highway=pedestrian` and `highway=platform` are assumed to be areas regardless of any `area` tag.  Closed `highway=pathnarrow` and `highway=service` are assumed to be areas only if `area=yes` is set.
+`highway=pedestrian` and are only written to land1 if they're closed areas.  All closed `highway=pedestrian` and `highway=platform` are assumed to be areas regardless of any `area` tag.  Closed `highway=pathnarrow` and `highway=service` are assumed to be areas only if `area=yes` is set.
 
 ### Zoom 14 `highway` values in `land1`.
 
@@ -543,7 +543,7 @@ These are written as a area feature at a based-on-area "fill minzoom" and an als
 
 For the largest of these features (way_area > 800000) the "fill minzoom" is 9 and the "name minzoom" is 11.  The catch-all for the smallest ones is 13 for fill and 14 for name.
 
-industrial`, `railway`, `commercial`, `residential`, `retail`, `construction`, `brownfield`, `landfill`, `historic`, `meadow`, `meadowtransitional`, `meadowwildflower`, `wetmeadow`, `meadowperpetual`, `farmyard`, `farmgrass`, `grass`, `christiancemetery`, `jewishcemetery`, `othercemetery`, `orchard`, `vineyard`, and `allotments` are all handled like this.
+`industrial`, `railway`, `commercial`, `residential`, `retail`, `construction`, `brownfield`, `landfill`, `historic`, `meadow`, `meadowtransitional`, `meadowwildflower`, `wetmeadow`, `meadowperpetual`, `farmyard`, `farmgrass`, `grass`, `christiancemetery`, `jewishcemetery`, `othercemetery`, `orchard`, `vineyard`, and `allotments` are all handled like this.
 
 Those tags are often computed from other raw OSM tags - synonyms, subtags and others such as religion.
 
