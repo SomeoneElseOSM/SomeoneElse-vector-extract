@@ -266,7 +266,7 @@ A boolean value set to true if a tunnel.
 
 ## "linearbarrier"
 
-All features here are linear.  Point or polygon features will go in "land1" or "land2".  Most features here are barriers, but things like power lines are also included.
+All features here are linear.  Point or polygon features will go in `land1` or `land2`.  Most features here are barriers, but things like power lines are also included.
 
 ### class
 
@@ -815,7 +815,7 @@ These are written as an named area only at vector zoom 9.
 
 These are written as an unnamed area only at vector zoom 8.
 
-`natural=unnamed_forest` and `natural=unnamedfarmland` are handled like this.  These tags are set when other more important tags should be used for the name, but we still want `forest` or `farmland` fill.
+`natural=unnamed_forest` and `natural=unnamedfarmland` are handled like this.  These tags are set when other more important tags should be used for the name, but we might still want `forest` or `farmland` fill.
 
 ### Variable zoom `natural` point and area features in `land2`. 
 
@@ -823,7 +823,7 @@ These are written as an unnamed area feature only at a based-on-area "minzoom".
 
 For the largest of these features (way_area > 800000) the "minzoom" is 9.  The catch-all for the smallest ones is 13.
 
-`unnamedgrass`, `unnamedresidential`, `unnamedmeadow`, `unnamedwetmeadow`, `unnamedfarmyard`, `unnamedfarmgrass`, `unnamedindustrial`, `unnamedcommercial`, `unnamedconstruction`, `unnamedlandfill`, `unnamedorchard`, `unnamedmeadowtransitional`, `unnamedmeadowwildflower`, `unnamedmeadowperpetual`, `unnamedsaltmarsh`, `unnamedallotments`, `unnamedchristiancemetery`, `unnamedjewishcemetery` and `unnamedothercemetery` are handled like this.  Again, these tags are set when other more important tags should be used for the name, but we still want a fill from another feature.  As with the named versions of these tags, these computed from other raw OSM tags - synonyms, subtags and others such as religion.
+`unnamedgrass`, `unnamedresidential`, `unnamedmeadow`, `unnamedwetmeadow`, `unnamedfarmyard`, `unnamedfarmgrass`, `unnamedindustrial`, `unnamedcommercial`, `unnamedconstruction`, `unnamedlandfill`, `unnamedorchard`, `unnamedmeadowtransitional`, `unnamedmeadowwildflower`, `unnamedmeadowperpetual`, `unnamedsaltmarsh`, `unnamedallotments`, `unnamedchristiancemetery`, `unnamedjewishcemetery` and `unnamedothercemetery` are handled like this.  Again, these tags are set when other more important tags should be used for the name, but we might still want a fill from another feature.  As with the named versions of these tags, these computed from other raw OSM tags - synonyms, subtags and others such as religion.
 
 ### Variable zoom `landuse=miltary` point and area features in `land2`. 
 
@@ -893,11 +893,11 @@ These are written as an unnamed area and a named centroid at vector zoom 6.
 
 ## "poi"
 
-Not written by default - this is an optional catch-all that can output everything not handled by "land1" processing.  Uncomment out the call to `generic_after_poi( passedt )` to produce this layer, which contains all unhandled `amenity`, `shop` and `tourism` features.
+Not written by default - this is an optional catch-all that can output everything not handled by `land1` processing.  Uncomment out the call to `generic_after_poi( passedt )` to produce this layer, which contains all unhandled `amenity`, `shop` and `tourism` features.
 
 ### class
 
-Stored as the OSM tag and value, such as `amenity_wibble`, where `wibble` is not an amenity value already expected by the "land1" layer.
+Stored as the OSM tag and value, such as `amenity_wibble`, where `wibble` is not an amenity value already expected by the `land1` layer.
 
 ### name
 
