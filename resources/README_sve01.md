@@ -603,35 +603,35 @@ Note that `track` may be an area (processed here) or a closed linear (processed 
 
 ### Zoom 12 `leisure=playground and `leisure=schoolyard` in `land1`. 
 
-Written a an unnamed area feature and a named point at vector zoom 12.
+Written as an unnamed area feature and a named point at vector zoom 12.
 
 ### Zoom 13 `leisure=swimming_pool in `land1`. 
 
-Written a an unnamed area feature and a named point feature at vector zoom 13.
+Written as an unnamed area feature and a named point feature at vector zoom 13.
 
 ### Zoom 14 `leisure=leisurenonspecific` and `leisure=hunting_stand` in `land1`. 
 
-Written a an unnamed area feature and a named point feature at vector zoom 14.
+Written as an unnamed area feature and a named point feature at vector zoom 14.
 
 `leisure=leisurenonspecific` is a catch-all for many other raw OSM `leisure` and other tags.
 
 ### Zoom 14 other `leisure` in `land1`. 
 
-These are written a an unnamed area feature only at vector zoom 14.
+These are written as an unnamed area feature only at vector zoom 14.
 
 `bandstand`, `bleachers`, `fitness_station`, `picnic_table`, `slipway`, `bird_hide`, `grouse_butt` are handled here.
 
 ### Zoom 9 `military=barracks` in `land1`. 
 
-Written a an unnamed area feature and a named point feature at vector zoom 9.
+Written as an unnamed area feature and a named point feature at vector zoom 9.
 
 ### Zoom 7 `natural=desert` in `land1`. 
 
-Written a an unnamed area feature and a named point feature at vector zoom 7.
+Written as an unnamed area feature and a named point feature at vector zoom 7.
 
 ### Zoom 8 `natural=bigprompeak` in `land1`. 
 
-These are written a an named area feature only (with `ele`) at vector zoom 8.
+These are written as a named area feature only (with `ele`) at vector zoom 8.
 
 The value `bigprompeak` is calculated from (`ele` > 914) and (`prominence` > 500).  If not tagged `prominence` is guessed based on other tags such as `munro`.
 
@@ -663,7 +663,7 @@ For the largest of these features (way_area > 16000000) the "fill minzoom" is 7 
 
 ### Zoom 9 `natural=bigpeak` in `land1`. 
 
-These are written a an named area feature only (with `ele`) at vector zoom 9.
+These are written as a named area feature only (with `ele`) at vector zoom 9.
 
 The value `bigpeak` is calculated from (`ele` > 914) and (`prominence` <= 500).  If not tagged `prominence` is guessed based on other tags such as `munro`.
 
@@ -671,7 +671,7 @@ The value of `ele` is written as an attribute.
 
 ### Zoom 10 `natural` other peak and similar features in `land1`. 
 
-These are written a an named area feature only (with `ele`) at vector zoom 10.
+These are written as a named area feature only (with `ele`) at vector zoom 10.
 
 The value `peak` is calculated from (`ele` <= 914).
 
@@ -687,7 +687,7 @@ These are written as an unnamed area and a named centroid at vector zoom 12.
 
 ### Zoom 12 `natural=hill` in `land1`. 
 
-These are written a an named area feature only (with `ele`) at vector zoom 12.  `hill` is derived from a couple of tag combinations (`natural=hill` and `peak=hill`).
+These are written as a named area feature only (with `ele`) at vector zoom 12.  `hill` is derived from a couple of tag combinations (`natural=hill` and `peak=hill`).
 
 The value of `ele` is written as an attribute.
 
