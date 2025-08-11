@@ -81,26 +81,26 @@ Other `highway` values are calculated from a combination of OSM tags, such as `h
 * `rbynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "restricted byway" or similar.
 * `bridlewaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public bridleway" or similar.
 * `bridlewaynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "public bridleway" or similar.
-* `bridlewaysteps`.  Used steps with a designation of "public bridleway" or similar.  It's legal but not always practical to ride a horse or a bicycle here.
+* `bridlewaysteps`.  Used for steps with a designation of "public bridleway" or similar.  It's legal but not always practical to ride a horse or a bicycle here.
 * `intbridlewaywide`.  Like `bridlewaywide`, but with `intermediate` or `bad` `trail_visibility`.
 * `intbridlewaynarrow`.  Like `bridlewaynarrow`, but with `intermediate` or `bad` `trail_visibility`.
 * `footwaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public footpath" or similar.
 * `footwaynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "public footpath" or similar.
-* `footwaysteps`.  Used steps with a designation of "public footpath" or similar.  
+* `footwaysteps`.  Used for steps with a designation of "public footpath" or similar.  
 * `intfootwaywide`.  Like `footwaywide`, but with `intermediate` or `bad` `trail_visibility`.
 * `intfootwaynarrow`.  Like `footwaynarrow`, but with `intermediate` or `bad` `trail_visibility`.
-* `service`.  Used for "important" service roads without a designation
-* `driveway`.  Used for "less important" service roads without a designation and with `service=driveway`, `parking_aisle`, or `drive_through`.
-* `steps`.  Used for `steps` without a designation
+* `service`.  Used for "important" service roads without a `designation`
+* `driveway`.  Used for "less important" service roads without a `designation` and with `service=driveway`, `parking_aisle`, or `drive_through`.
+* `steps`.  Used for `steps` without a `designation`.
 * `road`.  Used for `highway=road`.
-* `pathwide`.  Used for tracks or paths >= 2m wide without a designation.
-* `pathnarrow`.  Used for tracks or paths < 2m wide without a designation.
+* `pathwide`.  Used for tracks or paths >= 2m wide without a `designation`.
+* `pathnarrow`.  Used for tracks or paths < 2m wide without a `designation`.
 * `intpathwide`.  Like `pathwide`, but with `intermediate` `trail_visibility`.
 * `intpathnarrow`.  Like `pathnarrow`, but with `intermediate` `trail_visibility`.
 * `badpathwide`.  Like `pathwide`, but with `bad` `trail_visibility`.
 * `badpathnarrow`.  Like `pathnarrow`, but with `bad` `trail_visibility`.
 * `construction`.  Used for `highway=construction`.
-* `pedestrian`.  Used for `highway=pedestrian` which are open or closed linear ways (not areas).
+* `pedestrian`.  Used for `highway=pedestrian` which are open or closed linear ways (not areas - see `land` for those).
 * `raceway`.  Used for `highway=raceway` and open or closed linear `leisure=track` with a motor `sport`.
 * `gallop`.  Used open or closed linear `leisure=track` with a horse `sport`.
 * `leisuretrack`.  Used open or closed linear `leisure=track` with a non-motor, non-horse or no `sport`.
@@ -119,7 +119,7 @@ Various other tags are used to complement `trail_visibility` so that consumers c
 * `foot:physical=no` is used to set `trail_visibility=bad`.
 * a `bridge` on an otherwise `trail_visibility=bad` is handled as `intermediate`.
 * a `designation` on an otherwise `trail_visibility=bad` highway is handled as `intermediate`.
-* a `sac_scale` of `demanding_alpine_hiking` or `difficult_alpine_hiking` is handled as `bad`.
+* a `sac_scale` of `demanding_alpine_hiking` or `difficult_alpine_hiking` is handled as `bad` on something without a `designation` and `intermediate` on something with.
 
 The resulting `trail_visibility` is used to change an object from e.g. `pathwide` to `intpathwide` or `badpathwide`.
 
@@ -128,12 +128,12 @@ Other things that can get included in the list above can include:
 * Ground-level `highway=corridor`, which will be classified based on other tags,
 * `golf=track` and `golf=cartpath`, which in the absence of `width` are assumed to be >= 2m wide.
 * `golf=path`, which in the absence of `width` are assumed to be < 2m wide.
-* `highway=scramble`, which will be classified based on other tags.  If `sac_scale` is unsert `demanding_alpine_hiking` is assumed.
+* `highway=scramble`, which will be classified based on other tags.  If `sac_scale` is unset `demanding_alpine_hiking` is assumed.
 * `ladder=yes` in the absence of a `highway` value.
-* `highway=escape` is treated as `highway=service` with `access=destination`.
+* `highway=escape` and linear `highway=emergency_bay` treated as `highway=service` with `access=destination`.
 * `surface=grass` on an `aeroway=taxiway` causes it be be set as `highway=pathwide`
 
-Various sorts of long distance paths are also written out at vector zoom 12.  These include:
+Various sorts of long distance paths are also written out to this layer at vector zoom 12.  These include:
 
 * `ldpnwn`.  Used for signed `iwn`, `nwn`, `rwn` and `lwn` networks
 * `ldpnhn`.  Used for signed `nhn` and `rhn` networks.  Also includes some semicolon-value networks incorporating '*hn'.
@@ -142,7 +142,7 @@ Various sorts of long distance paths are also written out at vector zoom 12.  Th
 
 Linear highway platforms are written out at vector zoom 14.  
 
-Highways are also checked to see if they are also `railway=tram`.  If that is also present it is written out at vector zoom 6.
+Highways are also checked to see if they are also `railway=tram`.  If that is also present it is written out at vector zoom 6 as an extra object.
 
 See below for attributes of highways also written out if set include:
 
@@ -175,7 +175,7 @@ These other values are taken into account:
 * `disused=yes` on an `aeroway=runway` or `aeroway=taxiway` causes it be be set as `disused:aeroway` (which isn't written out)
 * `surface=grass` on an `aeroway=runway` causes it be be set as `aeroway=grass_runway`
 
-The following `aerialway` values are written from vector zoom 11:
+The following linear `aerialway` values are written from vector zoom 11:
 
 * `cable_car`
 * `gondola`
@@ -208,11 +208,11 @@ For long distance paths, there is some consolidation of `ref` values based on pa
 
 ### ref_len
 
-The length of the OSM ref tag, designed to make choice of e.g. road shield backgrounds easier.  Values for `ref` tend to be short (e.g. "A1") or long (e.g. "A627(M)"); generally speaking a split at "less than 6 characters" works well visually.
+The length of the OSM ref tag, designed to make choice of e.g. road shield backgrounds easier.  Values for `ref` tend to be short (e.g. "A1") or long (e.g. "A627(M)"); generally speaking a split at "less than 6 characters" works well visually, although that is the responsibility of the display style, not here.
 
 ### edge
 
-This will be `sidewalk`, `verge`, ford` or unset.  Designed to be used to influence the rendering on major road types.  `sidewalk` is set if one of many "sidewalk-indicating" tags such as `sidewalk:left=yes` is set; similarly `verge` and `ford` (for long fords on roads).
+This will be `sidewalk`, `verge`, `ford` or unset.  Designed to be used to influence the rendering on major road types.  `sidewalk` is set if one of many "sidewalk-indicating" tags such as `sidewalk:left=yes` is set; similarly `verge` and `ford` (for long fords on roads).
 
 ### bridge
 
