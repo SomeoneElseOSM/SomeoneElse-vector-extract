@@ -376,6 +376,251 @@ There is considerable consolidation of raw OSM tags into these values.  In addit
 
 `shop=vacant` is written as a area feature at vector zoom 14.  `ref` is written with a name containing "vacant:".
 
+### Zoom 11 `man_made` in `land1`.
+
+`bigmast`, `pier`, `breakwater` and `groyne` point and area values are written out at vector zoom 11 as area features.
+
+`mast` and `bigmast` are derived from a selection of `man_made` features such as `phone_mast`, 'radio_mast`, `communications_mast`, `tower`, `communications_tower`, `transmitter`, `antenna`, `mast`, with `bigmast` being set if the `height` is > 300.
+
+Previously many sorts of `tower` will have been split off into a selection of towers, `bigchimney` and `chimney` (see below).
+
+### Zoom 12 `man_made` in `land1`.
+
+`bigchimney` point and area values are written out at vector zoom 12 as area features.
+
+`bigchimney` is set instead of `chimney` if the `height` is > 50.
+
+### Zoom 12 `man_made` in `land1`.
+
+`bigobservationtower` point and area values are written out at vector zoom 12 as area features.
+
+`observationtower` is set if `man_made` is `tower` and `tower:type` is`observation`.  `bigobservationtower` is set instead of `observationtower` if the `height` is > 100.
+
+### Variable zoom `man_made` derived from `power` in `land1`.
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 1500000) the "fill minzoom" is 9 and the "name minzoom" is vector zoom 11.  The catch-all for the smallest ones is 14 for fill and name.
+
+`man_made=power`, `power_water` and `power_wind` are written out this way.  Those in turn may be derived from several OSM tags (5 for `wind`, 4 for `water`).
+
+### Zoom 14 `man_made` in `land1`.
+
+Numerous other `man_made` values are written as area features at vector zoom 14.  These include `chimney`, `lighthouse`, `mast`, `ventilation`, `water`, `windsock`, `crane`, `cross`, `flagpole`, `maypole`, `aircraftcontroltower`, `churchspire`, `churchtower`, `clockpedestal`, `clocktower`, `defensivetower`, `footwear`, `illuminationtower`, `militarybunker`, `mineshaft`, `monitoringearthquake`, `monitoringrainfall`, `monitoringky`, `monitoringwater`, `monitoringweather`, `mounting`, `observationtower`, `radartower`, `squaretower`, `watermill`, `windmill`, `survey`, `water`, `cairn`, `flagpole`, `boundary`, `golfballwasher`, `golfpin`, `outfall` and `markermilitary`.  Wach of these is typically sent based on several other tags (such as `monitoringwater`, based on `man_made=monitoring_station` and various other tags such as `monitoring:water_velocity`).
+
+If set, `ele` is also written through here; it sometimes carries an inscription for a stone.
+
+### Zoom 14 `man_made` with `ref` and relation lists in `land1`.
+
+`man_made=markeraerial` and `lcn_ref` have the `ref` written through as a `name` attribute, and also an `ncnrelationlist` written through if set.  The `ncnrelationlist` value is made up of all the appropriate relation `ref` or `name` values concatenated together. 
+
+### Zoom 14 `office` values in `land1`.
+
+Most `office` values are written through as area features at vector zoom 14 as `nonspecific`; the exceptions are `craftbrewery` and `craftcider` (based on appropriate `craft` and `product` values.
+
+### Zoom 12 `highway` values in `land1`.
+
+Only point and area features are included here; linear features are in `transportation`.
+
+`highway=pedestrian` and are only written to land1 if they're closed areas.  All closed 1highway=pedestrian` and `highway=platform` are assumed to be areas regardless of any `area` tag.  Closed `highway=pathnarrow` and `highway=service` are assumed to be areas only if `area=yes` is set.
+
+### Zoom 14 `highway` values in `land1`.
+
+`highway=ford` only (typically a point only).
+
+Note that linear fords are handled as an `edge=ford` attribute on roads in `transportation`.
+
+### Zoom 14 `highway` values with website processing in `land1`.
+
+`board_realtime`, `bus_stop_nothing`, `bus_stop_pole`, `bus_stop_disused_pole`, `bus_stop_timetable`, `bus_stop_realtime`, `bus_stop_speech_timetable`, `bus_stop_speech_realtime`, `elevator`, `traffic_signals`, `streetlamp_electric`, `streetlamp_gas`, `crossing`, `milestone` and `mini_roundabout` are also written out as area features at vector zoom 14.
+
+`ele` (which will often include an expanded `name` to include `website`) is also written.
+
+### Zoom 10 `highway=motorway_junction` in `land1`.
+
+### Zoom 14 `highway=platform` in `land1`.
+
+Note that linear ones are handled in `transportation`.
+
+### Zoom 12 `highway=turning_circle` in `land1`.
+
+These include `passing_place` and are written out as area features at vector zoom 14.
+
+### Zoom 11 `railway` in `land1`.
+
+`railway=station` is written as an area feature.
+
+### Zoom 12 `railway` in `land1`.
+
+`railway=halt` and `railway=tram_stop`  are written as area features
+
+### Zoom 14 railway platforms in `land1`.
+
+Point and area `railway=platform` only.   Linear ones are handled in `transportation`.
+
+### Zoom 14 railway turntables in `land1`.
+
+`railway=turntable` is assumed to be an area feature.
+
+### Zoom 12 `aerialway` in `land1`.
+
+`aerialway=station` is written as an area feature.
+
+### Variable zoom `historic` in `land1`.
+
+These are written as a area feature at a based-on-area "minzoom" and an also as a point feature at the same "minzoom".  
+
+For the largest of these features (way_area > 800000) the "minzoom" is 9.  The catch-all for the smallest ones is 13.
+
+The fill that is written is `landus=historic`.  The `historic` feature written out will be one of `archaeological_site`, `battlefield`, `historicarchcastle`, `historicarchmotte`, `historiccrannog`, `historicfortification`, `historichillfort`, `historicpromontoryfort`, `historicringfort`, `historictumulus`, `manor`, `monastery`, `palaeontological_site`, `castle`, `church`, `city_gate`, `dovecote`, `folly`, `historicchurchtower`, `historicdefensivetower`, `historicmegalithtomb`, `historicobservationtower`, `historicroundtower`, `historicsquaretower`, `historicstandingstone`, `historicstone`, `historicstonecircle`, `historicstonerow`, `martello_tower`, `massrock`, `naturalstone`, `oghamstone`, `pinfold`, `runestone`, `aircraft`, `aircraft_wreck`, `bunker`, `cannon`, `cross`, `ice_house`, `kiln`, `memorial`, `memorialbench`, `memorialcross`, `memorialgrave`, `memorialobelisk`, `memorialpavementplaque`, `memorialplaque`, `memorialplate`, `memorialsculpture`, `memorialstatue`, `memorialstone`, `milk_churn_stand`, `mill`, `monument`, `ship`, `stocks`, `tank`, `tomb`, `warmemorial`, `water_crane`, `water_pump`, `watermill`, `well`, `windmill`, `wreck`, `mineshaft` or `nonspecific`.
+
+These values are computed from numerous other OSM tags.  In many cases a `historic` tag exists in the raw OSM data alongside other tags defining a feature (for example various tower tags can define a "square tower") and `historic` is simply used to move that into an equivalent set of historic features that data consumers can either handle separately or ignore.
+
+### Variable zoom forest and farmland `landuse` in `land1`.
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 16000000) the "fill minzoom" is 7 and the "name minzoom" is 9.  The catch-all for the smallest ones is 14 for fill and name.
+
+`landuse=forest` and `landuse=farmland` are handled like this.
+
+### Variable zoom other land-based `landuse` in `land1`.
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 800000) the "fill minzoom" is 9 and the "name minzoom" is 11.  The catch-all for the smallest ones is 13 for fill and 14 for name.
+
+industrial`, `railway`, `commercial`, `residential`, `retail`, `construction`, `brownfield`, `landfill`, `historic`, `meadow`, `meadowtransitional`, `meadowwildflower`, `wetmeadow`, `meadowperpetual`, `farmyard`, `farmgrass`, `grass`, `christiancemetery`, `jewishcemetery`, `othercemetery`, `orchard`, `vineyard`, and `allotments` are all handled like this.
+
+Those tags are often computed from other raw OSM tags - synonyms, subtags and others such as religion.
+
+### Variable zoom other mostly coastal `landuse` in `land1`.
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 141284) the "fill minzoom" is 9 and the "name minzoom" is 12.  The catch-all for the smallest ones is 9 for fill and 14 for name.
+
+`greenfield`, `saltmarsh` and `reedbed` are handled like this.
+
+### Variable zoom other large green `landuse` in `land1`.
+
+These are written as a area feature at a based-on-area "minzoom" and an also as a point feature at the same "minzoom".  
+
+For the largest of these features (way_area > 4000000000) the "minzoom" is 6.  The catch-all for the smallest ones is 14.
+
+`recreation_ground`, `conservation`, `village_green` are handled like this.
+
+### Zoom 10 quarries in `land1`.
+
+`landuse=quarry` and `landuse=historicquarry` are written out as unnamed area and named point features.  The second of these values in particular is computed from other raw OSM tags such as `disused`.
+
+### Zoom 11 `garages` in `land1`.
+
+`landuse=garages` is written out as a named area feature.
+
+### Zoom 14 `industrialbuilding` in `land1`.
+
+`landuse=industrialbuilding` is written out as an unnamed area and a named point feature.  This value is computed from other raw OSM tags.
+
+### Variable zoom nature reserves in `land1`.
+
+These are written as a area feature at a based-on-area "minzoom" and an also as a point feature at the same "minzoom".  
+
+For the largest of these features (way_area > 4000000000) the "minzoom" is 6.  The catch-all for the smallest ones is 14.
+
+`nature_reserve` is handled like this.  The value is computed from other OSM tags.  The very largest values are marine conservation areas.
+
+### Variable zoom large green `leisure` in `land1`.
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 1600000) the "fill minzoom" is 8 and the "name minzoom" is 10.  The catch-all for the smallest ones is 13 for fill and 14 for name.
+
+`park`, `common`, `garden`, `golfgreen` are handled like this.
+
+### Variable zoom other green `leisure` in `land1`.
+
+These are written as a area feature at a based-on-area "minzoom" and an also as a point feature at the same "minzoom".  
+
+For the largest of these features (way_area > 141284) the "minzoom" is 9.  The catch-all for the smallest ones is 13.
+
+`dog_park`, `recreation_ground`, `golf_course`, `sports_centre`, `stadium`, `pitch`, `track` are handled like this.
+
+Note that `track` may be an area (processed here) or a closed linear (processed in `transportation`) feature depending on the `area` tag.
+
+### Zoom 12 `leisure=playground and `leisure=schoolyard` in `land1`. 
+
+Written a an unnamed area feature and a named point at vector zoom 12.
+
+### Zoom 13 `leisure=swimming_pool in `land1`. 
+
+Written a an unnamed area feature and a named point feature at vector zoom 13.
+
+### Zoom 14 `leisure=leisurenonspecific` and `leisure=hunting_stand` in `land1`. 
+
+Written a an unnamed area feature and a named point feature at vector zoom 14.
+
+`leisure=leisurenonspecific` is a catch-all for many other raw OSM `leisure` and other tags.
+
+### Zoom 14 other `leisure` in `land1`. 
+
+These are written a an unnamed area feature only at vector zoom 14.
+
+`bandstand`, `bleachers`, `fitness_station`, `picnic_table`, `slipway`, `bird_hide`, `grouse_butt` are handled here.
+
+### Zoom 9 `military=barracks` in `land1`. 
+
+Written a an unnamed area feature and a named point feature at vector zoom 9.
+
+### Zoom 7 `natural=desert` in `land1`. 
+
+Written a an unnamed area feature and a named point feature at vector zoom 7.
+
+### Zoom 8 `natural=bigprompeak` in `land1`. 
+
+These are written a an named area feature only (with `ele`) at vector zoom 8.
+
+The value `bigprompeak` is calculated from (`ele` > 914) and (`prominence` > 500).  If not tagged `prominence` is guessed based on other tags such as `munro`.
+
+### Variable zoom `natural` woodland in `land`
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 8000000) the "fill minzoom" is 8 and the "name minzoom" is 10.  The catch-all for the smallest ones is 14 for fill and name.
+
+`wood`, `broadleaved`, `needleleaved`, and `mixedleaved` are handled like this.
+
+### Variable zoom `natural` beaches and sand in `land`
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 800000) the "fill minzoom" is 9 and the "name minzoom" is 11.  The catch-all for the smallest ones is 13 for fill and 14 for name.
+
+`beach`, `tidal_beach`, `sand` and `tidal_sand` are handled like this.  These are computed values based on the raw OSM tags for `natural` and `tidal`.
+ 
+### Variable zoom `natural` mud and rock in `land`
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 16000000) the "fill minzoom" is 7 and the "name minzoom" is 9.  The catch-all for the smallest ones is 14 for fill and name.
+
+`mud`, `tidal_mud`, `bare_rock`, `tidal_rock`, `scree`, `tidal_scree`, `shingle`, `tidal_shingle`, `heath`, `grassland`, and `scrub` are handled like this.
+
+### Zoom 9 `natural=bigpeak` in `land1`. 
+
+These are written a an named area feature only (with `ele`) at vector zoom 9.
+
+The value `bigpeak` is calculated from (`ele` > 914) and (`prominence` <= 500).  If not tagged `prominence` is guessed based on other tags such as `munro`.
+
+### Zoom 10 `natural` other peaks in `land1`. 
+
+These are written a an named area feature only (with `ele`) at vector zoom 9.
+
+The value `peak` is calculated from (`ele` <= 914).
+
+`peak`, `saddle` and `volcano` are handled like this.
+
+
 (older notes)
 
 * zoom 6-9 `leisure=nature_reserve`.
