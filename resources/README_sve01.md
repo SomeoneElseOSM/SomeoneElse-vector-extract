@@ -16,7 +16,7 @@ The main lua processing logic logic used here is actually shared with the equiva
 
 Note that the "config-sve01.json" has the "high_resolution" parameter set to "true", so that parameter must also be in any "config-coastline.json" if generated tiles are merged with coastline tiles, otherwise there will be patches of grey in the sea.  See [here](https://github.com/systemed/tilemaker/pull/384) for how that works.
 
-The keys and values present in the data at the time when it is written out to vector tiles will differ significantly from the original OSM keys.  As an example, "function wr_after_highway( passedt )", which writes highway information to vector tiles will be passed `highway` values such as `gallop`, which has been computed based on the various OSM tags and values on the way.  The [taginfo](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags) entry for this project references the raw OSM tags and values in OSM data, but the tags and values listed below (e.g. `highway=gallop`) are after the initial lua processing.  Generally speaking the raw OSM tags used to compute these "schema" values is meentioned in each section below.
+The keys and values present in the data at the time when it is written out to vector tiles will differ significantly from the original OSM keys.  As an example, "function wr_after_highway( passedt )", which writes highway information to vector tiles will be passed `highway` values such as `gallop`, which has been computed based on the various OSM tags and values on the way.  The [taginfo](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags) entry for this project references the raw OSM tags and values in OSM data, but the tags and values listed below (e.g. `highway=gallop`) are after the initial lua processing.  Generally speaking the raw OSM tags used to compute these "schema" values is mentioned in each section below.
 
 The `name` values written to features to several layers may incorporate `operator` and `brand` as appropriate, and may be suppressed or written out in brackets if a feature has been tagged as being unsigned (see the discussion of the `land2` layer below).
 
@@ -40,7 +40,7 @@ Note that vector `way_area` values are roughly 2.9 times the equivalent raster w
 
 Some named point and area `natural` features are also written out as localities - `arch`, `cliff`, `gully`, `mountain_range`, `ridge`, and `strait`.
 
-Point and area 'locality' values are also written; at a zoom level that depends on size.  Size is determined either by the `way_area` of the area, or the size as defined by `sqkm` of a node.
+Point and area `locality` values are also written; at a zoom level that depends on size.  Size is determined either by the `way_area` of the area, or the size as defined by `sqkm` of a node.
 
 `place=sea` is written to `land1` (see below).  Other `place` values are ignored.
 
@@ -54,7 +54,7 @@ The value of the OSM name tag.
 
 ### way_area
 
-Written for `locality` and 'island` only.  This is either an actual `way_area` value or a pretend one based on `sqkm` for nodes.
+Written for `locality` and `island` only.  This is either an actual `way_area` value or a pretend one based on `sqkm` for nodes.
 
 ## "transportation"
 
