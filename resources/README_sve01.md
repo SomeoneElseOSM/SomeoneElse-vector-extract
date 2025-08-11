@@ -3,22 +3,22 @@
 "sve01" is a schema for use with [Tilemaker](https://github.com/systemed/tilemaker) that is used to create 
 mbtiles that can be displayed with the svwd01 style [here](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/README.md).
 
-As with the parent style, releases are simply datestamped.  At the time of updating this README, the most recent release was "20250706".  Roughly one "release" per month is made; this README corresponds with the latest version of the committed code at that time.
+As with the parent style, releases are simply datestamped.  At the time of updating this README, the most recent release was "20250706".  Roughly one "release" per month is made; it corresponds with the latest version of the committed code at that time.
 
-This only describes the schema and the data extraction that supports that schema.  See also the [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/resources/README_svwd01.md) for an example display style, and also the main project [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/README.md) for the top=level scripts.
+This only describes the schema and the data extraction that supports that schema.  See also the [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/resources/README_svwd01.md) for an example display style, and also the main project [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/README.md) for the top=level scripts.  Note that in order to keep vector tile sizes small, below vector zoom 14 decisions to exclude something fro a layer tend to be made in here rather than the example display style.
 
 There are two files:
 
 * config-sve01.json - defines what is stored in the .mbtiles file
 * process-sve01.lua - actually puts OSM data into the right field
 
-The main lua processing logic logic used here is actually shared with the equivalent [raster maps](https://github.com/SomeoneElseOSM/SomeoneElse-style/blob/master/style.lua), and is also similar to that used for [mkgmap maps](https://github.com/SomeoneElseOSM/mkgmap_style_ajt/blob/master/transform_03.lua) as well.
+The main lua processing logic logic used here is actually shared with the equivalent [raster maps](https://github.com/SomeoneElseOSM/SomeoneElse-style/blob/master/style.lua), and is similar to that also used for [mkgmap maps](https://github.com/SomeoneElseOSM/mkgmap_style_ajt/blob/master/transform_03.lua) as well.
 
-Note that the "config-sve01.json" has the "high_resolution" parameter set to "true", so that parameter must also be in any "config-coastline.json" if generated tiles are merged with coastline tiles, otherwise there will be patches of grey in the sea.
+Note that the "config-sve01.json" has the "high_resolution" parameter set to "true", so that parameter must also be in any "config-coastline.json" if generated tiles are merged with coastline tiles, otherwise there will be patches of grey in the sea.  See [here](https://github.com/systemed/tilemaker/pull/384) for how that works.
 
-The keys and values present in the data at the time when it is written out to vector tiles will differ significantly from the original OSM keys.  As an example, "function wr_after_highway( passedt )", which writes highway information to vector tiles will be passed `highway` values such as `gallop`, which has been calculated based on the various OSM tags and values on the way.  The [taginfo](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags) entry for this project references actual OSM tags and values, but the tags and values listed below (e.g. `highway=gallop`) are after the initial lua processing.
+The keys and values present in the data at the time when it is written out to vector tiles will differ significantly from the original OSM keys.  As an example, "function wr_after_highway( passedt )", which writes highway information to vector tiles will be passed `highway` values such as `gallop`, which has been computed based on the various OSM tags and values on the way.  The [taginfo](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags) entry for this project references the raw OSM tags and values in OSM data, but the tags and values listed below (e.g. `highway=gallop`) are after the initial lua processing.  Generally speaking the raw OSM tags used to compute these "schema" values is meentioned in each section below.
 
-The `name` values written to features to several layers may incorporate `operator` and `brand` as appropriate, and may be suppressed or written out in brackets if a feature has been tagged as being unsigned.
+The `name` values written to features to several layers may incorporate `operator` and `brand` as appropriate, and may be suppressed or written out in brackets if a feature has been tagged as being unsigned (see the discussion of the `land2` layer below).
 
 
 ## "water"
@@ -32,7 +32,7 @@ Set to "ocean".
 
 ## "place"
 
-More important regular place nodes are written to lower numbered layers: `country`, `state` to all layers, `capital` at 3, `city` at 5, `town` at 8, `suburb`, `village` at 11, `hamlet`, `neighbourhood`, `isolated_dwelling`, `farm` at 13.  Only OSM nodes are processed for these place as there is too much randomness and duplication in OSM way and relation place data to use ways or relations.
+More important regular place nodes are written to lower numbered layers: `country`, `state` to all layers, `capital` at 3, `city` at 5, `town` at 8, `suburb`, `village` at 11, `hamlet`, `neighbourhood`, `isolated_dwelling`, `farm` at 13.  Only OSM nodes are processed for these place as there is too much randomness and duplication in most OSM way and relation `place` data to use ways or relations, apart from the exceptions listed immediately below.
 
 Area islands and islets are written as `place=island`, at a zoom level based on `way_area`. The `way_area` is also written out to allow zoom level display decisions to be made beyond zoom level 15.  Point islands and islets are written as `place=locality`, handled as described below.
 
