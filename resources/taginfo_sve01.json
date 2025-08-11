@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250806T134501Z",
+  "data_updated": "20250811T013101Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1898,6 +1898,7 @@
     { "key": "leisure", "value": "bandstand", "description": "Extracted as unique value" },
     { "key": "leisure", "value": "beach_resort", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "beer_garden", "description": "Leisure amenities extracted" },
+    { "key": "leisure", "value": "bike_park", "description": "Treated as a synonym of `landuse=recreation_ground`" },
     { "key": "leisure", "value": "bingo", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "bingo_hall", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "bird_hide", "description": "Leisure amenities extracted" },
