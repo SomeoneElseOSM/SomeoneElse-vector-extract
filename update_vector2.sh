@@ -195,6 +195,9 @@ file_url4=https://download.geofabrik.de/europe/${file_prefix4}-latest.osm.pbf
 #
 # Next get the latest versions of each part of the map style.
 #
+cd /home/${local_filesystem_user}/src/SomeoneElse-style
+sudo -u ${local_filesystem_user} git pull
+#
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-extract
 sudo -u ${local_filesystem_user} git pull
 #

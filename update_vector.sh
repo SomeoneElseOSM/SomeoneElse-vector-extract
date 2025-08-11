@@ -29,6 +29,9 @@
 #
 local_filesystem_user=ajtown
 #
+cd /home/${local_filesystem_user}/src/SomeoneElse-style
+sudo -u ${local_filesystem_user} git pull
+#
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-extract
 sudo -u ${local_filesystem_user} git pull
 #
