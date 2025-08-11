@@ -36,6 +36,8 @@ More important regular place nodes are written to lower numbered layers: `countr
 
 Area islands and islets are written as `place=island`, at a zoom level based on `way_area`. The `way_area` is also written out to allow zoom level display decisions to be made beyond zoom level 15.  Point islands and islets are written as `place=locality`, handled as described below.
 
+Note that vector `way_area` values are roughly 2.9 times the equivalent raster way_area values.
+
 Some named point and area `natural` features are also written out as localities - `arch`, `cliff`, `gully`, `mountain_range`, `ridge`, and `strait`.
 
 Point and area 'locality' values are also written; at a zoom level that depends on size.  Size is determined either by the `way_area` of the area, or the size as defined by `sqkm` of a node.
@@ -144,7 +146,7 @@ Highways are also checked to see if they are also `railway=tram`.  If that is al
 
 See below for attributes of highways also written out if set include:
 
-As well as highways, the value of `railway` is wrtten out for non-area `railway` objects from vector zoom 6.  Non-linear `railway` objects are written to `land` not here.  Some other changes are made:
+As well as highways, the value of `railway` is wrtten out for non-area `railway` objects from vector zoom 6.  Non-linear `railway` objects are written to `land1` not here.  Some other changes are made:
 
 * `highway=bus_guideway` and `highway=busway` are handled as `railway=bus_guideway`.  
 * `historic=inclined_plane` and `historic=tramway` are handled as `railway=abandoned`.
@@ -187,7 +189,7 @@ The following `aerialway` values are written from vector zoom 11:
 
 `leisure=slipway` is written out as from vector zoom 13.
 
-Genuine highway areas are handled via "land1", not here.  For some highway types that are closed ways, `area` needs to be checked to choose which layer something should be processed as:
+Genuine highway areas are handled via `land1`, not here.  For some highway types that are closed ways, `area` needs to be checked to choose which layer something should be processed as:
 
 * `highway=pedestrian` ways are assumed to be areas if closed unless `area=no` or `oneway` is set.
 * `highway=leisuretrack` and `highway=gallop` (which is what `leisure=track` will be processed into based on `sport` tags) are assumed to be linear unless `area=no` is set.
@@ -262,14 +264,63 @@ A boolean value set to true if a tunnel.
 
 `bridge` and `tunnel` tags can coexist and a map style consuming this schema needs to deal with that.
 
+## "linearbarrier"
 
-## "land1" and "land2"
+All features here are linear.  Point or polygon features will go in "land1" or "land2".  Most features here are barriers, but things like power lines are also included.
 
-There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas and points go.  Most go into "land1", except in the case of some overlays (e.g. military red hatching) which goes into "land2".  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into "land2".
+### class
+
+Generally speaking, this will be the OSM value for `barrier`.  Exceptions include various rarer tags mapped through to e.g. `gate`.
+
+* zoom 10 `natural=valley`.
+* zoom 11 `man_made=breakwater`, `man_made=groyne`, `man_made=pier`.
+* zoom 12 `natural=cliff`.
+* zoom 12 `waterway=dam`.
+* zoom 13 `barrier=wall`, `barrier=hedge` (non-closed only), `barrier=hedgeline`, `barrier=fence`, `barrier=kerb`, `barrier=pitchline`, `barrier=gate`, `barrier=gate_locked`, `barrier=lift_gate`, `barrier=stile`, `barrier=cattle_grid`, `barrier=ford` (if not associated with a `highway`), `barrier=tree_row`.
+* zoom 13 `man_made=cutline`, `man_made=levee`.
+* zoom 13 `historic=citywalls`, `historic=castle_walls`.
+* zoom 14 `man_made=embankment`.
+* zoom 14 `power=line`, `power=minor_line`.
+* zoom 14 linear `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, `waterway=floating_barrier`.
+
+Numerous other tags (e.g. `man_made=pier`) may be linear or occur on areas; other than the exceptions noted elsewhere this is usually based on whether the way is closed or not.
+
+Closed `barrier=hedge` are assumed to be linear if there is some other area tag on the object (e.g. `landuse=farmland`), otherwise areas.
+
+### name
+
+The value of the OSM name tag; appended for most features.
+
+
+## "building"
+
+All nodes, ways and relations with `building` tags that imply "is actually a building" will be written out here from zoom 11.  Many "not quite a building" values will have been consolidated into `roof`; `man_made=bridge` will be in `bridge_area`.  Data consumers can special-case `roof` and `bridge_area`, and may also want to show e.g. `building=church` differently; they'll then need to use a catch-all for `building` values that excludes what they have special-cased.
+
+### class
+
+Stored as the processed OSM tag and value, such as `building_roof`
+
+### name
+
+the value of the OSM `name` tag, after any postprocessing e.g. for `operator`.
+
+### housenumber
+
+the value of the OSM `addr:housenumber` tag, after postprocessing.
+
+### housename
+
+the value of the OSM `addr:housename` tag, after postprocessing.
+
+## `land1` and `land2`
+
+There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas and points go.  Most go into `land1`, except in the case of some overlays (e.g. military red hatching) which goes into `land2`.  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into `land2`.
 
 Features are written from an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=nature_reserve") and that zoom level in many cases will vary based on `way_area` or a proxy for that (`sqkm`).
 
 Most area "`landuse`, `leisure`, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
+
+Tags and values are checked in order so the last thing that might cause a feature to be written to these layers (address information) won't be written as a separate feature if something more important has been earlier.
 
 ### `natural` and `place` water features in `land1`.
 
@@ -584,7 +635,9 @@ These are written a an named area feature only (with `ele`) at vector zoom 8.
 
 The value `bigprompeak` is calculated from (`ele` > 914) and (`prominence` > 500).  If not tagged `prominence` is guessed based on other tags such as `munro`.
 
-### Variable zoom `natural` woodland in `land`
+The value of `ele` is written as an attribute.
+
+### Variable zoom `natural` woodland in `land1`
 
 These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
 
@@ -592,7 +645,7 @@ For the largest of these features (way_area > 8000000) the "fill minzoom" is 8 a
 
 `wood`, `broadleaved`, `needleleaved`, and `mixedleaved` are handled like this.
 
-### Variable zoom `natural` beaches and sand in `land`
+### Variable zoom `natural` beaches and sand in `land1`
 
 These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
 
@@ -600,7 +653,7 @@ For the largest of these features (way_area > 800000) the "fill minzoom" is 9 an
 
 `beach`, `tidal_beach`, `sand` and `tidal_sand` are handled like this.  These are computed values based on the raw OSM tags for `natural` and `tidal`.
  
-### Variable zoom `natural` mud and rock in `land`
+### Variable zoom `natural` mud and rock in `land1`
 
 These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
 
@@ -614,159 +667,229 @@ These are written a an named area feature only (with `ele`) at vector zoom 9.
 
 The value `bigpeak` is calculated from (`ele` > 914) and (`prominence` <= 500).  If not tagged `prominence` is guessed based on other tags such as `munro`.
 
-### Zoom 10 `natural` other peaks in `land1`. 
+The value of `ele` is written as an attribute.
 
-These are written a an named area feature only (with `ele`) at vector zoom 9.
+### Zoom 10 `natural` other peak and similar features in `land1`. 
+
+These are written a an named area feature only (with `ele`) at vector zoom 10.
 
 The value `peak` is calculated from (`ele` <= 914).
 
 `peak`, `saddle` and `volcano` are handled like this.
 
+The value of `ele` is written as an attribute.
 
-(older notes)
+### Zoom 12 `natural` wetland features in `land1`. 
 
-* zoom 6-9 `leisure=nature_reserve`.
-* zoom 7 `natural=desert`
-* zoom 8 `landuse` tags `forest`, `farmland`.
-* zoom 8 `natural` tags `wood`, `broadleaved`, `needleleaved`, `mixedleaved`.
-* zoom 8 Various power features extracted as `man_made=power`, `man_made=power_water` and `man_made=power_wind`.
-* zoom 9 various parking `amenity` tags (`parking`, `parking_pay`, `parking_freedisabled`, `parking_paydisabled`)
-* zoom 9 `amenity` tags `university`, `college`, `school`, `hospital`, `kindergarten`.
-* zoom 9 `tourism` tag `attraction`.  Consumers need to take care with this because in "land1" this shouldn't be allowed to obliterate smaller "land1" objects mapped.  Rendering a fill with a low maxzoom is one option.
-* zoom 9-13 various `landuse` tags: `grass`, `residential`, `meadow`, `wetmeadow`, `farmyard`, `farmgrass`, `recreation_ground`, `retail`, `industrial`, `railway`, `commercial`, `brownfield`, `greenfield`, `construction`, `landfill`, `historic`, `orchard`, `meadowtransitional`, `meadowwildflower`, `meadowperpetual`, `saltmarsh`, `reedbed`, `allotments`, `christiancemetery`, `jewishcemetery`, `othercemetery`.
-* zoom 9-13 various `leisure` tags `common`, `dog_park`, `park`, `recreation_ground`, `garden`, `golfgreen`, `golf_course`, `sports_centre`, `stadium`, `pitch`, and closed examples of `track`.
-* zoom 9-13 various `natural` tags `beach`, `tidal_beach`, `mud`, `tidal_mud`, `bare_rock`, `tidal_rock`, `sand`, `tidal_sand`, `scree`, `tidal_scree`, `shingle`, `tidal_shingle`, `heath`, `grassland`, `scrub`.
-* zoom 10 `landuse` tags `village_green`, `quarry`, `historicquarry`.
-* zoom 10 point and area `aeroway` tags `runway` and `grass_runway`.
-* zoom 10 `waterway=damarea`
-* zoom 11 `addr:housenumber` tags not attached to buildings (as `housenumber`)
-* zoom 12 `natural` tags `wetland`, `reef`, `reefsand`, `swamp`, `bog`, `string_bog`.
-* zoom 12 point and area `aeroway` tags `apron` and `taxiway`.
-* zoom 12 `tourism` tags `camp_site`, `caravan_site` and `theme_park`.
-* all zoom 14 `historic=` tags (`battlefield` etc. - here the area is written out as `landuse=historic` and the centroid as e.g. `historic=battlefield`)
-* zoom 14 point and area `aeroway` tags `helipad` and `gate`.
-* zoom 14 `tourism` tags `hotel`, `motel`, `museum`, `chalet`.
-* zoom 14 `amenity` tag `ferry_terminal`.
-* zoom 14 `landuse` tag `industrialbuilding`.
-* zoom 14 `leisure` tag `leisurenonspecific`.
-* zoom 14 many `shop` tags (the vast majority with a usage of at least tens in UK/IE, and some others).
+These are written as an unnamed area and a named centroid at vector zoom 12.
 
-from "land2:
+`wetland`, `intermittentwetland`, `swamp`, `bog`, `string_bog`, `reef` and `reefsand` are handled like this.  These tags are computed from other tags such as `wetland`, `intermittent`, `surface` etc.
 
-* zoom 0-12 `boundary=administrative` (zoom based on admin level: 2->0, 3,4->7, 5,6,7->8, 8,9,10->10, 11->12).
-* zoom 6 `landuse=military`
-* zoom 6 `boundary=national_park`, `boundary=access_land`.
-* zoom 12 `aeroway=aerodrome` and `aeroway=large_aerodrome`.
-* zoom 13 `leisure=harbour`.
-* zoom 13 `leisure=marina`.
+### Zoom 12 `natural=hill` in `land1`. 
 
-Features written out just once, as a point or polygon, with a name if one exists, include:
+These are written a an named area feature only (with `ele`) at vector zoom 12.  `hill` is derived from a couple of tag combinations (`natural=hill` and `peak=hill`).
 
-* zoom 8 `natural-bigprompeak`.
-* zoom 9 `military=barracks`
-* zoom 9 `natural=bigpeak`
-* zoom 10 `natural=peak`, `natural=saddle`, `natural=volcano`.
-* zoom 11 closed `man_made=pier` areas.
-* zoom 11 `railway=station`
-* zoom 11 `landuse=garages`
-* zoom 12 `railway=halt`, railway=tram_stop` and `aerialway=station`.
-* zoom 12 `man_made=bigchimney`
-* zoom 12 some `highway` street areas, usually after explicit checks on `is_closed` and the `area` tag.
-* zoom 12 `highway=turning_circle`
-* zoom 12 `landuse=vineyard`
-* zoom 12 `natural=hill`
-* zoom 12 `tourism=theme_park`
-* zoom 12 `leisure` tags `playground`, `schoolyard`.
-* zoom 13 `amenity` tags `holy_spring`, `holy_well`, `watering_place`.
-* zoom 13 `man_made=bigobservationtower`
-* zoom 13 `natural=spring`
-* zoom 13 `leisure` tag `swimming_pool`.
-* zoom 14 many `amenity` tags such as the various tags for bars, cafes, pitches, pubs and many more.
-* zoom 14 most remaining `man_made` features such as `chimney` etc.
-* zoom 14 `office` tags `craftbrewery`, `craftcider` and `nonspecific`.
-* zoom 14 many `highway` tags such as the various bus stop tags etc.
-* zoom 14 `highway` and `railway` platform areas, usually after explicit checks on `is_closed` and the `area` tag.  Also railway turntables.
-* zoom 14 `leisure` tags `bandstand`, `bleachers`, `fitness_station`, `picnic_table`, `slipway`, `bird_hide`, `hunting_stand` and `grouse_butt`.
-* zoom 14 `natural` tags `cave_entrance`, `sinkhole`, `climbing`, `rock`, `tree`, `shrub`.
-* zoom 14 point and (multi)polygon `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, `waterway=floating_barrier`.
+The value of `ele` is written as an attribute.
 
-### class
+### Zoom 13 `natural=spring` in `land1`. 
 
-This is based on the OSM tag, processed to create some derived values such as `landuse=farmgrass` for both agricultural meadows and farmland that is pasture, paddock, etc.
+These are written as a named area feature only at vector zoom 13.  
 
-Values are written as e.g. `landuse_farmland` with the OSM tag as part of the key.
+Regular springs are handled here.  See also `holy_spring` elsewhere.
 
-### name
+### Zoom 14 `natural` features in `land1`. 
 
-The value of the OSM `name` tag, after any name processing logic to (perhaps) append operator etc.
+These are written as a named area feature only at vector zoom 14.  
 
-### access
+`cave_entrance`, `sinkhole`, `climbing`, `rock`, `tree`, `tree_10m`, `tree_20m`, `tree_30m` and `shrub` are handled like this.  The `tree` tags are computed from the value of `diameter_crown`.
 
-The value of the OSM `access` tag is included for `amenity=bicycle_rental`, `amenity=scooter_rental`, `amenity=bicycle_parking`, `amenity=motorcycle_parking` and also the `_pay` versions of the latter two.
+### Zoom 14 point and area `barrier` features in `land1`. 
 
-### admin_level
+These are written as a named area feature only at vector zoom 14.  
 
-Written out for `boundary=administrative` only.
+`cattle_grid`, `cycle_barrier`, `gate`, `gate_locked`, `horse_stile`, `kissing_gate`, `dog_gate_stile`, `stepping_stones`, `stile`, `block`, `bollard`, `lift_gate`, `toll_booth`, `toll_gantry`, `door` and `hedge` are handled like this.
 
-### ele
+Note that linear versions of many of these are also processed, but to `linearbarrier` not `land1`.
 
-Either the value of the OSM ele tag, or for some features used to pass a "more detailed name" to the display map style.  This allows (for example) "headline information" to be displayed for a signpost at lower zoom levels but detailed directions at higher ones.
+### Zoom 10 `waterway=damarea` in `land1`. 
 
-### way_area
+These are written as an unnamed area and a named centroid at vector zoom 10.
 
-Set to the results of "Area()" for certain types of closed polygons as described above.  Values here are roughly 2.9 times the equivalent raster way_area values.
+`waterway=damarea` is a tag computed based on closed way `waterway=dam` that are not buildings.
 
+### Zoom 14 `waterway` point and area features in `land1`. 
 
-## "linearbarrier"
+These are written as an named area only at vector zoom 14.
 
-All features here are linear.  Point or polygon features will go in "land1" or "land2".  Most features here are barriers, but things like power lines are also included.
+`lock_gate`, `sluice_gate`, `waterfall`, `weir` and `floating_barrier` are handled like this.
 
-### class
+### Zoom 9 `power` point and area features in `land1`. 
 
-Generally speaking, this will be the OSM value for `barrier`.  Exceptions include various rarer tags mapped through to e.g. `gate`.
+These are written as an unnamed area and a named centroid at vector zoom 9.
 
-* zoom 10 `natural=valley`.
-* zoom 11 `man_made=breakwater`, `man_made=groyne`, `man_made=pier`.
-* zoom 12 `natural=cliff`.
-* zoom 12 `waterway=dam`.
-* zoom 13 `barrier=wall`, `barrier=hedge` (non-closed only), `barrier=hedgeline`, `barrier=fence`, `barrier=kerb`, `barrier=pitchline`, `barrier=gate`, `barrier=gate_locked`, `barrier=lift_gate`, `barrier=stile`, `barrier=cattle_grid`, `barrier=ford` (if not associated with a `highway`), `barrier=tree_row`.
-* zoom 13 `man_made=cutline`, `man_made=levee`.
-* zoom 13 `historic=citywalls`, `historic=castle_walls`.
-* zoom 14 `man_made=embankment`.
-* zoom 14 `power=line`, `power=minor_line`.
-* zoom 14 linear `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, `waterway=floating_barrier`.
+`station` and `generator` are handled like this.
 
-Numerous other tags (e.g. `man_made=pier`) may be linear or occur on areas; other than the exceptions noted elsewhere this is usually based on whether the way is closed or not.
+Also see e.g. `power_water` et al elsewhere.
 
-Closed `barrier=hedge` are assumed to be linear if there is some other area tag on the object (e.g. `landuse=farmland`), otherwise areas.
+### Zoom 12 `power` point and area features in `land1`. 
 
-### name
+These are written as an unnamed area and a named centroid at vector zoom 12.
 
-The value of the OSM name tag; appended for most features.
+`substation` is handled like this.
 
+Also see e.g. `power_water` et al elsewhere.
 
-## "building"
+### Zoom 14 `power` point and area features in `land1`. 
 
-All nodes, ways and relations with `building` tags that imply "is actually a building" will be written out here from zoom 11.  Many "not quite a building" values will have been consolidated into `roof`; `man_made=bridge` will be in `bridge_area`.  Data consumers can special-case `roof` and `bridge_area`, and may also want to show e.g. `building=church` differently; they'll then need to use a catch-all for `building` values that excludes what they have special-cased.
+These are written as an named area only at vector zoom 14.
 
-non-nil and non-blank 
+`tower` and `pole` are handled like this.
 
-### class
+Also see e.g. `power_water` et al elsewhere.
 
-Stored as the processed OSM tag and value, such as `building_roof`
+### Zoom 9 `tourism=attraction` point and area features in `land1`. 
 
-### name
+These are written as an unnamed area and a named centroid at vector zoom 9.
 
-the value of the OSM `name` tag, after any postprocessing e.g. for `operator`.
+Note that where `tourism=attraction` occurs in combination with other tags, almost always the other tags will be used and the `tourism=attraction` tag removed.
 
-### housenumber
+### Zoom 12 `tourism` point and area features without centroid in `land1`. 
 
-the value of the OSM `addr:housenumber` tag, after postprocessing.
+These are written as an named area only at vector zoom 12.
 
-### housename
+`picnic_site` and `alpine_hut` are handled like this.
 
-the value of the OSM `addr:housename` tag, after postprocessing.
+### Zoom 12 `tourism` point and area features with centroid in `land1`. 
 
+These are written as an unnamed area and named centroid at vector zoom 12.
+
+`camp_site`, `caravan_site` and `theme_park` are handled like this.
+
+### Zoom 14 `tourism` point and area features without centroid in `land1`. 
+
+These are written as an named area only at vector zoom 14.
+
+`viewpoint`, `information`, `informationncndudgeon`, `informationncnmccoll`, `informationncnmills`, `informationncnrowe`, `informationncnunknown`, `informationpnfs`, `informationoffice`, `informationboard`, `informationear`, `informationplaque`, `informationpublictransport`, `informationroutemarker`, `informationsign`, `informationmarker`, `informationprowmarker`, `informationstele`, `informationartwork`, `militarysign`, `advertising_column`, `artwork`, `singlechalet`, `hostel`, `bed_and_breakfast`, `guest_house`, `tourism_guest_dynd`, `tourism_guest_nydn`, `tourism_guest_nynn`, `tourism_guest_yddd`, `tourism_guest_ynnn`, `tourism_guest_ynyn`, `tourism_guest_yynd`, `tourism_guest_yyyn`, `tourism_guest_yyyy` and `camp_pitch` are handled like this.
+
+Many of those values are computed from a selection of OSM tags - for example, the value of `ncn_milepost` is used when setting values for the various NCN route markers.  The `tourism_guest_` values are used for various sorts of guest accommodation.  The flags mean "self catering", "multiple occupancy", "urban setting" and "cheap" (like a hostel).
+
+The value of `ele` and `ref` are written as attributes.
+
+A `nwnrelationlist` value is also written out if set, made up of all the appropriate relation `ref` or `name` values concatenated together.  `nhnrelation_in_list` is written as an attrinbte if one of the relations is an NHN (horse) relation. A `ncnrelationlist` value is also written out if set.
+
+### Zoom 14 `tourism` point and area features with centroid in `land1`. 
+
+These are written as an unnamed area and a named centroid at vector zoom 14.
+
+`motel`, `hotel`, `chalet`, `museum`, `gallery`, `aquarium`, `zoo` are handled like this.
+
+### Zoom 10 `aeroway` point and area features in `land1`. 
+
+These are written as an unnamed area and a named centroid at vector zoom 10.
+
+Point and area `runway` and `grass_runway` are handled like this.  `grass_runway` is computed based on the `surface` tag of the runway.  An closed runway way is assumed to be an area (since circular runways are not a thing).  Linear runways are written to `transportation`; see above.
+
+### Zoom 12 `aeroway` point and area features in `land1`. 
+
+These are written as an unnamed area and a named centroid at vector zoom 12.
+
+Point and area `apron` and `taxiway` are handled like this.  Unless `area=yes` is explicitly set we assume that a taxiway is linear, because there are circular ones.
+
+### Zoom 14 `aeroway` point and area features in `land1`. 
+
+These are written as an unnamed area and a named centroid at vector zoom 14.
+
+Point and area `helipad` and `gate` are handled like this.  The `way_area` is written against the centroid, as is `ref`.
+
+### Zoom 11 address point and area features in `land1`. 
+
+If nothing else has caused a feature to be written to `land1`, a non-nil, non-blank `addr:housenumber` on a non-building will result in a `housenumber` object being writte as an area feaure at vector zoom 11.
+
+### Zoom 9 `natural=flood_prone` point and area features in `land2`. 
+
+These are written as an named area only at vector zoom 9.
+
+`natural=flood_prone` is handled like this.  This tag is computed from various other raw tags, including `basin` values that would not normally have water in them.
+
+### Zoom 8 `natural` forest and farmland point and area features in `land2`. 
+
+These are written as an unnamed area only at vector zoom 8.
+
+`natural=unnamed_forest` and `natural=unnamedfarmland` are handled like this.  These tags are set when other more important tags should be used for the name, but we still want `forest` or `farmland` fill.
+
+### Variable zoom `natural` point and area features in `land2`. 
+
+These are written as an unnamed area feature only at a based-on-area "minzoom".
+
+For the largest of these features (way_area > 800000) the "minzoom" is 9.  The catch-all for the smallest ones is 13.
+
+`unnamedgrass`, `unnamedresidential`, `unnamedmeadow`, `unnamedwetmeadow`, `unnamedfarmyard`, `unnamedfarmgrass`, `unnamedindustrial`, `unnamedcommercial`, `unnamedconstruction`, `unnamedlandfill`, `unnamedorchard`, `unnamedmeadowtransitional`, `unnamedmeadowwildflower`, `unnamedmeadowperpetual`, `unnamedsaltmarsh`, `unnamedallotments`, `unnamedchristiancemetery`, `unnamedjewishcemetery` and `unnamedothercemetery` are handled like this.  Again, these tags are set when other more important tags should be used for the name, but we still want a fill from another feature.  As with the named versions of these tags, these computed from other raw OSM tags - synonyms, subtags and others such as religion.
+
+### Variable zoom `landuse=miltary` point and area features in `land2`. 
+
+These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
+
+For the largest of these features (way_area > 150000000) the "fill minzoom" and the "name minzoom" are both 7.  The catch-all for the smallest ones is 14 for fill and name.
+
+After writing out a `landuse=military` feature an additional `leisure` feature may also be written - see `leisure=unnamedpitch` below.  This is an exception to the way that processing is done in almost all other cases.
+
+### Zoom 10 `landuse` quarry point and area features in `land2`. 
+
+These are written as an unnamed area only at vector zoom 10.
+
+`landuse=unnamedquarry` and `landuse=unnamedhistoricquarry` are written out as unnamed area features.  The second of these values in particular is computed from other raw OSM tags such as `disused`.
+
+### Zoom 13 `landuse=harbour` point and area features in `land2`. 
+
+These are written as an unnamed area and named centroid at vector zoom 13.
+
+### Zoom 9 `leisure=unnamedpitch` point and area features in `land2`. 
+
+These are written as an unnamed area only at vector zoom 9.
+
+### Zoom 13 `leisure=marina` point and area features in `land2`. 
+
+These are written as an unnamed area and a named centroid at vector zoom 13.
+
+### Zoom 8 `landuse` woodland point and area features in `land2`. 
+
+These are written as an unnamed area only at vector zoom 8.
+
+`unnamedwood`, `unnamedbroadleaved`, `unnamedneedleleaved`, `unnamedmixedleaved` are handled like this.
+
+### Zoom 9 `landuse` point and area features in `land2`. 
+
+These are written as an unnamed area only at vector zoom 9.
+
+`unnamedheath`, `unnamedscrub`, `unnamedmud`, `unnamedtidal_mud`, `unnamedbare_rock`, `unnamedbeach`, `unnamedsand`, `unnamedtidal_sand` and `unnamedgrassland` are handled like this.
+
+### Zoom 12 `landuse` point and area features in `land2`. 
+
+These are written as an unnamed area only at vector zoom 12.
+
+`unnamedwetland`, `unnamedswamp`, `unnamedbog` and `unnamedstring_bog` are handled like this.
+
+### Zoom 12 `aeroway` point and area features in `land2`. 
+
+These are written as an unnamed area and a named centroid at vector zoom 12.
+
+`aerodrome` and `large_aerodrome`, are handled like this.
+
+A "large" aerodrome is one that has an `iata` value that is non-miltary.
+
+### Variable zoom `boundary=administrative` point and area features in `land2`. 
+
+These are written as an unnamed area feature only at a based-on-admin_level "minzoom".  
+
+For countries (`admin_level=2`) the `minzoom` value is 0, for `admin_level=11`, it is 12.
+
+Alongside `boundary=administrative` written to `class`, `boundary_X` (where X is the `admin_level`) is written to `admin_level`, as an area feature, and also as a centroid with `way_area` and `name`.
+
+### Zoom 6 `boundary` national parks etc. point and area features in `land2`. 
+
+These are written as an unnamed area and a named centroid at vector zoom 6.
+
+`national_park` and `access_land` are handled like this.
 
 ## "poi"
 
@@ -781,6 +904,7 @@ Stored as the OSM tag and value, such as `amenity_wibble`, where `wibble` is not
 the value of the OSM name tag, after any postprocessing e.g. for `operator`.
 
 
-For individual source tag values used see [here](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags)
+For individual source tag values used see [here](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags
+).
 
 
