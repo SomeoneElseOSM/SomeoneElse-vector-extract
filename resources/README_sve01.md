@@ -330,7 +330,7 @@ Where there are variations from regular OSM keys, these are based on other OSM t
 * `fuel`: "e" for electricity, "h" for hydrogen, "l" for LPG, "w" for waterway fuel, 
 * `toilets` and `shower`: `free` or `pay`, then "m" for men and "w" for women.
 
-For pubs, a series of up to 8 flags is appended.  For each flag, "d" means "don't know", "y" means "yes" and "n" no. These flags and any other values are:
+For pubs, a series of up to 9 flags is appended.  For each flag, "d" means "don't know", "y" means "yes" and "n" no. These flags and any other values are:
 
 * live or dead pub?  y or n, or c (closed due to covid)
 * real ale  y, n or d (don't know)
@@ -390,9 +390,9 @@ Previously many sorts of `tower` will have been split off into a selection of to
 
 `bigchimney` is set instead of `chimney` if the `height` is > 50.
 
-### Zoom 12 `man_made` in `land1`.
+### Zoom 13 `man_made` in `land1`.
 
-`bigobservationtower` point and area values are written out at vector zoom 12 as area features.
+`bigobservationtower` point and area values are written out at vector zoom 13 as area features.
 
 `observationtower` is set if `man_made` is `tower` and `tower:type` is`observation`.  `bigobservationtower` is set instead of `observationtower` if the `height` is > 100.
 
@@ -406,7 +406,7 @@ For the largest of these features (way_area > 1500000) the "fill minzoom" is 9 a
 
 ### Zoom 14 `man_made` in `land1`.
 
-Numerous other `man_made` values are written as area features at vector zoom 14.  These include `chimney`, `lighthouse`, `mast`, `ventilation`, `water`, `windsock`, `crane`, `cross`, `flagpole`, `maypole`, `aircraftcontroltower`, `churchspire`, `churchtower`, `clockpedestal`, `clocktower`, `defensivetower`, `footwear`, `illuminationtower`, `militarybunker`, `mineshaft`, `monitoringearthquake`, `monitoringrainfall`, `monitoringky`, `monitoringwater`, `monitoringweather`, `mounting`, `observationtower`, `radartower`, `squaretower`, `watermill`, `windmill`, `survey`, `water`, `cairn`, `flagpole`, `boundary`, `golfballwasher`, `golfpin`, `outfall` and `markermilitary`.  Wach of these is typically sent based on several other tags (such as `monitoringwater`, based on `man_made=monitoring_station` and various other tags such as `monitoring:water_velocity`).
+Numerous other `man_made` values are written as area features at vector zoom 14.  These include `chimney`, `lighthouse`, `mast`, `ventilation`, `water`, `windsock`, `crane`, `cross`, `flagpole`, `maypole`, `aircraftcontroltower`, `churchspire`, `churchtower`, `clockpedestal`, `clocktower`, `defensivetower`, `footwear`, `illuminationtower`, `militarybunker`, `mineshaft`, `monitoringearthquake`, `monitoringrainfall`, `monitoringky`, `monitoringwater`, `monitoringweather`, `mounting`, `observationtower`, `radartower`, `squaretower`, `watermill`, `windmill`, `survey`, `water`, `cairn`, `flagpole`, `boundary`, `golfballwasher`, `golfpin`, `outfall` and `markermilitary`.  Each of these is typically sent based on several other tags (such as `monitoringwater`, based on `man_made=monitoring_station` and various other tags such as `monitoring:water_velocity`).
 
 If set, `ele` is also written through here; it sometimes carries an inscription for a stone.
 
@@ -437,6 +437,8 @@ Note that linear fords are handled as an `edge=ford` attribute on roads in `tran
 `ele` (which will often include an expanded `name` to include `website`) is also written.
 
 ### Zoom 10 `highway=motorway_junction` in `land1`.
+
+This is written out as a named area feature at vector zoom 10.  `ref` and `ref_len` are added as attributes.
 
 ### Zoom 14 `highway=platform` in `land1`.
 
