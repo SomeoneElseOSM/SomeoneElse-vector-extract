@@ -283,7 +283,7 @@ Generally speaking, this will be the OSM value for `barrier`.  Exceptions includ
 * zoom 14 `power=line`, `power=minor_line`.
 * zoom 14 linear `waterway=lock_gate`, `waterway=sluice_gate`, `waterway=waterfall`, `waterway=weir`, `waterway=floating_barrier`.
 
-Numerous other tags (e.g. `man_made=pier`) may be linear or occur on areas; other than the exceptions noted elsewhere this is usually based on whether the way is closed or not.
+Numerous other tags (e.g. `man_made=pier`) may be linear or occur on areas; other than the exceptions noted elsewhere, this is usually based on whether the way is closed or not.
 
 Closed `barrier=hedge` are assumed to be linear if there is some other area tag on the object (e.g. `landuse=farmland`), otherwise areas.
 
@@ -316,7 +316,7 @@ the value of the OSM `addr:housename` tag, after postprocessing.
 
 There are two "landuse / landcover" layers into which all sorts of landuse, leisure, natural etc. areas and points go.  Most go into `land1`, except in the case of some overlays (e.g. military red hatching) which goes into `land2`.  The same name collision avoidance logic is used as in the [equivalent raster map code](https://github.com/SomeoneElseOSM/SomeoneElse-style); the resulting "unnamed" area features also go into `land2`.
 
-Features are written from an appropriate zoom level, which depending on the feature (e.g. "natural=water", "leisure=nature_reserve") and that zoom level in many cases will vary based on `way_area` or a proxy for that (`sqkm`).
+Features are written from an appropriate zoom level, which depending on the feature (e.g. `natural=water`, `leisure=nature_reserve`) and that zoom level in many cases will vary based on `way_area` or a proxy for that (`sqkm`).
 
 Most area "`landuse`, `leisure`, etc." features that may be either large or small will be written out twice - once as a polygon without a name, so that a rendering style can show an appropriate fill and outline, and once as a centroid with a name (if one exists), together with the way_area of the polygon.  This allows the fill and/or outline for these features to be shown at one (lower) zoom level, and the `name` at a higher one, and the rendering style may choose to display larger feature names earlier than smaller ones.
 
@@ -345,7 +345,7 @@ Other tags that will change `amenity=parking` to e.g. `amenity=parking_pay` incl
 * `fee`.  If set to a non-free value `parking_space=parking_pay` is set as an attribute.
 * `parking_space=disabled`
 
-An additional attribute `access` is also set - this is the regular `access` tag from OSM.
+An additional attribute `access` is also set - this is derived from the regular `access` tag from OSM.
 
 ### `amenity` education and hospital features in `land1`.
 
@@ -431,7 +431,7 @@ There is considerable consolidation of raw OSM tags into these values.  In addit
 
 `bigmast`, `pier`, `breakwater` and `groyne` point and area values are written out at vector zoom 11 as area features.
 
-`mast` and `bigmast` are derived from a selection of `man_made` features such as `phone_mast`, 'radio_mast`, `communications_mast`, `tower`, `communications_tower`, `transmitter`, `antenna`, `mast`, with `bigmast` being set if the `height` is > 300.
+`mast` and `bigmast` are derived from a selection of `man_made` features such as `phone_mast`, `radio_mast`, `communications_mast`, `tower`, `communications_tower`, `transmitter`, `antenna`, `mast`, with `bigmast` being set if the `height` is > 300.
 
 Previously many sorts of `tower` will have been split off into a selection of towers, `bigchimney` and `chimney` (see below).
 
