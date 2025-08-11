@@ -1,6 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Ensure that conditions that might clear `disused:amenity` are processed before `disused:amenity` itself is processed.
+Process contradictory `healthcare` values better - `amenity` or `disused:amenity` etc. now take precedence.
+
 ## 10/08/2025
 Treat `leisure=bike_park` as `landuse=recreation_ground`.
 
