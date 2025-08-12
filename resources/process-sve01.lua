@@ -1715,6 +1715,16 @@ end -- wr_after_transportation( passedt )
 -- "gallop" and "leisuretrack" are also special cases.  If "area==no", 
 -- they are assumed to be linear and are rendered here, whether or not they 
 -- are closed. 
+--
+-- Note that "pathsteps", "intpathsteps", "badpathsteps", 
+-- "intfootwaysteps", "badfootwaysteps", 
+-- "intbridlewaysteps", "badbridlewaysteps" are never set by the shared lua,
+-- because "bad" and "int" processing isn't done for steps, because if some
+-- steps are there you can surely see them.
+--
+-- Similarly, "badfootwaywide", "badfootwaynarrow" and 
+-- "badbridlewaywide" and "badbridlewaynarrow" aren't set because we always 
+-- want to show designated paths and tracks.
 -- ----------------------------------------------------------------------------
 function wr_after_highway( passedt )
     if (( passedt.highway == "motorway"      ) or
@@ -1780,32 +1790,21 @@ function wr_after_highway( passedt )
                             ( passedt.highway == "bridlewaysteps"     ) or
                             ( passedt.highway == "intbridlewaywide"   ) or
                             ( passedt.highway == "intbridlewaynarrow" ) or
-                            ( passedt.highway == "intbridlewaysteps"  ) or
-                            ( passedt.highway == "badbridlewaywide"   ) or
-                            ( passedt.highway == "badbridlewaynarrow" ) or
-                            ( passedt.highway == "badbridlewaysteps"  ) or
                             ( passedt.highway == "footwaywide"        ) or
                             ( passedt.highway == "footwaynarrow"      ) or
                             ( passedt.highway == "footwaysteps"       ) or
                             ( passedt.highway == "intfootwaywide"     ) or
                             ( passedt.highway == "intfootwaynarrow"   ) or
-                            ( passedt.highway == "intfootwaysteps"    ) or
-                            ( passedt.highway == "badfootwaywide"     ) or
-                            ( passedt.highway == "badfootwaynarrow"   ) or
-                            ( passedt.highway == "badfootwaysteps"    ) or
                             ( passedt.highway == "service"            ) or
                             ( passedt.highway == "driveway"           ) or
                             ( passedt.highway == "steps"              ) or
                             ( passedt.highway == "road"               ) or
                             ( passedt.highway == "pathwide"           ) or
                             ( passedt.highway == "pathnarrow"         ) or
-                            ( passedt.highway == "pathsteps"          ) or
                             ( passedt.highway == "intpathwide"        ) or
                             ( passedt.highway == "intpathnarrow"      ) or
-                            ( passedt.highway == "intpathsteps"       ) or
                             ( passedt.highway == "badpathwide"        ) or
                             ( passedt.highway == "badpathnarrow"      ) or
-                            ( passedt.highway == "badpathsteps"       ) or
                             ( passedt.highway == "construction"       ) or
                             ( passedt.highway == "raceway"            )) then
                             Layer("transportation", false)
