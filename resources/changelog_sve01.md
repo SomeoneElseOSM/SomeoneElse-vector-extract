@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Ensure that conditions that might clear `disused:amenity` are processed before `disused:amenity` itself is processed.
 Process contradictory `healthcare` values better - `amenity` or `disused:amenity` etc. now take precedence.
+Fix some bugs in the shared lua that could potentially result in blank values being missed in comparisons.
 
 ## 10/08/2025
 Treat `leisure=bike_park` as `landuse=recreation_ground`.
