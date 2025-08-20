@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250811T013101Z",
+  "data_updated": "20250820T231801Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2989,7 +2989,8 @@
     { "key": "shop", "value": "e-cigarette;computer;mobile_phone", "description": "Extracted as an e-cigarette shop" },
     { "key": "shop", "value": "e-cigarette;convenience", "description": "Extracted as an e-cigarette shop" },
     { "key": "shop", "value": "e-cigarette;mobile_phone", "description": "Extracted as an e-cigarette shop" },
-    { "key": "shop", "value": "eco_refill", "description": "Extracted as a grocer so that it can be displayed separately" },
+    { "key": "shop", "value": "eco", "description": "Extracted as a grocery so that it can be displayed separately" },
+    { "key": "shop", "value": "eco_refill", "description": "Extracted as a grocery so that it can be displayed separately" },
     { "key": "shop", "value": "education", "description": "Various shops extracted" },
     { "key": "shop", "value": "eggs", "description": "Various shops extracted" },
     { "key": "shop", "value": "electrical", "description": "Various shops extracted" },

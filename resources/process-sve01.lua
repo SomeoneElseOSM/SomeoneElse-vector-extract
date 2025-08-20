@@ -2662,6 +2662,7 @@ function render_shop_land1( passedt )
         ( passedt.shop == "art"                ) or
         ( passedt.shop == "bakery"             ) or
         ( passedt.shop == "beauty"             ) or
+        ( passedt.shop == "ecobeauty"          ) or
         ( passedt.shop == "bicycle"            ) or
         ( passedt.shop == "bookmaker"          ) or
         ( passedt.shop == "books"              ) or
@@ -2679,7 +2680,9 @@ function render_shop_land1( passedt )
         ( passedt.shop == "copyshop"           ) or
         ( passedt.shop == "deli"               ) or
         ( passedt.shop == "discount"           ) or
+        ( passedt.shop == "ecodiscount"        ) or
         ( passedt.shop == "doityourself"       ) or
+        ( passedt.shop == "ecodoityourself"    ) or
         ( passedt.shop == "e-cigarette"        ) or
         ( passedt.shop == "ecoconv"            ) or
         ( passedt.shop == "ecogreengrocer"     ) or
@@ -2693,6 +2696,7 @@ function render_shop_land1( passedt )
         ( passedt.shop == "furniture"          ) or
         ( passedt.shop == "garden_centre"      ) or
         ( passedt.shop == "gift"               ) or
+        ( passedt.shop == "ecogift"            ) or
         ( passedt.shop == "greengrocer"        ) or
         ( passedt.shop == "hairdresser"        ) or
         ( passedt.shop == "health_food"        ) or
@@ -2709,6 +2713,7 @@ function render_shop_land1( passedt )
         ( passedt.shop == "outdoor"            ) or
         ( passedt.shop == "pawnbroker"         ) or
         ( passedt.shop == "pet"                ) or
+        ( passedt.shop == "ecopet"             ) or
         ( passedt.shop == "pet_food"           ) or
         ( passedt.shop == "pet_grooming"       ) or
         ( passedt.shop == "photo"              ) or
