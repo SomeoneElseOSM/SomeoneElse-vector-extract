@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Show clocks that are neither pedestal clocks nor clock towers.
 Handle "eco" versions of doityourself, gift, beauty, pet, and discount shops.
+Removed `sidewalk:left=segregated`.  No longer in the data.
 
 ## 17/08/2025
 Show some more clock towers.

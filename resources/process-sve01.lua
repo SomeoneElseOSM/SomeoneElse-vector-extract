@@ -1889,10 +1889,8 @@ function append_edge_etc( passedt )
         (   passedt.sidewalk == "yes"                 ) or
         (   passedt["sidewalk:both"] == "separate"    ) or 
         (   passedt["sidewalk:both"] == "yes"         ) or
-        (   passedt["sidewalk:left"] == "segregated"  ) or
         (   passedt["sidewalk:left"] == "separate"    ) or 
         (   passedt["sidewalk:left"] == "yes"         ) or
-        (   passedt["sidewalk:right"] == "segregated" ) or 
         (   passedt["sidewalk:right"] == "separate"   ) or 
         (   passedt["sidewalk:right"] == "yes"        ) or
         (   passedt.footway  == "separate"            ) or 
