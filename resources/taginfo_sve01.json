@@ -2269,6 +2269,7 @@
     { "key": "natural", "value": "arch", "description": "Various natural features extracted" },
     { "key": "natural", "value": "arete", "description": "Treated as an embankment or an embanked highway" },
     { "key": "natural", "value": "bare_rock", "description": "Written into 'land1' or 'land2' (differently if tidal) at minzoom 9; centroid for name written separately" },
+    { "key": "natural", "value": "blockfield", "description": "Treated in the same way as 'scree'" },
     { "key": "natural", "value": "bay", "description": "Various natural features extracted" },
     { "key": "natural", "value": "beach", "description": "Written into 'land1' or 'land2' (differently if tidal) at minzoom 9; centroid for name written separately" },
     { "key": "natural", "value": "boulder", "description": "Treated as natural=rock, if not sport=climbing or climbing=boulder" },

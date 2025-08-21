@@ -2,9 +2,12 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Removed `sidewalk:left=segregated`.  No longer in the data.
+Handle `natural=blockfield` in the same way as `scree`.
+
+## 20/08/2025
 Show clocks that are neither pedestal clocks nor clock towers.
 Handle "eco" versions of doityourself, gift, beauty, pet, and discount shops.
-Removed `sidewalk:left=segregated`.  No longer in the data.
 
 ## 17/08/2025
 Show some more clock towers.
