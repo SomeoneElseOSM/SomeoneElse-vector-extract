@@ -1,9 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 22/08/2025
 Removed `sidewalk:left=segregated`.  No longer in the data.
 Handle `natural=blockfield` in the same way as `scree`.
+Removed `leisure=dojo`.  No longer in the data.
 
 ## 20/08/2025
 Show clocks that are neither pedestal clocks nor clock towers.
