@@ -3461,24 +3461,34 @@ function render_leisure_land1( passedt )
 -- then the name.
 -- ----------------------------------------------------------------------------
                 if ( passedt.way_area > 141284 ) then
-                    minzoom = 9
+                    fill_minzoom = 9
+                    name_minzoom = 11
                 else
                     if ( passedt.way_area > 71668 ) then
-                        minzoom = 10
+                        fill_minzoom = 10
+                        name_minzoom = 12
                     else
                         if ( passedt.way_area > 12853 ) then
-                            minzoom = 11
+                            fill_minzoom = 11
+                            name_minzoom = 13
                         else
                             if ( passedt.way_area > 2584 ) then
-                                minzoom = 12
+                                fill_minzoom = 12
+                                name_minzoom = 14
                             else
-                                minzoom = 13
+                                if ( passedt.way_area > 1400 ) then
+                                    fill_minzoom = 13
+                                    name_minzoom = 14
+                                else
+                                    fill_minzoom = 14
+                                    name_minzoom = 14
+                                end
                             end
                         end
                     end
                 end
 
-                write_polygon_and_centroid( "land1", passedt, "leisure_", passedt.leisure, minzoom )
+                write_polygon_and_centroid_2( "land1", passedt, "leisure_", passedt.leisure, fill_minzoom, name_minzoom )
             else
                 if (( passedt.leisure == "playground" ) or
                     ( passedt.leisure == "schoolyard" )) then
