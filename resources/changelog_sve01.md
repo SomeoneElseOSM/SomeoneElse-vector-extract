@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract fill name name for various leisure (such as golf courses) at differet zooms, allowing the styling code to be simpler.
+Detect "non-crossings" added by StreetComplete and remove them.
 
 ## 22/08/2025
 Removed `sidewalk:left=segregated`.  No longer in the data.
