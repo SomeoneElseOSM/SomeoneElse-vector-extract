@@ -1,9 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
-Extract fill name name for various leisure (such as golf courses) at differet zooms, allowing the styling code to be simpler.
+## 30/08/2025
+Extract fill and name display for various leisure features (such as golf courses) at different zooms, allowing the styling code to be simpler.
 Detect "non-crossings" added by StreetComplete and remove them.
+Reduce the threshold for "large masts" from 300m down to 150m high.
 
 ## 22/08/2025
 Removed `sidewalk:left=segregated`.  No longer in the data.
