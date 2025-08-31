@@ -1,9 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 31/08/2025
 Treat `natural=fen` as `place=locality` (most already have that tag set).
 Treat Don't set `place=locality` if any otherwise handled `natural` tag is set.
+If a `place=locality` is a `townland` or `subtownland` and a point, remove it, because there will probably be a duplicate area.
 
 ## 30/08/2025
 Extract fill and name display for various leisure features (such as golf courses) at different zooms, allowing the styling code to be simpler.

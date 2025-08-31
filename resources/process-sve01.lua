@@ -697,9 +697,10 @@ function way_function()
     end
 
 -- ----------------------------------------------------------------------------
--- The only way and relation places that we're interested in are islands
--- and localities.
+-- The only way and relation places that we're interested in are islands and
+-- localities.
 -- Islets have been changed to islands in the shared lua.
+-- Some other features have been set to localities.
 -- ----------------------------------------------------------------------------
     wr_after_place( wayt )
 
@@ -1206,6 +1207,7 @@ function update_table( passedt )
     passedt.leisure = Find("leisure")
     passedt.level = Find("level")
     passedt.loc_ref = Find("loc_ref")
+    passedt.locality = Find("locality")
     passedt.location = Find("location")
     passedt.lock_name = Find("lock_name")
     passedt.lock_ref = Find("lock_ref")
@@ -4455,7 +4457,9 @@ function n_after_place( passedt )
 -- Node localities are written here.  See wr_after_place for ways and relations.
 -- set_sqkm_name_minzoom sets "minzoom" within the table which is used just below.
 -- ------------------------------------------------------------------------------
-                            if ( passedt.place == "locality" ) then
+                            if (( passedt.place    == "locality"    )  and
+                                ( passedt.locality ~= "townland"    )  and
+                                ( passedt.locality ~= "subtownland" )) then
                                 set_sqkm_name_minzoom( passedt )
                                 LayerAsCentroid( "place" )
                                 append_name( passedt )
@@ -4470,6 +4474,7 @@ function n_after_place( passedt )
 -- ------------------------------------------------------------------------------
 -- There is no catch-all on place - 
 -- we only extract what we expect to want to process.
+-- If more code is added here for more place values, change the "locality" check above.
 -- ------------------------------------------------------------------------------
                             end -- locality
                         end -- hamlet
