@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Removed `information=sitemap`.  No longer in the data.
+
 ## 31/08/2025
 Treat `natural=fen` as `place=locality` (most already have that tag set).
 Treat Don't set `place=locality` if any otherwise handled `natural` tag is set.
