@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Detect dry-stone walls mapped via `fence_type`.
+Removed `shop=tanning`; no longed in OSM data.
 
 ## 06/09/2025
 Removed `covered=covered`; no longed in OSM data.
