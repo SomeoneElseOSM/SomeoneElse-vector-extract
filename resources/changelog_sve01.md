@@ -1,9 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## Vector 11/09/2025, raster as yet unreleased
 Detect dry-stone walls mapped via `fence_type`.
 Removed `shop=tanning`; no longed in OSM data.
+Don't show a landuse fill for unnamed tourist attractions.  There will surely be something else that carries the name, and that will likely have a more appropriate OSM tag.
 
 ## 06/09/2025
 Removed `covered=covered`; no longed in OSM data.
