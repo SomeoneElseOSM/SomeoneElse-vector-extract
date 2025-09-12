@@ -2010,6 +2010,7 @@
     { "key": "man_made", "value": "concrete_post", "description": "Handled as barrier=post" },
     { "key": "man_made", "value": "crane", "description": "Extracted as crane" },
     { "key": "man_made", "value": "cross", "description": "Extracted as cross" },
+    { "key": "man_made", "value": "crane", "description": "Extracted so that 'land' can be shown over the top of any trees" },
     { "key": "man_made", "value": "dyke", "description": "Used to detect embankments, which may have highways on them or not" },
     { "key": "man_made", "value": "embankment", "description": "Treated as a one-sided embankment" },
     { "key": "man_made", "value": "filter_bed", "description": "Most man-made items are extracted" },
