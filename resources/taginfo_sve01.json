@@ -2011,6 +2011,7 @@
     { "key": "man_made", "value": "crane", "description": "Extracted as crane" },
     { "key": "man_made", "value": "cross", "description": "Extracted as cross" },
     { "key": "man_made", "value": "dyke", "description": "Used to detect embankments, which may have highways on them or not" },
+    { "key": "man_made", "value": "embankment", "description": "Treated as a one-sided embankment" },
     { "key": "man_made", "value": "filter_bed", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "filtration_bed", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "flagpole", "description": "Extracted as a flagpole, military or otherwise" },
