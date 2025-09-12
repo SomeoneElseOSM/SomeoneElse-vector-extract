@@ -2056,6 +2056,7 @@
     { "key": "man_made", "value": "pier", "description": "Areas extracted into 'land1, lines into 'linearbarrier''" },
     { "key": "man_made", "value": "pipeline", "description": "Extract overground pipelines as bridges; extract underground pipelines in light purple" },
     { "key": "man_made", "value": "pipeline_marker", "description": "Extracted as aerial pipeline marker" },
+    { "key": "man_made", "value": "planter", "description": "Handled as grass with a wall around it" },
     { "key": "man_made", "value": "post", "description": "Handled as barrier=post" },
     { "key": "man_made", "value": "pumping_station", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "radio_mast", "description": "Most man-made items are extracted" },

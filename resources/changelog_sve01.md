@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Detect slurry tanks, basins and pits.
+Handle `man_made=planter`.
 
 ## Vector 11/09/2025, raster as yet unreleased
 Detect dry-stone walls mapped via `fence_type`.
