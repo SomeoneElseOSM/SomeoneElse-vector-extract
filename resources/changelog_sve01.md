@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Detect slurry tanks, basins and pits.
+
 ## Vector 11/09/2025, raster as yet unreleased
 Detect dry-stone walls mapped via `fence_type`.
 Removed `shop=tanning`; no longed in OSM data.
