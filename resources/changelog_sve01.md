@@ -5,7 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Detect slurry tanks, basins and pits, and also sewage works clarifiers.
 Handle `man_made=planter`.
 Detect `man_made` and `historic` mine adits.
-Handle `man_made=courtyard` as a locality.
+Handle `man_made=courtyard` and `man_made=quay` as a locality.
 
 ## Vector 11/09/2025, raster as yet unreleased
 Detect dry-stone walls mapped via `fence_type`.
