@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250912T204501Z",
+  "data_updated": "20250913T112001Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2000,6 +2000,7 @@
     { "key": "man_made", "value": "air_shaft", "description": "Extracted as vent shaft" },
     { "key": "man_made", "value": "antenna", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "beacon", "description": "Most man-made items are extracted" },
+    { "key": "man_made", "value": "beehive", "description": "Most man-made items are handled" },
     { "key": "man_made", "value": "boundary_marker", "description": "Extracted as stone" },
     { "key": "man_made", "value": "boundary_stone", "description": "Extracted as stone" },
     { "key": "man_made", "value": "breakwater", "description": "Extracted as their own thing" },

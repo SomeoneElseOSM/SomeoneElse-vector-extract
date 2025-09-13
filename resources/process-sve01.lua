@@ -2855,6 +2855,7 @@ function render_man_made_land1( passedt )
                         ( passedt.man_made == "golfballwasher"           ) or
                         ( passedt.man_made == "golfpin"                  ) or
                         ( passedt.man_made == "outfall"                  ) or
+                        ( passedt.man_made == "beehive"                  ) or
                         ( passedt.man_made == "markermilitary"           )) then
                         Layer( "land1", true )
                         Attribute( "class", "man_made_" .. passedt.man_made )
