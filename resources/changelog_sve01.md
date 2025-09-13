@@ -1,14 +1,14 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 13/09/2025
 Detect slurry tanks, basins and pits, and also sewage works clarifiers.
 Handle `man_made=planter`.
 Detect `man_made` and `historic` mine adits.
 Handle `man_made=courtyard` and `man_made=quay` as a locality.
 Handle `man_made=beehive`.
 
-## Vector 11/09/2025, raster as yet unreleased
+## Vector 11/09/2025, raster 13/09/2025
 Detect dry-stone walls mapped via `fence_type`.
 Removed `shop=tanning`; no longed in OSM data.
 Don't show a landuse fill for unnamed tourist attractions.  There will surely be something else that carries the name, and that will likely have a more appropriate OSM tag.
