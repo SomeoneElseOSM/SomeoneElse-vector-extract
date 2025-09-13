@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Detect slurry tanks, basins and pits.
+Detect slurry tanks, basins and pits, and also sewage works clarifiers.
 Handle `man_made=planter`.
 Detect `man_made` and `historic` mine adits.
 Handle `man_made=courtyard` as a locality.
