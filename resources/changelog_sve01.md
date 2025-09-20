@@ -1,10 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 20/09/2025
 Added support for various wind monitoring stations, and also water quality.
 
-## Vector, 16/09/2025 raster as yet unreleased
+## 16/09/2025
 Removed `office=office`; no longer in OSM data.
 Treat "`natural=water`; `basin=detention`" etc. as intermittent.
 
