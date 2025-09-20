@@ -1223,14 +1223,24 @@ function update_table( passedt )
     passedt.microbrewery = Find("microbrewery")
     passedt.micropub = Find("micropub")
     passedt.military = Find("military")
+    passedt["monitoring"] = Find("monitoring")
     passedt["monitoring:air_quality"] = Find("monitoring:air_quality")
+    passedt["monitoring:bathing_water"] = Find("monitoring:bathing_water")
+    passedt["monitoring:flood"] = Find("monitoring:flood")
+    passedt["monitoring:flow_rate"] = Find("monitoring:flow_rate")
     passedt["monitoring:rainfall"] = Find("monitoring:rainfall")
+    passedt["monitoring:river_level"] = Find("monitoring:river_level")
     passedt["monitoring:seismic_activity"] = Find("monitoring:seismic_activity")
     passedt["monitoring:sky_brightness"] = Find("monitoring:sky_brightness")
+    passedt["monitoring:temperature"] = Find("monitoring:temperature")
     passedt["monitoring:water_flow"] = Find("monitoring:water_flow")
     passedt["monitoring:water_level"] = Find("monitoring:water_level")
+    passedt["monitoring:water_quality"] = Find("monitoring:water_quality")
     passedt["monitoring:water_velocity"] = Find("monitoring:water_velocity")
     passedt["monitoring:weather"] = Find("monitoring:weather")
+    passedt["monitoring:wind"] = Find("monitoring:wind")
+    passedt["monitoring:wind_direction"] = Find("monitoring:wind_direction")
+    passedt["monitoring:wind_speed"] = Find("monitoring:wind_speed")
     passedt.motorroad = Find("motorroad")
     passedt.motor_vehicle = Find("motor_vehicle")
     passedt.munro = Find("munro")
@@ -2840,7 +2850,9 @@ function render_man_made_land1( passedt )
                         ( passedt.man_made == "monitoringrainfall"       ) or
                         ( passedt.man_made == "monitoringky"             ) or
                         ( passedt.man_made == "monitoringwater"          ) or
+                        ( passedt.man_made == "monitoringwaterquality"   ) or
                         ( passedt.man_made == "monitoringweather"        ) or
+                        ( passedt.man_made == "monitoringwind"           ) or
                         ( passedt.man_made == "mounting_block"           ) or
                         ( passedt.man_made == "observationtower"         ) or
                         ( passedt.man_made == "radartower"               ) or
