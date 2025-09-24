@@ -1,6 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## Vector 24/09/2025
+Removed `information=wildlife`; no longer in OSM data.
+Added some missing `disused` keys to "node_keys".
+
 ## 20/09/2025
 Added support for various wind monitoring stations, and also water quality.
 

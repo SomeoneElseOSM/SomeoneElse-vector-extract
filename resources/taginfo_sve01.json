@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20250920T182201Z",
+  "data_updated": "20250924T213601Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1816,7 +1816,6 @@
     { "key": "information", "value": "trail_blaze", "description": "Treated as information route marker" },
     { "key": "information", "value": "trail_marker", "description": "Treated as information route marker" },
     { "key": "information", "value": "visitor_centre", "description": "Treated as information office" },
-    { "key": "information", "value": "wildlife", "description": "Treated as information board" },
     { "key": "inscription", "description": "Appended to names of historic and boundary stones" },
     { "key": "intermittent", "description": "Intermittent waterways and wetland" },
     { "key": "intermittent", "value": "yes", "description": "Intermittent waterways and wetland" },
