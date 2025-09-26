@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Use "(hydro)" as a name for unnamed hydro power.
+Fixed a bug where weather stations weren't processedeven if they didn't have a weather radar tower, which is handled elsewhere.
 
 ## 24/09/2025
 Removed `information=wildlife`; no longer in OSM data.
