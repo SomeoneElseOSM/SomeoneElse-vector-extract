@@ -7,6 +7,7 @@ Fixed a bug where weather stations weren't processed even if they didn't have a 
 Show "junction=yes" nodes with a name and no other highway tags.
 Fixed a bug where "ruins:building" was missing from vector node keys, resulting in objects with only that tag being omitted. 
 Added "ruined:building" to list of tags treated as "not quite a building".
+Extract parking spaces separately so that they can avoid being shown at low zooms.
 
 ## 24/09/2025
 Removed `information=wildlife`; no longer in OSM data.

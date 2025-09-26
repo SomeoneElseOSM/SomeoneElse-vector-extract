@@ -2241,6 +2241,7 @@ end -- generic_place_land1()
 
 function render_amenity_land1( passedt )
     if (( passedt.amenity == "parking"              ) or
+        ( passedt.amenity == "parking_space"        ) or
         ( passedt.amenity == "parking_pay"          ) or
         ( passedt.amenity == "parking_freedisabled" ) or
         ( passedt.amenity == "parking_paydisabled"  )) then
