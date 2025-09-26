@@ -36,7 +36,7 @@ node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenit
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
               "office", "outlet", "pipeline", "pitch", "place", 
-              "place_of_worship", "playground", "police", "power", "railway", "shop", 
+              "place_of_worship", "playground", "police", "power", "railway", "ruined:building", "ruins:building", "shop", 
               "sport", "tourism", "tunnel", "was:amenity", "waterway", "whitewater", "zoo" }
 
 -- Initialize Lua logic
@@ -1330,6 +1330,7 @@ function update_table( passedt )
     passedt.route = Find("route")
     passedt["ruined:building"] = Find("ruined:building")
     passedt.ruins = Find("ruins")
+    passedt["ruined:building"] = Find("ruined:building")
     passedt["ruins:building"] = Find("ruins:building")
     passedt["ruins:man_made"] = Find("ruins:man_made")
     passedt["ruins:tourism"] = Find("ruins:tourism")
