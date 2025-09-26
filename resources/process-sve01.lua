@@ -32,7 +32,7 @@ node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenit
 	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:man_made",
 	      "disused:military", "disused:pub", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
               "emergency", "entrance", "ford", "geological", "golf", "harbour", "historic", 
-              "healthcare", "highway", "information", 
+              "healthcare", "highway", "information", "junction", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
               "office", "outlet", "pipeline", "pitch", "place", 
@@ -351,6 +351,18 @@ function node_function()
             end
          end
       end
+   end
+
+-- ----------------------------------------------------------------------------
+-- "junction=yes" nodes with a name and no other highway tags.
+-- ----------------------------------------------------------------------------
+   if ((  nodet.junction == "yes" ) and
+       (  nodet.name     ~= nil   ) and
+       (  nodet.name     ~= ""    ) and
+       (( nodet.highway  == nil  )  or
+        ( nodet.highway  == ""   ))) then
+      nodet.highway  = "motorway_junction"
+      nodet.junction = nil
    end
 
 -- ------------------------------------------------------------------------------
