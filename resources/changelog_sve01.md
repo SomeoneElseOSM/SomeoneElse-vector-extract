@@ -9,6 +9,7 @@ Fixed a bug where "ruins:building" was missing from vector node keys, resulting 
 Added "ruined:building" to list of tags treated as "not quite a building".
 Extract parking spaces separately so that they can avoid being shown at low zooms.
 Extract satellite dishes with a unique icon.
+Extract `man_made=fuel_pump` with a unique icon.
 
 ## 24/09/2025
 Removed `information=wildlife`; no longer in OSM data.
