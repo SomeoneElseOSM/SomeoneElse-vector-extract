@@ -365,6 +365,14 @@ function node_function()
       nodet.junction = nil
    end
 
+-- ----------------------------------------------------------------------------
+-- node waterway=fish_pass are changed to waterway=weir
+-- ----------------------------------------------------------------------------
+   if ( nodet.waterway == "fish_pass" ) then
+      nodet.waterway = "weir"
+      nodet.usage    = nil
+   end
+
 -- ------------------------------------------------------------------------------
 -- (end of the node-specific code)
 --
@@ -663,6 +671,22 @@ function way_function()
       else
          wayt.amenity = nil
          wayt.landuse = nil
+      end
+   end
+
+-- ----------------------------------------------------------------------------
+-- way waterway=fish_pass are changed to "waterway=drain"
+-- Closed fish_pass ways have "area=yes" added.
+-- A number of closed "waterway=drain" ways are _not_ areas.
+-- ----------------------------------------------------------------------------
+   if ( wayt.waterway == "fish_pass" ) then
+      wayt.usage    = nil
+
+      if ( wayt.is_closed ) then
+         wayt.natural = "water"
+         wayt.water   = "fish_pass"
+      else
+         wayt.waterway = "drain"
       end
    end
 

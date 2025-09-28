@@ -10,6 +10,8 @@ Added "ruined:building" to list of tags treated as "not quite a building".
 Extract parking spaces separately so that they can avoid being shown at low zooms.
 Extract satellite dishes with a unique icon.
 Extract `man_made=fuel_pump` with a unique icon.
+Extract node `waterway=fish_pass` as `waterway=weir` so that it can get processed as a node waterway feature.
+Extract way `waterway=fish_pass` as either `natural=water` (if a closed way) or `waterway=drain` (if not) so that it can get processed as an polygon or line waterway feature.
 
 ## 24/09/2025
 Removed `information=wildlife`; no longer in OSM data.
