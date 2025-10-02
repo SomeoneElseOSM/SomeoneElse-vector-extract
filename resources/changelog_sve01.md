@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract sanitary dump stations with a unique value.
+
 ## 02/10/2025
 Use "(hydro)" as a name for unnamed hydro power.
 Fixed a bug where weather stations weren't processed even if they didn't have a weather radar tower, which is handled elsewhere.
@@ -8,8 +11,8 @@ Show "junction=yes" nodes with a name and no other highway tags.
 Fixed a bug where "ruins:building" was missing from vector node keys, resulting in objects with only that tag being omitted. 
 Added "ruined:building" to list of tags treated as "not quite a building".
 Extract parking spaces separately so that they can avoid being shown at low zooms.
-Extract satellite dishes with a unique icon.
-Extract `man_made=fuel_pump` with a unique icon.
+Extract satellite dishes with a unique value.
+Extract `man_made=fuel_pump` with a unique value.
 Extract node `waterway=fish_pass` as `waterway=weir` so that it can get processed as a node waterway feature.
 Extract way `waterway=fish_pass` as either `natural=water` (if a closed way) or `waterway=drain` (if not) so that it can get processed as an polygon or line waterway feature.
 
@@ -112,7 +115,7 @@ Extract cafes with `cuisine=bubble_tea` and `cuisine=indian` separately and e.g.
 Process various crossing tags to decide if a crossing should be extracted.
 Removed `LPG=yes`.  No longer in the data.
 Include galleries with artworks in former telephone box uses.
-Extract noncommercial art galleries with a unique museum-like icon.
+Extract noncommercial art galleries with a unique value.
 Handle more semicolon values.  Apart from some special cases, shops with semicolon values just use the first part.
 Change squiggly brackets at the start of appended bridge refs to round brackets.
 Detect Core Paths in Scotland which only have "Core Path..." set in the `ref`.

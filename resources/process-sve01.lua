@@ -2638,6 +2638,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "musical_instrument"          ) or
                         ( passedt.amenity == "drinking_water"              ) or
                         ( passedt.amenity == "nondrinking_water"           ) or
+                        ( passedt.amenity == "sanitary_dump_station"       ) or
                         ( passedt.amenity == "fountain"                    ) or
                         ( passedt.amenity == "prison"                      ) or
                         ( passedt.amenity == "veterinary"                  ) or
