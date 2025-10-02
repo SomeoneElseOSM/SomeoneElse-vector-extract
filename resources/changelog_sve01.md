@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 02/10/2025
 Use "(hydro)" as a name for unnamed hydro power.
 Fixed a bug where weather stations weren't processed even if they didn't have a weather radar tower, which is handled elsewhere.
 Show "junction=yes" nodes with a name and no other highway tags.
