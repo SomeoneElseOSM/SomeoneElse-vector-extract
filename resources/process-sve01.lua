@@ -28,7 +28,7 @@ require "shared_lua_vector"
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
               "barrier", "boundary", 
-              "canoe", "climbing", "craft",
+              "canoe", "climbing", "craft", 'defensive_works', 
 	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:man_made",
 	      "disused:military", "disused:pub", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
               "emergency", "entrance", "ford", "geological", "golf", "harbour", "historic", 
