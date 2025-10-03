@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251003T011401Z",
+  "data_updated": "20251003T131801Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3898,6 +3898,7 @@
     { "key": "waterway", "value": "brook", "description": "Many water features extracted" },
     { "key": "waterway", "value": "canal", "description": "Written into 'waterway' at minzoom 11" },
     { "key": "waterway", "value": "cave_of_debouchement", "description": "Many water features extracted" },
+    { "key": "waterway", "value": "construction", "description": "Treated as `derelict_canal`" },
     { "key": "waterway", "value": "derelict_canal", "description": "Written into 'waterway' at minzoom 11" },
     { "key": "waterway", "value": "disused_canal", "description": "Handled as per derelict_canal" },
     { "key": "waterway", "value": "ditch", "description": "Written into 'waterway' at minzoom 13" },
