@@ -2910,6 +2910,7 @@ function render_man_made_land1( passedt )
                         ( passedt.man_made == "outfall"                  ) or
                         ( passedt.man_made == "beehive"                  ) or
                         ( passedt.man_made == "fuel_pump"                ) or
+                        ( passedt.man_made == "charge_point"             ) or
                         ( passedt.man_made == "satellite_dish"           ) or
                         ( passedt.man_made == "markermilitary"           )) then
                         Layer( "land1", true )
