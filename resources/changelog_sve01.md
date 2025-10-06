@@ -6,6 +6,7 @@ Extract sanitary dump stations with a unique value.
 Handle `waterway=floodgate` as `waterway=sluice_gate`.
 Handle `waterway=construction` as `waterway=derelict_canal`, as many are.
 Extract `man_made=charging_point` with a unique value, analagous to `fuel_pump`.
+Suppress silly very long walking relation names.
 
 ## 02/10/2025
 Use "(hydro)" as a name for unnamed hydro power.
