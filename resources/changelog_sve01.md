@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+(raster, vector) Handle `amenity=security_control` as a barrier.
+
 ## 09/10/2025
 Extract sanitary dump stations with a unique value.
 Handle `waterway=floodgate` as `waterway=sluice_gate`.
