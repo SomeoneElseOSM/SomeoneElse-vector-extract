@@ -1,12 +1,13 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 09/10/2025
 Extract sanitary dump stations with a unique value.
 Handle `waterway=floodgate` as `waterway=sluice_gate`.
 Handle `waterway=construction` as `waterway=derelict_canal`, as many are.
 Extract `man_made=charging_point` with a unique value, analagous to `fuel_pump`.
 Suppress silly very long walking relation names.
+Handle "penguin" artwork separately to allow a different icon to be shown.
 
 ## 02/10/2025
 Use "(hydro)" as a name for unnamed hydro power.

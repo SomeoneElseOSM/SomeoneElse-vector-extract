@@ -1084,6 +1084,7 @@ function update_table( passedt )
     passedt.archaeological_site = Find("archaeological_site")
     passedt.area = Find("area")
     passedt["area:highway"] = Find("area:highway")
+    passedt.artwork_subject = Find("artwork_subject")
     passedt.attraction = Find("attraction")
     passedt.barrier = Find("barrier")
     passedt.basin = Find("basin")
@@ -4001,6 +4002,7 @@ function render_tourism_land1( passedt )
                     ( passedt.tourism == "militarysign"               ) or
                     ( passedt.tourism == "advertising_column"         ) or
                     ( passedt.tourism == "artwork"                    ) or
+                    ( passedt.tourism == "penguinartwork"             ) or
                     ( passedt.tourism == "singlechalet"               ) or
                     ( passedt.tourism == "hostel"                     ) or
                     ( passedt.tourism == "bed_and_breakfast"          ) or
