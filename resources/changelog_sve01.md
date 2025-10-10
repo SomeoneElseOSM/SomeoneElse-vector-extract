@@ -2,7 +2,8 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-(raster, vector) Handle `amenity=security_control` as a barrier.
+Handle `amenity=security_control` as a barrier.
+Don't extract underground (`level=-1`) swimming pools.
 
 ## 09/10/2025
 Extract sanitary dump stations with a unique value.
