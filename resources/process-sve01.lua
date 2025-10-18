@@ -2251,7 +2251,7 @@ function generic_after_land1( passedt )
 -- written, so that the fill and the outline of the feature appears first, and
 -- then the name.
 -- ----------------------------------------------------------------------------
-        set_way_area_name_and_fill_minzoom( passedt )
+        set_way_area_name_and_fill_minzoom_sea( passedt )
         write_polygon_and_centroid_2( "land1", passedt, "natural_", passedt.natural, passedt.fill_minzoom, passedt.name_minzoom )
     else
         render_place_land1( passedt )
@@ -2260,7 +2260,7 @@ end -- generic_after_land1()
 
 function render_place_land1( passedt )
     if ( passedt.place == "sea" ) then
-        set_way_area_name_and_fill_minzoom( passedt )
+        set_way_area_name_and_fill_minzoom_sea( passedt )
         write_polygon_and_centroid_2( "land1", passedt, "place_", passedt.place, passedt.fill_minzoom, passedt.name_minzoom )
     else
         render_amenity_land1( passedt )
@@ -3958,7 +3958,8 @@ end -- render_power_land1()
 
 function render_tourism_land1( passedt )
     if ( passedt.tourism == "attraction" ) then
-        write_polygon_and_centroid( "land1", passedt, "tourism_", passedt.tourism, 9 )
+        set_way_area_name_and_fill_minzoom_tourism( passedt )
+        write_polygon_and_centroid_2( "land1", passedt, "tourism_", passedt.tourism, passedt.fill_minzoom, passedt.name_minzoom )
     else
 -- ----------------------------------------------------------------------------
 -- Some zoom 12 tourist things tend to be just points, so we don't extract the
@@ -4219,53 +4220,8 @@ function render_landuse_land2( passedt )
 -- it from a separate layer.
 -- ----------------------------------------------------------------------------
             if ( passedt.landuse == "military" ) then
-                if ( passedt.way_area > 150000000 ) then
-                    fill_minzoom = 7                                     -- MoD Shoeburyness  #11/51.5830/0.9635
-                    name_minzoom = 7
-                else
-                    if ( passedt.way_area > 50000000 ) then
-                        fill_minzoom = 7                                 -- Warcop Training Area  #12/54.5946/-2.3219
-                        name_minzoom = 8
-                    else
-                        if ( passedt.way_area > 25000000 ) then          -- RAF Holbeach Air Weapons Range  #12/52.8831/0.1589
-                            fill_minzoom = 8
-                            name_minzoom = 9
-                        else
-                            if ( passedt.way_area > 2100000 ) then       -- Barden Moor  #13/54.37313/-1.77059
-                                fill_minzoom = 9                         -- Linton on Ouse  #11/54.0191/-1.1459
-                                name_minzoom = 10
-                            else
-                                if ( passedt.way_area > 600000 ) then    -- RAF Digby #15/53.09978/-0.44352
-                                    fill_minzoom = 10
-                                    name_minzoom = 11
-                                else
-                                    if ( passedt.way_area > 300000 ) then  -- RAF Fylingdales  #15/54.35919/-0.66785
-                                        fill_minzoom = 10
-                                        name_minzoom = 12
-                                    else
-                                        if ( passedt.way_area > 60000 ) then   -- GCHQ Scarborough  #17/54.267006/-0.446328
-                                            fill_minzoom = 11
-                                            name_minzoom = 13
-                                        else
-                                            if ( passedt.way_area > 6000 ) then   -- Tunbridge Wells TA Centre  #18/51.148519/0.260879
-                                                fill_minzoom = 13
-                                                name_minzoom = 14
-                                            else
--- ----------------------------------------------------------------------------
--- 14 is the catch-all minzoom
--- ----------------------------------------------------------------------------
-                                                fill_minzoom = 14
-                                                name_minzoom = 14
-                                            end -- fill_minzoom 13
-                                        end -- fill_minzoom 12
-                                    end -- fill_minzoom 11
-                                end -- fill_minzoom 10
-                            end -- fill_minzoom 9
-                        end -- fill_minzoom 8
-                    end -- fill_minzoom 7, 8
-                end -- fill_minzoom 7, 7
-
-                write_polygon_and_centroid_2( "land2", passedt, "landuse_", passedt.landuse, fill_minzoom, name_minzoom )
+                set_way_area_name_and_fill_minzoom_military( passedt )
+                write_polygon_and_centroid_2( "land2", passedt, "landuse_", passedt.landuse, passedt.fill_minzoom, passedt.name_minzoom )
 
 -- ----------------------------------------------------------------------------
 -- We've just written "landuse=military" out to land2, but as that's just an
@@ -4672,7 +4628,7 @@ function append_ref_etc( passedt )
 end -- function append_ref_etc( passedt )
 
 
-function set_way_area_name_and_fill_minzoom( passedt )
+function set_way_area_name_and_fill_minzoom_sea( passedt )
     if ( passedt.way_area > 20000000000 ) then
         passedt.fill_minzoom = 2                                 -- North Sea
         passedt.name_minzoom = 2
@@ -4730,7 +4686,109 @@ function set_way_area_name_and_fill_minzoom( passedt )
             end -- passedt.fill_minzoom 6
         end -- passedt.fill_minzoom 5
     end -- passedt.fill_minzoom 2
-end -- set_way_area_name_and_fill_minzoom( passedt )
+end -- set_way_area_name_and_fill_minzoom_sea( passedt )
+
+
+function set_way_area_name_and_fill_minzoom_military( passedt )
+    if ( passedt.way_area > 150000000 ) then
+        passedt.fill_minzoom = 7                                     -- MoD Shoeburyness  #11/51.5830/0.9635
+        passedt.name_minzoom = 7
+    else
+        if ( passedt.way_area > 50000000 ) then
+            passedt.fill_minzoom = 7                                 -- Warcop Training Area  #12/54.5946/-2.3219
+            passedt.name_minzoom = 8
+        else
+            if ( passedt.way_area > 25000000 ) then          -- RAF Holbeach Air Weapons Range  #12/52.8831/0.1589
+                passedt.fill_minzoom = 8
+                passedt.name_minzoom = 9
+            else
+                if ( passedt.way_area > 2100000 ) then       -- Barden Moor  #13/54.37313/-1.77059
+                    passedt.fill_minzoom = 9                         -- Linton on Ouse  #11/54.0191/-1.1459
+                    passedt.name_minzoom = 10
+                else
+                    if ( passedt.way_area > 600000 ) then    -- RAF Digby #15/53.09978/-0.44352
+                        passedt.fill_minzoom = 10
+                        passedt.name_minzoom = 11
+                    else
+                        if ( passedt.way_area > 300000 ) then  -- RAF Fylingdales  #15/54.35919/-0.66785
+                            passedt.fill_minzoom = 10
+                            passedt.name_minzoom = 12
+                        else
+                            if ( passedt.way_area > 60000 ) then   -- GCHQ Scarborough  #17/54.267006/-0.446328
+                                passedt.fill_minzoom = 11
+                                passedt.name_minzoom = 13
+                            else
+                                if ( passedt.way_area > 6000 ) then   -- Tunbridge Wells TA Centre  #18/51.148519/0.260879
+                                    passedt.fill_minzoom = 13
+                                    passedt.name_minzoom = 14
+                                else
+-- ----------------------------------------------------------------------------
+-- 14 is the catch-all minzoom
+-- If there is a "sqkm" value set, use that to determine passedt.name_minzoom.
+-- It will end up at 14 if there isn't.
+-- ----------------------------------------------------------------------------
+                                    passedt.fill_minzoom = 14
+                                    set_sqkm_name_minzoom( passedt )
+                                end -- fill_minzoom 13
+                            end -- fill_minzoom 12
+                        end -- fill_minzoom 11
+                    end -- fill_minzoom 10
+                end -- fill_minzoom 9
+            end -- fill_minzoom 8
+        end -- fill_minzoom 7, 8
+    end -- fill_minzoom 7, 7
+end -- set_way_area_name_and_fill_minzoom_military( passedt )
+
+
+function set_way_area_name_and_fill_minzoom_tourism( passedt )
+    if ( passedt.way_area > 150000000 ) then
+        passedt.fill_minzoom = 7
+        passedt.name_minzoom = 7
+    else
+        if ( passedt.way_area > 50000000 ) then
+            passedt.fill_minzoom = 7                                 -- Warcop Training Area  #12/54.5946/-2.3219
+            passedt.name_minzoom = 8
+        else
+            if ( passedt.way_area > 25000000 ) then          -- RAF Holbeach Air Weapons Range  #12/52.8831/0.1589
+                passedt.fill_minzoom = 8
+                passedt.name_minzoom = 9
+            else
+                if ( passedt.way_area > 2100000 ) then       -- Barden Moor  #13/54.37313/-1.77059
+                    passedt.fill_minzoom = 9                         -- Linton on Ouse  #11/54.0191/-1.1459
+                    passedt.name_minzoom = 10
+                else
+                    if ( passedt.way_area > 600000 ) then    -- RAF Digby #15/53.09978/-0.44352
+                        passedt.fill_minzoom = 10
+                        passedt.name_minzoom = 11
+                    else
+                        if ( passedt.way_area > 300000 ) then  -- RAF Fylingdales  #15/54.35919/-0.66785
+                            passedt.fill_minzoom = 10
+                            passedt.name_minzoom = 12
+                        else
+                            if ( passedt.way_area > 60000 ) then   -- GCHQ Scarborough  #17/54.267006/-0.446328
+                                passedt.fill_minzoom = 11
+                                passedt.name_minzoom = 13
+                            else
+                                if ( passedt.way_area > 6000 ) then   -- Tunbridge Wells TA Centre  #18/51.148519/0.260879
+                                    passedt.fill_minzoom = 13
+                                    passedt.name_minzoom = 14
+                                else
+-- ----------------------------------------------------------------------------
+-- 14 is the catch-all minzoom
+-- If there is a "sqkm" value set, use that to determine passedt.name_minzoom.
+-- It will end up at 14 if there isn't.
+-- ----------------------------------------------------------------------------
+                                    passedt.fill_minzoom = 14
+                                    set_sqkm_name_minzoom( passedt )
+                                end -- fill_minzoom 13
+                            end -- fill_minzoom 12
+                        end -- fill_minzoom 11
+                    end -- fill_minzoom 10
+                end -- fill_minzoom 9
+            end -- fill_minzoom 8
+        end -- fill_minzoom 7, 8
+    end -- fill_minzoom 7, 7
+end -- set_way_area_name_and_fill_minzoom_tourism( passedt )
 
 
 function set_sqkm_name_minzoom( passedt )
