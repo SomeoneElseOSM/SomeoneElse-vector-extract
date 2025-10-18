@@ -37,6 +37,10 @@ sudo -u ${local_filesystem_user} git pull
 #
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display
 sudo -u ${local_filesystem_user} git checkout resources/svwd06_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01cy_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01en_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01ga_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01gd_style.json
 sudo -u ${local_filesystem_user} git pull
 #
 #
@@ -56,6 +60,27 @@ cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/
 chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json 
 #
 #
+# Create the svwd01cy style for Welsh from svwd01
+#
+cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json | sed "s/{name}/{name_cy}/" > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01cy_style.json 
+chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01cy_style.json
+#
+# Create the svwd01en style for English from svwd01
+#
+cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json | sed "s/{name}/{name_en}/" > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01en_style.json 
+chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01en_style.json 
+#
+# Create the svwd01ga style for Irish from svwd01
+#
+cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json | sed "s/{name}/{name_ga}/" > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01ga_style.json 
+chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01ga_style.json 
+#
+# Create the svwd01gd style for Scots Gaelic from svwd01
+#
+cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json | sed "s/{name}/{name_gd}/" > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01gd_style.json 
+chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01gd_style.json 
+#
+#
 # Load the svwd01 style into apache
 #
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
@@ -63,6 +88,22 @@ sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into
 # Load the svwd06 style into apache
 #
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd06 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+# Load the svwd01cy style into apache
+#
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01cy https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01cy_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+# Load the svwd01en style into apache
+#
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01en https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01en_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+# Load the svwd01ga style into apache
+#
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01ga https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01ga_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+# Load the svwd01gd style into apache
+#
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01gd https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01gd_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
 #
 #
 # Update the documentation

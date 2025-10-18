@@ -1285,7 +1285,10 @@ function update_table( passedt )
     passedt.munro = Find("munro")
     passedt.name = Find("name")
     passedt["name:absent"] = Find("name:absent")
+    passedt["name:cy"] = Find("name:cy")
     passedt["name:en"] = Find("name:en")
+    passedt["name:ga"] = Find("name:ga")
+    passedt["name:gd"] = Find("name:gd")
     passedt["name:historic"] = Find("name:historic")
     passedt["name:left"] = Find("name:left")
     passedt["name:right"] = Find("name:right")
@@ -4636,6 +4639,26 @@ function append_name( passedt )
     if (( passedt.name ~= nil )   and
         ( passedt.name ~= ""  ))  then
         Attribute( "name", passedt.name )
+    end
+
+    if (( passedt["name:cy"] ~= nil )   and
+        ( passedt["name:cy"] ~= ""  ))  then
+        Attribute( "name_cy", passedt["name:cy"] )
+    end
+
+    if (( passedt["name:en"] ~= nil )   and
+        ( passedt["name:en"] ~= ""  ))  then
+        Attribute( "name_en", passedt["name:en"] )
+    end
+
+    if (( passedt["name:ga"] ~= nil )   and
+        ( passedt["name:ga"] ~= ""  ))  then
+        Attribute( "name_ga", passedt["name:ga"] )
+    end
+
+    if (( passedt["name:gd"] ~= nil )   and
+        ( passedt["name:gd"] ~= ""  ))  then
+        Attribute( "name_gd", passedt["name:gd"] )
     end
 end -- function append_name( passedt )
 
