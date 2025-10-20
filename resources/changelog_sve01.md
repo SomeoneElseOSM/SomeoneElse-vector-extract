@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Made the maxzoom associated with `tourism=attraction` depend on `way_area`.
+Made the maxzoom associated with `military=barracks` depend on `way_area`.
 
 ## 18/10/2025
 Ensure all named things have something in name:cy, name:en, name:ga and name:gd

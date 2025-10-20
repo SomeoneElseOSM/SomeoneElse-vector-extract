@@ -3600,7 +3600,8 @@ end -- render_leisure_land1()
 
 function render_military_land1( passedt )
     if ( passedt.military == "barracks" ) then
-        write_polygon_and_centroid( "land1", passedt, "military_", passedt.military, 9 )
+        set_way_area_name_and_fill_minzoom_military( passedt )
+        write_polygon_and_centroid_2( "land1", passedt, "military_", passedt.military, passedt.fill_minzoom, passedt.name_minzoom )
     else
         render_natural_land1( passedt )
     end
