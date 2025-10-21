@@ -3577,6 +3577,7 @@ function render_leisure_land1( passedt )
 -- written as part of the name feature.
 -- ----------------------------------------------------------------------------
                             if (( passedt.leisure == "bandstand"          ) or
+                                ( passedt.leisure == "outdoor_seating"    ) or
                                 ( passedt.leisure == "bleachers"          ) or
                                 ( passedt.leisure == "fitness_station"    ) or
                                 ( passedt.leisure == "picnic_table"       ) or
