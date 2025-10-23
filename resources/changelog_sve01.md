@@ -6,6 +6,7 @@ Made the maxzoom associated with `tourism=attraction` depend on `way_area`.
 Made the maxzoom associated with `military=barracks` depend on `way_area`.
 Show an icon for outdoor seating areas.
 Extract manholes at high zoom levels.
+Treat `man_made=shooting_butt` as grouse butts.
 
 ## 18/10/2025
 Ensure all named things have something in name:cy, name:en, name:ga and name:gd
