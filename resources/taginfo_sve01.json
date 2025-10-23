@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251018T183200Z",
+  "data_updated": "20251023T010300Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2048,6 +2048,7 @@
     { "key": "man_made", "value": "lake", "description": "Extracted as water" },
     { "key": "man_made", "value": "levee", "description": "Used to detect embankments, which may have highways on them or not" },
     { "key": "man_made", "value": "lighthouse", "description": "Most man-made items are extracted" },
+    { "key": "man_made", "value": "manhole", "description": "Extracted at high zoom levels" },
     { "key": "man_made", "value": "marker", "description": "Extracted as aerial pipeline marker" },
     { "key": "man_made", "value": "marker_post", "description": "Handled as barrier=bollard" },
     { "key": "man_made", "value": "mast", "description": "Most man-made items are extracted" },
