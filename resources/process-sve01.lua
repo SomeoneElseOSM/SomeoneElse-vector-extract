@@ -2884,6 +2884,7 @@ function render_man_made_land1( passedt )
                         ( passedt.man_made == "churchspire"              ) or
                         ( passedt.man_made == "churchtower"              ) or
                         ( passedt.man_made == "clockface"                ) or
+                        ( passedt.man_made == "dovecote"                 ) or
                         ( passedt.man_made == "clockpedestal"            ) or
                         ( passedt.man_made == "clocktower"               ) or
                         ( passedt.man_made == "defensivetower"           ) or
