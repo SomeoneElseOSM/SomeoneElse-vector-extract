@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251028T002400Z",
+  "data_updated": "20251028T235800Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2080,6 +2080,7 @@
     { "key": "man_made", "value": "reservoir_covered", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "satellite_dish", "description": "Most man-made items are handled" },
     { "key": "man_made", "value": "sewage_works", "description": "Synonym for wastewater_plant" },
+    { "key": "man_made", "value": "shaft", "description": "Shown like `manhole`, extracted at high zoom levels" },
     { "key": "man_made", "value": "shooting_butt", "description": "Detect grouse butts" },
     { "key": "man_made", "value": "signal_beacon", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "signpost", "description": "Handled as information=guidepost" },
