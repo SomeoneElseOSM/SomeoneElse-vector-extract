@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251028T235800Z",
+  "data_updated": "20251029T204300Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1521,6 +1521,7 @@
     { "key": "highway", "value": "emergency_bay", "description": "Extracted as private parking" },
     { "key": "highway", "value": "escape", "description": "Extracted as access=destination service road" },
     { "key": "highway", "value": "footway", "description": "Extracted as narrow path based on designation" },
+    { "key": "highway", "value": "ladder", "description": "Ways extracted as steps" },
     { "key": "highway", "value": "living_street", "description": "Extracted as living_street" },
     { "key": "highway", "value": "living_street_link", "description": "Not an expected value in OSM data.  extracted as living_street" },
     { "key": "highway", "value": "milestone", "description": "Extracted as milestone" },

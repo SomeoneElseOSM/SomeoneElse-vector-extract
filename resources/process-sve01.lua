@@ -691,6 +691,13 @@ function way_function()
    end
 
 -- ----------------------------------------------------------------------------
+-- Treat ladders that have been mapped as ways as steps.
+-- ----------------------------------------------------------------------------
+   if ( wayt.highway == "ladder" ) then
+      wayt.highway = "steps"
+   end
+
+-- ----------------------------------------------------------------------------
 -- (end of the way-specific code)
 --
 -- Linear transportation layer
