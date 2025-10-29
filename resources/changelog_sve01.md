@@ -10,6 +10,7 @@ Treat `man_made=shooting_butt` as grouse butts.
 Treat `man_made=dovecote` as either historic or non-historic dovecotes.
 Treat `man_made=shaft` as manholes.
 Extract `highway=ladder` ways as `steps`.
+Treat objects tagged with `crossing` and some other tag with a semicolon as something appropriate.
 
 ## 18/10/2025
 Ensure all named things have something in name:cy, name:en, name:ga and name:gd
