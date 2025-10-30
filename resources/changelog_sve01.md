@@ -12,6 +12,7 @@ Treat `man_made=shaft` as manholes.
 Extract `highway=ladder` ways as `steps`.
 Treat objects tagged with `crossing` and some other tag with a semicolon as something appropriate.
 Treat `highway=wheelwash` as footwear decontamination.
+Treat bus stops with semicolons in as bus stops.
 
 ## 18/10/2025
 Ensure all named things have something in name:cy, name:en, name:ga and name:gd
