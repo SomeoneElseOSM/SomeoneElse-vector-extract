@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251029T204300Z",
+  "data_updated": "20251030T012900Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1564,6 +1564,7 @@
     { "key": "highway", "value": "turning_loop", "description": "Treated as turning circle on nodes; driveway on ways" },
     { "key": "highway", "value": "unclassified", "description": "Treated as unclassified" },
     { "key": "highway", "value": "unclassified_link", "description": "Not an expected value in OSM data.  Treated as unclassified" },
+    { "key": "highway", "value": "wheelwash", "description": "Treated as `man_made=footwear_decontamination`" },
     { "key": "highway_authority_ref", "description": "Indicates an unsigned ref" },
     { "key": "highway_ref", "description": "Indicates an unsigned ref" },
     { "key": "historic", "description": "Various historic items extracted.  Often another OSM tag is removed." },
@@ -2034,7 +2035,7 @@
     { "key": "man_made", "value": "filter_bed", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "filtration_bed", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "flagpole", "description": "Extracted as a flagpole, military or otherwise" },
-    { "key": "man_made", "value": "footwear_decontamination", "description": "Extracted as black shallow dish" },
+    { "key": "man_made", "value": "footwear_decontamination", "description": "Extracted as unique value" },
     { "key": "man_made", "value": "fuel_pump", "description": "Most man-made items are handled" },
     { "key": "man_made", "value": "gantry", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "gas_station", "description": "Most man-made items are extracted" },
