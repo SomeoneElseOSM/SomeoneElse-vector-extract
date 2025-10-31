@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 31/10/2025
 Made the maxzoom associated with `tourism=attraction` depend on `way_area`.
 Made the maxzoom associated with `military=barracks` depend on `way_area`.
 Show an icon for outdoor seating areas.
