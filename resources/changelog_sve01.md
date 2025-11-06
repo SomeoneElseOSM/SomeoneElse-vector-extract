@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Handle more synonyms for `level_crossing`.
+
 ## 04/11/2025
 Rewrote the "highway crossing" logic to be more tolerant of the bizarre tag combinations that now circulate in OSM.  The raster and vector rendering code expects `highway=crossing` or `highway=traffic_signals`.  The new code detects various semicolon combinations, and then (for something that isn't already some other sort of `highway`, `railway` or `disused`, checks a few other keys for known good values.  It then sets appropriate ones to `traffic_signals` and of the ones left checks for key/value combinations that indicate a _real_ crossing rather than an "informal way to cross a road with no infrastructure".
 
