@@ -3991,7 +3991,8 @@ function render_tourism_land1( passedt )
             if (( passedt.tourism == "camp_site"    ) or
                 ( passedt.tourism == "caravan_site" ) or
                 ( passedt.tourism == "theme_park"   )) then
-                write_polygon_and_centroid( "land1", passedt, "tourism_", passedt.tourism, 12 )
+                set_way_area_name_and_fill_minzoom_tourism( passedt )
+                write_polygon_and_centroid_2( "land1", passedt, "tourism_", passedt.tourism, passedt.fill_minzoom, passedt.name_minzoom )
             else
 -- ----------------------------------------------------------------------------
 -- Most zoom 14 tourist things tend to be just points, so we don't extract the
