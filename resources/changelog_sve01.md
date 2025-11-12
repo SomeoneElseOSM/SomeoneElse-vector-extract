@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract fill and name of theme parks at varying zoom levels depending on size.
+Extract `area:highway=service` as service areas.
 
 ## 08/11/2025
 Handle more synonyms for `level_crossing`.

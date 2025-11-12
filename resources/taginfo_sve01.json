@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251104T220402Z",
+  "data_updated": "20251112T012702Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -399,7 +399,8 @@
     { "key": "area", "description": "Drop some highway areas" },
     { "key": "area", "value": "yes", "description": "Detect and don't extract some area highways" },
     { "key": "area:aeroway", "description": "Used as part of aeroway processing, but not extracted." },
-    { "key": "area:highway", "description": "Extract traffic islands as kerbs" },
+    { "key": "area:highway", "description": "Extract traffic islands as kerbs, and service areas" },
+    { "key": "area:highway", "value": "service", "description": "Extract as a service area" },
     { "key": "area:highway", "value": "traffic_island", "description": "Extracted as a kerb" },
     { "key": "artwork_subject", "description": "Detect penguins" },
     { "key": "artwork_subject", "value": "penguins", "description": "Detect penguins" },
