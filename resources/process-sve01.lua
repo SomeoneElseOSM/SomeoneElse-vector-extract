@@ -2985,15 +2985,16 @@ end -- render_office_land1()
 -- All closed highway=pedestrian and highway=platform are assumed to be areas, 
 -- regardless of any area tag.  There are some "area=no" examples, but these
 -- seem to be mistaggings.
--- Closed highway=pathnarrow and highway=service are assumed to be areas, 
--- only if area=yes tag.
+-- Closed highway=pathnarrow, highway=pathwide and highway=service are assumed
+-- to be areas, only if area=yes tag.
 -- ----------------------------------------------------------------------------
 function render_highway_land1( passedt )
     if (((  passedt.highway == "pedestrian"  )  and
          (  passedt.area    ~= "no"          )  and
          (  passedt.is_closed                )) or
         ((( passedt.highway == "service"    )   or
-          ( passedt.highway == "pathnarrow" ))  and
+          ( passedt.highway == "pathnarrow" )   or
+          ( passedt.highway == "pathwide"   ))  and
          (  passedt.area    == "yes"         )  and
          (  passedt.is_closed                ))) then
         write_polygon_and_centroid( "land1", passedt, "highway_", passedt.highway, 12 )
