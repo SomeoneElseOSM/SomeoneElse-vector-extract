@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251112T012702Z",
+  "data_updated": "20251120T233702Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2351,6 +2351,7 @@
     { "key": "natural", "value": "earth_bank", "description": "Treated as a type of embankment" },
     { "key": "natural", "value": "embankment", "description": "Treated as a synonym for man_made=embankment" },
     { "key": "natural", "value": "fell", "description": "Various natural features extracted" },
+    { "key": "natural", "value": "fen", "description": "Treated as place=locality" },
     { "key": "natural", "value": "fishing_bank", "description": "Treated as a place=locality" },
     { "key": "natural", "value": "floodplain", "description": "Various natural features extracted" },
     { "key": "natural", "value": "flower_bed", "description": "Synonym for leisure=garden, if no other appropriate tag." },
