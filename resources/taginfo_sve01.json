@@ -2343,6 +2343,7 @@
     { "key": "natural", "value": "cape", "description": "Treated as a place=locality" },
     { "key": "natural", "value": "cave_entrance", "description": "Various natural features extracted" },
     { "key": "natural", "value": "cirque", "description": "Treated as a place=locality" },
+    { "key": "natural", "value": "clearing", "description": "Treated as ground" },
     { "key": "natural", "value": "cliff", "description": "Various natural features extracted" },
     { "key": "natural", "value": "creek", "description": "Treated as a place=locality" },
     { "key": "natural", "value": "desert", "description": "Written into 'land1' or 'land2' at minzoom 7" },
