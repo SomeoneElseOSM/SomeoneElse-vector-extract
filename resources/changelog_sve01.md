@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Show `landuse=institutional` as `landuse=commercial`.
+Show `landuse=institutional` and `landuse=service` as `landuse=commercial`.
 
 ## 21/11/2025
 Extract fill and name of theme parks at varying zoom levels depending on size.
