@@ -3899,24 +3899,25 @@ end -- render_natural_land1()
 -- barriers already
 -- ----------------------------------------------------------------------------
 function render_barrier_land1( passedt )
-    if ((  passedt.barrier == "cattle_grid"     ) or
-        (  passedt.barrier == "cycle_barrier"   ) or
-        (  passedt.barrier == "gate"            ) or
-        (  passedt.barrier == "gate_locked"     ) or
-        (  passedt.barrier == "horse_stile"     ) or
-        (  passedt.barrier == "kissing_gate"    ) or
-        (  passedt.barrier == "dog_gate_stile"  ) or
-        (  passedt.barrier == "stepping_stones" ) or
-        (  passedt.barrier == "stile"           ) or
-        (  passedt.barrier == "block"           ) or
-        (  passedt.barrier == "bollard"         ) or
-        (  passedt.barrier == "lift_gate"       ) or
-        (  passedt.barrier == "toll_booth"      ) or
-        (  passedt.barrier == "toll_gantry"     ) or
-        (  passedt.barrier == "door"            ) or
-        (( passedt.barrier == "hedge"          )  and
-         ( passedt.is_closed                   )  and
-         ( passedt.area    == "yes"            ))) then
+    if ((  passedt.barrier == "cattle_grid"       ) or
+        (  passedt.barrier == "cycle_barrier"     ) or
+        (  passedt.barrier == "gate"              ) or
+        (  passedt.barrier == "gate_locked"       ) or
+        (  passedt.barrier == "horse_stile"       ) or
+        (  passedt.barrier == "kissing_gate"      ) or
+        (  passedt.barrier == "dog_gate_stile"    ) or
+        (  passedt.barrier == "stepping_stones"   ) or
+        (  passedt.barrier == "stile"             ) or
+        (  passedt.barrier == "block"             ) or
+        (  passedt.barrier == "bollard"           ) or
+        (  passedt.barrier == "lift_gate"         ) or
+        (  passedt.barrier == "height_restrictor" ) or
+        (  passedt.barrier == "toll_booth"        ) or
+        (  passedt.barrier == "toll_gantry"       ) or
+        (  passedt.barrier == "door"              ) or
+        (( passedt.barrier == "hedge"            )  and
+         ( passedt.is_closed                     )  and
+         ( passedt.area    == "yes"              ))) then
         Layer( "land1", true )
         Attribute( "class", "barrier_" .. passedt.barrier )
         append_name( passedt )
