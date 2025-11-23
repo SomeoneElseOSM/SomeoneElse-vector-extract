@@ -2426,6 +2426,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "cinema"                      ) or
                         ( passedt.amenity == "fire_station"                ) or
                         ( passedt.amenity == "lifeboat"                    ) or
+                        ( passedt.amenity == "loading_dock"                ) or
                         ( passedt.amenity == "fuel"                        ) or
                         ( passedt.amenity == "fuel_e"                      ) or
                         ( passedt.amenity == "fuel_h"                      ) or

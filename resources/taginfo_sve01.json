@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251122T233302Z",
+  "data_updated": "20251123T165902Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -247,6 +247,7 @@
     { "key": "amenity", "value": "library", "description": "Libraries: If in an old phone box, display as such" },
     { "key": "amenity", "value": "lifeboat", "description": "Lifeboats" },
     { "key": "amenity", "value": "lifeboat_station", "description": "Synonym for office=nonspecific" },
+    { "key": "amenity", "value": "loading_dock", "description": "Loading docks" },
     { "key": "amenity", "value": "lost_property", "description": "Extracted as an office" },
     { "key": "amenity", "value": "lost_property_office", "description": "Extracted as an office" },
     { "key": "amenity", "value": "lottery", "description": "Extracted as gambling shop" },

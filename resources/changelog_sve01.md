@@ -6,6 +6,7 @@ Extract `landuse=institutional`, `landuse=service` and `landuse=utility` as `lan
 Extract `barrier=height_restrictor`.
 Extract point `barrier=planter` as bollards, lines as walls, areas walls around grass.
 Extract `barrier=handrail`.
+Extract `amenity=loading_dock`.
 
 ## 21/11/2025
 Extract fill and name of theme parks at varying zoom levels depending on size.
