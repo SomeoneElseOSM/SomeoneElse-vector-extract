@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Show `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
+Show point `barrier=planter` as bollards, lines as walls, areas walls around grass.
 
 ## 21/11/2025
 Extract fill and name of theme parks at varying zoom levels depending on size.

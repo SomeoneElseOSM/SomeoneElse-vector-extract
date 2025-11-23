@@ -119,7 +119,9 @@ function node_function()
        ( nodet.barrier  == "gate_post"      ) or
        ( nodet.man_made == "gate_post"      ) or
        ( nodet.man_made == "gatepost"       ) or
-       ( nodet.barrier  == "pole"           )) then
+       ( nodet.barrier  == "pole"           ) or
+       ( nodet.barrier  == "planter"        ) or
+       ( nodet.man_made == "planter"        )) then
       nodet.barrier = "bollard"
    end
 
@@ -487,6 +489,15 @@ function way_function()
        ( wayt.barrier == "v_stile"         ) or
        ( wayt.barrier == "cycle_barrier"   )) then
       wayt.barrier = "fence"
+   end
+
+   if (( wayt.barrier  == "planter"   ) or
+       ( wayt.man_made == "planter"   )) then
+      wayt.barrier = "wall"
+
+      if ( wayt.is_closed ) then
+         wayt.landuse = "grass"
+      end
    end
 
    if (( wayt.public_transport == "platform" ) and
