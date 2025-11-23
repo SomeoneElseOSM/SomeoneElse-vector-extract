@@ -449,6 +449,7 @@
     { "key": "barrier", "value": "guard_rail", "description": "Extracted as a fence" },
     { "key": "barrier", "value": "haha", "description": "Extracted as wall" },
     { "key": "barrier", "value": "hampshire_gate", "description": "Extracted as a gate or locked gate if locked" },
+    { "key": "barrier", "value": "handrail", "description": "Extracted as fence" },
     { "key": "barrier", "value": "hedge", "description": "Extracted as a green line" },
     { "key": "barrier", "value": "hedge;fence", "description": "Extracted as hedge" },
     { "key": "barrier", "value": "height_restrictor", "description": "Shown as a height restrictor" },

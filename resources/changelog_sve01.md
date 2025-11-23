@@ -2,13 +2,15 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Show `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
-Show point `barrier=planter` as bollards, lines as walls, areas walls around grass.
+Extract `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
+Extract `barrier=height_restrictor`.
+Extract point `barrier=planter` as bollards, lines as walls, areas walls around grass.
+Extract `barrier=handrail`.
 
 ## 21/11/2025
 Extract fill and name of theme parks at varying zoom levels depending on size.
 Extract `area:highway=service` as service areas.
-Show `natural=clearing` as `man_made=pier` (essentially, "ground").
+Extract `natural=clearing` as `man_made=pier` (essentially, "ground").
 
 ## 08/11/2025
 Handle more synonyms for `level_crossing`.
@@ -19,7 +21,7 @@ Rewrote the "highway crossing" logic to be more tolerant of the bizarre tag comb
 ## 31/10/2025
 Made the maxzoom associated with `tourism=attraction` depend on `way_area`.
 Made the maxzoom associated with `military=barracks` depend on `way_area`.
-Show an icon for outdoor seating areas.
+Extract outdoor seating areas.
 Extract manholes at high zoom levels.
 Treat `man_made=shooting_butt` as grouse butts.
 Treat `man_made=dovecote` as either historic or non-historic dovecotes.

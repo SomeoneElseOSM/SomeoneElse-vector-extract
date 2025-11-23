@@ -487,7 +487,8 @@ function way_function()
        ( wayt.barrier == "chain"           ) or
        ( wayt.barrier == "stile"           ) or
        ( wayt.barrier == "v_stile"         ) or
-       ( wayt.barrier == "cycle_barrier"   )) then
+       ( wayt.barrier == "cycle_barrier"   ) or
+       ( wayt.barrier == "handrail"        )) then
       wayt.barrier = "fence"
    end
 
