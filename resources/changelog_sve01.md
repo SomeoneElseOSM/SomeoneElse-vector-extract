@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract `amenity=weighbridge`.
+
 ## 23/11/2025
 Extract `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
 Extract `barrier=height_restrictor`.
