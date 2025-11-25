@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251124T003002Z",
+  "data_updated": "20251125T213302Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -137,6 +137,7 @@
     { "key": "amenity", "value": "bingo", "description": "Extracted as leisure=nonspecific" },
     { "key": "amenity", "value": "bird_hide", "description": "Leisure amenities extracted" },
     { "key": "amenity", "value": "boat_rental", "description": "Extracted as leisure=nonspecific" },
+    { "key": "amenity", "value": "boat_storage", "description": "Boat storage" },
     { "key": "amenity", "value": "brothel", "description": "Extracted as leisure=nonspecific" },
     { "key": "amenity", "value": "building_society", "description": "Synonym for bank" },
     { "key": "amenity", "value": "bureau_de_change", "description": "Extracted as nonspecific shop" },
