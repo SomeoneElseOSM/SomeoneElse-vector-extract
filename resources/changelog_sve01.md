@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Extract `amenity=weighbridge`.
 Added icon for `amenity=boat_storage`.
+Handle more restricted `access` values (`employees`, etc.)
 
 ## 23/11/2025
 Extract `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
