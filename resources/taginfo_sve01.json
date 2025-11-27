@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251127T004702Z",
+  "data_updated": "20251127T103202Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2175,6 +2175,7 @@
     { "key": "marker", "value": "post", "description": "Extracted as aerial pipeline marker" },
     { "key": "marker", "value": "stone", "description": "Extracted as boundary stone" },
     { "key": "marker", "value": "yes", "description": "Potentially extracted as aerial pipeline marker" },
+    { "key": "maxlength", "description": "If set on a `waterway=turning_point` (canal winding hole), append to name" },
     { "key": "maxwidth", "description": "Depending on context, go down a road class. Also changes path to track and vice versa." },
     { "key": "meadow", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "agricultural", "description": "Extract agricultural meadows as 'farm grass'" },
@@ -3955,6 +3956,7 @@
     { "key": "waterway", "value": "canal", "description": "Written into 'waterway' at minzoom 11" },
     { "key": "waterway", "value": "cave_of_debouchement", "description": "Many water features extracted" },
     { "key": "waterway", "value": "construction", "description": "Treated as `derelict_canal`" },
+    { "key": "waterway", "value": "dam", "description": "Linear and area dams" },
     { "key": "waterway", "value": "derelict_canal", "description": "Written into 'waterway' at minzoom 11" },
     { "key": "waterway", "value": "disused_canal", "description": "Handled as per derelict_canal" },
     { "key": "waterway", "value": "ditch", "description": "Written into 'waterway' at minzoom 13" },
@@ -3983,6 +3985,7 @@
     { "key": "waterway", "value": "spillway", "description": "Not a current value in OSM data.  Treated as `waterway=drain`" },
     { "key": "waterway", "value": "stream", "description": "Written into 'waterway' based on intermittent at minzoom 13" },
     { "key": "waterway", "value": "tidal_channel", "description": "Handled as per 'stream'" },
+    { "key": "waterway", "value": "turning_point", "description": "Extracted as a winding hole" },
     { "key": "waterway", "value": "water_point", "description": "Extracted as drinking or nondrinking water" },
     { "key": "waterway", "value": "waterfall", "description": "Many water features extracted" },
     { "key": "waterway", "value": "weir", "description": "Written into 'waterway' at minzoom 14" },

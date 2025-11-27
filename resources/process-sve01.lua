@@ -1274,6 +1274,7 @@ function update_table( passedt )
     passedt.male = Find("male")
     passedt.man_made = Find("man_made")
     passedt.marker = Find("marker")
+    passedt.maxlength = Find("maxlength")
     passedt.maxwidth = Find("maxwidth")
     passedt.meadow = Find("meadow")
     passedt.megalith_type = Find("megalith_type")
@@ -2681,6 +2682,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "fire_hydrant"                ) or
                         ( passedt.amenity == "bbq"                         ) or
                         ( passedt.amenity == "waterway_access_point"       ) or
+                        ( passedt.amenity == "waterway_turning_point"      ) or
                         ( passedt.amenity == "pub"                         ) or
                         (( passedt.amenity  ~= nil                        )  and
                          ( passedt.amenity  ~= ""                         )  and

@@ -7,6 +7,7 @@ Added icon for `amenity=boat_storage`.
 Handle more restricted `access` values (`employees`, etc.)
 Handle `foot=customers` and `foot=destination` as `access=destination`.
 Handle `foot=permit` and others as `access=private`.
+Handle `waterway=turning_point` (canal winding holes).
 
 ## 23/11/2025
 Extract `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
