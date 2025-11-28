@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251127T103202Z",
+  "data_updated": "20251128T213102Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1429,6 +1429,9 @@
     { "key": "generator:method", "value": "wind", "description": "Detect wind turbines" },
     { "key": "generator:method", "value": "wind_turbine", "description": "Detect wind turbines" },
     { "key": "generator:source", "description": "Detect wind turbines" },
+    { "key": "generator:source", "value": "hydro", "description": "Detect hydro power generators" },
+    { "key": "generator:source", "value": "tidal", "description": "Detect tidal power generators" },
+    { "key": "generator:source", "value": "wave", "description": "Detect wave power generators" },
     { "key": "generator:source", "value": "wind", "description": "Detect wind turbines" },
     { "key": "geological", "description": "Detect palaeontological sites and glacial erratics" },
     { "key": "geological", "value": "glacial_erratic", "description": "Extracted as natural=rock, if not sport=climbing or climbing=boulder" },
@@ -1941,6 +1944,7 @@
     { "key": "leisure", "value": "adventure_park", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "amusement_arcade", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "bandstand", "description": "Extracted as unique value" },
+    { "key": "leisure", "value": "bathing_place", "description": "Treated as a place=locality" },
     { "key": "leisure", "value": "beach_resort", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "beer_garden", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "bike_park", "description": "Treated as a synonym of `landuse=recreation_ground`" },
