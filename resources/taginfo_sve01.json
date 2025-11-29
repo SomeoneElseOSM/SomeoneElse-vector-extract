@@ -1982,6 +1982,7 @@
     { "key": "leisure", "value": "nature_reserve", "description": "Written into 'land1' or 'land2' at minzoom 6; centroid for name written separately" },
     { "key": "leisure", "value": "outdoor_centre", "description": "Leisure amenities extracted" },
     { "key": "leisure", "value": "outdoor_seating", "description": "If grass, extracted as beer gardens" },
+    { "key": "leisure", "value": "paddling_pool", "description": "Shown as blue water with name" },
     { "key": "leisure", "value": "park", "description": "Written into 'land1' or 'land2' at minzoom 9; centroid for name written separately" },
     { "key": "leisure", "value": "picnic_table", "description": "Extracted as picnic table" },
     { "key": "leisure", "value": "pitch", "description": "Written into 'land1' or 'land2' at minzoom 9; centroid for name written separately" },

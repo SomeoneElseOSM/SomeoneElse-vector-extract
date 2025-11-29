@@ -11,6 +11,7 @@ Handle `waterway=turning_point` (canal winding holes).
 Handle `waterway=pressurised` as `man_made=pipeline`.
 Handle `waterway=junction`.
 Handle `leisure=bathing_place` as `place=locality`.
+Handle `leisure=paddling_pool` as water.
 
 ## 23/11/2025
 Extract `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
