@@ -1146,6 +1146,7 @@
     { "key": "designation", "value": "access_land", "description": "Areas extracted as nature reserves, highways extracted as public_footpath" },
     { "key": "designation", "value": "access_land;site_of_special_scientific_interest", "description": "Areas extracted as nature reserves" },
     { "key": "designation", "value": "adopted", "description": "Extracted as public highway" },
+    { "key": "designation", "value": "adopted_footway", "description": "Shown as public footpath" },
     { "key": "designation", "value": "adopted_highway", "description": "Extracted as public highway" },
     { "key": "designation", "value": "adopted_highway;public_footpath", "description": "Extracted as public highway" },
     { "key": "designation", "value": "area_of_outstanding_natural_beauty", "description": "Extracted as national park" },
