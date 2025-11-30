@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Append `maxheight` to height restrictors.
 Show a few more vending machine labels.
 Show historic mineshafts tagged with `historic=yes; type=mine_shaft`.
+Show `type=broad_leaf` as `leaf_type=broadleaved`.
 
 ## 29/11/2025
 Extract `amenity=weighbridge`.
