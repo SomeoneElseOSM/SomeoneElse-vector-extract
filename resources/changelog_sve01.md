@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Append `maxheight` to height restrictors.
+Show a few more vending machine labels.
 
 ## 29/11/2025
 Extract `amenity=weighbridge`.
