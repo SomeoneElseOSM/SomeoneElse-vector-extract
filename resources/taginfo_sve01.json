@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251128T213102Z",
+  "data_updated": "20251130T003002Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2181,6 +2181,7 @@
     { "key": "marker", "value": "post", "description": "Extracted as aerial pipeline marker" },
     { "key": "marker", "value": "stone", "description": "Extracted as boundary stone" },
     { "key": "marker", "value": "yes", "description": "Potentially extracted as aerial pipeline marker" },
+    { "key": "maxheight", "description": "If set on a `barrier=height_restrictor`, append to name" },
     { "key": "maxlength", "description": "If set on a `waterway=turning_point` (canal winding hole), append to name" },
     { "key": "maxwidth", "description": "Depending on context, go down a road class. Also changes path to track and vice versa." },
     { "key": "meadow", "description": "Extract agricultural meadows as 'farm grass'" },
