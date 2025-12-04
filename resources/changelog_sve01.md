@@ -7,6 +7,8 @@ Show a few more vending machine labels.
 Show historic mineshafts tagged with `historic=yes; type=mine_shaft`.
 Show `type=broad_leaf` as `leaf_type=broadleaved`.
 Treat `footway=crossing` as `footway=sidewalk` when suppressing name.
+Treat `shop=fan` as `shop=clothes` (as mainly replica kits).
+Treat `shop=country_store` etc. as `shop=pet_food` (a better match than the previous `furniture`).
 
 ## 29/11/2025
 Extract `amenity=weighbridge`.
@@ -20,7 +22,6 @@ Handle `waterway=junction`.
 Handle `leisure=bathing_place` as `place=locality`.
 Handle `leisure=paddling_pool` as water.
 Handle `designation=adopted_footway` as public footpaths.
-Treat `shop=fan` as `shop=clothes` (as mainly replica kits).
 
 ## 23/11/2025
 Extract `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
