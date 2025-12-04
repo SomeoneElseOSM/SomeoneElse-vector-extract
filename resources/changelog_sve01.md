@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Added support for a couple of 3d printing shops as nonspecific shops.
+
 ## 04/12/2025
 Append `maxheight` to height restrictors.
 Show a few more vending machine labels.

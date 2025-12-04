@@ -2897,6 +2897,8 @@
     { "key": "shelter_type", "value": "shopping_cart", "description": "Suppress some shelter types" },
     { "key": "shelter_type", "value": "trolley_park", "description": "Suppress some shelter types" },
     { "key": "shop", "description": "All shop objects written into 'poi' layer at minzoom 14" },
+    { "key": "shop", "value": "3d_printing", "description": "Handled as a nonspecific shop" },
+    { "key": "shop", "value": "3d_shop", "description": "Handled as a nonspecific shop" },
     { "key": "shop", "value": "abandoned", "description": "Various shops extracted" },
     { "key": "shop", "value": "accessories", "description": "Various shops extracted" },
     { "key": "shop", "value": "accountant", "description": "Various shops extracted" },
