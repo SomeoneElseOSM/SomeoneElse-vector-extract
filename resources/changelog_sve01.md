@@ -6,6 +6,7 @@ Added support for a couple of 3d printing shops as nonspecific shops.
 Handle `shop=saddlery` as nonspecific offices.
 Added `vape` as another synonym for `shop=e-cigarette`.
 Handle `shop=mobile_industrial_equipment` as nonspecific offices.
+Handle `shop=pasta` as fast food that serves pizza or italian food.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.

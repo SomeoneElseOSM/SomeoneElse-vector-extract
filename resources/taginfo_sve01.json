@@ -3357,6 +3357,7 @@
     { "key": "shop", "value": "paint", "description": "Various shops extracted" },
     { "key": "shop", "value": "party", "description": "Various shops extracted" },
     { "key": "shop", "value": "party_goods", "description": "Various shops extracted" },
+    { "key": "shop", "value": "pasta", "description": "Treated as fast food that serves pizza or italian food" },
     { "key": "shop", "value": "pastry", "description": "Various shops extracted" },
     { "key": "shop", "value": "patisserie", "description": "Various shops extracted" },
     { "key": "shop", "value": "pawnbroker", "description": "Various shops extracted" },
