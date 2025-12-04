@@ -9,6 +9,7 @@ Handle `shop=mobile_industrial_equipment` as nonspecific offices.
 Handle `shop=pasta` as fast food that serves pizza or italian food.
 Handle `shop=popup` as nonspecific shops.
 Handle `shop=joiners` as nonspecific offices.
+Handle `golf=water_hazard` as water.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.
