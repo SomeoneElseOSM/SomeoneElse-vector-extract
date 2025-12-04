@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Added support for a couple of 3d printing shops as nonspecific shops.
 Handle `shop=saddlery` as nonspecific offices.
+Added `vape` as another synonym for `shop=e-cigarette`.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.
