@@ -1448,6 +1448,7 @@
     { "key": "golf", "value": "driving_range", "description": "Extracted as pitch" },
     { "key": "golf", "value": "fairway", "description": "Extracted as garden" },
     { "key": "golf", "value": "green", "description": "Extracted as golf green" },
+    { "key": "golf", "value": "lateral_water_hazard", "description": "Treated as water" },
     { "key": "golf", "value": "path", "description": "Extracted as path" },
     { "key": "golf", "value": "pin", "description": "Extracted as golf pin" },
     { "key": "golf", "value": "practice", "description": "Extracted as garden" },

@@ -9,7 +9,7 @@ Handle `shop=mobile_industrial_equipment` as nonspecific offices.
 Handle `shop=pasta` as fast food that serves pizza or italian food.
 Handle `shop=popup` as nonspecific shops.
 Handle `shop=joiners` as nonspecific offices.
-Handle `golf=water_hazard` as water.
+Handle `golf=water_hazard` and `golf=lateral_water_hazard` as water.
 Handle `golf=clubhouse` as leisure facilities.
 
 ## 04/12/2025
