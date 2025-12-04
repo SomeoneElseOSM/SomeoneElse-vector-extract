@@ -9,6 +9,7 @@ Show `type=broad_leaf` as `leaf_type=broadleaved`.
 Treat `footway=crossing` as `footway=sidewalk` when suppressing name.
 Treat `shop=fan` as `shop=clothes` (as mainly replica kits).
 Treat `shop=country_store` etc. as `shop=pet_food` (a better match than the previous `furniture`).
+Treat `shop=cleaning_supplies` as a nonspecific shop.
 
 ## 29/11/2025
 Extract `amenity=weighbridge`.
