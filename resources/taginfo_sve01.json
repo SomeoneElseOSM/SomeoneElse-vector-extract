@@ -3212,7 +3212,6 @@
     { "key": "shop", "value": "hardware", "description": "Various shops extracted" },
     { "key": "shop", "value": "hardware_rental", "description": "Various shops extracted" },
     { "key": "shop", "value": "hat", "description": "Various shops extracted" },
-    { "key": "shop", "value": "hats", "description": "Various shops extracted" },
     { "key": "shop", "value": "headshop", "description": "Various shops extracted" },
     { "key": "shop", "value": "health", "description": "Various shops extracted" },
     { "key": "shop", "value": "health_and_beauty", "description": "Various shops extracted" },

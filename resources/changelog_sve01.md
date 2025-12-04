@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 04/12/2025
 Append `maxheight` to height restrictors.
 Show a few more vending machine labels.
 Show historic mineshafts tagged with `historic=yes; type=mine_shaft`.
@@ -10,6 +10,7 @@ Treat `footway=crossing` as `footway=sidewalk` when suppressing name.
 Treat `shop=fan` as `shop=clothes` (as mainly replica kits).
 Treat `shop=country_store` etc. as `shop=pet_food` (a better match than the previous `furniture`).
 Treat `shop=cleaning_supplies` as a nonspecific shop.
+Removed `shop=hats`; no longer in the data.
 
 ## 29/11/2025
 Extract `amenity=weighbridge`.
