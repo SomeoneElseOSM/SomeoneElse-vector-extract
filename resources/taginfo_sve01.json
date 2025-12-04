@@ -3120,6 +3120,7 @@
     { "key": "shop", "value": "ethnic", "description": "Various shops extracted" },
     { "key": "shop", "value": "fabric", "description": "Various shops extracted" },
     { "key": "shop", "value": "factory_outlet", "description": "Various shops extracted" },
+    { "key": "shop", "value": "fan", "description": "Shown as `shop=clothes` as mainly replica kits" },
     { "key": "shop", "value": "fancy_dress", "description": "Various shops extracted" },
     { "key": "shop", "value": "farm", "description": "Various shops extracted" },
     { "key": "shop", "value": "fashion", "description": "Various shops extracted" },

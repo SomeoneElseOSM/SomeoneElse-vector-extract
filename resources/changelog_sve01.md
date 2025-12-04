@@ -20,6 +20,7 @@ Handle `waterway=junction`.
 Handle `leisure=bathing_place` as `place=locality`.
 Handle `leisure=paddling_pool` as water.
 Handle `designation=adopted_footway` as public footpaths.
+Treat `shop=fan` as `shop=clothes` (as mainly replica kits).
 
 ## 23/11/2025
 Extract `landuse=institutional`, `landuse=service` and `landuse=utility` as `landuse=commercial`.
