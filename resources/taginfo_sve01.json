@@ -3305,6 +3305,7 @@
     { "key": "shop", "value": "milk", "description": "Various shops extracted" },
     { "key": "shop", "value": "minicab", "description": "Various shops extracted" },
     { "key": "shop", "value": "mirrors", "description": "Various shops extracted" },
+    { "key": "shop", "value": "mobile_industrial_equipment", "description": "Handled as `office=nonspecific`" },
     { "key": "shop", "value": "mobile_phone", "description": "Various shops extracted" },
     { "key": "shop", "value": "mobile_phone;e-cigarette", "description": "Synonym for mobile_phone" },
     { "key": "shop", "value": "mobile_phone_accessories", "description": "Synonym for mobile_phone" },
