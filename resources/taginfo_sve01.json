@@ -3394,6 +3394,7 @@
     { "key": "shop", "value": "plumbers_merchant", "description": "Various shops extracted" },
     { "key": "shop", "value": "plumbing", "description": "Various shops extracted" },
     { "key": "shop", "value": "plumbing_supplies", "description": "Various shops extracted" },
+    { "key": "shop", "value": "popup", "description": "Handled as nonspecific shops" },
     { "key": "shop", "value": "pottery", "description": "Extracted as a synonym for 'art'" },
     { "key": "shop", "value": "pound", "description": "Various shops extracted" },
     { "key": "shop", "value": "print", "description": "Various shops extracted" },
