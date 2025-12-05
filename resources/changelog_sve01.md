@@ -11,6 +11,7 @@ Handle `shop=popup` as nonspecific shops.
 Handle `shop=joiners` as nonspecific offices.
 Handle `golf=water_hazard` and `golf=lateral_water_hazard` as water.
 Handle `golf=clubhouse` as leisure facilities.
+Add `log_bridge` to list of bridges processed.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.
