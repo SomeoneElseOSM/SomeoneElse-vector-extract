@@ -4024,6 +4024,7 @@
     { "key": "waterway:historic", "description": "Handle disused version of tag" },
     { "key": "waterway:historic", "value": "canal", "description": "Disused canals are extracted as derelict canals" },
     { "key": "weather:radar", "description": "Include weather radar stations as radar towers" },
+    { "key": "website", "description": "Include website in name at high zooms on some objects" },
     { "key": "wetland", "description": "Modify wetland landuse value in 'land1' or 'land2'" },
     { "key": "wetland", "value": "bog", "description": "Extract different sorts of wetlands" },
     { "key": "wetland", "value": "mud", "description": "Modify wetland landuse to mud or tidal mud" },
