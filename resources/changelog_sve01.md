@@ -14,6 +14,7 @@ Handle `golf=clubhouse` as leisure facilities.
 Add `log_bridge` to list of bridges processed.
 Use `name` as `addr:name` on a number of `railway` features
 Fixed bug where some historic railway features were not procesed.
+All railway signal boxes are actually buildings.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.
