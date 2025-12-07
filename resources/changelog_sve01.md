@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 07/12/2025
 Added support for a couple of 3d printing shops as nonspecific shops.
 Handle `shop=saddlery` as nonspecific offices.
 Added `vape` as another synonym for `shop=e-cigarette`.
