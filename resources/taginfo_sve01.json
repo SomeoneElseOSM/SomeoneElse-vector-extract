@@ -1299,6 +1299,7 @@
     { "key": "emergency", "value": "water_rescue_station", "description": "Yet another tag used for coastguard huts etc." },
     { "key": "entrance", "description": "Extract main entrances" },
     { "key": "entrance", "value": "entrance", "description": "Detect building entrances" },
+    { "key": "entrance", "value": "gate", "description": "Treated as a synonym for `barrier=gate`" },
     { "key": "entrance", "value": "main", "description": "Extract main entrances" },
     { "key": "est_width", "description": "Estimated road width, used to adjust road categories" },
     { "key": "expressway", "description": "Decide if a road with a shoulder should be considered as having a sidewalk" },

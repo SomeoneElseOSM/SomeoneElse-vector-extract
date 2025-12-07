@@ -20,6 +20,7 @@ Handle `railway=water_tower` as `man_made=water_tower`.
 Handle `railway=escape_shaft` as `man_made=shaft`.
 Handle `railway=air_shaft` as yet another ventilation shaft synonym.
 Use `leaf_cycle` as a proxy for `leaf_type`.
+Handle `entrance=gate` as a synonym for `barrier=gate`.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.
