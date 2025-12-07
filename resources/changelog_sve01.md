@@ -17,6 +17,7 @@ Fixed bug where some historic railway features were not procesed.
 All railway signal boxes are actually buildings.
 Handle `railway=gantry` as `man_made=gantry`.
 Handle `railway=water_tower` as `man_made=water_tower`.
+Handle `railway=escape_shaft` as `man_made=shaft`.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.
