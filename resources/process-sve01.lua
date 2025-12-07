@@ -26,13 +26,13 @@
 require "shared_lua_vector"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
+node_keys = { "abandoned:railway", "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
               "barrier", "boundary", 
               "canoe", "climbing", "craft", 'defensive_works', 
 	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:man_made",
 	      "disused:military", "disused:pub", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
-              "emergency", "entrance", "ford", "geological", "golf", "harbour", "historic", 
-              "healthcare", "highway", "information", "junction", 
+              "emergency", "entrance", "ford", "geological", "golf", "harbour",
+              "healthcare", "highway", "historic", "historic:railway", "information", "junction", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
               "office", "outlet", "pipeline", "pitch", "place", 
