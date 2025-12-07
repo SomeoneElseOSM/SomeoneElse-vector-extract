@@ -16,6 +16,7 @@ Use `name` as `addr:name` on a number of `railway` features
 Fixed bug where some historic railway features were not procesed.
 All railway signal boxes are actually buildings.
 Handle `railway=gantry` as `man_made=gantry`.
+Handle `railway=water_tower` as `man_made=water_tower`.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.
