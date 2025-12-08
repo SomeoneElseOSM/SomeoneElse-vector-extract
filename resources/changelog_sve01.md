@@ -1,6 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Handle `traffic_calming=none` as `no`.
+Treat `tunnel=pipe` and `underpass` as tunnels.
+
 ## 07/12/2025
 Added support for a couple of 3d printing shops as nonspecific shops.
 Handle `shop=saddlery` as nonspecific offices.
@@ -21,6 +25,7 @@ Handle `railway=escape_shaft` as `man_made=shaft`.
 Handle `railway=air_shaft` as yet another ventilation shaft synonym.
 Use `leaf_cycle` as a proxy for `leaf_type`.
 Handle `entrance=gate` as a synonym for `barrier=gate`.
+Handle `traffic_calming=none` as `no`.
 
 ## 04/12/2025
 Append `maxheight` to height restrictors.
