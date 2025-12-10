@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Handle `traffic_calming=none` as `no`.
 Treat `tunnel=pipe` and `underpass` as tunnels.
+Treat `cycleway:both=separate` as "has something like a sidewalk".
 
 ## 07/12/2025
 Added support for a couple of 3d printing shops as nonspecific shops.

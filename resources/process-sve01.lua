@@ -1148,6 +1148,7 @@ function update_table( passedt )
     passedt["crossing:signals"] = Find("crossing:signals")
     passedt.cuisine = Find("cuisine")
     passedt.cycleway = Find("cycleway")
+    passedt["cycleway:both"] = Find("cycleway:both")
     passedt["dance:teaching"] = Find("dance:teaching")
     passedt.defensive_works = Find("defensive_works")
     passedt["demolished:amenity"] = Find("demolished:amenity")
@@ -1960,56 +1961,13 @@ function append_edge_etc( passedt )
 -- ----------------------------------------------------------------------------
 -- If there is a sidewalk, set "edge" to "sidewalk"
 -- ----------------------------------------------------------------------------
-    if ((   passedt.sidewalk == "both"                ) or 
-        (   passedt.sidewalk == "left"                ) or 
-        (   passedt.sidewalk == "mapped"              ) or 
-        (   passedt.sidewalk == "separate"            ) or 
-        (   passedt.sidewalk == "right"               ) or 
-        (   passedt.sidewalk == "shared"              ) or 
-        (   passedt.sidewalk == "yes"                 ) or
-        (   passedt["sidewalk:both"] == "separate"    ) or 
-        (   passedt["sidewalk:both"] == "yes"         ) or
-        (   passedt["sidewalk:left"] == "separate"    ) or 
-        (   passedt["sidewalk:left"] == "yes"         ) or
-        (   passedt["sidewalk:right"] == "separate"   ) or 
-        (   passedt["sidewalk:right"] == "yes"        ) or
-        (   passedt.footway  == "separate"            ) or 
-        (   passedt.footway  == "yes"                 ) or
-        ((( passedt.shoulder == "both"              )   or
-          ( passedt.shoulder == "left"              )   or 
-          ( passedt.shoulder == "right"             )   or 
-          ( passedt.shoulder == "yes"               )   or
-          ( passedt["shoulder:both"] == "yes"       )   or
-          ( passedt["shoulder:left"] == "yes"       )   or
-          ( passedt["shoulder:right"] == "yes"      )   or
-          ( passedt.hard_shoulder == "yes"          ))  and
-         (  passedt.expressway ~= "yes"              )  and
-         (  passedt.motorroad  ~= "yes"              )) or
-        (   passedt.cycleway == "track"               ) or
-        (   passedt.cycleway == "opposite_track"      ) or
-        (   passedt.cycleway == "yes"                 ) or
-        (   passedt.cycleway == "separate"            ) or
-        (   passedt.cycleway == "sidewalk"            ) or
-        (   passedt.cycleway == "sidepath"            ) or
-        (   passedt.cycleway == "segregated"          ) or
-        (   passedt.segregated == "yes"               ) or
-        (   passedt.segregated == "right"             )) then
+    if ( calculate_sidewalk_edge( passedt )) then
         Attribute("edge", "sidewalk")
     else
 -- ----------------------------------------------------------------------------
 -- If there is not a sidewalk but there is a verge, set "edge" to "verge"
 -- ----------------------------------------------------------------------------
-        if (( passedt.verge       == "both"     ) or
-            ( passedt.verge       == "left"     ) or
-            ( passedt.verge       == "separate" ) or
-            ( passedt.verge       == "right"    ) or
-            ( passedt.verge       == "yes"      ) or
-            ( passedt["verge:both"]  == "separate" ) or
-            ( passedt["verge:both"]  == "yes"      ) or
-            ( passedt["verge:left"]  == "separate" ) or
-            ( passedt["verge:left"]  == "yes"      ) or
-            ( passedt["verge:right"] == "separate" ) or
-            ( passedt["verge:right"] == "yes"      )) then
+        if ( calculate_verge_edge( passedt )) then
             Attribute("edge", "verge")
         else
 -- ----------------------------------------------------------------------------
