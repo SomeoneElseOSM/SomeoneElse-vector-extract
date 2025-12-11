@@ -3659,6 +3659,7 @@
     { "key": "sport", "value": "football;basketball", "description": "Extract 'soccer' value on sports pitches" },
     { "key": "sport", "value": "football;rugby", "description": "Extract 'soccer' value on sports pitches" },
     { "key": "sport", "value": "football;soccer", "description": "Extract 'soccer' value on sports pitches" },
+    { "key": "sport", "value": "gaelic_football", "description": "Show 'gaelic_games' icon on sports pitches" },
     { "key": "sport", "value": "gaelic_games", "description": "Extract 'gaelic_games' value on sports pitches" },
     { "key": "sport", "value": "gaelic_games;handball", "description": "Extract 'gaelic_games' value on sports pitches" },
     { "key": "sport", "value": "gaelic_games;soccer", "description": "Extract 'gaelic_games' value on sports pitches" },
