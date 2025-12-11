@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251208T203104Z",
+  "data_updated": "20251211T120705Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3651,8 +3651,6 @@
     { "key": "sport", "value": "cricket_nets;multi", "description": "Extracted as pitch, also extract 'cricket' value on sports pitches" },
     { "key": "sport", "value": "croquet", "description": "Extract 'croquet' value on sports pitches" },
     { "key": "sport", "value": "cycling", "description": "Extract 'cycling' value on sports pitches" },
-    { "key": "sport", "value": "cycling", "description": "Extract 'cycling' value on sports pitches" },
-    { "key": "sport", "value": "cycling;bmx", "description": "Extract 'cycling' value on sports pitches" },
     { "key": "sport", "value": "cycling;bmx", "description": "Extract 'cycling' value on sports pitches" },
     { "key": "sport", "value": "equestrian", "description": "Detect linear equestrian gallops;extract 'horse' value on sports pitches" },
     { "key": "sport", "value": "field_hockey", "description": "Extract 'hockey' value on sports pitches" },
@@ -3671,6 +3669,7 @@
     { "key": "sport", "value": "laser_tag", "description": "Used to classify and clarify many other tags" },
     { "key": "sport", "value": "long_jump", "description": "Extract 'athletics' value on sports pitches" },
     { "key": "sport", "value": "model_aerodrome", "description": "Used to classify and clarify many other tags" },
+    { "key": "sport", "value": "motocross", "description": "Tell leisure=track from highway=raceway" },
     { "key": "sport", "value": "motor", "description": "Tell leisure=track from highway=raceway" },
     { "key": "sport", "value": "motor;karting", "description": "Tell leisure=track from highway=raceway" },
     { "key": "sport", "value": "mtb", "description": "Extract 'cycling' value on sports pitches" },
