@@ -122,7 +122,8 @@ function node_function()
        ( nodet.barrier  == "pole"           ) or
        ( nodet.barrier  == "planter"        ) or
        ( nodet.man_made == "planter"        ) or
-       ( nodet.barrier  == "log"            )) then
+       ( nodet.barrier  == "log"            ) or
+       ( nodet.barrier  == "tree"           )) then
       nodet.barrier = "bollard"
    end
 

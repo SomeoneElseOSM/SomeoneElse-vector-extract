@@ -515,6 +515,7 @@
     { "key": "barrier", "value": "ticket_barrier", "description": "Extracted as a lift_gate" },
     { "key": "barrier", "value": "toll_booth", "description": "Extracted as a paying gate" },
     { "key": "barrier", "value": "traffic_island", "description": "Extracted as a fence" },
+    { "key": "barrier", "value": "tree", "description": "Points extracted as a bollard" },
     { "key": "barrier", "value": "turnstile", "description": "Extracted as a kissing_gate" },
     { "key": "barrier", "value": "tyres", "description": "Extracted as fence" },
     { "key": "barrier", "value": "v_stile", "description": "Nodes extracted as stile; ways as fence" },
