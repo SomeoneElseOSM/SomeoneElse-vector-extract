@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Handle linear `barrier=water_gate` as `fence`.
+Handle linear `barrier=water_gate` and `barrier=rope` as `fence`.
 
 ## 14/12/2025
 Handle `traffic_calming=none` as `no`.
