@@ -121,7 +121,8 @@ function node_function()
        ( nodet.man_made == "gatepost"       ) or
        ( nodet.barrier  == "pole"           ) or
        ( nodet.barrier  == "planter"        ) or
-       ( nodet.man_made == "planter"        )) then
+       ( nodet.man_made == "planter"        ) or
+       ( nodet.barrier  == "log"            )) then
       nodet.barrier = "bollard"
    end
 

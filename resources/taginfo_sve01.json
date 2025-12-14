@@ -473,6 +473,7 @@
     { "key": "barrier", "value": "kissing_gate", "description": "Extracted as a kissing_gate" },
     { "key": "barrier", "value": "kissing_gate;gate", "description": "Extracted as a kissing_gate" },
     { "key": "barrier", "value": "lift_gate", "description": "Extracted as a lift_gate" },
+    { "key": "barrier", "value": "log", "description": "Points extracted as a bollard" },
     { "key": "barrier", "value": "lych_gate", "description": "Extracted as a gate or locked gate if locked" },
     { "key": "barrier", "value": "lytch_gate", "description": "Extracted as a gate or locked gate if locked" },
     { "key": "barrier", "value": "motorcycle_barrier", "description": "Extracted as a cycle_barrier" },
