@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Handle linear `barrier=water_gate` as `fence`.
+
 ## 14/12/2025
 Handle `traffic_calming=none` as `no`.
 Treat `tunnel=pipe` and `underpass` as tunnels.

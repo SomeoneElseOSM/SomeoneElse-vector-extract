@@ -516,6 +516,7 @@
     { "key": "barrier", "value": "v_stile", "description": "Nodes extracted as stile; ways as fence" },
     { "key": "barrier", "value": "wall", "description": "Extracted as a thicker line; Castle walls extracted as citywalls" },
     { "key": "barrier", "value": "wall;fence", "description": "Extracted as wall" },
+    { "key": "barrier", "value": "water_gate", "description": "Extracted as fence" },
     { "key": "barrier", "value": "wicket_gate", "description": "Extracted as a gate or locked gate if locked" },
     { "key": "barrier", "value": "wire_fence", "description": "Extracted as a fence" },
     { "key": "barrier", "value": "wood_fence", "description": "Extracted as a fence" },
