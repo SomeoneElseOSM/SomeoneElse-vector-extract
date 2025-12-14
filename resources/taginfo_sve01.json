@@ -494,6 +494,7 @@
     { "key": "barrier", "value": "sally_port", "description": "Extracted as a gate or locked gate if locked" },
     { "key": "barrier", "value": "sea_wall", "description": "Extracted as wall" },
     { "key": "barrier", "value": "security_control", "description": "Extracted as a lift_gate" },
+    { "key": "barrier", "value": "sliding_gate", "description": "Extracted as a gate or locked gate if locked" },
     { "key": "barrier", "value": "snow_gate", "description": "Extracted as a gate or locked gate if locked" },
     { "key": "barrier", "value": "squeeze", "description": "Extracted as a cycle_barrier" },
     { "key": "barrier", "value": "squeeze_point", "description": "Extracted as a stile" },

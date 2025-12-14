@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Handle linear `barrier=water_gate`, `barrier=rope` and `barrier=tyres` as `fence`.
 Handle point `barrier=log` as `bollard`.
+Handle `barrier=sliding_gate` as `gate`.
 
 ## 14/12/2025
 Handle `traffic_calming=none` as `no`.
