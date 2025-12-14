@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Handle linear `barrier=water_gate` and `barrier=rope` as `fence`.
+Handle linear `barrier=water_gate`, `barrier=rope` and `barrier=tyres` as `fence`.
 Handle point `barrier=log` as `bollard`.
 
 ## 14/12/2025
