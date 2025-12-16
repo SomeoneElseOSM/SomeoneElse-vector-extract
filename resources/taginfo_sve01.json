@@ -351,6 +351,7 @@
     { "key": "amenity", "value": "spa", "description": "Extracted as nonspecific shop" },
     { "key": "amenity", "value": "storage", "description": "Synonym for shop=storage" },
     { "key": "amenity", "value": "stripclub", "description": "Extracted as nonspecific shop" },
+    { "key": "amenity", "value": "student_accommodation", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "studio", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "sundial", "description": "Extracted as sundial" },
     { "key": "amenity", "value": "surgery", "description": "Synonym for doctors" },
