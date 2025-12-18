@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251214T215606Z",
+  "data_updated": "20251218T161207Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -271,6 +271,7 @@
     { "key": "amenity", "value": "mobility_aids_hire", "description": "Used to detect shopmobility" },
     { "key": "amenity", "value": "mobility_equipment_hire", "description": "Used to detect shopmobility" },
     { "key": "amenity", "value": "monastery", "description": "Synonym for office=nonspecific" },
+    { "key": "amenity", "value": "money_transfer", "description": "Handled as nonspecific shop" },
     { "key": "amenity", "value": "motorcycle_parking", "description": "Extracted as motorcycle parking" },
     { "key": "amenity", "value": "motorcycle_rental", "description": "Extracted as motorcycle shop" },
     { "key": "amenity", "value": "mountain_rescue", "description": "Extracted, generic name used if blank" },

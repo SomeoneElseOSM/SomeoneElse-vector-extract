@@ -7,6 +7,7 @@ Handle point `barrier=log` and `barrier=tree` as `bollard`.
 Handle `barrier=sliding_gate` as `gate`.
 Handle `amenity=student_accommodation` as `office`.
 Added `amenity=smoking_area`.
+Handle `amenity=money_transfer` as `shop`.
 
 ## 14/12/2025
 Handle `traffic_calming=none` as `no`.
