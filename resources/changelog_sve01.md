@@ -6,6 +6,7 @@ Handle linear `barrier=water_gate`, `barrier=rope` and `barrier=tyres` as `fence
 Handle point `barrier=log` and `barrier=tree` as `bollard`.
 Handle `barrier=sliding_gate` as `gate`.
 Handle `amenity=student_accommodation` as `office`.
+Added `amenity=smoking_area`.
 
 ## 14/12/2025
 Handle `traffic_calming=none` as `no`.

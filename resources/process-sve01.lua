@@ -2412,6 +2412,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "bottle_return"               ) or
                         ( passedt.amenity == "waste_basket"                ) or
                         ( passedt.amenity == "waste_disposal"              ) or
+                        ( passedt.amenity == "smoking_area"                ) or
                         ( passedt.amenity == "grit_bin"                    ) or
                         ( passedt.amenity == "left_luggage"                ) or
                         ( passedt.amenity == "parcel_locker"               ) or
