@@ -370,6 +370,21 @@ function node_function()
    end
 
 -- ----------------------------------------------------------------------------
+-- Assume that a "junction=roundabout" node that is not any other sort of 
+-- "highway" is a mini roundabout.
+-- If it is some other sort of "highway" then assume that it is not really a
+-- roundabout.
+-- ----------------------------------------------------------------------------
+   if ( nodet.junction == "roundabout" ) then
+      if (( nodet.highway  == nil )  or
+          ( nodet.highway  == ""  )) then
+         nodet.highway  = "mini_roundabout"
+      end
+
+      nodet.junction = nil
+   end
+
+-- ----------------------------------------------------------------------------
 -- node waterway=fish_pass are changed to waterway=weir
 -- ----------------------------------------------------------------------------
    if ( nodet.waterway == "fish_pass" ) then
