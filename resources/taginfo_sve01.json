@@ -402,6 +402,7 @@
     { "key": "archaeological_site", "description": "Extract different archaeological sites differently" },
     { "key": "archaeological_site", "value": "castle", "description": "Not an expected value in OSM data.  Extract castle with a unique value; centroid for name written separately" },
     { "key": "archaeological_site", "value": "crannog", "description": "Extract crannog with a unique value; centroid for name written separately" },
+    { "key": "archaeological_site", "value": "enclosure", "description": "Extract archaeological enclosures; centroid for name written separately" },
     { "key": "archaeological_site", "value": "fortification", "description": "Extract archaeological fortifications; centroid for name written separately" },
     { "key": "archaeological_site", "value": "hill_fort", "description": "Not an expected value in OSM data.  Extract hill forts with a unique value; centroid for name written separately" },
     { "key": "archaeological_site", "value": "hillfort", "description": "Not an expected value in OSM data.  Extract hill forts with a unique value; centroid for name written separately" },
