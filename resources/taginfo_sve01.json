@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251218T161207Z",
+  "data_updated": "20251228T104703Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -407,6 +407,7 @@
     { "key": "archaeological_site", "value": "hillfort", "description": "Not an expected value in OSM data.  Extract hill forts with a unique value; centroid for name written separately" },
     { "key": "archaeological_site", "value": "hilltop_enclosure", "description": "Extract hilltop enclosures as hill forts; centroid for name written separately" },
     { "key": "archaeological_site", "value": "megalith", "description": "Detect standing stones and ogham stones" },
+    { "key": "archaeological_site", "value": "mineral_extraction", "description": "Treated as historic quarry" },
     { "key": "archaeological_site", "value": "settlement", "description": "Detect some ringforts; centroid for name written separately" },
     { "key": "archaeological_site", "value": "standing_stone", "description": "Detect standing stones and ogham stones" },
     { "key": "archaeological_site", "value": "tumulus", "description": "Extract archaeological tumuli; centroid for name written separately" },
@@ -938,6 +939,7 @@
     { "key": "cuisine", "value": "breakfast;british", "description": "Treated as fast food or restaurant that serves British food" },
     { "key": "cuisine", "value": "british", "description": "Treated as fast food or restaurant that serves British food" },
     { "key": "cuisine", "value": "british;breakfast", "description": "Treated as fast food or restaurant that serves British food" },
+    { "key": "cuisine", "value": "bubble_tea", "description": "Treated as cafe that serves bubble tea" },
     { "key": "cuisine", "value": "burger", "description": "Treated as fast food or restaurant that serves burgers" },
     { "key": "cuisine", "value": "burger;chicken", "description": "Treated as fast food or restaurant that serves burgers" },
     { "key": "cuisine", "value": "burger;chicken;fish_and_chips;kebab", "description": "Treated as fast food or restaurant that serves burgers" },
@@ -1419,6 +1421,7 @@
     { "key": "fortification_type", "value": "hillfort", "description": "Extract hill forts with a unique value; centroid for name written separately" },
     { "key": "fortification_type", "value": "hilltop_enclosure", "description": "Extract hilltop enclosures as hill forts; centroid for name written separately" },
     { "key": "fortification_type", "value": "motte", "description": "Extract mottes with a unique value; centroid for name written separately" },
+    { "key": "fortification_type", "value": "motte_and_bailey", "description": "Extract mottes with a unique value; centroid for name written separately" },
     { "key": "fortification_type", "value": "promontory_fort", "description": "Extract promontory fort with a unique value; centroid for name written separately" },
     { "key": "fortification_type", "value": "ringfort", "description": "Extract ringforts with a unique value; centroid for name written separately" },
     { "key": "fuel", "description": "Detect vending machines that sell petrol" },

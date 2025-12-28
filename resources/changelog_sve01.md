@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Treat `archaeological_site=mineral_extraction` as `historic=quarry`.
+
 ## 21/12/2025
 Handle linear `barrier=water_gate`, `barrier=rope` and `barrier=tyres` as `fence`.
 Handle point `barrier=log` and `barrier=tree` as `bollard`.
