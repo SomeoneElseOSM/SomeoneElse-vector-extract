@@ -362,7 +362,7 @@
     { "key": "amenity", "value": "taxi", "description": "Extracted as taxi" },
     { "key": "amenity", "value": "telephone", "description": "Phone boxes - extract based on colour" },
     { "key": "amenity", "value": "telephone_exchange", "description": "Descriptive name added to whatever else is there" },
-    { "key": "amenity", "value": "theatre", "description": "Synonym for concert_hall if theatre=concert_hall" },
+    { "key": "amenity", "value": "theatre", "description": "Synonym for concert_hall if theatre=concert_hall, otherwise theatre" },
     { "key": "amenity", "value": "toilets", "description": "Extract according to gender, if set; extract differently if non-free" },
     { "key": "amenity", "value": "townhall", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "training", "description": "Extracted as nonspecific shop" },
