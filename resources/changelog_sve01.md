@@ -6,6 +6,7 @@ Treat `archaeological_site=mineral_extraction` as `historic=quarry`.
 Extract historic enclosures and hut circles.
 Treat `archaeological_site=monastery` as `historic=monastery`.
 Added `office=charity` to the list of tag values that can support a Shopmobility `name` match and removed `building`, to avoid problems with disused ones.
+Lots of brochs are mapped as `archaeological_site` rather than as a type of fortification.
 
 ## 21/12/2025
 Handle linear `barrier=water_gate`, `barrier=rope` and `barrier=tyres` as `fence`.
