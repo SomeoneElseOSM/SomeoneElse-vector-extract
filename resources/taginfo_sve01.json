@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251228T104703Z",
+  "data_updated": "20251229T114504Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -407,6 +407,7 @@
     { "key": "archaeological_site", "value": "hill_fort", "description": "Not an expected value in OSM data.  Extract hill forts with a unique value; centroid for name written separately" },
     { "key": "archaeological_site", "value": "hillfort", "description": "Not an expected value in OSM data.  Extract hill forts with a unique value; centroid for name written separately" },
     { "key": "archaeological_site", "value": "hilltop_enclosure", "description": "Extract hilltop enclosures as hill forts; centroid for name written separately" },
+    { "key": "archaeological_site", "value": "hut_circle", "description": "Extract archaeological hut circles; centroid for name written separately" },
     { "key": "archaeological_site", "value": "megalith", "description": "Detect standing stones and ogham stones" },
     { "key": "archaeological_site", "value": "mineral_extraction", "description": "Treated as historic quarry" },
     { "key": "archaeological_site", "value": "settlement", "description": "Detect some ringforts; centroid for name written separately" },

@@ -3127,6 +3127,7 @@ function render_historic_land1( passedt )
         ( passedt.historic == "historicpromontoryfort"   ) or
         ( passedt.historic == "historicringfort"         ) or
         ( passedt.historic == "historicenclosure"        ) or
+        ( passedt.historic == "historichutcircle"        ) or
         ( passedt.historic == "historictumulus"          ) or
         ( passedt.historic == "manor"                    ) or
         ( passedt.historic == "monastery"                ) or
