@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Treat `archaeological_site=mineral_extraction` as `historic=quarry`.
 Extract historic enclosures and hut circles.
+Treat `archaeological_site=monastery` as `historic=monastery`.
 
 ## 21/12/2025
 Handle linear `barrier=water_gate`, `barrier=rope` and `barrier=tyres` as `fence`.
