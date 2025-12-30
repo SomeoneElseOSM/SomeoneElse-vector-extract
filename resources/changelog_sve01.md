@@ -8,6 +8,7 @@ Treat `archaeological_site=monastery` as `historic=monastery`.
 Added `office=charity` to the list of tag values that can support a Shopmobility `name` match and removed `building`, to avoid problems with disused ones.
 Lots of brochs are mapped as `archaeological_site` rather than as a type of fortification.
 Detect lime kilns that are tagged as archaeological sites.
+Don't show "archaeological_site=ridge_and_furrow"
 
 ## 21/12/2025
 Handle linear `barrier=water_gate`, `barrier=rope` and `barrier=tyres` as `fence`.
