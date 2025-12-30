@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251229T114504Z",
+  "data_updated": "20251230T111705Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1695,7 +1695,6 @@
     { "key": "historic", "value": "market_cross", "description": "Extracted as historic cross" },
     { "key": "historic", "value": "martello_tower", "description": "Extracted as uncrenellated tower; centroid for name written separately" },
     { "key": "historic", "value": "martello_tower;bunker", "description": "Extracted as uncrenellated tower; centroid for name written separately" },
-    { "key": "historic", "value": "martello_tower;fort", "description": "Extracted as uncrenellated tower; centroid for name written separately" },
     { "key": "historic", "value": "maypole", "description": "Extracted as nonspecific historic item" },
     { "key": "historic", "value": "memorial", "description": "Extracted as nonspecific historic item; centroid for name written separately" },
     { "key": "historic", "value": "memorial_plaque", "description": "Extracted as information plaque" },
@@ -3585,7 +3584,6 @@
     { "key": "shop", "value": "wool", "description": "Various shops extracted" },
     { "key": "shop", "value": "yarn", "description": "Various shops extracted" },
     { "key": "shop", "value": "yes", "description": "Extracted as a generic shop" },
-    { "key": "shop", "value": "yes;jewelry", "description": "Synonym for 'jewelry'" },
     { "key": "shop", "value": "yes;jewelry;e-cigarette", "description": "Synonym for 'jewelry'" },
     { "key": "shop", "value": "yes;piercing", "description": "Various shops extracted" },
     { "key": "shop", "value": "zero_waste", "description": "Extracted as grocer so that it can be displayed separately" },

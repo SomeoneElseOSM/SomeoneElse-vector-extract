@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Removed `shop=yes;jewelry`; no longer in the data.
+
+## 30/12/2025
 Treat `archaeological_site=mineral_extraction` as `historic=quarry`, along with a couple of synonyms.
 Extract historic enclosures and hut circles.
 Treat `archaeological_site=monastery` as `historic=monastery`.
