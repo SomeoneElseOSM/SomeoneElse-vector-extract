@@ -416,6 +416,7 @@
     { "key": "archaeological_site", "value": "mine", "description": "Treated as historic quarry" },
     { "key": "archaeological_site", "value": "mineral_extraction", "description": "Treated as historic quarry" },
     { "key": "archaeological_site", "value": "monastery", "description": "Treated as 'historic=monastery'" },
+    { "key": "archaeological_site", "value": "roman_fort", "description": "Treat roman forts as archaeological fortifications" },
     { "key": "archaeological_site", "value": "settlement", "description": "Detect some ringforts; centroid for name written separately" },
     { "key": "archaeological_site", "value": "standing_stone", "description": "Detect standing stones and ogham stones" },
     { "key": "archaeological_site", "value": "tumulus", "description": "Extract archaeological tumuli; centroid for name written separately" },
