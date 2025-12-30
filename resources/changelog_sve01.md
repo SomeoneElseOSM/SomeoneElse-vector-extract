@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Treat `archaeological_site=mineral_extraction` as `historic=quarry`.
+Treat `archaeological_site=mineral_extraction` as `historic=quarry`, along with a couple of synonyms.
 Extract historic enclosures and hut circles.
 Treat `archaeological_site=monastery` as `historic=monastery`.
 Added `office=charity` to the list of tag values that can support a Shopmobility `name` match and removed `building`, to avoid problems with disused ones.
