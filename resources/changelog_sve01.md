@@ -11,6 +11,7 @@ Treat `hazard=archery_range` as a synonym for `landuse=military`.
 Treat `hazard=sink_holes` and `wreck` as synonyms for `landuse=military`.
 Detect more hogweed.
 Detect vent shafts mapped as mineshafts.
+Detect more SSSIs.
 
 ## 30/12/2025
 Treat `archaeological_site=mineral_extraction` as `historic=quarry`, along with a couple of synonyms.
