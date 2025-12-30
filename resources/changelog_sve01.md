@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Removed `shop=yes;jewelry`; no longer in the data.
 Treat `boundary=fence` as a synonym for `barrier=fence`.
+Treat `hazard=flooding` as a synonym for `flood_prone=yes`.
 
 ## 30/12/2025
 Treat `archaeological_site=mineral_extraction` as `historic=quarry`, along with a couple of synonyms.
