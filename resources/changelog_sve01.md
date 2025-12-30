@@ -8,7 +8,7 @@ Treat `hazard=flooding` as a synonym for `flood_prone=yes`.
 Treat `hazard=open_mineshaft`, `mineshaft` and `pit` as synonyms for `landuse=military`.
 Treat `hazard=contamination` as a synonym for `landuse=military`.
 Treat `hazard=archery_range` as a synonym for `landuse=military`.
-Treat `hazard=sink_holes` as a synonym for `landuse=military`.
+Treat `hazard=sink_holes` and `wreck` as synonyms for `landuse=military`.
 
 ## 30/12/2025
 Treat `archaeological_site=mineral_extraction` as `historic=quarry`, along with a couple of synonyms.
