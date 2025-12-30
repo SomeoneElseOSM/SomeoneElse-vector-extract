@@ -1496,6 +1496,7 @@
     { "key": "hard_shoulder", "description": "Decide if a road has a sidewalk" },
     { "key": "hard_shoulder", "value": "yes", "description": "Decide if a road has a sidewalk" },
     { "key": "hazard", "description": "A couple of specific hazards - hogweed and shooting ranges" },
+    { "key": "hazard", "value": "archery_range", "description": "Extract archery ranges as no-go areas" },
     { "key": "hazard", "value": "contamination", "description": "Extract contaminated areas as no-go areas" },
     { "key": "hazard", "value": "flooding", "description": "Extract flood-prone areas as very intermittent water" },
     { "key": "hazard", "value": "mineshaft", "description": "Extract open mineshaft areas as no-go areas" },
