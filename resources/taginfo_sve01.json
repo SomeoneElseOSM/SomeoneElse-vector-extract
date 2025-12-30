@@ -1505,6 +1505,7 @@
     { "key": "hazard", "value": "plant", "description": "Detect hogweed" },
     { "key": "hazard", "value": "shooting", "description": "Detect shooting ranges" },
     { "key": "hazard", "value": "shooting_range", "description": "Detect shooting ranges" },
+    { "key": "hazard", "value": "sink_holes", "description": "Extract sink hole areas as no-go" },
     { "key": "hazard", "value": "toxic_plant", "description": "Detect hogweed" },
     { "key": "hazard_prone", "description": "Extract flood-prone areas as very intermittent water" },
     { "key": "hazard_prone", "value": "yes", "description": "Extract flood-prone areas as very intermittent water" },
