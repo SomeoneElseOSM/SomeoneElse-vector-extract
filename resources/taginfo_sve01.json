@@ -1499,6 +1499,7 @@
     { "key": "hazard", "value": "archery_range", "description": "Extract archery ranges as no-go areas" },
     { "key": "hazard", "value": "contamination", "description": "Extract contaminated areas as no-go areas" },
     { "key": "hazard", "value": "flooding", "description": "Extract flood-prone areas as very intermittent water" },
+    { "key": "hazard", "value": "giant hogweed;stinging nettles", "description": "Detect hogweed" },
     { "key": "hazard", "value": "mineshaft", "description": "Extract open mineshaft areas as no-go areas" },
     { "key": "hazard", "value": "open_mineshaft", "description": "Extract open mineshaft areas as no-go areas" },
     { "key": "hazard", "value": "pit", "description": "Extract open mineshaft areas as no-go areas" },

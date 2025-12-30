@@ -31,7 +31,7 @@ node_keys = { "abandoned:railway", "addr:housenumber", "advertising", "aerialway
               "canoe", "climbing", "craft", 'defensive_works', 
 	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:man_made",
 	      "disused:military", "disused:pub", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
-              "emergency", "entrance", "ford", "geological", "golf", "harbour",
+              "emergency", "entrance", "ford", "geological", "golf", "harbour", "hazard",
               "healthcare", "highway", "historic", "historic:railway", "information", "junction", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
