@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Piers that are mapped as nodes are extracted into `land1` as `pointpier`.
+
 ## 31/12/2025
 Removed `shop=yes;jewelry`; no longer in the data.
 Treat `boundary=fence` as a synonym for `barrier=fence`.

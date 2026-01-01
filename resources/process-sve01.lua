@@ -392,6 +392,14 @@ function node_function()
       nodet.usage    = nil
    end
 
+-- ----------------------------------------------------------------------------
+-- node piers are changed to "man_made=pointpier" to make the processing logic
+-- easier.
+-- ----------------------------------------------------------------------------
+   if ( nodet.man_made == "pier" ) then
+      nodet.man_made = "pointpier"
+   end
+
 -- ------------------------------------------------------------------------------
 -- (end of the node-specific code)
 --
@@ -2124,6 +2132,10 @@ function way_after_linearbarrier( passedt )
 
         MinZoom( 13 )
     else
+-- ----------------------------------------------------------------------------
+-- Any point "man_made=pier" will have been changed to "man_made=pointpier"
+-- previously.  Therefore, all non-closed ones are linear.
+-- ----------------------------------------------------------------------------
         if ((( passedt.man_made == "pier"        )   or
              ( passedt.man_made == "breakwater"  ) or
              ( passedt.man_made == "groyne"      ))  and
@@ -2886,6 +2898,7 @@ function render_man_made_land1( passedt )
                         ( passedt.man_made == "water_tower"              ) or
                         ( passedt.man_made == "windsock"                 ) or
                         ( passedt.man_made == "crane"                    ) or
+                        ( passedt.man_made == "pointpier"                ) or
                         ( passedt.man_made == "cross"                    ) or
                         ( passedt.man_made == "flagpole"                 ) or
                         ( passedt.man_made == "maypole"                  ) or

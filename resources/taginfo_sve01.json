@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20251230T111705Z",
+  "data_updated": "20260101T121701Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2157,7 +2157,7 @@
     { "key": "man_made", "value": "outfall", "description": "Detect outfalls, sewage and otherwise" },
     { "key": "man_made", "value": "petroleum_well", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "phone_mast", "description": "Extracted as large or small mast" },
-    { "key": "man_made", "value": "pier", "description": "Areas extracted into 'land1, lines into 'linearbarrier''" },
+    { "key": "man_made", "value": "pier", "description": "Points extracted into 'land1' as 'pointpier', areas extracted into 'land1' as 'pier', lines into 'linearbarrier'" },
     { "key": "man_made", "value": "pipeline", "description": "Extract overground pipelines as bridges; extract underground pipelines" },
     { "key": "man_made", "value": "pipeline_marker", "description": "Extracted as aerial pipeline marker" },
     { "key": "man_made", "value": "planter", "description": "Points handled as bollards, lines handled as walls, areas handled as grass with a wall around it" },
@@ -2749,6 +2749,8 @@
     { "key": "power", "value": "plant", "description": "Detect wind turbines" },
     { "key": "power", "value": "station", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "power", "value": "substation", "description": "Written into 'land1' or 'land2' at minzoom 12" },
+    { "key": "power_source", "description": "Detect wind turbines" },
+    { "key": "power_source", "value": "wind", "description": "Detect wind turbines" },
     { "key": "produce", "description": "Detect honesty box sales offerings; also farmland" },
     { "key": "produce", "value": "Silage", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "produce", "value": "cattle", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
