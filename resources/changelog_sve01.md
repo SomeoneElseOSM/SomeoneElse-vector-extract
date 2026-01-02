@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Piers that are mapped as nodes are extracted into `land1` as `pointpier`.
+Handle more 'wheelchair' values that map to 'yes', 'limited' or 'no'.
 
 ## 31/12/2025
 Removed `shop=yes;jewelry`; no longer in the data.
