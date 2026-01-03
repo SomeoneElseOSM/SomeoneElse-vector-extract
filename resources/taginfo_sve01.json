@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260101T121701Z",
+  "data_updated": "20260103T120203Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2764,8 +2764,6 @@
     { "key": "power", "value": "plant", "description": "Detect wind turbines" },
     { "key": "power", "value": "station", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "power", "value": "substation", "description": "Written into 'land1' or 'land2' at minzoom 12" },
-    { "key": "power_source", "description": "Detect wind turbines" },
-    { "key": "power_source", "value": "wind", "description": "Detect wind turbines" },
     { "key": "produce", "description": "Detect honesty box sales offerings; also farmland" },
     { "key": "produce", "value": "Silage", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "produce", "value": "cattle", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
