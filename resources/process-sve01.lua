@@ -2704,7 +2704,14 @@ function render_amenity_land1( passedt )
                             ( passedt.amenity == "bicycle_parking_pay"        ) or
                             ( passedt.amenity == "motorcycle_parking"         ) or
                             ( passedt.amenity == "motorcycle_parking_pay"     )) then
-                            Layer( "land1", true )
+
+			    if ( passedt.way_area > 0 ) then
+			        Layer( "land1", true )
+			        Attribute( "class", "amenity_" .. passedt.amenity )
+			        MinZoom( 14 )
+			    end
+
+                            LayerAsCentroid( "land1" )
                             Attribute( "class", "amenity_" .. passedt.amenity )
 
                             if (( passedt.access ~= nil ) and
