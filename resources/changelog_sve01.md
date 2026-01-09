@@ -8,6 +8,7 @@ Handle more synonyms for `opening_hours=closed`.
 Handle more `fence_type` synonyms for `wall`.
 Handle more old names for disused pubs.
 Write both point and area for bicycle rental etc.
+Treat `water=tidal` the same as `tidal=yes`.
 
 ## 31/12/2025
 Removed `shop=yes;jewelry`; no longer in the data.

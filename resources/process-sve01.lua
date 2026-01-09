@@ -612,6 +612,16 @@ function way_function()
    end
 
 -- ----------------------------------------------------------------------------
+-- Render tidal rocks with more blue
+-- ----------------------------------------------------------------------------
+   if ((  wayt.natural   == "bare_rock"  )  and
+       (( wayt.tidal     == "yes"       )   or
+        ( wayt.wetland   == "tidalflat" )   or
+        ( wayt.water     == "tidal"     ))) then
+      wayt.natural = "tidal_rock"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Where amenity=watering_place has been used on a way and there's no
 -- "natural" tag already, apply "natural=water".
 -- ----------------------------------------------------------------------------
