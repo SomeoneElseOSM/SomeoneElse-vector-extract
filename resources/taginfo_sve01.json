@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260103T120203Z",
+  "data_updated": "20260110T012004Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -4132,6 +4132,7 @@
     { "key": "whitewater", "value": "put_in_out", "description": "Extracted as a waterway access point" },
     { "key": "width", "description": "Depending on context, go down a road class. Also changes path to track and vice versa." },
     { "key": "width", "value": "2 m", "description": "Non-computable value to explicitly process" },
+    { "key": "width", "value": "2.0 m", "description": "Non-computable value to explicitly process" },
     { "key": "width", "value": "2.5 m", "description": "Non-computable value to explicitly process" },
     { "key": "width", "value": "2.5m", "description": "Non-computable value to explicitly process" },
     { "key": "width", "value": "3 m", "description": "Non-computable value to explicitly process" },
@@ -4139,6 +4140,7 @@
     { "key": "width", "value": "3.5 m", "description": "Non-computable value to explicitly process" },
     { "key": "width", "value": "4 m", "description": "Non-computable value to explicitly process" },
     { "key": "width", "value": "5m", "description": "Non-computable value to explicitly process" },
+    { "key": "width", "value": "narrow", "description": "Non-computable value to explicitly process" },
     { "key": "windmill:disused", "description": "Detect disused windmills" },
     { "key": "windmill:disused", "value": "yes", "description": "Detect disused windmills" },
     { "key": "zero_waste", "description": "Detect 'eco' shops and supermarkets" },

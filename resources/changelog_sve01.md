@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 09/01/2026
 Piers that are mapped as nodes are extracted into `land1` as `pointpier`.
 Handle more 'wheelchair' values that map to 'yes', 'limited' or 'no'.
 Handle more synonyms for `opening_hours=closed`.
@@ -9,6 +9,7 @@ Handle more `fence_type` synonyms for `wall`.
 Handle more old names for disused pubs.
 Write both point and area for bicycle rental etc.
 Treat `water=tidal` the same as `tidal=yes`.
+Handle a couple of extra uncomputable widths of narrow tertiary roads
 
 ## 31/12/2025
 Removed `shop=yes;jewelry`; no longer in the data.
