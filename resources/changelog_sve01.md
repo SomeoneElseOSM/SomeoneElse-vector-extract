@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Removed `amenity=funeral`; no longer in the data.
 Handle `historic:railway=station_site` as a nonspecific historic item.
+Handle `lamp_type=gas` as a synonym for `gaslight`.
 
 ## 09/01/2026
 Piers that are mapped as nodes are extracted into `land1` as `pointpier`.
