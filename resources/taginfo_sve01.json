@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260110T012004Z",
+  "data_updated": "20260110T110505Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -225,7 +225,6 @@
     { "key": "amenity", "value": "fuel", "description": "Extracted, name incorporates brand" },
     { "key": "amenity", "value": "fuel_depot", "description": "Synonym for indstrial landuse" },
     { "key": "amenity", "value": "function_room", "description": "Extracted as leisure=nonspecific" },
-    { "key": "amenity", "value": "funeral", "description": "Synonym for shop=funeral_directors" },
     { "key": "amenity", "value": "funeral_directors", "description": "Synonym for shop=funeral_directors" },
     { "key": "amenity", "value": "gallery", "description": "Extracted as nonspecific shop" },
     { "key": "amenity", "value": "gambling", "description": "Extracted as gambling shop" },

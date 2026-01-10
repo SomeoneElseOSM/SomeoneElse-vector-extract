@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Removed `amenity=funeral`; no longer in the data.
+
 ## 09/01/2026
 Piers that are mapped as nodes are extracted into `land1` as `pointpier`.
 Handle more 'wheelchair' values that map to 'yes', 'limited' or 'no'.
