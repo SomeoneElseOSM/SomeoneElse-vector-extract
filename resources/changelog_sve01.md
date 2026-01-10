@@ -8,6 +8,7 @@ Handle `lamp_type=gas` as a synonym for `gaslight`.
 Detect more synonyms for "free".
 Detect more synonyms of `cycleway=sidewalk`.
 Also detect church towers mapped with `building:part=tower`
+Detect more small canal channels.
 
 ## 09/01/2026
 Piers that are mapped as nodes are extracted into `land1` as `pointpier`.
