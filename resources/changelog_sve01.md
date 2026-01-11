@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Use `flashing_lights` as part of the check to detect non-crossings.
+
 ## 10/01/2026
 Removed `amenity=funeral`; no longer in the data.
 Handle `historic:railway=station_site` as a nonspecific historic item.
