@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Use `flashing_lights` as part of the check to detect non-crossings.
+Add more `crosssing` values to "is it or is it not a crossing" logic.
 
 ## 10/01/2026
 Removed `amenity=funeral`; no longer in the data.
