@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260111T153606Z",
+  "data_updated": "20260115T131308Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1938,6 +1938,8 @@
     { "key": "is_sidepath:of:name", "description": "Suppress names on roadside footpaths" },
     { "key": "is_sidepath:of:ref", "description": "Suppress names on roadside footpaths" },
     { "key": "junction", "description": "Drop multipolygon junctions" },
+    { "key": "junction", "value": "circular", "description": "Circular junctions are assumed to be oneway" },
+    { "key": "junction", "value": "roundabout", "description": "Roundabouts are assumed to be oneway" },
     { "key": "junction", "value": "yes", "description": "Drop multipolygon junctions" },
     { "key": "kerb", "description": "Detect non-crossings" },
     { "key": "kerb", "value": "lowered", "description": "Detect non-crossings" },
