@@ -6,6 +6,7 @@ Use `flashing_lights` as part of the check to detect non-crossings.
 Add more `crosssing` values to "is it or is it not a crossing" logic.
 Handle a couple more `support` values for clocks.
 Tiger crossings do not imply traffic signals.
+Detect more TROs on BOATs.
 
 ## 10/01/2026
 Removed `amenity=funeral`; no longer in the data.
