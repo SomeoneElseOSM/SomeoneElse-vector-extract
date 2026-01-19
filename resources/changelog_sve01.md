@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 18/01/2026
+On bus stops use a smarter combination of `name`, `ref`, `local_ref` and `naptan:Indicator`.  Avoid duplication.
+
 ## 17/01/2025
 Use `flashing_lights` as part of the check to detect non-crossings.
 Add more `crosssing` values to "is it or is it not a crossing" logic.
