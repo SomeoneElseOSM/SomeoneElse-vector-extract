@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Include some `cycleway:left` values in deciding when there is a `sidewalk`.
+
 ## 18/01/2026
 On bus stops use a smarter combination of `name`, `ref`, `local_ref` and `naptan:Indicator`.  Avoid duplication.
 

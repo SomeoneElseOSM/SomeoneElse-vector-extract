@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260117T110409Z",
+  "data_updated": "20260120T014702Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1160,6 +1160,14 @@
     { "key": "cycleway", "value": "yes", "description": "Decide if a road has a sidewalk" },
     { "key": "cycleway:both", "description": "Decide if a road has a sidewalk or equivalent" },
     { "key": "cycleway:both", "value": "separate", "description": "If present, show the road as having a sidewalk or equivalent" },
+    { "key": "cycleway:left", "description": "Decide if a road has a sidewalk or equivalent" },
+    { "key": "cycleway:left", "value": "separate", "description": "If present, show the road as having a sidewalk or equivalent" },
+    { "key": "cycleway:left", "value": "track", "description": "If present, show the road as having a sidewalk or equivalent" },
+    { "key": "cycleway:left", "value": "share_sidewalk", "description": "If present, show the road as having a sidewalk or equivalent" },
+    { "key": "cycleway:left", "value": "shared", "description": "If present, show the road as having a sidewalk or equivalent" },
+    { "key": "cycleway:left", "value": "opposite_track", "description": "If present, show the road as having a sidewalk or equivalent" },
+    { "key": "cycleway:left", "value": "separate track", "description": "If present, show the road as having a sidewalk or equivalent" },
+    { "key": "cycleway:left", "value": "sidewalk", "description": "If present, show the road as having a sidewalk or equivalent" },
     { "key": "dance:teaching", "description": "Detect dance places" },
     { "key": "dance:teaching", "value": "yes", "description": "Detect dance places" },
     { "key": "defensive_works", "description": "Detect batteries not mapped as historic" },
