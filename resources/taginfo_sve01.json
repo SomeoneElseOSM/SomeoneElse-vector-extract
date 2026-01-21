@@ -1338,6 +1338,7 @@
     { "key": "emergency", "value": "bleed_control_kit", "description": "Extract bleed control kits" },
     { "key": "emergency", "value": "coast_guard", "description": "Extracted as government office" },
     { "key": "emergency", "value": "defibrillator", "description": "Extract defibrillators" },
+    { "key": "emergency", "value": "emergency_ward_entrance", "description": "Extracted as main entrances" },
     { "key": "emergency", "value": "fire_extinguisher", "description": "Extract fire extinguishers" },
     { "key": "emergency", "value": "fire_hydrant", "description": "Extract fire hydrants" },
     { "key": "emergency", "value": "fire_station", "description": "Extract fire stations" },
