@@ -2685,6 +2685,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "car_rental"                  ) or
                         ( passedt.amenity == "compressed_air"              ) or
                         ( passedt.amenity == "defibrillator"               ) or
+                        ( passedt.amenity == "bleed_control_kit"           ) or
                         ( passedt.amenity == "life_ring"                   ) or 
                         ( passedt.amenity == "fire_extinguisher"           ) or
                         ( passedt.amenity == "fire_hydrant"                ) or
