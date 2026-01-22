@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260121T224203Z",
+  "data_updated": "20260122T130801Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1353,9 +1353,10 @@
     { "key": "emergency", "value": "rescue_box", "description": "Extracted as mountain rescue box" },
     { "key": "emergency", "value": "rescue_equipment", "description": "Extracted as life ring" },
     { "key": "emergency", "value": "ses_station", "description": "Synonym for 'emergency=coast_goard'.  Extracted as government office" },
+    { "key": "emergency", "value": "throw_bag", "description": "Extracted as 'amenity=emergency_throw_bag' in 'land1'" },
     { "key": "emergency", "value": "water_rescue", "description": "Unhelpful tag; other tags used to see what object actually is" },
     { "key": "emergency", "value": "water_rescue_station", "description": "Yet another tag used for coastguard huts etc." },
-    { "key": "emergency", "value": "water_tank", "description": "Shown as a building" },
+    { "key": "emergency", "value": "water_tank", "description": "Treated as a building" },
     { "key": "entrance", "description": "Extract main entrances" },
     { "key": "entrance", "value": "entrance", "description": "Detect building entrances" },
     { "key": "entrance", "value": "gate", "description": "Treated as a synonym for `barrier=gate`" },
