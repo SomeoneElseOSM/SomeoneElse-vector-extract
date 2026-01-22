@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Include some `cycleway:left` values in deciding when there is a `sidewalk`.
 Handle `emergency=bleed_control_kit` in a similar way to `defibrillator`.
 Handle `emergency=emergency_ward_entrance` in a similar way to `entrance=main`.
+Handle `emergency=water_tank` in a similar way to `man_made=water_tank`.
 
 ## 18/01/2026
 On bus stops use a smarter combination of `name`, `ref`, `local_ref` and `naptan:Indicator`.  Avoid duplication.

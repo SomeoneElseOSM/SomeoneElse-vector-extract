@@ -1355,6 +1355,7 @@
     { "key": "emergency", "value": "ses_station", "description": "Synonym for 'emergency=coast_goard'.  Extracted as government office" },
     { "key": "emergency", "value": "water_rescue", "description": "Unhelpful tag; other tags used to see what object actually is" },
     { "key": "emergency", "value": "water_rescue_station", "description": "Yet another tag used for coastguard huts etc." },
+    { "key": "emergency", "value": "water_tank", "description": "Shown as a building" },
     { "key": "entrance", "description": "Extract main entrances" },
     { "key": "entrance", "value": "entrance", "description": "Detect building entrances" },
     { "key": "entrance", "value": "gate", "description": "Treated as a synonym for `barrier=gate`" },
