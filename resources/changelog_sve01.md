@@ -3,7 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Handle `office=property_management` in a similar way to other property offices.
-Handle various commercial offices as generic offices.
+Handle various commercial and noncommercial offices as generic offices.
 
 ## 27/01/2026
 Include some `cycleway:left` values in deciding when there is a `sidewalk`.

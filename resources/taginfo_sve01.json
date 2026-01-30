@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260130T151404Z",
+  "data_updated": "20260130T151405Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2668,11 +2668,13 @@
     { "key": "office", "value": "taxi", "description": "Most offices extracted" },
     { "key": "office", "value": "telecommunication", "description": "Most offices extracted" },
     { "key": "office", "value": "therapist", "description": "Most offices extracted" },
-    { "key": "office", "value": "training", "description": "Most offices extracted" },
+    { "key": "office", "value": "trade_union", "description": "Extracted as 'office=nonspecific'" },
+    { "key": "office", "value": "training", "description": "Extracted as 'office=nonspecific'" },
     { "key": "office", "value": "translator", "description": "Extracted as 'office=nonspecific'" },
     { "key": "office", "value": "transport", "description": "Extracted as 'office=nonspecific'" },
     { "key": "office", "value": "travel_agent", "description": "Most offices extracted" },
     { "key": "office", "value": "tutoring", "description": "Most offices extracted" },
+    { "key": "office", "value": "union", "description": "Extracted as 'office=nonspecific'" },
     { "key": "office", "value": "university", "description": "Most offices extracted" },
     { "key": "office", "value": "vacant", "description": "Most offices extracted" },
     { "key": "office", "value": "water_utility", "description": "Extracted as 'office=nonspecific'" },
