@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260128T225202Z",
+  "data_updated": "20260130T151401Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1898,12 +1898,10 @@
     { "key": "information", "value": "board;route_marker", "description": "Treated as information board" },
     { "key": "information", "value": "centre", "description": "Treated as information office" },
     { "key": "information", "value": "citymap", "description": "Treated as information board" },
-    { "key": "information", "value": "departure times and destinations", "description": "Treated as information board" },
     { "key": "information", "value": "desk", "description": "Treated as information office" },
     { "key": "information", "value": "electronic_board", "description": "Treated as information board" },
     { "key": "information", "value": "estate_map", "description": "Treated as information board" },
     { "key": "information", "value": "fingerpost", "description": "Treated as information guidepost" },
-    { "key": "information", "value": "former_telephone_box", "description": "Treated as information board" },
     { "key": "information", "value": "guidepost", "description": "Treated as information guidepost" },
     { "key": "information", "value": "handcrank_powered_speaker", "description": "Treated as information audioguide" },
     { "key": "information", "value": "hikingmap", "description": "Treated as information board" },
