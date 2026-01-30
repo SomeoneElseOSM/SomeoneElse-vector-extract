@@ -1,6 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Handle `office=property_management` in a similar way to other property offices.
+Handle various commercial offices as generic offices.
+
 ## 27/01/2026
 Include some `cycleway:left` values in deciding when there is a `sidewalk`.
 Handle `emergency=bleed_control_kit` in a similar way to `defibrillator`, but with a unique value.
