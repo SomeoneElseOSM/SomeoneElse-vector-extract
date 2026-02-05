@@ -1002,11 +1002,19 @@ function rf_2( relationt )
 -- Horse networks
 --
 -- One English/Welsh National Trail is in this category, the Pennine Bridleway,
--- That already has sensible name and ref so we do not need to add those here.
+-- That already has sensible name and ref so we do not need to add anything to
+-- sort out names here.
+--
+-- In most cases we just use "network" to look for things like walking and
+-- cycling networks.  If a cycle network has no "network" tag we ignore it as
+-- likely not very important; likewise foot.  "horse" is the exception.
 -- ----------------------------------------------------------------------------
-      if (( relationt.network == "nhn"         ) or
-          ( relationt.network == "rhn"         )  or
-          ( relationt.network == "ncn;nhn;nwn" )) then
+      if (((  relationt.route   == "horse"      )   and
+           (( relationt.network == nil         )    or
+            ( relationt.network == ""          )))  or
+          ( relationt.network == "nhn"           )  or
+          ( relationt.network == "rhn"           )  or
+          ( relationt.network == "ncn;nhn;nwn"   )) then
          relationt.highway = "ldpnhn"
       end
 

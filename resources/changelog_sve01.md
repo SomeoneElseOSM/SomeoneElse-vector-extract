@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Include some `route=horse` along with `network=nhn` etc. to show horse routes.
+
 ## 30/01/2026
 Handle `office=property_management` in a similar way to other property offices.
 Handle various commercial and noncommercial offices as generic offices.
