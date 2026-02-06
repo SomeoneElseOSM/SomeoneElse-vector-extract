@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260205T112102Z",
+  "data_updated": "20260205T112103Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2283,10 +2283,12 @@
     { "key": "meadow", "value": "cut", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "hay", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "managed", "description": "Extract agricultural meadows as 'farm grass'" },
+    { "key": "meadow", "value": "mown", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "paddock", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "pasture", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "perpetual", "description": "Extract as class of meadow" },
     { "key": "meadow", "value": "transitional", "description": "Extract as class of meadow" },
+    { "key": "meadow", "value": "wet_meadow", "description": "Show wet meadow wetlands as such" },
     { "key": "meadow", "value": "wildflower", "description": "Extract as class of meadow" },
     { "key": "megalith_type", "description": "Used to identify standing and Ogham stones" },
     { "key": "megalith_type", "value": "alignment", "description": "Extracted as a pair of stones" },

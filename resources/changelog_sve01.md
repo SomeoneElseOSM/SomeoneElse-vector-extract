@@ -3,6 +3,8 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Include some `route=horse` along with `network=nhn` etc. to show horse routes.
+Detect wet meadows that are tagged as `meadow=wet_meadow`.
+Treat `meadow=mown` like `meadow=hay`.
 
 ## 30/01/2026
 Handle `office=property_management` in a similar way to other property offices.
