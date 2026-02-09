@@ -2703,6 +2703,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "waterway_turning_point"      ) or
                         ( passedt.amenity == "waterway_junction"           ) or
                         ( passedt.amenity == "dressing_room"               ) or
+                        ( passedt.amenity == "reception_desk"              ) or
                         ( passedt.amenity == "pub"                         ) or
                         (( passedt.amenity  ~= nil                        )  and
                          ( passedt.amenity  ~= ""                         )  and

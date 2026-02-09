@@ -318,6 +318,7 @@
     { "key": "amenity", "value": "public_bath", "description": "Extracted as leisure=nonspecific" },
     { "key": "amenity", "value": "public_bookcase", "description": "Extract as small library.  If in an old phone box extracted as such" },
     { "key": "amenity", "value": "public_building", "description": "Synonym for office=nonspecific" },
+    { "key": "amenity", "value": "reception_desk", "description": "Extracted as reception_desk" },
     { "key": "amenity", "value": "recycling", "description": "Depending on recycling_type, either a centre or a bin" },
     { "key": "amenity", "value": "register_office", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "rental", "description": "Extracted as nonspecific shop" },

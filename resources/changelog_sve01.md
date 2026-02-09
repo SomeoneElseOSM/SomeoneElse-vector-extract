@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Handle `amenity=dressing_room`.
+Handle `amenity=reception_desk`.
 
 ## 09/02/2026
 Include some `route=horse` along with `network=nhn` etc. to show horse routes.
