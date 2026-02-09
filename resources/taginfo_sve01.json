@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260205T112105Z",
+  "data_updated": "20260209T114301Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -247,6 +247,7 @@
     { "key": "amenity", "value": "kick-scooter_rental", "description": "Synonym for 'amenity=scooter_rental'.  Extracted, name incorporates brand" },
     { "key": "amenity", "value": "kindergarten", "description": "Written into 'land1' or 'land2' at minzoom 9" },
     { "key": "amenity", "value": "laboratory", "description": "Synonym for office=nonspecific" },
+    { "key": "amenity", "value": "language_school", "description": "Extracted as nonspecific shop" },
     { "key": "amenity", "value": "lawyer", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "layby", "description": "Synonym for parking" },
     { "key": "amenity", "value": "left_luggage", "description": "Left luggage lockers" },

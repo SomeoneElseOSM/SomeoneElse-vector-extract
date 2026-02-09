@@ -1,11 +1,12 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 09/02/2026
 Include some `route=horse` along with `network=nhn` etc. to show horse routes.
 Detect wet meadows that are tagged as `meadow=wet_meadow`.
 Treat `meadow=mown` like `meadow=hay`.
 Handle more `sidewalk:both`, `sidewalk:left` and `sidewalk:right` values that indicate a sidewalk.
+Added `amenity=language_school` to list of nonspecific shops.
 
 ## 30/01/2026
 Handle `office=property_management` in a similar way to other property offices.
