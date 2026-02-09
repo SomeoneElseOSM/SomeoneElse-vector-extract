@@ -296,6 +296,7 @@
     { "key": "amenity", "value": "parcel_pickup", "description": "Used to detect parcel lockers" },
     { "key": "amenity", "value": "parking", "description": "Written into 'land1' or 'land2' based on fee at minzoom 9" },
     { "key": "amenity", "value": "parking_space", "description": "Extract as small private parking area" },
+    { "key": "amenity", "value": "payment_terminal", "description": "Extracted as payment_terminal" },
     { "key": "amenity", "value": "pharmacy", "description": "Pharmacies: If tagged on supermarket, removed.  Wheelchair tags extracted" },
     { "key": "amenity", "value": "phone", "description": "Synonym for telephone" },
     { "key": "amenity", "value": "photo_booth", "description": "Extracted as photo booths" },
