@@ -311,6 +311,7 @@
     { "key": "amenity", "value": "post_box", "description": "Extracted as post box" },
     { "key": "amenity", "value": "post_depot", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "post_office", "description": "Extracted as post office" },
+    { "key": "amenity", "value": "prep_school", "description": "Extracted as nonspecific shop" },
     { "key": "amenity", "value": "preschool", "description": "Synonym for shop=healthnonspecific" },
     { "key": "amenity", "value": "printer", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "prison", "description": "Synonym for office=nonspecific" },

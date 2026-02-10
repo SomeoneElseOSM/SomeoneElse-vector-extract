@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Handle `amenity=dressing_room`.
 Handle `amenity=reception_desk`.
 Handle `amenity=payment_terminal`.
+Added `amenity=prep_school` to list of nonspecific shops.
 
 ## 09/02/2026
 Include some `route=horse` along with `network=nhn` etc. to show horse routes.
