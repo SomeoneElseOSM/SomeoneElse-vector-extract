@@ -6,6 +6,7 @@ Handle `amenity=dressing_room`.
 Handle `amenity=reception_desk`.
 Handle `amenity=payment_terminal`.
 Added `amenity=prep_school` to list of nonspecific shops.
+Fixed bug whereby `oneway=no` was missed when deciding if a road was one way or not.
 
 ## 09/02/2026
 Include some `route=horse` along with `network=nhn` etc. to show horse routes.
