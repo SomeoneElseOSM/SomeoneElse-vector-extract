@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260210T214301Z",
+  "data_updated": "20260210T214303Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1947,6 +1947,7 @@
     { "key": "information", "value": "visitor_centre", "description": "Treated as information office" },
     { "key": "inscription", "description": "Appended to names of historic and boundary stones" },
     { "key": "intermittent", "description": "Intermittent waterways and wetland" },
+    { "key": "intermittent", "value": "dry", "description": "Intermittent waterways and wetland" },
     { "key": "intermittent", "value": "yes", "description": "Intermittent waterways and wetland" },
     { "key": "is_sidepath", "description": "Suppress names on roadside footpaths" },
     { "key": "is_sidepath", "value": "yes", "description": "Suppress names on roadside footpaths" },
@@ -2400,6 +2401,8 @@
     { "key": "monitoring:wind_speed", "description": "Detect wind speed monitoring stations" },
     { "key": "monitoring:wind_speed", "value": "yes", "description": "Detect wind speed monitoring stations" },
     { "key": "motorroad", "description": "Decide if a road with a shoulder should be considered as having a sidewalk" },
+    { "key": "motorcar", "description": "Detect whether a BOAT might have a TRO on it; if so, display as a restricted byway" },
+    { "key": "motorcar", "value": "no", "description": "Detect whether a BOAT might have a TRO on it; if so, display as a restricted byway" },
     { "key": "motor_vehicle", "description": "Detect whether a BOAT might have a TRO on it; if so, display as a restricted byway" },
     { "key": "motor_vehicle", "value": "no", "description": "Detect whether a BOAT might have a TRO on it; if so, display as a restricted byway" },
     { "key": "munro", "description": "Detect big peaks (munros) and prominent peaks" },
