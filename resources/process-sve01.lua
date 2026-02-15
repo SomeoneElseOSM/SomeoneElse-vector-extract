@@ -36,8 +36,8 @@ node_keys = { "abandoned:railway", "addr:housenumber", "advertising", "aerialway
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
               "office", "outlet", "pipeline", "pitch", "place", 
-              "place_of_worship", "playground", "police", "power", "railway", "ruined:building", "ruins:building", "shop", 
-              "sport", "tourism", "tunnel", "was:amenity", "waterway", "whitewater", "zoo" }
+              "place_of_worship", "playground", "police", "power", "railway", "ruined:building", "ruins:building", 
+              "seamark:type", "shop", "sport", "tourism", "tunnel", "was:amenity", "waterway", "whitewater", "zoo" }
 
 -- Initialize Lua logic
 
@@ -1441,6 +1441,7 @@ function update_table( passedt )
     passedt.scramble = Find("scramble")
     passedt["seamark:rescue_station:category"] = Find("seamark:rescue_station:category")
     passedt["seamark:type"] = Find("seamark:type")
+    passedt["seamark:wreck:water_level"] = Find("seamark:wreck:water_level")
     passedt.segregated = Find("segregated")
     passedt.service = Find("service")
     passedt.shop = Find("shop")

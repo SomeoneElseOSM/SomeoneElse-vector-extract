@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 15/02/2026
 Handle `amenity=dressing_room`.
 Handle `amenity=reception_desk`.
 Handle `amenity=payment_terminal`.
@@ -9,6 +9,7 @@ Added `amenity=prep_school` to list of nonspecific shops.
 Fixed bug whereby `oneway=no` was missed when deciding if a road was one way or not.
 Handle `intermittent=dry` as intermittent.
 Use `motorcar` on BOATs in the same way as `motor_vehicle` to check for TROs.
+Detect wrecks that have `seamark` and not `historic` tags.
 
 ## 09/02/2026
 Include some `route=horse` along with `network=nhn` etc. to show horse routes.
