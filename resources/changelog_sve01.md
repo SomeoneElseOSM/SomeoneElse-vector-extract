@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleeased
+Detect rocks that have `seamark` and not `natural` tags.
+
 ## 15/02/2026
 Handle `amenity=dressing_room`.
 Handle `amenity=reception_desk`.

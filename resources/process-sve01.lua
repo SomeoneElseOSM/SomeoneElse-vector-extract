@@ -151,6 +151,15 @@ function node_function()
    end
 
 -- ----------------------------------------------------------------------------
+-- Before we start doing comparisons that include natural=rock, make sure 
+-- that we have caught them all.
+--
+-- The code to do this is shared between nodes and ways here (vector) and also
+-- raster.
+-- ----------------------------------------------------------------------------
+   consolidate_rock_t( nodet )
+
+-- ----------------------------------------------------------------------------
 -- Change natural=bare_rock and natural=rocks on nodes to natural=rock
 -- So that an icon (the all-black, non-climbing boulder one) is displayed
 -- ----------------------------------------------------------------------------
@@ -603,6 +612,15 @@ function way_function()
       wayt.highway = "service"
       wayt.service = "driveway"
    end
+
+-- ----------------------------------------------------------------------------
+-- Before we start doing comparisons that include natural=rock, make sure 
+-- that we have caught them all.
+--
+-- The code to do this is shared between nodes and ways here (vector) and also
+-- raster.
+-- ----------------------------------------------------------------------------
+   consolidate_rock_t( wayt )
 
 -- ----------------------------------------------------------------------------
 -- natural=rock on ways to natural=bare_rock
@@ -1441,6 +1459,7 @@ function update_table( passedt )
     passedt.scramble = Find("scramble")
     passedt["seamark:rescue_station:category"] = Find("seamark:rescue_station:category")
     passedt["seamark:type"] = Find("seamark:type")
+    passedt["seamark:rock:water_level"] = Find("seamark:rock:water_level")
     passedt["seamark:wreck:water_level"] = Find("seamark:wreck:water_level")
     passedt.segregated = Find("segregated")
     passedt.service = Find("service")

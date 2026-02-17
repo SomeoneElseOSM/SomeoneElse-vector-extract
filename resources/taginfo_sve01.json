@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260215T152502Z",
+  "data_updated": "20260217T222601Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3020,7 +3020,10 @@
     { "key": "seamark:type", "value": "coastguard_station", "description": "Coast guards" },
     { "key": "seamark:type", "value": "marine_farm", "description": "Extract marine farms as commercial landuse" },
     { "key": "seamark:type", "value": "pipeline_submarine", "description": "Extract pipelines" },
+    { "key": "seamark:type", "value": "rock", "description": "Extract non-submerged rocks mapped as seammarks as 'historic=rock'  or 'natural=bare_rock' depending on whether node or way." },
     { "key": "seamark:type", "value": "wreck", "description": "Extract non-submerged wrecks mapped as seammarks not historic as 'historic=wreck'" },
+    { "key": "seamark:rock:water_level", "description": "Used to detect non-submerged rocks" },
+    { "key": "seamark:rock:water_level", "value": "submerged", "description": "Any value other than this is treated as not submerged" },
     { "key": "seamark:wreck:water_level", "description": "Used to detect non-submerged wrecks" },
     { "key": "seamark:wreck:water_level", "value": "submerged", "description": "Any value other than this is treated as not submerged" },
     { "key": "segregated", "description": "Decide if a road has a sidewalk" },
