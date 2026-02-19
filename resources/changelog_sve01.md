@@ -6,6 +6,7 @@ Detect rocks that have `seamark` and not `natural` tags.
 Detect slipways that have `seamark` and not `leisure` tags.
 Detect cranes that have `seamark` and not `man_made` tags.
 Detect taps that have `seamark` and not `man_made` tags.
+Detect toilets that have `seamark` and not `amenity` tags.
 
 ## 15/02/2026
 Handle `amenity=dressing_room`.
