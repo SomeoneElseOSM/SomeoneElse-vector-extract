@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleeased
 Detect rocks that have `seamark` and not `natural` tags.
 Detect slipways that have `seamark` and not `leisure` tags.
+Detect cranes that have `seamark` and not `man_made` tags.
 
 ## 15/02/2026
 Handle `amenity=dressing_room`.
