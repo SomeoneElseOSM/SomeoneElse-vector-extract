@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260220T174401Z",
+  "data_updated": "20260220T174402Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3014,6 +3014,11 @@
     { "key": "school", "value": "entrance", "description": "Detect school entrances" },
     { "key": "scramble", "description": "Extracted as intermediate path" },
     { "key": "scramble", "value": "yes", "description": "Extracted as intermediate path" },
+    { "key": "seamark:obstruction:category", "description": "Detect obstructions only mapped as seamarks" },
+    { "key": "seamark:obstruction:category", "value": "foul_area", "description": "Detect obstructions only mapped as seamarks" },
+    { "key": "seamark:obstruction:category", "value": "foul_ground", "description": "Detect obstructions only mapped as seamarks" },
+    { "key": "seamark:obstruction:water_level", "description": "Detect obstructions only mapped as seamarks" },
+    { "key": "seamark:obstruction:water_level", "value": "submerged", "description": "Detect obstructions only mapped as seamarks" },
     { "key": "seamark:rescue_station:category", "description": "Lifeboats" },
     { "key": "seamark:rescue_station:category", "value": "lifeboat_on_mooring", "description": "Lifeboats" },
     { "key": "seamark:small_craft_facility:category", "description": "Slipways and cranes" },

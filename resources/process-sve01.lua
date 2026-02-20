@@ -1457,6 +1457,8 @@ function update_table( passedt )
     passedt.sac_scale = Find("sac_scale")
     passedt.school = Find("school")
     passedt.scramble = Find("scramble")
+    passedt["seamark:obstruction:category"] = Find("seamark:obstruction:category")
+    passedt["seamark:obstruction:water_level"] = Find("seamark:obstruction:water_level")
     passedt["seamark:rescue_station:category"] = Find("seamark:rescue_station:category")
     passedt["seamark:small_craft_facility:category"] = Find("seamark:small_craft_facility:category")
     passedt["seamark:type"] = Find("seamark:type")
@@ -2086,6 +2088,27 @@ end -- append_edge_etc( passedt )
 -- "lock_gate" and "sluice_gate" are written to "linearbarrier".
 -- ----------------------------------------------------------------------------
 function way_after_waterway( passedt )
+-- ----------------------------------------------------------------------------
+-- Before we start doing comparisons that include waterway=floating_barrier, make sure 
+-- that we have caught them all.
+-- ----------------------------------------------------------------------------
+   if ((  passedt["seamark:type"]                    == "obstruction"  )  and
+       (  passedt["seamark:obstruction:category"]    ~= "foul_area"    )  and
+       (  passedt["seamark:obstruction:category"]    ~= "foul_ground"  )  and
+       (  passedt["seamark:obstruction:water_level"] ~= "submerged"    )  and
+       (( passedt.barrier                            == nil            )  or
+        ( passedt.barrier                            == ""             )) and
+       (( passedt.landuse                            == nil            )  or
+        ( passedt.landuse                            == ""             )) and
+       (( passedt.man_made                           == nil            )  or
+        ( passedt.man_made                           == ""             )) and
+       (( passedt.natural                            == nil            )  or
+        ( passedt.natural                            == ""             )) and
+       (( passedt.waterway                           == nil            )  or
+        ( passedt.waterway                           == ""             ))) then
+      passedt.waterway = "floating_barrier"
+   end
+
     if (( passedt.waterway ~= nil                ) and
         ( passedt.waterway ~= ""                 ) and
         ( passedt.waterway ~= "lock_gate"        ) and

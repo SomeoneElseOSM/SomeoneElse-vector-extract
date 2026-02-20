@@ -9,6 +9,7 @@ Detect taps that have `seamark` but not `man_made` tags.
 Detect toilets that have `seamark` but not `amenity` tags.
 Detect fuel that has `seamark` but not `amenity` tags.
 Detect platforms that have `seamark` but not `building` tags.
+Detect linear barriers that have `seamark` but not other tags.
 
 ## 15/02/2026
 Handle `amenity=dressing_room`.
