@@ -80,7 +80,8 @@ function node_function()
        ( nodet.ford == "intermittent"   ) or
        ( nodet.ford == "seasonal"       ) or
        ( nodet.ford == "stream"         ) or
-       ( nodet.ford == "tidal"          )) then
+       ( nodet.ford == "tidal"          ) or
+       ( nodet.ford == "boat"           )) then
       nodet.ford = "yes"
    end
 
@@ -454,7 +455,8 @@ function way_function()
        ( wayt.ford == "intermittent"   ) or
        ( wayt.ford == "seasonal"       ) or
        ( wayt.ford == "stream"         ) or
-       ( wayt.ford == "tidal"          )) then
+       ( wayt.ford == "tidal"          ) or
+       ( wayt.ford == "boat"           )) then
       wayt.ford = "yes"
    end
 

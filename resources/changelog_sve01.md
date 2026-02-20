@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleeased
+## 20/02/2026
 Detect rocks that have `seamark` but not `natural` tags.
 Detect slipways that have `seamark` but not `leisure` tags.
 Detect cranes that have `seamark` but not `man_made` tags.
@@ -10,6 +10,7 @@ Detect toilets that have `seamark` but not `amenity` tags.
 Detect fuel that has `seamark` but not `amenity` tags.
 Detect platforms that have `seamark` but not `building` tags.
 Detect linear barriers that have `seamark` but not other tags.
+Detect `ford=boat` as a ford.
 
 ## 15/02/2026
 Handle `amenity=dressing_room`.
