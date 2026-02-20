@@ -5,7 +5,7 @@ mbtiles that can be displayed with the svwd01 style [here](https://github.com/So
 
 As with the parent style, releases are simply datestamped.  At the time of updating this README, the most recent release was "20250706".  Roughly one "release" per month is made; it corresponds with the latest version of the committed code at that time.
 
-This only describes the schema and the data extraction that supports that schema.  See also the [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/resources/README_svwd01.md) for an example display style, and also the main project [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/README.md) for the top=level scripts.  Note that in order to keep vector tile sizes small, below vector zoom 14 decisions to exclude something from a layer tend to be made in here rather than the example display style.
+This only describes the schema and the data extraction that supports that schema.  See also the [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-web-display/blob/main/resources/README_svwd01.md) for an example display style, and also the main project [readme](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/README.md) for the top-level scripts.  Note that in order to keep vector tile sizes small, below vector zoom 14 decisions to exclude something from a layer tend to be made in here rather than the example display style.
 
 There are two files:
 
