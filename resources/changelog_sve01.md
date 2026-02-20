@@ -2,12 +2,13 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleeased
-Detect rocks that have `seamark` and not `natural` tags.
-Detect slipways that have `seamark` and not `leisure` tags.
-Detect cranes that have `seamark` and not `man_made` tags.
-Detect taps that have `seamark` and not `man_made` tags.
-Detect toilets that have `seamark` and not `amenity` tags.
-Detect fuel that has `seamark` and not `amenity` tags.
+Detect rocks that have `seamark` but not `natural` tags.
+Detect slipways that have `seamark` but not `leisure` tags.
+Detect cranes that have `seamark` but not `man_made` tags.
+Detect taps that have `seamark` but not `man_made` tags.
+Detect toilets that have `seamark` but not `amenity` tags.
+Detect fuel that has `seamark` but not `amenity` tags.
+Detect platforms that have `seamark` but not `building` tags.
 
 ## 15/02/2026
 Handle `amenity=dressing_room`.
@@ -17,7 +18,7 @@ Added `amenity=prep_school` to list of nonspecific shops.
 Fixed bug whereby `oneway=no` was missed when deciding if a road was one way or not.
 Handle `intermittent=dry` as intermittent.
 Use `motorcar` on BOATs in the same way as `motor_vehicle` to check for TROs.
-Detect wrecks that have `seamark` and not `historic` tags.
+Detect wrecks that have `seamark` but not `historic` tags.
 
 ## 09/02/2026
 Include some `route=horse` along with `network=nhn` etc. to show horse routes.
