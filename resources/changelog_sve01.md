@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Don't show `place=locality` that are `boundary=historic`.
+Suppress silly very long walking relation names on John Muir Way.
 
 ## 06/03/2026
 Removed `shop=pound`; no longer in the data.
