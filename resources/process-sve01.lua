@@ -1493,6 +1493,7 @@ function update_table( passedt )
     passedt.sqkm = Find("sqkm")
     passedt.station = Find("station")
     passedt.status = Find("status")
+    passedt.subject = Find("subject")
     passedt.substance = Find("substance")
     passedt.support = Find("support")
     passedt.surface = Find("surface")
@@ -3260,6 +3261,7 @@ function render_historic_land1( passedt )
         ( passedt.historic == "memorial"                 ) or
         ( passedt.historic == "memorialbench"            ) or
         ( passedt.historic == "memorialcross"            ) or
+        ( passedt.historic == "memorialghostbike"        ) or
         ( passedt.historic == "memorialgrave"            ) or
         ( passedt.historic == "memorialobelisk"          ) or
         ( passedt.historic == "memorialpavementplaque"   ) or
