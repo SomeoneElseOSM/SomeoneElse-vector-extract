@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260306T214401Z",
+  "data_updated": "20260306T214402Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -88,6 +88,7 @@
     { "key": "aerodrome:type", "value": "military", "description": "Military aerodromes are not treated as large airports" },
     { "key": "aeroway", "description": "Various 'aeroway' values written into 'land1' (mostly named) and 'land2' (mostly unnamed) layers" },
     { "key": "aeroway", "value": "aerodrome", "description": "Written into 'land1' or 'land2' at minzoom 12; centroid for name written separately" },
+    { "key": "aeroway", "value": "airstrip", "description": "Named airstrips are handled as aerodromes" },
     { "key": "aeroway", "value": "apron", "description": "Written into 'land1' or 'land2' at minzoom 12" },
     { "key": "aeroway", "value": "control_tower", "description": "Synonym for tower:type=aircraft_control" },
     { "key": "aeroway", "value": "fuel", "description": "Treated as amenity=fuel" },

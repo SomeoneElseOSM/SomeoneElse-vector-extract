@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Don't show `place=locality` that are `boundary=historic`.
 Suppress silly very long walking relation names on John Muir Way.
 Detect ghost bikes and handle as a special type of memorial.
+Handle named airstrips as aerodromes.
 
 ## 06/03/2026
 Removed `shop=pound`; no longer in the data.
