@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260306T214402Z",
+  "data_updated": "20260306T214403Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -99,6 +99,7 @@
     { "key": "aeroway", "value": "runway", "description": "Runways: depending on other tags (surface etc.) treated as normal or grass" },
     { "key": "aeroway", "value": "taxiway", "description": "Aerodrome taxiways" },
     { "key": "aeroway", "value": "terminal", "description": "Extract as airport terminals" },
+    { "key": "aeroway", "value": "tower", "description": "Synonym for tower:type=aircraft_control" },
     { "key": "aeroway", "value": "windsock", "description": "Extract windsocks" },
     { "key": "agrarian", "description": "Used to distinguish agricultural machinery and feed shops" },
     { "key": "agrarian", "value": "agricultural_machinery", "description": "Agricultural machinery shops" },
