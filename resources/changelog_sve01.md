@@ -1,13 +1,14 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 12/03/2026
 Don't show `place=locality` that are `boundary=historic`.
 Suppress silly very long walking relation names on John Muir Way.
 Detect ghost bikes and handle as a special type of memorial.
 Handle named airstrips as aerodromes.
 Handle `aeroway=tower` as aircraft control towers.
 Handle `barrier=floating_barrier` and `barrier=floating_boom` as `waterway=floating_barrier`.
+Fixed bug https://github.com/SomeoneElseOSM/openstreetmap-carto-AJT/issues/8 where `leisure=horse_riding` were no longer shown as `landuse=unnamedcommercial` if not grass.
 
 ## 06/03/2026
 Removed `shop=pound`; no longer in the data.
