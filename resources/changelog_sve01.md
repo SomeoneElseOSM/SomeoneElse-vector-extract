@@ -7,6 +7,7 @@ Suppress silly very long walking relation names on John Muir Way.
 Detect ghost bikes and handle as a special type of memorial.
 Handle named airstrips as aerodromes.
 Handle `aeroway=tower` as aircraft control towers.
+Handle `barrier=floating_barrier` and `barrier=floating_boom` as `waterway=floating_barrier`.
 
 ## 06/03/2026
 Removed `shop=pound`; no longer in the data.

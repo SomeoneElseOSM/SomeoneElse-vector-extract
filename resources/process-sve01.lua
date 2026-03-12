@@ -2097,6 +2097,19 @@ function way_after_waterway( passedt )
 -- Before we start doing comparisons that include waterway=floating_barrier, make sure 
 -- that we have caught them all.
 -- ----------------------------------------------------------------------------
+   if ((( passedt.barrier                         == "floating_barrier" )  or
+        ( passedt.barrier                         == "floating_boom"    )) and
+       (( passedt.landuse                         == nil                )  or
+        ( passedt.landuse                         == ""                 )) and
+       (( passedt.man_made                        == nil                )  or
+        ( passedt.man_made                        == ""                 )) and
+       (( passedt.natural                         == nil                )  or
+        ( passedt.natural                         == ""                 )) and
+       (( passedt.waterway                        == nil                )  or
+        ( passedt.waterway                        == ""                 ))) then
+      passedt.waterway = "floating_barrier"
+   end
+
    if ((  passedt["seamark:type"]                    == "obstruction"  )  and
        (  passedt["seamark:obstruction:category"]    ~= "foul_area"    )  and
        (  passedt["seamark:obstruction:category"]    ~= "foul_ground"  )  and
