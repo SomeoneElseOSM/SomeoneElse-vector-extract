@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260312T162102Z",
+  "data_updated": "20260316T234801Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2303,7 +2303,6 @@
     { "key": "maxwidth", "description": "Depending on context, go down a road class. Also changes path to track and vice versa." },
     { "key": "meadow", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "agricultural", "description": "Extract agricultural meadows as 'farm grass'" },
-    { "key": "meadow", "value": "agriculture", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "cut", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "hay", "description": "Extract agricultural meadows as 'farm grass'" },
     { "key": "meadow", "value": "managed", "description": "Extract agricultural meadows as 'farm grass'" },

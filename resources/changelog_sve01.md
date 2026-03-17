@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Removed `meadow=agriculture`; no longer in the data.
+
 ## 12/03/2026
 Don't show `place=locality` that are `boundary=historic`.
 Suppress silly very long walking relation names on John Muir Way.
