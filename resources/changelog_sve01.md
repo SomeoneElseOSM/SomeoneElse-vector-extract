@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Removed `meadow=agriculture`; no longer in the data.
+Removed `wheelchair=number of rooms`; no longer in the data.
 
 ## 12/03/2026
 Don't show `place=locality` that are `boundary=historic`.
