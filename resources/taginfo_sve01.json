@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260316T234801Z",
+  "data_updated": "20260318T221801Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1284,7 +1284,7 @@
     { "key": "diplomatic", "value": "consulate;embassy", "description": "Extracted as embassy" },
     { "key": "diplomatic", "value": "embassy", "description": "Extracted as embassy or office depending on subtag" },
     { "key": "diplomatic", "value": "embassy;consulate", "description": "Extracted as embassy" },
-    { "key": "diplomatic", "value": "embassy;mission", "description": "Extracted as embassy" },
+    { "key": "diplomatic", "value": "embassy;mission", "description": "Not a current value in OSM data.  Extracted as embassy" },
     { "key": "diplomatic", "value": "liaison", "description": "Extracted as office rather than as embassy" },
     { "key": "diplomatic", "value": "mission", "description": "Extracted as office rather than as embassy" },
     { "key": "diplomatic", "value": "non_diplomatic", "description": "Extracted as office rather than as embassy" },
