@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260322T000304Z",
+  "data_updated": "20260322T000305Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -4028,6 +4028,7 @@
     { "key": "tower:type", "value": "defensive", "description": "Classify various towers" },
     { "key": "tower:type", "value": "firefighter_training", "description": "Classify various towers" },
     { "key": "tower:type", "value": "hose", "description": "Classify various towers" },
+    { "key": "tower:type", "value": "intake", "description": "Classify various towers" },
     { "key": "tower:type", "value": "lighting", "description": "Classify various towers" },
     { "key": "tower:type", "value": "minaret", "description": "Classify various towers" },
     { "key": "tower:type", "value": "monument", "description": "Classify various towers" },
