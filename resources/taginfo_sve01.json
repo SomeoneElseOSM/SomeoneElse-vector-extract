@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260322T000309Z",
+  "data_updated": "20260322T000310Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1212,7 +1212,8 @@
     { "key": "departures_board", "value": "timetable", "description": "Some sort of fixed timetable" },
     { "key": "departures_board", "value": "timetable; realtime", "description": "Some sort of realtime display" },
     { "key": "departures_board", "value": "timetable;realtime", "description": "Some sort of realtime display" },
-    { "key": "departures_board", "value": "yes", "description": "At timetable" },
+    { "key": "departures_board", "value": "yes", "description": "Some sort of fixed timetable" },
+    { "key": "departures_board", "value": "yes;delay;realtime;timetable", "description": "Some sort of realtime display" },
     { "key": "departures_board:speech_output", "description": "Is there a button you can press to hear bus times" },
     { "key": "departures_board:speech_output", "value": "yes", "description": "There is speech output of bus times" },
     { "key": "description:floor", "description": "Detect noncarpeted pub floors" },
