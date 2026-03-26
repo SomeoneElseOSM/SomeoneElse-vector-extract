@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260322T000308Z",
+  "data_updated": "20260322T000309Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -4259,7 +4259,6 @@
     { "key": "wheelchair", "value": "limited, notice required", "description": "Handled as wheelchair=limited" },
     { "key": "wheelchair", "value": "no", "description": "Extract the wheelchair-friendliness of pubs" },
     { "key": "wheelchair", "value": "no space", "description": "Handled as wheelchair=no" },
-    { "key": "wheelchair", "value": "number of rooms", "description": "Handled as wheelchair=yes" },
     { "key": "wheelchair", "value": "official", "description": "Handled as wheelchair=yes" },
     { "key": "wheelchair", "value": "on request", "description": "Handled as wheelchair=yes" },
     { "key": "wheelchair", "value": "only", "description": "Handled as wheelchair=yes" },
