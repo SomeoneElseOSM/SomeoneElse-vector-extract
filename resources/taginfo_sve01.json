@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260322T000310Z",
+  "data_updated": "20260322T000311Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1387,6 +1387,7 @@
     { "key": "expressway", "description": "Decide if a road with a shoulder should be considered as having a sidewalk" },
     { "key": "farmland", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "animal_keeping", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
+    { "key": "farmland", "value": "arable", "description": "If set on 'landuse=meadow`, extract as grassy farmland, 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "crofts", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "crofts", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "equestrian", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
@@ -1400,6 +1401,7 @@
     { "key": "farmland", "value": "pasture", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "pasture;heath", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "pasture;wetland", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
+    { "key": "farmland", "value": "rough_pasture", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "scrub", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "turf", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
     { "key": "farmland", "value": "turf_production", "description": "Extract grassy farmland as 'farmgrass', a value designed to be mid-way between meadow and farmland" },
