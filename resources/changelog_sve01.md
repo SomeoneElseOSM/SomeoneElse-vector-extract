@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 28/03/2026
 Handle `tower:type=clock_tower` as an alias for `tower:type=clock`.
 Handle `tower:type=pagoda` in the same way as `tower:type=spire`.
 Handle `tower:type=monument` in the same way as `historic=monument`.
