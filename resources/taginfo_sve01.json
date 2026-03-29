@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260329T163101Z",
+  "data_updated": "20260329T163103Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -16,6 +16,7 @@
     { "key": "abandoned:amenity", "value": "pub", "description": "Obscure tagging used for former pubs" },
     { "key": "abandoned:amenity", "value": "telephone", "description": "Obscure tagging used for former telephones" },
     { "key": "abandoned:railway", "description": "Detect former railway stations" },
+    { "key": "abandoned:railway", "value": "halt", "description": "Treat former railway stations as historic items" },
     { "key": "abandoned:railway", "value": "narrow_guage", "description": "Synonym for 'railway=abandoned'.  Extracted as an abandoned railway" },
     { "key": "abandoned:railway", "value": "rail", "description": "Synonym for 'railway=abandoned'.  Extracted as an abandoned railway" },
     { "key": "abandoned:railway", "value": "station", "description": "Treat former railway stations as historic items" },
@@ -1334,6 +1335,7 @@
     { "key": "disused:pub", "description": "Former pubs are extracted as closed pubs if no other tag applies" },
     { "key": "disused:pub", "value": "yes", "description": "Former pubs are extracted as closed pubs if no other tag applies" },
     { "key": "disused:railway", "description": "Former railway stations extracted as nonspecific historical objects" },
+    { "key": "disused:railway", "value": "halt", "description": "Former railway stations extracted as nonspecific historical objects" },
     { "key": "disused:railway", "value": "rail", "description": "Treated as disused railway" },
     { "key": "disused:railway", "value": "station", "description": "Former railway stations extracted as nonspecific historical objects" },
     { "key": "disused:railway", "value": "water_crane", "description": "Extracted as historic water cranes" },
@@ -1865,6 +1867,7 @@
     { "key": "historic:civilization", "value": "prehistoric", "description": "Used to detect forts that are archeological rather than historic" },
     { "key": "historic:name", "description": "Name of derelict canals" },
     { "key": "historic:railway", "description": "Detect historic railway stations" },
+    { "key": "historic:railway", "value": "halt", "description": "Detect historic railway stations" },
     { "key": "historic:railway", "value": "station", "description": "Detect historic railway stations" },
     { "key": "historic:railway", "value": "station_site", "description": "Detect historic railway stations" },
     { "key": "historic:waterway", "description": "Detect derelict canals" },

@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Handle `abandoned:railway=narrow_gauge` as `railway=abandoned`.
+Handle `abandoned:railway=halt` `disused:railway=halt` and `historic:railway=halt` as `disused:railway=station`.
 
 ## 28/03/2026
 Handle `tower:type=clock_tower` as an alias for `tower:type=clock`.
