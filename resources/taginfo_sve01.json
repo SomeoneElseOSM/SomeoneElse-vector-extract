@@ -17,7 +17,7 @@
     { "key": "abandoned:amenity", "value": "telephone", "description": "Obscure tagging used for former telephones" },
     { "key": "abandoned:railway", "description": "Detect former railway stations" },
     { "key": "abandoned:railway", "value": "halt", "description": "Treat former railway stations as historic items" },
-    { "key": "abandoned:railway", "value": "narrow_guage", "description": "Synonym for 'railway=abandoned'.  Extracted as an abandoned railway" },
+    { "key": "abandoned:railway", "value": "narrow_gauge", "description": "Synonym for 'railway=abandoned'.  Extracted as an abandoned railway" },
     { "key": "abandoned:railway", "value": "rail", "description": "Synonym for 'railway=abandoned'.  Extracted as an abandoned railway" },
     { "key": "abandoned:railway", "value": "station", "description": "Treat former railway stations as historic items" },
     { "key": "abandoned:waterway", "description": "Former canals" },
