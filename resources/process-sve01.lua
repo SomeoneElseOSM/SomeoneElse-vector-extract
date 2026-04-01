@@ -24,6 +24,7 @@
 --      /usr/local/share/lua/5.3/
 -- ----------------------------------------------------------------------------
 require "shared_lua_vector"
+local utf8 = require "utf8"
 
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "abandoned:railway", "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
