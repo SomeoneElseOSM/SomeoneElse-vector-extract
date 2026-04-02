@@ -3039,6 +3039,7 @@
     { "key": "sac_scale", "value": "demanding_alpine_hiking", "description": "Suppress some unfeasible walking paths wth no explicit PRoW" },
     { "key": "sac_scale", "value": "difficult_alpine_hiking", "description": "Suppress some unfeasible walking paths wth no explicit PRoW" },
     { "key": "school", "description": "Detect school entrances" },
+    { "key": "school", "value": "art", "description": "Handle art schools as generic offices" },
     { "key": "school", "value": "entrance", "description": "Detect school entrances" },
     { "key": "scramble", "description": "Extracted as intermediate path" },
     { "key": "scramble", "value": "yes", "description": "Extracted as intermediate path" },

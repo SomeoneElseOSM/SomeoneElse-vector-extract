@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Handle `school=art` as `office=yes`.
+
 ## 01/04/2026
 Handle `abandoned:railway=narrow_gauge` as `railway=abandoned`.
 Handle `abandoned:railway=halt` `disused:railway=halt` and `historic:railway=halt` as `disused:railway=station`.
