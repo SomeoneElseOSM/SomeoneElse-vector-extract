@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Handle `school=art` as `office=yes`.
+If both `place` and `tourism` are set, pick the most appropriate one to keep.
 
 ## 01/04/2026
 Handle `abandoned:railway=narrow_gauge` as `railway=abandoned`.
