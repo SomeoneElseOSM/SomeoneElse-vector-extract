@@ -6,6 +6,7 @@ Handle `school=art` as `office=yes`.
 If both `place` and `tourism` are set, pick the most appropriate one to keep.
 A key-pad indicates a locked gate.
 Signalised crossings are now written through as a distinct value, to allow renderers to differentiate.
+Towers that are also historic fortifications or ruins are now shown as the latter.
 
 ## 01/04/2026
 Handle `abandoned:railway=narrow_gauge` as `railway=abandoned`.
