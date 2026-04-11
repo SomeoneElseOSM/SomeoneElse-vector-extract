@@ -1752,7 +1752,28 @@ function generic_after_building( passedt )
             Attribute( "housename", passedt["addr:housename"] )
         end
 
-        MinZoom( 11 )
+-- ----------------------------------------------------------------------------
+-- Some example sizes:                         Vector way area
+-- w18926167  | Dagenham Engine Plant        |  179122
+-- r1895281   | The O2                       |   84625 
+-- w200652378 | Brent Cross Shopping Centre  |   42724
+-- w357278392 | Sainsbury's                  |   19051
+-- w227053396 | Wanis Cash and Carry         |    9994
+-- w30327519  | Barking Bus Garage           |    4922
+-- ----------------------------------------------------------------------------
+        if ( passedt.way_area > 5000 ) then
+            MinZoom( 11 )
+        else
+            if ( passedt.way_area > 2500 ) then
+                MinZoom( 12 )
+            else
+                if ( passedt.way_area > 1250 ) then
+                    MinZoom( 13 )
+                else
+                    MinZoom( 14 )
+                end
+            end
+        end
     end
 end -- generic_after_building()
 

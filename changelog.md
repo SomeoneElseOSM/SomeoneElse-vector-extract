@@ -1,6 +1,9 @@
 # Changes made to the scripts at the top level of [this repository](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/README.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/changelog_sve01.md) for the schema.
 
+## 11/04/2026
+Added new script "analyse_apache_logs.sh" to report on largest tile size at each zoom level.
+
 ## 26/04/2025
 Both "update_vector" scripts now use "nice -n 15" to inhibit e.g. raster tile serving less.
 

@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## 11/04/2026
+Buildings are now written to low-zoom layers only if large enough.  The largest ones are written to z11 (as before), more to z12 and z13 and all to z14.
+
 ## 10/04/2026
 Handle `school=art` as `office=yes`.
 If both `place` and `tourism` are set, pick the most appropriate one to keep.
