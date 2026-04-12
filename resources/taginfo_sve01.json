@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260412T122201Z",
+  "data_updated": "20260412T122203Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2351,6 +2351,7 @@
     { "key": "memorial", "value": "blue_plaque", "description": "Extracted as memorial plaque" },
     { "key": "memorial", "value": "cairn", "description": "Extracted as memorial cairn" },
     { "key": "memorial", "value": "celtic_cross", "description": "Extracted as memorial cross" },
+    { "key": "memorial", "value": "column", "description": "Extracted as memorial obelisk" },
     { "key": "memorial", "value": "cross", "description": "Extracted as memorial cross" },
     { "key": "memorial", "value": "cross;stone", "description": "Extracted as memorial cross" },
     { "key": "memorial", "value": "grave", "description": "Extracted as memorial grave" },
@@ -2364,6 +2365,7 @@
     { "key": "memorial", "value": "plate", "description": "Not a current value in OSM data.  Extracted as memorial plate" },
     { "key": "memorial", "value": "sculpture", "description": "Extracted as memorial sculpture" },
     { "key": "memorial", "value": "statue", "description": "Extracted as memorial statue" },
+    { "key": "memorial", "value": "stele", "description": "Extracted as memorial stone" },
     { "key": "memorial", "value": "stone", "description": "Extracted as memorial stone" },
     { "key": "memorial", "value": "tablet", "description": "Extracted as memorial plate" },
     { "key": "memorial", "value": "war_memorial", "description": "Extracted as war memorial" },
