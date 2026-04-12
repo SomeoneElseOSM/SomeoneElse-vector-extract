@@ -8,6 +8,7 @@ Detect `memorial=cairn` and handle as a special type of memorial.
 Treat `memorial=stele` like `memorial=stone`.
 Treat `memorial=column` like `memorial=obelisk`.
 Added some more `disused:amenity` to the "ignore" list.
+Detect `traffic_signals:sound` and `traffic_signals:vibration`.
 
 ## 11/04/2026
 Buildings are now written to low-zoom layers only if large enough.  The largest ones are written to z11 (as before), more to z12 and z13 and all to z14.

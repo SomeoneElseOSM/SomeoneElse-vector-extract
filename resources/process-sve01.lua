@@ -1524,6 +1524,8 @@ function update_table( passedt )
     passedt.tpuk_ref = Find("tpuk_ref")
     passedt.trade = Find("trade")
     passedt.traffic_calming = Find("traffic_calming")
+    passedt["traffic_signals:sound"] = Find("traffic_signals:sound")
+    passedt["traffic_signals:vibration"] = Find("traffic_signals:vibration")
     passedt.trail_visibility = Find("trail_visibility")
     passedt.tunnel = Find("tunnel")
     passedt["tunnel:name"] = Find("tunnel:name")
@@ -3146,22 +3148,25 @@ function render_highway_land1( passedt )
             append_name( passedt )
             MinZoom( 14 )
         else
-            if (( passedt.highway == "board_realtime"            ) or
-                ( passedt.highway == "bus_stop_nothing"          ) or
-                ( passedt.highway == "bus_stop_pole"             ) or
-                ( passedt.highway == "bus_stop_disused_pole"     ) or
-                ( passedt.highway == "bus_stop_timetable"        ) or
-                ( passedt.highway == "bus_stop_realtime"         ) or
-                ( passedt.highway == "bus_stop_speech_timetable" ) or
-                ( passedt.highway == "bus_stop_speech_realtime"  ) or
-                ( passedt.highway == "elevator"                  ) or
-                ( passedt.highway == "traffic_signals"           ) or
-                ( passedt.highway == "signalised_crossing"       ) or
-                ( passedt.highway == "streetlamp_electric"       ) or
-                ( passedt.highway == "streetlamp_gas"            ) or
-                ( passedt.highway == "crossing"                  ) or
-                ( passedt.highway == "milestone"                 ) or
-                ( passedt.highway == "mini_roundabout"           )) then
+            if (( passedt.highway == "board_realtime"                     ) or
+                ( passedt.highway == "bus_stop_nothing"                   ) or
+                ( passedt.highway == "bus_stop_pole"                      ) or
+                ( passedt.highway == "bus_stop_disused_pole"              ) or
+                ( passedt.highway == "bus_stop_timetable"                 ) or
+                ( passedt.highway == "bus_stop_realtime"                  ) or
+                ( passedt.highway == "bus_stop_speech_timetable"          ) or
+                ( passedt.highway == "bus_stop_speech_realtime"           ) or
+                ( passedt.highway == "elevator"                           ) or
+                ( passedt.highway == "traffic_signals"                    ) or
+                ( passedt.highway == "signalised_crossing"                ) or
+                ( passedt.highway == "signalised_sound_crossing"          ) or
+                ( passedt.highway == "signalised_vibration_crossing"      ) or
+                ( passedt.highway == "signalised_soundvibration_crossing" ) or
+                ( passedt.highway == "streetlamp_electric"                ) or
+                ( passedt.highway == "streetlamp_gas"                     ) or
+                ( passedt.highway == "crossing"                           ) or
+                ( passedt.highway == "milestone"                          ) or
+                ( passedt.highway == "mini_roundabout"                    )) then
                 Layer( "land1", true )
                 Attribute( "class", "highway_" .. passedt.highway )
                 append_name( passedt )
