@@ -2364,6 +2364,7 @@
     { "key": "memorial", "value": "sculpture", "description": "Extracted as memorial sculpture" },
     { "key": "memorial", "value": "statue", "description": "Extracted as memorial statue" },
     { "key": "memorial", "value": "stone", "description": "Extracted as memorial stone" },
+    { "key": "memorial", "value": "tablet", "description": "Extracted as memorial plate" },
     { "key": "memorial", "value": "war_memorial", "description": "Extracted as war memorial" },
     { "key": "memorial:type", "description": "Extract different memorial types differently" },
     { "key": "memorial:type", "value": "obelisk", "description": "Extracted as memorial obelisk" },

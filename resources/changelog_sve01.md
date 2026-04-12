@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Treat `war_memorial=yes` as a war_memorial if no other type fits.
+Treat `memorial=tablet` like `memorial=plate`.
 
 ## 11/04/2026
 Buildings are now written to low-zoom layers only if large enough.  The largest ones are written to z11 (as before), more to z12 and z13 and all to z14.
