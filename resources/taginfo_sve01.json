@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260410T010101Z",
+  "data_updated": "20260412T122201Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2349,6 +2349,7 @@
     { "key": "memorial", "description": "Extract different memorial types differently" },
     { "key": "memorial", "value": "bench", "description": "Extracted as memorial bench" },
     { "key": "memorial", "value": "blue_plaque", "description": "Extracted as memorial plaque" },
+    { "key": "memorial", "value": "cairn", "description": "Extracted as memorial cairn" },
     { "key": "memorial", "value": "celtic_cross", "description": "Extracted as memorial cross" },
     { "key": "memorial", "value": "cross", "description": "Extracted as memorial cross" },
     { "key": "memorial", "value": "cross;stone", "description": "Extracted as memorial cross" },

@@ -3305,6 +3305,7 @@ function render_historic_land1( passedt )
         ( passedt.historic == "kiln"                     ) or
         ( passedt.historic == "memorial"                 ) or
         ( passedt.historic == "memorialbench"            ) or
+        ( passedt.historic == "memorialcairn"            ) or
         ( passedt.historic == "memorialcross"            ) or
         ( passedt.historic == "memorialghostbike"        ) or
         ( passedt.historic == "memorialgrave"            ) or
