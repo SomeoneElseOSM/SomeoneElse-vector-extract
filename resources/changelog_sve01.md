@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Treat `war_memorial=yes` as a war_memorial if no other type fits.
+
 ## 11/04/2026
 Buildings are now written to low-zoom layers only if large enough.  The largest ones are written to z11 (as before), more to z12 and z13 and all to z14.
 

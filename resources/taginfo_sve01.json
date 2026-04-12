@@ -4175,6 +4175,8 @@
     { "key": "volcano:status", "value": "extinct", "description": "Detect extinct volcanos" },
     { "key": "wall", "description": "Extract castle walls as city walls" },
     { "key": "wall", "value": "castle_wall", "description": "Extract castle walls as city walls" },
+    { "key": "war_memorial", "description": "Extract war_memorials" },
+    { "key": "war_memorial", "value": "yes", "description": "Extracted as war memorial" },
     { "key": "was:aeroway", "description": "Handle disused version of tag" },
     { "key": "was:aeroway", "value": "aerodrome", "description": "Handle disused version of tag (actual action depends on value)" },
     { "key": "was:aeroway", "value": "runway", "description": "Handle disused version of tag (actual action depends on value)" },
