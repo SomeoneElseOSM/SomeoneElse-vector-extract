@@ -10,6 +10,9 @@ Treat `memorial=column` like `memorial=obelisk`.
 Added some more `disused:amenity` to the "ignore" list.
 Detect `traffic_signals:sound` and `traffic_signals:vibration`.
 Treat `area:highway=steps` similarly to `area:highway=traffic_island`.  It's mapped to kerb so that a renderer can put a small black line around it.
+Raster has always had `railway=rail` sidings and yards as less prominent than other `railway=rail`.  
+This has now been applied to vector (as `railway=railminor` in the schema).
+`railway:traffic_mode=freight` is also treated as `railminor`.
 
 ## 11/04/2026
 Buildings are now written to low-zoom layers only if large enough.  The largest ones are written to z11 (as before), more to z12 and z13 and all to z14.
