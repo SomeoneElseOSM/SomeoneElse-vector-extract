@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 17/04/2026
 Treat `war_memorial=yes` as a war_memorial if no other type fits.
 Treat `memorial=tablet` like `memorial=plate`.
 Detect `memorial=cairn` and handle as a special type of memorial.
