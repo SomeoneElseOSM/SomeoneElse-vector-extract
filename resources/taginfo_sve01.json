@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260412T122207Z",
+  "data_updated": "20260412T122208Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1887,6 +1887,8 @@
     { "key": "icao", "description": "Split large/small and public/private heliports, if 'iata' not present" },
     { "key": "indoor", "description": "Assume indoor defibrillators are only accessible by customers" },
     { "key": "indoor", "value": "yes", "description": "Assume indoor defibrillators are only accessible by customers" },
+    { "key": "indoor_seating", "description": "Set alleged cafes with no seating to fast food" },
+    { "key": "indoor_seating", "value": "yes", "description": "Set alleged cafes with no seating to fast food" },
     { "key": "industrial", "description": "Subdivisions of industrial areas" },
     { "key": "industrial", "value": "auto_wrecker", "description": "Extracted as named industrial landuse" },
     { "key": "industrial", "value": "automotive_industry", "description": "Extracted as named industrial landuse" },
