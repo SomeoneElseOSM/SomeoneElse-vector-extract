@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-If a cafe has no seating, it is probably fast_food.
+If a cafe or a restaurant has no seating, it is probably fast_food.
 
 ## 17/04/2026
 Treat `war_memorial=yes` as a war_memorial if no other type fits.
