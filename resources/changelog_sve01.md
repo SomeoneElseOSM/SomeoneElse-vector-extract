@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 If a cafe or a restaurant has no seating, it is probably fast_food.
+Removed `cycleway:left=separate track`; no longer in the data.
 
 ## 17/04/2026
 Treat `war_memorial=yes` as a war_memorial if no other type fits.
