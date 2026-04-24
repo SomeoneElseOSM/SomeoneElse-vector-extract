@@ -1996,6 +1996,7 @@ function wr_after_highway( passedt )
                             ( passedt.highway == "steps"              ) or
                             ( passedt.highway == "road"               ) or
                             ( passedt.highway == "pathwide"           ) or
+                            ( passedt.highway == "goodpathnarrow"     ) or
                             ( passedt.highway == "pathnarrow"         ) or
                             ( passedt.highway == "intpathwide"        ) or
                             ( passedt.highway == "intpathnarrow"      ) or
@@ -3134,14 +3135,15 @@ end -- render_office_land1()
 -- to be areas, only if area=yes tag.
 -- ----------------------------------------------------------------------------
 function render_highway_land1( passedt )
-    if (((  passedt.highway == "pedestrian"  )  and
-         (  passedt.area    ~= "no"          )  and
-         (  passedt.is_closed                )) or
-        ((( passedt.highway == "service"    )   or
-          ( passedt.highway == "pathnarrow" )   or
-          ( passedt.highway == "pathwide"   ))  and
-         (  passedt.area    == "yes"         )  and
-         (  passedt.is_closed                ))) then
+    if (((  passedt.highway == "pedestrian"      )  and
+         (  passedt.area    ~= "no"              )  and
+         (  passedt.is_closed                    )) or
+        ((( passedt.highway == "service"        )   or
+          ( passedt.highway == "goodpathnarrow" )   or
+          ( passedt.highway == "pathnarrow"     )   or
+          ( passedt.highway == "pathwide"       ))  and
+         (  passedt.area    == "yes"             )  and
+         (  passedt.is_closed                    ))) then
         write_polygon_and_centroid( "land1", passedt, "highway_", passedt.highway, 12 )
     else
         if ( passedt.highway == "ford" ) then

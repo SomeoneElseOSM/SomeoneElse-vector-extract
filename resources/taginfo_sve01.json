@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260412T122209Z",
+  "data_updated": "20260424T014901Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3947,6 +3947,7 @@
     { "key": "support", "value": "pillar", "description": "Detect clock towers and pedestal clocks" },
     { "key": "support", "value": "tower", "description": "Detect clock towers and pedestal clocks" },
     { "key": "surface", "description": "Extract gravel residentials etc. as tracks; show grass beer gardens" },
+    { "key": "surface", "value": "asphalt", "description": "Considered a good path surface" },
     { "key": "surface", "value": "bare_rock", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "concrete", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "dirt", "description": "Used to determine if roads are unpaved" },
@@ -3958,6 +3959,7 @@
     { "key": "surface", "value": "gravel", "description": "Extract gravel residential an service roads as lower quality; show wetlands based on the surface that is set" },
     { "key": "surface", "value": "ground", "description": "Used to determine if roads are unpaved" },
     { "key": "surface", "value": "mud", "description": "Extract wetlands based on the surface that is set" },
+    { "key": "surface", "value": "paved", "description": "Considered a good path surface" },
     { "key": "surface", "value": "pebblestone", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "rock", "description": "Extract wetlands based on the surface that is set" },
     { "key": "surface", "value": "sand", "description": "Extract wetlands based on the surface that is set" },
