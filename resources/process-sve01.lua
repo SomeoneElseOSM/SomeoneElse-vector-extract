@@ -682,10 +682,11 @@ function way_function()
     end
 
 -- ----------------------------------------------------------------------------
--- Dam areas.  Extract as an explicit area feature.
+-- Dam areas.  Extract as an explicit area feature unless not an area.
 -- ----------------------------------------------------------------------------
    if ((  wayt.waterway == "dam" ) and
        (  wayt.is_closed         ) and
+       (  wayt.area     ~= "no"  ) and
        (( wayt.building == nil  )  or
         ( wayt.building == ""   ))) then
         wayt.waterway = "damarea"
@@ -1087,10 +1088,11 @@ function rf_2( relationt )
    end
 
 -- ----------------------------------------------------------------------------
--- Dam areas.  Extract as an explicit area feature.
+-- Dam areas.  Extract as an explicit area feature unless not an area.
 -- ----------------------------------------------------------------------------
    if ((  relationt.waterway == "dam" ) and
        (  relationt.is_closed         ) and
+       (  relationt.area     ~= "no"  ) and
        (( relationt.building == nil  )  or
         ( relationt.building == ""   ))) then
         relationt.waterway = "damarea"

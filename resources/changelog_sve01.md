@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Fix bug where some circular dams were incorrectly detected as areas.
+
 ## 24/04/2026
 If a cafe or a restaurant has no seating, it is probably fast_food.
 Removed `cycleway:left=separate track`; no longer in the data.
