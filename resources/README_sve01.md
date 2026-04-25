@@ -93,7 +93,9 @@ Other `highway` values are calculated from a combination of OSM tags, such as `h
 * `driveway`.  Used for "less important" service roads without a `designation` and with `service=driveway`, `parking_aisle`, or `drive_through`.
 * `steps`.  Used for `steps` without a `designation`.
 * `road`.  Used for `highway=road`.
+* `goodpathwide`.  Used for tracks or paths >= 2m wide without a `designation`, with a "good" surface.
 * `pathwide`.  Used for tracks or paths >= 2m wide without a `designation`.
+* `goodpathnarrow`.  Used for tracks or paths < 2m wide without a `designation`, with a "good" surface.
 * `pathnarrow`.  Used for tracks or paths < 2m wide without a `designation`.
 * `intpathwide`.  Like `pathwide`, but with `intermediate` `trail_visibility`.
 * `intpathnarrow`.  Like `pathnarrow`, but with `intermediate` `trail_visibility`.

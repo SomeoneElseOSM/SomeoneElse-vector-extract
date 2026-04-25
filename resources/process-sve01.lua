@@ -1997,6 +1997,7 @@ function wr_after_highway( passedt )
                             ( passedt.highway == "driveway"           ) or
                             ( passedt.highway == "steps"              ) or
                             ( passedt.highway == "road"               ) or
+                            ( passedt.highway == "goodpathwide"       ) or
                             ( passedt.highway == "pathwide"           ) or
                             ( passedt.highway == "goodpathnarrow"     ) or
                             ( passedt.highway == "pathnarrow"         ) or
@@ -3143,6 +3144,7 @@ function render_highway_land1( passedt )
         ((( passedt.highway == "service"        )   or
           ( passedt.highway == "goodpathnarrow" )   or
           ( passedt.highway == "pathnarrow"     )   or
+          ( passedt.highway == "goodpathwide"   )   or
           ( passedt.highway == "pathwide"       ))  and
          (  passedt.area    == "yes"             )  and
          (  passedt.is_closed                    ))) then

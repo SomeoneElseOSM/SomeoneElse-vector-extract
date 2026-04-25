@@ -3,11 +3,12 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Fix bug where some circular dams were incorrectly detected as areas.
+Extract "good surface" wide paths differently so that a different rendering style can be used.
 
 ## 24/04/2026
 If a cafe or a restaurant has no seating, it is probably fast_food.
 Removed `cycleway:left=separate track`; no longer in the data.
-Change dash array for "good surface" narrow paths.
+Extract "good surface" narrow paths differently so that a different rendering style can be used.
 
 ## 17/04/2026
 Treat `war_memorial=yes` as a war_memorial if no other type fits.
