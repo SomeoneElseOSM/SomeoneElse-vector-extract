@@ -3220,7 +3220,7 @@ function render_railway_land1( passedt )
         Layer( "land1", true )
         Attribute( "class", "railway_" .. passedt.railway )
         append_name( passedt )
-        MinZoom( 11 )
+        MinZoom( 7 )
     else
         if (( passedt.railway == "halt"      ) or
             ( passedt.railway == "tram_stop" )) then

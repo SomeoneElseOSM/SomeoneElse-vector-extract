@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Fix bug where some circular dams were incorrectly detected as areas.
 Extract "good surface" wide paths differently so that a different rendering style can be used.
+Extract railway stations from zoom 7
 
 ## 24/04/2026
 If a cafe or a restaurant has no seating, it is probably fast_food.

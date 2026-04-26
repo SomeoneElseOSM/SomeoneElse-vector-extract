@@ -148,7 +148,10 @@ Highways are also checked to see if they are also `railway=tram`.  If that is al
 
 See below for attributes of highways also written out if set include:
 
-As well as highways, the value of `railway` is wrtten out for non-area `railway` objects from vector zoom 6.  Non-linear `railway` objects are written to `land1` not here.  Some other changes are made:
+As well as highways, the value of `railway` is wrtten out for non-area `railway` objects from vector zoom 6.  
+It is expected that only railway-specific maps will want to show linear rail at that low a zoom, so others will likely want to use a `minzoom` of 8 or so (if showing "low zoom rail") or perhaps 11 if not.
+Non-linear `railway` objects are written to `land1` not here.  
+Some other changes are made:
 
 * `highway=bus_guideway` and `highway=busway` are handled as `railway=bus_guideway`.  
 * `historic=inclined_plane` and `historic=tramway` are handled as `railway=abandoned`.
@@ -501,9 +504,10 @@ Note that linear ones are handled in `transportation`.
 
 These include `passing_place` and are written out as area features at vector zoom 14.
 
-### Zoom 11 `railway` in `land1`.
+### Zoom 7 `railway` in `land1`.
 
 `railway=station` is written as an area feature.
+It is expected that only railway-specific maps will want to show stations at that low a zoom, so others will likely want to use a `minzoom` of 11 or so.
 
 ### Zoom 12 `railway` in `land1`.
 
