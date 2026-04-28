@@ -1799,7 +1799,7 @@ function wr_after_transportation( passedt )
         wr_after_highway( passedt )
 
 -- ----------------------------------------------------------------------------
--- Something that is a railway might also be a tram?
+-- Something that is a highway might also be a tram?
 -- ----------------------------------------------------------------------------
         if (( passedt.railway == "tram" ) and
             ( passedt.area    ~= "yes"  )) then
