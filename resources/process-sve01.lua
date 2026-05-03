@@ -3216,7 +3216,8 @@ function render_highway_land1( passedt )
 end -- render_highway_land1()
 
 function render_railway_land1( passedt )
-    if ( passedt.railway == "station" ) then
+    if (( passedt.railway == "station"     ) or
+        ( passedt.railway == "tubestation" )) then
         Layer( "land1", true )
         Attribute( "class", "railway_" .. passedt.railway )
         append_name( passedt )
@@ -3252,7 +3253,7 @@ function render_railway_land1( passedt )
                 end -- railway=turntable 14
             end -- railway=platform 14
         end -- railway=halt 12
-    end -- railway=station 11
+    end -- railway=station 7
 end -- render_railway_land1()
 
 
