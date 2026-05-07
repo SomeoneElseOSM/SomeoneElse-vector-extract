@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Regular railway stations (`railway=station`) are still extracted as such, but those with `station=subway` are now extracted as `railway=tubestation`.  
+Detect historic kilns that are mapped as `man_made` with `disused=yes` and `disused:man_made`.
 
 ## 26/04/2026
 Fix bug where some circular dams were incorrectly detected as areas.

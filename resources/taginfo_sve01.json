@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260424T121601Z",
+  "data_updated": "20260507T212401Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1328,6 +1328,7 @@
     { "key": "disused:landuse", "value": "quarry", "description": "Disused quarries are still extracted as quarries" },
     { "key": "disused:man_made", "description": "Disused mines are extracted as historic mines" },
     { "key": "disused:man_made", "value": "adit", "description": "Disused mines are treated as historic mines" },
+    { "key": "disused:man_made", "value": "kiln", "description": "Disused kilns are treated as historic kilns" },
     { "key": "disused:man_made", "value": "mine", "description": "Disused mines are extracted as historic mines" },
     { "key": "disused:man_made", "value": "mine_shaft", "description": "Disused mines are extracted as historic mines" },
     { "key": "disused:man_made", "value": "mineshaft", "description": "Disused mines are extracted as historic mines" },
