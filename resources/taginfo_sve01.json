@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260507T212404Z",
+  "data_updated": "20260507T212405Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2048,6 +2048,7 @@
     { "key": "landuse", "value": "military", "description": "All sorts of landuse" },
     { "key": "landuse", "value": "orchard", "description": "Written into 'land1' or 'land2' at minzoom 9; centroid for name written separately" },
     { "key": "landuse", "value": "paddock", "description": "All sorts of landuse" },
+    { "key": "landuse", "value": "pit", "description": "Synonym for 'quarry'; written into 'land1' or 'land2' as quarry or historicquarry at minzoom 10; centroid for name written separately" },
     { "key": "landuse", "value": "plant_nursery", "description": "All sorts of landuse" },
     { "key": "landuse", "value": "playground", "description": "Extracted as playground" },
     { "key": "landuse", "value": "quarry", "description": "Written into 'land1' or 'land2' as quarry or historicquarry at minzoom 10; centroid for name written separately" },
