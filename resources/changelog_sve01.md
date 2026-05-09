@@ -10,6 +10,7 @@ Detect chimneys that are mapped as `disused:man_made`.
 Handle `landuse=pit` as `landuse=quarry`.
 Detect former military that are mapped as `disused=yes` as `brownfield` if appropriate.
 Detect former plant nurseries that are mapped as with `disused=yes` as `vacant` rather than `garden_centre`.
+Fix bug where waterway names were incorrectly reread from the OSM version rather the processed version.
 
 ## 26/04/2026
 Fix bug where some circular dams were incorrectly detected as areas.

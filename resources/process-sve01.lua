@@ -2175,7 +2175,7 @@ function way_after_waterway( passedt )
         ( passedt.waterway ~= "floating_barrier" )) then
         Layer("waterway", false)
         Attribute("class", passedt.waterway)
-        Attribute( "name", Find( "name" ) )
+        Attribute( "name", passedt.name )
         Attribute( "bridge", passedt.bridge )
         AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
 
