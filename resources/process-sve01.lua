@@ -1988,6 +1988,8 @@ function wr_after_highway( passedt )
                             ( passedt.highway == "bridlewaysteps"     ) or
                             ( passedt.highway == "intbridlewaywide"   ) or
                             ( passedt.highway == "intbridlewaynarrow" ) or
+                            ( passedt.highway == "goodfootwaywide"    ) or
+                            ( passedt.highway == "goodfootwaynarrow"  ) or
                             ( passedt.highway == "footwaywide"        ) or
                             ( passedt.highway == "footwaynarrow"      ) or
                             ( passedt.highway == "footwaysteps"       ) or

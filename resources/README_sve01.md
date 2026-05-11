@@ -84,7 +84,9 @@ Other `highway` values are calculated from a combination of OSM tags, such as `h
 * `bridlewaysteps`.  Used for steps with a designation of "public bridleway" or similar.  It's legal but not always practical to ride a horse or a bicycle here.
 * `intbridlewaywide`.  Like `bridlewaywide`, but with `intermediate` or `bad` `trail_visibility`.
 * `intbridlewaynarrow`.  Like `bridlewaynarrow`, but with `intermediate` or `bad` `trail_visibility`.
+* `goodfootwaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public footpath" or similar, with a "good" surface.
 * `footwaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public footpath" or similar.
+* `goodfootwaynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "public footpath" or similar, with a "good" surface.
 * `footwaynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "public footpath" or similar.
 * `footwaysteps`.  Used for steps with a designation of "public footpath" or similar.  
 * `intfootwaywide`.  Like `footwaywide`, but with `intermediate` or `bad` `trail_visibility`.
