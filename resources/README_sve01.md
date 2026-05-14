@@ -79,7 +79,9 @@ Other `highway` values are calculated from a combination of OSM tags, such as `h
 * `boatnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "byway open to all traffic" or similar.
 * `rbywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "restricted byway" or similar.
 * `rbynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "restricted byway" or similar.
+* `goodbridlewaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public bridleway" or similar, with a "good" surface.
 * `bridlewaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public bridleway" or similar.
+* `goodbridlewaynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "public bridleway" or similar, with a "good" surface.
 * `bridlewaynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "public bridleway" or similar.
 * `bridlewaysteps`.  Used for steps with a designation of "public bridleway" or similar.  It's legal but not always practical to ride a horse or a bicycle here.
 * `intbridlewaywide`.  Like `bridlewaywide`, but with `intermediate` or `bad` `trail_visibility`.

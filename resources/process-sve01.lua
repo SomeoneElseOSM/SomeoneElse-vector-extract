@@ -1976,39 +1976,41 @@ function wr_after_highway( passedt )
                         append_edge_etc( passedt )
                         MinZoom( 9 )
                     else
-                        if (( passedt.highway == "unpaved"            ) or
-                            ( passedt.highway == "ucrwide"            ) or
-                            ( passedt.highway == "ucrnarrow"          ) or
-                            ( passedt.highway == "boatwide"           ) or
-                            ( passedt.highway == "boatnarrow"         ) or
-                            ( passedt.highway == "rbywide"            ) or
-                            ( passedt.highway == "rbynarrow"          ) or
-                            ( passedt.highway == "bridlewaywide"      ) or
-                            ( passedt.highway == "bridlewaynarrow"    ) or
-                            ( passedt.highway == "bridlewaysteps"     ) or
-                            ( passedt.highway == "intbridlewaywide"   ) or
-                            ( passedt.highway == "intbridlewaynarrow" ) or
-                            ( passedt.highway == "goodfootwaywide"    ) or
-                            ( passedt.highway == "goodfootwaynarrow"  ) or
-                            ( passedt.highway == "footwaywide"        ) or
-                            ( passedt.highway == "footwaynarrow"      ) or
-                            ( passedt.highway == "footwaysteps"       ) or
-                            ( passedt.highway == "intfootwaywide"     ) or
-                            ( passedt.highway == "intfootwaynarrow"   ) or
-                            ( passedt.highway == "service"            ) or
-                            ( passedt.highway == "driveway"           ) or
-                            ( passedt.highway == "steps"              ) or
-                            ( passedt.highway == "road"               ) or
-                            ( passedt.highway == "goodpathwide"       ) or
-                            ( passedt.highway == "pathwide"           ) or
-                            ( passedt.highway == "goodpathnarrow"     ) or
-                            ( passedt.highway == "pathnarrow"         ) or
-                            ( passedt.highway == "intpathwide"        ) or
-                            ( passedt.highway == "intpathnarrow"      ) or
-                            ( passedt.highway == "badpathwide"        ) or
-                            ( passedt.highway == "badpathnarrow"      ) or
-                            ( passedt.highway == "construction"       ) or
-                            ( passedt.highway == "raceway"            )) then
+                        if (( passedt.highway == "unpaved"             ) or
+                            ( passedt.highway == "ucrwide"             ) or
+                            ( passedt.highway == "ucrnarrow"           ) or
+                            ( passedt.highway == "boatwide"            ) or
+                            ( passedt.highway == "boatnarrow"          ) or
+                            ( passedt.highway == "rbywide"             ) or
+                            ( passedt.highway == "rbynarrow"           ) or
+                            ( passedt.highway == "goodbridlewaywide"   ) or
+                            ( passedt.highway == "goodbridlewaynarrow" ) or
+                            ( passedt.highway == "bridlewaywide"       ) or
+                            ( passedt.highway == "bridlewaynarrow"     ) or
+                            ( passedt.highway == "bridlewaysteps"      ) or
+                            ( passedt.highway == "intbridlewaywide"    ) or
+                            ( passedt.highway == "intbridlewaynarrow"  ) or
+                            ( passedt.highway == "goodfootwaywide"     ) or
+                            ( passedt.highway == "goodfootwaynarrow"   ) or
+                            ( passedt.highway == "footwaywide"         ) or
+                            ( passedt.highway == "footwaynarrow"       ) or
+                            ( passedt.highway == "footwaysteps"        ) or
+                            ( passedt.highway == "intfootwaywide"      ) or
+                            ( passedt.highway == "intfootwaynarrow"    ) or
+                            ( passedt.highway == "service"             ) or
+                            ( passedt.highway == "driveway"            ) or
+                            ( passedt.highway == "steps"               ) or
+                            ( passedt.highway == "road"                ) or
+                            ( passedt.highway == "goodpathwide"        ) or
+                            ( passedt.highway == "pathwide"            ) or
+                            ( passedt.highway == "goodpathnarrow"      ) or
+                            ( passedt.highway == "pathnarrow"          ) or
+                            ( passedt.highway == "intpathwide"         ) or
+                            ( passedt.highway == "intpathnarrow"       ) or
+                            ( passedt.highway == "badpathwide"         ) or
+                            ( passedt.highway == "badpathnarrow"       ) or
+                            ( passedt.highway == "construction"        ) or
+                            ( passedt.highway == "raceway"             )) then
                             Layer("transportation", false)
                             Attribute( "class", passedt.highway )
                             append_name( passedt )
