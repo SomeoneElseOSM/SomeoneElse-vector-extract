@@ -77,7 +77,9 @@ Other `highway` values are calculated from a combination of OSM tags, such as `h
 * `ucrnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "unclassified county roads" or similar.
 * `boatwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "byway open to all traffic" or similar.
 * `boatnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "byway open to all traffic" or similar.
+* `goodrbywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "restricted byway" or similar, with a "good" surface.
 * `rbywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "restricted byway" or similar.
+* `goodrbynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "restricted byway" or similar, with a "good" surface.
 * `rbynarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "restricted byway" or similar.
 * `goodbridlewaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public bridleway" or similar, with a "good" surface.
 * `bridlewaywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "public bridleway" or similar.

@@ -1981,6 +1981,8 @@ function wr_after_highway( passedt )
                             ( passedt.highway == "ucrnarrow"           ) or
                             ( passedt.highway == "boatwide"            ) or
                             ( passedt.highway == "boatnarrow"          ) or
+                            ( passedt.highway == "goodrbywide"         ) or
+                            ( passedt.highway == "goodrbynarrow"       ) or
                             ( passedt.highway == "rbywide"             ) or
                             ( passedt.highway == "rbynarrow"           ) or
                             ( passedt.highway == "goodbridlewaywide"   ) or

@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Extract "good surface" narrow and wide public footpaths differently so that a different rendering style can be used (`footwaynarrow` and `footwaywide` in the schema).
 Extract "good surface" narrow and wide public bridlways differently so that a different rendering style can be used (`bridlewaynarrow` and `bridlewaywide` in the schema).
+Extract "good surface" narrow and wide restricted byways differently so that a different rendering style can be used (`rbynarrow` and `rbywide` in the schema).
 
 ## 09/05/2026
 Regular railway stations (`railway=station`) are still extracted as such, but those with `station=subway` are now extracted as `railway=tubestation`.  
