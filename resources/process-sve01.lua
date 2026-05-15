@@ -1977,6 +1977,8 @@ function wr_after_highway( passedt )
                         MinZoom( 9 )
                     else
                         if (( passedt.highway == "unpaved"             ) or
+                            ( passedt.highway == "gooducrwide"         ) or
+                            ( passedt.highway == "gooducrnarrow"       ) or
                             ( passedt.highway == "ucrwide"             ) or
                             ( passedt.highway == "ucrnarrow"           ) or
                             ( passedt.highway == "goodboatwide"        ) or

@@ -73,7 +73,9 @@ Various linear transportation objects are written here.  This includes these hig
 Other `highway` values are calculated from a combination of OSM tags, such as `highway`, `surface`, `designation` (a number of UK legal classifications), `width` among others.  These are all written out at vector zoom 12:
 
 * `unpaved`.  Used for `unclassified` highways with an unpaved `surface` (values such as `gravel`).
+* `gooducrwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "unclassified county roads" or similar, with a "good" surface.
 * `ucrwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "unclassified county roads" or similar.
+* `gooducrnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "unclassified county roads" or similar, with a "good" surface.
 * `ucrnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "unclassified county roads" or similar.
 * `goodboatwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "byway open to all traffic" or similar, with a "good" surface.
 * `boatwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "byway open to all traffic" or similar.
