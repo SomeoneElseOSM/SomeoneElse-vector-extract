@@ -75,7 +75,9 @@ Other `highway` values are calculated from a combination of OSM tags, such as `h
 * `unpaved`.  Used for `unclassified` highways with an unpaved `surface` (values such as `gravel`).
 * `ucrwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "unclassified county roads" or similar.
 * `ucrnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "unclassified county roads" or similar.
+* `goodboatwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "byway open to all traffic" or similar, with a "good" surface.
 * `boatwide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "byway open to all traffic" or similar.
+* `goodboatnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "byway open to all traffic" or similar, with a "good" surface.
 * `boatnarrow`.  Used for service roads, tracks or paths < 2m wide with a designation of "byway open to all traffic" or similar.
 * `goodrbywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "restricted byway" or similar, with a "good" surface.
 * `rbywide`.  Used for service roads, tracks or paths >= 2m wide with a designation of "restricted byway" or similar.

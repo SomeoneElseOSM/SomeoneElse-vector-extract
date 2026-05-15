@@ -1979,6 +1979,8 @@ function wr_after_highway( passedt )
                         if (( passedt.highway == "unpaved"             ) or
                             ( passedt.highway == "ucrwide"             ) or
                             ( passedt.highway == "ucrnarrow"           ) or
+                            ( passedt.highway == "goodboatwide"        ) or
+                            ( passedt.highway == "goodboatnarrow"      ) or
                             ( passedt.highway == "boatwide"            ) or
                             ( passedt.highway == "boatnarrow"          ) or
                             ( passedt.highway == "goodrbywide"         ) or
