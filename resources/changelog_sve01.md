@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 15/05/2026
 Extract "good surface" narrow and wide public footpaths differently so that a different rendering style can be used (`footwaynarrow` and `footwaywide` in the schema).
 Extract "good surface" narrow and wide public bridlways differently so that a different rendering style can be used (`bridlewaynarrow` and `bridlewaywide` in the schema).
 Extract "good surface" narrow and wide restricted byways differently so that a different rendering style can be used (`rbynarrow` and `rbywide` in the schema).

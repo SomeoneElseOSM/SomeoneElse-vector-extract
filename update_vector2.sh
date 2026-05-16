@@ -194,6 +194,9 @@ file_url4=https://download.geofabrik.de/europe/${file_prefix4}-latest.osm.pbf
 # See https://stackoverflow.com/a/73836045/8145448
 #
 # Next get the latest versions of each part of the map style.
+# Those files that are not expected to be edited here but instead
+# generated here have an explicit "git checkout" to avoid:
+# "Your local changes to the following files would be overwritten by merge"
 #
 cd /home/${local_filesystem_user}/src/SomeoneElse-style
 sudo -u ${local_filesystem_user} git pull
@@ -203,6 +206,10 @@ sudo -u ${local_filesystem_user} git pull
 #
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display
 sudo -u ${local_filesystem_user} git checkout resources/svwd06_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01cy_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01en_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01ga_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01gd_style.json
 sudo -u ${local_filesystem_user} git pull
 #
 # Unlike with raster, we don't load into a "gis3" database and make that live later.
