@@ -894,6 +894,8 @@ function rf_2( relationt )
 -- Note that we're not doing any per-member processing for routes - we just
 -- add a highway type to the relation and ensure that the style rules for it
 -- handle it sensibly, as it's going to be overlaid over other highway types.
+-- This can cause problems when people add e.g. buildings to route relations.
+--
 -- "ldpnwn" is used to allow for future different processing of different 
 -- relations.
 --
@@ -903,16 +905,27 @@ function rf_2( relationt )
 -- route (including LCN, which isn't actually shown in this rendering).
 --
 -- Processing routes,
--- Walking networks first.
--- We use "ref" rather than "name" on IWNs but not others.
--- We use "colour" as "name" if "colour" is set and "name" is not.
 -- ----------------------------------------------------------------------------
    if (relationt.type == "route") then
+-- ----------------------------------------------------------------------------
+-- Throw out any alleged historic routes immediately.
+-- ----------------------------------------------------------------------------
+      if ( relationt.route == "historic" ) then
+         relationt.network = nil
+      end
+
+-- ----------------------------------------------------------------------------
+-- Walking networks first.
+-- We use "ref" rather than "name" on IWNs but not others.
+-- ----------------------------------------------------------------------------
       if (( relationt.network == "iwn" ) and
           ( relationt.ref     ~= nil   )) then
          relationt.name = relationt.ref
       end
 
+-- ----------------------------------------------------------------------------
+-- We use "colour" as "name" if "colour" is set and "name" is not.
+-- ----------------------------------------------------------------------------
       if (((  relationt.network == "iwn"          ) or
            (  relationt.network == "nwn"          ) or
            (  relationt.network == "rwn"          ) or
