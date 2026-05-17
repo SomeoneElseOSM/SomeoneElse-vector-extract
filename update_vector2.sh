@@ -420,6 +420,11 @@ fi
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/sve_into_apache.sh sve01 sve01 /home/${local_filesystem_user}/data/tilemaker_sve01.mbtiles   http://map.atownsend.org.uk /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/default-ssl.conf
 #
 #
+# Create the svwd01, svwd08 and svwd10 styles from svwd00
+lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_process_style.lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd00_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json svwd01
+lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_process_style.lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd00_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd08_style.json svwd08
+lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_process_style.lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd00_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd10_style.json svwd10
+
 # Create the svwd06 style for Android Native from svwd01
 #
 cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json | sed "s/viewport/map/" > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json 
@@ -451,10 +456,6 @@ chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-ve
 #
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_debug_langswitch.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
 #
-# Load the svwd06 style into apache
-#
-sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd06 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
-#
 # Load the svwd01cy style into apache
 #
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01cy https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01cy_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
@@ -470,6 +471,18 @@ sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into
 # Load the svwd01gd style into apache
 #
 sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd01gd https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01gd_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+# Load the svwd06 style into apache
+#
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd06 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_index.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+# Load the svwd08 style into apache
+#
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd08 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd08_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd08_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+#
+# Load the svwd10 style into apache
+#
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd10 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd10_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd10_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
 #
 #
 # Update the documentation
