@@ -2601,6 +2601,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "playground_seesaw"           ) or
                         ( passedt.amenity == "playground_roundabout"       ) or
                         ( passedt.amenity == "playground_balancebeam"      ) or
+                        ( passedt.amenity == "playground_playhouse"        ) or
                         ( passedt.amenity == "pitch_tabletennis"           ) or
                         ( passedt.amenity == "pitch_soccer"                ) or
                         ( passedt.amenity == "pitch_basketball"            ) or

@@ -2859,6 +2859,7 @@
     { "key": "playground", "value": "balance_posts", "description": "Synonym for 'playground=balancebeam'. Explicitly extract some playground features" },
     { "key": "playground", "value": "basketswing", "description": "Explicitly extract some playground features" },
     { "key": "playground", "value": "climbingframe", "description": "Explicitly extract some playground features" },
+    { "key": "playground", "value": "playhouse", "description": "Explicitly extract some playground features" },
     { "key": "playground", "value": "roundabout", "description": "Explicitly extract some playground features" },
     { "key": "playground", "value": "sandpit", "description": "Explicitly extract some playground features" },
     { "key": "playground", "value": "seesaw", "description": "Explicitly extract some playground features" },
