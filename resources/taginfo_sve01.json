@@ -1636,7 +1636,6 @@
     { "key": "healthcare", "value": "pharmacy", "description": "Extract as pharmacy" },
     { "key": "healthcare", "value": "physiotherapist", "description": "Synonym for shop=healthnonspecific" },
     { "key": "healthcare", "value": "physiotherapist;podiatrist", "description": "Synonym for shop=healthnonspecific" },
-    { "key": "healthcare", "value": "physiotherapy", "description": "Synonym for shop=healthnonspecific" },
     { "key": "healthcare", "value": "podiatrist", "description": "Extract as nonspecific healthcare" },
     { "key": "healthcare", "value": "podiatrist;chiropodist", "description": "Extract as nonspecific healthcare" },
     { "key": "healthcare", "value": "podiatry", "description": "Extract as nonspecific healthcare" },
