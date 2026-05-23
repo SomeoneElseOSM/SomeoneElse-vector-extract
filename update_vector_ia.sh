@@ -29,6 +29,17 @@
 #
 local_filesystem_user=ajtown
 #
+cd /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display
+sudo -u ${local_filesystem_user} git checkout resources/svwd01_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd06_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd08_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd10_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01cy_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01en_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01ga_style.json
+sudo -u ${local_filesystem_user} git checkout resources/svwd01gd_style.json
+sudo -u ${local_filesystem_user} git pull
+#
 # Create the svwd01, svwd08 and svwd10 styles from svwd00
 lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_process_style.lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd00_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json svwd01
 lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_process_style.lua /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd00_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd08_style.json svwd08
