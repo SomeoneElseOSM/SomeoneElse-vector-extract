@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260507T212405Z",
+  "data_updated": "20260525T183501Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2858,6 +2858,7 @@
     { "key": "playground", "value": "balance_posts", "description": "Synonym for 'playground=balancebeam'. Explicitly extract some playground features" },
     { "key": "playground", "value": "basketswing", "description": "Explicitly extract some playground features" },
     { "key": "playground", "value": "climbingframe", "description": "Explicitly extract some playground features" },
+    { "key": "playground", "value": "climbingwall", "description": "Synonym for 'playground=climbingframe'. Explicitly extract some playground features" },
     { "key": "playground", "value": "playhouse", "description": "Explicitly extract some playground features" },
     { "key": "playground", "value": "roundabout", "description": "Explicitly extract some playground features" },
     { "key": "playground", "value": "sandpit", "description": "Explicitly extract some playground features" },
