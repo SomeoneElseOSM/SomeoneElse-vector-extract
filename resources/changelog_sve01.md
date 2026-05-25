@@ -1,13 +1,13 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 25/05/2026
 Handle `man_made=water_pump` as `historic=water_pump`.
 Extract playground balance beams and playhouses.
 Removed `healthcare=physiotherapy`; no longer in the data.
 Show playground climbing walls as climbing frames.
 
-## Vector 17/05/2026
+## 17/05/2026
 Suppress historic routes from appearing.  Previously that would have been included if they had an appropriate "network" tag.  Only one is currently affected, "St Bernard's Way" https://www.openstreetmap.org/relation/19918287 , which appears to have been created by a holiday company and is apparently all unsigned.
 
 ## 15/05/2026
