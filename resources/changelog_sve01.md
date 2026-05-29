@@ -1,6 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Don't add "unnamedcommercial" to theme parks.
+Do add a land2 value for zoo enclosures - often grass, wood, etc.
+
 ## 25/05/2026
 Handle `man_made=water_pump` as `historic=water_pump`.
 Extract playground balance beams and playhouses.
