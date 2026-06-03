@@ -2964,6 +2964,7 @@ function render_shop_land1( passedt )
         ( passedt.shop == "stationery"         ) or
         ( passedt.shop == "storage_rental"     ) or
         ( passedt.shop == "tattoo"             ) or
+        ( passedt.shop == "ticket"             ) or
         ( passedt.shop == "toys"               ) or
         ( passedt.shop == "travel_agent"       )) then
         write_polygon_and_centroid( "land1", passedt, "shop_", passedt.shop, 14 )
