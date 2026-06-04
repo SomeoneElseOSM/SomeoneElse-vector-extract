@@ -6,6 +6,7 @@ Don't add "unnamedcommercial" to theme parks.
 Do add a land2 value for zoo enclosures - often grass, wood, etc.
 If `highway_authority_ref:signed=yes` is set, treat it as a `ref` not an `official_ref`.
 Extract `shop=ticket` as a unique value.
+Various historic cemetery tags are now processed and historic cemeteries are now extracted with a unique value.
 
 ## 25/05/2026
 Handle `man_made=water_pump` as `historic=water_pump`.

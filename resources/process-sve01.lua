@@ -33,12 +33,12 @@ node_keys = { "abandoned:railway", "addr:housenumber", "advertising", "aerialway
 	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:man_made",
 	      "disused:military", "disused:pub", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
               "emergency", "entrance", "ford", "geological", "golf", "harbour", "hazard",
-              "healthcare", "highway", "historic", "historic:railway", "information", "junction", 
+              "healthcare", "highway", "historic", "historic:landuse", "historic:railway", "information", "junction", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
               "military", "natural", "ncn_milepost", 
               "office", "outlet", "pipeline", "pitch", "place", 
               "place_of_worship", "playground", "police", "power", "railway", "ruined:building", "ruins:building", 
-              "seamark:type", "shop", "sport", "tourism", "tunnel", "was:amenity", "waterway", "whitewater", "zoo" }
+              "seamark:type", "shop", "sport", "tourism", "tunnel", "was:amenity", "was:landuse", "waterway", "whitewater", "zoo" }
 
 -- Initialize Lua logic
 
@@ -1221,6 +1221,7 @@ function update_table( passedt )
     passedt.canoe = Find("canoe")
     passedt.capital = Find("capital")
     passedt.castle_type = Find("castle_type")
+    passedt.cemetery = Find("cemetery")
     passedt.climbing = Find("climbing")
     passedt["closed:amenity"] = Find("closed:amenity")
     passedt["closed:shop"] = Find("closed:shop")
@@ -1329,6 +1330,7 @@ function update_table( passedt )
     passedt.historic = Find("historic")
     passedt["historic:amenity"] = Find("historic:amenity")
     passedt["historic:civilization"] = Find("historic:civilization")
+    passedt["historic:landuse"] = Find("historic:landuse")
     passedt["historic:name"] = Find("historic:name")
     passedt["historic:railway"] = Find("historic:railway")
     passedt["historic:waterway"] = Find("historic:waterway")
@@ -3503,6 +3505,7 @@ function render_landuse_land1( passedt )
             ( passedt.landuse == "christiancemetery"         ) or
             ( passedt.landuse == "jewishcemetery"            ) or
             ( passedt.landuse == "othercemetery"             ) or
+            ( passedt.landuse == "historiccemetery"          ) or
             ( passedt.landuse == "orchard"                   ) or
             ( passedt.landuse == "vineyard"                  ) or
             ( passedt.landuse == "allotments"                )) then
@@ -4387,7 +4390,8 @@ function render_landuse_land2( passedt )
             ( passedt.landuse == "unnamedallotments"         ) or
             ( passedt.landuse == "unnamedchristiancemetery"  ) or
             ( passedt.landuse == "unnamedjewishcemetery"     ) or
-            ( passedt.landuse == "unnamedothercemetery"      )) then
+            ( passedt.landuse == "unnamedothercemetery"      ) or
+            ( passedt.landuse == "unnamedhistoriccemetery"   )) then
             Layer( "land2", true )
             Attribute( "class", "landuse_" .. passedt.landuse )
 
