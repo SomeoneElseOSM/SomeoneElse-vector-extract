@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 04/06/2026
 Don't add "unnamedcommercial" to theme parks.
 Do add a land2 value for zoo enclosures - often grass, wood, etc.
 If `highway_authority_ref:signed=yes` is set, treat it as a `ref` not an `official_ref`.
