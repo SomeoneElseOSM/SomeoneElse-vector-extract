@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260605T120901Z",
+  "data_updated": "20260605T120902Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -441,6 +441,8 @@
     { "key": "attraction", "description": "Mazes and zoo enclosures" },
     { "key": "attraction", "value": "animal", "description": "Extracted as zoo enclosure" },
     { "key": "attraction", "value": "maze", "description": "Extracted as nonspecific leisure item" },
+    { "key": "attraction", "value": "music_venue", "description": "Extracted as music venue" },
+    { "key": "attraction", "value": "showground", "description": "Extracted as a meadow" },
     { "key": "barrier", "description": "Most barriers extracted" },
     { "key": "barrier", "value": "a_frame", "description": "Extracted as a cycle_barrier" },
     { "key": "barrier", "value": "bar", "description": "Extracted as a horse_stile" },
