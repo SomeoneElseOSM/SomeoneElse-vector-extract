@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260525T183502Z",
+  "data_updated": "20260605T120901Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -4205,7 +4205,6 @@
     { "key": "vending", "value": "milk", "description": "Roadside stands" },
     { "key": "vending", "value": "newspapers", "description": "Roadside stands" },
     { "key": "vending", "value": "parcel_mail_in", "description": "Parcel lockers" },
-    { "key": "vending", "value": "parcel_mail_in;parcel_pickup", "description": "Parcel lockers" },
     { "key": "vending", "value": "parcel_pickup", "description": "Parcel lockers" },
     { "key": "vending", "value": "parcel_pickup;parcel_mail_in", "description": "Parcel lockers" },
     { "key": "vending", "value": "photos", "description": "Photo booths" },
