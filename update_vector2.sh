@@ -209,7 +209,6 @@ sudo -u ${local_filesystem_user} git checkout resources/svwd01_style.json
 sudo -u ${local_filesystem_user} git checkout resources/svwd06_style.json
 sudo -u ${local_filesystem_user} git checkout resources/svwd08_style.json
 sudo -u ${local_filesystem_user} git checkout resources/svwd10_style.json
-sudo -u ${local_filesystem_user} git checkout resources/svwd06_style.json
 sudo -u ${local_filesystem_user} git checkout resources/svwd01cy_style.json
 sudo -u ${local_filesystem_user} git checkout resources/svwd01en_style.json
 sudo -u ${local_filesystem_user} git checkout resources/svwd01ga_style.json
