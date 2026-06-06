@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260605T120902Z",
+  "data_updated": "20260605T120903Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3874,7 +3874,7 @@
     { "key": "sport", "value": "football;basketball", "description": "Extract 'soccer' value on sports pitches" },
     { "key": "sport", "value": "football;rugby", "description": "Extract 'soccer' value on sports pitches" },
     { "key": "sport", "value": "football;soccer", "description": "Extract 'soccer' value on sports pitches" },
-    { "key": "sport", "value": "gaelic_football", "description": "Show 'gaelic_games' icon on sports pitches" },
+    { "key": "sport", "value": "gaelic_football", "description": "Not a current value in OSM data.  Synonym for 'gaelic_games'.  Extract 'gaelic_games' value on sports pitches" },
     { "key": "sport", "value": "gaelic_games", "description": "Extract 'gaelic_games' value on sports pitches" },
     { "key": "sport", "value": "gaelic_games;handball", "description": "Extract 'gaelic_games' value on sports pitches" },
     { "key": "sport", "value": "gaelic_games;soccer", "description": "Extract 'gaelic_games' value on sports pitches" },
@@ -4184,7 +4184,7 @@
     { "key": "usage", "value": "penstock", "description": "Canal leats and spillways" },
     { "key": "usage", "value": "spillway", "description": "Canal leats and spillways" },
     { "key": "usage", "value": "tailrace", "description": "Canal leats and spillways" },
-    { "key": "usage", "value": "tourism", "description": "Tourist railway stations are shown with a blue station dot and brown text", "icon_url": "https://raw.githubusercontent.com/SomeoneElseOSM/openstreetmap-carto-AJT/master/symbols/station.png" },
+    { "key": "usage", "value": "tourism", "description": "Tourist railway stations are extracted separately so that they can be shown with e.g. a blue station dot and brown text", "icon_url": "https://raw.githubusercontent.com/SomeoneElseOSM/openstreetmap-carto-AJT/master/symbols/station.png" },
     { "key": "usage", "value": "transmission", "description": "Canal leats and spillways" },
     { "key": "usage", "value": "watershed_management", "description": "Canal leats and spillways" },
     { "key": "utility", "description": "Detect utility aerial pipeline markers" },
