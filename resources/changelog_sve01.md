@@ -7,6 +7,7 @@ Music venues that have some sort of music venue main tag (`amenity`, `leisure` a
 Extract `amenity=binoculars` (free and pay).  
 Extract `sport=archery` with a unique value.
 Minor changes to nature reserve detection.
+Handle `amenity=animal_breeding` as a nonspecific office.
 
 ## 04/06/2026
 Don't add "unnamedcommercial" to theme parks.
