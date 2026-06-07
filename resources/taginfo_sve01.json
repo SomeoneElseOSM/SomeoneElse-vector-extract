@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260605T120905Z",
+  "data_updated": "20260605T120906Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1243,6 +1243,7 @@
     { "key": "designation", "value": "carriageway", "description": "Extracted as byway open to all traffic (NI)" },
     { "key": "designation", "value": "common", "description": "Extract as 'leisure=common'" },
     { "key": "designation", "value": "common;site_of_special_scientific_interest", "description": "Areas extracted as nature reserves" },
+    { "key": "designation", "value": "common;site_of_special_scientific_interest;national_nature_reserve", "description": "Areas shown as nature reserves" },
     { "key": "designation", "value": "core_path", "description": "Extracted in same way as public footpaths" },
     { "key": "designation", "value": "footpath", "description": "Extracted as public footpath" },
     { "key": "designation", "value": "local_nature_reserve", "description": "Extracted as nature reserve" },
