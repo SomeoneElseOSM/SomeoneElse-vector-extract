@@ -2649,6 +2649,8 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "post_box"                    ) or
                         ( passedt.amenity == "post_office"                 ) or
                         ( passedt.amenity == "biergarten"                  ) or
+                        ( passedt.amenity == "binoculars_free"             ) or
+                        ( passedt.amenity == "binoculars_pay"              ) or
                         ( passedt.amenity == "boatyard"                    ) or
                         ( passedt.amenity == "tourismstation"              ) or
                         ( passedt.amenity == "recycling"                   ) or
