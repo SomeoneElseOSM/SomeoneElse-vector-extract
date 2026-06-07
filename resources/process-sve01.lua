@@ -2608,6 +2608,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "pitch_tabletennis"           ) or
                         ( passedt.amenity == "pitch_soccer"                ) or
                         ( passedt.amenity == "pitch_basketball"            ) or
+                        ( passedt.amenity == "pitch_archery"               ) or
                         ( passedt.amenity == "pitch_cricket"               ) or
                         ( passedt.amenity == "pitch_skateboard"            ) or
                         ( passedt.amenity == "pitch_climbing"              ) or
