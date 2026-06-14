@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 14/06/2026
 Removed `vending=parcel_mail_in;parcel_pickup`; no longer in the data.
 Music venues that have some sort of music venue main tag (`amenity`, `leisure` and also `attraction`) are handled as such, not as pubs, bars or nightclubs.  This does not include e.g. pubs with `live_music=yes`.
 Extract `amenity=binoculars` (free and pay).  
