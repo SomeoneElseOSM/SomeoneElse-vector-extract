@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Don't add `building=yes` to historic chapels etc. if they don't already have it.
+Detect memorial benches even if they do not have the `historic` tag.  Use `inscription` if `name` is unset.  Suppress `name` (or `inscription`) if longer than 28 UTF8 characters.
 
 ## 14/06/2026
 Removed `vending=parcel_mail_in;parcel_pickup`; no longer in the data.
