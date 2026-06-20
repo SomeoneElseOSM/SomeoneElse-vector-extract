@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 20/06/2026
 Don't add `building=yes` to historic chapels etc. if they don't already have it.
 Detect memorial benches even if they do not have the `historic` tag.  Use `inscription` if `name` is unset.  Suppress `name` (or `inscription`) if longer than 28 UTF8 characters.
 
