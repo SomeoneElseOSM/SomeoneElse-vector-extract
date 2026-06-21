@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260605T120908Z",
+  "data_updated": "20260621T101101Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -4048,7 +4048,7 @@
     { "key": "tourism", "value": "aquarium", "description": "Many tourism tags handled" },
     { "key": "tourism", "value": "artwork", "description": "Many tourism tags handled" },
     { "key": "tourism", "value": "attraction", "description": "Written into 'land1' or 'land2' if no other rlevant tag at minzoom 9" },
-    { "key": "tourism", "value": "bed_and_breakfast", "description": "Many tourism tags handled" },
+    { "key": "tourism", "value": "bed_and_breakfast", "description": "Not a current value in OSM data.  Many tourism tags handled" },
     { "key": "tourism", "value": "cabin", "description": "Many tourism tags handled" },
     { "key": "tourism", "value": "camp_pitch", "description": "Many tourism tags handled" },
     { "key": "tourism", "value": "camp_site", "description": "Written into 'land1' or 'land2' at minzoom 12" },
