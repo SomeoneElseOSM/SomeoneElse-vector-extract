@@ -69,6 +69,7 @@ Various linear transportation objects are written here.  This includes these hig
 * `highway=primary` and `primary_link` at vector zoom 7.
 * `highway=secondary` and `secondary_link` at vector zoom 8.
 * `highway=tertiary` and `tertiary_link`, `highway=unclassified` and `unclassified_link`, `highway=residential` and `residential_link` and `highway=living_street` and `living_street_link` at vector zoom 9.
+* `highway=bus_guideway` and `highway=busway` at vector zoom 9
 
 Other `highway` values are calculated from a combination of OSM tags, such as `highway`, `surface`, `designation` (a number of UK legal classifications), `width` among others.  These are all written out at vector zoom 12:
 
@@ -163,7 +164,6 @@ It is expected that only railway-specific maps will want to show linear rail at 
 Non-linear `railway` objects are written to `land1` not here.  
 Some other changes are made:
 
-* `highway=bus_guideway` and `highway=busway` are handled as `railway=bus_guideway`.  
 * `historic=inclined_plane` and `historic=tramway` are handled as `railway=abandoned`.
 * `railway=razed` is handled as `railway=dismantled`.  
 * `railway=proposed` is handled as `railway=construction`.  

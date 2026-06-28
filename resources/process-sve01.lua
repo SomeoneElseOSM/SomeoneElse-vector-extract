@@ -1979,6 +1979,8 @@ function wr_after_highway( passedt )
                 else
                     if (( passedt.highway == "tertiary"           ) or
                         ( passedt.highway == "tertiary_link"      ) or
+                        ( passedt.highway == "bus_guideway"       ) or
+                        ( passedt.highway == "busway"             ) or
                         ( passedt.highway == "unclassified"       ) or
                         ( passedt.highway == "unclassified_link"  ) or
                         ( passedt.highway == "residential"        ) or
