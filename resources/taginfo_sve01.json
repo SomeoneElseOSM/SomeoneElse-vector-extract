@@ -2289,6 +2289,7 @@
     { "key": "man_made", "value": "storage_tank", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "street_cabinet", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "summit_cross", "description": "Extracted as cross" },
+    { "key": "man_made", "value": "surveillance", "description": "Extracted as a separate value" },
     { "key": "man_made", "value": "survey_point", "description": "Extracted as trig point" },
     { "key": "man_made", "value": "tank", "description": "Most man-made items are extracted" },
     { "key": "man_made", "value": "telephone_box", "description": "Used to identify former phoneboxes" },

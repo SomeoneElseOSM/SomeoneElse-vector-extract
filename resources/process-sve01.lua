@@ -3110,7 +3110,8 @@ function render_man_made_land1( passedt )
                         ( passedt.man_made == "charge_point"             ) or
                         ( passedt.man_made == "satellite_dish"           ) or
                         ( passedt.man_made == "markermilitary"           ) or
-                        ( passedt.man_made == "manhole"                  )) then
+                        ( passedt.man_made == "manhole"                  ) or
+                        ( passedt.man_made == "surveillance"             )) then
                         Layer( "land1", true )
                         Attribute( "class", "man_made_" .. passedt.man_made )
                         append_name( passedt )
