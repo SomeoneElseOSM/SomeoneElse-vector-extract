@@ -2840,6 +2840,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "dressing_room"               ) or
                         ( passedt.amenity == "reception_desk"              ) or
                         ( passedt.amenity == "payment_terminal"            ) or
+                        ( passedt.amenity == "marketplace"                 ) or
                         ( passedt.amenity == "pub"                         ) or
                         (( passedt.amenity  ~= nil                        )  and
                          ( passedt.amenity  ~= ""                         )  and

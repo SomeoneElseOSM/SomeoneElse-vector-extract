@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Extract `man_made=surveillance` as a unique value.
+Extract `amenity=marketplace` as a unique value.
 
 ## 28/06/2026
 Bus guideways are now extracted as different values from busways, and as "highway" not "railway".
