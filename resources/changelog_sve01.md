@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Extract `man_made=surveillance` as a unique value.
 Extract `amenity=marketplace` and `amenity=food_court` as unique values.
+Fixed bug whereby way `amenity=taxi` and taxi offices didn't have a centroid extracted.
 
 ## 28/06/2026
 Bus guideways are now extracted as different values from busways, and as "highway" not "railway".

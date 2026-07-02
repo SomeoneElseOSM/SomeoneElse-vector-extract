@@ -2520,7 +2520,9 @@ function render_amenity_land1( passedt )
 -- ----------------------------------------------------------------------------
                 if (( passedt.amenity == "ferry_terminal" ) or
                     ( passedt.amenity == "marketplace"    ) or
-                    ( passedt.amenity == "food_court"     )) then
+                    ( passedt.amenity == "food_court"     ) or
+                    ( passedt.amenity == "taxi"           ) or
+                    ( passedt.amenity == "taxi_office"    )) then
                     write_polygon_and_centroid( "land1", passedt, "amenity_", passedt.amenity, 14 )
                 else
                     if (( passedt.amenity == "shelter"                     ) or
@@ -2549,8 +2551,6 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "nightclub"                   ) or
                         ( passedt.amenity == "concert_hall"                ) or
                         ( passedt.amenity == "car_sharing"                 ) or
-                        ( passedt.amenity == "taxi"                        ) or
-                        ( passedt.amenity == "taxi_office"                 ) or
                         ( passedt.amenity == "bus_station"                 ) or
                         ( passedt.amenity == "entrancemain"                ) or
                         ( passedt.amenity == "bubble_tea"                  ) or
