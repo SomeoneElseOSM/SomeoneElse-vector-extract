@@ -2,7 +2,7 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
-Treat `network=lcn;lwn` like `network=lwn;lcn`.
+Treat `network=lcn;lwn` and `lcn;lwn;lhn` like `network=lwn;lcn`.
 
 ## 04/07/2026
 Extract `man_made=surveillance` as a unique value.
