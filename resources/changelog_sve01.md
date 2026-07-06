@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Treat `network=lcn;lwn` like `network=lwn;lcn`.
+
 ## 04/07/2026
 Extract `man_made=surveillance` as a unique value.
 Extract `amenity=marketplace` and `amenity=food_court` as unique values.

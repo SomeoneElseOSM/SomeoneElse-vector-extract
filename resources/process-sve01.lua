@@ -317,6 +317,7 @@ function node_function()
               ( relation_network == "rwn"          ) or
               ( relation_network == "lwn"          ) or
               ( relation_network == "lwn;lcn"      ) or
+              ( relation_network == "lcn;lwn"      ) or
               ( relation_network == "lwn;lcn;lhn"  )) and
              (  relation_namet.name    ~= nil             ) and
              (  relation_namet.name    ~= ""              ) and
@@ -931,7 +932,9 @@ function rf_2( relationt )
            (  relationt.network == "rwn"          ) or
            (  relationt.network == "lwn"          ) or
            (  relationt.network == "lwn;lcn"      ) or
-           (  relationt.network == "lwn;lcn;lhn"  )) and
+           (  relationt.network == "lcn;lwn"      ) or
+           (  relationt.network == "lwn;lcn;lhn"  ) or
+           (  relationt.network == "lcn;lwn;lhn"  )) and
           ((( relationt.name    ~= nil           )   and
             ( relationt.name    ~= ""            ))  or
            (( relationt.colour  ~= nil           )   and
