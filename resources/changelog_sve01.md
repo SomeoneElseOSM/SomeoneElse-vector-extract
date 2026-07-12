@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Treat `network=lcn;lwn` and `lcn;lwn;lhn` like `network=lwn;lcn`.
+Banks with atms are extracted as an amenity starting "bankatm", with e.g. "_y" appended for wheelchair access.
 
 ## 04/07/2026
 Extract `man_made=surveillance` as a unique value.

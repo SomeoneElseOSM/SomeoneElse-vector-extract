@@ -1196,6 +1196,7 @@ function update_table( passedt )
     passedt.area = Find("area")
     passedt["area:highway"] = Find("area:highway")
     passedt.artwork_subject = Find("artwork_subject")
+    passedt.atm = Find("atm")
     passedt.attraction = Find("attraction")
     passedt.barrier = Find("barrier")
     passedt.basin = Find("basin")
@@ -2534,6 +2535,10 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "bank_l"                      ) or
                         ( passedt.amenity == "bank_n"                      ) or
                         ( passedt.amenity == "bank_y"                      ) or
+                        ( passedt.amenity == "bankatm"                     ) or
+                        ( passedt.amenity == "bankatm_l"                   ) or
+                        ( passedt.amenity == "bankatm_n"                   ) or
+                        ( passedt.amenity == "bankatm_y"                   ) or
                         ( passedt.amenity == "bar"                         ) or
                         ( passedt.amenity == "bar_ddd"                     ) or
                         ( passedt.amenity == "bar_dld"                     ) or

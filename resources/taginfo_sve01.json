@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260621T101103Z",
+  "data_updated": "20260712T101901Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -440,6 +440,8 @@
     { "key": "artwork_subject", "description": "Detect penguins" },
     { "key": "artwork_subject", "value": "penguins", "description": "Detect penguins" },
     { "key": "artwork_subject", "value": "5 penguins", "description": "Detect penguins" },
+    { "key": "atm", "description": "Banks with ATMs" },
+    { "key": "atm", "value": "yes", "description": "Banks with ATMs" },
     { "key": "attraction", "description": "Mazes and zoo enclosures" },
     { "key": "attraction", "value": "animal", "description": "Extracted as zoo enclosure" },
     { "key": "attraction", "value": "maze", "description": "Extracted as nonspecific leisure item" },
