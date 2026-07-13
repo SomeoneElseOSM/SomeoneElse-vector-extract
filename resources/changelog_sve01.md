@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract chairs as benches.
+
 ## 12/07/2026
 Treat `network=lcn;lwn` and `lcn;lwn;lhn` like `network=lwn;lcn`.
 Banks with atms are extracted as an amenity starting "bankatm", with e.g. "_y" appended for wheelchair access.

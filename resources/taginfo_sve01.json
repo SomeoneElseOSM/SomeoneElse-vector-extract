@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260712T101901Z",
+  "data_updated": "20260712T101902Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -169,6 +169,7 @@
     { "key": "amenity", "value": "care_home", "description": "Synonym for shop=healthnonspecific" },
     { "key": "amenity", "value": "casino", "description": "Extracted as gambling shop" },
     { "key": "amenity", "value": "cattery", "description": "Extracted as animal shop, name incorporates brand" },
+    { "key": "amenity", "value": "chair", "description": "Chairs are extracted as benches" },
     { "key": "amenity", "value": "charging_station", "description": "Extracted, name incorporates brand" },
     { "key": "amenity", "value": "childcare", "description": "Synonym for shop=healthnonspecific" },
     { "key": "amenity", "value": "childrens_centre", "description": "Synonym for shop=healthnonspecific" },
