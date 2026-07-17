@@ -3215,6 +3215,7 @@ function render_highway_land1( passedt )
                 ( passedt.highway == "signalised_sound_crossing"          ) or
                 ( passedt.highway == "signalised_vibration_crossing"      ) or
                 ( passedt.highway == "signalised_soundvibration_crossing" ) or
+                ( passedt.highway == "zebra_crossing"                     ) or
                 ( passedt.highway == "streetlamp_electric"                ) or
                 ( passedt.highway == "streetlamp_gas"                     ) or
                 ( passedt.highway == "crossing"                           ) or
