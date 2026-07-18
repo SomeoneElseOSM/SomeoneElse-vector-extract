@@ -2825,6 +2825,7 @@ function render_amenity_land1( passedt )
                         ( passedt.amenity == "shower_pay"                  ) or
                         ( passedt.amenity == "shower_pay_m"                ) or
                         ( passedt.amenity == "shower_pay_w"                ) or
+                        ( passedt.amenity == "kitchen"                     ) or
                         ( passedt.amenity == "musical_instrument"          ) or
                         ( passedt.amenity == "drinking_water"              ) or
                         ( passedt.amenity == "nondrinking_water"           ) or

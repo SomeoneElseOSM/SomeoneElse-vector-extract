@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Extract chairs as benches.
 Detect zebra crossings.
+Extract `amenity=kitchen`.
 
 ## 12/07/2026
 Treat `network=lcn;lwn` and `lcn;lwn;lhn` like `network=lwn;lcn`.
