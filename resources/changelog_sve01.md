@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Extract chairs as benches.
 Detect zebra crossings.
 Extract `amenity=kitchen`.
+Use `seamark:name` in place of `name` if the former set and the latter not.
 
 ## 12/07/2026
 Treat `network=lcn;lwn` and `lcn;lwn;lhn` like `network=lwn;lcn`.

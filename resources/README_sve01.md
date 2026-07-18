@@ -18,7 +18,7 @@ Note that the "config-sve01.json" has the "high_resolution" parameter set to "tr
 
 The keys and values present in the data at the time when it is written out to vector tiles will differ significantly from the original OSM keys.  As an example, "function wr_after_highway( passedt )", which writes highway information to vector tiles will be passed `highway` values such as `gallop`, which has been computed based on the various OSM tags and values on the way.  The [taginfo](https://taginfo.openstreetmap.org/projects/someoneelse_vector_sve01#tags) entry for this project references the raw OSM tags and values in OSM data, but the tags and values listed below (e.g. `highway=gallop`) are after the initial lua processing.  Generally speaking the raw OSM tags used to compute these "schema" values is mentioned in each section below.
 
-The `name` values written to features to several layers may incorporate `operator` and `brand` as appropriate, and may be suppressed or written out in brackets if a feature has been tagged as being unsigned (see the discussion of the `land2` layer below).
+The `name` values written to features to several layers may incorporate `operator` and `brand` as appropriate, and may be suppressed or written out in brackets if a feature has been tagged as being unsigned (see the discussion of the `land2` layer below).  If `name` is unset `name:en` or `seamark:name` may be used instead of the missing `name`.  The vector implementation also stores `name:cy`, `name:en`, `name:ga` and `name:gd` for use by a language switcher, and derives from a "close" language (e.g. ga from gd and vice-versa) if unset.
 
 
 ## "water"

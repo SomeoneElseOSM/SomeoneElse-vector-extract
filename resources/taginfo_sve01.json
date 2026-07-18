@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260712T101904Z",
+  "data_updated": "20260712T101905Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3086,6 +3086,7 @@
     { "key": "school", "value": "entrance", "description": "Detect school entrances" },
     { "key": "scramble", "description": "Extracted as intermediate path" },
     { "key": "scramble", "value": "yes", "description": "Extracted as intermediate path" },
+    { "key": "seamark:name", "description": "Seamark names - if set and no name set, use for name" },
     { "key": "seamark:obstruction:category", "description": "Detect obstructions only mapped as seamarks" },
     { "key": "seamark:obstruction:category", "value": "foul_area", "description": "Detect obstructions only mapped as seamarks" },
     { "key": "seamark:obstruction:category", "value": "foul_ground", "description": "Detect obstructions only mapped as seamarks" },
