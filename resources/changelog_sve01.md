@@ -6,6 +6,7 @@ Extract chairs as benches.
 Detect zebra crossings.
 Extract `amenity=kitchen`.
 Use `seamark:name` in place of `name` if the former set and the latter not.
+Extract `man_made=offshore_platform` and `seamark:type` as generic industrial.  If not already a building, area ones are treated as "almost a building".
 
 ## 12/07/2026
 Treat `network=lcn;lwn` and `lcn;lwn;lhn` like `network=lwn;lcn`.
