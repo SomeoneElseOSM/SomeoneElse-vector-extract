@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260718T121901Z",
+  "data_updated": "20260718T121902Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -241,6 +241,7 @@
     { "key": "amenity", "value": "gym", "description": "Extracted as leisure=nonspecific" },
     { "key": "amenity", "value": "hall", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "health_centre", "description": "Synonym for shop=healthnonspecific" },
+    { "key": "amenity", "value": "health_post", "description": "Synonym for 'clinic' unless an alternative 'healthcare' tag is set." },
     { "key": "amenity", "value": "healthcare", "description": "Synonym for shop=healthnonspecific" },
     { "key": "amenity", "value": "holy_well", "description": "Usually mapped as place of worship" },
     { "key": "amenity", "value": "horse_dismount_block", "description": "Horse mounting blocks" },
@@ -3261,6 +3262,7 @@
     { "key": "shop", "value": "childrens", "description": "Various shops extracted" },
     { "key": "shop", "value": "chinese_medicine", "description": "Various shops extracted" },
     { "key": "shop", "value": "chiropodist", "description": "Various shops extracted" },
+    { "key": "shop", "value": "chiropractor", "description": "Synonym for shop=healthnonspecific" },
     { "key": "shop", "value": "chocolate", "description": "Various shops extracted" },
     { "key": "shop", "value": "christmas", "description": "Various shops extracted" },
     { "key": "shop", "value": "cleaning", "description": "Treated as nonspecific shop" },
