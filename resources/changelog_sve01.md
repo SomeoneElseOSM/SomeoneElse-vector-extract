@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Where something is tagged as `amenity=pub` (and some others) and `shop=alcohol` (and some others), remove the shop tag.
+
 ## 23/07/2026
 Extract chairs as benches.
 Detect zebra crossings.
