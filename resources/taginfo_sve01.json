@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260722T235802Z",
+  "data_updated": "20260806T095701Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -415,7 +415,6 @@
     { "key": "animal", "value": "wellness", "description": "Extracted as animal shop, name incorporates brand" },
     { "key": "animal", "value": "yes", "description": "Detect meadows as agricultural" },
     { "key": "archaeological_site", "description": "Extract different archaeological sites differently" },
-    { "key": "archaeological_site", "value": "abandoned_mine_workings", "description": "Treated as historic quarry" },
     { "key": "archaeological_site", "value": "broch", "description": "Treat brochs as archaeological fortifications" },
     { "key": "archaeological_site", "value": "castle", "description": "Not an expected value in OSM data.  Extract castle with a unique value; centroid for name written separately" },
     { "key": "archaeological_site", "value": "crannog", "description": "Extract crannog with a unique value; centroid for name written separately" },
@@ -3630,7 +3629,6 @@
     { "key": "shop", "value": "picture_framing", "description": "Various shops extracted" },
     { "key": "shop", "value": "piercing", "description": "Various shops extracted" },
     { "key": "shop", "value": "piercing;tattoo", "description": "Various shops extracted" },
-    { "key": "shop", "value": "piercings", "description": "Various shops extracted" },
     { "key": "shop", "value": "plant_centre", "description": "Various shops extracted" },
     { "key": "shop", "value": "plant_hire", "description": "Various shops extracted" },
     { "key": "shop", "value": "plant_nursery", "description": "Synonym for 'garden_centre'" },
