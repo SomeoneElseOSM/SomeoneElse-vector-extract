@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 06/08/2026
 Where something is tagged as `amenity=pub` (and some others) and `shop=alcohol` (and some others), remove the shop tag.
 Removed `shop=piercings`; no longer in the data.
 Removed `archaeological_site=abandoned_mine_workings`; no longer in the data.
