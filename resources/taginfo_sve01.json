@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260806T095702Z",
+  "data_updated": "20260806T095703Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -235,7 +235,7 @@
     { "key": "amenity", "value": "fuel_depot", "description": "Synonym for indstrial landuse" },
     { "key": "amenity", "value": "function_room", "description": "Extracted as leisure=nonspecific" },
     { "key": "amenity", "value": "funeral_directors", "description": "Synonym for shop=funeral_directors" },
-    { "key": "amenity", "value": "gallery", "description": "Not a current value in OSM data.  Extracted as nonspecific shop" },
+    { "key": "amenity", "value": "gallery", "description": "Extracted as nonspecific shop" },
     { "key": "amenity", "value": "gambling", "description": "Extracted as gambling shop" },
     { "key": "amenity", "value": "grave_yard", "description": "Extracted as graveyard" },
     { "key": "amenity", "value": "grit_bin", "description": "Extracted as grit bin" },
@@ -3409,7 +3409,7 @@
     { "key": "shop", "value": "furnishings", "description": "Various shops extracted" },
     { "key": "shop", "value": "furniture", "description": "Various shops extracted" },
     { "key": "shop", "value": "gadget", "description": "Various shops extracted" },
-    { "key": "shop", "value": "gallery", "description": "Various shops extracted" },
+    { "key": "shop", "value": "gallery", "description": "Not a current value in OSM data.  Various shops extracted" },
     { "key": "shop", "value": "gambling", "description": "Various shops extracted" },
     { "key": "shop", "value": "games", "description": "Various shops extracted" },
     { "key": "shop", "value": "garage", "description": "Various shops extracted" },
