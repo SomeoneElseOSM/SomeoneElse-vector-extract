@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260806T095704Z",
+  "data_updated": "20260806T095705Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1215,7 +1215,6 @@
     { "key": "denomination", "value": "jehovahs_witness", "description": "Don't use a cross for Jehovahs Witness buildings" },
     { "key": "departures_board", "description": "What sort of departures board does a bus stop have?" },
     { "key": "departures_board", "value": "multiline", "description": "Some sort of realtime display" },
-    { "key": "departures_board", "value": "paper timetable", "description": "Some sort of fixed timetable" },
     { "key": "departures_board", "value": "realtime", "description": "Some sort of realtime display" },
     { "key": "departures_board", "value": "realtime; timetable", "description": "Some sort of realtime display" },
     { "key": "departures_board", "value": "realtime,timetable", "description": "Some sort of realtime display" },

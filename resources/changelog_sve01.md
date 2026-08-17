@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Removed `departures_board=paper timetable`; no longer in the data.
+
+## 16/08/2026
 Removed `wheelchair=unisex`; no longer in the data.
 
 ## 06/08/2026
