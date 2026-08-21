@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260806T095705Z",
+  "data_updated": "20260806T095706Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -434,6 +434,7 @@
     { "key": "archaeological_site", "value": "settlement", "description": "Detect some ringforts; centroid for name written separately" },
     { "key": "archaeological_site", "value": "standing_stone", "description": "Not a current value in OSM data.  Detect standing stones and ogham stones" },
     { "key": "archaeological_site", "value": "tumulus", "description": "Extract archaeological tumuli; centroid for name written separately" },
+    { "key": "archaeological_site", "value": "water_well", "description": "Synonym for 'historic=well'.  Extracted as historic version of water_well value; centroid for name written separately" },
     { "key": "area", "description": "Drop some highway areas" },
     { "key": "area", "value": "yes", "description": "Detect and don't extract some area highways" },
     { "key": "area:aeroway", "description": "Used as part of aeroway processing, but not extracted." },

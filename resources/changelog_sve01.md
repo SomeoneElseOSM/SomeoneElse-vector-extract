@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Removed `departures_board=paper timetable`; no longer in the data.
+Treat `historic=archaeological_site; archaeological_site=water_well` as `historic=well`.
 
 ## 16/08/2026
 Removed `wheelchair=unisex`; no longer in the data.
