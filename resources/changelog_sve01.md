@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 29/08/2026
 Removed `departures_board=paper timetable`; no longer in the data.
 Treat `historic=archaeological_site; archaeological_site=water_well` as `historic=well`.
 Fixed bug whereby farm shop produce types weren't appearing as bracketed names.
