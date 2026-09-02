@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Detect radomes which are mapped as buildings rather than `man_made`.
+
 ## 29/08/2026
 Removed `departures_board=paper timetable`; no longer in the data.
 Treat `historic=archaeological_site; archaeological_site=water_well` as `historic=well`.
