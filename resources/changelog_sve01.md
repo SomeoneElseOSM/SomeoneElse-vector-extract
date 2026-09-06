@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Detect radomes which are mapped as buildings rather than `man_made`.
+Where something is mapped as a `place=island` or `place=islet` and some other tag (e.g. `landuse`); remove the `place` tag.
 
 ## 29/08/2026
 Removed `departures_board=paper timetable`; no longer in the data.
