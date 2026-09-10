@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 10/09/2026
 Detect radomes which are mapped as buildings rather than `man_made`.
 Where something is mapped as a `place=island` or `place=islet` and some other tag (e.g. `landuse`); remove the `place` tag.
 
