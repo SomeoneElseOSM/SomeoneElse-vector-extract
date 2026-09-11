@@ -485,7 +485,7 @@ sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into
 #
 # Load the svwd10 style into apache
 #
-sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd10 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd10_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
+sudo /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/svwd_into_apache.sh sve01 svwd10 https://map.atownsend.org.uk /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_spec.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_metadata.json /home/${local_filesystem_user}/src/tilemaker/server/static/fonts /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd10_style.json /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug_langswitch_geocode.html svwd01sprite /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources
 #
 #
 # Update the documentation
