@@ -3,6 +3,8 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Add more soft `surface` values which cause `unclassified`, `residential` and `service` roads to be handled differently.
+Removed `amenity=preschool`; no longer in the data.  
+No need to separately check `building=preschool`.
 
 ## 10/09/2026
 Detect radomes which are mapped as buildings rather than `man_made`.
