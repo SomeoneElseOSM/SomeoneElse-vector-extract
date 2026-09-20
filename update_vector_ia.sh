@@ -31,14 +31,6 @@ local_filesystem_user=ajtown
 local_webserver=https://map.atownsend.org.uk
 #
 cd /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display
-sudo -u ${local_filesystem_user} git checkout resources/svwd01_style.json
-sudo -u ${local_filesystem_user} git checkout resources/svwd06_style.json
-sudo -u ${local_filesystem_user} git checkout resources/svwd08_style.json
-sudo -u ${local_filesystem_user} git checkout resources/svwd10_style.json
-sudo -u ${local_filesystem_user} git checkout resources/svwd01cy_style.json
-sudo -u ${local_filesystem_user} git checkout resources/svwd01en_style.json
-sudo -u ${local_filesystem_user} git checkout resources/svwd01ga_style.json
-sudo -u ${local_filesystem_user} git checkout resources/svwd01gd_style.json
 sudo -u ${local_filesystem_user} git pull
 #
 # Create the svwd01, svwd08 and svwd10 styles from svwd00
@@ -71,6 +63,11 @@ chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-ve
 #
 cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_style.json | sed "s/viewport/map/" > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json 
 chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd06_style.json 
+#
+#
+# Create the nodebug version of the website from the debug version
+#
+cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_debug_langswitch_geocode.html | sed "s/enable_debug /\/\/enable_debug/"  > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug_langswitch_geocode.html
 #
 #
 # Load the svwd01 style into apache as svwd01 and svwd01d
