@@ -68,6 +68,7 @@ chown ${local_filesystem_user} /home/${local_filesystem_user}/src/SomeoneElse-ve
 # Create the nodebug version of the website from the debug version
 #
 cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_debug_langswitch_geocode.html | sed "s/enable_debug /\/\/enable_debug/"  > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug_langswitch_geocode.html
+cat /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_debug_geocode.html | sed "s/enable_debug /\/\/enable_debug/"  > /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/svwd01_index_nodebug_geocode.html
 #
 #
 # Load the svwd01 style into apache as svwd01 and svwd01d
