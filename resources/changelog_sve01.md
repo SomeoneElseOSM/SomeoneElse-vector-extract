@@ -5,6 +5,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 Add more soft `surface` values which cause `unclassified`, `residential` and `service` roads to be handled differently.
 Removed `amenity=preschool`; no longer in the data.  
 No need to separately check `building=preschool`.
+Detect bingo, as it has been tagfiddled to gambling, to show as leisure not bookmakers.
 
 ## 10/09/2026
 Detect radomes which are mapped as buildings rather than `man_made`.

@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260918T190301Z",
+  "data_updated": "20260918T190303Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1543,6 +1543,7 @@
     { "key": "fuel:lpg", "value": "yes", "description": "Detect lpg fuel stations" },
     { "key": "gambling", "description": "Detect bingo halls" },
     { "key": "gambling", "value": "bingo", "description": "Detect bingo halls" },
+    { "key": "gambling", "value": "bingo;slot_machines", "description": "Detect bingo halls" },
     { "key": "garden", "description": "Detect beer gardens" },
     { "key": "garden", "value": "beer_garden", "description": "Detect beer gardens" },
     { "key": "gate", "description": "Detect locked gates" },
