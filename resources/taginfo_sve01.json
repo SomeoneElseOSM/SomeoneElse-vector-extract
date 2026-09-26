@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260926T125702Z",
+  "data_updated": "20260926T125705Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1368,6 +1368,10 @@
     { "key": "drinking_water", "value": "yes", "description": "Causes features with other tags to be extracted as drinking water" },
     { "key": "ele", "description": "Detect big peaks (ele > 914 munros) and prominent peaks, and allow them to be extracted them more prominently" },
     { "key": "embankment", "description": "Used to detect invalid layer values and also levees (standalone or on other features)" },
+    { "key": "embankment", "value": "both", "description": "Used to detect levees (standalone or on other features)" },
+    { "key": "embankment", "value": "dyke", "description": "Used to detect levees (standalone or on other features)" },
+    { "key": "embankment", "value": "left", "description": "Used to detect levees (standalone or on other features)" },
+    { "key": "embankment", "value": "levee", "description": "Used to detect levees (standalone or on other features)" },
     { "key": "embankment", "value": "yes", "description": "Used to detect invalid layer values and also levees (standalone or on other features)" },
     { "key": "embassy", "description": "Extracted as either embassy or office" },
     { "key": "embassy", "value": "branch_embassy", "description": "Extracted as office rather than embassy" },

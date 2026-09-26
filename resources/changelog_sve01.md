@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Detect `sac_scale=tidal` as a long ford.
 Detect `recycling_type=reverse_vending_machine as a reverse vending machine.
+Detect `embankment=dyke`, `embankment=levee`, `embankment=both` `embankment=left` as a standalone or other (highway-carrying) embankment.
 
 ## 25/09/2026
 Add more soft `surface` values which cause `unclassified`, `residential` and `service` roads to be handled differently.
