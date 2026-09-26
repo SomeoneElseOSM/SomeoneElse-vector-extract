@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20260926T125701Z",
+  "data_updated": "20260926T125702Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -3006,6 +3006,7 @@
     { "key": "real_ale", "value": "no", "description": "Detect real_ale pubs" },
     { "key": "recycling_type", "description": "Extract recycling centres and containers differently" },
     { "key": "recycling_type", "value": "centre", "description": "Extract recycling centres and containers differently" },
+    { "key": "recycling_type", "value": "reverse_vending_machine", "description": "Handled as reverse vending machine" },
     { "key": "recycling_type", "value": "scrap_yard", "description": "Extract as regular scrapyard" },
     { "key": "reef", "description": "Is a reef rocky or sandy" },
     { "key": "reef", "value": "sand", "description": "Is a reef rocky or sandy" },
