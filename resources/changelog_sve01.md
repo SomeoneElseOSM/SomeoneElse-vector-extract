@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Detect `sac_scale=tidal` as a long ford.
+
+## 25/09/2026
 Add more soft `surface` values which cause `unclassified`, `residential` and `service` roads to be handled differently.
 Removed `amenity=preschool`; no longer in the data.  
 No need to separately check `building=preschool`.

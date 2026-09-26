@@ -72,6 +72,16 @@ function node_function()
 
 -- ----------------------------------------------------------------------------
 -- Node-specific code
+--
+-- Catch unusual use of "sac_scale=tidal"
+-- ----------------------------------------------------------------------------
+   if ((  nodet.sac_scale == "tidal"  ) and
+       (( nodet.ford == nil          ) or
+        ( nodet.ford == ""           ))) then
+      nodet.ford = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Consolidate some "ford" values into "yes".
 -- This is here rather than in "generic" because "generic" is called after this
 -- There is a similar section in way-only.
@@ -448,6 +458,16 @@ function way_function()
 
 -- ----------------------------------------------------------------------------
 -- Way-specific code
+--
+-- Catch unusual use of "sac_scale=tidal"
+-- ----------------------------------------------------------------------------
+   if ((  wayt.sac_scale == "tidal"  ) and
+       (( wayt.ford == nil          ) or
+        ( wayt.ford == ""           ))) then
+      wayt.ford = "yes"
+   end
+
+-- ----------------------------------------------------------------------------
 -- Consolidate some "ford" values into "yes".
 -- This is here rather than in "generic" because "generic" is called after this
 -- There is a similar section in way-only.
