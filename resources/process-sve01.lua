@@ -1536,6 +1536,7 @@ function update_table( passedt )
     passedt.site_type = Find("site_type")
     passedt.small_electric_vehicle = Find("small_electric_vehicle")
     passedt.social_facility = Find("social_facility")
+    passedt["source:designation"] = Find("source:designation")
     passedt.species = Find("species")
 
 -- ------------------------------------------------------------------------------

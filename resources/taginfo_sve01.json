@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20261002T165701Z",
+  "data_updated": "20261002T165702Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1261,6 +1261,7 @@
     { "key": "designation", "value": "public_bridleway;public_footpath", "description": "Extracted as public bridleway" },
     { "key": "designation", "value": "public_byway", "description": "Extracted as byway open to all traffic" },
     { "key": "designation", "value": "public_cycleway;public_bridleway", "description": "Extracted as public bridleway" },
+    { "key": "designation", "value": "public_cycleway;public_footpath", "description": "Extractedas public footpath" },
     { "key": "designation", "value": "public_footpath", "description": "Extracted as public footpath" },
     { "key": "designation", "value": "public_footpath;permissive_bridleway", "description": "Extracted as public footpath" },
     { "key": "designation", "value": "public_footpath;public_cycleway", "description": "Extracted as public footpath" },
@@ -3854,6 +3855,8 @@
     { "key": "social_facility", "value": "residential_home", "description": "Detect social_facility without amenity or office" },
     { "key": "social_facility", "value": "shelter", "description": "Detect social_facility without amenity or office" },
     { "key": "social_facility", "value": "shopmobility", "description": "Detect shopmobility" },
+    { "key": "source:designation", "description": "Detect public cycleways on list of streets" },
+    { "key": "source:designation", "value": "list_of_streets", "description": "Detect public cycleways on list of streets" },
     { "key": "species", "description": "Detect hogweed hazard" },
     { "key": "species", "value": "Heracleum mantegazzianum", "description": "Detect hogweed hazard" },
     { "key": "sport", "description": "Used to classify and clarify many other tags" },
