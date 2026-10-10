@@ -112,4 +112,9 @@ pandoc -s -f markdown -t html -H /home/${local_filesystem_user}/src/SomeoneElse-
 pandoc -s -f markdown -t html -H /home/${local_filesystem_user}/src/SomeoneElse-map/vector_header.html --metadata title="schema changelog" /home/${local_filesystem_user}/src/SomeoneElse-vector-extract/resources/changelog_sve01.md > /var/www/html/maps/map/changelog_sve01.html
 #
 pandoc -s -f markdown -t html -H /home/${local_filesystem_user}/src/SomeoneElse-map/vector_header.html --metadata title="style changelog" /home/${local_filesystem_user}/src/SomeoneElse-vector-web-display/resources/changelog_svwd01.md > /var/www/html/maps/map/changelog_svwd01.html
+
 #
+# Copy the latest Geocoder source over to the "vector" web area
+#
+cp /home/${local_filesystem_user}/src/maplibre-gl-geocoder/lib/maplibre-gl-geocoder.js /var/www/html/vector/
+cp /home/${local_filesystem_user}/src/maplibre-gl-geocoder/lib/index.css /var/www/html/vector/maplibre-gl-geocoder.css
