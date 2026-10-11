@@ -2,6 +2,9 @@
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
 ## As yet unreleased
+Show `leisure=pitch_area` as `landuse=recreation_ground`.
+
+## 11/10/2026
 Detect `sac_scale=tidal` as a long ford.
 Detect `recycling_type=reverse_vending_machine as a reverse vending machine.
 Detect `embankment=dyke`, `embankment=levee`, `embankment=both` `embankment=left` as a standalone or other (highway-carrying) embankment.

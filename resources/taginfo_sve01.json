@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20261002T165703Z",
+  "data_updated": "20261011T171001Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -2146,6 +2146,7 @@
     { "key": "leisure", "value": "park", "description": "Written into 'land1' or 'land2' at minzoom 9; centroid for name written separately" },
     { "key": "leisure", "value": "picnic_table", "description": "Extracted as picnic table" },
     { "key": "leisure", "value": "pitch", "description": "Written into 'land1' or 'land2' at minzoom 9; centroid for name written separately" },
+    { "key": "leisure", "value": "pitch_area", "description": "Treated as a synonym of `landuse=recreation_ground`" },
     { "key": "leisure", "value": "playground", "description": "Written into 'land1' or 'land2' at minzoom 12; centroid for name written separately" },
     { "key": "leisure", "value": "pool", "description": "Extracted as 'leisure=swimming_pool'" },
     { "key": "leisure", "value": "practice_pitch", "description": "Extracted as pitch" },
