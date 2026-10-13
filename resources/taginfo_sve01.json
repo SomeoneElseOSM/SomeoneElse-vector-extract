@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20261011T171001Z",
+  "data_updated": "20261011T171002Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -239,7 +239,7 @@
     { "key": "amenity", "value": "gambling", "description": "Extracted as gambling shop" },
     { "key": "amenity", "value": "grave_yard", "description": "Extracted as graveyard" },
     { "key": "amenity", "value": "grit_bin", "description": "Extracted as grit bin" },
-    { "key": "amenity", "value": "gym", "description": "Extracted as leisure=nonspecific" },
+    { "key": "amenity", "value": "gym", "description": "Not a current value in OSM data.  Extracted as leisure=nonspecific" },
     { "key": "amenity", "value": "hall", "description": "Synonym for office=nonspecific" },
     { "key": "amenity", "value": "health_centre", "description": "Synonym for shop=healthnonspecific" },
     { "key": "amenity", "value": "health_post", "description": "Synonym for 'clinic' unless an alternative 'healthcare' tag is set." },
