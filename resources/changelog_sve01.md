@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Show `leisure=pitch_area` as `landuse=recreation_ground`.
+Wide covered roads are treated as tunnels in both raster and vector.  Previously raster only treated covered as tunnel.
 
 ## 11/10/2026
 Detect `sac_scale=tidal` as a long ford.
