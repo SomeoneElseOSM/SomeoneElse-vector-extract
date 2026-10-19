@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/SomeoneElseOSM/SomeoneElse-vector-extract/master/resources/taginfo_sve01.json",
-  "data_updated": "20261011T171004Z",
+  "data_updated": "20261011T171005Z",
   "project": {
     "name": "SomeoneElse: SVE01 Rural pedestrian vector schema",
     "description": "This vector map style is designed for England and Wales-based rural pedestrians",
@@ -1397,6 +1397,7 @@
     { "key": "emergency", "value": "fire_extinguisher", "description": "Extract fire extinguishers" },
     { "key": "emergency", "value": "fire_hydrant", "description": "Extract fire hydrants" },
     { "key": "emergency", "value": "fire_station", "description": "Extract fire stations" },
+    { "key": "emergency", "value": "first_aid_kit", "description": "Detect bleed control kits" },
     { "key": "emergency", "value": "flotation device", "description": "Extracted as life ring" },
     { "key": "emergency", "value": "help_point", "description": "Extract railway help points" },
     { "key": "emergency", "value": "life_ring", "description": "Extracted as life ring" },
@@ -1454,6 +1455,8 @@
     { "key": "fence_type", "value": "hedge", "description": "Detect obscure synonyms for hedges" },
     { "key": "fence_type", "value": "stone", "description": "Detect obscure synonyms for walls" },
     { "key": "fence_type", "value": "wall", "description": "Detect obscure synonyms for walls" },
+    { "key": "first_aid_kit", "description": "Various features extracted" },
+    { "key": "first_aid_kit", "value": "bleed_control_kit", "description": "Detect bleed control kits" },
     { "key": "flag", "description": "Does a bus stop have a flag or pole?" },
     { "key": "flag", "value": "no", "description": "No bus stop flag or pole" },
     { "key": "flood_prone", "description": "Extract flood-prone areas as very intermittent water" },
