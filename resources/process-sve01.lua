@@ -27,18 +27,18 @@ require "shared_lua_vector"
 local utf8 = require "utf8"
 
 -- Nodes will only be processed if one of these keys is present
-node_keys = { "abandoned:railway", "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
-              "barrier", "boundary", 
-              "canoe", "climbing", "craft", 'defensive_works', 
-	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:man_made",
-	      "disused:military", "disused:pub", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
+node_keys = { "abandoned:public_transport", "abandoned:public_transport", "abandoned:railway", "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
+              "barrier", "bench", "boundary", "building", "bus", 
+              "canoe", "climbing", "craft", 'defensive_works', "demolished:leisure", 
+	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:leisure", "disused:man_made",
+	      "disused:military", "disused:pub", "disused:public_transport", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
               "emergency", "entrance", "ford", "geological", "golf", "harbour", "hazard",
               "healthcare", "highway", "historic", "historic:landuse", "historic:railway", "information", "junction", 
               "landuse", "lcn_ref", "leisure", "man_made", "marker", 
-              "military", "natural", "ncn_milepost", 
-              "office", "outlet", "pipeline", "pitch", "place", 
-              "place_of_worship", "playground", "police", "power", "railway", "ruined:building", "ruins:building", 
-              "seamark:type", "shop", "sport", "tourism", "tunnel", "was:amenity", "was:landuse", "waterway", "whitewater", "zoo" }
+              "military", "naptan:BusStopType", "natural", "ncn_milepost", 
+              "office", "outlet", "physically_present", "pipeline", "pitch", "place", 
+              "place_of_worship", "playground", "police", "power", "proposed:highway", "public_transport", "railway", "ruined:building", "ruins:building", 
+              "seamark:type", "shop", "sport", "tourism", "tunnel", "was:amenity", "was:highway", "was:landuse", "was:leisure", "waterway", "whitewater", "zoo" }
 
 -- Initialize Lua logic
 
@@ -1186,6 +1186,7 @@ end  -- rf_2()
 function update_table( passedt )
     passedt.LPG = Find("LPG")
     passedt["abandoned:amenity"] = Find("abandoned:amenity")
+    passedt["abandoned:public_transport"] = Find("abandoned:public_transport")
     passedt["abandoned:railway"] = Find("abandoned:railway")
     passedt["abandoned:waterway"] = Find("abandoned:waterway")
     passedt.access = Find("access")
@@ -1238,6 +1239,7 @@ function update_table( passedt )
     passedt["building:ruins"] = Find("building:ruins")
     passedt["building:type"] = Find("building:type")
     passedt.bulk_purchase = Find("bulk_purchase")
+    passedt.bus = Find("bus")
     passedt.bus_display_name = Find("bus_display_name")
     passedt.bus_speech_output_name = Find("bus_speech_output_name")
     passedt.business = Find("business")
@@ -1268,6 +1270,7 @@ function update_table( passedt )
     passedt["dance:teaching"] = Find("dance:teaching")
     passedt.defensive_works = Find("defensive_works")
     passedt["demolished:amenity"] = Find("demolished:amenity")
+    passedt["demolished:leisure"] = Find("demolished:leisure")
     passedt.denomination = Find("denomination")
     passedt.departures_board = Find("departures_board")
     passedt["departures_board:speech_output"] = Find("departures_board:speech_output")
@@ -1290,10 +1293,12 @@ function update_table( passedt )
     passedt["disused:building"] = Find("disused:building")
     passedt["disused:highway"] = Find("disused:highway")
     passedt["disused:landuse"] = Find("disused:landuse")
+    passedt["disused:leisure"] = Find("disused:leisure")
     passedt["disused:man_made"] = Find("disused:man_made")
     passedt["disused:military"] = Find("disused:military")
     passedt["disused:name"] = Find("disused:name")
     passedt["disused:pub"] = Find("disused:pub")
+    passedt["disused:public_transport"] = Find("disused:public_transport")
     passedt["disused:railway"] = Find("disused:railway")
     passedt["disused:shop"] = Find("disused:shop")
     passedt["disused:tourism"] = Find("disused:tourism")
@@ -1595,7 +1600,9 @@ function update_table( passedt )
     passedt.war_memorial = Find("war_memorial")
     passedt["was:aeroway"] = Find("was:aeroway")
     passedt["was:amenity"] = Find("was:amenity")
+    passedt["was:highway"] = Find("was:highway")
     passedt["was:landuse"] = Find("was:landuse")
+    passedt["was:leisure"] = Find("was:leisure")
     passedt["was:name"] = Find("was:name")
     passedt["was:railway"] = Find("was:railway")
     passedt["was:shop"] = Find("was:shop")
