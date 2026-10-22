@@ -2396,6 +2396,7 @@ end -- generic_linearbarrier_power()
 -- ----------------------------------------------------------------------------
 function generic_after_land1( passedt )
     if (( passedt.natural == "water"             ) or
+        ( passedt.natural == "tidalwater"        ) or
         ( passedt.natural == "intermittentwater" ) or
         ( passedt.natural == "glacier"           ) or
         ( passedt.natural == "bay"               )) then

@@ -339,7 +339,7 @@ Tags and values are checked in order so the last thing that might cause a featur
 
 ### `natural` and `place` water features in `land1`.
 
-This includes `natural=water`, `natural=intermittentwater`, `natural=glacier`, `natural=bay` and `place=sea`.
+This includes `natural=water`, `natural=tidalwater`, `natural=intermittentwater`, `natural=glacier`, `natural=bay` and `place=sea`.
 
 These are written as a area feature at a based-on-area "fill minzoom" and an also as a point feature at a based-on-area "name minzoom".  
 
