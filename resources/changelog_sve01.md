@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 22/10/2026
 Show `leisure=pitch_area` as `landuse=recreation_ground`.
 Wide covered roads are treated as tunnels in both raster and vector.  Previously raster only treated covered as tunnel.
 Treat "was:highway" as "disused:highway", "was:leisure" as "disused:leisure", "was:public_transport" as "disused:public_transport".
