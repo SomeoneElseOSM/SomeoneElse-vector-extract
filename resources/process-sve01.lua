@@ -2201,11 +2201,11 @@ function way_after_waterway( passedt )
         Attribute( "bridge", passedt.bridge )
         AttributeBoolean( "tunnel", ( passedt.tunnel == "yes" ) )
 
-        if ( passedt.waterway == "river" ) then
+        if (( passedt.waterway == "river" ) or
+            ( passedt.waterway == "canal" )) then
             MinZoom( 10 )
         else
-            if (( passedt.waterway == "canal"          ) or
-                ( passedt.waterway == "derelict_canal" )) then
+            if ( passedt.waterway == "derelict_canal" ) then
                 MinZoom( 11 )
             else
                 if (( passedt.waterway == "stream"   ) or

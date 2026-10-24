@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+Extract non-derelict linear canals from vector zoom 10, not 11.  Canal water areas are still extracted based on way_area.
+
 ## 22/10/2026
 Show `leisure=pitch_area` as `landuse=recreation_ground`.
 Wide covered roads are treated as tunnels in both raster and vector.  Previously raster only treated covered as tunnel.

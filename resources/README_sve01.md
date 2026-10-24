@@ -259,8 +259,8 @@ This is for linear waterways.
 
 The OSM value for "waterway" after processing based on "intermittent" etc.
 
-* zoom 10 `waterway=river`
-* zoom 11 `waterway=canal`, `waterway=derelict_canal`.
+* zoom 10 `waterway=river`, `waterway=canal`.
+* zoom 11 `waterway=derelict_canal`.
 * zoom 12 `waterway=stream`, `waterway=drain`, `waterway=intriver`., `waterway=intstream`.
 * zoom 13 `waterway=ditch`
 * zoom 14 `waterway=pipeline`
