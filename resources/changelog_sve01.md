@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 Extract non-derelict linear canals from vector zoom 10, not 11.  Canal water areas are still extracted based on way_area.
 Treat `amenity=playing_field`, `leisure=pitch_area` and `leisure=pitch_surface` as `leisure=recreation_ground`.
+Use benches, bins and shelters to detect that disused bus stops are physically present.
 
 ## 22/10/2026
 Show `leisure=pitch_area` as `landuse=recreation_ground`.
