@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 29/10/2026
 Extract non-derelict linear canals from vector zoom 10, not 11.  Canal water areas are still extracted based on way_area.
 Treat `amenity=playing_field`, `leisure=pitch_area` and `leisure=pitch_surface` as `leisure=recreation_ground`.
 Use benches, bins and shelters to detect that disused bus stops are physically present.
