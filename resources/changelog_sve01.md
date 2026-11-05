@@ -1,9 +1,10 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 05/11/2026
 Farm shops no longer need to be unnamed to count as "vending machines" - just either named produce or self service (but not take e.g. credit cards).
 Also, `self_service=only` is yet another way of hiding farm shops in plain sight.
+Fixed a bug whereby some crossings were missed because some crossing types weren't included in node_keys.
 
 ## 29/10/2026
 Extract non-derelict linear canals from vector zoom 10, not 11.  Canal water areas are still extracted based on way_area.

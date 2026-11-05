@@ -29,7 +29,9 @@ local utf8 = require "utf8"
 -- Nodes will only be processed if one of these keys is present
 node_keys = { "abandoned:public_transport", "abandoned:public_transport", "abandoned:railway", "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
               "barrier", "bench", "boundary", "building", "bus", 
-              "canoe", "climbing", "craft", 'defensive_works', "demolished:leisure", 
+              "canoe", "climbing", "craft", 
+              "crossing", "crossing:markings", "crossing:island", "crossing_ref", "crossing:signals", 
+              'defensive_works', "demolished:leisure", 
 	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:leisure", "disused:man_made",
 	      "disused:military", "disused:pub", "disused:public_transport", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
               "emergency", "entrance", "ford", "geological", "golf", "harbour", "hazard",
