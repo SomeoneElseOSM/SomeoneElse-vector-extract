@@ -3,6 +3,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 
 ## As yet unreleased
 Suppress some more silly very long walking relation names.
+Treat NaPTAN "hail and ride" stops as "pole not present" ones.  If a CUS or HAR stop is `physically_present`, show it as such.
 
 ## 05/11/2026
 Farm shops no longer need to be unnamed to count as "vending machines" - just either named produce or self service (but not take e.g. credit cards).
