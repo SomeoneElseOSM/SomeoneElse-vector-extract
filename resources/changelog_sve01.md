@@ -1,7 +1,7 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 10/11/2026
 Suppress some more silly very long walking relation names.
 Treat NaPTAN "hail and ride" stops as "pole not present" ones.  If a CUS or HAR stop is `physically_present`, show it as such.
 
