@@ -4,6 +4,7 @@ See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-ex
 ## As yet unreleased
 If NaPTAN "hail and ride" stops have been imported without `highway` tags, show as other HAR stops (based on the `physically_present` tag).
 Detect some more "actual crossings" based on e.g. `tactile_paving` or `traffic_calming`.
+Suppress some more silly very long walking relation names.
 
 ## 10/11/2026
 Suppress some more silly very long walking relation names.
