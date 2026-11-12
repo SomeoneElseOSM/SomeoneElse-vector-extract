@@ -4066,7 +4066,6 @@
     { "key": "surface", "value": "woodchips", "description": "Used to determine if roads are unpaved" },
     { "key": "sustrans_ref", "description": "USed as ref on sustrans mileposts" },
     { "key": "tactile_paving", "description": "Detect non-crossings added by StreetComplete" },
-    { "key": "tactile_paving", "value": "no", "description": "Detect non-crossings added by StreetComplete" },
     { "key": "taxon", "description": "Detect hogweed hazard" },
     { "key": "taxon", "value": "Heracleum mantegazzianum", "description": "Detect hogweed hazard" },
     { "key": "telecom", "description": "Used when detecting telephone exchanges" },
