@@ -1,10 +1,11 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
-## As yet unreleased
+## 16/11/2026
 If NaPTAN "hail and ride" stops have been imported without `highway` tags, show as other HAR stops (based on the `physically_present` tag).
 Detect some more "actual crossings" based on e.g. `tactile_paving` or `traffic_calming`.
 Suppress some more silly very long walking relation names.
+Pubs that have realtime departures boards are extracted with a `realtime_departures_board=true` value, so that maps (such as https://map.atownsend.org.uk/vector/index_svwd10.html ) can display them.
 
 ## 10/11/2026
 Suppress some more silly very long walking relation names.

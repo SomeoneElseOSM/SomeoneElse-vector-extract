@@ -2866,6 +2866,7 @@ function render_amenity_land1( passedt )
                             Attribute( "ele", passedt.ele )
                         end
 
+                        AttributeBoolean( "realtime_departures_board", ( passedt.departures_board == "realtime" ) )
                         MinZoom( 14 )
                     else
 -- ----------------------------------------------------------------------------
