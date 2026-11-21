@@ -54,7 +54,7 @@ then
 		# ----------------------------------------------------------------------
 		echo "2 geographic arguments passed - processing a continent"
 		file_prefix1=${6}
-		file_page1=http://download.geofabrik.de/${file_prefix1}.html
+		file_page1=http://download.geofabrik.de/${file_prefix1}/index.html
 		file_url1=http://download.geofabrik.de/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 	    fi
 	else
