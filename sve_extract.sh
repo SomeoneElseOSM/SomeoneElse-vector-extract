@@ -94,7 +94,7 @@ cd ~/data
 # When was the target file last modified?
 #
 wget $file_page1 -O file_page1.$$
-grep " and contains all OSM data up to " file_page1.$$ | sed "s/.*and contains//" | sed 's/.*, datetime="//' | sed 's/">.*//' > last_modified1.$$
+grep " and contains all OSM data up to " file_page1.$$ | sed "s/.*and contains//" | sed 's/.*, datetime="//' | sed 's/+..:..">.*/Z/' > last_modified1.$$
 rm file_page1.$$
 #
 file_extension1=`cat last_modified1.$$`
