@@ -78,20 +78,20 @@ fi
 # What's the first file that we are interested in?
 #
 #file_prefix1=europe
-#file_page1=https://download.geofabrik.de/${file_prefix1}.html
-#file_url1=https://download.geofabrik.de/${file_prefix1}-latest.osm.pbf
+#file_page1=https://download.geofabrik.de/${file_prefix1}/index.html
+#file_url1=https://download.geofabrik.de/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 #
 #file_prefix1=britain-and-ireland
 file_prefix1=united-kingdom
 #file_prefix1=ireland-and-northern-ireland
 file_page1=https://download.geofabrik.de/europe/${file_prefix1}.html
-file_url1=https://download.geofabrik.de/europe/${file_prefix1}-latest.osm.pbf
+file_url1=https://download.geofabrik.de/europe/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 #
 #file_prefix1=england
 #file_prefix1=scotland
 #file_prefix1=wales
 #file_page1=https://download.geofabrik.de/europe/united-kingdom/${file_prefix1}.html
-#file_url1=https://download.geofabrik.de/europe/united-kingdom/${file_prefix1}-latest.osm.pbf
+#file_url1=https://download.geofabrik.de/europe/united-kingdom/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 #
 #file_prefix1=bedfordshire
 #file_prefix1=berkshire
@@ -141,16 +141,16 @@ file_url1=https://download.geofabrik.de/europe/${file_prefix1}-latest.osm.pbf
 #file_prefix1=wiltshire
 #file_prefix1=worcestershire
 #file_page1=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix1}.html
-#file_url1=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix1}-latest.osm.pbf
+file_url1=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 #
 #file_prefix1=new-york
 #file_prefix1=oregon
 #file_page1=https://download.geofabrik.de/north-america/us/${file_prefix1}.html
-#file_url1=https://download.geofabrik.de/north-america/us/${file_prefix1}-latest.osm.pbf
+#file_url1=https://download.geofabrik.de/north-america/us/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 #
 #file_prefix1=argentina
 #file_page1=https://download.geofabrik.de/south-america/${file_prefix1}.html
-#file_url1=https://download.geofabrik.de/south-america/${file_prefix1}-latest.osm.pbf
+#file_url1=https://download.geofabrik.de/south-america/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 #
 # What's the second file that we are interested in?
 # Note that if this is commented out, also change the "merge" below to not use it.
@@ -158,33 +158,33 @@ file_url1=https://download.geofabrik.de/europe/${file_prefix1}-latest.osm.pbf
 file_prefix2=ireland-and-northern-ireland
 #file_prefix2=isle-of-man
 file_page2=https://download.geofabrik.de/europe/${file_prefix2}.html
-file_url2=https://download.geofabrik.de/europe/${file_prefix2}-latest.osm.pbf
+file_url2=https://download.geofabrik.de/europe/${file_prefix2}/${file_prefix2}-latest.osm.pbf
 #file_prefix2=east-yorkshire-with-hull
 #file_prefix2=rutland
 #file_page2=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix2}.html
-#file_url2=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix2}-latest.osm.pbf
+#file_url2=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix2}/${file_prefix2}-latest.osm.pbf
 #
 # What's the third file that we are interested in?
 # Note that if this is commented out, also change the "merge" below to not use it.
 #
 file_prefix3=isle-of-man
 file_page3=https://download.geofabrik.de/europe/${file_prefix3}.html
-file_url3=https://download.geofabrik.de/europe/${file_prefix3}-latest.osm.pbf
+file_url3=https://download.geofabrik.de/europe/${file_prefix3}/${file_prefix3}-latest.osm.pbf
 #file_prefix3=rutland
 #file_prefix3=south-yorkshire
 #file_page3=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix3}.html
-#file_url3=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix3}-latest.osm.pbf
+#file_url3=https://download.geofabrik.de/europe/united-kingdom/${file_prefix3}/${file_prefix3}-latest.osm.pbf
 #
 # What's the fourth file that we are interested in?
 # Note that if this is commented out, also change the "merge" below to not use it.
 #
 file_prefix4=guernsey-jersey
 file_page4=https://download.geofabrik.de/europe/${file_prefix4}.html
-file_url4=https://download.geofabrik.de/europe/${file_prefix4}-latest.osm.pbf
+file_url4=https://download.geofabrik.de/europe/${file_prefix4}/${file_prefix4}-latest.osm.pbf
 #file_prefix4=rutland
 #file_prefix4=west-yorkshire
 #file_page4=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix4}.html
-#file_url4=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix4}-latest.osm.pbf
+#file_url4=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix4}/${file_prefix4}-latest.osm.pbf
 #
 # We do not need to turn off any crontabs in this script.
 #
@@ -193,11 +193,6 @@ file_url4=https://download.geofabrik.de/europe/${file_prefix4}-latest.osm.pbf
 # This is run from sudo without a connection to an authentication agent, 
 # so it makes sense for the git config url to be "https" and the pushurl "git".  
 # See https://stackoverflow.com/a/73836045/8145448
-#
-# Next get the latest versions of each part of the map style.
-# Those files that are not expected to be edited here but instead
-# generated here have an explicit "git checkout" to avoid:
-# "Your local changes to the following files would be overwritten by merge"
 #
 cd /home/${local_filesystem_user}/src/SomeoneElse-style
 sudo -u ${local_filesystem_user} git pull
@@ -224,15 +219,14 @@ then
     ls -t | grep "${file_prefix1}_" | head -1 | sed "s/${file_prefix1}_//" | sed "s/.osm.pbf//" > last_modified1.$$
 else
     wget $file_page1 -O file_page1.$$
-    grep " and contains all OSM data up to " file_page1.$$ | sed "s/.*and contains all OSM data up to //" | sed "s/. File size.*//" > last_modified1.$$
-    rm file_page1.$$
+    grep " and contains all OSM data up to " file_page1.$$ | sed "s/.*and contains//" | sed 's/.*, datetime="//' | sed 's/+..:..">.*/Z/' > last_modified1.$$
 fi
 #
 file_extension1=`cat last_modified1.$$`
 #
 if test -e ${file_prefix1}_${file_extension1}.osm.pbf
 then
-    echo "File1 already downloaded"
+    echo "File1 ${file_prefix1}_${file_extension1}.osm.pbf already downloaded"
 else
     wget $file_url1 -O ${file_prefix1}_${file_extension1}.osm.pbf
 fi
@@ -243,16 +237,22 @@ if [ "$1" = "current" ]
 then
     ls -t | grep "${file_prefix2}_" | head -1 | sed "s/${file_prefix2}_//" | sed "s/.osm.pbf//" > last_modified2.$$
 else
-    wget $file_page2 -O file_page2.$$
-    grep " and contains all OSM data up to " file_page2.$$ | sed "s/.*and contains all OSM data up to //" | sed "s/. File size.*//" > last_modified2.$$
-    rm file_page2.$$
+    if [ "${file_page1}" = "${file_page2}" ]
+    then
+        echo "We already have a date for ${file_prefix2}"
+        cp file_page1.$$ file_page2.$$
+    else
+        wget ${file_page2} -O file_page2.$$
+    fi
+
+    grep " and contains all OSM data up to " file_page2.$$ | sed "s/.*and contains//" | sed 's/.*, datetime="//' | sed 's/+..:..">.*/Z/' > last_modified2.$$
 fi
 #
 file_extension2=`cat last_modified2.$$`
 #
 if test -e ${file_prefix2}_${file_extension2}.osm.pbf
 then
-    echo "File2 already downloaded"
+    echo "File2 ${file_prefix2}_${file_extension2}.osm.pbf already downloaded"
 else
     wget $file_url2 -O ${file_prefix2}_${file_extension2}.osm.pbf
 fi
@@ -263,16 +263,22 @@ if [ "$1" = "current" ]
 then
     ls -t | grep "${file_prefix3}_" | head -1 | sed "s/${file_prefix3}_//" | sed "s/.osm.pbf//" > last_modified3.$$
 else
-    wget $file_page3 -O file_page3.$$
-    grep " and contains all OSM data up to " file_page3.$$ | sed "s/.*and contains all OSM data up to //" | sed "s/. File size.*//" > last_modified3.$$
-    rm file_page3.$$
+    if [ "${file_page1}" = "${file_page3}" ]
+    then
+        echo "We already have a date for ${file_prefix3}"
+        cp file_page1.$$ file_page3.$$
+    else
+	wget ${file_page3} -O file_page3.$$
+    fi
+
+    grep " and contains all OSM data up to " file_page3.$$ | sed "s/.*and contains//" | sed 's/.*, datetime="//' | sed 's/+..:..">.*/Z/' > last_modified3.$$
 fi
 #
 file_extension3=`cat last_modified3.$$`
 #
 if test -e ${file_prefix3}_${file_extension3}.osm.pbf
 then
-    echo "File3 already downloaded"
+    echo "File3 ${file_prefix3}_${file_extension3}.osm.pbf already downloaded"
 else
     wget $file_url3 -O ${file_prefix3}_${file_extension3}.osm.pbf
 fi
@@ -283,16 +289,27 @@ if [ "$1" = "current" ]
 then
     ls -t | grep "${file_prefix4}_" | head -1 | sed "s/${file_prefix4}_//" | sed "s/.osm.pbf//" > last_modified4.$$
 else
-    wget $file_page4 -O file_page4.$$
-    grep " and contains all OSM data up to " file_page4.$$ | sed "s/.*and contains all OSM data up to //" | sed "s/. File size.*//" > last_modified4.$$
-    rm file_page4.$$
+    if [ "${file_page1}" = "${file_page4}" ]
+    then
+        echo "We already have a date for ${file_prefix4}"
+        cp file_page1.$$ file_page4.$$
+    else
+        wget ${file_page4} -O file_page4.$$
+    fi
+
+    grep " and contains all OSM data up to " file_page4.$$ | sed "s/.*and contains//" | sed 's/.*, datetime="//' | sed 's/+..:..">.*/Z/' > last_modified4.$$
 fi
+#
+rm file_page1.$$
+rm file_page2.$$
+rm file_page3.$$
+rm file_page4.$$
 #
 file_extension4=`cat last_modified4.$$`
 #
 if test -e ${file_prefix4}_${file_extension4}.osm.pbf
 then
-    echo "File4 already downloaded"
+    echo "File4 ${file_prefix4}_${file_extension4}.osm.pbf already downloaded"
 else
     wget $file_url4 -O ${file_prefix4}_${file_extension4}.osm.pbf
 fi
