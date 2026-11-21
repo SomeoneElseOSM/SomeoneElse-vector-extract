@@ -173,7 +173,7 @@ file_url3=https://download.geofabrik.de/europe/${file_prefix3}/${file_prefix3}-l
 #file_prefix3=rutland
 #file_prefix3=south-yorkshire
 #file_page3=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix3}.html
-#file_url3=https://download.geofabrik.de/europe/united-kingdom/${file_prefix3}/${file_prefix3}-latest.osm.pbf
+#file_url3=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix3}/${file_prefix3}-latest.osm.pbf
 #
 # What's the fourth file that we are interested in?
 # Note that if this is commented out, also change the "merge" below to not use it.
