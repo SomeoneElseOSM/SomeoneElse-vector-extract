@@ -30,7 +30,7 @@ local utf8 = require "utf8"
 node_keys = { "abandoned:public_transport", "abandoned:public_transport", "abandoned:railway", "addr:housenumber", "advertising", "aerialway", "aeroway", "amenity", "attraction", 
               "barrier", "bench", "boundary", "building", "bus", 
               "canoe", "climbing", "craft", 
-              "crossing", "crossing:markings", "crossing:island", "crossing_ref", "crossing:signals", 
+              "crossing", "crossing:markings", "crossing:island", "crossing_ref", "crossing:signals", "crossing:signed", 
               'defensive_works', "demolished:leisure", 
 	      "disused:amenity", "disused:building", "disused:highway", "disused:landuse", "disused:leisure", "disused:man_made",
 	      "disused:military", "disused:pub", "disused:public_transport", "disused:railway", "disused:shop", "disused:tourism", "disused:waterway", 
@@ -1265,6 +1265,7 @@ function update_table( passedt )
     passedt["crossing:island"] = Find("crossing:island")
     passedt["crossing:markings"] = Find("crossing:markings")
     passedt["crossing:signals"] = Find("crossing:signals")
+    passedt["crossing:signed"] = Find("crossing:signed")
     passedt.cuisine = Find("cuisine")
     passedt.cycleway = Find("cycleway")
     passedt["cycleway:both"] = Find("cycleway:both")

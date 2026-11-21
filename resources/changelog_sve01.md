@@ -1,6 +1,9 @@
 # Changes made to the [SVE01 schema](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/resources/README_sve01.md).  
 See also the [changelog](https://github.com/SomeoneElseOSM/SomeoneElse-vector-extract/blob/main/changelog.md) for the scripts here.
 
+## As yet unreleased
+`crossing:signed` is yet another "random" value that can influence whether something that might be a crossing in OSM actually is.
+
 ## 16/11/2026
 If NaPTAN "hail and ride" stops have been imported without `highway` tags, show as other HAR stops (based on the `physically_present` tag).
 Detect some more "actual crossings" based on e.g. `tactile_paving` or `traffic_calming`.
