@@ -141,7 +141,7 @@ file_url1=https://download.geofabrik.de/europe/${file_prefix1}/${file_prefix1}-l
 #file_prefix1=wiltshire
 #file_prefix1=worcestershire
 #file_page1=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix1}.html
-file_url1=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix1}/${file_prefix1}-latest.osm.pbf
+#file_url1=https://download.geofabrik.de/europe/united-kingdom/england/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 #
 #file_prefix1=new-york
 #file_prefix1=oregon
