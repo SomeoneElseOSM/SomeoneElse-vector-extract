@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 # -----------------------------------------------------------------------------
 # sve_extract.sh
 #
@@ -55,7 +56,7 @@ then
 		echo "2 geographic arguments passed - processing a continent"
 		file_prefix1=${6}
 		file_page1=http://download.geofabrik.de/${file_prefix1}.html
-		file_url1=http://download.geofabrik.de/${file_prefix1}-latest.osm.pbf
+		file_url1=http://download.geofabrik.de/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 	    fi
 	else
 	    # ----------------------------------------------------------------------
@@ -64,7 +65,7 @@ then
 	    echo "3 geographic arguments passed - processing a continent and a country"
 	    file_prefix1=${7}
 	    file_page1=http://download.geofabrik.de/${6}/${file_prefix1}.html
-	    file_url1=http://download.geofabrik.de/${6}/${file_prefix1}-latest.osm.pbf
+	    file_url1=http://download.geofabrik.de/${6}/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 	fi
     else
 	# ----------------------------------------------------------------------
@@ -73,7 +74,7 @@ then
 	echo "4 geographic arguments passed - processing a continent, a country and a subregion"
 	file_prefix1=${8}
 	file_page1=http://download.geofabrik.de/${6}/${7}/${file_prefix1}.html
-	file_url1=http://download.geofabrik.de/${6}/${7}/${file_prefix1}-latest.osm.pbf
+	file_url1=http://download.geofabrik.de/${6}/${7}/${file_prefix1}/${file_prefix1}-latest.osm.pbf
     fi
 else
     # ----------------------------------------------------------------------
@@ -82,7 +83,7 @@ else
     echo "5 geographic arguments passed - processing a continent, a country, a subregion and a county"
     file_prefix1=${9}
     file_page1=http://download.geofabrik.de/${6}/${7}/${8}/${file_prefix1}.html
-    file_url1=http://download.geofabrik.de/${6}/${7}/${8}/${file_prefix1}-latest.osm.pbf
+    file_url1=http://download.geofabrik.de/${6}/${7}/${8}/${file_prefix1}/${file_prefix1}-latest.osm.pbf
 fi
 
 #
@@ -94,7 +95,7 @@ cd ~/data
 # When was the target file last modified?
 #
 wget $file_page1 -O file_page1.$$
-grep " and contains all OSM data up to " file_page1.$$ | sed "s/.*and contains all OSM data up to //" | sed "s/. File size.*//" > last_modified1.$$
+grep " and contains all OSM data up to " file_page1.$$ | sed "s/.*and contains//" | sed 's/.*, datetime="//' | sed 's/">.*//' > last_modified1.$$
 rm file_page1.$$
 #
 file_extension1=`cat last_modified1.$$`
